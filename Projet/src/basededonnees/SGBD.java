@@ -16,6 +16,7 @@ import exception.ColonneInconnue;
 
 public class SGBD {
 
+	// Test SVN Google Code à l'Ensai
 	/**********************************************************************/
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
