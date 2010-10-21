@@ -21,7 +21,7 @@ import basededonnees.SGBD;
 
 public class Principale {
 
-		// TEST SVN
+		// TEST SVN CHEZ REMI
 	/** TODO : À finir ! **/
 	// Méthode permettant d'activer ou de désactiver un compte
 	public static void activDesactivCompte() {
