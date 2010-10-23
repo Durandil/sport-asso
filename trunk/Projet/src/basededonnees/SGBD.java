@@ -22,6 +22,8 @@ public class SGBD {
 	/**********************************************************************/
 	static private Connection c;
 	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	
+
 	private static final String ID = "id3199";
 	private static final String MDP = "id3199";
 
@@ -277,53 +279,7 @@ public class SGBD {
 		}
 	}
 	
-	/**TODO Gérer les clés primaires et secondaires**/
 	
-	// Méthode permettant de créer la table que l'on veut 
-	// à partir du String passé en paramètre
-	public static void creerTable(String table) {
-
-		executeUpdate("DROP TABLE " + table);
-
-		if (table.equals("CLIENTS")) {
-			executeUpdate("CREATE TABLE " + table 
-					+ " (MAIL VARCHAR(40),"
-					+ " NOM VARCHAR(40),"
-					+ " PRENOM VARCHAR(40),"
-					+ " DENOMINATION VARCHAR(40),"
-					+ " ADRESSE VARCHAR(60),"
-					+ " VILLE VARCHAR(40),"
-					+ " CODEPOSTAL VARCHAR(5),"
-					+ " TELEPHONE VARCHAR(20),"
-					+ " CARTEFIDEL VARCHAR(3),"
-					+ " NBPOINTS NUMBER(6),"
-					+ " ETATCOMPTE VARCHAR(9)) "
-					);
-			
-		}
-		
-		if(table.equals("ARTICLES")){
-	
-			executeUpdate("CREATE TABLE " + table 
-					+ " (IDENTIFIANT VARCHAR(10), " 
-					+ " DESCRIPTION VARCHAR(40), "
-					+ " CATSPORT VARCHAR(40), "
-					+ " POIDS NUMBER(8), "
-					+ " PRIXINITIAL NUMBER(6,2), "
-					+ " STOCK NUMBER(4),"
-					+ " CATPRIX VARCHAR(3))"
-					);
-		}
-		
-		if(table.equals("COMMANDES")){
-			executeUpdate("CREATE TABLE " + table 
-					+ "( IDENTIFIANT VARCHAR(10), " 
-					+ " DATECOMMANDE DATE, "
-					+ " IDCLIENT VARCHAR(40))"
-					);
-		}
-		
-	}
 	
 	
 	public static ArrayList<String[]> afficheSelectClients() {
