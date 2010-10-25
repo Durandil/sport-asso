@@ -8,15 +8,11 @@ import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class FenetreCompte extends JFrame {
    
@@ -36,7 +32,7 @@ public class FenetreCompte extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		
-        //Définition de sa couleur de fond
+        //Définition de la couleur de fond
         pan.setBackground(Color.white);        
         //On prévient notre JFrame que ce sera notre JPanel qui sera son contentPane
         this.setContentPane(pan);
@@ -49,20 +45,26 @@ public class FenetreCompte extends JFrame {
         JPanel panneauHaut= new JPanel();
         panneauHaut.setLayout(new BorderLayout());
         
+        // Création d'un sous panneau accueillant le logo du magasin
         icon = new JLabel(new ImageIcon("src/images/logo.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.add(icon);	
 		
+		//Création du panneau avec l'affichage du texte "Bienvenue"
 		JPanel panAccueil=new JPanel();
 		panAccueil.setBackground(Color.white);
 		accueilLabel=new JLabel("Bienvenue");
 		accueilLabel.setFont(new Font("Times",Font.BOLD, 36));
 		panAccueil.add(accueilLabel);	
 		
+		// Création du panneau contenant l'heure et la date
 		JPanel panHeure=new JPanel();
 		panHeure.setBackground(Color.white);
 		panHeure.setLayout(new GridLayout(2,1,5,5));
+		
+		//Pour récupérer la date et l'heure, nous avons besoin d'un objet Date 
+		// où l'on recupera ses informations grâce aux méthodes de cette classe
 		heure=new Date();
 		
 		JPanel panneauDate = new JPanel();
@@ -121,13 +123,15 @@ public class FenetreCompte extends JFrame {
 		
 		boutonIdentificationClient.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				FenetreDialogIdentification zd = new FenetreDialogIdentification(null, "Informations Client", true);
+				// On affiche le contenu de la fenêtre d'identifiaction du client
+				FenetreDialogIdentification zd = new FenetreDialogIdentification(null, "Identification client", true);
 				DialogIdentifiant Ident = zd.showDialogIdent(); 
 			}	
 		});		
 		
 		boutonDeconnexion.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
+				// on ferme l'application
 				System.exit(0);
 			}	
 		});	

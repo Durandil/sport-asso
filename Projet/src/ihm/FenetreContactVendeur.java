@@ -24,16 +24,18 @@ public class FenetreContactVendeur extends JDialog{
 	private TextArea contenu;
 	private JLabel sujetLabel,contenuLabel,introduction,texte;
 	
+	// Constructeur de la fentre qui sera initialisée avec initComponent()
 	
 	public FenetreContactVendeur(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
-		this.setSize(700, 400);
+		this.setSize(700, 400); // définition largeur,hauteur
 		this.setLocationRelativeTo(null);
-		this.setResizable(false);
-		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		this.setResizable(false); // permet de ne pas modifier la taille de la fenetre
+		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE); // ferme la fenetre en appuyant sur la croix du haut
 		this.initComponent();
 	}
 	
+	// Méthode permettant l'affichage de la fenêtre FenetreContactVendeur
 	public DialogMessage showDialog(){
 		this.setVisible(true);		
 		return this.message;		
@@ -48,13 +50,14 @@ public class FenetreContactVendeur extends JDialog{
 		introduction.setSize(12, 1);
 		texteHautPan.add(introduction);		
 		
+		// Création d'un panneau introductif de la fenetre
 		JPanel panneauTexte = new JPanel();
 		panneauTexte.setBackground(Color.white);
 		texte=new JLabel("Si vous avez besoin de renseignements concernant nos produits ou pour toute autre demande");
 		texte.setSize(8,1);
 		panneauTexte.add(texte);
 		
-		
+		//Creation du panneau sujetPan qui sert à l'affichage et l'écriture du sujet du message
 		JPanel sujetPan=new JPanel();
 		sujetPan.setBackground(Color.white);
 		sujetPan.setPreferredSize(new Dimension(260,100));
@@ -65,6 +68,7 @@ public class FenetreContactVendeur extends JDialog{
 		sujetPan.add(sujetLabel);
 		sujetPan.add(sujet);
 		
+		//Creation du panneau contenuPan qui sert à l'affichage et l'écriture du contenu du message
 		JPanel contenuPan=new JPanel();
 		contenuPan.setBackground(Color.white);
 		contenuPan.setPreferredSize(new Dimension(260, 150));
@@ -75,17 +79,22 @@ public class FenetreContactVendeur extends JDialog{
 		contenuPan.add(contenuLabel);
 		contenuPan.add(contenu);
 		
+		// Création du panneau qui accueillera tous les panneaux contenant les champs du message (sujet,contenu)
 		JPanel contentPan=new JPanel();
 		contentPan.add(panneauTexte);
 		contentPan.add(sujetPan);
 		contentPan.add(contenuPan);
 		
+		// Création du panneau qui va accueillir le bouton d'envoi du message
 		JPanel panneauBouton=new JPanel();
 		JButton boutonEnvoyer=new JButton("Envoyer");
 		
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
+				// classe provisoire permettant de récupérer des objets de type message avec un sujet et un contenu
+				// cependant il faudrait ajouter un attribut identifiant de l'expéditeur
 				message=new DialogMessage(sujet.getText(),contenu.getText());
+				// fermeture de la fenetre
 				setVisible(false);
 			}
 		});

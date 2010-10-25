@@ -27,7 +27,8 @@ public class FenetreChoixCatalogue extends JDialog {
 	//public static Article testArticle= new Article("ART1", "Maillot", "Running", (float) 0.600, 25.0, 40);
 	
 	/**
-	 * Constructeur
+	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client pourra choisir 
+	 * la quantitée qu'il désire de l'article sélectionné dans le tableau du catalogue
 	 * @param parent
 	 * @param title
 	 * @param modal
@@ -42,12 +43,14 @@ public class FenetreChoixCatalogue extends JDialog {
 	}
 	
 	private void initComponent(Article article){
+		// Définition du panneau dans lequel le client sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));
 		panneauQuantite.setBorder(BorderFactory.createTitledBorder("Ajout au panier"));
 		quantiteLabel = new JLabel("Quantité : ");
 		
+		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
 		quantite=new JComboBox();
 		for(int i=1;i==article.getStock();i++){
 			quantite.addItem(i);
@@ -66,25 +69,32 @@ public class FenetreChoixCatalogue extends JDialog {
 		quantite.setVisible(true);
 		panneauQuantite.add(quantite);
 		
-		
+		// Définition du panneau dans lequel seront présents les boutons de confirmation ou d'annulation 
+		// du choix d'un article dans le panier
 		JPanel panneauBoutons=new JPanel();
 		panneauBoutons.setBackground(Color.white);
 		
 		JButton boutonValiderSelection= new JButton("Valider Sélection Article");
 		JButton boutonAnnulerSelection= new JButton("Annuler Sélection Article");
 		
+		//Définition des actions relatives à chaque bouton
+		
 		boutonValiderSelection.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
+				// TODO il faudra ajouter l'article concerné dans le panier avec la quantité correspondante
+				// et faire les modifications éventuelles dans la base de données.
 			}			
 		});
 		
 		boutonAnnulerSelection.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
+				// permet d'annuler la sélection en cours et retour vers page principale
 				setVisible(false);
 			}			
 		});
 		
+		//Ajout des boutons au panneau principal des boutons panneauBoutons
 		panneauBoutons.add(boutonValiderSelection);
 		panneauBoutons.add(boutonAnnulerSelection);
 		

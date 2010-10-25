@@ -20,7 +20,7 @@ import javax.swing.border.Border;
 public class FenetreReapprovisionnement extends JFrame{
 	// Creer la base de données correspondante aux articles 
 	
-	private JLabel icon;
+	private JLabel image;
 	private JLabel titreLabel;
 
 
@@ -43,18 +43,23 @@ public class FenetreReapprovisionnement extends JFrame{
     	titreLabel = new JLabel("Réapprovisionnement des articles en rupture de stock ou en quantité insuffisante");
     	panneauHaut.add(titreLabel);
     	
-    	icon = new JLabel(new ImageIcon("E:\\catalogue.jpg"));
+    	// Ajout d'une image entre le tableau et l'introduction dans le haut de la fenetre
+    	image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
-		panIcon.add(icon);
+		panIcon.add(image);
     	
     	panneauHaut.add(panIcon);
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
+    	// TODO Récupération du tableau avec l'ensemble ds articles en quantité insuffisante 
+    	// après interroagtion de la base de données dans ModeleTableauCatalogue
 	    JTable tableau = new JTable(new ModeleTableauCatalogue());
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	    
+	    // Ajout du bouton permettant de revenir à la page précédante grâce à l'implémenation
+	    // de la méthode ActionPerformed
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {

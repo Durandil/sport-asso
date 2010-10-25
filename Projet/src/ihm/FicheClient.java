@@ -19,23 +19,8 @@ import javax.swing.JTextField;
 
 public class FicheClient extends JDialog {
 	
-	private JLabel typeCompteLabel;
-	private JLabel identifiantLabel;
-	private JTextField identifiant;
-	private JTextField denomination;
-	private JLabel denominationLabel;
-	private JTextField nom;
-	private JLabel nomLabel;
-	private JLabel prenomLabel;
-	private JTextField prenom;
-	private JLabel adresseLabel;
-	private JTextField adresse;
-	private JLabel villeLabel;
-	private JTextField ville;
-	private JLabel cpLabel;
-	private JTextField codePostal;
-	private JLabel telLabel;
-	private JTextField telephone;
+	private JLabel typeCompteLabel,identifiantLabel,denominationLabel,nomLabel,prenomLabel,adresseLabel,villeLabel,cpLabel,telLabel;
+	private JTextField identifiant,denomination,nom,prenom,adresse,ville,codePostal,telephone;
 	private JSplitPane split;
 
 
@@ -50,17 +35,22 @@ public class FicheClient extends JDialog {
 	
 	private void initComponent(DialogInfo client){
 		
+		// Déclaration du panneau qui contiendra les statistiques sur le client
 		JPanel panneauDroite=new JPanel();
 		
 		
+		
+		// Déclaration du panneau qui contiendra les informations personnelles du client
 		JPanel panneauGauche= new JPanel();
 		
 		
-		//On construit enfin notre séparateur
+		//On construit enfin notre séparateur de page
 		split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panneauGauche, panneauDroite);
 		
-		//On le passe ensuite au contentPane de notre objet Fenetre
-		//placé au centre pour qu'il utilise tout l'espace disponible
+		/* On le passe ensuite au contentPane de notre objet FicheClient 
+		 * afin de séparer la partie informations personnelles 
+		 * et la partie statistique sur le client
+		*/ 
 		this.getContentPane().add(split, BorderLayout.CENTER);
 		
 		
@@ -171,12 +161,12 @@ public class FicheClient extends JDialog {
 		panneauCentral.add(panAdresse);
 		panneauCentral.add(panCP);
 		panneauCentral.add(panVille);
+		
+		// Nous ajoutons tous les panneaux contenant les champs d'informations sur le client dans le panneau de gauche
 		panneauGauche.add(panneauCentral, BorderLayout.CENTER);
 		
 
-
-		
-		
+		// Définition du panneau accueillant les boutons situés en bas de fenêtre
 		JPanel panneauBouton=new JPanel();
 		JButton boutonValider=new JButton("Confirmer");
 			
@@ -190,6 +180,8 @@ public class FicheClient extends JDialog {
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {
+			// bouton permettant le retour à la page précédante et l'annulation des modifications en cours 
+			// tout en fermant la fenêtre
 				setVisible(false);
 			}			
 		});
