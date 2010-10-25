@@ -34,10 +34,12 @@ public class FenetreRechercheClient extends JDialog{
 	
 	private void initComponent(){
 		
+		// Définition du panneau qui acceuillera tous les panneaux avec les principaux critères de recherche de clients
 		JPanel panneauChampsRecherche = new JPanel();
 		panneauChampsRecherche.setBorder(BorderFactory.createTitledBorder("Recherche de clients selon :"));
 		panneauChampsRecherche.setLayout(new GridLayout(4,1,5,5));
 		
+		// Définition d'un panneau avec le premier critère de recherche : le numéro du client
 		JPanel panneauNumero = new JPanel();
 		panneauNumero.setBackground(Color.white);
 		panneauNumero.setPreferredSize(new Dimension(220, 60));
@@ -48,6 +50,7 @@ public class FenetreRechercheClient extends JDialog{
 		panneauNumero.add(numeroLabel);
 		panneauNumero.add(numero);
 		
+		// Définition d'un panneau avec un autre critère de recherche : le nom du client pour les particuliers
 		JPanel panneauNom = new JPanel();
 		panneauNom.setBackground(Color.white);
 		panneauNom.setPreferredSize(new Dimension(220, 60));
@@ -58,6 +61,8 @@ public class FenetreRechercheClient extends JDialog{
 		panneauNom.add(nomLabel);
 		panneauNom.add(nom);
 		
+		// Définition d'un panneau avec un autre critère de recherche : la dénomination du client 
+		// pour les collectivités ou associations
 		JPanel panDenomination= new JPanel();
 		panDenomination.setBackground(Color.white);
 		panDenomination.setPreferredSize(new Dimension(220, 60));
@@ -68,6 +73,7 @@ public class FenetreRechercheClient extends JDialog{
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
 		
+		// Définition d'un panneau avec le dernier critère de recherche : la ville du client
 		JPanel panVille = new JPanel();
 		panVille.setBackground(Color.white);
 		panVille.setPreferredSize(new Dimension(220, 60));
@@ -78,6 +84,7 @@ public class FenetreRechercheClient extends JDialog{
 		panVille.add(villeLabel);
 		panVille.add(ville);
 		
+		// Pour finir, nous ajoutons ces panneaux au grand panneau de recherche d'un client
 		panneauChampsRecherche.add(panneauNumero);
 		panneauChampsRecherche.add(panDenomination);
 		panneauChampsRecherche.add(panneauNom);
@@ -96,14 +103,14 @@ public class FenetreRechercheClient extends JDialog{
 			
 			public void actionPerformed(ActionEvent e) {
 				//Auto-generated method stub
-				// TODO afficher un tableau dessous avec les résultats de la recherche
-				// setVisible du tableau (True) en affichant résultat
+				// TODO afficher un tableau en dessous avec les résultats de la recherche
+				// setVisible(=True) permettra d'afficher le tableau  avec les résultats de la recherche
 				tableauRechercheClient.setVisible(true);
 			}
 		});
 		
 		
-		// Panneau des boutons du bas
+		// Définition du panneau des boutons du bas
 		JButton boutonRetour= new JButton("Retour à la page précédente");
 		
 		boutonRetour.addActionListener(new ActionListener() {
@@ -116,13 +123,19 @@ public class FenetreRechercheClient extends JDialog{
 			}
 		});
 		
+		// Création d'un panneau qui regroupera : le bouton de recherche des clients selon les critères entrés en paramètre
+		// le tableau des résultats de la recherche
+		// et le bouton de retour à la page précédante
+		// crées et implémentés au dessus
 		JPanel panneauBas = new JPanel();
 		panneauBas.setLayout(new BorderLayout());
 		panneauBas.add(boutonValidationRecherche,"North");
 		panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
 		panneauBas.add(boutonRetour,"South");
 		
-		// Ajout d'une séparation verticale afin de séparer les champs de recherche et l'affichage des résultats
+		// TODO Afficher un champ permettant au gérant de rentrer le numero de client que le gérant souhaite consulter
+		
+		// Ajout d'une séparation horizontale afin de séparer les champs de recherche et l'affichage des résultats
 		split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panneauChampsRecherche, panneauBas);
 		this.getContentPane().add(split,"Center");
 	}

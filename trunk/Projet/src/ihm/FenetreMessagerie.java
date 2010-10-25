@@ -30,14 +30,18 @@ public class FenetreMessagerie extends JFrame {
         
     private void initComponent(){
     	
+    	//Création du panneau qui se situera en haut de la fenetre créée
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
     	
+    	// Création d'un "sous-panneau" accueillant tous les boutons relatifs aux actions
+    	// que le gérant peut faire sur les messages de ses clients
     	JPanel panneauTitle=new JPanel();
     	JButton boutonAjouter=new JButton("Lire");
     	JButton boutonSupprimer=new JButton("Supprimer");
     	JButton boutonModifier=new JButton("Supprimer tout");
     	
+    	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
     	panneauTitle.add(boutonAjouter);
     	panneauTitle.add(boutonSupprimer);
     	panneauTitle.add(boutonModifier);
@@ -45,16 +49,21 @@ public class FenetreMessagerie extends JFrame {
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
+    	// Création d'une table contenant tous les messages envoyés par les clients au gérant
+    	// après interrogation de la base de données
 	    JTable tableauMessage = new JTable(new ModeleMessagerie());     
 	    this.getContentPane().add(new JScrollPane(tableauMessage), BorderLayout.CENTER);
 	    
 	    
+	    // Définition du panneau panneauBouton qui accueillera le bouton
+	    // permettant de retourner à la page précédente 
 	    JPanel panneauBouton=new JPanel();
 			
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
+			// l'instruction permet de femrer la fenetre en cours	
+			setVisible(false);
 			}			
 		});
 			

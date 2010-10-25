@@ -2,8 +2,6 @@ package ihm;
 import ihm.Panneau;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -11,6 +9,8 @@ import javax.swing.JFrame;
 
 public class FenetreInformationsClient extends JFrame {
 	
+	// Cette fenêtre va permettere de donner un descriptif du magasin aux clients 
+	// accédant au sous-menu "Informations" dans le menu "Contact"
 	
 	public FenetreInformationsClient(){
         

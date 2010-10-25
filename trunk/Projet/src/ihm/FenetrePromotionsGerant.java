@@ -30,14 +30,18 @@ public class FenetrePromotionsGerant extends JFrame {
         
     private void initComponent(){
     	
+    	//Création du panneau qui se situera en haut de la fenetre créée
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
     	
+    	// Création d'un "sous-panneau" accueillant tous les boutons relatifs aux actions
+    	// que le gérant peut faire sur les promotions en cours : soit en ajouter, soit en modifier soit en supprimer
     	JPanel panneauTitle=new JPanel();
     	JButton boutonAjouter=new JButton("Ajouter");
     	JButton boutonSupprimer=new JButton("Supprimer");
     	JButton boutonModifier=new JButton("Modifier");
     	
+    	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
     	panneauTitle.add(boutonAjouter);
     	panneauTitle.add(boutonSupprimer);
     	panneauTitle.add(boutonModifier);
@@ -45,10 +49,14 @@ public class FenetrePromotionsGerant extends JFrame {
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
+    	// Définition du tableau qui affichera l'ensemble des promotions en cours pour les différents clients
+    	// (adhérents ou non adhérents) après interrogation de la base de données dans ModelePromotionClient
 	    JTable tableauPromotions = new JTable(new ModelePromotionClient());     
 	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
 	    
 	    
+	    // Définition du panneau panneauBouton qui accueillera le bouton
+	    // permettant de retourner à la page précédente 
 	    JPanel panneauBouton=new JPanel();
 			
 		JButton retourBouton = new JButton("Retour");
@@ -59,7 +67,6 @@ public class FenetrePromotionsGerant extends JFrame {
 		});
 			
 		panneauBouton.add(retourBouton);
-			
 	
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 			

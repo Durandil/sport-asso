@@ -1,5 +1,8 @@
 package ihm;
 
+// Classe provisoire permettant pour le moment de faire tourner la partie IHM
+// mais sera remplacée par la classe correspondant aux clients
+
 public class DialogInfo {
 	private String nom, prenom,adresse,ville,motDePasse;
 	private String codePostal, telephone,identifiant,denomination;
@@ -114,19 +117,6 @@ public class DialogInfo {
 
 	public void setPointFidelite(int pointFidelite) {
 		this.pointFidelite = pointFidelite;
-	}
-
-	public String toString(){
-		String str;
-		if(this.nom != null && this.prenom != null ){
-			str = "Description de l'objet InfoZDialog";
-			str += "Nom : " + this.nom + "\n";
-			str += "Taille : " + this.prenom + "\n";
-		}
-		else{
-			str = "Aucune information !";
-		}
-		return str;
 	}
 
 }

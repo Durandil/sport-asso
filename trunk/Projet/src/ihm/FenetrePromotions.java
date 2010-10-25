@@ -32,8 +32,10 @@ public class FenetrePromotions extends JFrame {
         
     private void initComponent(){
     	
+    	//Création du panneau qui se situera en haut de la fenetre créée
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
+    	
     	
     	JPanel panneauTitle=new JPanel();
     	promotionsLabel= new JLabel("Decouvrez les promotions en cours dans le tableau ci-dessous");
@@ -42,10 +44,13 @@ public class FenetrePromotions extends JFrame {
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
+    	// Définition du tableau qui affichera l'ensemble des promotions en cours pour le client
+    	// qui utilise l'application après interrogation de la base de données dans ModelePromotionClient
 	    JTable tableauPromotions = new JTable(new ModelePromotionClient());     
 	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
 	    
-	    
+	    // Définition du panneau panneauBouton qui accueillera le bouton
+	    // permettant de retourner à la page précédente 
 	    JPanel panneauBouton=new JPanel();
 			
 		JButton retourBouton = new JButton("Retour");
@@ -56,8 +61,7 @@ public class FenetrePromotions extends JFrame {
 		});
 			
 		panneauBouton.add(retourBouton);
-			
-	
+		
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 			
 	        

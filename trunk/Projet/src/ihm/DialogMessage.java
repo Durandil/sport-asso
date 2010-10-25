@@ -1,6 +1,8 @@
 package ihm;
 import javax.swing.JDialog;
 
+// Classe provisoire permettant la gestion provisoire des messages envoyés par les clients
+// dans la fenetre FenetreContactVendeur
 
 public class DialogMessage extends JDialog {
 	

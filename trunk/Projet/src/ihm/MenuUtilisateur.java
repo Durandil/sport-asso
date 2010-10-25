@@ -43,7 +43,7 @@ public class MenuUtilisateur extends JFrame{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 			
-		//On initialise nos menus
+		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
 		//--------------------------
 			
 		item2.addActionListener(new ActionListener(){
@@ -94,7 +94,9 @@ public class MenuUtilisateur extends JFrame{
 				promotion.setVisible(true);
 			}
 		});
-			
+		
+		// Ajout des sous-menus à leur menu respectif dans l'ordre descendant que l'on désire 
+		// à l'affichage 
 		this.deuxieme_menu.add(item3);
 		this.deuxieme_menu.add(item4);
 		this.deuxieme_menu.add(item2);
@@ -113,7 +115,8 @@ public class MenuUtilisateur extends JFrame{
 		this.menuBar.add(quatrieme_menu);
 		this.menuBar.add(cinquieme_menu);
 		//-------------------------
-			
+		
+		//Ajout de la barre de menu à notre objet MenuUtilisateur
 		this.setJMenuBar(menuBar);
 		this.setVisible(true);
 		}

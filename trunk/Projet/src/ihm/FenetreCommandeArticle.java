@@ -18,7 +18,12 @@ public class FenetreCommandeArticle extends JFrame{
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
 
-
+	
+	/*
+	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
+	 * initComponent(). Cette classe permet l'affichage simultané du catalogue et du panier du client.
+	 */
+	
 	public FenetreCommandeArticle(){
 		super();
 		this.setTitle("Catalogue Article");
@@ -32,6 +37,8 @@ public class FenetreCommandeArticle extends JFrame{
         
     private void initComponent(){
     	
+    	// Définition du panneau qui ne contiendra que l'affichage de part et d'autre de la fenetre
+    	// des intitulés des tableaux catalogie e panier
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
     	
@@ -46,7 +53,10 @@ public class FenetreCommandeArticle extends JFrame{
     	panneauPanier.add(panierLabel);
     	panneauHaut.add(panneauPanier,"East");
     	
+    	
+    	// Ajout du panneau au panneau "principal" en haut de la fenetre
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
+    	
     	
 	    JTable tableau = new JTable(new ModeleTableauCatalogue());     
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.WEST);
@@ -54,19 +64,22 @@ public class FenetreCommandeArticle extends JFrame{
 	    JTable panier = new JTable(new ModelePanier());     
 	    this.getContentPane().add(new JScrollPane(panier), BorderLayout.EAST);
 	        
-	        
+	    // Définition du panneau des boutons permettant la confirmation ou l'annulation de la commande en cours    
 	    JPanel panneauBouton=new JPanel();
 		JButton boutonValider=new JButton("Valider");
 			
 		boutonValider.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent arg0){
+				// TODO il faudra modifier la base de données en fonction des quantités et articles achetés
+				// et enregistrer la commande dans la table COMMANDE
 				setVisible(false);
 			}
 		});
 			
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
+				// le bouton retour permet l'annulation de la commande en cours et le retour au menu utilisateur
 				setVisible(false);
 			}			
 		});
