@@ -11,18 +11,23 @@ public class Commande {
 	// une liste de lignes de commande
 	// Une date, et le client qui en est à l'origine
 
-	// Le Constructeur ajouter la Commande à la table COMMANDES
+	
+	
+	// Le Constructeur ajoute la Commande à la table COMMANDES
+	// Et met à jour la table générique INFOCOMMANDES
 	public Commande(String idCommande, String idClient,
-			ArrayList<LigneCommande> liste, String date) {
+			ArrayList<LigneCommande> liste, Date date) {
 		this.idCommande = idCommande;
 		this.idClient = idClient;
 		this.liste = liste;
 		this.date = date;
-		ajouterBDD();
+		/** IMPORTANT : Méthodes mises en commentaire jusqu'à la rentrée**/
+		//ajouterBDD();
+		//majInfoCommandes();
 	}
 
 	private String idClient;
-	private String date;
+	private Date date;
 	private String idCommande;
 	private ArrayList<LigneCommande> liste;
 
@@ -50,11 +55,11 @@ public class Commande {
 		this.idClient = idClient;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
@@ -69,24 +74,40 @@ public class Commande {
 				+ this.date
 				+ "',"
 				+ "'"
-				+ idClient + "')";
+				+ this.idClient + "')";
 		SGBD.executeUpdate(requete);
 	}
 
-	// Méthode qui crée la table COMMANDE+idCommande
-	public void creerTable() {
+	// Méthode qui met à jour la table INFOCOMMANDES
+	public void majInfoCommandes() {
 
-		SGBD.executeUpdate("DROP TABLE " + idCommande);
-		SGBD.executeUpdate("CREATE TABLE " + idCommande
-				+ " (ARTICLE VARCHAR(40), " + " QUANTITE NUMBER(3))");
 		String requete = null;
 		for (int i = 0; i < liste.size(); i++) {
 			requete = "'" + liste.get(i).getArticle() + "',"
 					+ liste.get(i).getQuantite();
-			SGBD.executeUpdate("INSERT INTO " + idCommande
-					+ " (ARTICLE, QUANTITE)  VALUES" + "(" + requete + ")");
+			SGBD.executeUpdate("INSERT INTO INFOCOMMANDES " 
+					+ " (IDCOMMANDE, DATECOMMANDE, IDCLIENT, ARTICLE, QUANTITE)  VALUES" 
+					+ "('" 
+					+ this.idCommande
+					+ "',"
+					+ "'"
+					+ this.date
+					+ "',"
+					+ "'"
+					+ this.idClient
+					+ "',"
+					+ requete + ")");
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+		
+		
+		return "Commande [idClient=" + idClient + ", date=" + sqlDate + "]";
 	}
 
 }

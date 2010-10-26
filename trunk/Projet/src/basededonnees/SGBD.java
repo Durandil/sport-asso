@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import oracle.jdbc.pool.OracleDataSource;
@@ -240,7 +241,17 @@ public class SGBD {
 		s = "TO_DATE('" + sqlDate + "', 'YYYY-MM-DD')";
 		return s;
 	}
+	
+	public static Date stringToDate(String sDate, String sFormat)
+			throws Exception {
 
+		java.sql.Date sDate2 = new java.sql.Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat(sFormat);
+		sDate2 = new java.sql.Date(sdf.parse(sDate).getTime());
+		return sDate2;
+	}
+
+	
 	// Méthode issue du TP2
 	public static void afficheSelectEtoileSelonProchainMois(String table,
 			String colonneDate) {
@@ -280,6 +291,8 @@ public class SGBD {
 	}
 	
 	
+
+
 	
 	
 	public static ArrayList<String[]> afficheSelectClients() {
