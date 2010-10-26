@@ -47,7 +47,6 @@ public class BDD {
 					);
 		}
 		
-		/**TODO : Gérer le remplissage de cette table**/
 		if(table.equals("INFOCOMMANDES")){
 			SGBD.executeUpdate("CREATE TABLE " + table 
 					+ "( IDCOMMANDE VARCHAR(10), " 
