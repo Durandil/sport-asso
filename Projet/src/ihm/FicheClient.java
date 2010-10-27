@@ -38,7 +38,18 @@ public class FicheClient extends JDialog {
 		// Déclaration du panneau qui contiendra les statistiques sur le client
 		JPanel panneauDroite=new JPanel();
 		
+		JLabel totalMoyenCommandes=new JLabel("Total moyen des commandes : ");
+		JLabel totalMaxCommande=new JLabel("Plus grosse commande effectuée : ");
+		JLabel articleMaxCommande= new JLabel("Article le plus commandé : ");
+		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
+		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
 		
+		panneauDroite.add(totalMoyenCommandes);
+		panneauDroite.add(totalMaxCommande);
+		
+		panneauDroite.add(articleMaxCommande);
+		panneauDroite.add(quantiteTotaleArticleMaxCommande);
+		panneauDroite.add(dateDernierAchatArticleMaxCommande);
 		
 		// Déclaration du panneau qui contiendra les informations personnelles du client
 		JPanel panneauGauche= new JPanel();

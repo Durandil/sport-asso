@@ -29,16 +29,6 @@ public class Panneau extends JPanel {
         g.drawString("  ¤ Accessibilité par une large gamme de produits sportifs. ",20,130);
         g.drawString("	  Cette gamme est composée à la fois de nos marques propres et des produits de marques Internationales.", 25, 145);
         
-        g.drawString("Au delà de ces produits, SPORT'ASSOC propose également de nombreux services qui permettent également de faciliter ",20,170);
-        g.drawString("la pratique du sport : nos ateliers, nos avantages clients, les bons d'achat.", 20, 190);
-        
-        g.drawString("Et depuis quelques années, SPORT'ASSOC est allé plus loin dans sa relation avec ses clients en partageant le sport",20,210);
-        g.drawString("autour d'événements clients acteurs. ",20,230);
-        
-        g.setColor(Color.gray);
-        g.setFont(new Font("Times", Font.BOLD, 16));
-        g.drawString("Alexis Louvel, directeur de SPORT'ASSOC", 250, 270);
-        
         
 	}  
 }

@@ -21,7 +21,6 @@ public class FenetreDialogIdentification extends JDialog {
 	DialogIdentifiant ident= new DialogIdentifiant();
 	private JLabel identifiantLabel,passwordLabel;
 	private JTextField identifiant, password;
-	private boolean sendData;
 	
 	
 	public FenetreDialogIdentification(JFrame parent, String title, boolean modal){
@@ -38,7 +37,6 @@ public class FenetreDialogIdentification extends JDialog {
 	 * @return Info
 	 */
 	public DialogIdentifiant showDialogIdent(){
-		this.sendData = false;
 		this.setVisible(true);		
 		return this.ident;		
 	}

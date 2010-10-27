@@ -14,11 +14,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import metier.Article;
+import metier.LigneCommande;
 
 
-public class FenetreChoixCatalogue extends JDialog {
-
+public class FenetreSuppressionPanier extends JDialog {
 	private JLabel quantiteLabel;
 	private JComboBox quantite;
 	public static int quantiteSelectionnee ;
@@ -32,26 +31,26 @@ public class FenetreChoixCatalogue extends JDialog {
 	 * @param title
 	 * @param modal
 	 */
-	public FenetreChoixCatalogue(JFrame parent, String title, boolean modal,Article article){
+	public FenetreSuppressionPanier(JFrame parent, String title, boolean modal,LigneCommande lignePanier){
 		super(parent, title, modal);
 		this.setSize(200, 350);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(article);
+		this.initComponent(lignePanier);
 	}
 	
-	private void initComponent(Article article){
+	private void initComponent(LigneCommande lignePanier){
 		// Définition du panneau dans lequel le client sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));
-		panneauQuantite.setBorder(BorderFactory.createTitledBorder("Ajout au panier"));
+		panneauQuantite.setBorder(BorderFactory.createTitledBorder("Supprimer du panier"));
 		quantiteLabel = new JLabel("Quantité : ");
 		
-		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
+		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité qu'il a déjà prise
 		quantite=new JComboBox();
-		for(int i=1;i==article.getStock();i++){
+		for(int i=1;i==lignePanier.getQuantite();i++){
 			quantite.addItem(i);
 		}
 		
@@ -73,20 +72,19 @@ public class FenetreChoixCatalogue extends JDialog {
 		JPanel panneauBoutons=new JPanel();
 		panneauBoutons.setBackground(Color.white);
 		
-		JButton boutonValiderSelection= new JButton("Valider Sélection Article");
-		JButton boutonAnnulerSelection= new JButton("Annuler Sélection Article");
+		JButton boutonValiderSuppression= new JButton("Valider Modification Panier");
+		JButton boutonAnnulerSuppression= new JButton("Annuler Modification Panier");
 		
 		//Définition des actions relatives à chaque bouton
 		
-		boutonValiderSelection.addActionListener(new ActionListener(){
+		boutonValiderSuppression.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				// TODO il faudra ajouter l'article concerné dans le panier avec la quantité correspondante
-				// et faire les modifications éventuelles dans la base de données.
+				// TODO il faudra faire les modifications éventuelles dans la base de données.
 			}			
 		});
 		
-		boutonAnnulerSelection.addActionListener(new ActionListener(){
+		boutonAnnulerSuppression.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				// permet d'annuler la sélection en cours et retour vers page principale
 				setVisible(false);
@@ -94,11 +92,12 @@ public class FenetreChoixCatalogue extends JDialog {
 		});
 		
 		//Ajout des boutons au panneau principal des boutons panneauBoutons
-		panneauBoutons.add(boutonValiderSelection);
-		panneauBoutons.add(boutonAnnulerSelection);
+		panneauBoutons.add(boutonValiderSuppression);
+		panneauBoutons.add(boutonAnnulerSuppression);
 		
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 		
 	}
 }
+
