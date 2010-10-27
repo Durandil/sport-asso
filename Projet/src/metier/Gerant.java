@@ -25,7 +25,7 @@ public class Gerant extends Utilisateur {
 		System.out.println("Votre mot de passe est : " + this.motDePasse);
 	}
 	
-	/** TODO : À finir ! **/
+
 	// Méthode permettant d'activer ou de désactiver un compte
 	public static void activDesactivCompte() {
 		System.out.println("Veuillez entrer l'id du compte que vous souhaiter activer/désactiver");
@@ -33,16 +33,16 @@ public class Gerant extends Utilisateur {
 		Scanner sc = new Scanner(System.in);
 		String str = sc.nextLine();
 
-		ArrayList<String[]> listeMails = new ArrayList<String[]>();
+		ArrayList<String[]> listeMailsEtats = new ArrayList<String[]>();
 
-		listeMails = SGBD.afficheSelectClients();
+		listeMailsEtats = SGBD.afficheSelectMailsEtatsClients();
 
-		for (int i = 0; i < listeMails.size(); i++) {
+		for (int i = 0; i < listeMailsEtats.size(); i++) {
 			
 			
-			if (listeMails.get(i)[0].equals(str)) {
+			if (listeMailsEtats.get(i)[0].equals(str)) {
 				
-				if (listeMails.get(i)[1].equals("Activé")) {
+				if (listeMailsEtats.get(i)[1].equals("Activé")) {
 					String str2 = null;
 					do {
 						System.out
@@ -63,7 +63,7 @@ public class Gerant extends Utilisateur {
 					}
 				}
 				
-				else if (listeMails.get(i)[1].equals("Désactivé")){
+				else if (listeMailsEtats.get(i)[1].equals("Désactivé")){
 					String str3 = null;
 					do {
 					System.out.println("Ce compte est désactivé, voulez-vous le réactiver (O/N)?");

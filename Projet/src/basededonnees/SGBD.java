@@ -296,9 +296,9 @@ public class SGBD {
 
 	
 	
-	public static ArrayList<String[]> afficheSelectClients() {
+	public static ArrayList<String[]> afficheSelectMailsEtatsClients() {
 		connecter();
-		ArrayList<String[]> mailsClients = new ArrayList<String[]>();
+		ArrayList<String[]> mailsEtatsClients = new ArrayList<String[]>();
 
 		Statement st = null;
 		ResultSet res = null;
@@ -309,22 +309,17 @@ public class SGBD {
 
 			// Récupérer les méta données
 			ResultSetMetaData rsmd = res.getMetaData();
-			
-			
-			while (res.next()) {
-				
-					String[] client = new String[2];
-					String s = res.getObject(1).toString();
-					String s2 = res.getObject(2).toString();
-					client[0] =s;
-					client[1] = s2;
-					mailsClients.add(client);
-					
 
+			while (res.next()) {
+
+				String[] client = new String[2];
+				String s = res.getObject(1).toString();
+				String s2 = res.getObject(2).toString();
+				client[0] = s;
+				client[1] = s2;
+				mailsEtatsClients.add(client);
 
 			}
-			
-			
 
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative d’interrogation : "
@@ -334,8 +329,42 @@ public class SGBD {
 			fermer();
 
 		}
-		
 
+		return mailsEtatsClients;
+	}
+	
+	
+	public static ArrayList<String> afficheSelectMailsClients() {
+		connecter();
+		ArrayList<String> mailsClients = new ArrayList<String>();
+
+		Statement st = null;
+		ResultSet res = null;
+		try {
+			st = c.createStatement();
+
+			res = st.executeQuery("SELECT MAIL FROM CLIENTS");
+
+			// Récupérer les méta données
+			ResultSetMetaData rsmd = res.getMetaData();
+
+			while (res.next()) {
+
+				
+				String s = res.getObject(1).toString();
+				mailsClients.add(s);
+				
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
 
 		return mailsClients;
 	}
