@@ -21,9 +21,8 @@ public class Commande {
 		this.idClient = idClient;
 		this.liste = liste;
 		this.date = date;
-		/** IMPORTANT : Méthodes mises en commentaire jusqu'à la rentrée**/
-		//ajouterBDD();
-		//majInfoCommandes();
+		ajouterBDD();
+		majInfoCommandes();
 	}
 
 	private String idClient;
@@ -66,15 +65,16 @@ public class Commande {
 	// Méthode permettant d'ajouter cette commande à la table COMMANDES
 	public void ajouterBDD() {
 
+		String s = SGBD.transformation(this.date);
+		
 		String requete = "INSERT INTO COMMANDES (IDENTIFIANT, DATECOMMANDE, IDCLIENT) VALUES ( "
 				+ "'"
 				+ this.idCommande
 				+ "',"
-				+ "'"
-				+ this.date
-				+ "',"
-				+ "'"
+				+ s
+				+ ",'"
 				+ this.idClient + "')";
+		
 		SGBD.executeUpdate(requete);
 	}
 
@@ -83,16 +83,16 @@ public class Commande {
 
 		String requete = null;
 		for (int i = 0; i < liste.size(); i++) {
+			String s = SGBD.transformation(this.date);
 			requete = "'" + liste.get(i).getArticle() + "',"
 					+ liste.get(i).getQuantite();
 			SGBD.executeUpdate("INSERT INTO INFOCOMMANDES " 
-					+ " (IDCOMMANDE, DATECOMMANDE, IDCLIENT, ARTICLE, QUANTITE)  VALUES" 
+					+ " (IDCOMMANDE, DATECOMMANDE, IDCLIENT, IDARTICLE, QUANTITE)  VALUES" 
 					+ "('" 
 					+ this.idCommande
 					+ "',"
-					+ "'"
-					+ this.date
-					+ "',"
+					+ s
+					+ ","
 					+ "'"
 					+ this.idClient
 					+ "',"

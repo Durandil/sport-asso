@@ -23,8 +23,8 @@ public class Association extends Client {
 		this.nbPointsFidelite = 0;
 		this.estFidele = false;
 		this.estActif = true;
-		ajouterBDD();
 		this.motDePasse = genererMdp();
+		ajouterBDD();
 		System.out.println("Votre mot de passe est : " + this.motDePasse);
 
 	}
@@ -85,7 +85,7 @@ public class Association extends Client {
 		}
 		
 		String requete = "INSERT INTO CLIENTS (MAIL, DENOMINATION, ADRESSE, VILLE" +
-				", CODEPOSTAL, TELEPHONE, CARTEFIDEL, NBPOINTS, ETATCOMPTE) VALUES ( "+
+				", CODEPOSTAL, TELEPHONE, CARTEFIDEL, NBPOINTS, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
 				"'"+this.mail+"',"
 				+"'"+this.denomination+"',"
 				+"'"+this.adresse+"',"
@@ -94,7 +94,9 @@ public class Association extends Client {
 				+"'"+this.telephone+"',"
 				+"'"+fidele+"',"
 				+"'"+this.nbPointsFidelite+"',"
-				+"'"+actif+"')";
+				+"'"+actif+"',"
+				+"'"+this.motDePasse+"')";
+		
 		SGBD.executeUpdate(requete);
 	}
 
