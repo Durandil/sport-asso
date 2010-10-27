@@ -9,8 +9,8 @@ public class ClassePrincipale {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		//FenetreCompte fen=new FenetreCompte();
-		MenuUtilisateur men = new MenuUtilisateur();
+		FenetreCompte fen=new FenetreCompte();
+		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		
 	}

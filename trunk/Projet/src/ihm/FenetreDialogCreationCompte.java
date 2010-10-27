@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 
+import metier.Association;
 import metier.Particulier;
 
 
@@ -234,8 +235,15 @@ public class FenetreDialogCreationCompte extends JDialog{
 				//et on affiche un message qu'il est déjà utilisé par un autre utilisateur }
 				
 				// on pourra enregistrer dans base de données la nouvelle création de compte
-				//Particulier p = new Particulier(nom.getText(),prenom.getText(), identifiant.getText(),adresse.getText(), ville.getText(), codePostal.getText(), telephone.getText());
-				//p.ajouterBDD();
+				if(denomination.getText().isEmpty())
+				{
+					Particulier p = new Particulier(nom.getText(),prenom.getText(), identifiant.getText(),adresse.getText(), ville.getText(), codePostal.getText(), telephone.getText());
+				}
+				else
+				{
+					Association a = new Association(denomination.getText(), identifiant.getText(), adresse.getText(), ville.getText(), codePostal.getText(), telephone.getText());
+				}
+				
 				zInfo = new DialogInfo(nom.getText(),adresse.getText(),prenom.getText(),ville.getText(),(codePostal.getText()),telephone.getText(),identifiant.getText());
 				setVisible(false);
 			}

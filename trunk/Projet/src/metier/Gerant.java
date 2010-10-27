@@ -28,8 +28,7 @@ public class Gerant extends Utilisateur {
 	/** TODO : À finir ! **/
 	// Méthode permettant d'activer ou de désactiver un compte
 	public static void activDesactivCompte() {
-		System.out
-				.println("Veuillez entrer l'id du compte que vous souhaiter activer/désactiver");
+		System.out.println("Veuillez entrer l'id du compte que vous souhaiter activer/désactiver");
 
 		Scanner sc = new Scanner(System.in);
 		String str = sc.nextLine();
@@ -39,19 +38,24 @@ public class Gerant extends Utilisateur {
 		listeMails = SGBD.afficheSelectClients();
 
 		for (int i = 0; i < listeMails.size(); i++) {
-			System.out.println(listeMails.get(i)[0]);
-			System.out.println(listeMails.get(i)[1]);
+			
 			
 			if (listeMails.get(i)[0].equals(str)) {
 				
 				if (listeMails.get(i)[1].equals("Activé")) {
-					
-					System.out.println("Ce compte est activé, voulez-vous le désactiver (O/N)?");
-					Scanner sc2 = new Scanner(System.in);
-					String str2 = sc2.nextLine();
+					String str2 = null;
+					do {
+						System.out
+								.println("Ce compte est activé, voulez-vous le désactiver (O/N)?");
+						Scanner sc2 = new Scanner(System.in);
+						str2 = sc2.nextLine();
+					} while (!str2.equals("O") && !str2.equals("N"));
 					
 					if(str2.equals("O")){
 						
+						SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Désactivé' " +
+											"WHERE MAIL ='" + str+"'");
+						System.out.println("Le compte " + str + " a été désactivé");
 					}
 					
 					else if (str2.equals("N")){
@@ -60,13 +64,17 @@ public class Gerant extends Utilisateur {
 				}
 				
 				else if (listeMails.get(i)[1].equals("Désactivé")){
-					
+					String str3 = null;
+					do {
 					System.out.println("Ce compte est désactivé, voulez-vous le réactiver (O/N)?");
 					Scanner sc3 = new Scanner(System.in);
-					String str3 = sc3.nextLine();
+					str3 = sc3.nextLine();
+					} while (!str3.equals("O") && !str3.equals("N"));
 					
 					if(str3.equals("O")){
-						
+						SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Activé' " +
+								"WHERE MAIL ='" + str+"'");
+						System.out.println("Le compte " + str + " a été réactivé");
 					}
 					
 					else if (str3.equals("N")){

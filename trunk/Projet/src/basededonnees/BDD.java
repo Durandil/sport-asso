@@ -21,7 +21,8 @@ public class BDD {
 					+ " TELEPHONE VARCHAR(20),"
 					+ " CARTEFIDEL VARCHAR(3),"
 					+ " NBPOINTS NUMBER(6),"
-					+ " ETATCOMPTE VARCHAR(9)) "
+					+ " ETATCOMPTE VARCHAR(9), "
+					+ " MOTDEPASSE VARCHAR(7))"
 					);
 			
 		}
@@ -49,12 +50,11 @@ public class BDD {
 		
 		if(table.equals("INFOCOMMANDES")){
 			SGBD.executeUpdate("CREATE TABLE " + table 
-					+ "( IDCOMMANDE VARCHAR(10), " 
+					+ " (IDCOMMANDE VARCHAR(10), " 
 					+ " DATECOMMANDE DATE, "
 					+ " IDCLIENT VARCHAR(40)," 
-					+ " IDARTICLE VARCHAR(10)"
-					+ " QUANTITE NUMBER(3)"
-					+ ")"
+					+ " IDARTICLE VARCHAR(10),"
+					+ " QUANTITE NUMBER(3))"
 					);
 		}
 		

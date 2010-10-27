@@ -13,7 +13,7 @@ public abstract class Utilisateur {
 	protected String genererMdp(){
 		String s = "";
 		for(int i=0;i<7;i++){
-			int a =   (int) ((int)  93* Math.random()) +33;
+			int a =   (int) ((int)  78* Math.random()) +48;
 			char c = (char) a;
 			 s = s+c;}
 		return s;
