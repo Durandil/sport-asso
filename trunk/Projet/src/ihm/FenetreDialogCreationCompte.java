@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
+
+import basededonnees.SGBD;
 
 import metier.Association;
 import metier.Particulier;
@@ -230,22 +233,53 @@ public class FenetreDialogCreationCompte extends JDialog{
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {	
-				//if(identifiant.getText() est déjà utilisé) { on n'enregistre pas la saisie des champs 
-				//et on affiche un message qu'il est déjà utilisé par un autre utilisateur }
+			public void actionPerformed(ActionEvent arg0) {
+				/**Au début, le type de compte est sur "Compte Particulier" par défaut 
+				 * Mais le champ Dénomination n'est pas grisé il faut resélectionner Compte Particulier
+				 * pour que Dénomination se grise.
+				 */
 				
-				// on pourra enregistrer dans base de données la nouvelle création de compte
-				if(denomination.getText().isEmpty())
-				{
-					Particulier p = new Particulier(nom.getText(),prenom.getText(), identifiant.getText(),adresse.getText(), ville.getText(), codePostal.getText(), telephone.getText());
-				}
-				else
-				{
-					Association a = new Association(denomination.getText(), identifiant.getText(), adresse.getText(), ville.getText(), codePostal.getText(), telephone.getText());
-				}
+				//listeMails recense l'ensemble des adresses mails présentes dans la base
+				//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
+				//Si test reste à 0, on ajoute le client dans la BDD
+				ArrayList<String> listeMails = new ArrayList<String>();
+				listeMails = SGBD.afficheSelectMailsClients();
+				int test = 0;
 				
-				zInfo = new DialogInfo(nom.getText(),adresse.getText(),prenom.getText(),ville.getText(),(codePostal.getText()),telephone.getText(),identifiant.getText());
-				setVisible(false);
+				for (int i = 0; i < listeMails.size(); i++) {
+					if (identifiant.getText().equals(listeMails.get(i))) {
+						test = 1;
+					}
+				}
+
+				if (test == 1) {
+					System.out
+							.println("Cette adresse mail est déjà utilisée par un autre utilisateur !");
+				}
+				// on pourra enregistrer dans base de données la nouvelle
+				// création de compte
+				else {
+					if (denomination.getText().isEmpty())
+
+					{
+						Particulier p = new Particulier(nom.getText(), prenom
+								.getText(), identifiant.getText(), adresse
+								.getText(), ville.getText(), codePostal
+								.getText(), telephone.getText());
+					} else {
+						Association a = new Association(denomination.getText(),
+								identifiant.getText(), adresse.getText(), ville
+										.getText(), codePostal.getText(),
+								telephone.getText());
+					}
+					
+					System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
+					zInfo = new DialogInfo(nom.getText(), adresse.getText(),
+							prenom.getText(), ville.getText(), (codePostal
+									.getText()), telephone.getText(),
+							identifiant.getText());
+					setVisible(false);
+				}
 			}
 						
 		});

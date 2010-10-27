@@ -19,7 +19,7 @@ public class Principale {
  * @throws Exception **/
 
 	public static void main(String[] args) throws Exception {
-			
+		
 		//Gerant.activDesactivCompte();
 		
 		
