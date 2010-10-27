@@ -25,7 +25,6 @@ import metier.Particulier;
 public class FenetreDialogCreationCompte extends JDialog{
 	
 	private DialogInfo zInfo = new DialogInfo();
-	private boolean sendData;
 	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,adresse,ville,codePostal,telephone,identifiant,denomination;;
 	private JComboBox compte, fidelite;
@@ -52,7 +51,6 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 * @return zInfo
 	 */
 	public DialogInfo showZDialog(){
-		this.sendData = false;
 		this.setVisible(true);		
 		return this.zInfo;		
 	}
