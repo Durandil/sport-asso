@@ -14,7 +14,7 @@ public class Particulier extends Client {
 	// Le constructeur permet d'ajouter le particulier dans la base CLIENTS
 	// Et génère un mot de passe lors de l'instanciation
 	public Particulier(String nom, String prenom, String mail, String adresse,
-			String ville, String codePostal, String telephone) {
+			String ville, String codePostal, String telephone, boolean estFidele) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
@@ -24,7 +24,7 @@ public class Particulier extends Client {
 		this.telephone = telephone;
 		this.particulierAssociation = "Particulier";
 		this.nbPointsFidelite = 0;
-		this.estFidele = false;
+		this.estFidele = estFidele;
 		this.estActif = true;
 		this.motDePasse = genererMdp();
 		ajouterBDD();
