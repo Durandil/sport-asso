@@ -22,7 +22,7 @@ public class Principale {
 		
 		//Gerant.activDesactivCompte();
 		
-		
+	
 		
 /*	
 		  //Création de la table CLIENTS 

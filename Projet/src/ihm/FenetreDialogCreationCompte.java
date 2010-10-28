@@ -20,6 +20,7 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 
+import basededonnees.BDDClients;
 import basededonnees.SGBD;
 
 import metier.Association;
@@ -32,6 +33,8 @@ public class FenetreDialogCreationCompte extends JDialog{
 	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,adresse,ville,codePostal,telephone,identifiant,denomination;;
 	private JComboBox compte, fidelite;
+	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
+	private boolean estFidele = true;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
 	
@@ -201,14 +204,23 @@ public class FenetreDialogCreationCompte extends JDialog{
 		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
 		
+		
 		fidelite=new JComboBox();
 		fidelite.addItem("Oui");
 		fidelite.addItem("Non");
 		fidelite.setVisible(true);
 		fidelite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+			
+				// Le booléen estFidele passe à faux si l'utilisateur répond "Non" à la question
+				// Il reste à vrai s'il répond "Oui"
 				itemFidelite = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				if(itemFidelite == "Non"){
+					estFidele = false;
+				}
+				else{
+					estFidele = true;
+				}
 			}	
 		});
 		
@@ -234,7 +246,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 		
 		validationBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				/**Au début, le type de compte est sur "Compte Particulier" par défaut 
+				/** ATTENTION ! Au début, le type de compte est sur "Compte Particulier" par défaut 
 				 * Mais le champ Dénomination n'est pas grisé il faut resélectionner Compte Particulier
 				 * pour que Dénomination se grise.
 				 */
@@ -243,7 +255,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 				//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 				//Si test reste à 0, on ajoute le client dans la BDD
 				ArrayList<String> listeMails = new ArrayList<String>();
-				listeMails = SGBD.afficheSelectMailsClients();
+				listeMails = BDDClients.afficheSelectMailsClients();
 				int test = 0;
 				
 				for (int i = 0; i < listeMails.size(); i++) {
@@ -262,15 +274,16 @@ public class FenetreDialogCreationCompte extends JDialog{
 					if (denomination.getText().isEmpty())
 
 					{
+						
 						Particulier p = new Particulier(nom.getText(), prenom
 								.getText(), identifiant.getText(), adresse
 								.getText(), ville.getText(), codePostal
-								.getText(), telephone.getText());
+								.getText(), telephone.getText(), estFidele);
 					} else {
 						Association a = new Association(denomination.getText(),
 								identifiant.getText(), adresse.getText(), ville
 										.getText(), codePostal.getText(),
-								telephone.getText());
+								telephone.getText(),estFidele);
 					}
 					
 					System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());

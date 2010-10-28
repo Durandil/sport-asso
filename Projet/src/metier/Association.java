@@ -12,7 +12,7 @@ public class Association extends Client {
 	// Le constructeur ajoute l'association dans la table CLIENTS
 	// Et génère un mot de passe lors de l'instanciation
 	public Association(String denomination, String mail, String adresse,String ville,
-			String codePostal, String telephone) {
+			String codePostal, String telephone, boolean estFidele) {
 		this.denomination = denomination;
 		this.mail = mail;
 		this.adresse = adresse;
@@ -21,7 +21,7 @@ public class Association extends Client {
 		this.telephone = telephone;
 		this.particulierAssociation = "Association";
 		this.nbPointsFidelite = 0;
-		this.estFidele = false;
+		this.estFidele = estFidele;
 		this.estActif = true;
 		this.motDePasse = genererMdp();
 		ajouterBDD();

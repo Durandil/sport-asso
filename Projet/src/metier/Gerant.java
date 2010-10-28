@@ -3,6 +3,7 @@ package metier;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import basededonnees.BDDClients;
 import basededonnees.SGBD;
 
 public class Gerant extends Utilisateur {
@@ -35,7 +36,7 @@ public class Gerant extends Utilisateur {
 
 		ArrayList<String[]> listeMailsEtats = new ArrayList<String[]>();
 
-		listeMailsEtats = SGBD.afficheSelectMailsEtatsClients();
+		listeMailsEtats = BDDClients.afficheSelectMailsEtatsClients();
 
 		for (int i = 0; i < listeMailsEtats.size(); i++) {
 			

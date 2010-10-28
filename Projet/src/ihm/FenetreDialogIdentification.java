@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +15,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import basededonnees.BDDClients;
+import basededonnees.SGBD;
 
 
 public class FenetreDialogIdentification extends JDialog {
@@ -78,8 +82,32 @@ public class FenetreDialogIdentification extends JDialog {
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {				
+			public void actionPerformed(ActionEvent arg0) {
+				int present = 0;
+				ArrayList<String[]> listeMailsMdps = new ArrayList<String[]>();
+				listeMailsMdps = BDDClients.afficheSelectMailsMdpsClients();
 				DialogIdentifiant login = new DialogIdentifiant(identifiant.getText(),password.getText());
+				
+				for(int i=0;i<listeMailsMdps.size();i++){
+					
+					if(identifiant.getText().equals(listeMailsMdps.get(i)[0]))
+					{
+						present = present + 1;
+						if(password.getText().equals(listeMailsMdps.get(i)[1])){
+							System.out.println("Identification réussie !");
+						//Faire apparaître le Menu utilisateur ici !
+						}
+						else{
+							System.out.println("Mot de passe erroné, veuillez réessayer.");
+						}
+					}
+					
+				}
+				
+				if(present == 0)
+				{
+					System.out.println("Ce compte n'existe pas, inscrivez-vous !");
+				}
 				// vérifier que le login existe sinon retourner à la page précédente de choix entre création et identification
 				// lancer la page suivante si succès
 				setVisible(false);
