@@ -117,15 +117,15 @@ public class FenetreCompte extends JFrame {
 		boutonCreation.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				FenetreDialogCreationCompte compte = new FenetreDialogCreationCompte(null, "Informations Client", true);
-				DialogInfo Info = compte.showZDialog(); 
+				compte.setVisible(true); 
 			}	
 		});
 		
 		boutonIdentificationClient.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				// On affiche le contenu de la fenêtre d'identifiaction du client
-				FenetreDialogIdentification zd = new FenetreDialogIdentification(null, "Identification client", true);
-				DialogIdentifiant Ident = zd.showDialogIdent(); 
+				FenetreDialogIdentification identificationClient = new FenetreDialogIdentification(null, "Identification client", true);
+				identificationClient.setVisible(true); 
 			}	
 		});		
 		
