@@ -22,7 +22,6 @@ public class FenetreCatalogueGerant extends JFrame{
 	
 	private JLabel icon;
 
-
 	/**
 	 * Création du constructeur de la classe FenetreCatalogueGerant
 	 * la fenetre sera créée selon les instructions de la méthode initComponent()
@@ -55,8 +54,35 @@ public class FenetreCatalogueGerant extends JFrame{
     	panneauBoutonHaut.setLayout(new GridLayout(1,3,5,5));
 
     	JButton boutonAjouter=new JButton("Ajouter");
+    	boutonAjouter.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				// ouverture du formulaire d'ajout d'un article dans la base de donnees
+				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
+			}
+		});
+    	
     	JButton boutonSupprimer=new JButton("Supprimer");
+    	boutonSupprimer.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				// suppression de l'article selectionné dans le catalogue
+				
+			}
+		});
+    	
     	JButton boutonModifier=new JButton("Modifier");
+    	boutonModifier.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				// modification de l'article selectionné dans la catalogue
+				
+			}
+		});
+    	
     	
     	// Ajout des boutons sur ce panneau
     	panneauBoutonHaut.add(boutonAjouter);

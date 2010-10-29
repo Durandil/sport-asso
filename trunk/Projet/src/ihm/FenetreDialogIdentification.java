@@ -95,17 +95,16 @@ public class FenetreDialogIdentification extends JDialog {
 						//MenuUtilisateur men = new MenuUtilisateur();
 						}
 						else{
-							// essai d'affichage d'un message d'erreur en cas de mot de passe erroné
-							erreurMotPasse = new JOptionPane();
-							ImageIcon image = new ImageIcon("src/images/warning.png");
-							erreurMotPasse.showMessageDialog(null, "Mot de passe erroné, veuillez réessayer.", "Attention", JOptionPane.WARNING_MESSAGE, image);
-						}
+							System.out.println("Mot de passe erroné, veuillez réessayer.");
+							//affichage d'un message d'erreur en cas de mot de passe erroné
+							}
 					}
 					
 				}
 				
 				if(present == 0)
-				{
+				{	
+					
 					// essai d'affichage d'un message d'erreur en cas de probleme sur le compte
 					erreurCompte = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
