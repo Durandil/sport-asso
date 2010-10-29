@@ -67,7 +67,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 */
 	private void initComponent(){
 		//Icone
-		icon = new JLabel(new ImageIcon("E:\\logos.jpg"));
+		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.setLayout(new BorderLayout());
@@ -287,10 +287,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 					}
 					
 					System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
-					zInfo = new DialogInfo(nom.getText(), adresse.getText(),
-							prenom.getText(), ville.getText(), (codePostal
-									.getText()), telephone.getText(),
-							identifiant.getText());
+					//zInfo = new DialogInfo(nom.getText(), adresse.getText(),prenom.getText(), ville.getText(), (codePostal.getText()), telephone.getText(),identifiant.getText());
 					setVisible(false);
 				}
 			}
