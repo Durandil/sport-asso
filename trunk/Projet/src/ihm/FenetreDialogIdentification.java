@@ -24,7 +24,7 @@ import basededonnees.SGBD;
 
 public class FenetreDialogIdentification extends JDialog {
 	
-	DialogIdentifiant ident= new DialogIdentifiant();
+	//DialogIdentifiant ident= new DialogIdentifiant();
 	private JLabel identifiantLabel,passwordLabel;
 	private JTextField identifiant, password;
 	private JOptionPane erreurMotPasse, erreurCompte;
@@ -39,14 +39,6 @@ public class FenetreDialogIdentification extends JDialog {
 		this.initComponent();
 	}
 	
-	/**
-	 * Méthode appelée pour utiliser la boîte 
-	 * @return Info
-	 */
-	public DialogIdentifiant showDialogIdent(){
-		this.setVisible(true);		
-		return this.ident;		
-	}
 	
 	/**
 	 * Initialise le contenu de la boîte
@@ -100,7 +92,7 @@ public class FenetreDialogIdentification extends JDialog {
 						if(password.getText().equals(listeMailsMdps.get(i)[1])){
 							System.out.println("Identification réussie !");
 						//Faire apparaître le Menu utilisateur ici !
-						MenuUtilisateur men = new MenuUtilisateur();
+						//MenuUtilisateur men = new MenuUtilisateur();
 						}
 						else{
 							// essai d'affichage d'un message d'erreur en cas de mot de passe erroné

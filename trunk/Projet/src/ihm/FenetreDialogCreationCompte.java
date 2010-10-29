@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -29,14 +30,16 @@ import metier.Particulier;
 
 public class FenetreDialogCreationCompte extends JDialog{
 	
-	private DialogInfo zInfo = new DialogInfo();
+	//private DialogInfo zInfo = new DialogInfo();
 	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
-	private JTextField nom, prenom,adresse,ville,codePostal,telephone,identifiant,denomination;;
+	private JTextField nom, prenom,adresse,ville,codePostal,telephone,identifiant,denomination;
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = true;
+	private JOptionPane creationCorrecte ;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
+	
 	
 	/**
 	 * Constructeur
@@ -53,14 +56,6 @@ public class FenetreDialogCreationCompte extends JDialog{
 		this.initComponent();
 	}
 	
-	/**
-	 * Méthode appelée pour utiliser la boîte 
-	 * @return zInfo
-	 */
-	public DialogInfo showZDialog(){
-		this.setVisible(true);		
-		return this.zInfo;		
-	}
 	
 	/**
 	 * Initialise le contenu de la boîte
@@ -245,6 +240,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
+			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent arg0) {
 				/** ATTENTION ! Au début, le type de compte est sur "Compte Particulier" par défaut 
 				 * Mais le champ Dénomination n'est pas grisé il faut resélectionner Compte Particulier
@@ -286,9 +282,14 @@ public class FenetreDialogCreationCompte extends JDialog{
 								telephone.getText(),estFidele);
 					}
 					
-					System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
-					//zInfo = new DialogInfo(nom.getText(), adresse.getText(),prenom.getText(), ville.getText(), (codePostal.getText()), telephone.getText(),identifiant.getText());
+					//System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
+					creationCorrecte = new JOptionPane();
+					ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
+					creationCorrecte.showMessageDialog(null, "Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText(), "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
+					
 					setVisible(false);
+					// Essai d'ouverture du menu Utilisateur après une création de compte correcte
+					//MenuUtilisateur men = new MenuUtilisateur();
 				}
 			}
 						
