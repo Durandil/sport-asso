@@ -15,11 +15,11 @@ import basededonnees.SGBD;
 
 public class Principale {
 
-/** IMPORTANT : Vérifier si on peut accéder à la Base ORACLE Ensai de la maison !
+/** 
  * @throws Exception **/
 
 	public static void main(String[] args) throws Exception {
-		
+
 		//Gerant.activDesactivCompte();
 		
 	
@@ -40,33 +40,33 @@ public class Principale {
 		  //Instanciation d'un particulier 
 		Particulier p = new Particulier("Louvel", "Alexis", "alexis.louvel@ensai.fr",
 		  "Campus de KL", "Bruz", "35000", "02 56 98 66 33");
-	
+*/
 
 		
-		  // Création de la table ARTICLES 
-			BDD.creerTable("ARTICLES");
-		  
-		  // Instanciation de 10 articles (et ajout dans la table 
-		Article art1 = new Article("ART001", "Maillot", "Omnisport", 200,
-				50.20, 10, "2");
-		Article art2 = new Article("ART002", "Ballon", "Sport d''équipe", 200,
-				15.30, 100, "1");
-		Article art3 = new Article("ART003", "Chaussettes Blanches",
-				"Omnisport", 50, 10, 50, "1");
-		Article art4 = new Article("ART004", "Bonnet de bain", "Natation", 75,
-				15, 100, "1");
-		Article art5 = new Article("ART005", "Club", "Golf", 500, 100, 10, "3");
-		Article art6 = new Article("ART006", "Chaussettes Noires", "Omnisport",
-				50, 10, 50, "1");
-		Article art7 = new Article("ART007", "Selle", "Équitation", 250, 50, 5,
-				"3");
-		Article art8 = new Article("ART008", "Chaussures NIKE", "Running", 250,
-				100, 60, "2");
-		Article art9 = new Article("ART009", "Kimono", "Sport de combat", 750,
-				35, 30, "2");
-		Article art10 = new Article("ART010", "Raquette de tennis débutant",
-				"Sport de raquette", 170, 20, 50, "3");
-*/
+//		  // Création de la table ARTICLES 
+//			BDD.creerTable("ARTICLES");
+//		  
+//		  // Instanciation de 10 articles (et ajout dans la table 
+//		Article art1 = new Article("ART001", "Maillot", "Omnisport", 200,
+//				50.20, 0,"Rupture de stock", "2");
+//		Article art2 = new Article("ART002", "Ballon", "Sport d''équipe", 200,
+//				15.30, 100,"En stock", "1");
+//		Article art3 = new Article("ART003", "Chaussettes Blanches",
+//				"Omnisport", 50, 10, 50,"En stock", "1");
+//		Article art4 = new Article("ART004", "Bonnet de bain", "Natation", 75,
+//				15, 0,"Rupture de stock", "1");
+//		Article art5 = new Article("ART005", "Club", "Golf", 500, 100, 10,"En stock", "3");
+//		Article art6 = new Article("ART006", "Chaussettes Noires", "Omnisport",
+//				50, 10, 50,"En stock", "1");
+//		Article art7 = new Article("ART007", "Selle", "Équitation", 250, 50, 5,"Déstockage",
+//				"3");
+//		Article art8 = new Article("ART008", "Chaussures NIKE", "Running", 250,
+//				100, 60,"En stock", "2");
+//		Article art9 = new Article("ART009", "Kimono", "Sport de combat", 750,
+//				35, 30,"Déstockage", "2");
+//		Article art10 = new Article("ART010", "Raquette de tennis débutant",
+//				"Sport de raquette", 170, 20, 50,"En stock", "3");
+
 		/** TODO : Gérer le format Date **/
 		
 		// Création de 2 commandes

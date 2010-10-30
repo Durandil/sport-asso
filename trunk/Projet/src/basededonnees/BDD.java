@@ -36,6 +36,7 @@ public class BDD {
 					+ " POIDS NUMBER(8), "
 					+ " PRIXINITIAL NUMBER(6,2), "
 					+ " STOCK NUMBER(4),"
+					+ " ETAT VARCHAR(20),"
 					+ " CATPRIX VARCHAR(3))"
 					);
 		}
