@@ -21,7 +21,6 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 
-import basededonnees.BDDClients;
 import basededonnees.SGBD;
 
 import metier.Association;
@@ -36,7 +35,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = true;
-	private JOptionPane creationCorrecte ;
+	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise ;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
 	
@@ -251,7 +250,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 				//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 				//Si test reste à 0, on ajoute le client dans la BDD
 				ArrayList<String> listeMails = new ArrayList<String>();
-				listeMails = BDDClients.afficheSelectMailsClients();
+				listeMails = SGBD.selectListeString("CLIENTS", "MAIL");
 				int test = 0;
 				
 				for (int i = 0; i < listeMails.size(); i++) {
@@ -261,8 +260,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 				}
 
 				if (test == 1) {
-					System.out
-							.println("Cette adresse mail est déjà utilisée par un autre utilisateur !");
+					mailDejaUtilise = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image);
 				}
 				// on pourra enregistrer dans base de données la nouvelle
 				// création de compte
@@ -286,6 +286,11 @@ public class FenetreDialogCreationCompte extends JDialog{
 					creationCorrecte = new JOptionPane();
 					ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
 					creationCorrecte.showMessageDialog(null, "Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText(), "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
+					
+					//On rechercher le mot de passe dans la base avant de l'afficher
+					String motDePasse = SGBD.selectStringConditionString("CLIENTS", "MOTDEPASSE", "MAIL", identifiant.getText());
+					affichageMotDePasse = new JOptionPane();
+					affichageMotDePasse.showMessageDialog(null, "Retenez votre mot de passe : " + motDePasse, "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 					
 					setVisible(false);
 					// Essai d'ouverture du menu Utilisateur après une création de compte correcte

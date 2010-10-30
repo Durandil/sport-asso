@@ -291,8 +291,183 @@ public class SGBD {
 		}
 	}
 	
-	
+	//Méthode permettant d'obtenir l'ensemble des éléments (de nature String)
+	//d'un champ issu d'une table tous deux précisés en paramètres
+	public static ArrayList<String> selectListeString(String table, String str) {
+		connecter();
+		ArrayList<String> listeString = new ArrayList<String>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+str+" FROM "+table );
 
+			// Récupérer les méta données
+			ResultSetMetaData rsmd = res.getMetaData();
+
+			while (res.next()) {
+
+				String s = res.getObject(1).toString();
+				listeString.add(s);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeString;
+	}
+	
+	//Méthode permettant d'obtenir l'ensemble des éléments (de nature Float)
+	//d'une variable issu d'une table tous deux précisés en paramètres
+	public static ArrayList<Float> selectListeFloat(String table, String var) {
+		connecter();
+		ArrayList<Float> listeFloat = new ArrayList<Float>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+var+" FROM "+table );
+
+			// Récupérer les méta données
+			ResultSetMetaData rsmd = res.getMetaData();
+
+			while (res.next()) {
+
+				Float f = res.getFloat(1);
+				listeFloat.add(f);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeFloat;
+	}
+	
+	//Méthode permettant d'obtenir l'ensemble des éléments (de nature Integer)
+	//d'une variable issu d'une table tous deux précisés en paramètres
+	public static ArrayList<Integer> selectListeInt(String table, String var) {
+		connecter();
+		ArrayList<Integer> listeInt = new ArrayList<Integer>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+var+" FROM "+table );
+
+			// Récupérer les méta données
+			ResultSetMetaData rsmd = res.getMetaData();
+
+			while (res.next()) {
+
+				Integer i = res.getInt(1);
+				listeInt.add(i);
+				
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeInt;
+	}
+	
+	
+	//Méthode permettant de récupérer un élément d'un champ (de nature String)
+	//En apposant une condition sur un autre champ (dont les éléments sont aussi de nature String)
+	public static String selectStringConditionString(String table, String champ, String champDeCondition, String condition) {
+		connecter();
+		String s = null;
+		Statement st = null;
+		ResultSet res = null;
+		try {
+
+			st = c.createStatement();
+
+			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
+					+ condition + "'");
+
+			// Récupérer les méta données
+			while (res.next()) {
+
+				s = res.getObject(1).toString();
+
+			}
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return s;
+	}
+	
+	//Méthode permettant de récupérer l'ensemble des éléments de DEUX champs (de nature string)
+	//d'une table donnée (tous entrés en paramètres)
+	public static ArrayList<String[]> selectDeuxChampsString(String table, String champ1, String champ2) {
+		connecter();
+		ArrayList<String[]> liste = new ArrayList<String[]>();
+
+		Statement st = null;
+		ResultSet res = null;
+		try {
+			st = c.createStatement();
+
+			res = st.executeQuery("SELECT "+champ1+","+champ2+" FROM "+table);
+
+			// Récupérer les méta données
+			ResultSetMetaData rsmd = res.getMetaData();
+
+			while (res.next()) {
+
+				String[] listeString = new String[2];
+				String s = res.getObject(1).toString();
+				String s2 = res.getObject(2).toString();
+				listeString[0] = s;
+				listeString[1] = s2;
+				liste.add(listeString);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return liste;
+	}
 
 	
 	

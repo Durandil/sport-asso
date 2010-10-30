@@ -3,7 +3,6 @@ package metier;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import basededonnees.BDDClients;
 import basededonnees.SGBD;
 
 public class Gerant extends Utilisateur {
@@ -29,61 +28,68 @@ public class Gerant extends Utilisateur {
 
 	// Méthode permettant d'activer ou de désactiver un compte
 	public static void activDesactivCompte() {
-		System.out.println("Veuillez entrer l'id du compte que vous souhaiter activer/désactiver");
+		int test = 0;
+		while (test == 0) {
+			System.out
+					.println("Veuillez entrer l'id du compte que vous souhaiter activer/désactiver");
 
-		Scanner sc = new Scanner(System.in);
-		String str = sc.nextLine();
+			Scanner sc = new Scanner(System.in);
+			String str = sc.nextLine();
 
-		ArrayList<String[]> listeMailsEtats = new ArrayList<String[]>();
+			ArrayList<String[]> listeMailsEtats = new ArrayList<String[]>();
 
-		listeMailsEtats = BDDClients.afficheSelectMailsEtatsClients();
+			listeMailsEtats = SGBD.selectDeuxChampsString("CLIENTS", "MAIL",
+					"ETATCOMPTE");
 
-		for (int i = 0; i < listeMailsEtats.size(); i++) {
-			
-			
-			if (listeMailsEtats.get(i)[0].equals(str)) {
-				
-				if (listeMailsEtats.get(i)[1].equals("Activé")) {
-					String str2 = null;
-					do {
-						System.out
-								.println("Ce compte est activé, voulez-vous le désactiver (O/N)?");
-						Scanner sc2 = new Scanner(System.in);
-						str2 = sc2.nextLine();
-					} while (!str2.equals("O") && !str2.equals("N"));
-					
-					if(str2.equals("O")){
-						
-						SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Désactivé' " +
-											"WHERE MAIL ='" + str+"'");
-						System.out.println("Le compte " + str + " a été désactivé");
+			for (int i = 0; i < listeMailsEtats.size(); i++) {
+
+				if (listeMailsEtats.get(i)[0].equals(str)) {
+					test = test + 1;
+					if (listeMailsEtats.get(i)[1].equals("Activé")) {
+						String str2 = null;
+						do {
+							System.out
+									.println("Ce compte est activé, voulez-vous le désactiver (O/N)?");
+							Scanner sc2 = new Scanner(System.in);
+							str2 = sc2.nextLine();
+						} while (!str2.equals("O") && !str2.equals("N"));
+
+						if (str2.equals("O")) {
+
+							SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Désactivé' "
+									+ "WHERE MAIL ='" + str + "'");
+							System.out.println("Le compte " + str
+									+ " a été désactivé");
+						}
+
+						else if (str2.equals("N")) {
+							System.out.println("Compte laissé activé.");
+						}
 					}
-					
-					else if (str2.equals("N")){
-						System.out.println("Compte laissé activé.");
-					}
-				}
-				
-				else if (listeMailsEtats.get(i)[1].equals("Désactivé")){
-					String str3 = null;
-					do {
-					System.out.println("Ce compte est désactivé, voulez-vous le réactiver (O/N)?");
-					Scanner sc3 = new Scanner(System.in);
-					str3 = sc3.nextLine();
-					} while (!str3.equals("O") && !str3.equals("N"));
-					
-					if(str3.equals("O")){
-						SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Activé' " +
-								"WHERE MAIL ='" + str+"'");
-						System.out.println("Le compte " + str + " a été réactivé");
-					}
-					
-					else if (str3.equals("N")){
-						System.out.println("Compte laissé désactivé.");
+
+					else if (listeMailsEtats.get(i)[1].equals("Désactivé")) {
+						String str3 = null;
+						do {
+							System.out
+									.println("Ce compte est désactivé, voulez-vous le réactiver (O/N)?");
+							Scanner sc3 = new Scanner(System.in);
+							str3 = sc3.nextLine();
+						} while (!str3.equals("O") && !str3.equals("N"));
+
+						if (str3.equals("O")) {
+							SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Activé' "
+									+ "WHERE MAIL ='" + str + "'");
+							System.out.println("Le compte " + str
+									+ " a été réactivé");
+						}
+
+						else if (str3.equals("N")) {
+							System.out.println("Compte laissé désactivé.");
+						}
 					}
 				}
 			}
-		}	
+		}
 
 	}
 }

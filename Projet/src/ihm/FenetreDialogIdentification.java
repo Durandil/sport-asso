@@ -18,16 +18,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import basededonnees.BDDClients;
 import basededonnees.SGBD;
 
 
 public class FenetreDialogIdentification extends JDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//DialogIdentifiant ident= new DialogIdentifiant();
 	private JLabel identifiantLabel,passwordLabel;
 	private JTextField identifiant, password;
-	private JOptionPane erreurMotPasse, erreurCompte;
+	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie;
+
 	
 	
 	public FenetreDialogIdentification(JFrame parent, String title, boolean modal){
@@ -81,7 +85,7 @@ public class FenetreDialogIdentification extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {
 				int present = 0;
 				ArrayList<String[]> listeMailsMdps = new ArrayList<String[]>();
-				listeMailsMdps = BDDClients.afficheSelectMailsMdpsClients();
+				listeMailsMdps = SGBD.selectDeuxChampsString("CLIENTS", "MAIL", "MOTDEPASSE");
 				DialogIdentifiant login = new DialogIdentifiant(identifiant.getText(),password.getText());
 				
 				for(int i=0;i<listeMailsMdps.size();i++){
@@ -89,13 +93,18 @@ public class FenetreDialogIdentification extends JDialog {
 					if(identifiant.getText().equals(listeMailsMdps.get(i)[0]))
 					{
 						present = present + 1;
-						if(password.getText().equals(listeMailsMdps.get(i)[1])){
-							System.out.println("Identification réussie !");
+						if(password.getText().equals(listeMailsMdps.get(i)[1])){					
+							identificationReussie = new JOptionPane();
+							ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
+							identificationReussie.showMessageDialog(null, "Identification réussie !", "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
+							
 						//Faire apparaître le Menu utilisateur ici !
 						//MenuUtilisateur men = new MenuUtilisateur();
 						}
 						else{
-							System.out.println("Mot de passe erroné, veuillez réessayer.");
+							erreurMotPasse = new JOptionPane();
+							ImageIcon image = new ImageIcon("src/images/warning.png");
+							erreurMotPasse.showMessageDialog(null, "Mot de passe erroné, veuillez réessayer.", "Attention", JOptionPane.WARNING_MESSAGE, image);
 							//affichage d'un message d'erreur en cas de mot de passe erroné
 							}
 					}
