@@ -23,8 +23,6 @@ public class FenetreChoixCatalogue extends JDialog {
 	private JComboBox quantite;
 	public static int quantiteSelectionnee ;
 	
-	//public static Article testArticle= new Article("ART1", "Maillot", "Running", (float) 0.600, 25.0, 40);
-	
 	/**
 	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client pourra choisir 
 	 * la quantitée qu'il désire de l'article sélectionné dans le tableau du catalogue
@@ -83,6 +81,7 @@ public class FenetreChoixCatalogue extends JDialog {
 				setVisible(false);
 				// TODO il faudra ajouter l'article concerné dans le panier avec la quantité correspondante
 				// et faire les modifications éventuelles dans la base de données.
+				// LigneCommande panierEnCours = new LigneCommande(article,quantite);
 			}			
 		});
 		

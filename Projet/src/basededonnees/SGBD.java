@@ -468,8 +468,36 @@ public class SGBD {
 
 		return liste;
 	}
-
 	
+	// Méthode qui permettra de récupérer les statistiques sur le montant des commandes d'un
+	// client pour la fiche client. avg ( moyenne), min et max.
+	// pour le moment je me sers de la quantite, plus tard il faudra travailler sur
+	// le prix x quantité ( requete imbriquée à réaliser)
+	public static String statistiqueClassiqueClient(String identifiant, String statistique){
+		connecter();
+		String resultat ;
+		Statement st = null;
+		ResultSet res = null;
+		String rs = "";
+		
+		try {
+			st = c.createStatement();
+			res= st.executeQuery("SELECT"+ statistique + "(QUANTITE) FROM COMMANDES,INFOCOMMANDES,CLIENT" +
+					"WHERE COMMANDES.IDENTIFIANT=INFOCOMMANDES.IDCOMMANDE and CLIENT.IDENTIFIANT=" +
+					"COMMANDES.IDCLIENT and MAIL="+ identifiant +";");
+			
+			rs = res.getNString(0);
+			
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			fermer();
+		}
+		return rs;
+	}
 	
 	
 }
