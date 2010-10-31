@@ -6,8 +6,11 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
+
+import basededonnees.SGBD;
 
 public class FenetreRechercheClient extends JDialog{
 	private JLabel numeroLabel;
@@ -19,6 +22,9 @@ public class FenetreRechercheClient extends JDialog{
 	private JTextField denomination;
 	private JLabel denominationLabel;
 	private JSplitPane split;
+	private JLabel clientLabel;
+	private JTextField clientIdentifiant;
+	private JOptionPane mailInexistant;
 
 	// Le gérant pourra rechercher un client en fonction de son numéro, nom, ville
 	
@@ -111,17 +117,61 @@ public class FenetreRechercheClient extends JDialog{
 		
 		
 		// Définition du panneau des boutons du bas
+		JPanel panneauBasBoutons = new JPanel();
+		panneauBasBoutons.setLayout(new GridLayout(1,2,5,5));
+		
+		// TODO Afficher un champ permettant au gérant de rentrer l'identifiant de client que le gérant souhaite consulter
+		JPanel panneauRechercheClient = new JPanel();
+		panneauRechercheClient.setLayout(new GridLayout(1,3,5,5));
+		clientLabel = new JLabel("Client recherché ?");
+		clientIdentifiant = new JTextField();
+		JButton validationRecherche = new JButton("OK");
+		validationRecherche.addActionListener(new ActionListener() {
+			
+			@SuppressWarnings("static-access")
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stud
+				
+				//listeMails recense l'ensemble des adresses mails présentes dans la base
+				//L'entier test passe à 1 si l'adresse renseignée existe bien dans la base de données
+				//Si test reste à 0, on avertit le gérant que l'adresse n'existe pas
+				ArrayList<String> listeMails = new ArrayList<String>();
+				listeMails = SGBD.selectListeString("CLIENTS", "MAIL");
+				byte test = 0;
+				
+				for (int i = 0; i < listeMails.size(); i++) {
+					if (clientIdentifiant.getText().equals(listeMails.get(i))) {
+						test = 1;
+					}
+				}
+				
+				if (test == 0) {
+					mailInexistant = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					mailInexistant.showMessageDialog(null, "Cette adresse mail n'existe pas !", "Attention", JOptionPane.WARNING_MESSAGE, image);
+				}
+				else{
+					// on affiche la fiche client correspondante à l'identifiant saisi
+					
+				}
+					
+			}
+		});
+		panneauRechercheClient.add(clientLabel);
+		panneauRechercheClient.add(clientIdentifiant);
+		panneauRechercheClient.add(validationRecherche);
+		panneauBasBoutons.add(panneauRechercheClient);
+		
+		// Creation du bouton de retour à la page précédente
 		JButton boutonRetour= new JButton("Retour à la page précédente");
 		
 		boutonRetour.addActionListener(new ActionListener() {
-			
-			
 			public void actionPerformed(ActionEvent e) {
 				//TODO Auto-generated method stub
-				setVisible(false);
-				
+				setVisible(false);	
 			}
 		});
+		panneauBasBoutons.add(boutonRetour);
 		
 		// Création d'un panneau qui regroupera : le bouton de recherche des clients selon les critères entrés en paramètre
 		// le tableau des résultats de la recherche
@@ -131,9 +181,9 @@ public class FenetreRechercheClient extends JDialog{
 		panneauBas.setLayout(new BorderLayout());
 		panneauBas.add(boutonValidationRecherche,"North");
 		panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
-		panneauBas.add(boutonRetour,"South");
+		panneauBas.add(panneauBasBoutons,"South");
 		
-		// TODO Afficher un champ permettant au gérant de rentrer le numero de client que le gérant souhaite consulter
+		 
 		
 		// Ajout d'une séparation horizontale afin de séparer les champs de recherche et l'affichage des résultats
 		split = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panneauChampsRecherche, panneauBas);

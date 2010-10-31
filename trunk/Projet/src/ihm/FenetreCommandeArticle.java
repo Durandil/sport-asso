@@ -1,9 +1,11 @@
 package ihm;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +19,7 @@ public class FenetreCommandeArticle extends JFrame{
 	
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
+	private JComboBox comboBoxTri;
 
 	
 	/*
@@ -57,10 +60,25 @@ public class FenetreCommandeArticle extends JFrame{
     	// Ajout du panneau au panneau "principal" en haut de la fenetre
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
+    	// Définition du panneau qui accueillera le catalogue et un JComboBox de tri du tableau
+    	// selon divers critères
+    	JPanel panneauTableauCatalogue = new JPanel();
+    	panneauTableauCatalogue.setLayout(new GridLayout(1,2,5,5));
     	
-	    JTable tableau = new JTable(new ModeleTableauCatalogue());     
-	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.WEST);
+	    JTable tableau = new JTable(new ModeleTableauCatalogue());
+	    panneauTableauCatalogue.add(new JScrollPane(tableau));
 	    
+	    comboBoxTri = new JComboBox();
+	    comboBoxTri.addItem("Trier par Prix");
+	    comboBoxTri.addItem("Trier par sport");
+	    comboBoxTri.addItem("Trier par nom d'article");
+	    // TODO ajouter les action listener correspondant à chaque Item
+	    
+	    panneauTableauCatalogue.add(comboBoxTri);
+	    
+	    this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
+	    
+	    // Définition du panneau qui accueillera les aricles du panier
 	    JTable panier = new JTable(new ModelePanier());     
 	    this.getContentPane().add(new JScrollPane(panier), BorderLayout.EAST);
 	        

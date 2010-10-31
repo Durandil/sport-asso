@@ -29,8 +29,6 @@ public class MenuGerant extends JFrame {
 		// il faut, pour chaque item, lui implémenter son actionPerformed correspondant
 		// à la fenetre qu'il faudra ouvrir 
 		
-		
-		
 		item1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				// Afficher la fenetre de recherche d'un client
