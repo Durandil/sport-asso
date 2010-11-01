@@ -16,11 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import metier.Client;
+
 
 public class FenetreFideliteClient extends JDialog {
 	
-	
-	private DialogInfo infoClient = new DialogInfo();
 	private JLabel fideliteLabel;
 	private JComboBox fidelite;
 	private JLabel pointsFideliteLabel;
@@ -35,7 +35,7 @@ public class FenetreFideliteClient extends JDialog {
 	 * @param client : Il permet de récupérer les informations d'un client pour les utiliser dans la fenêtre
 	 * 				   
 	 */
-	public FenetreFideliteClient(JFrame parent, String title, boolean modal,DialogInfo client){
+	public FenetreFideliteClient(JFrame parent, String title, boolean modal,Client client){
 		super(parent, title, modal);
 		this.setSize(400, 500);
 		this.setLocationRelativeTo(null);
@@ -44,16 +44,8 @@ public class FenetreFideliteClient extends JDialog {
 		this.initComponent(client);
 	}
 	
-	/**
-	 * Méthode appelée pour utiliser la boîte 
-	 * @return infoClient
-	 */
-	public DialogInfo showClientFidelite(){
-		this.setVisible(true);		
-		return this.infoClient;		
-	}
 	
-	private void initComponent(DialogInfo client){
+	private void initComponent(Client client){
 		
 		// Création du panneau de gestion de la demande d'une carte de fidelité
 		JPanel panFidelite = new JPanel();
@@ -67,7 +59,7 @@ public class FenetreFideliteClient extends JDialog {
 		fidelite.addItem("Oui");
 		fidelite.addItem("Non");
 		
-		
+		//client.isEstFidele()==true
 		if(FenetreDialogCreationCompte.itemFidelite=="Oui"){
 			// si la personne a répondu oui lors de la création de compte, on ne lui permet pas de modifier 
 			// le contenu du menu déroulant
@@ -95,7 +87,7 @@ public class FenetreFideliteClient extends JDialog {
 		panPointsFidelite.setPreferredSize(new Dimension(220, 80));
 		pointsFideliteLabel = new JLabel("Nombre de points fidelité :");
 		panPointsFidelite.add(pointsFideliteLabel);
-		int points=client.getPointFidelite(); // récupération du nombre de points du client entré en paramètre de initComponent()
+		int points=client.getNbPointsFidelite(); // récupération du nombre de points du client entré en paramètre de initComponent()
 		pointsFidelite= new JTextField(points);
 		pointsFidelite.setPreferredSize(new Dimension(90, 25));
 		pointsFidelite.setEnabled(false);
@@ -125,7 +117,8 @@ public class FenetreFideliteClient extends JDialog {
         JButton validationBouton = new JButton("Confirmer");
 		validationBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO enregistrer éventuelle modification de programme fidelité (par ex : passage de non à oui,on ne peut pas passer de oui à non a priori)
+				// TODO enregistrer éventuelle modification de programme fidelité 
+				//(par ex : passage de non à oui,on ne peut pas passer de oui à non a priori)
 				// et retourner menu utilisateur
 			}			
 		});

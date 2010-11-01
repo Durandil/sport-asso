@@ -16,28 +16,31 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
+import metier.Client;
+import metier.Particulier;
+
 
 public class MenuUtilisateur extends JFrame{
 	
 	private JMenuBar menuBar = new JMenuBar();
-	private JMenu deuxieme_menu = new JMenu("Mon Compte");
-	private JMenu troisieme_menu = new JMenu("Catalogue");
-	private JMenu quatrieme_menu = new JMenu("Promotions");
-	private JMenu cinquieme_menu = new JMenu("Contact");
+	private JMenu menuCompte = new JMenu("Mon Compte");
+	private JMenu menuCatalogue = new JMenu("Catalogue");
+	private JMenu menuPromotions = new JMenu("Promotions");
+	private JMenu menuContact = new JMenu("Contact");
 		
 	
-	private JMenuItem item2 = new JMenuItem("Fermer");
-	private JMenuItem item3 = new JMenuItem("Mes informations");
-	private JMenuItem item4 = new JMenuItem("Mon programme fidélité");
-	private JMenuItem item5 = new JMenuItem("Nous Contacter");
-	private JMenuItem item6 = new JMenuItem("Informations");
-	private JMenuItem item7 = new JMenuItem("Articles");
-	private JMenuItem item8 = new JMenuItem("Promotions en cours");
+	private JMenuItem itemFermer = new JMenuItem("Fermer");
+	private JMenuItem itemMesInformations = new JMenuItem("Mes informations");
+	private JMenuItem itemProgFidelite = new JMenuItem("Mon programme fidélité");
+	private JMenuItem itemContact = new JMenuItem("Nous Contacter");
+	private JMenuItem itemInformations = new JMenuItem("Informations");
+	private JMenuItem itemArticles = new JMenuItem("Articles");
+	private JMenuItem itemPromotions = new JMenuItem("Promotions en cours");
 	
 	// Cette variable static contiendra normalement le client en cours d'utilisation de l'application
 	// pour le moment elle sert à faire fonctionner la fenêtre
-	public static DialogInfo client = new DialogInfo("Orange SA","rue de la défense", "Nice", "13000", "0410322322", "mpanel@orange.fr");
-	
+	public static Client client = new Particulier("jean","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
+
 	public MenuUtilisateur(){
 		this.setSize(400, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,49 +49,49 @@ public class MenuUtilisateur extends JFrame{
 		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
 		//--------------------------
 			
-		item2.addActionListener(new ActionListener(){
+		itemFermer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}				
 		});
 		
-		item3.addActionListener(new ActionListener(){
+		itemMesInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				//ouvrir la fenetre permettant accès au compte
-				FenetreDialogGestionCompteClient fenetreGestionCompte =new FenetreDialogGestionCompteClient(null,"Informations client",true,client);
-				DialogInfo gestion= fenetreGestionCompte.showClient();
+				//FenetreDialogGestionCompteClient fenetreGestionCompte =new FenetreDialogGestionCompteClient(null,"Informations client",true,client);
+				//DialogInfo gestion= fenetreGestionCompte.showClient();
 			}
 		});
 		
-		item4.addActionListener(new ActionListener(){
+		itemProgFidelite.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				//ouvrir la fenetre permettant accès au informations sur programme de fidelite
-				 FenetreFideliteClient fenetreProgrammeFidelite =new  FenetreFideliteClient(null,"programme fidelité",true,client);
-				DialogInfo gestion= fenetreProgrammeFidelite.showClientFidelite();
+				 //FenetreFideliteClient fenetreProgrammeFidelite =new  FenetreFideliteClient(null,"programme fidelité",true,client);
+				 //fenetreProgrammeFidelite.setVisible(true);
 			}
 		});
 		
-		item5.addActionListener(new ActionListener(){
+		itemContact.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				FenetreContactVendeur contactVendeur= new FenetreContactVendeur(null,"Nous Contacter",true);
-				DialogMessage mes = contactVendeur.showDialog();
+				contactVendeur.setVisible(true);
 			}
 		});
 		
-		item6.addActionListener(new ActionListener(){
+		itemInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				FenetreInformationsClient contactVendeur= new FenetreInformationsClient();
 			}
 		});
 		
-		item7.addActionListener(new ActionListener(){
+		itemArticles.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				FenetreCommandeArticle catalogue = new FenetreCommandeArticle();
 				catalogue.setVisible(true);
 			}
 		});
 		
-		item8.addActionListener(new ActionListener(){
+		itemPromotions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				FenetrePromotions promotion = new FenetrePromotions();
 				promotion.setVisible(true);
@@ -97,23 +100,23 @@ public class MenuUtilisateur extends JFrame{
 		
 		// Ajout des sous-menus à leur menu respectif dans l'ordre descendant que l'on désire 
 		// à l'affichage 
-		this.deuxieme_menu.add(item3);
-		this.deuxieme_menu.add(item4);
-		this.deuxieme_menu.add(item2);
+		this.menuCompte.add(itemMesInformations);
+		this.menuCompte.add(itemProgFidelite);
+		this.menuCompte.add(itemFermer);
 		
-		this.troisieme_menu.add(item7);
+		this.menuCatalogue.add(itemArticles);
 		
-		this.quatrieme_menu.add(item8);
+		this.menuPromotions.add(itemPromotions);
 		
-		this.cinquieme_menu.add(item6);
-		this.cinquieme_menu.add(item5);
+		this.menuContact.add(itemInformations);
+		this.menuContact.add(itemContact);
 			
 	    //L'ordre d'ajout va déterminer l'ordre d'apparition dans le menu de gauche à droite
 	    //Le premier ajouté sera tout à gauche de la barre de menu et inversement pour le dernier
-		this.menuBar.add(deuxieme_menu);
-		this.menuBar.add(troisieme_menu);
-		this.menuBar.add(quatrieme_menu);
-		this.menuBar.add(cinquieme_menu);
+		this.menuBar.add(menuCompte);
+		this.menuBar.add(menuCatalogue);
+		this.menuBar.add(menuPromotions);
+		this.menuBar.add(menuContact);
 		//-------------------------
 		
 		//Ajout de la barre de menu à notre objet MenuUtilisateur

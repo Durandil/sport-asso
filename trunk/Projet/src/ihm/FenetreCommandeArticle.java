@@ -66,15 +66,15 @@ public class FenetreCommandeArticle extends JFrame{
     	panneauTableauCatalogue.setLayout(new GridLayout(1,2,5,5));
     	
 	    JTable tableau = new JTable(new ModeleTableauCatalogue());
+	    tableau.setAutoCreateRowSorter(true); // permet de trier un tableau en cliquant sur la colonne
 	    panneauTableauCatalogue.add(new JScrollPane(tableau));
 	    
-	    comboBoxTri = new JComboBox();
+	    /*comboBoxTri = new JComboBox();
 	    comboBoxTri.addItem("Trier par Prix");
 	    comboBoxTri.addItem("Trier par sport");
 	    comboBoxTri.addItem("Trier par nom d'article");
-	    // TODO ajouter les action listener correspondant à chaque Item
-	    
 	    panneauTableauCatalogue.add(comboBoxTri);
+	    */
 	    
 	    this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
 	    

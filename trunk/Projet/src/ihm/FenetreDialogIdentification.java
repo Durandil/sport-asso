@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import basededonnees.SGBD;
@@ -29,9 +30,11 @@ public class FenetreDialogIdentification extends JDialog {
 	private static final long serialVersionUID = 1L;
 	//DialogIdentifiant ident= new DialogIdentifiant();
 	private JLabel identifiantLabel,passwordLabel;
-	private JTextField identifiant, password;
+	private JTextField identifiant, motDePasse;
+	private JPasswordField password ;
 	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie;
-
+	public static String clientUserIdentifiant="" ; // permet d'avoir l'identifiant de l'utilisateur 
+													 // dans toute l'application
 	
 	
 	public FenetreDialogIdentification(JFrame parent, String title, boolean modal){
@@ -66,7 +69,7 @@ public class FenetreDialogIdentification extends JDialog {
 		panPassword.setPreferredSize(new Dimension(220, 60));
 		panPassword.setBorder(BorderFactory.createTitledBorder("Mot de passe :"));
 		passwordLabel = new JLabel("Mot de passe : ");
-		password = new JTextField();
+		password = new JPasswordField();
 		password.setPreferredSize(new Dimension(90, 25));
 		panPassword.add(passwordLabel);
 		panPassword.add(password);
@@ -97,7 +100,7 @@ public class FenetreDialogIdentification extends JDialog {
 							identificationReussie = new JOptionPane();
 							ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
 							identificationReussie.showMessageDialog(null, "Identification réussie !", "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
-							
+							clientUserIdentifiant=identifiant.getText();
 						//Faire apparaître le Menu utilisateur ici !
 						//MenuUtilisateur men = new MenuUtilisateur();
 						}

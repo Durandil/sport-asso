@@ -287,6 +287,8 @@ public class FenetreDialogCreationCompte extends JDialog{
 					ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
 					creationCorrecte.showMessageDialog(null, "Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText(), "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 					
+					FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
+					
 					//On rechercher le mot de passe dans la base avant de l'afficher
 					String motDePasse = SGBD.selectStringConditionString("CLIENTS", "MOTDEPASSE", "MAIL", identifiant.getText());
 					affichageMotDePasse = new JOptionPane();

@@ -1,5 +1,9 @@
 package ihm;
+import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
+
+import basededonnees.SGBD;
 
 public class ModeleMessagerie extends AbstractTableModel {
 	
@@ -10,12 +14,21 @@ public class ModeleMessagerie extends AbstractTableModel {
 	
 	public ModeleMessagerie(){
 		super();
+		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+		ArrayList<String> listeExpediteur = SGBD.selectListeString("MESSAGE", "EXPEDITEUR");
+		ArrayList<String> listeSujet = SGBD.selectListeString("MESSAGE", "SUJET");
+		ArrayList<Integer> listeDate = SGBD.selectListeInt("MESSAGE", "DATE");
 		
 		
-		donnees= new Object[][]{
-				{"Robert","Article 1","11/05/2010"},
-				{"Paul","Destockage de chaussettes de football","12/07/2010"}
-		};
+		donnees = new Object[1000][3];
+		
+		//On ajoute les informations dans l'objet donnees
+		for(int i=0;i<listeExpediteur.size();i++){
+			donnees[i][0] = listeExpediteur.get(i);
+			donnees[i][1] = listeSujet.get(i);
+			donnees[i][2] = listeDate.get(i);
+
+		}
 	}
 	
 	

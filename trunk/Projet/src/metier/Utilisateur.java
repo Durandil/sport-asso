@@ -8,8 +8,7 @@ public abstract class Utilisateur {
 	protected String codePostal;
 	protected String telephone;
 	
-	
-	
+
 	protected String genererMdp(){
 		String s = "";
 		for(int i=0;i<7;i++){
