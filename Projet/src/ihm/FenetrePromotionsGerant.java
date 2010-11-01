@@ -41,6 +41,28 @@ public class FenetrePromotionsGerant extends JFrame {
     	JButton boutonSupprimer=new JButton("Supprimer");
     	JButton boutonModifier=new JButton("Modifier");
     	
+    	boutonAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Ajout d'une promotion
+				FenetreFormulairePromotionsGerant nouvellePromo = new FenetreFormulairePromotionsGerant(null,"Ajout d'une nouvelle promotion",true);
+				nouvellePromo.setVisible(true);
+			}
+		});
+    	
+    	boutonSupprimer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO supprimer la promotion selectionnée dans la base de donnée
+				
+			}
+		});
+    	
+    	boutonModifier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO modifier la promotion sélectionée grâce à un formulaire
+				
+			}
+		});
+    	
     	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
     	panneauTitle.add(boutonAjouter);
     	panneauTitle.add(boutonSupprimer);

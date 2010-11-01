@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,10 +17,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import metier.Message;
+
 
 public class FenetreContactVendeur extends JDialog{
 	
-	private DialogMessage message = new DialogMessage();
+	private Message message = new Message();
 	private JTextField sujet;
 	private TextArea contenu;
 	private JLabel sujetLabel,contenuLabel,introduction,texte;
@@ -35,11 +38,6 @@ public class FenetreContactVendeur extends JDialog{
 		this.initComponent();
 	}
 	
-	// Méthode permettant l'affichage de la fenêtre FenetreContactVendeur
-	public DialogMessage showDialog(){
-		this.setVisible(true);		
-		return this.message;		
-	}
 	
 	private void initComponent(){
 		JPanel texteHautPan= new JPanel();
@@ -93,7 +91,8 @@ public class FenetreContactVendeur extends JDialog{
 			public void actionPerformed(ActionEvent arg0){
 				// classe provisoire permettant de récupérer des objets de type message avec un sujet et un contenu
 				// cependant il faudrait ajouter un attribut identifiant de l'expéditeur
-				message=new DialogMessage(sujet.getText(),contenu.getText());
+				// il faudrait ajouter message à la base de données
+				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,new Date());
 				// fermeture de la fenetre
 				setVisible(false);
 			}

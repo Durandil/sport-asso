@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,6 +14,8 @@ import javax.swing.JPanel;
 
 public class FenetreInformationsClient extends JFrame {
 	
+	private JLabel imageFenetre;
+
 	// Cette fenêtre va permettre de donner un descriptif du magasin aux clients 
 	// accédant au sous-menu "Informations" dans le menu "Contact"
 	
@@ -23,14 +26,17 @@ public class FenetreInformationsClient extends JFrame {
         this.setLocationRelativeTo(null);               
         this.setResizable(true);
         this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-        this.setLayout(new GridLayout(1,2,5,5));
         
         //Instanciation d'un objet JPanel
         Panneau panneauInformations = new Panneau();
         panneauInformations.setBorder(BorderFactory.createTitledBorder("Mot du Gérant : Alexis Louvel"));
         //Définition de sa couleur de fond
         panneauInformations.setBackground(Color.white);               
-        this.getContentPane().add(panneauInformations);
+        this.getContentPane().add(panneauInformations,"Center");
+        
+        // Creation du panneau du bas qui accueillera un autre panneau et une image 
+        JPanel panneauBas = new JPanel();
+        panneauBas.setLayout(new GridLayout(1,2,5,5));
         
         // Creation du panneau avec l'adresse et le téléphone
         JPanel panneauInformationsSupp = new JPanel();
@@ -41,7 +47,18 @@ public class FenetreInformationsClient extends JFrame {
         panneauInformationsSupp.add(adresse);
         panneauInformationsSupp.add(telephone);
         
-        this.getContentPane().add(panneauInformationsSupp);
+        panneauBas.add(panneauInformationsSupp);
+        
+        // Creation du panneau qui accueillera l'image
+        imageFenetre = new JLabel(new ImageIcon("src/images/carte.jpg"));
+		JPanel panImage = new JPanel();
+		panImage.setBackground(Color.white);
+		panImage.setBorder(BorderFactory.createEmptyBorder());
+		panImage.add(imageFenetre);
+		
+		panneauBas.add(panImage);
+        
+        this.getContentPane().add(panneauBas,"South");
         
         
         this.setVisible(true);

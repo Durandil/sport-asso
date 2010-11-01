@@ -15,28 +15,30 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import metier.Article;
+import metier.Message;
 
 public class FenetreLectureMessage extends JDialog{
 
 	private JTextField expediteur,date,sujet,contenu;
 	private JLabel expediteurLabel,dateLabel,sujetLabel,contenuLabel;
 
-	public FenetreLectureMessage(JFrame parent, String title, boolean modal /*,Message messageClient */){
+	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,Message messageClient ){
 		super(parent, title, modal);
 		this.setSize(200, 350);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(/*messageClient*/);
+		this.initComponent(messageClient);
 	}
 	
-	private void initComponent(/*Message emailrecu*/){
+	private void initComponent(Message emailRecu){
 		
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
 		panneauExpediteur.setBackground(Color.white);
 		panneauExpediteur.setPreferredSize(new Dimension(220, 60));
-		expediteur=new JTextField();
+		expediteur=new JTextField(emailRecu.getExpediteur());
+		expediteur.setEnabled(false); // pas modifiable
 		expediteur.setPreferredSize(new Dimension(90, 25));
 		expediteurLabel=new JLabel("Expéditeur : ");
 		panneauExpediteur.add(expediteurLabel);
@@ -46,7 +48,8 @@ public class FenetreLectureMessage extends JDialog{
 		JPanel panneauDate= new JPanel();
 		panneauDate.setBackground(Color.white);
 		panneauDate.setPreferredSize(new Dimension(220, 60));
-		date=new JTextField();
+		date=new JTextField(emailRecu.getDateEnvoi().toString());
+		date.setEnabled(false);
 		date.setPreferredSize(new Dimension(90, 25));
 		dateLabel=new JLabel("Date : ");
 		panneauDate.add(dateLabel);
@@ -56,7 +59,8 @@ public class FenetreLectureMessage extends JDialog{
 		JPanel panneauSujet= new JPanel();
 		panneauSujet.setBackground(Color.white);
 		panneauSujet.setPreferredSize(new Dimension(220, 60));
-		sujet=new JTextField();
+		sujet=new JTextField(emailRecu.getSujet());
+		sujet.setEnabled(false);
 		sujet.setPreferredSize(new Dimension(90, 25));
 		sujetLabel=new JLabel("Objet : ");
 		panneauExpediteur.add(sujetLabel);
@@ -66,7 +70,8 @@ public class FenetreLectureMessage extends JDialog{
 		JPanel panneauContenuMessage= new JPanel();
 		panneauContenuMessage.setBackground(Color.white);
 		panneauContenuMessage.setPreferredSize(new Dimension(220, 60));
-		contenu=new JTextField();
+		contenu=new JTextField(emailRecu.getContenu());
+		contenu.setEnabled(false);
 		contenu.setPreferredSize(new Dimension(90, 25));
 		contenuLabel=new JLabel("Denomination");
 		panneauContenuMessage.add(contenuLabel);

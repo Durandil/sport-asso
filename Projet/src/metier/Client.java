@@ -17,9 +17,7 @@ public abstract class Client extends Utilisateur{
 	// Fait appel à la fonction random et aux caractères ASCII
 	// Longueur : 7 caractères
 
-	
-	
-	
+
 
 	public String getParticulierAssociation() {
 		return particulierAssociation;

@@ -12,14 +12,14 @@ public class MenuGerant extends JFrame {
 	
 	private JMenuBar menuBar = new JMenuBar();
 	
-	private JMenu premier_menu = new JMenu("Clientèle");
-	private JMenu deuxieme_menu = new JMenu("Stock");
+	private JMenu menuClientele = new JMenu("Clientèle");
+	private JMenu menuStock = new JMenu("Stock");
 
-	private JMenuItem item1 = new JMenuItem("Gestion Compte Client");
-	private JMenuItem item2 = new JMenuItem("Messagerie");
-	private JMenuItem item3 = new JMenuItem("Articles");
-	private JMenuItem item4 = new JMenuItem("Commandes");
-	private JMenuItem item5 = new JMenuItem("Promotions");
+	private JMenuItem itemGestionCompte = new JMenuItem("Gestion Compte Client");
+	private JMenuItem itemMessagerie = new JMenuItem("Messagerie");
+	private JMenuItem itemArticles = new JMenuItem("Articles");
+	private JMenuItem itemCommandes = new JMenuItem("Commandes");
+	private JMenuItem itemPromotions = new JMenuItem("Promotions");
 
 	public MenuGerant(){
 		this.setSize(400, 200);
@@ -29,7 +29,7 @@ public class MenuGerant extends JFrame {
 		// il faut, pour chaque item, lui implémenter son actionPerformed correspondant
 		// à la fenetre qu'il faudra ouvrir 
 		
-		item1.addActionListener(new ActionListener(){
+		itemGestionCompte.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				// Afficher la fenetre de recherche d'un client
 				FenetreRechercheClient recherche = new FenetreRechercheClient(null, "Recherche de clients", true);
@@ -37,7 +37,7 @@ public class MenuGerant extends JFrame {
 			}
 		});
 		
-		item2.addActionListener(new ActionListener(){
+		itemMessagerie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				// Afficher la fenetre contenant la boite de reception interne du gérant
 				FenetreMessagerie message = new FenetreMessagerie();
@@ -45,7 +45,7 @@ public class MenuGerant extends JFrame {
 			}
 		});
 		
-		item3.addActionListener(new ActionListener(){
+		itemArticles.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				// Afficher la fenetre avec la dernière version du catalogue client
 				FenetreCatalogueGerant fenetreCatalogue = new FenetreCatalogueGerant();
@@ -53,7 +53,7 @@ public class MenuGerant extends JFrame {
 			}
 		});
 		
-		item4.addActionListener(new ActionListener(){
+		itemCommandes.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				// Afficher la fenetre contenant le tableau des articles en rupture de stock 
 				// et/ou à commander 
@@ -62,7 +62,7 @@ public class MenuGerant extends JFrame {
 			}
 		});
 		
-		item5.addActionListener(new ActionListener(){
+		itemPromotions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				//ouvrir la fenetre permettant accès au compte
 				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant();
@@ -72,15 +72,15 @@ public class MenuGerant extends JFrame {
 		
 		// Ajout des différents sous-menus à leur menu correspondant comme cela a été défini
 		// dans la maquette graphique des interfaces
-		this.premier_menu.add(item1);
-		this.premier_menu.add(item2);
-		this.deuxieme_menu.add(item3);
-		this.deuxieme_menu.add(item4);
-		this.deuxieme_menu.add(item5);
+		this.menuClientele.add(itemGestionCompte);
+		this.menuClientele.add(itemMessagerie);
+		this.menuStock.add(itemArticles);
+		this.menuStock.add(itemCommandes);
+		this.menuStock.add(itemPromotions);
 		
 		// Ajout des menus à l'objet barre de menus qui contient tous les menus
-		this.menuBar.add(premier_menu);
-		this.menuBar.add(deuxieme_menu);
+		this.menuBar.add(menuClientele);
+		this.menuBar.add(menuStock);
 		
 		//Ajout de la barre de menus à notre objet MenuGerant
 		this.setJMenuBar(menuBar);
