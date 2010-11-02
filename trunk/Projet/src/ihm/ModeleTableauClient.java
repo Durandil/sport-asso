@@ -5,7 +5,7 @@ public class ModeleTableauClient extends AbstractTableModel {
 	
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Numéro","Dénomination","Nom","Prénom","Ville"} ;
+    private final String[] entetes={"Identifiant","Dénomination","Nom","Prénom","Ville"} ;
 	
 	
 	public ModeleTableauClient(){
@@ -13,7 +13,7 @@ public class ModeleTableauClient extends AbstractTableModel {
 		
 		
 		donnees= new Object[][]{
-				{"001","","Senghor","Leopold","Dakar"}
+				{"senghor@gmail.com","","Senghor","Leopold","Dakar"}
 		};
 	}
 	

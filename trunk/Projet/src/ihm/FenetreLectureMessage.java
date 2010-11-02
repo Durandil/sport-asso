@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import metier.Article;
@@ -19,7 +20,8 @@ import metier.Message;
 
 public class FenetreLectureMessage extends JDialog{
 
-	private JTextField expediteur,date,sujet,contenu;
+	private JTextField expediteur,date,sujet;
+	private JTextArea contenu;
 	private JLabel expediteurLabel,dateLabel,sujetLabel,contenuLabel;
 
 	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,Message messageClient ){
@@ -70,7 +72,7 @@ public class FenetreLectureMessage extends JDialog{
 		JPanel panneauContenuMessage= new JPanel();
 		panneauContenuMessage.setBackground(Color.white);
 		panneauContenuMessage.setPreferredSize(new Dimension(220, 60));
-		contenu=new JTextField(emailRecu.getContenu());
+		contenu=new JTextArea(emailRecu.getContenu());
 		contenu.setEnabled(false);
 		contenu.setPreferredSize(new Dimension(90, 25));
 		contenuLabel=new JLabel("Denomination");

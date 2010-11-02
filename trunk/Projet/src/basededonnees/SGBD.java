@@ -503,14 +503,35 @@ public class SGBD {
 	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
 		connecter();
 		ArrayList<String> client = new ArrayList<String>();
-		Statement st = null ;
-		ResultSet res = null ;
 		
+		/*ArrayList<String> listeMails = new ArrayList<String>();
+		listeMails = SGBD.selectListeString("CLIENTS", "MAIL");
+		
+		for(int i=0;i<listeMails.size();i++){
+			if(mailIdentifiant.equals(listeMails.get(i))){
+				
+			}
+			
+		}*/
+		
+		Statement st = null ;
+		ResultSet res= null;
 		try{
-			st = c.createStatement();
+			st=c.createStatement();
+			res= st.executeQuery("SELECT MAIL,NOM,PRENOM,DENOMINATION,VILLE," +
+								"CODEPOSTAL,TELEPHONE,FIDELITE,ACTIFCOMPTE FROM CLIENTS " +
+								"WHERE mail="+ mailIdentifiant+";");
+			ResultSetMetaData rsmd = res.getMetaData();
+			
+			for(int i=1;i==rsmd.getColumnCount();i++){
+				client.add(res.getString(i));
+			}
+			
+			
 		}
 		catch(SQLException e){
-			
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
 		}
 		finally{
 			fermer();

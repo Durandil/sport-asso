@@ -25,6 +25,7 @@ public class BDD {
 				"POURCENTAGE NUMBER(5),"+
 				"CONSTRAINT PK_DISPOSE PRIMARY KEY (IDCATEGORIE,IDQUANTITE),"+
 				"CONSTRAINT FK_CATEGORIE_QUANTITE FOREIGN KEY ");
+		
 		Create table Dispose
 		(idCategorie char(8),
 		idQuantite char(8),
