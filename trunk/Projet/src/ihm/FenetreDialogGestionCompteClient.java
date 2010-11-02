@@ -17,9 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+import metier.Client;
+
 
 public class FenetreDialogGestionCompteClient extends JDialog {
-	private DialogInfo zInfo = new DialogInfo();
 
 	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
@@ -32,7 +33,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	 * @param title
 	 * @param modal
 	 */
-	public FenetreDialogGestionCompteClient(JFrame parent, String title, boolean modal,DialogInfo client){
+	public FenetreDialogGestionCompteClient(JFrame parent, String title, boolean modal,Client client){
 		super(parent, title, modal);
 		this.setSize(550, 700);
 		this.setLocationRelativeTo(null);
@@ -41,19 +42,11 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		this.initComponent(client);
 	}
 	
-	/**
-	 * Méthode appelée pour utiliser la boîte 
-	 * @return zInfo
-	 */
-	public DialogInfo showClient(){
-		this.setVisible(true);		
-		return this.zInfo;		
-	}
-	
+
 	/**
 	 * Initialise le contenu de la boîte
 	 */
-	private void initComponent(DialogInfo client){
+	private void initComponent(Client client){
 		//Icone
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
@@ -67,7 +60,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panIdentifiant.setPreferredSize(new Dimension(260, 60));
 		panIdentifiant.setBorder(BorderFactory.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
-		identifiant = new JTextField(client.getIdentifiant());
+		identifiant = new JTextField(client.getMail());
 		identifiant.setEnabled(false);
 		identifiant.setPreferredSize(new Dimension(115, 25));
 		panIdentifiant.add(identifiantLabel);
@@ -175,7 +168,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {	
 				
 				// on pourra enregistrer dans base de données la modification
-				zInfo = new DialogInfo(nom.getText(),adresse.getText(),prenom.getText(),ville.getText(),(codePostal.getText()),telephone.getText(),identifiant.getText());
+				//zInfo = new DialogInfo(nom.getText(),adresse.getText(),prenom.getText(),ville.getText(),(codePostal.getText()),telephone.getText(),identifiant.getText());
 				setVisible(false);
 			}
 						

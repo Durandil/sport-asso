@@ -20,8 +20,8 @@ public class FenetrePromotionsGerant extends JFrame {
 	public FenetrePromotionsGerant(){
 		super();
 		this.setTitle("Promotions en cours");
-		this.setSize(500, 900);
-		this.setLocationRelativeTo(null);
+		this.setSize(500, 600);
+		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();

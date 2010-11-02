@@ -28,7 +28,7 @@ public class FenetreReapprovisionnement extends JFrame{
 		super();
 		this.setTitle("Articles à commander");
 		this.setSize(300,400);
-		this.setLocationRelativeTo(null);
+		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();

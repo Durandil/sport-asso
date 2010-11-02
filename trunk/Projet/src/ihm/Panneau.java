@@ -9,11 +9,7 @@ import javax.swing.JPanel;
 public class Panneau extends JPanel {
 	
 	public void paintComponent(Graphics g){
-        
-		g.setFont(new Font("Courier", Font.BOLD, 20));
-		g.setColor(Color.GREEN);
-        g.drawString("SPORT'ASSOC ", 10, 20);
-        
+
         g.setFont(new Font("Times", Font.BOLD, 13));
         g.setColor(Color.red);
         g.drawString("Créer l'envie et rendre accessible au plus grand nombre le plaisir et les bienfaits du sport",20,40);

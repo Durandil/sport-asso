@@ -21,7 +21,7 @@ public class FenetreMessagerie extends JFrame {
 		super();
 		this.setTitle("Boite de Réception");
 		this.setSize(500, 900);
-		this.setLocationRelativeTo(null);
+		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();

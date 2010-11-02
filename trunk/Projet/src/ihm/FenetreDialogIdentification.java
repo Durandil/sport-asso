@@ -33,7 +33,7 @@ public class FenetreDialogIdentification extends JDialog {
 	private JTextField identifiant, motDePasse;
 	private JPasswordField password ;
 	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie;
-	public static String clientUserIdentifiant="" ; // permet d'avoir l'identifiant de l'utilisateur 
+	public static String clientUserIdentifiant=""; // permet d'avoir l'identifiant de l'utilisateur 
 													 // dans toute l'application
 	
 	
@@ -102,7 +102,8 @@ public class FenetreDialogIdentification extends JDialog {
 							identificationReussie.showMessageDialog(null, "Identification réussie !", "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 							clientUserIdentifiant=identifiant.getText();
 						//Faire apparaître le Menu utilisateur ici !
-						//MenuUtilisateur men = new MenuUtilisateur();
+						
+						MenuUtilisateur men = new MenuUtilisateur();
 						}
 						else{
 							erreurMotPasse = new JOptionPane();

@@ -13,17 +13,9 @@ import javax.swing.*;
 import basededonnees.SGBD;
 
 public class FenetreRechercheClient extends JDialog{
-	private JLabel numeroLabel;
-	private JTextField numero;
-	private JLabel nomLabel;
-	private JTextField nom;
-	private JLabel villeLabel;
-	private JTextField ville;
-	private JTextField denomination;
-	private JLabel denominationLabel;
+	private JLabel numeroLabel,nomLabel,villeLabel,denominationLabel,clientLabel;
+	private JTextField numero,nom,denomination,ville,clientIdentifiant;
 	private JSplitPane split;
-	private JLabel clientLabel;
-	private JTextField clientIdentifiant;
 	private JOptionPane mailInexistant;
 
 	// Le gérant pourra rechercher un client en fonction de son numéro, nom, ville
@@ -31,8 +23,8 @@ public class FenetreRechercheClient extends JDialog{
 	
 	public FenetreRechercheClient(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
-		this.setSize(400,800);
-		this.setLocationRelativeTo(null);
+		this.setSize(400,600);
+		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();

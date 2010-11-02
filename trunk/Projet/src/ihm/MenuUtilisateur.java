@@ -1,5 +1,4 @@
 package ihm;
-import ihm.DialogInfo;
 import ihm.DialogMessage;
 import ihm.FenetreCommandeArticle;
 import ihm.FenetreContactVendeur;
@@ -39,11 +38,12 @@ public class MenuUtilisateur extends JFrame{
 	
 	// Cette variable static contiendra normalement le client en cours d'utilisation de l'application
 	// pour le moment elle sert à faire fonctionner la fenêtre
-	public static Client client = new Particulier("jean","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
+	//public static Client client = new Particulier("jean","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
 
 	public MenuUtilisateur(){
 		this.setSize(400, 200);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(null);
 			
 		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
@@ -59,7 +59,7 @@ public class MenuUtilisateur extends JFrame{
 			public void actionPerformed(ActionEvent arg0){
 				//ouvrir la fenetre permettant accès au compte
 				//FenetreDialogGestionCompteClient fenetreGestionCompte =new FenetreDialogGestionCompteClient(null,"Informations client",true,client);
-				//DialogInfo gestion= fenetreGestionCompte.showClient();
+				//fenetreGestionCompte.setVisible(true);
 			}
 		});
 		
