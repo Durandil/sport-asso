@@ -59,6 +59,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		JPanel panCategorieSport = new JPanel();
 		JPanel panStock = new JPanel();
 		JPanel panPrixInitial = new JPanel();
+		JPanel panQuantiteSeuil = new JPanel();
 		
 		panNumArticle.setPreferredSize(dimensionStandard);
 		panDescription.setPreferredSize(dimensionStandard);

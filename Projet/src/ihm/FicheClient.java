@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +25,8 @@ public class FicheClient extends JDialog {
 	private JLabel typeCompteLabel,identifiantLabel,denominationLabel,nomLabel,prenomLabel,adresseLabel,villeLabel,cpLabel,telLabel,compteFidelLabel,nbPointsLabel;
 	private JTextField identifiant,denomination,nom,prenom,adresse,ville,codePostal,telephone,compteFidelite,nbrePoints;
 	private JSplitPane split;
+	private JComboBox ActivationCompteBox;
+	private JLabel ActifCompteLabel;
 
 
 	public FicheClient(JFrame parent, String title, boolean modal,Client clientCourant){
@@ -169,6 +172,21 @@ public class FicheClient extends JDialog {
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
 		panneauCentral.add(panTelephone);
+		
+		// Activation du compte
+		JPanel panActivationCompte = new JPanel();
+		panActivationCompte.setBackground(Color.white);
+		panActivationCompte.setPreferredSize(new Dimension(220, 60));
+		panActivationCompte.setBorder(BorderFactory.createTitledBorder("Activation du compte"));
+		ActifCompteLabel = new JLabel("Compte Actif ? ");
+		ActivationCompteBox = new JComboBox();
+		ActivationCompteBox.addItem("True");
+		ActivationCompteBox.addItem("False");
+		String activite = Boolean.toString(client.isEstActif());
+		ActivationCompteBox.setSelectedItem(activite);
+		panActivationCompte.add(ActifCompteLabel);
+		panActivationCompte.add(ActivationCompteBox);
+		panneauCentral.add(panActivationCompte);
 		
 		// Panneau Compte Fidelite
 		JPanel panCompteFidelite = new JPanel();
