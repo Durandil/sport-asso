@@ -499,5 +499,24 @@ public class SGBD {
 		return rs;
 	}
 	
+	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
+	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
+		connecter();
+		ArrayList<String> client = new ArrayList<String>();
+		Statement st = null ;
+		ResultSet res = null ;
+		
+		try{
+			st = c.createStatement();
+		}
+		catch(SQLException e){
+			
+		}
+		finally{
+			fermer();
+		}
+		
+		return client;
+	}
 	
 }
