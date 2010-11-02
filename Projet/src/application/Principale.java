@@ -24,23 +24,23 @@ public class Principale {
 		
 	
 		
-/*	
-		  //Création de la table CLIENTS 
-		BDD.creerTable("CLIENTS");
-		  
-		  
-		  //Instanciation d'une association 
-		Association ass = new Association("Idylliste", "idylliste@ensai.fr", "Ensai", "Rennes",
-		  "35000", "02 23 45 78 96");
-		  
-		  // Instanciation d'une  autre Association 
-		Association ass2 = new Association("BDE", "bde@ensai.fr", "Ensai", "Rennes",
-				  "35000", "02 56 84 22 10");
-		
-		  //Instanciation d'un particulier 
-		Particulier p = new Particulier("Louvel", "Alexis", "alexis.louvel@ensai.fr",
-		  "Campus de KL", "Bruz", "35000", "02 56 98 66 33");
-*/
+//
+//		  //Création de la table CLIENTS 
+//		BDD.creerTable("CLIENTS");
+//		  
+//		  
+//		  //Instanciation d'une association 
+//		Association ass = new Association("Idylliste", "idylliste@ensai.fr", "Ensai", "Rennes",
+//		  "35000", "02 23 45 78 96",true);
+//		  
+//		  // Instanciation d'une  autre Association 
+//		Association ass2 = new Association("BDE", "bde@ensai.fr", "Ensai", "Rennes",
+//				  "35000", "02 56 84 22 10",true);
+//		
+//		  //Instanciation d'un particulier 
+//		Particulier p = new Particulier("Louvel", "Alexis", "alexis.louvel@ensai.fr",
+//		  "Campus de KL", "Bruz", "35000", "02 56 98 66 33",true);
+
 
 		
 //		  // Création de la table ARTICLES 

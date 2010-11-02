@@ -30,8 +30,8 @@ public class FenetreCatalogueGerant extends JFrame{
 	public FenetreCatalogueGerant(){
 		super();
 		this.setTitle("Gestion du Catalogue Article");
-		this.setSize(500, 900);
-		this.setLocationRelativeTo(null);
+		this.setSize(500, 700);
+		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();

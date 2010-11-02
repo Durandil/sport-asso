@@ -1,5 +1,4 @@
 package ihm;
-import ihm.DialogInfo;
 import ihm.FenetreDialogCreationCompte;
 
 import java.awt.BorderLayout;
@@ -38,7 +37,7 @@ public class FenetreFideliteClient extends JDialog {
 	public FenetreFideliteClient(JFrame parent, String title, boolean modal,Client client){
 		super(parent, title, modal);
 		this.setSize(400, 500);
-		this.setLocationRelativeTo(null);
+		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent(client);
