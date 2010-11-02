@@ -14,7 +14,7 @@ public class ClassePrincipale {
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
 		MenuGerant menu= new MenuGerant();
-		System.out.println("Test");
+		System.out.println("Test Sulli");
 	}
 
 }
