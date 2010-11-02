@@ -1,5 +1,6 @@
 package ihm;
 
+import basededonnees.BDD;
 import basededonnees.SGBD;
 
 
@@ -10,11 +11,11 @@ public class ClassePrincipale {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		//FenetreCompte fen=new FenetreCompte();
+		BDD.creerTable("CLIENTS");
+		FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu= new MenuGerant();
-		System.out.println("Test Sulli");
+		//MenuGerant menu= new MenuGerant();
+		
 	}
 
 }
