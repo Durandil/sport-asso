@@ -21,9 +21,8 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 
 		//Gerant.activDesactivCompte();
-		
-	
-		
+		BDD.init();
+			
 //
 //		  //Création de la table CLIENTS 
 //		BDD.creerTable("CLIENTS");
