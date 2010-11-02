@@ -22,9 +22,9 @@ public class FenetreInformationsClient extends JFrame {
 	public FenetreInformationsClient(){
         
         this.setTitle("Qui sommes-nous ?");
-        this.setSize(750, 600);
+        this.setSize(750, 400);
         this.setLocationRelativeTo(null);               
-        this.setResizable(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
         
         //Instanciation d'un objet JPanel
@@ -37,10 +37,10 @@ public class FenetreInformationsClient extends JFrame {
         // Creation du panneau du bas qui accueillera un autre panneau et une image 
         JPanel panneauBas = new JPanel();
         panneauBas.setLayout(new GridLayout(1,2,5,5));
+        panneauBas.setBorder(BorderFactory.createTitledBorder("Localisation"));
         
         // Creation du panneau avec l'adresse et le téléphone
         JPanel panneauInformationsSupp = new JPanel();
-        panneauInformationsSupp.setBorder(BorderFactory.createEmptyBorder());
         JLabel adresse = new JLabel("Adresse : Rue Blaise Pascal - BP 37203 - 35172 BRUZ cedex");
         JLabel telephone = new JLabel("Téléphone : +33 (0)2 99 05 32 32");
         panneauInformationsSupp.add(adresse);

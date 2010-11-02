@@ -23,9 +23,9 @@ public class FenetreRechercheClient extends JDialog{
 	
 	public FenetreRechercheClient(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
-		this.setSize(400,600);
+		this.setSize(700,600);
 		this.setLocation(50,50);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();
 	}
@@ -40,9 +40,9 @@ public class FenetreRechercheClient extends JDialog{
 		// Définition d'un panneau avec le premier critère de recherche : le numéro du client
 		JPanel panneauNumero = new JPanel();
 		panneauNumero.setBackground(Color.white);
-		panneauNumero.setPreferredSize(new Dimension(220, 60));
-		panneauNumero.setBorder(BorderFactory.createTitledBorder("Numéro"));
-		numeroLabel = new JLabel("Numéro: ");
+		panneauNumero.setPreferredSize(new Dimension(110, 60));
+		panneauNumero.setBorder(BorderFactory.createTitledBorder("Identifiant du client"));
+		numeroLabel = new JLabel("Mail: ");
 		numero = new JTextField();
 		numero.setPreferredSize(new Dimension(90, 25));
 		panneauNumero.add(numeroLabel);
@@ -51,8 +51,8 @@ public class FenetreRechercheClient extends JDialog{
 		// Définition d'un panneau avec un autre critère de recherche : le nom du client pour les particuliers
 		JPanel panneauNom = new JPanel();
 		panneauNom.setBackground(Color.white);
-		panneauNom.setPreferredSize(new Dimension(220, 60));
-		panneauNom.setBorder(BorderFactory.createTitledBorder("Nom"));
+		panneauNom.setPreferredSize(new Dimension(110, 60));
+		panneauNom.setBorder(BorderFactory.createTitledBorder("Nom du client pour les particuliers"));
 		nomLabel = new JLabel("Nom: ");
 		nom = new JTextField();
 		nom.setPreferredSize(new Dimension(90, 25));
@@ -63,8 +63,8 @@ public class FenetreRechercheClient extends JDialog{
 		// pour les collectivités ou associations
 		JPanel panDenomination= new JPanel();
 		panDenomination.setBackground(Color.white);
-		panDenomination.setPreferredSize(new Dimension(220, 60));
-		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
+		panDenomination.setPreferredSize(new Dimension(110, 60));
+		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination de l'association ou de la collectivité"));
 		denomination=new JTextField();
 		denomination.setPreferredSize(new Dimension(90, 25));
 		denominationLabel=new JLabel("Denomination");
@@ -74,8 +74,8 @@ public class FenetreRechercheClient extends JDialog{
 		// Définition d'un panneau avec le dernier critère de recherche : la ville du client
 		JPanel panVille = new JPanel();
 		panVille.setBackground(Color.white);
-		panVille.setPreferredSize(new Dimension(220, 60));
-		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
+		panVille.setPreferredSize(new Dimension(110, 60));
+		panVille.setBorder(BorderFactory.createTitledBorder("Ville du client"));
 		villeLabel = new JLabel("Ville: ");
 		ville = new JTextField();
 		ville.setPreferredSize(new Dimension(90, 25));
@@ -144,7 +144,10 @@ public class FenetreRechercheClient extends JDialog{
 				}
 				else{
 					// on affiche la fiche client correspondante à l'identifiant saisi
-					
+					ArrayList<String> client = new ArrayList<String>();
+					client=SGBD.recupererAttributClient(clientIdentifiant.getText());
+					//FicheClient ficheDuClient = new FicheClient(null, "Fiche du client : "+ clientIdentifiant.getText(), true, clientCourant);
+					//ficheDuClient.setVisible(true);
 				}
 					
 			}

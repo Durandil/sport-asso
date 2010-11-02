@@ -31,7 +31,7 @@ public class FenetreContactVendeur extends JDialog{
 	
 	public FenetreContactVendeur(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
-		this.setSize(700, 400); // définition largeur,hauteur
+		this.setSize(700, 300); // définition largeur,hauteur
 		this.setLocationRelativeTo(null);
 		this.setResizable(false); // permet de ne pas modifier la taille de la fenetre
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE); // ferme la fenetre en appuyant sur la croix du haut
