@@ -6,111 +6,121 @@ public class BDD {
 	// Méthode permettant de créer la table que l'on veut 
 	// à partir du String passé en paramètre
 	public static void init(){
+		
+//		On commence par supprimer les tables avant de les (re)créer
+		SGBD.executeUpdate("DROP TABLE LISTING_PROMOS_ARTICLES");
+		SGBD.executeUpdate("DROP TABLE LISTING_ARTICLES_COMMANDES");
+		SGBD.executeUpdate("DROP TABLE FIDELITE");
+		SGBD.executeUpdate("DROP TABLE ARTICLE");
+		SGBD.executeUpdate("DROP TABLE COMMANDE");
+		SGBD.executeUpdate("DROP TABLE CLIENT");
+		SGBD.executeUpdate("DROP TABLE VILLE");
+		SGBD.executeUpdate("DROP TABLE PROMO");
+		SGBD.executeUpdate("DROP TABLE TYPE_SPORT");
+		SGBD.executeUpdate("DROP TABLE REDUCTION");
+		SGBD.executeUpdate("DROP TABLE CATEGORIE");
+		SGBD.executeUpdate("DROP TABLE QUANTITE");		
+		
+		
 		SGBD.executeUpdate("CREATE TABLE QUANTITE" +
 				"(IDQUANTITE CHAR(8),"+
 				"QUANTITE NUMBER(4),"+
-				"CONSTRAINT PK_QUANTITE PRIMARY KEY (IDQUANTITE)");
+				"CONSTRAINT PK_QUANTITE PRIMARY KEY (IDQUANTITE))");
 
 
 		SGBD.executeUpdate("CREATE TABLE CATEGORIE" +
 				"(IDCATEGORIE CHAR(8),"+
 				"NOMCATEGORIE VARCHAR(20),"+
 				"QUANTITELIMITE NUMBER(6),"+
-				"CONSTRAINT PK_CATEGORIE PRIMARY KEY (IDCATEGORIE)");
+				"CONSTRAINT PK_CATEGORIE PRIMARY KEY (IDCATEGORIE))");
 	
 
 		SGBD.executeUpdate("CREATE TABLE REDUCTION" +
 				"(IDCATEGORIE CHAR(8),"+
 				"IDQUANTITE CHAR(8),"+
 				"POURCENTAGE NUMBER(5),"+
-				"CONSTRAINT PK_DISPOSE PRIMARY KEY (IDCATEGORIE,IDQUANTITE),"+
-				"CONSTRAINT FK_CATEGORIE_QUANTITE FOREIGN KEY ");
+				"CONSTRAINT PK_REDUCTION PRIMARY KEY (IDCATEGORIE,IDQUANTITE),"+
+				"CONSTRAINT FK_CATEGORIE_QUANTITE FOREIGN KEY (IDQUANTITE) REFERENCES QUANTITE,"+
+				"CONSTRAINT FK_QUANTITE_CATEGORIE FOREIGN KEY (IDCATEGORIE) REFERENCES CATEGORIE)");
 		
-		Create table Dispose
-		(idCategorie char(8),
-		idQuantite char(8),
-		pourcentage number(5),
-		constraint pk_DISPOSE Primary Key (idCategorie, idQuantite),
-		constraint fk_CATEGORIE_QUANTITE Foreign Key (idQuantite) references QUANTITE,
-		constraint fk_QUANTITE_CATEGORIE Foreign Key (idCategorie) references CATEGORIE)
+		SGBD.executeUpdate("CREATE TABLE TYPE_SPORT" +
+				"(IDTYPE CHAR(8),"+
+				"NOMTYPE VARCHAR(20),"+
+				"CONSTRAINT PK_TYPE_SPORT PRIMARY KEY (IDTYPE))");
 
 
-		Create table TYPE_SPORT
-		(idType char(8),
-		NomType varchar(20),
-		constraint pk_TYPE_SPORT Primary Key (idType))
+		SGBD.executeUpdate("CREATE TABLE PROMO" +
+				"(IDPROMO CHAR(8),"+
+				"NOMPROMO VARCHAR(20),"+
+				"DATEDEBUT DATE,"+
+				"DATEFIN DATE,"+
+				"POURCENTAGEPROMO NUMBER(3),"+
+				"CONSTRAINT PK_PROMO PRIMARY KEY (IDPROMO))");
+
+		SGBD.executeUpdate("CREATE TABLE VILLE" +
+				"(IDVILLE CHAR(8),"+
+				"NOMVILLE VARCHAR(20),"+
+				"CONSTRAINT PK_VILLE PRIMARY KEY (IDVILLE))");
+
+		
+		SGBD.executeUpdate("CREATE TABLE CLIENT" +
+				"(IDCLIENT VARCHAR(40),"+
+				" NOMCLIENT VARCHAR(40),"+ 
+				" PRENOMCLIENT VARCHAR(40),"+
+				" DENOMINATIONCLIENT VARCHAR(40),"+
+				" ADRESSECLIENT VARCHAR(60),"+
+				" IDVILLE CHAR(8),"+
+				" TELEPHONE VARCHAR(20),"+
+				" ESTFIDELE VARCHAR(3),"+
+				" ETATCOMPTE VARCHAR(9),"+
+				"MOTDEPASSE VARCHAR(20),"+
+				"CONSTRAINT PK_CLIENT PRIMARY KEY (IDCLIENT)," +
+				"CONSTRAINT FK_CLIENT_VILLE FOREIGN KEY (IDVILLE) REFERENCES VILLE)");
+
+		SGBD.executeUpdate("CREATE TABLE COMMANDE" +
+				"(IDCOMMANDE CHAR(8),"+
+				"DATECOMMANDE DATE,"+
+				"IDCLIENT VARCHAR(40),"+
+				"CONSTRAINT PK_COMMANDE PRIMARY KEY (IDCOMMANDE),"+
+				"CONSTRAINT FK_COMMANDE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
+		
+		
+		SGBD.executeUpdate("CREATE TABLE ARTICLE" +
+				"(IDARTICLE CHAR(8),"+
+				"DESCRIPTION VARCHAR(40),"+
+				"PRIXINITIAL NUMBER(6,2),"+
+				"STOCK NUMBER(6),"+
+				"POIDS NUMBER(5),"+
+				"IDTYPE CHAR(8),"+
+				"IDCATEGORIE CHAR(8),"+
+				"ETAT VARCHAR(10),"+
+				"CONSTRAINT PK_ARTICLE PRIMARY KEY (IDARTICLE),"+
+				"CONSTRAINT FK_ARTICLE_TYPE_SPORT FOREIGN KEY (IDTYPE) REFERENCES TYPE_SPORT,"+
+				"CONSTRAINT FK_ARTICLE_CATEGORIE FOREIGN KEY (IDCATEGORIE) REFERENCES CATEGORIE)");
 
 
-		Create table PROMO
-		(idPromo char(8),
-		NomPromo varchar(20),
-		dateDebut Date,
-		dateFin Date,
-		PourcentagePromo number(3),
-		constraint pk_PROMO Primary Key (idPromo))
-
-		Create table VILLE
-		(idVille char(8),
-		NomVille varchar(20),
-		constraint pk_VILLE Primary Key (idVille)
-		)
-
-
-		Create table CLIENT
-		(idClient char(8),
-		Mdp varchar(20),
-		NomClient varchar(20),
-		PrenomClient varchar(20),
-		AdresseClient varchar(20),
-		ClientActif boolean,
-		idVille char(8),
-		constraint pk_article Primary Key (idClient),
-		constraint fk_CLIENT_VILLE Foreign Key (idVille) references VILLE)
-
-		Create table COMMANDE
-		(idCommande char(8),
-		DateCommande Date,
-		idClient char(8),
-		constraint pk_COMMANDE Primary Key (idCommande),
-		constraint fk_COMMANDE_CLIENT Foreign Key (idClient) references CLIENT
-		)
+		SGBD.executeUpdate("CREATE TABLE FIDELITE" +
+				"(IDCARTEFIDELITE CHAR(8),"+
+				"NBPOINTS NUMBER(5),"+
+				"IDCLIENT VARCHAR(40),"+
+				"CONSTRAINT PK_CARTE_FIDELITE PRIMARY KEY (IDCARTEFIDELITE),"+
+				"CONSTRAINT FK_CARTE_FIDELITE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
+		
+		SGBD.executeUpdate("CREATE TABLE LISTING_ARTICLES_COMMANDES" +
+				"(IDARTICLE CHAR(8),"+
+				"IDCOMMANDE CHAR(8),"+
+				"QUANTITECOMMANDEE NUMBER(5),"+
+				"CONSTRAINT PK_LISTING_ARTICLES_COMMANDES PRIMARY KEY (IDCOMMANDE, IDARTICLE),"+
+				"CONSTRAINT FK_COMMANDE_ARTICLE FOREIGN KEY (IDARTICLE) REFERENCES ARTICLE,"+
+				"CONSTRAINT FK_ARTICLE_COMMANDE FOREIGN KEY (IDCOMMANDE) REFERENCES COMMANDE)");
 
 
-
-		Create table ARTICLE
-		(idArticle char(8),
-		PrixInitial number(10),
-		NomArticle varchar(20),
-		Stock number(6),
-		Poids number(5),
-		idType char(8),
-		idCategorie char(8),
-		constraint pk_article Primary Key (idArticle),
-		constraint fk_ARTICLE_TYPE_SPORT Foreign Key (idType) references TYPE_SPORT,
-		constraint fk_ARTICLE_CATEGORIE Foreign Key (idCategorie) references CATEGORIE)
-
-		Create table CARTE_FIDELITE
-		(idCarteFidelite char(8),
-		Nbpoints number(5),
-		idClient char(8)
-		constraint pk_CARTE_FIDELITE Primary Key (idCarteFidelite),
-		constraint fk_CARTE_FIDELITE_CLIENT Foreign Key (idClient) references CLIENT)
-
-		Create table Se_trouve
-		(idArticle char(8),
-		idCommande char(8),
-		quantiteCommande number(5),
-		constraint pk_SE_TROUVE Primary Key (idCommande, idArticle),
-		constraint fk_COMMANDE_ARTICLE Foreign Key (idArticle) references ARTICLE
-		constraint fk_ARTICLE_COMMANDE Foreign Key (idCommande) references COMMANDE)
-
-
-		Create table Fait_objet
-		(idArticle char(8),
-		idPromo char(8),
-		constraint pk_FAIT_OBJET Primary Key (idPromo, idArticle),
-		constraint fk_PROMO_ARTICLE Foreign Key (idArticle) references ARTICLE
-		constraint fk_ARTICLE_PROMO Foreign Key (idPromo) references PROMO))
+		SGBD.executeUpdate("CREATE TABLE LISTING_PROMOS_ARTICLES" +
+				"(IDARTICLE CHAR(8),"+
+				"IDPROMO CHAR(8),"+
+				"CONSTRAINT PK_LISTING_PROMOS_ARTICLES PRIMARY KEY (IDPROMO, IDARTICLE),"+
+				"CONSTRAINT FK_PROMO_ARTICLE FOREIGN KEY (IDARTICLE) REFERENCES ARTICLE,"+
+				"CONSTRAINT FK_ARTICLE_PROMO FOREIGN KEY (IDPROMO) REFERENCES PROMO)");
 
 
 
