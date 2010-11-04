@@ -65,7 +65,7 @@ public class FenetreCommandeArticle extends JFrame{
     	JPanel panneauTableauCatalogue = new JPanel();
     	panneauTableauCatalogue.setLayout(new GridLayout(1,2,5,5));
     	
-	    JTable tableau = new JTable(new ModeleTableauCatalogue());
+	    JTable tableau = new JTable(new ModeleTableauCatalogue(false));
 	    tableau.setAutoCreateRowSorter(true); // permet de trier un tableau en cliquant sur la colonne
 	    panneauTableauCatalogue.add(new JScrollPane(tableau));
 	    

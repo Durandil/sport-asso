@@ -540,4 +540,46 @@ public class SGBD {
 		return client;
 	}
 	
+	// Méthode qui permet de selectionner des articles 
+	// dont le stock est inférieur à la quantité seuil ou en rupture de stock
+	public ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
+		
+		connecter();
+		ArrayList<String[]> article = new ArrayList<String[]>();
+		Statement st = null;
+		ResultSet res = null;
+		
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("select idarticle,description,stock,prixinitial " + "from ARTICLE " +
+					"where stock=0 or idarticle = ( select id article from articles,categorie " +
+					"where article.idcategorie = categorie.idcategorie and stock< quantitelimite) ;" );
+
+			while (res.next()) {
+
+				String[] listeString = new String[4];
+				String s = res.getObject(1).toString();
+				String s2 = res.getObject(2).toString();
+				String s3 = res.getObject(3).toString();
+				String s4 = res.getObject(4).toString();
+				listeString[0] = s;
+				listeString[1] = s2;
+				listeString[2]= s3;
+				listeString[3]=s4;
+				article.add(listeString);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+		}
+		
+		return article ;
+	}
+	
 }
