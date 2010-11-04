@@ -12,9 +12,9 @@ public class ClassePrincipale {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//BDD.creerTable("CLIENTS");
-		//FenetreCompte fen=new FenetreCompte();
+		FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu= new MenuGerant();
+		//MenuGerant menu= new MenuGerant();
 		
 	}
 
