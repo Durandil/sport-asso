@@ -13,27 +13,45 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 	
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Numero","Denomination","Quantite en stock","Etat"} ;
+    private final String[] entetes={"Numero","Denomination","Quantite en stock","Prix Initial"} ;
 	
 	
-	public ModeleTableauCatalogue(/*ArrayList<Article> ensArticles*/){
+	public ModeleTableauCatalogue(boolean pourReapprovisionnement){
 		super();
+		if( pourReapprovisionnement == false){
+			//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+			ArrayList<String> listeNumeros = SGBD.selectListeString("ARTICLES", "IDENTIFIANT");
+			ArrayList<String> listeDescriptions = SGBD.selectListeString("ARTICLES", "DESCRIPTION");
+			ArrayList<Integer> listeStocks = SGBD.selectListeInt("ARTICLES", "STOCK");
+			ArrayList<String> listeEtats = SGBD.selectListeString("ARTICLES", "PRIXINITIAL");
 		
-		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
-		ArrayList<String> listeNumeros = SGBD.selectListeString("ARTICLES", "IDENTIFIANT");
-		ArrayList<String> listeDescriptions = SGBD.selectListeString("ARTICLES", "DESCRIPTION");
-		ArrayList<Integer> listeStocks = SGBD.selectListeInt("ARTICLES", "STOCK");
-		ArrayList<String> listeEtats = SGBD.selectListeString("ARTICLES", "ETAT");
 		
+			donnees = new Object[1000][4];
 		
-		donnees = new Object[1000][4];
+			//On ajoute les informations dans l'objet donnees
+			for(int i=0;i<listeDescriptions.size();i++){
+				donnees[i][0] = listeNumeros.get(i);
+				donnees[i][1] = listeDescriptions.get(i);
+				donnees[i][2] = listeStocks.get(i);
+				donnees[i][3] = listeEtats.get(i);
+			}
+		}
+		else{
+			// création des listes pour récupérer les informations des articles qui ont besoin d'être
+			// reapprovisionnés
+			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
+			
+			donnees = new Object[1000][4];
+			
+			// on ajoute les informations dans l'objet
+			int j=0;
+			for (ArrayList<String> arrayList : listeArticles) {
+				for(int i=0;i< arrayList.size();i++){
+					donnees[i][j] = arrayList.get(i);
+				}
+				j++;
+			}
 		
-		//On ajoute les informations dans l'objet donnees
-		for(int i=0;i<listeDescriptions.size();i++){
-			donnees[i][0] = listeNumeros.get(i);
-			donnees[i][1] = listeDescriptions.get(i);
-			donnees[i][2] = listeStocks.get(i);
-			donnees[i][3] = listeEtats.get(i);
 		}
 		/*
 		for( Article element : ensArticles){
