@@ -16,6 +16,10 @@ import java.util.Date;
 
 public class FenetreCompte extends JFrame {
    
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton boutonCreation = new JButton(" Créer un compte");
 	private JButton boutonIdentificationClient = new JButton(" Identification Client");
 	private JButton boutonIdentificationGerant = new JButton("Identification Gerant");
@@ -24,6 +28,7 @@ public class FenetreCompte extends JFrame {
 	private JLabel icon,iconEast,iconWest, accueilLabel,heureLabel,dateLabel; 
 	private Date heure ;
 	
+	@SuppressWarnings("deprecation")
 	public FenetreCompte(){
 
 		this.setTitle("Informations client");
