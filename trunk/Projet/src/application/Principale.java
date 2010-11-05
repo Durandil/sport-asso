@@ -20,11 +20,10 @@ public class Principale {
 
 	public static void main(String[] args) throws Exception {
 /** GROS TODO : revoir tous les insert into **/
-		BDD.init();
+		//BDD.init();
 			
 //
-//		  //Création de la table CLIENTS 
-//		BDD.creerTable("CLIENTS");
+
 //		  
 //		  
 //		  //Instanciation d'une association 
@@ -41,19 +40,17 @@ public class Principale {
 //		  "Campus de KL", "Bruz", "35000", "02 56 98 66 33",true);
 
 
-		
-//		  // Création de la table ARTICLES 
-//			BDD.creerTable("ARTICLES");
+
 //		  
-//		  // Instanciation de 10 articles (et ajout dans la table 
-//		Article art1 = new Article("ART001", "Maillot", "Omnisport", 200,
-//				50.20, 0,"Rupture de stock", "2");
-//		Article art2 = new Article("ART002", "Ballon", "Sport d''équipe", 200,
-//				15.30, 100,"En stock", "1");
-//		Article art3 = new Article("ART003", "Chaussettes Blanches",
-//				"Omnisport", 50, 10, 50,"En stock", "1");
-//		Article art4 = new Article("ART004", "Bonnet de bain", "Natation", 75,
-//				15, 0,"Rupture de stock", "1");
+		  // Instanciation de 10 articles (et ajout dans la table 
+		Article art1 = new Article("ART00001", "Maillot","typ00001", 200,
+				50.20, 0,"Rupture de stock", "cat00001");
+		Article art2 = new Article("ART00002", "Ballon", "typ00002", 200,
+				15.30, 100,"En stock", "cat00002");
+		Article art3 = new Article("ART00003", "Chaussettes Blanches",
+				"typ00001", 50, 10, 50,"En stock", "cat00001");
+		Article art4 = new Article("ART00004", "Bonnet de bain", "typ00004", 75,
+				15, 0,"Rupture de stock", "cat00001");
 //		Article art5 = new Article("ART005", "Club", "Golf", 500, 100, 10,"En stock", "3");
 //		Article art6 = new Article("ART006", "Chaussettes Noires", "Omnisport",
 //				50, 10, 50,"En stock", "1");

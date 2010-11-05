@@ -14,13 +14,13 @@ public class Article {
 
 	//Le constructeur ajoute l'article dans la table ARTICLES
 	
-	public Article(String idArticle, String description, String catSport,
+	public Article(String idArticle, String description, String typeSport,
 			float poids, double prixInitial, int stock, String etat, String catPrix) {
 		super();
 
 		this.idArticle = idArticle;
 		this.description = description;
-		this.catSport = catSport;
+		this.typeSport = typeSport;
 		this.poids = poids;
 		this.prixInitial = prixInitial;
 		this.stock = stock;
@@ -30,7 +30,7 @@ public class Article {
 	}
 
 	private String idArticle;
-	private String catSport;
+	private String typeSport;
 	private String description;
 	private float poids;
 	private double prixInitial;
@@ -47,12 +47,12 @@ public class Article {
 		this.idArticle = idArticle;
 	}
 
-	public String getCatSport() {
-		return catSport;
+	public String getTypeSport() {
+		return typeSport;
 	}
 
-	public void setCatSport(String catSport) {
-		this.catSport = catSport;
+	public void setTypeSport(String typeSport) {
+		this.typeSport = typeSport;
 	}
 
 	public String getDescription() {
@@ -105,30 +105,33 @@ public class Article {
 
 	// Méthode permettant d'ajouter un article dans la table ARTICLES
 	public void ajouterBDD() {
+	;
 
-		String requete = "INSERT INTO ARTICLE (IDENTIFIANT, DESCRIPTION, CATSPORT, POIDS, PRIXINITIAL, STOCK, ETAT, CATPRIX) VALUES ( "
+
+		
+		String requete = "INSERT INTO ARTICLE (IDARTICLE, DESCRIPTION, PRIXINITIAL," +
+				" STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( "
 				+ "'"
 				+ this.idArticle
 				+ "',"
 				+ "'"
 				+ this.description
 				+ "',"
-				+ "'"
-				+ this.catSport
-				+ "',"
-				+ this.poids
-				+ ","
 				+ this.prixInitial 
 				+ "," 
 				+ this.stock 
+				+ "," 
+				+ this.poids
 				+ ",'"
-				+ this.etat
+				+ this.typeSport
 				+ "','"
 				+ this.catPrix
-				+ "'"
-				+") ";
+				+ "','"
+				+ this.etat
+				+"')";
 
 		SGBD.executeUpdate(requete);
+		
 	}
 	
 }

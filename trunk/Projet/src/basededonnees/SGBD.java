@@ -66,12 +66,15 @@ public class SGBD {
 
 	// Méthode issue du TP2
 	public static void executeUpdate(String requete) {
+		
 		connecter();
 		Statement st;
 	
 		try {
 			st = c.createStatement();
+			
 			st.executeUpdate(requete);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
