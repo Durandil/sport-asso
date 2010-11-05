@@ -105,10 +105,8 @@ public class Article {
 
 	// Méthode permettant d'ajouter un article dans la table ARTICLES
 	public void ajouterBDD() {
-	;
+	
 
-
-		
 		String requete = "INSERT INTO ARTICLE (IDARTICLE, DESCRIPTION, PRIXINITIAL," +
 				" STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( "
 				+ "'"
