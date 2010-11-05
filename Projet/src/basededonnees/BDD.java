@@ -7,9 +7,10 @@ public class BDD {
 	public static void init(){
 		
 //		On commence par supprimer les tables avant de les (re)créer
+		SGBD.executeUpdate("DROP TABLE MESSAGE");
 		SGBD.executeUpdate("DROP TABLE LISTING_PROMOS_ARTICLES");
 		SGBD.executeUpdate("DROP TABLE LISTING_ARTICLES_COMMANDES");
-		SGBD.executeUpdate("DROP TABLE FIDELITE");
+		SGBD.executeUpdate("DROP TABLE CARTE_FIDELITE");
 		SGBD.executeUpdate("DROP TABLE ARTICLE");
 		SGBD.executeUpdate("DROP TABLE COMMANDE");
 		SGBD.executeUpdate("DROP TABLE CLIENT");
@@ -57,9 +58,10 @@ public class BDD {
 				"CONSTRAINT PK_PROMO PRIMARY KEY (IDPROMO))");
 
 		SGBD.executeUpdate("CREATE TABLE VILLE" +
-				"(IDVILLE CHAR(8),"+
+				"(CODECOMMUNE CHAR(5),"+
+				"CODEPOSTAL CHAR(5),"+
 				"NOMVILLE VARCHAR(20),"+
-				"CONSTRAINT PK_VILLE PRIMARY KEY (IDVILLE))");
+				"CONSTRAINT PK_VILLE PRIMARY KEY (CODECOMMUNE))");
 
 		
 		SGBD.executeUpdate("CREATE TABLE CLIENT" +
@@ -68,13 +70,12 @@ public class BDD {
 				" PRENOMCLIENT VARCHAR(40),"+
 				" DENOMINATIONCLIENT VARCHAR(40),"+
 				" ADRESSECLIENT VARCHAR(60),"+
-				" IDVILLE CHAR(8),"+
-				" TELEPHONE VARCHAR(20),"+
-				" ESTFIDELE VARCHAR(3),"+
-				" ETATCOMPTE VARCHAR(9),"+
+				" CODECOMMUNE CHAR(5),"+
+				" TELEPHONE CHAR(10),"+
+				" ETATCOMPTE VARCHAR(10),"+
 				"MOTDEPASSE VARCHAR(20),"+
 				"CONSTRAINT PK_CLIENT PRIMARY KEY (IDCLIENT)," +
-				"CONSTRAINT FK_CLIENT_VILLE FOREIGN KEY (IDVILLE) REFERENCES VILLE)");
+				"CONSTRAINT FK_CLIENT_VILLE FOREIGN KEY (CODECOMMUNE) REFERENCES VILLE)");
 
 		SGBD.executeUpdate("CREATE TABLE COMMANDE" +
 				"(IDCOMMANDE CHAR(8),"+
@@ -92,13 +93,13 @@ public class BDD {
 				"POIDS NUMBER(5),"+
 				"IDTYPE CHAR(8),"+
 				"IDCATEGORIE CHAR(8),"+
-				"ETAT VARCHAR(10),"+
+				"ETATCOMPTE VARCHAR(10),"+
 				"CONSTRAINT PK_ARTICLE PRIMARY KEY (IDARTICLE),"+
 				"CONSTRAINT FK_ARTICLE_TYPE_SPORT FOREIGN KEY (IDTYPE) REFERENCES TYPE_SPORT,"+
 				"CONSTRAINT FK_ARTICLE_CATEGORIE FOREIGN KEY (IDCATEGORIE) REFERENCES CATEGORIE)");
 
 
-		SGBD.executeUpdate("CREATE TABLE FIDELITE" +
+		SGBD.executeUpdate("CREATE TABLE CARTE_FIDELITE" +
 				"(IDCARTEFIDELITE CHAR(8),"+
 				"NBPOINTS NUMBER(5),"+
 				"IDCLIENT VARCHAR(40),"+
@@ -120,68 +121,20 @@ public class BDD {
 				"CONSTRAINT PK_LISTING_PROMOS_ARTICLES PRIMARY KEY (IDPROMO, IDARTICLE),"+
 				"CONSTRAINT FK_PROMO_ARTICLE FOREIGN KEY (IDARTICLE) REFERENCES ARTICLE,"+
 				"CONSTRAINT FK_ARTICLE_PROMO FOREIGN KEY (IDPROMO) REFERENCES PROMO)");
-
+		
+		SGBD.executeUpdate("CREATE TABLE MESSAGE" +
+				"(IDMESSAGE CHAR(8),"+
+				"SUJETMESSAGE VARCHAR(40),"+
+				"CONTENUMESSAGE VARCHAR(200),"+
+				"IDCLIENT VARCHAR(40),"+
+				"DATEMESSAGE DATE,"+
+				"CONSTRAINT PK_MESSAGE PRIMARY KEY (IDMESSAGE),"+
+				"CONSTRAINT FK_MESSAGE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
 
 
 	}
 	
-	// Ancienne méthode permettant de créer la table que l'on veut 
-	// à partir du String passé en paramètre
-	public static void creerTable(String table) {
 
-		SGBD.executeUpdate("DROP TABLE " + table);
-
-		if (table.equals("CLIENTS")) {
-			SGBD.executeUpdate("CREATE TABLE " + table 
-					+ " (MAIL VARCHAR(40),"
-					+ " NOM VARCHAR(40),"
-					+ " PRENOM VARCHAR(40),"
-					+ " DENOMINATION VARCHAR(40),"
-					+ " ADRESSE VARCHAR(60),"
-					+ " VILLE VARCHAR(40),"
-					+ " CODEPOSTAL VARCHAR(5),"
-					+ " TELEPHONE VARCHAR(20),"
-					+ " CARTEFIDEL VARCHAR(3),"
-					+ " NBPOINTS NUMBER(6),"
-					+ " ETATCOMPTE VARCHAR(9), "
-					+ " MOTDEPASSE VARCHAR(7))"
-					);
-			
-		}
-		
-		if(table.equals("ARTICLES")){
-	
-			SGBD.executeUpdate("CREATE TABLE " + table 
-					+ " (IDENTIFIANT VARCHAR(10), " 
-					+ " DESCRIPTION VARCHAR(40), "
-					+ " CATSPORT VARCHAR(40), "
-					+ " POIDS NUMBER(8), "
-					+ " PRIXINITIAL NUMBER(6,2), "
-					+ " STOCK NUMBER(4),"
-					+ " ETAT VARCHAR(20),"
-					+ " CATPRIX VARCHAR(3))"
-					);
-		}
-		
-		if(table.equals("COMMANDES")){
-			SGBD.executeUpdate("CREATE TABLE " + table 
-					+ "( IDENTIFIANT VARCHAR(10), " 
-					+ " DATECOMMANDE DATE, "
-					+ " IDCLIENT VARCHAR(40))"
-					);
-		}
-		
-		if(table.equals("INFOCOMMANDES")){
-			SGBD.executeUpdate("CREATE TABLE " + table 
-					+ " (IDCOMMANDE VARCHAR(10), " 
-					+ " DATECOMMANDE DATE, "
-					+ " IDCLIENT VARCHAR(40)," 
-					+ " IDARTICLE VARCHAR(10),"
-					+ " QUANTITE NUMBER(3))"
-					);
-		}
-		
-	}
 	
 	
 }
