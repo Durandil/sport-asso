@@ -20,6 +20,10 @@ import javax.swing.border.Border;
 public class FenetreReapprovisionnement extends JFrame{
 	// Creer la base de données correspondante aux articles 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel image;
 	private JLabel titreLabel;
 

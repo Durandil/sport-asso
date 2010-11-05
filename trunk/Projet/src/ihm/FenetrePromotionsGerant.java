@@ -17,6 +17,12 @@ import javax.swing.JTable;
 public class FenetrePromotionsGerant extends JFrame {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public FenetrePromotionsGerant(){
 		super();
 		this.setTitle("Promotions en cours");

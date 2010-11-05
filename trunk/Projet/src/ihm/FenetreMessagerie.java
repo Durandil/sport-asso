@@ -17,6 +17,12 @@ import javax.swing.JTable;
 public class FenetreMessagerie extends JFrame {
 	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+
 	public FenetreMessagerie(){
 		super();
 		this.setTitle("Boite de Réception");

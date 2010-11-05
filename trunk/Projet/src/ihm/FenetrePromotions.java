@@ -16,6 +16,10 @@ import javax.swing.JTable;
 
 public class FenetrePromotions extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel promotionsLabel;
 
 

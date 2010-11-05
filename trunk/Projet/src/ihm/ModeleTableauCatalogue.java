@@ -11,6 +11,11 @@ import metier.LigneCommande;
 
 public class ModeleTableauCatalogue extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final Object[][] donnees;
 
     private final String[] entetes={"Numero","Denomination","Quantite en stock","Prix Initial"} ;

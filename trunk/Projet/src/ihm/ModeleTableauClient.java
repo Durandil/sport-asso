@@ -3,6 +3,11 @@ import javax.swing.table.AbstractTableModel;
 
 public class ModeleTableauClient extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final Object[][] donnees;
 
     private final String[] entetes={"Identifiant","Dénomination","Nom","Prénom","Ville"} ;

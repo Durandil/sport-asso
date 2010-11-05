@@ -18,6 +18,10 @@ import metier.LigneCommande;
 
 
 public class FenetreSuppressionPanier extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
 	private JComboBox quantite;
 	public static int quantiteSelectionnee ;
