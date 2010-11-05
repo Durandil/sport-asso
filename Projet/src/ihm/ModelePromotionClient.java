@@ -7,6 +7,11 @@ import metier.LigneCommande;
 
 public class ModelePromotionClient extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final Object[][] donnees;
 
     private final String[] entetes={" Promotions en cours"} ;

@@ -14,6 +14,10 @@ import javax.swing.JPanel;
 
 public class FenetreInformationsClient extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel imageFenetre;
 
 	// Cette fenêtre va permettre de donner un descriptif du magasin aux clients 

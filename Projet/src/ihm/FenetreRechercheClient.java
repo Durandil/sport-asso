@@ -13,6 +13,10 @@ import javax.swing.*;
 import basededonnees.SGBD;
 
 public class FenetreRechercheClient extends JDialog{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel numeroLabel,nomLabel,villeLabel,denominationLabel,clientLabel;
 	private JTextField numero,nom,denomination,ville,clientIdentifiant;
 	private JSplitPane split;

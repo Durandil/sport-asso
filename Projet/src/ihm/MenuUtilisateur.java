@@ -21,6 +21,10 @@ import metier.Particulier;
 
 public class MenuUtilisateur extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JMenuBar menuBar = new JMenuBar();
 	private JMenu menuCompte = new JMenu("Mon Compte");
 	private JMenu menuCatalogue = new JMenu("Catalogue");

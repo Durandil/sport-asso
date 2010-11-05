@@ -10,6 +10,11 @@ import javax.swing.JMenuItem;
 
 public class MenuGerant extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JMenuBar menuBar = new JMenuBar();
 	
 	private JMenu menuClientele = new JMenu("Clientèle");
