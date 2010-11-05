@@ -22,7 +22,7 @@ public class FenetreFactureCommande extends JDialog {
 	
 	public FenetreFactureCommande(JFrame parent, String title, boolean modal, String identifiantClient, String identifantCommande ){
 		super(parent, title, modal);
-		this.setSize(300, 650);
+		this.setSize(600, 650);
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);

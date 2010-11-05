@@ -1,11 +1,14 @@
 package ihm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+
+import basededonnees.SGBD;
 
 
 public class MenuGerant extends JFrame {
@@ -39,6 +42,13 @@ public class MenuGerant extends JFrame {
 				// Afficher la fenetre de recherche d'un client
 				FenetreRechercheClient recherche = new FenetreRechercheClient(null, "Recherche de clients", true);
 				recherche.setVisible(true);
+				ArrayList<String> liste = new ArrayList<String>();
+				
+				//liste = SGBD.recupererAttributClient("qpuc@ensai.fr");
+				//for (String element : liste) {
+				//	System.out.println(element);
+				//}
+				
 			}
 		});
 		
