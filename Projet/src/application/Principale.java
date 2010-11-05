@@ -19,8 +19,7 @@ public class Principale {
  * @throws Exception **/
 
 	public static void main(String[] args) throws Exception {
-
-		//Gerant.activDesactivCompte();
+/** GROS TODO : revoir tous les insert into **/
 		BDD.init();
 			
 //
@@ -29,6 +28,7 @@ public class Principale {
 //		  
 //		  
 //		  //Instanciation d'une association 
+		/**TODO : Gestion des id ville...**/
 //		Association ass = new Association("Idylliste", "idylliste@ensai.fr", "Ensai", "Rennes",
 //		  "35000", "02 23 45 78 96",true);
 //		  
@@ -70,62 +70,40 @@ public class Principale {
 		
 		// Création de 2 commandes
 		// Création et MAJ des tables COMMANDES et INFOCOMMANDES
-/*		
-		BDD.creerTable("COMMANDES");
-		BDD.creerTable("INFOCOMMANDES");
-		LigneCommande lc1 = new LigneCommande("ART002", 3);
-		LigneCommande lc2 = new LigneCommande("ART001", 1);
-		ArrayList al = new ArrayList<LigneCommande>();
-		al.add(lc1);
-		al.add(lc2);
-
-
 		
+//		BDD.creerTable("COMMANDES");
+//		BDD.creerTable("INFOCOMMANDES");
+//		LigneCommande lc1 = new LigneCommande("ART002", 3);
+//		LigneCommande lc2 = new LigneCommande("ART001", 1);
+//		ArrayList al = new ArrayList<LigneCommande>();
+//		al.add(lc1);
+//		al.add(lc2);
+//
+//
+//		
+//		
+//		String dateS = "05/12/2010";
+//		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
+//		Commande c1 = new Commande("COM1", "alexis.louvel@ensai.fr", al, date);
+//
+//		  
+//		 
+//		
+//		LigneCommande lc3 = new LigneCommande("ART010", 12);
+//		LigneCommande lc4 = new LigneCommande("ART007", 3);
+//		LigneCommande lc5 = new LigneCommande("ART008", 7);
+//		ArrayList al2 = new ArrayList<LigneCommande>();
+//		al2.add(lc3);
+//		al2.add(lc4);
+//		al2.add(lc5);
+//
+//		String dateS2 = "19/10/2010";
+//		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
+//		Commande c2 = new Commande("COM2", "idylliste@ensai.fr", al2, date2);
 		
-		String dateS = "05/12/2010";
-		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
-		Commande c1 = new Commande("COM1", "alexis.louvel@ensai.fr", al, date);
+ 
 
-		  
-		 
-		
-		LigneCommande lc3 = new LigneCommande("ART010", 12);
-		LigneCommande lc4 = new LigneCommande("ART007", 3);
-		LigneCommande lc5 = new LigneCommande("ART008", 7);
-		ArrayList al2 = new ArrayList<LigneCommande>();
-		al2.add(lc3);
-		al2.add(lc4);
-		al2.add(lc5);
 
-		String dateS2 = "19/10/2010";
-		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
-		Commande c2 = new Commande("COM2", "idylliste@ensai.fr", al2, date2);
-		
-*/	 
-
-		
-/*		  
-		  // Création de la table CAT1(Catégorie 1)
-		  
-		ArrayList<double[]> alcat1 = new ArrayList<double[]>();
-
-		double[] d1 = new double[2];
-		d1[0] = 10.0;
-		d1[1] = 0.9;
-		double[] d2 = new double[2];
-		d2[0] = 20.0;
-		d2[1] = 0.8;
-		double[] d3 = new double[2];
-		d3[0] = 30.0;
-		d3[1] = 0.7;
-		alcat1.add(d1);
-		alcat1.add(d2);
-		alcat1.add(d3);
-
-		Categorie cat1 = new Categorie("CAT1", alcat1);
-		cat1.creerTable();
-		 
-*/
 	}
 
 }

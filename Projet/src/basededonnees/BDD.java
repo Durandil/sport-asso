@@ -3,8 +3,7 @@ package basededonnees;
 public class BDD {
 /**TODO Gérer les clés primaires et secondaires**/
 	
-	// Méthode permettant de créer la table que l'on veut 
-	// à partir du String passé en paramètre
+	//Méthode permettant d'initialiser la création des tables de la BDD
 	public static void init(){
 		
 //		On commence par supprimer les tables avant de les (re)créer
@@ -126,6 +125,8 @@ public class BDD {
 
 	}
 	
+	// Ancienne méthode permettant de créer la table que l'on veut 
+	// à partir du String passé en paramètre
 	public static void creerTable(String table) {
 
 		SGBD.executeUpdate("DROP TABLE " + table);
