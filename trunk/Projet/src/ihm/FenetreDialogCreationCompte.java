@@ -266,6 +266,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 				}
 				// on pourra enregistrer dans base de données la nouvelle
 				// création de compte
+				/** TODO : Gestion de l'id ville...**/
 				else {
 					if (denomination.getText().isEmpty())
 
