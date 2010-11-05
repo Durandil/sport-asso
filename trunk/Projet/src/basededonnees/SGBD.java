@@ -545,7 +545,7 @@ public class SGBD {
 	public ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
 		
 		connecter();
-		ArrayList<String[]> article = new ArrayList<String[]>();
+		ArrayList<ArrayList<String>> article = new ArrayList<ArrayList<String>>();
 		Statement st = null;
 		ResultSet res = null;
 		
@@ -559,15 +559,15 @@ public class SGBD {
 
 			while (res.next()) {
 
-				String[] listeString = new String[4];
+				ArrayList<String> listeString = new ArrayList<String>();
 				String s = res.getObject(1).toString();
 				String s2 = res.getObject(2).toString();
 				String s3 = res.getObject(3).toString();
 				String s4 = res.getObject(4).toString();
-				listeString[0] = s;
-				listeString[1] = s2;
-				listeString[2]= s3;
-				listeString[3]=s4;
+				listeString.add(s);
+				listeString.add(s2);
+				listeString.add(s3);
+				listeString.add(s4);
 				article.add(listeString);
 			}
 

@@ -96,7 +96,7 @@ public class FenetreCatalogueGerant extends JFrame{
     	
     	// Définition du tableau qui accueillera l'ensemble des articles disponibles
     	// après interrogation de la base de données
-	    JTable tableau = new JTable(new ModeleTableauCatalogue());
+	    JTable tableau = new JTable(new ModeleTableauCatalogue(false));
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	    
 	    // Définition du panneau qui contiendra les boutons de confirmation et de retour à la page précédente
