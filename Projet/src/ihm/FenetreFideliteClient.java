@@ -20,6 +20,10 @@ import metier.Client;
 
 public class FenetreFideliteClient extends JDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel fideliteLabel;
 	private JComboBox fidelite;
 	private JLabel pointsFideliteLabel;

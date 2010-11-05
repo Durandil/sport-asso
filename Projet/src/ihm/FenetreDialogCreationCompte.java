@@ -29,6 +29,10 @@ import metier.Particulier;
 
 public class FenetreDialogCreationCompte extends JDialog{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//private DialogInfo zInfo = new DialogInfo();
 	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,adresse,ville,codePostal,telephone,identifiant,denomination;

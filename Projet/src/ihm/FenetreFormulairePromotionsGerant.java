@@ -16,6 +16,10 @@ import javax.swing.JTextField;
 import metier.Article;
 
 public class FenetreFormulairePromotionsGerant extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// cette classe devra permettre d'ouvrir le formulaire d'ajout 
 	// ou de modification d'une promotion
 	public Dimension dimensionStandard = new Dimension(220, 60);

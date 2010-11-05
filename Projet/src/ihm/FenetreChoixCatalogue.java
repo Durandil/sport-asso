@@ -19,6 +19,10 @@ import metier.Article;
 
 public class FenetreChoixCatalogue extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
 	private JComboBox quantite;
 	public static int quantiteSelectionnee ;
