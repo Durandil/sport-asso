@@ -22,6 +22,10 @@ import metier.Client;
 
 public class FenetreDialogGestionCompteClient extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
 	private TextArea adresse;

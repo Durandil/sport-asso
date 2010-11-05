@@ -4,6 +4,7 @@ public class DialogIdentifiant {
 	
 	private String identifiant, password;
 
+	
 	public DialogIdentifiant() {
 		super();
 		// TODO Auto-generated constructor stub

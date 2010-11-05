@@ -22,6 +22,10 @@ import metier.Message;
 
 public class FenetreContactVendeur extends JDialog{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Message message = new Message();
 	private JTextField sujet;
 	private TextArea contenu;

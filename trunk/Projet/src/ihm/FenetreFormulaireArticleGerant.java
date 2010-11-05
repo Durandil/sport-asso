@@ -21,6 +21,10 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	// cette classe devra permettre d'ouvrir le formulaire d'ajout 
 	// ou de modification d'un article dans le catalogue
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JLabel numArticleLabel,descriptionLabel,poidsLabel,catPrixLabel,catSportLabel,prixLabel,stockLabel;
 	JTextField numArticle,description,poids,prix,stock;
 	JComboBox catPrixBox,catSportBox;

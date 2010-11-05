@@ -6,6 +6,10 @@ import javax.swing.JDialog;
 
 public class DialogMessage extends JDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String sujet,contenu;
 	
 	public DialogMessage() {
