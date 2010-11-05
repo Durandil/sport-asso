@@ -486,7 +486,7 @@ public class SGBD {
 					"WHERE COMMANDES.IDENTIFIANT=INFOCOMMANDES.IDCOMMANDE and CLIENT.IDENTIFIANT=" +
 					"COMMANDES.IDCLIENT and MAIL="+ identifiant +";");
 			
-			rs = res.getNString(0);
+			rs = res.getString(0);
 			
 		}
 		catch(SQLException e){
