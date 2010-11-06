@@ -25,6 +25,7 @@ public class MenuGerant extends JFrame {
 
 	private JMenuItem itemGestionCompte = new JMenuItem("Gestion Compte Client");
 	private JMenuItem itemMessagerie = new JMenuItem("Messagerie");
+	private JMenuItem itemFermer = new JMenuItem("Fermer");
 	private JMenuItem itemArticles = new JMenuItem("Articles");
 	private JMenuItem itemCommandes = new JMenuItem("Commandes");
 	private JMenuItem itemPromotions = new JMenuItem("Promotions");
@@ -60,6 +61,12 @@ public class MenuGerant extends JFrame {
 			}
 		});
 		
+		itemFermer.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}				
+		});
+		
 		itemArticles.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
 				// Afficher la fenetre avec la dernière version du catalogue client
@@ -89,6 +96,7 @@ public class MenuGerant extends JFrame {
 		// dans la maquette graphique des interfaces
 		this.menuClientele.add(itemGestionCompte);
 		this.menuClientele.add(itemMessagerie);
+		this.menuClientele.add(itemFermer);
 		this.menuStock.add(itemArticles);
 		this.menuStock.add(itemCommandes);
 		this.menuStock.add(itemPromotions);

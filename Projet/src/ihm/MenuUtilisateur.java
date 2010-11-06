@@ -42,7 +42,7 @@ public class MenuUtilisateur extends JFrame{
 	
 	// Cette variable static contiendra normalement le client en cours d'utilisation de l'application
 	// pour le moment elle sert à faire fonctionner la fenêtre
-	//public static Client client = new Particulier("jean","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
+	//public static Client client = new Particulier("julien","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
 
 	public MenuUtilisateur(){
 		this.setSize(400, 200);
@@ -54,13 +54,13 @@ public class MenuUtilisateur extends JFrame{
 		//--------------------------
 			
 		itemFermer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}				
 		});
 		
 		itemMesInformations.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				//ouvrir la fenetre permettant accès au compte
 				//FenetreDialogGestionCompteClient fenetreGestionCompte =new FenetreDialogGestionCompteClient(null,"Informations client",true,client);
 				//fenetreGestionCompte.setVisible(true);
@@ -68,35 +68,35 @@ public class MenuUtilisateur extends JFrame{
 		});
 		
 		itemProgFidelite.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				//ouvrir la fenetre permettant accès au informations sur programme de fidelite
-				 //FenetreFideliteClient fenetreProgrammeFidelite =new  FenetreFideliteClient(null,"programme fidelité",true,client);
-				 //fenetreProgrammeFidelite.setVisible(true);
+				 FenetreFideliteClient fenetreProgrammeFidelite =new  FenetreFideliteClient(null,"programme fidelité",true);
+				 fenetreProgrammeFidelite.setVisible(true);
 			}
 		});
 		
 		itemContact.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				FenetreContactVendeur contactVendeur= new FenetreContactVendeur(null,"Nous Contacter",true);
 				contactVendeur.setVisible(true);
 			}
 		});
 		
 		itemInformations.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				FenetreInformationsClient contactVendeur= new FenetreInformationsClient();
 			}
 		});
 		
 		itemArticles.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				FenetreCommandeArticle catalogue = new FenetreCommandeArticle();
 				catalogue.setVisible(true);
 			}
 		});
 		
 		itemPromotions.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				FenetrePromotions promotion = new FenetrePromotions();
 				promotion.setVisible(true);
 			}

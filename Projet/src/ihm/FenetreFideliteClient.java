@@ -7,11 +7,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -28,6 +30,7 @@ public class FenetreFideliteClient extends JDialog {
 	private JComboBox fidelite;
 	private JLabel pointsFideliteLabel;
 	private JTextField pointsFidelite;
+	private JOptionPane affichageBonAchat;
 	
 	/**
 	 * Constructeur de la classe FenetreFideliteClient
@@ -38,17 +41,17 @@ public class FenetreFideliteClient extends JDialog {
 	 * @param client : Il permet de récupérer les informations d'un client pour les utiliser dans la fenêtre
 	 * 				   
 	 */
-	public FenetreFideliteClient(JFrame parent, String title, boolean modal,Client client){
+	public FenetreFideliteClient(JFrame parent, String title, boolean modal/*,Client client*/){
 		super(parent, title, modal);
 		this.setSize(400, 500);
 		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(client);
+		this.initComponent(/*client*/);
 	}
 	
 	
-	private void initComponent(Client client){
+	private void initComponent(/*Client client*/){
 		
 		// Création du panneau de gestion de la demande d'une carte de fidelité
 		JPanel panFidelite = new JPanel();
@@ -57,20 +60,22 @@ public class FenetreFideliteClient extends JDialog {
 		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
 		
+		FenetreDialogCreationCompte.itemFidelite="Non";
 		// Création du menu déroulant sur la demande de la carte de fidélité
 		fidelite=new JComboBox();
 		fidelite.addItem("Oui");
 		fidelite.addItem("Non");
+		fidelite.setSelectedItem(FenetreDialogCreationCompte.itemFidelite);
 		
 		//client.isEstFidele()==true
 		if(FenetreDialogCreationCompte.itemFidelite=="Oui"){
 			// si la personne a répondu oui lors de la création de compte, on ne lui permet pas de modifier 
 			// le contenu du menu déroulant
-			fidelite.setVisible(false);
+			fidelite.setEnabled(false);
 		}
 		else{
 			// dans le cas contraire, il pourra le modifier
-			fidelite.setVisible(true);
+			fidelite.setEnabled(true);
 		}
 		
 		fidelite.addActionListener(new ActionListener() {
@@ -79,9 +84,19 @@ public class FenetreFideliteClient extends JDialog {
 				// TODO Auto-generated method stub
 				// si la valeur du menu déroulant est modifiée, on change pour l'individu la valeur de l'attribut du compte fidélité
 				FenetreDialogCreationCompte.itemFidelite = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				if(FenetreDialogCreationCompte.itemFidelite=="Oui"){
+					// si la personne a répondu oui lors de la création de compte, on ne lui permet pas de modifier 
+					// le contenu du menu déroulant
+					fidelite.setEnabled(false);
+				}
+				else{
+					// dans le cas contraire, il pourra le modifier
+					fidelite.setEnabled(true);
+				}
 			}	
 		});
 		
+		fidelite.setVisible(true);
 		panFidelite.add(fidelite);
 		
 		// Création d'un panneau permettant l'affichage du nombre de points
@@ -89,11 +104,14 @@ public class FenetreFideliteClient extends JDialog {
 		panPointsFidelite.setBackground(Color.white);
 		panPointsFidelite.setPreferredSize(new Dimension(220, 80));
 		pointsFideliteLabel = new JLabel("Nombre de points fidelité :");
-		panPointsFidelite.add(pointsFideliteLabel);
-		int points=client.getNbPointsFidelite(); // récupération du nombre de points du client entré en paramètre de initComponent()
-		pointsFidelite= new JTextField(points);
+		
+		final int points=35 ; //client.getNbPointsFidelite(); // récupération du nombre de points du client entré en paramètre de initComponent()
+		pointsFidelite= new JTextField("0");
 		pointsFidelite.setPreferredSize(new Dimension(90, 25));
+		pointsFidelite.setVisible(true);
 		pointsFidelite.setEnabled(false);
+		
+		panPointsFidelite.add(pointsFideliteLabel);
 		panPointsFidelite.add(pointsFidelite);
 		
 		// Bouton affichage des bons d'achat disponible
@@ -101,9 +119,24 @@ public class FenetreFideliteClient extends JDialog {
 		boutonAffichageBons.addActionListener(new ActionListener() {
 			
 		
+			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				// afficher dans une nouvelle fenetre ou dans un JTable les résultats
+				// TODO Gestion des bons achat du client selon le nombre de points
+				// sur sa carte de fidelite
+
+				int bonAchat=0;
+				
+				if(points <= 0) {
+					bonAchat=0;
+				}
+				else if(points<20) {
+					bonAchat=10;
+				}
+				else if(points<60) bonAchat=30;
+				
+				affichageBonAchat = new JOptionPane();
+				ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
+				affichageBonAchat.showMessageDialog(null, "Vous disposez d'un bon d'achat de "+ bonAchat + " €", "Information sur les bons d'achat", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 				
 			}
 		});

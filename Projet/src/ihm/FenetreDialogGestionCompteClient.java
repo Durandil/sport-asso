@@ -29,6 +29,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
 	private TextArea adresse;
+	private Client client;
 
 	
 	/**
@@ -40,7 +41,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	public FenetreDialogGestionCompteClient(JFrame parent, String title, boolean modal,Client client){
 		super(parent, title, modal);
 		this.setSize(550, 700);
-		this.setLocationRelativeTo(null);
+		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent(client);
@@ -51,12 +52,18 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	 * Initialise le contenu de la boîte
 	 */
 	private void initComponent(Client client){
+		
+		
 		//Icone
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.setLayout(new BorderLayout());
 		panIcon.add(icon);
+		
+		//Panneau qui accueillera tous les champs
+		JPanel content = new JPanel();
+		content.setBackground(Color.white);
 		
 		//Identifiant
 		JPanel panIdentifiant = new JPanel();
@@ -69,43 +76,50 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		identifiant.setPreferredSize(new Dimension(115, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
+		content.add(panIdentifiant);
 		
-		// La denomination
-		// if typeCompte=collectivités association
-		JPanel panDenomination= new JPanel();
-		panDenomination.setBackground(Color.white);
-		panDenomination.setPreferredSize(new Dimension(260, 60));
-		denomination=new JTextField();
-		denomination.setPreferredSize(new Dimension(90, 25));
-		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
-		denominationLabel=new JLabel("Denomination");
-		panDenomination.add(denominationLabel);
-		panDenomination.add(denomination);
-		
-		// else
-		//Le nom
-		JPanel panNom = new JPanel();
-		panNom.setBackground(Color.white);
-		panNom.setPreferredSize(new Dimension(260, 60));
-		nom = new JTextField();
-		nom.setPreferredSize(new Dimension(90, 25));
-		panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
-		nomLabel = new JLabel("Nom :");
-		panNom.add(nomLabel);
-		panNom.add(nom);
-		
-		
-		//Le prenom
-		JPanel panPrenom = new JPanel();
-		panPrenom.setBackground(Color.white);
-		panPrenom.setPreferredSize(new Dimension(260, 60));
-		panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
-		prenomLabel = new JLabel("Prenom : ");
-		prenom = new JTextField();
-		prenom.setPreferredSize(new Dimension(90, 25));
-		panPrenom.add(prenomLabel);
-		panPrenom.add(prenom);
-
+//		
+//		
+//		// La denomination
+//		String p = client.getParticulierAssociation();
+//		if(p=="Association"){
+//			// if typeCompte=collectivités association
+//			JPanel panDenomination= new JPanel();
+//			panDenomination.setBackground(Color.white);
+//			panDenomination.setPreferredSize(new Dimension(260, 60));
+//			denomination=new JTextField();
+//			denomination.setPreferredSize(new Dimension(90, 25));
+//			panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
+//			denominationLabel=new JLabel("Denomination");
+//			panDenomination.add(denominationLabel);
+//			panDenomination.add(denomination);
+//			content.add(panDenomination);
+//		}
+//		else{		//Le nom
+//			JPanel panNom = new JPanel();
+//			panNom.setBackground(Color.white);
+//			panNom.setPreferredSize(new Dimension(260, 60));
+//			nom = new JTextField();
+//			nom.setPreferredSize(new Dimension(90, 25));
+//			panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
+//			nomLabel = new JLabel("Nom :");
+//			panNom.add(nomLabel);
+//			panNom.add(nom);
+//			content.add(panNom);
+//			
+//			//Le prenom
+//			JPanel panPrenom = new JPanel();
+//			panPrenom.setBackground(Color.white);
+//			panPrenom.setPreferredSize(new Dimension(260, 60));
+//			panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
+//			prenomLabel = new JLabel("Prenom : ");
+//			prenom = new JTextField();
+//			prenom.setPreferredSize(new Dimension(90, 25));
+//			panPrenom.add(prenomLabel);
+//			panPrenom.add(prenom);
+//			content.add(panPrenom);
+//		}
+			
 		//L'adresse
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(Color.white);
@@ -117,7 +131,8 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		adresse.setPreferredSize(new Dimension(140, 50));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
-
+		content.add(panAdresse);
+		
 		//ville
 		JPanel panVille = new JPanel();
 		panVille.setBackground(Color.white);
@@ -128,6 +143,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		ville.setPreferredSize(new Dimension(90, 25));
 		panVille.add(villeLabel);
 		panVille.add(ville);
+		content.add(panVille);
 		
 		//Code Postal
 		JPanel panCP = new JPanel();
@@ -139,6 +155,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
+		content.add(panCP);
 		
 		// Telephone
 		JPanel panTelephone = new JPanel();
@@ -150,21 +167,8 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		telephone.setPreferredSize(new Dimension(90, 25));
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
-		
-				
-		
-		JPanel content = new JPanel();
-		content.setBackground(Color.white);
-		content.add(panIdentifiant);
-		content.add(panDenomination);
-		content.add(panNom);
-		content.add(panPrenom);
-		content.add(panAdresse);
-		content.add(panVille);
-		content.add(panCP);
 		content.add(panTelephone);
-		
-		
+				
 		JPanel control = new JPanel();
 		JButton validationBouton = new JButton("Valider");
 		
