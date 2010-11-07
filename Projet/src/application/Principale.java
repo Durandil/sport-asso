@@ -21,15 +21,29 @@ public class Principale {
 
 	public static void main(String[] args) throws Exception {
 /** GROS TODO : revoir tous les insert into **/
-		BDD.init();
+		//Initialiser la base de données
+		//BDD.init();
 		
 //
-		//Création d'une promo
+		
+		  // Instanciation de 2 articles tests (et ajout dans la table 
+//		Article art1 = new Article("ART99999", "Maillot spigouleux","TYP00001", 200,
+//				50.20, 0,"Rupture de stock", "CAT00001");
+//		Article art2 = new Article("ART99998", "Ballon spigouleux", "TYP00002", 200,
+//				15.30, 100,"En stock", "CAT00002");
+		
+		//Création d'une promo test
 		String dateS = "05/11/2010";
 		String dateS2 = "07/11/2010";
 		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
 		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
-		Promotion p = new Promotion("PRO00001","Promo sur les maillots",date,date2,0.7 );
+		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.7 );
+		
+//		//Instanciation d'une catégorie test
+//		Categorie cat = new Categorie("CAT99999","Test",100);
+		
+		
+		
 //		  
 //		  
 //		  //Instanciation d'une association 
@@ -48,26 +62,7 @@ public class Principale {
 
 
 //		  
-		  // Instanciation de 10 articles (et ajout dans la table 
-//		Article art1 = new Article("ART00001", "Maillot","typ00001", 200,
-//				50.20, 0,"Rupture de stock", "cat00001");
-//		Article art2 = new Article("ART00002", "Ballon", "typ00002", 200,
-//				15.30, 100,"En stock", "cat00002");
-//		Article art3 = new Article("ART00003", "Chaussettes Blanches",
-//				"typ00001", 50, 10, 50,"En stock", "cat00001");
-//		Article art4 = new Article("ART00004", "Bonnet de bain", "typ00004", 75,
-//				15, 0,"Rupture de stock", "cat00001");
-//		Article art5 = new Article("ART005", "Club", "Golf", 500, 100, 10,"En stock", "3");
-//		Article art6 = new Article("ART006", "Chaussettes Noires", "Omnisport",
-//				50, 10, 50,"En stock", "1");
-//		Article art7 = new Article("ART007", "Selle", "Équitation", 250, 50, 5,"Déstockage",
-//				"3");
-//		Article art8 = new Article("ART008", "Chaussures NIKE", "Running", 250,
-//				100, 60,"En stock", "2");
-//		Article art9 = new Article("ART009", "Kimono", "Sport de combat", 750,
-//				35, 30,"Déstockage", "2");
-//		Article art10 = new Article("ART010", "Raquette de tennis débutant",
-//				"Sport de raquette", 170, 20, 50,"En stock", "3");
+
 
 		/** TODO : Gérer le format Date **/
 		

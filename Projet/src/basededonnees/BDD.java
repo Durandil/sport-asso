@@ -6,6 +6,11 @@ public class BDD {
 	//Méthode permettant d'initialiser la création des tables de la BDD
 	public static void init(){
 		
+		
+		/**Attention si la méthode est lancée en dehors de l'Ensai elle ne marchera pas
+		Passer en commentaire la 2ème moitié de la méthode, exécuter la 1ère
+		Puis passer la 1ère en commentaire et exécuter la seconde**/
+		
 //		On commence par supprimer les tables avant de les (re)créer
 		SGBD.executeUpdate("DROP TABLE MESSAGE");
 		SGBD.executeUpdate("DROP TABLE LISTING_PROMOS_ARTICLES");
@@ -56,7 +61,7 @@ public class BDD {
 				"DATEFIN DATE,"+
 				"POURCENTAGEPROMO NUMBER(3,1),"+
 				"CONSTRAINT PK_PROMO PRIMARY KEY (IDPROMO))");
-
+		/**Si on lance la méthode de chez soi couper ici**/
 		SGBD.executeUpdate("CREATE TABLE VILLE" +
 				"(CODECOMMUNE CHAR(5),"+
 				"CODEPOSTAL CHAR(5),"+
