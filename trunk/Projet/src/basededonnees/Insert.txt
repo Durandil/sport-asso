@@ -1,0 +1,61 @@
+#Categorie:
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00001','C1',100)
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00002','C2',250)
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00003','C3',500)
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00004','C4',1000)
+
+#Quantite
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00001',5)
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00002',10)
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00003',15)
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00004',20)
+
+#Reduction
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA000001',10)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA000002',15)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA000003',20)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA000004',25)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA000001',7.5)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA000002',10)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA000003',15)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA000004',20)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA000001',5)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA000002',7.5)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA000003',10)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA000004',15)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA000001',2.5)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA000002',5)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA000003',7.5)
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA000004',10)
+
+
+#Type de Sport:
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00001','SportWear')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00002','Camping')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00003','Sports en équipe')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00004','Sports eau')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00005','Randonnée')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00006','cycle')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00007','Sport hiver')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00008','Sports de raquette')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00009','Arts Martiaux')
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air')
+
+#Article
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00001', 'Maillot de foot de Sochaux', 350, 0.5, 70, 'CAT00002', 'TYP00001','En stock')
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00002', 'Ballon de basket', 350, 0.5, 20, 'CAT00002', 'TYP00003','En stock')
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00003', 'Velo de Course', 0, 5, 250, 'CAT00001', 'TYP00006', 'Rupture de stock')
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00004', 'Raquette de Tennis', 550, 1.1, 50, 'CAT00003', 'TYP00008', 'En stock')
+
+#Ville
+Insert into VILLE (Codecommune, Codepostal, Nomville) values (35238, 35000, Rennes)
+Insert into VILLE (Codecommune, Codepostal, Nomville) values (35047, 35170, Bruz)
+Insert into VILLE (Codecommune, Codepostal, Nomville) values (35138, 35170, Pont Rean)
+Insert into VILLE (Codecommune, Codepostal, Nomville) values (38185, 38000, Grenoble)
+Insert into VILLE (Codecommune, Codepostal, Nomville) values (90010, 90000, Belfort)
+
+#Client
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLI00001', 'Laroch', 'Arthur', '4 rue de la Breiz', 35238, 0606060606, 'Actif', 'L3R6T4X8')
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLIO0002', 'Ueihtam', 'Imré', '2 rue du Nord', 3185, 0645454545, 'Actif', 'I7H8M9XX')
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLI00003', 'Les canards givrés', '11 rue de la Mairie', 35047, 0448488484, 'Actif', 'Canard35')
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLI00004', 'Club Espoir Belfortain de Football', '12 place de la mainsion du Peuple', 90010, 0384254104, 'Actif', 'CHECHE')
