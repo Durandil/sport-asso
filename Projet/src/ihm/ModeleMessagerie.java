@@ -56,5 +56,13 @@ public class ModeleMessagerie extends AbstractTableModel {
         return entetes[columnIndex];
     }
     
+    public void removeAllMessage() {
+    	// méthode pour supprimer tous les messages de la table
+        for(int i=0;i==donnees.length;i++){
+        	fireTableRowsDeleted(i, i);
+        }
+        
+        
+    }
 
 }

@@ -35,10 +35,10 @@ public class FenetreContactVendeur extends JDialog{
 	
 	public FenetreContactVendeur(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
-		this.setSize(700, 300); // définition largeur,hauteur
+		this.setSize(700, 300);
 		this.setLocationRelativeTo(null);
-		this.setResizable(false); // permet de ne pas modifier la taille de la fenetre
-		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE); // ferme la fenetre en appuyant sur la croix du haut
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE); 
 		this.initComponent();
 	}
 	
@@ -93,10 +93,10 @@ public class FenetreContactVendeur extends JDialog{
 		
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent arg0){
-				// classe provisoire permettant de récupérer des objets de type message avec un sujet et un contenu
-				// cependant il faudrait ajouter un attribut identifiant de l'expéditeur
+				// TODO Améliorer la détermination/numérotation des IDMESSAGE
 				// il faudrait ajouter message à la base de données
 				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,new Date());
+				message.ajouterBDD(); 
 				// fermeture de la fenetre
 				setVisible(false);
 			}

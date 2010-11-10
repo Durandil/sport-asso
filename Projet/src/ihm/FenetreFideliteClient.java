@@ -106,7 +106,7 @@ public class FenetreFideliteClient extends JDialog {
 		pointsFideliteLabel = new JLabel("Nombre de points fidelité :");
 		
 		final int points=35 ; //client.getNbPointsFidelite(); // récupération du nombre de points du client entré en paramètre de initComponent()
-		pointsFidelite= new JTextField("0");
+		pointsFidelite= new JTextField(""+points+"");
 		pointsFidelite.setPreferredSize(new Dimension(90, 25));
 		pointsFidelite.setVisible(true);
 		pointsFidelite.setEnabled(false);

@@ -2,12 +2,19 @@ package metier;
 
 import java.util.Date;
 
+import basededonnees.SGBD;
+
 public class Message {
 	
+	private String idMessage ;
 	private String sujet ;
 	private String contenu ;
 	private String expediteur;
 	private Date dateEnvoi ;
+	// ce static doit aider à faire un compteur des idMessage
+	// A chaque fois qu'un message sera ajouté à la base, on l'incrementera de 1
+	// voir méthode ajouterBDD ci-dessous
+	private static int compteurIdentifiantMessage=1;
 	
 	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi) {
 		super();
@@ -53,6 +60,52 @@ public class Message {
 		this.dateEnvoi = dateEnvoi;
 	}
 	
+	// Méthode permettant d'ajouter un message dans la table MESSAGE sachant l'expéditeur
+	// et le nombre de message dans la table MESSAGE ( à améliorer)
+	public void ajouterBDD() {
+		
+		compteurIdentifiantMessage++;
+		
+		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
+				"IDCLIENT,DATEMESSAGE) VALUES ( 'M000000"+ compteurIdentifiantMessage +"',"
+				+ "'"
+				+ this.sujet
+				+ "',"
+				+ "'"
+				+ this.contenu
+				+ "',"
+				+ this.expediteur
+				+ "'," 
+				+ this.dateEnvoi
+				+"')";
+
+		SGBD.executeUpdate(requete);
+		
+	}
+	
+	// TODO il faut aussi implémenter la suppression d'un tuple (message) de la MESSAGE
+	// ainsi qu'une méthode pour supprimer tous les messages de la table de la base de données
+	// et du tableau
+	
+	public void supprimerBDD(){
+		// TODO vérifier si la requete est correcte
+		
+		String requete = "DELETE FROM MESSAGE WHERE " +
+				"IDMESSAGE = " +"'"+ this.idMessage+ "'"+
+				" and SUJETMESSAGE = " +"'"+ this.sujet+ "'"+
+				" and CONTENUMESSAGE = " +"'"+this.contenu+"'"+
+				" and IDCLIENT = " +"'"+this.expediteur+"'"+
+				" and DATEMESSAGE = " +"'"+this.dateEnvoi+"'"
+		;
+
+		
+	}
+	
+	public static void supprimerAllBDD(){
+		String requete = "DELETE FROM MESSAGE";
+		
+		SGBD.executeUpdate(requete);
+	}
 	
 	
 }
