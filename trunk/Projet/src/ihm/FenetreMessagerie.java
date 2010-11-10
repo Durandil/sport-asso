@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import metier.Message;
+
 
 public class FenetreMessagerie extends JFrame {
 	
@@ -36,6 +38,12 @@ public class FenetreMessagerie extends JFrame {
         
     private void initComponent(){
     	
+    	// Création d'une table contenant tous les messages envoyés par les clients au gérant
+    	// après interrogation de la base de données
+	    JTable tableauMessage = new JTable(new ModeleMessagerie());     
+	    this.getContentPane().add(new JScrollPane(tableauMessage), BorderLayout.CENTER);
+    	
+    	
     	//Création du panneau qui se situera en haut de la fenetre créée
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
@@ -44,23 +52,27 @@ public class FenetreMessagerie extends JFrame {
     	// que le gérant peut faire sur les messages de ses clients
     	JPanel panneauTitle=new JPanel();
     	JButton boutonAjouter=new JButton("Lire");
-    	JButton boutonSupprimer=new JButton("Supprimer");
-    	JButton boutonModifier=new JButton("Supprimer tout");
+    	//JButton boutonSupprimer=new JButton("Supprimer");
+    	JButton boutonSupprimerTout=new JButton("Supprimer tout");
+    	
+    	boutonSupprimerTout.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Message.supprimerAllBDD(); //suppression message de la DB
+				//tableauMessage.removeAllMessage(); // suppression message tableau
+			}
+		});
+    	
     	
     	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
     	panneauTitle.add(boutonAjouter);
-    	panneauTitle.add(boutonSupprimer);
-    	panneauTitle.add(boutonModifier);
+    	//panneauTitle.add(boutonSupprimer);
+    	panneauTitle.add(boutonSupprimerTout);
     	panneauHaut.add(panneauTitle,"Center");
-    	
+   
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
-    	// Création d'une table contenant tous les messages envoyés par les clients au gérant
-    	// après interrogation de la base de données
-	    JTable tableauMessage = new JTable(new ModeleMessagerie());     
-	    this.getContentPane().add(new JScrollPane(tableauMessage), BorderLayout.CENTER);
-	    
-	    
 	    // Définition du panneau panneauBouton qui accueillera le bouton
 	    // permettant de retourner à la page précédente 
 	    JPanel panneauBouton=new JPanel();
