@@ -14,13 +14,12 @@ public class Particulier extends Client {
 	// Le constructeur permet d'ajouter le particulier dans la base CLIENTS
 	// Et génère un mot de passe lors de l'instanciation
 	public Particulier(String nom, String prenom, String mail, String adresse,
-			String ville, String codePostal, String telephone, boolean estFidele) {
+			String codeCommune, String telephone, boolean estFidele) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
 		this.adresse = adresse;
-		this.ville = ville;
-		this.codePostal = codePostal;
+		this.codeCommune = codeCommune;
 		this.telephone = telephone;
 		this.particulierAssociation = "Particulier";
 		this.nbPointsFidelite = 0;
@@ -92,17 +91,15 @@ public class Particulier extends Client {
 		}
 		
 		
-		String requete = "INSERT INTO CLIENTS (MAIL, NOM, PRENOM, ADRESSE, VILLE" +
-				", CODEPOSTAL, TELEPHONE, CARTEFIDEL, NBPOINTS, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
+		
+		String requete = "INSERT INTO CLIENT (IDCLIENT, NOMCLIENT, PRENOMCLIENT, ADRESSECLIENT, CODECOMMUNE" +
+				", TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
 				"'"+this.mail+"',"
 				+"'"+this.nom+"',"
 				+"'"+this.prenom+"',"
 				+"'"+this.adresse+"',"
-				+"'"+this.ville+"',"
-				+"'"+this.codePostal+"',"
+				+"'"+this.codeCommune+"',"
 				+"'"+this.telephone+"',"
-				+"'"+fidele+"',"
-				+"'"+this.nbPointsFidelite+"',"
 				+"'"+actif+"',"
 				+"'"+this.motDePasse+"')";
 		SGBD.executeUpdate(requete);

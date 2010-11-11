@@ -12,13 +12,12 @@ public class Gerant extends Utilisateur {
 	private String motDePasse;
 
 	public Gerant(String nom, String prenom, String mail, String adresse,
-			String ville, String codePostal, String telephone) {
+			String ville, String codeCommune, String telephone) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
 		this.adresse = adresse;
-		this.ville = ville;
-		this.codePostal = codePostal;
+		this.codeCommune = codeCommune;
 		this.telephone = telephone;
 	
 		this.motDePasse = genererMdp();
@@ -38,7 +37,7 @@ public class Gerant extends Utilisateur {
 
 			ArrayList<String[]> listeMailsEtats = new ArrayList<String[]>();
 
-			listeMailsEtats = SGBD.selectDeuxChampsString("CLIENTS", "MAIL",
+			listeMailsEtats = SGBD.selectDeuxChampsString("CLIENT", "IDCLIENT",
 					"ETATCOMPTE");
 
 			for (int i = 0; i < listeMailsEtats.size(); i++) {
@@ -56,8 +55,8 @@ public class Gerant extends Utilisateur {
 
 						if (str2.equals("O")) {
 
-							SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Désactivé' "
-									+ "WHERE MAIL ='" + str + "'");
+							SGBD.executeUpdate("UPDATE CLIENT SET ETATCOMPTE = 'Désactivé' "
+									+ "WHERE IDCLIENT ='" + str + "'");
 							System.out.println("Le compte " + str
 									+ " a été désactivé");
 						}
@@ -77,8 +76,8 @@ public class Gerant extends Utilisateur {
 						} while (!str3.equals("O") && !str3.equals("N"));
 
 						if (str3.equals("O")) {
-							SGBD.executeUpdate("UPDATE CLIENTS SET ETATCOMPTE = 'Activé' "
-									+ "WHERE MAIL ='" + str + "'");
+							SGBD.executeUpdate("UPDATE CLIENT SET ETATCOMPTE = 'Activé' "
+									+ "WHERE IDCLIENT ='" + str + "'");
 							System.out.println("Le compte " + str
 									+ " a été réactivé");
 						}

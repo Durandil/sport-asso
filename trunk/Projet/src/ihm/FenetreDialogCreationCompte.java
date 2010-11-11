@@ -161,7 +161,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 		ville.setPreferredSize(new Dimension(90, 25));
 		panVille.add(villeLabel);
 		panVille.add(ville);
-		
+	
 		//Code Postal
 		JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
@@ -254,7 +254,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 				//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 				//Si test reste à 0, on ajoute le client dans la BDD
 				ArrayList<String> listeMails = new ArrayList<String>();
-				listeMails = SGBD.selectListeString("CLIENTS", "MAIL");
+				listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
 				int test = 0;
 				
 				for (int i = 0; i < listeMails.size(); i++) {
@@ -272,18 +272,19 @@ public class FenetreDialogCreationCompte extends JDialog{
 				// création de compte
 				/** TODO : Gestion de l'id ville...**/
 				else {
+					String s = new String();
+					s= SGBD.selectStringConditionString("VILLE", "CODECOMMUNE", "NOMVILLE", ville.getText());
+					System.out.println(s);
 					if (denomination.getText().isEmpty())
-
+						
 					{
 						
 						Particulier p = new Particulier(nom.getText(), prenom
 								.getText(), identifiant.getText(), adresse
-								.getText(), ville.getText(), codePostal
-								.getText(), telephone.getText(), estFidele);
+								.getText(), s , telephone.getText(), estFidele);
 					} else {
 						Association a = new Association(denomination.getText(),
-								identifiant.getText(), adresse.getText(), ville
-										.getText(), codePostal.getText(),
+								identifiant.getText(), adresse.getText(), s,
 								telephone.getText(),estFidele);
 					}
 					
@@ -294,8 +295,8 @@ public class FenetreDialogCreationCompte extends JDialog{
 					
 					FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
 					
-					//On rechercher le mot de passe dans la base avant de l'afficher
-					String motDePasse = SGBD.selectStringConditionString("CLIENTS", "MOTDEPASSE", "MAIL", identifiant.getText());
+					//On recherche le mot de passe dans la base avant de l'afficher
+					String motDePasse = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE", "IDCLIENT", identifiant.getText());
 					affichageMotDePasse = new JOptionPane();
 					affichageMotDePasse.showMessageDialog(null, "Retenez votre mot de passe : " + motDePasse, "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 					
