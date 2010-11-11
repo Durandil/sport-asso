@@ -13,8 +13,8 @@ public class ClassePrincipale {
 	
 		// TODO Auto-generated method stub
 		
-		//FenetreCompte fen=new FenetreCompte();
-		MenuUtilisateur men = new MenuUtilisateur();
+		FenetreCompte fen=new FenetreCompte();
+		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 	
 	}
