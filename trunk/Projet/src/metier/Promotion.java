@@ -77,4 +77,26 @@ public class Promotion {
 		
 		SGBD.executeUpdate(requete);
 	}
+	
+	public void modifierPromoBDD(){
+		String dateD = SGBD.transformation(this.dateDebut);
+		String dateF = SGBD.transformation(this.dateFin);
+		
+		String requete=" UPDATE PROMO" +
+		   " SET NOMPROMO = '" + this.nomPromotion +"'," +
+		   	"    DATEDEBUT = '" + dateD +"'," +
+		   	"    DATEFIN= '" + dateF + "', " +
+		   	"    POURCENTAGEPROMO= '" + this.pourcentagePromo + "'"
+			;
+		
+		SGBD.executeUpdate(requete);
+	}
+	
+	public void supprimerPromoBDD(){
+		
+		String requete= "DELETE FROM PROMO WHERE IDARTICLE='"+this.idPromotion+"'";
+		
+		SGBD.executeUpdate(requete);	
+	}
+	
 }

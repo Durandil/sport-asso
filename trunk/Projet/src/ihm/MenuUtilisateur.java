@@ -32,7 +32,7 @@ public class MenuUtilisateur extends JFrame{
 	private JMenu menuContact = new JMenu("Contact");
 		
 	
-	private JMenuItem itemFermer = new JMenuItem("Fermer");
+	private JMenuItem itemFermer = new JMenuItem("Fermer l'application");
 	private JMenuItem itemMesInformations = new JMenuItem("Mes informations");
 	private JMenuItem itemProgFidelite = new JMenuItem("Mon programme fidélité");
 	private JMenuItem itemContact = new JMenuItem("Nous Contacter");

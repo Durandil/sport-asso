@@ -35,9 +35,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	// Constructeur pour l'ajout d'un article
 	public FenetreFormulaireArticleGerant(JFrame parent, String title, boolean modal ){
 		super(parent, title, modal);
-		this.setSize(300, 650);
-		this.setLocationRelativeTo(null);
-		this.setResizable(true);
+		this.setSize(450, 650);
+		this.setLocation(50,50);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();
 	}
@@ -45,9 +45,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	// Constructeur pour la modification d'un article
 	public FenetreFormulaireArticleGerant(JFrame parent, String title, boolean modal,Article article ){
 		super(parent, title, modal);
-		this.setSize(300, 650);
-		this.setLocationRelativeTo(null);
-		this.setResizable(true);
+		this.setSize(450, 650);
+		this.setLocation(50,50);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent(article);
 	}
