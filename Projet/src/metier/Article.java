@@ -132,4 +132,23 @@ public class Article {
 		
 	}
 	
+	public void modifierArticleBDD(){
+		
+		// TODO pour type de sport et categorie de prix, il faudrait récupérer
+		// l'identifiant à partir du nom qui sera affiché dans le menu déroulant
+		// du formulaire de modification d'un article
+		// possibilité : faire une méthode pour cela
+		
+		String requete=" UPDATE ARTICLE" +
+					   " SET DESCRIPTION = '" + this.description +"'," +
+					   	"    PRIXINITIAL = '" + this.prixInitial +"'," +
+					   	"    STOCK = '" + this.stock + "', " +
+					   	"    POIDS = '" + this.poids + "', " +
+					   	"    IDTYPE = '" + this.typeSport + "',"+
+					   	"    IDCATEGORIE = '"+ this.catPrix+"'"
+						;
+		
+		SGBD.executeUpdate(requete);
+	}
+	
 }
