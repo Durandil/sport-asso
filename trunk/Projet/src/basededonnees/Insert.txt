@@ -56,7 +56,7 @@ Insert into VILLE (Codecommune, Codepostal, Nomville) values ('90010', '90000', 
 
 
 #Client
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLI00001', 'Laroch', 'Arthur', '4 rue de la Breiz', '35238', '0606060606', 'Activé', 'L3R6T4X8')
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLIO0002', 'Ueihtam', 'Imré', '2 rue du Nord', '38185', '0645454545', 'Activé', 'I7H8M9XX')
-Insert into CLIENT (idClient, Denominationclient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLI00003', 'Les canards givrés', '11 rue de la Mairie', '35047', '0448488484', 'Activé', 'Canard35')
-Insert into CLIENT (idClient, Denominationclient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('CLI00004', 'Club Espoir Belfortain de Football', '12 place de la mainsion du Peuple', '90010', '0384254104', 'Activé', 'CHECHE')
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', '35238', '0606060606', 'Activé', 'L3R6T4X8')
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('iueihtam@laposte.fr', 'Ueihtam', 'Imré', '2 rue du Nord', '38185', '0645454545', 'Activé', 'I7H8M9XX')
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('lcg@free.fr', 'Les canards givrés', '11 rue de la Mairie', '35047', '0448488484', 'Activé', 'Canard35')
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Codecommune, Telephone, Etatcompte, Motdepasse) values ('cebdf@belfort.fr', 'Club Espoir Belfortain de Football', '12 place de la mainsion du Peuple', '90010', '0384254104', 'Activé', 'CHECHE')

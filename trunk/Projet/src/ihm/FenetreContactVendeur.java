@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -95,7 +95,7 @@ public class FenetreContactVendeur extends JDialog{
 			public void actionPerformed(ActionEvent arg0){
 				// TODO Améliorer la détermination/numérotation des IDMESSAGE
 				// il faudrait ajouter message à la base de données
-				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,new Date());
+				//message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,new Date());
 				message.ajouterBDD(); 
 				// fermeture de la fenetre
 				setVisible(false);

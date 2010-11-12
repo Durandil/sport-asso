@@ -151,17 +151,17 @@ public class FenetreDialogCreationCompte extends JDialog{
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
 
-		//ville
-		JPanel panVille = new JPanel();
-		panVille.setBackground(Color.white);
-		panVille.setPreferredSize(new Dimension(220, 60));
-		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
-		villeLabel = new JLabel("Ville: ");
-		ville = new JTextField();
-		ville.setPreferredSize(new Dimension(90, 25));
-		panVille.add(villeLabel);
-		panVille.add(ville);
-	
+//		//ville
+//		JPanel panVille = new JPanel();
+//		panVille.setBackground(Color.white);
+//		panVille.setPreferredSize(new Dimension(220, 60));
+//		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
+//		villeLabel = new JLabel("Ville: ");
+//		ville = new JTextField();
+//		ville.setPreferredSize(new Dimension(90, 25));
+//		panVille.add(villeLabel);
+//		panVille.add(ville);
+//	
 		//Code Postal
 		JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
@@ -233,7 +233,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 		content.add(panNom);
 		content.add(panPrenom);
 		content.add(panAdresse);
-		content.add(panVille);
+//		content.add(panVille);
 		content.add(panCP);
 		content.add(panTelephone);
 		content.add(panFidelite);
@@ -273,7 +273,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 				/** TODO : Gestion de l'id ville...**/
 				else {
 					String s = new String();
-					s= SGBD.selectStringConditionString("VILLE", "CODECOMMUNE", "NOMVILLE", ville.getText());
+					s= SGBD.selectStringConditionString("VILLE", "CODECOMMUNE", "CODEPOSTAL", codePostal.getText());
 					System.out.println(s);
 					if (denomination.getText().isEmpty())
 						

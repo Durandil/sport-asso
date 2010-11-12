@@ -20,9 +20,9 @@ public class ModeleMessagerie extends AbstractTableModel {
 	public ModeleMessagerie(){
 		super();
 		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
-		ArrayList<String> listeExpediteur = SGBD.selectListeString("MESSAGE", "EXPEDITEUR");
-		ArrayList<String> listeSujet = SGBD.selectListeString("MESSAGE", "SUJET");
-		ArrayList<Integer> listeDate = SGBD.selectListeInt("MESSAGE", "DATE");
+		ArrayList<String> listeExpediteur = SGBD.selectListeString("MESSAGE", "IDCLIENT");
+		ArrayList<String> listeSujet = SGBD.selectListeString("MESSAGE", "SUJETMESSAGE");
+		ArrayList<String> listeDate = SGBD.selectListeString("MESSAGE", "DATEMESSAGE");
 		
 		
 		donnees = new Object[1000][3];
