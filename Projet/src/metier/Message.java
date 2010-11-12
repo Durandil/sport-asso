@@ -1,6 +1,6 @@
 package metier;
 
-import java.util.Date;
+import java.sql.Date;
 
 import basededonnees.SGBD;
 
@@ -22,6 +22,7 @@ public class Message {
 		this.contenu = contenu;
 		this.expediteur = expediteur;
 		this.dateEnvoi = dateEnvoi;
+		ajouterBDD();
 	}
 
 	public Message() {
@@ -64,6 +65,7 @@ public class Message {
 	// et le nombre de message dans la table MESSAGE ( à améliorer)
 	public void ajouterBDD() {
 		
+		String s = SGBD.transformation(this.dateEnvoi);
 		compteurIdentifiantMessage++;
 		
 		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
@@ -73,11 +75,11 @@ public class Message {
 				+ "',"
 				+ "'"
 				+ this.contenu
-				+ "',"
+				+ "','"
 				+ this.expediteur
 				+ "'," 
-				+ this.dateEnvoi
-				+"')";
+				+ s
+				+")";
 
 		SGBD.executeUpdate(requete);
 		

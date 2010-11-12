@@ -9,6 +9,7 @@ import metier.Categorie;
 import metier.Commande;
 import metier.Gerant;
 import metier.LigneCommande;
+import metier.Message;
 import metier.Particulier;
 import metier.Promotion;
 import basededonnees.BDD;
@@ -32,34 +33,38 @@ public class Principale {
 //		Article art2 = new Article("ART99998", "Ballon spigouleux", "TYP00002", 200,
 //				15.30, 100,"En stock", "CAT00002");
 		
-		//Création d'une promo test
-		String dateS = "05/11/2010";
-		String dateS2 = "07/11/2010";
-		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
-		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
-		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.7 );
+//		//Création d'une promo test
+//		String dateS = "05/11/2010";
+//		String dateS2 = "07/11/2010";
+//		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
+//		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
+//		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.7 );
 		
 //		//Instanciation d'une catégorie test
 //		Categorie cat = new Categorie("CAT99999","Test",100);
 		
-		
+	
 		
 //		  
 //		  
 //		  //Instanciation d'une association 
-		/**TODO : Gestion des id ville...**/
-//		Association ass = new Association("Idylliste", "idylliste@ensai.fr", "Ensai", "Rennes",
-//		  "35000", "02 23 45 78 96",true);
+
+//		Association ass = new Association("Idylliste", "idylliste@ensai.fr", "Ensai", "35047",
+//		  "0299451210", true);
 //		  
 //		  // Instanciation d'une  autre Association 
-//		Association ass2 = new Association("BDE", "bde@ensai.fr", "Ensai", "Rennes",
-//				  "35000", "02 56 84 22 10",true);
+//		Association ass2 = new Association("BDE", "bde@ensai.fr", "Ensai",
+//				  "35238", "0256842210",true);
 //		
 //		  //Instanciation d'un particulier 
 //		Particulier p = new Particulier("Louvel", "Alexis", "alexis.louvel@ensai.fr",
-//		  "Campus de KL", "Bruz", "35000", "02 56 98 66 33",true);
+//		  "Campus de KL", "35047", "0256986633",true);
 
-
+		//Création d'un message test
+//		String dateSM = "12/11/2010";
+//		Date dateM = SGBD.stringToDate(dateSM, "dd/MM/yyyy");
+//		Message m = new Message("Content", "Votre magasin est trop génial","idylliste@ensai.fr",dateM);
+//	
 
 //		  
 
