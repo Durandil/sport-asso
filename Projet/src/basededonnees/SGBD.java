@@ -508,23 +508,16 @@ public class SGBD {
 		connecter();
 		ArrayList<String> client = new ArrayList<String>();
 		
-		/*ArrayList<String> listeMails = new ArrayList<String>();
-		listeMails = SGBD.selectListeString("CLIENTS", "MAIL");
-		
-		for(int i=0;i<listeMails.size();i++){
-			if(mailIdentifiant.equals(listeMails.get(i))){
-				
-			}
-			
-		}*/
-		
 		Statement st = null ;
 		ResultSet res= null;
 		try{
 			st=c.createStatement();
-			res= st.executeQuery("SELECT MAIL,NOM,PRENOM,DENOMINATION,VILLE," +
-								"CODEPOSTAL,TELEPHONE,FIDELITE,ACTIFCOMPTE FROM CLIENTS " +
-								"WHERE mail='"+ mailIdentifiant+"';");
+			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
+								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE,FIDELITE," +
+								"ETATCOMPTE FROM CLIENT,VILLE " +
+								"WHERE CLIENT.CODECOMMUNE=VILLE.CODECOMMUNE and " +
+								"IDCLIENT='"+ mailIdentifiant+"';");
+			
 			ResultSetMetaData rsmd = res.getMetaData();
 			
 			for(int i=1;i==rsmd.getColumnCount();i++){
@@ -585,6 +578,49 @@ public class SGBD {
 		return article ;
 	}
 	
-	
+	// TODO cette méthode doit permettre de récupérer l'ensemble des indormations nécessaires 
+	// à la commande n° idCommande passée en paramètre
+	// il faudrait calculer le total par article en tenant compte % promo selon quantité
+	public static ArrayList<String[]> informationCommande(String idCommande){
+		SGBD.connecter();
+		ArrayList<String[]> commande = new ArrayList<String[]>();
+		
+		Statement st = null ;
+		ResultSet res= null;
+		try{
+			st=c.createStatement();
+			res= st.executeQuery("SELECT IDARTICLE, DESCRIPTION, PRIXINITIAL,QUANTITECOMMANDEE" +
+								 "FROM ARTICLE LISTING_ARTICLES_COMMANDES" +
+								 "WHERE ARTICLE.IDARTICLE=LISTING_ARTICLES_COMMANDES.IDARTICLE and" +
+								 "IDCOMMANDE='"+ idCommande +"';");
+			
+			ResultSetMetaData rsmd = res.getMetaData();
+			
+			while (res.next()) {
+
+				String[] listeString = new String[4];
+				String s = res.getObject(1).toString();
+				String s2 = res.getObject(2).toString();
+				String s3 = res.getObject(3).toString();
+				String s4 = res.getObject(4).toString();
+				listeString[0]=s;
+				listeString[1]=s2;
+				listeString[2]=s3;
+				listeString[3]=s4;
+				commande.add(listeString);
+			}
+			
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			SGBD.fermer();
+		}
+		
+		
+		return commande;
+	}
 	
 }

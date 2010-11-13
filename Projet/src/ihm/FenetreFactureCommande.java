@@ -3,6 +3,7 @@ package ihm;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.ScrollPane;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
@@ -11,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import basededonnees.SGBD;
 
 public class FenetreFactureCommande extends JDialog {
 	
@@ -36,14 +39,25 @@ public class FenetreFactureCommande extends JDialog {
 		// et le montant total ( faire utiliser bon achat eventuellement)
 		// en déduire le nombre de points à rajouter sur carte fidelité
 		
+		ArrayList<String> informationsClient = new ArrayList<String>();
+		informationsClient = SGBD.recupererAttributClient(idClient);
+		String nom = informationsClient.get(1);
+		String prenom = informationsClient.get(2);
+		String denomination = informationsClient.get(3);
+		String adresse = informationsClient.get(4);
+		String codePostal = informationsClient.get(5);
+		String ville = informationsClient.get(6);
+		
+		// TODO compléter informationsCommande dans SGBD
+		
 		// creation du panneau du haut avec caractéristiques client
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new GridLayout(1,2,5,5));
 		
 		JPanel panneauCaracteristiquesClient = new JPanel();
-		nomPrenomLabel = new JLabel("Nom Prenom");
-		adresseLabel = new JLabel("Adresse");
-		cpVilleLabel = new JLabel("CP Ville");
+		nomPrenomLabel = new JLabel(nom.toUpperCase()+" "+prenom+denomination.toUpperCase());
+		adresseLabel = new JLabel(adresse);
+		cpVilleLabel = new JLabel(codePostal+" "+ville);
 		
 		panneauCaracteristiquesClient.add(nomPrenomLabel);
 		panneauCaracteristiquesClient.add(adresseLabel);
