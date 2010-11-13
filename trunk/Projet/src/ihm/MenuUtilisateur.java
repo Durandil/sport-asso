@@ -62,8 +62,8 @@ public class MenuUtilisateur extends JFrame{
 		itemMesInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//ouvrir la fenetre permettant accès au compte
-				//FenetreDialogGestionCompteClient fenetreGestionCompte =new FenetreDialogGestionCompteClient(null,"Informations client",true,client);
-				//fenetreGestionCompte.setVisible(true);
+				FenetreDialogGestionCompteClient fenetreGestionCompte =new FenetreDialogGestionCompteClient(null,"Informations client",true,FenetreDialogIdentification.clientUserIdentifiant);
+				fenetreGestionCompte.setVisible(true);
 			}
 		});
 		

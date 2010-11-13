@@ -24,9 +24,9 @@ public class ModelePromotionClient extends AbstractTableModel {
 	// Trois listes sont créées pour récupérer les informations de la table
 	// PROMO
 	ArrayList<String> listePromos = SGBD.selectListeString("PROMO", "NOMPROMO");
-	ArrayList<String> listeDatesDebut = SGBD.selectListeString("PROMO",
-			"DATEDEBUT");
-	ArrayList<String> listeDatesFin = SGBD.selectListeString("PROMO", "DATEFIN");
+	ArrayList<String> listeDatesDebut = SGBD.selectListeDates("PROMO",
+			"DATEDEBUT","DD/MM/YYYY");
+	ArrayList<String> listeDatesFin = SGBD.selectListeDates("PROMO", "DATEFIN","DD/MM/YYYY");
 
 	public ModelePromotionClient() {
 		super();
