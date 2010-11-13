@@ -330,6 +330,41 @@ public class SGBD {
 		return listeString;
 	}
 	
+	//Méthode permettant d'obtenir l'ensemble des éléments 
+	//d'un champ de type date issu d'une table tous deux précisés en paramètres
+	//LE format que l'on désire obtenir est aussi précisé en paramètre
+	public static ArrayList<String> selectListeDates(String table, String str, String format) {
+		connecter();
+		ArrayList<String> listeString = new ArrayList<String>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT TO_CHAR("+str+",'" + format + "') FROM "+table );
+
+			// Récupérer les méta données
+			ResultSetMetaData rsmd = res.getMetaData();
+
+			while (res.next()) {
+
+				String s = res.getObject(1).toString();
+				listeString.add(s);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeString;
+	}
 	//Méthode permettant d'obtenir l'ensemble des éléments (de nature Float)
 	//d'une variable issu d'une table tous deux précisés en paramètres
 	public static ArrayList<Float> selectListeFloat(String table, String var) {
@@ -409,19 +444,36 @@ public class SGBD {
 		String s = null;
 		Statement st = null;
 		ResultSet res = null;
+
 		try {
 
 			st = c.createStatement();
-
+			
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
-
+			
+			
 			// Récupérer les méta données
-			while (res.next()) {
 
-				s = res.getObject(1).toString();
+				while (res.next()) {
+					
+			//Si le résultat est non nul tout se passe normalement
+					if(res.getObject(1) != null)
+					{
+						s = res.getObject(1).toString();
+						
+					}
+			//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
+			//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
+					else
+					{
+						s = " ";
+					}
 
-			}
+				}
+				
+			
+			
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative d’interrogation : "
 					+ e.getMessage());
@@ -430,7 +482,8 @@ public class SGBD {
 			fermer();
 
 		}
-
+		//Si la requête ne renvoie rien, on "remplit" s par "rien
+		
 		return s;
 	}
 	

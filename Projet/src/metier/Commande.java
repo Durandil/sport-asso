@@ -71,13 +71,12 @@ public class Commande {
 
 		String s = SGBD.transformation(this.date);
 		
-		String requete = "INSERT INTO COMMANDES (IDENTIFIANT, DATECOMMANDE, IDCLIENT) VALUES ( "
+		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE) VALUES ( "
 				+ "'"
 				+ this.idCommande
 				+ "',"
 				+ s
-				+ ",'"
-				+ this.idClient + "')";
+				+ ")";
 		
 		SGBD.executeUpdate(requete);
 	}
@@ -88,17 +87,13 @@ public class Commande {
 		String requete = null;
 		for (int i = 0; i < liste.size(); i++) {
 			String s = SGBD.transformation(this.date);
+			
 			requete = "'" + liste.get(i).getArticle() + "',"
 					+ liste.get(i).getQuantite();
-			SGBD.executeUpdate("INSERT INTO INFOCOMMANDES " 
-					+ " (IDCOMMANDE, DATECOMMANDE, IDCLIENT, IDARTICLE, QUANTITE)  VALUES" 
+			SGBD.executeUpdate("INSERT INTO LISTING_ARTICLES_COMMANDES " 
+					+ " (IDCOMMANDE, IDARTICLE, QUANTITECOMMANDEE)  VALUES" 
 					+ "('" 
 					+ this.idCommande
-					+ "',"
-					+ s
-					+ ","
-					+ "'"
-					+ this.idClient
 					+ "',"
 					+ requete + ")");
 		}
