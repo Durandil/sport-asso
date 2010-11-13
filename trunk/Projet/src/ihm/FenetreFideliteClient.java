@@ -60,7 +60,9 @@ public class FenetreFideliteClient extends JDialog {
 		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
 		
-		FenetreDialogCreationCompte.itemFidelite="Non";
+		
+		FenetreDialogCreationCompte.itemFidelite="Non";// client.isEstFidele()
+		
 		// Création du menu déroulant sur la demande de la carte de fidélité
 		fidelite=new JComboBox();
 		fidelite.addItem("Oui");
@@ -152,7 +154,7 @@ public class FenetreFideliteClient extends JDialog {
         JPanel panneauBoutons = new JPanel();
         JButton validationBouton = new JButton("Confirmer");
 		validationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO enregistrer éventuelle modification de programme fidelité 
 				//(par ex : passage de non à oui,on ne peut pas passer de oui à non a priori)
 				// et retourner menu utilisateur
@@ -162,7 +164,7 @@ public class FenetreFideliteClient extends JDialog {
         
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});

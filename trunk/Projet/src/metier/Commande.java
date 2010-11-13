@@ -1,6 +1,10 @@
 package metier;
 
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import basededonnees.SGBD;
@@ -105,9 +109,9 @@ public class Commande {
 	public String toString() {
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-		
-		
 		return "Commande [idClient=" + idClient + ", date=" + sqlDate + "]";
 	}
+	
 
+	
 }
