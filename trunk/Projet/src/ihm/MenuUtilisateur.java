@@ -19,7 +19,7 @@ import metier.Client;
 import metier.Particulier;
 
 
-public class MenuUtilisateur extends JFrame{
+public class MenuUtilisateur extends JFrame implements ActionListener{
 	
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class MenuUtilisateur extends JFrame{
 	private JMenu menuContact = new JMenu("Contact");
 		
 	
-	private JMenuItem itemFermer = new JMenuItem("Fermer l'application");
+	private JMenuItem itemFermer = new JMenuItem("Fermer compte utilisateur");
 	private JMenuItem itemMesInformations = new JMenuItem("Mes informations");
 	private JMenuItem itemProgFidelite = new JMenuItem("Mon programme fidélité");
 	private JMenuItem itemContact = new JMenuItem("Nous Contacter");
@@ -53,11 +53,7 @@ public class MenuUtilisateur extends JFrame{
 		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
 		//--------------------------
 			
-		itemFermer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}				
-		});
+		itemFermer.addActionListener(this);
 		
 		itemMesInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -127,6 +123,13 @@ public class MenuUtilisateur extends JFrame{
 		this.setJMenuBar(menuBar);
 		this.setVisible(true);
 		}
+
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == itemFermer){
+			this.dispose();
+		}
+	}
 	
 	
 }

@@ -300,9 +300,11 @@ public class FenetreDialogCreationCompte extends JDialog{
 					affichageMotDePasse = new JOptionPane();
 					affichageMotDePasse.showMessageDialog(null, "Retenez votre mot de passe : " + motDePasse, "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 					
+					// probleme de connexion voir fonction stringConditionString (trouve pas mot passe)
+					
 					setVisible(false);
 					// Essai d'ouverture du menu Utilisateur après une création de compte correcte
-					//MenuUtilisateur men = new MenuUtilisateur();
+					MenuUtilisateur men = new MenuUtilisateur();
 				}
 			}
 						
