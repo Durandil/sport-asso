@@ -66,7 +66,7 @@ public class Principale {
 //		Message m = new Message("Content", "Votre magasin est trop génial","idylliste@ensai.fr",dateM);
 //	
 
-//		  
+//		  /**N'importe quoi**/
 
 
 		
