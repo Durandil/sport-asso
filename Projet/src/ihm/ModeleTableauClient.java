@@ -1,7 +1,10 @@
 package ihm;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.table.AbstractTableModel;
 
-public class ModeleTableauClient extends AbstractTableModel {
+public class ModeleTableauClient extends AbstractTableModel implements ActionListener {
 	
 	/**
 	 * 
@@ -41,6 +44,13 @@ public class ModeleTableauClient extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return entetes[columnIndex];
     }
+
+
+	public void actionPerformed(ActionEvent e) {
+		
+		// TODO Auto-generated method stub
+		
+	}
     
 
 }
