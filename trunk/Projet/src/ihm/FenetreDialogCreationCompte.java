@@ -273,9 +273,10 @@ public class FenetreDialogCreationCompte extends JDialog{
 				/** TODO : Gestion de l'id ville...**/
 				else {
 					String s = new String();
+					System.out.println("Test");
 					s= SGBD.selectStringConditionString("VILLE", "CODECOMMUNE", "CODEPOSTAL", codePostal.getText());
 					System.out.println(s);
-					if (denomination.getText().isEmpty())
+					if (denomination.getText().equals(null))
 						
 					{
 						
