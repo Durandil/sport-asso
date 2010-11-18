@@ -1,3 +1,4 @@
+
 package basededonnees;
 
 public class BDD {
@@ -62,6 +63,7 @@ public class BDD {
 				"POURCENTAGEPROMO NUMBER(3,1),"+
 				"PROMOFIDELITE BOOLEAN,"+
 				"CONSTRAINT PK_PROMO PRIMARY KEY (IDPROMO))");
+		
 		/**Si on lance la méthode de chez soi couper ici**/
 		SGBD.executeUpdate("CREATE TABLE VILLE" +
 				"(CODECOMMUNE CHAR(5),"+

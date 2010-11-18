@@ -81,7 +81,17 @@ public class FenetreCompte extends JFrame {
 		JPanel panneauHeure = new JPanel();
 		panneauHeure.setBackground(Color.white);
 		
-		heureLabel=new JLabel("Heure : " + heure.getHours()+"h"+ heure.getMinutes());
+		String heures=heure.getHours()+"";
+		if(heure.getHours()<10){
+			heures = "0"+heures;
+		}
+		
+		String minutes=heure.getMinutes()+"";
+		if(heure.getMinutes()<10){
+			minutes = "0"+minutes;
+		}
+		
+		heureLabel=new JLabel("Heure : " + heures +"h"+ minutes);
 		heureLabel.setFont(new Font("Times",Font.BOLD, 20));
 		panneauHeure.add(heureLabel);
 		
