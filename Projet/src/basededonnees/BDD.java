@@ -60,6 +60,7 @@ public class BDD {
 				"DATEDEBUT DATE,"+
 				"DATEFIN DATE,"+
 				"POURCENTAGEPROMO NUMBER(3,1),"+
+				"PROMOFIDELITE BOOLEAN,"+
 				"CONSTRAINT PK_PROMO PRIMARY KEY (IDPROMO))");
 		/**Si on lance la méthode de chez soi couper ici**/
 		SGBD.executeUpdate("CREATE TABLE VILLE" +

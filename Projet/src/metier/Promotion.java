@@ -21,6 +21,8 @@ public class Promotion {
 		ajouterBDD();
 	}
 	
+	
+
 	private String idPromotion;
 	private String nomPromotion;
 	private Date dateDebut;
@@ -58,6 +60,15 @@ public class Promotion {
 	public void setPourcentagePromo(float pourcentagePromo) {
 		this.pourcentagePromo = pourcentagePromo;
 	}
+	public boolean getPromoFidelite() {
+		return promoFidelite;
+	}
+	public void setPromoFidelite(boolean promoFidelite) {
+		this.promoFidelite = promoFidelite;
+	}
+	public void setPourcentagePromo(double pourcentagePromo) {
+		this.pourcentagePromo = pourcentagePromo;
+	}
 	
 	public void ajouterBDD() {
 		
@@ -66,7 +77,7 @@ public class Promotion {
 		
 		
 		String requete = "INSERT INTO PROMO (IDPROMO, NOMPROMO, DATEDEBUT," +
-		" DATEFIN, POURCENTAGEPROMO) VALUES ( "
+		" DATEFIN, POURCENTAGEPROMO, PROMOFIDELITE) VALUES ( "
 		+ "'"
 		+ this.idPromotion
 		+ "',"
@@ -78,6 +89,9 @@ public class Promotion {
 		+ s2
 		+ "," 
 		+ this.pourcentagePromo
+		+ "',"
+		+ "'"
+		+ this.promoFidelite
 		+")";
 		
 		SGBD.executeUpdate(requete);
