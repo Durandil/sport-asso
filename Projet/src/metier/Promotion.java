@@ -6,14 +6,18 @@ import basededonnees.SGBD;
 
 public class Promotion {
 
+	//promoFidelite pour spécifier qui est concerné par la promotion
+	//true si pour les détenteurs de carte de fidelité, false si pour tout le monde 
+	
 	public Promotion(String idPromotion, String nomPromotion, Date dateDebut,
-			Date dateFin, double pourcentagePromo) {
+			Date dateFin, double pourcentagePromo, boolean promoFidelite) {
 		super();
 		this.idPromotion = idPromotion;
 		this.nomPromotion = nomPromotion;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.pourcentagePromo = pourcentagePromo;
+		this.promoFidelite = promoFidelite;
 		ajouterBDD();
 	}
 	
@@ -22,6 +26,7 @@ public class Promotion {
 	private Date dateDebut;
 	private Date dateFin;
 	private double pourcentagePromo;
+	private boolean promoFidelite;
 	
 	public String getIdPromotion() {
 		return idPromotion;
