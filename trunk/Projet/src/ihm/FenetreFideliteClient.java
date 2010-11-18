@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import basededonnees.SGBD;
 
 import metier.Client;
 
@@ -60,8 +63,17 @@ public class FenetreFideliteClient extends JDialog {
 		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
 		
+		// TODO récupérer dans base de donnees fidelite SANS ERREUR !!!!
+//		ArrayList<String> fideliteClient= new ArrayList<String>();
+//		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+//		String estFidele=fideliteClient.get(0);
 		
-		FenetreDialogCreationCompte.itemFidelite="Non";// client.isEstFidele()
+		//if(estFidele.equals("false")){
+			FenetreDialogCreationCompte.itemFidelite="Non";
+//		}
+//		else{
+//			FenetreDialogCreationCompte.itemFidelite="Oui";
+//		}
 		
 		// Création du menu déroulant sur la demande de la carte de fidélité
 		fidelite=new JComboBox();

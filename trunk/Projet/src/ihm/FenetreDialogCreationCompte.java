@@ -207,6 +207,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 		fidelite.addItem("Oui");
 		fidelite.addItem("Non");
 		fidelite.setVisible(true);
+		fidelite.setSelectedItem("Non");
 		fidelite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -273,11 +274,11 @@ public class FenetreDialogCreationCompte extends JDialog{
 				/** TODO : Gestion de l'id ville...**/
 				else {
 					String s = new String();
-					System.out.println("Test");
+					//System.out.println("Test");
 					s= SGBD.selectStringConditionString("VILLE", "CODECOMMUNE", "CODEPOSTAL", codePostal.getText());
+					System.out.println(codePostal.getText());
 					System.out.println(s);
-					if (denomination.getText().equals(null))
-						
+					if (itemSelectionne == "Compte Particulier")
 					{
 						
 						Particulier p = new Particulier(nom.getText(), prenom
@@ -305,6 +306,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 					
 					setVisible(false);
 					// Essai d'ouverture du menu Utilisateur après une création de compte correcte
+					//System.out.println(FenetreDialogIdentification.clientUserIdentifiant);
 					MenuUtilisateur men = new MenuUtilisateur();
 				}
 			}

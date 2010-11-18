@@ -449,9 +449,10 @@ public class SGBD {
 
 			st = c.createStatement();
 			
+			
+			
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
-			
 			
 			// Récupérer les méta données
 
@@ -665,8 +666,7 @@ public class SGBD {
 			
 		}
 		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			
 		}
 		finally{
 			SGBD.fermer();
@@ -674,6 +674,47 @@ public class SGBD {
 		
 		
 		return commande;
+	}
+	
+	// cette méthode a pour but de recuprer le boolean sur la fidelité du client 
+	// et son nombre éventuel de points
+	public static ArrayList<String> recupererInformationFideliteClient(String identifiant){
+		SGBD.connecter();
+		Statement st = null ;
+		ResultSet res= null;
+		
+		ArrayList <String> resultat = new ArrayList<String>();
+		String estFidele="";
+		
+		try{
+			st=c.createStatement();
+			
+			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
+			// QUI ONT UNE CARTE DE FIDELITE
+			res=st.executeQuery("SELECT NBPOINTS FROM CLIENT,CARTE_FIDELITE" +
+								"WHERE CLIENT.IDCLIENT=CARTE_FIDELITE.IDCLIENT");
+			
+			boolean champVide = res.getBoolean(1);
+			
+			// si le client n'a pas de compte fidelité (champVide=true) 
+			//alors on ajoute juste le booleen au vecteur sinon on met le booleen et le nb de points 
+			estFidele=champVide+"";
+			resultat.add(estFidele);
+			
+			if(champVide==false){
+				resultat.add(res.getObject(1).toString());
+			}
+			
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			SGBD.fermer();
+		}
+		
+		return resultat;
 	}
 	
 }

@@ -67,9 +67,10 @@ public class Message {
 		
 		String s = SGBD.transformation(this.dateEnvoi);
 		compteurIdentifiantMessage++;
+		String idMessage="M"+compteurIdentifiantMessage;
 		
 		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
-				"IDCLIENT,DATEMESSAGE) VALUES ( 'M000000"+ compteurIdentifiantMessage +"',"
+				"IDCLIENT,DATEMESSAGE) VALUES ( '"+ idMessage +"',"
 				+ "'"
 				+ this.sujet
 				+ "',"
