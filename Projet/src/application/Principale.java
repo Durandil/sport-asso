@@ -23,7 +23,7 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 
 		//Initialiser la base de données
-		BDD.init();
+		//BDD.init();
 		
 //
 		
@@ -66,7 +66,8 @@ public class Principale {
 //		Message m = new Message("Content", "Votre magasin est trop génial","idylliste@ensai.fr",dateM);
 //	
 
-
+		ArrayList<String> actual = SGBD.selectListeString("CLIENT", "TELEPHONE");
+		System.out.println(actual.get(0));
 
 
 		
