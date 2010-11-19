@@ -95,8 +95,11 @@ public class FenetreContactVendeur extends JDialog{
 			public void actionPerformed(ActionEvent arg0){
 				// TODO Améliorer la détermination/numérotation des IDMESSAGE
 				// il faudrait ajouter message à la base de données
-				//message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,new Date());
-				message.ajouterBDD(); 
+				java.util.Date date = new java.util.Date();
+				
+				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour);
+				//message.ajouterBDD();
 				// fermeture de la fenetre
 				setVisible(false);
 			}

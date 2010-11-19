@@ -20,6 +20,7 @@ public class ClassePrincipale {
 		//MenuUtilisateur men = new MenuUtilisateur();
 		MenuGerant menu= new MenuGerant();
 		
+		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 //		String s = SGBD.transformation(sqlDate);

@@ -27,8 +27,10 @@ public class SGBD {
 	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	//Penser à modifier les id/mdp
+
 	private static final String ID = "id3198";
 	private static final String MDP = "id3198";
+
 
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -67,20 +69,20 @@ public class SGBD {
 
 	// Méthode issue du TP2
 	public static void executeUpdate(String requete) {
-		
 		connecter();
 		Statement st;
-	
 		try {
 			st = c.createStatement();
 			
 			st.executeUpdate(requete);
 			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
+		} finally {		
 			fermer();
+
 		}
 	}
 

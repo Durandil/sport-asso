@@ -12,7 +12,7 @@ public class BDD {
 		Passer en commentaire la 2ème moitié de la méthode, exécuter la 1ère
 		Puis passer la 1ère en commentaire et exécuter la seconde**/
 		
-//		On commence par supprimer les tables avant de les (re)créer
+		//On commence par supprimer les tables avant de les (re)créer
 		SGBD.executeUpdate("DROP TABLE MESSAGE");
 		SGBD.executeUpdate("DROP TABLE LISTING_PROMOS_ARTICLES");
 		SGBD.executeUpdate("DROP TABLE LISTING_ARTICLES_COMMANDES");
@@ -26,12 +26,11 @@ public class BDD {
 		SGBD.executeUpdate("DROP TABLE REDUCTION");
 		SGBD.executeUpdate("DROP TABLE CATEGORIE");
 		SGBD.executeUpdate("DROP TABLE QUANTITE");		
-		
-		
+				
 		SGBD.executeUpdate("CREATE TABLE QUANTITE" +
 				"(IDQUANTITE CHAR(8),"+
-				"QUANTITE NUMBER(4),"+
-				"CONSTRAINT PK_QUANTITE PRIMARY KEY (IDQUANTITE))");
+			"QUANTITE NUMBER(4),"+
+			"CONSTRAINT PK_QUANTITE PRIMARY KEY (IDQUANTITE))");
 
 
 		SGBD.executeUpdate("CREATE TABLE CATEGORIE" +
