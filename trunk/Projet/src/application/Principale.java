@@ -23,7 +23,7 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 
 		//Initialiser la base de données
-		//BDD.init();
+		BDD.init();
 		
 //
 		
