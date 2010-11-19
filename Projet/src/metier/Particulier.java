@@ -104,13 +104,15 @@ public class Particulier extends Client {
 				+"'"+actif+"',"
 				+"'"+this.motDePasse+"')";
 		SGBD.executeUpdate(requete);
-	if (estFidele) {
+		
+		
+	if (this.estFidele) {
 	
 		CompteurIdcarte++;
-		String idCarte=""+CompteurIdcarte;
+		String idCarte="i"+CompteurIdcarte;
 		String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
 		"VALUES (" +
-		"'"+this.+"',"
+		"'"+idCarte+"',"
 		+"'0',"
 		+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
 		SGBD.executeUpdate(requete2);
