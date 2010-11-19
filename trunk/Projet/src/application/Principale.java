@@ -34,11 +34,12 @@ public class Principale {
 //				15.30, 100,"En stock", "CAT00002");
 		
 		/**Création d'une promo test**/
-//		String dateS = "05/11/2010";
-//		String dateS2 = "07/11/2010";
-//		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
-//		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
-//		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.7 );
+		String dateS = "05/11/2010";
+		String dateS2 = "07/11/2010";
+		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
+		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
+		boolean b=true;
+		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.7,b);
 		
 		/**Instanciation d'une catégorie test**/
 //		Categorie cat = new Categorie("CAT99999","Test",100);
@@ -66,8 +67,7 @@ public class Principale {
 //		Message m = new Message("Content", "Votre magasin est trop génial","idylliste@ensai.fr",dateM);
 //	
 
-		ArrayList<String> actual = SGBD.selectListeString("CLIENT", "TELEPHONE");
-		System.out.println(actual.get(0));
+
 
 
 		

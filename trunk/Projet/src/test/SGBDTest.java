@@ -2,6 +2,7 @@ package test;
 
 import java.util.ArrayList;
 
+import application.Principale;
 import basededonnees.SGBD;
 
 import junit.framework.TestCase;
@@ -15,4 +16,13 @@ public class SGBDTest extends TestCase {
 		
 		assertEquals(result,SGBD.selectListeString("client","TELEPHONE"));
 	}
+	public void testSelectListeDates(){
+		ArrayList<String> result = new ArrayList<String>();
+		String dateS = "05/11/2010";
+		String dateS2 = "07/11/2010";
+		result.add(dateS);
+		result.add(dateS2);
+		assertEquals(result,SGBD.selectListeDates(table, str, format) 
+	}
 }
+
