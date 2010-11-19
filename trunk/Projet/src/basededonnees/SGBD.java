@@ -636,9 +636,9 @@ public class SGBD {
 	// TODO cette méthode doit permettre de récupérer l'ensemble des indormations nécessaires 
 	// à la commande n° idCommande passée en paramètre
 	// il faudrait calculer le total par article en tenant compte % promo selon quantité
-	public static ArrayList<String[]> informationCommande(String idCommande){
+	public static ArrayList<Object[]> informationCommande(String idCommande){
 		SGBD.connecter();
-		ArrayList<String[]> commande = new ArrayList<String[]>();
+		ArrayList<Object[]> commande = new ArrayList<Object[]>();
 		
 		Statement st = null ;
 		ResultSet res= null;
@@ -693,7 +693,7 @@ public class SGBD {
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
 			res=st.executeQuery("SELECT NBPOINTS FROM CLIENT,CARTE_FIDELITE" +
-								"WHERE CLIENT.IDCLIENT=CARTE_FIDELITE.IDCLIENT");
+								"WHERE CLIENT.IDCLIENT=CARTE_FIDELITE.IDCLIENT AND CLIENT.IDCLIENT="+identifiant);
 			
 			boolean champVide = res.getBoolean(1);
 			
