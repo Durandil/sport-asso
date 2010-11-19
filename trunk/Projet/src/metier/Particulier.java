@@ -30,6 +30,7 @@ public class Particulier extends Client {
 		this.estFidele = estFidele;
 		this.estActif = true;
 		this.motDePasse = genererMdp();
+		this.idVille = idVille;
 		ajouterBDD();
 		System.out.println("Votre mot de passe est : " + this.motDePasse);
 	}
@@ -111,18 +112,18 @@ public class Particulier extends Client {
 		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 		
-		
-	if (this.estFidele) {
-	
-		CompteurIdcarte++;
-		String idCarte="fid"+CompteurIdcarte;
-		String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
-		"VALUES (" +
-		"'"+idCarte+"',"
-		+"'0',"
-		+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
-		SGBD.executeUpdate(requete2);
-	}
+		System.out.println("fin requête");
+//	if (this.estFidele) {
+//	System.out.println("est fidèle");
+//		CompteurIdcarte++;
+//		String idCarte="fid"+CompteurIdcarte;
+//		String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
+//		"VALUES (" +
+//		"'"+idCarte+"',"
+//		+"'0',"
+//		+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
+//		SGBD.executeUpdate(requete2);
+//	}
 	
 	}
 

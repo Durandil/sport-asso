@@ -96,6 +96,7 @@ public class SGBD {
 		connecter();
 		Statement st = null;
 		ResultSet res = null;
+		System.out.println("coucou");
 		try {
 			st = c.createStatement();
 			res = st.executeQuery(requete);
