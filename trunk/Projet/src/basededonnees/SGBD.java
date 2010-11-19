@@ -28,8 +28,8 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3198";
-	private static final String MDP = "id3198";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 
 
 	// Méthode issue du TP2
