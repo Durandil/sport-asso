@@ -109,7 +109,7 @@ public class Particulier extends Client {
 	if (this.estFidele) {
 	
 		CompteurIdcarte++;
-		String idCarte="i"+CompteurIdcarte;
+		String idCarte="fid"+CompteurIdcarte;
 		String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
 		"VALUES (" +
 		"'"+idCarte+"',"
