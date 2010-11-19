@@ -1,5 +1,6 @@
 package metier;
 
+import ihm.FenetreDialogIdentification;
 import basededonnees.SGBD;
 
 public class Association extends Client {
@@ -94,6 +95,19 @@ public class Association extends Client {
 		+"'"+this.motDePasse+"')";
 		
 		SGBD.executeUpdate(requete);
+		
+		
+		if (this.estFidele) {
+			
+			CompteurIdcarte++;
+			String idCarte="i"+CompteurIdcarte;
+			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
+			"VALUES (" +
+			"'"+idCarte+"',"
+			+"'0',"
+			+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
+			SGBD.executeUpdate(requete2);
+		}
 	}
 
 }
