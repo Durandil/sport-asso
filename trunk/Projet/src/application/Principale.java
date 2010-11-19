@@ -21,7 +21,7 @@ public class Principale {
  * @throws Exception **/
 
 	public static void main(String[] args) throws Exception {
-
+/** TODO : Instancier un client via l'ihm**/
 		//Initialiser la base de données
 		//BDD.init();
 		
@@ -86,8 +86,8 @@ public class Principale {
 //		String dateS = "05/12/2010";
 //		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
 //		Commande c1 = new Commande("COM99999", "alexis.louvel@ensai.fr", al, date);
-
-		  
+//
+//		  
 		 
 		
 //		LigneCommande lc3 = new LigneCommande("ART00004", 12);
