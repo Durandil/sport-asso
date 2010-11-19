@@ -1,6 +1,7 @@
 package application;
 
 import ihm.FenetreCompte;
+import ihm.MenuGerant;
 
 import java.sql.Date;
 import java.util.ArrayList;

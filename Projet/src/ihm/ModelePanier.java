@@ -26,11 +26,11 @@ public class ModelePanier extends AbstractTableModel {
 		 */
 		
 		donnees= new Object[][]{
-				{"ART1","Maillot de foot",3},
-				{"ART2","Maillot de rugby",2},
-				{"ART3","Short de foot",1},
-				{"ART4","Crosse de hockey sur glace",2},
-				{"ART5","Ballon de basket-ball",1}
+//				{"ART1","Maillot de foot",3},
+//				{"ART2","Maillot de rugby",2},
+//				{"ART3","Short de foot",1},
+//				{"ART4","Crosse de hockey sur glace",2},
+//				{"ART5","Ballon de basket-ball",1}
 		};
 	}
 	

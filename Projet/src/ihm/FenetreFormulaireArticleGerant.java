@@ -5,11 +5,13 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -56,7 +58,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	private void initComponent(){
 		JPanel panneauCentral = new JPanel();
 		
-		JPanel panNumArticle = new JPanel();
+		//JPanel panNumArticle = new JPanel();
 		JPanel panDescription = new JPanel();
 		JPanel panPoids = new JPanel();
 		JPanel panCategoriePrix = new JPanel();
@@ -65,7 +67,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		JPanel panPrixInitial = new JPanel();
 		
 		
-		panNumArticle.setPreferredSize(dimensionStandard);
+		//panNumArticle.setPreferredSize(dimensionStandard);
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panCategoriePrix.setPreferredSize(dimensionStandard);
@@ -74,7 +76,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panPrixInitial.setPreferredSize(dimensionStandard);
 		
 		
-		panNumArticle.setBorder(BorderFactory.createEmptyBorder());
+		//panNumArticle.setBorder(BorderFactory.createEmptyBorder());
 		panDescription.setBorder(BorderFactory.createEmptyBorder());
 		panPoids.setBorder(BorderFactory.createEmptyBorder());
 		panCategoriePrix.setBorder(BorderFactory.createEmptyBorder());
@@ -82,7 +84,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panStock.setBorder(BorderFactory.createEmptyBorder());
 		panPrixInitial.setBorder(BorderFactory.createEmptyBorder());
 		
-		numArticleLabel = new JLabel("Numéro d'article : ");
+		//numArticleLabel = new JLabel("Numéro d'article : ");
 		descriptionLabel = new JLabel("Description : ");
 		poidsLabel = new JLabel("Poids : ");
 		catPrixLabel = new JLabel("Catégorie de Prix : ");
@@ -90,13 +92,13 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		prixLabel = new JLabel("Prix Initial : ");
 		stockLabel = new JLabel("Stock : ");
 		
-		numArticle = new JTextField();
+		//numArticle = new JFormattedTextField();
 		description = new JTextField();
-		poids = new JTextField();
-		prix = new JTextField();
-		stock = new JTextField();
+		poids = new JFormattedTextField(NumberFormat.getIntegerInstance());
+		prix = new JFormattedTextField(NumberFormat.getNumberInstance());
+		stock = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		
-		numArticle.setPreferredSize(new Dimension(90, 25));
+		//numArticle.setPreferredSize(new Dimension(90, 25));
 		description.setPreferredSize(new Dimension(90, 25));
 		poids.setPreferredSize(new Dimension(90, 25));
 		prix.setPreferredSize(new Dimension(90, 25));
@@ -124,7 +126,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			}
 		});
 		
-		panNumArticle.add(numArticleLabel);
+		//panNumArticle.add(numArticleLabel);
 		panDescription.add(descriptionLabel);
 		panPoids.add(poidsLabel);
 		panCategoriePrix.add(catPrixLabel);
@@ -132,7 +134,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panStock.add(stockLabel);
 		panPrixInitial.add(prixLabel);
 		
-		panNumArticle.add(numArticle);
+		//panNumArticle.add(numArticle);
 		panDescription.add(description);
 		panPoids.add(poids);
 		panStock.add(stock);
@@ -140,7 +142,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panCategoriePrix.add(catPrixBox);
 		panCategorieSport.add(catSportBox);
 		
-		panneauCentral.add(panNumArticle);
+		//panneauCentral.add(panNumArticle);
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panCategoriePrix);
