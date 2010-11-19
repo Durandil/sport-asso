@@ -307,13 +307,14 @@ public class SGBD {
 			st = c.createStatement();
 			
 			res = st.executeQuery("SELECT "+str+" FROM "+table );
-
+			
 			// Récupérer les méta données
 			ResultSetMetaData rsmd = res.getMetaData();
 
 			while (res.next()) {
-
+				
 				String s = res.getObject(1).toString();
+				
 				listeString.add(s);
 
 			}

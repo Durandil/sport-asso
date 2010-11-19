@@ -24,21 +24,25 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 	public ModeleTableauCatalogue(boolean pourReapprovisionnement){
 		super();
 		if( pourReapprovisionnement == false){
-			//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
-			ArrayList<String> listeNumeros = SGBD.selectListeString("ARTICLE", "IDARTICLE");
+			//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
+			ArrayList<String> listeIdentifiants = SGBD.selectListeString("ARTICLE","IDARTICLE");
 			ArrayList<String> listeDescriptions = SGBD.selectListeString("ARTICLE", "DESCRIPTION");
 			ArrayList<Integer> listeStocks = SGBD.selectListeInt("ARTICLE", "STOCK");
-			ArrayList<String> listeEtats = SGBD.selectListeString("ARTICLE", "PRIXINITIAL");
+			ArrayList<Integer> listeEtats = SGBD.selectListeInt("ARTICLE", "PRIXINITIAL");
 		
 		
 			donnees = new Object[1000][4];
-		
+			System.out.println("test 1 " + listeIdentifiants.size());
+			System.out.println("test 2 " + listeDescriptions.size());
+			System.out.println("test 3 " + listeStocks.size());
+			System.out.println("test 4 " + listeEtats.size());
 			//On ajoute les informations dans l'objet donnees
-			for(int i=0;i<listeDescriptions.size();i++){
-				donnees[i][0] = listeNumeros.get(i);
+			for(int i=0;i<listeIdentifiants.size();i++){
+				donnees[i][0] = listeIdentifiants.get(i);
 				donnees[i][1] = listeDescriptions.get(i);
 				donnees[i][2] = listeStocks.get(i);
 				donnees[i][3] = listeEtats.get(i);
+			
 			}
 		}
 		else{
