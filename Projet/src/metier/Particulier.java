@@ -7,6 +7,8 @@ public class Particulier extends Client {
 
 	private String nom;
 	private String prenom;
+	private String idVille;
+	private String nomVille;
 
 	
 	// Constructeur d'un client Particulier
@@ -15,12 +17,13 @@ public class Particulier extends Client {
 	// Le constructeur permet d'ajouter le particulier dans la base CLIENTS
 	// Et génère un mot de passe lors de l'instanciation
 	public Particulier(String nom, String prenom, String mail, String adresse,
-			String codeCommune, String telephone, boolean estFidele) {
+			String codePostal, String nomVille, String idVille, String telephone, boolean estFidele) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
 		this.adresse = adresse;
-		this.codeCommune = codeCommune;
+		this.setNomVille(nomVille);
+		this.codePostal = codePostal;
 		this.telephone = telephone;
 		this.particulierAssociation = "Particulier";
 		this.nbPointsFidelite = 0;
@@ -93,16 +96,19 @@ public class Particulier extends Client {
 		
 		
 		
-		String requete = "INSERT INTO CLIENT (IDCLIENT, NOMCLIENT, PRENOMCLIENT, ADRESSECLIENT, CODECOMMUNE" +
-				", TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
+		String requete = "INSERT INTO CLIENT (IDCLIENT, NOMCLIENT, PRENOMCLIENT, ADRESSECLIENT, IDVILLE" +
+				",NOMVILLE, CODEPOSTAL, TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
 				"'"+this.mail+"',"
 				+"'"+this.nom+"',"
 				+"'"+this.prenom+"',"
 				+"'"+this.adresse+"',"
-				+"'"+this.codeCommune+"',"
+				+"'"+this.idVille+"',"
+				+"'"+this.nomVille+"',"
+				+"'"+this.codePostal+"',"
 				+"'"+this.telephone+"',"
 				+"'"+actif+"',"
 				+"'"+this.motDePasse+"')";
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 		
 		
@@ -118,5 +124,21 @@ public class Particulier extends Client {
 		SGBD.executeUpdate(requete2);
 	}
 	
+	}
+
+	public String getIdVille() {
+		return idVille;
+	}
+
+	public void setIdVille(String idVille) {
+		this.idVille = idVille;
+	}
+
+	public void setNomVille(String nomVille) {
+		this.nomVille = nomVille;
+	}
+
+	public String getNomVille() {
+		return nomVille;
 	}
 }

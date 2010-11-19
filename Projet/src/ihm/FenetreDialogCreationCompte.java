@@ -161,7 +161,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 //		ville.setPreferredSize(new Dimension(90, 25));
 //		panVille.add(villeLabel);
 //		panVille.add(ville);
-//	
+	
 		//Code Postal
 		JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
@@ -273,21 +273,20 @@ public class FenetreDialogCreationCompte extends JDialog{
 				// création de compte
 				/** TODO : Gestion de l'id ville...**/
 				else {
-					String s = new String();
-					//System.out.println("Test");
-					s= SGBD.selectStringConditionString("VILLE", "CODECOMMUNE", "CODEPOSTAL", codePostal.getText());
-					System.out.println(codePostal.getText());
-					System.out.println(s);
+					String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal.getText());
+					String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
+					System.out.println(ville + "  " + idVille);
+					
 					if (itemSelectionne == "Compte Particulier")
 					{
 						
-						Particulier p = new Particulier(nom.getText(), prenom
-								.getText(), identifiant.getText(), adresse
-								.getText(), s , telephone.getText(), estFidele);
+						Particulier p = new Particulier(nom.getText(), prenom.getText(), identifiant.getText()
+								, adresse.getText(), codePostal.getText() , "Rennes", "35000", telephone.getText(), 
+								estFidele);
 					} else {
-						Association a = new Association(denomination.getText(),
-								identifiant.getText(), adresse.getText(), s,
-								telephone.getText(),estFidele);
+//						Association a = new Association(denomination.getText(),
+//								identifiant.getText(), adresse.getText(), s,
+//								telephone.getText(),estFidele);
 					}
 					
 					//System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
