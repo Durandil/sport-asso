@@ -16,7 +16,8 @@ public class Message {
 	// ce static doit aider à faire un compteur des idMessage
 	// A chaque fois qu'un message sera ajouté à la base, on l'incrementera de 1
 	// voir méthode ajouterBDD ci-dessous
-	private static int compteurIdentifiantMessage=1;
+	private static int compteurIdentifiantMessage=0;
+	//private static int compteurIdentifiantMessage=SGBD.recupererIdentifiantDernierEnregistrementTable("MESSAGE", "IDMESSAGE");
 	
 	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi) {
 		super();
@@ -80,7 +81,7 @@ public class Message {
 		String s = SGBD.transformation(this.dateEnvoi);
 		compteurIdentifiantMessage = compteurIdentifiantMessage+1;
 		System.out.println(compteurIdentifiantMessage);
-		String idMessage="M"+compteurIdentifiantMessage;
+		String idMessage=""+compteurIdentifiantMessage;
 		
 		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
 				"IDCLIENT,DATEMESSAGE) VALUES ( '"+ idMessage +"',"

@@ -24,17 +24,12 @@ import metier.Client;
 
 public class FenetreDialogGestionCompteClient extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
 	private TextArea adresse;
 	private Client client;
 
-
-	
 	/**
 	 * Constructeur
 	 * @param parent
@@ -50,7 +45,6 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		this.initComponent(idclient);
 	}
 	
-
 	/**
 	 * Initialise le contenu de la boîte
 	 */

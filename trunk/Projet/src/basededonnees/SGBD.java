@@ -29,11 +29,8 @@ public class SGBD {
 	//Penser à modifier les id/mdp
 
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
-
-
-
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 
 
 
@@ -702,7 +699,7 @@ public class SGBD {
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
 			res=st.executeQuery("SELECT NBPOINTS FROM CLIENT,CARTE_FIDELITE" +
-								"WHERE CLIENT.IDCLIENT=CARTE_FIDELITE.IDCLIENT AND CLIENT.IDCLIENT="+identifiant);
+								"WHERE CLIENT.IDCLIENT=CARTE_FIDELITE.IDCLIENT AND CLIENT.IDCLIENT='"+identifiant+"' ;");
 			
 			boolean champVide = res.getBoolean(1);
 			
@@ -724,6 +721,29 @@ public class SGBD {
 			SGBD.fermer();
 		}
 		
+		return resultat;
+	}
+	
+	// cette methode permet de récupérer le numéro du dernier enregistrement de la table entrée en parametre
+	public static int recupererIdentifiantDernierEnregistrementTable(String table,String champ){
+		SGBD.connecter();
+		Statement st = null ;
+		ResultSet res= null;
+		int resultat=0;
+		
+		try{
+			st=c.createStatement();
+			res=st.executeQuery("SELECT MAX(TO_NUMBER("+champ+")) FROM "+table+ " ;");
+			
+			resultat=Integer.parseInt(res.getObject(1).toString());
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			SGBD.fermer();
+		}
 		return resultat;
 	}
 	

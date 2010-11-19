@@ -100,7 +100,7 @@ public class Association extends Client {
 		if (this.estFidele) {
 			
 			CompteurIdcarte++;
-			String idCarte="FID"+CompteurIdcarte;
+			String idCarte=""+CompteurIdcarte;
 			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
 			"VALUES (" +
 			"'"+idCarte+"',"
