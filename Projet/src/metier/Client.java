@@ -12,6 +12,7 @@ public abstract class Client extends Utilisateur{
 	protected boolean estFidele;
 	protected boolean estActif;
 	protected String motDePasse;
+	static int CompteurIdcarte=0;
 	
 	// Méthode permettant de générer un mot de passe
 	// Fait appel à la fonction random et aux caractères ASCII
