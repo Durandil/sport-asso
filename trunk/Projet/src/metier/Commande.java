@@ -107,6 +107,41 @@ public class Commande {
 		return "Commande [idClient=" + idClient + ", date=" + sqlDate + "]";
 	}
 	
-
+	
+	//GRAND CHANTIER ...
+	//Méthode qui retourne le prix de la commande
+	
+	public int PrixCommande(){
+		//le client a-t-il une carte de fidelite ?
+		
+		String idClient = SGBD.executeQuery("Select CarteFidelite from client, realise r, commande c where client.idClient = c.idClient and c.idClient="+this.idClient);
+		String carteFidelite=SGBD.recupererInformationFideliteClient(this.idClient).get(0);
+		int prixCommande=0;
+		//pour chaque article de la commande...
+		for (int i = 0; i < this.liste.size(); i++) {
+			LigneCommande typeArticle = this.liste.get(i);
+			//récupérer le prix initial
+			prixInit = SGBD.executeQuery("select prixInitial from article a, listing_articles_commandes l where a.idArticle=l.idArticle and a.idArticle = "+ TypeArticle);
+			//quelle promotion appliquer selon la quantité ?
+			promo1 = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1 where a.idArticle=l.idArticle and r.idCategorie=c.idCategorie and r.idQuantite=q.idQuantite and c.idCategorie=a.idCategorie and l.quantiteCommande-q.quantite>=0 and a.idArticle = "+TypeArticle+"order by l.quantiteCommande-q.quantite");
+			//quelle promotion exceptionnelle appliquer ?
+			if (carteFidelite = true){
+				promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, listing_articles_commandes lac, commande c Where p.idPromo = lpa.idPromo And lpa.idArticle = a.idArticle  And a.idArticle = lac.idArticle And lac.idCommande=c.idCommande And lac.idCommande = VALEUR(idCommande) And p.dateDebut < c.datecommande And p.dateFin > c.datecommande");
+			}
+			else{
+				promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, listing_articles_commandes lac, commande c Where p.idPromo = lpa.idPromo And lpa.idArticle = a.idArticle  And a.idArticle = lac.idArticle And lac.idCommande=c.idCommande And lac.idCommande = VALEUR(idCommande) And p.dateDebut < c.datecommande And p.dateFin > c.datecommande");
+			}
+			//calcul du prix de la ligne de commande
+			int prixLigne;
+			if (promo2 = 0){
+				prixLigne = prixInit*promo1*typeArticle.getQuantite();}
+			else{
+				prixLigne = prixInitial*promo2*typeArticle.getQuantite();}
+			//calcul du prix total de la commande
+			prixCommande=prixCommande+prixLigne;
+		}
+		
+		return prixCommande;
+	}
 	
 }
