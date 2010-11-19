@@ -21,7 +21,7 @@ public class Principale {
  * @throws Exception **/
 
 	public static void main(String[] args) throws Exception {
-/** GROS TODO : revoir tous les insert into **/
+
 		//Initialiser la base de données
 		//BDD.init();
 		
@@ -66,7 +66,7 @@ public class Principale {
 //		Message m = new Message("Content", "Votre magasin est trop génial","idylliste@ensai.fr",dateM);
 //	
 
-//		  /**N'importe quoi**/
+
 
 
 		
