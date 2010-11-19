@@ -32,10 +32,10 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		
 		
 			donnees = new Object[1000][4];
-			System.out.println("test 1 " + listeIdentifiants.size());
-			System.out.println("test 2 " + listeDescriptions.size());
-			System.out.println("test 3 " + listeStocks.size());
-			System.out.println("test 4 " + listeEtats.size());
+			System.out.println("test l1 " + listeIdentifiants.size());
+			System.out.println("test l2 " + listeDescriptions.size());
+			System.out.println("test l3 " + listeStocks.size());
+			System.out.println("test l4 " + listeEtats.size());
 			//On ajoute les informations dans l'objet donnees
 			for(int i=0;i<listeIdentifiants.size();i++){
 				donnees[i][0] = listeIdentifiants.get(i);
