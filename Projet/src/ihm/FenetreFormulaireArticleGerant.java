@@ -96,6 +96,12 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		prix = new JTextField();
 		stock = new JTextField();
 		
+		numArticle.setPreferredSize(new Dimension(90, 25));
+		description.setPreferredSize(new Dimension(90, 25));
+		poids.setPreferredSize(new Dimension(90, 25));
+		prix.setPreferredSize(new Dimension(90, 25));
+		stock.setPreferredSize(new Dimension(90, 25));
+		
 		catPrixBox = new JComboBox();
 		catSportBox = new JComboBox();
 		
