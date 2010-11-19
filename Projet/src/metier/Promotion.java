@@ -89,11 +89,10 @@ public class Promotion {
 		+ s2
 		+ "," 
 		+ this.pourcentagePromo
-		+ "',"
-		+ "'"
+		+ ",'"
 		+ this.promoFidelite
-		+")";
-		
+		+"')";
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 	}
 	
