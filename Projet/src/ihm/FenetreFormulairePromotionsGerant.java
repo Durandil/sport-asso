@@ -3,11 +3,13 @@ package ihm;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -23,10 +25,10 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	// cette classe devra permettre d'ouvrir le formulaire d'ajout 
 	// ou de modification d'une promotion
 	public Dimension dimensionStandard = new Dimension(220, 60);
-	private JLabel numPromotionLabel,descriptionLabel,populationLabel,categorieLabel;
-	private JComboBox categoriePromoBox;
-	private JTextField numPromotion,description,population;
-	private String itemCategoriePromoSelectionne="";
+	private JLabel descriptionLabel,populationLabel,articleLabel,dateDebutLabel,dateFinLabel,pourcentLabel;
+	private JComboBox articleBox,populationBox;
+	private JTextField description,pourcentPromo;
+	private String itemArticlePromo="";
 	
 	
 	// Constructeur pour l'ajout d'une promotion
@@ -52,53 +54,78 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	private void initComponent(){
 		JPanel panneauCentralFenetre = new JPanel();
 		
-		JPanel panNumPromotion = new JPanel();
+		
 		JPanel panDescriptionPromotion = new JPanel();
 		JPanel panPopulation = new JPanel();
-		JPanel panCategoriePromotion = new JPanel();
-		//JPanel panArticleConcerne = new JPanel();
-
-		panNumPromotion.setPreferredSize(dimensionStandard);
+		JPanel panDateDebut = new JPanel();
+		JPanel panDateFin = new JPanel();
+		JPanel panArticle =  new JPanel();
+		JPanel panPourcentPromo =  new JPanel();
+		
+		panDateDebut.setPreferredSize(dimensionStandard);
 		panDescriptionPromotion.setPreferredSize(dimensionStandard);
 		panPopulation.setPreferredSize(dimensionStandard);
-		panCategoriePromotion.setPreferredSize(dimensionStandard);
+		panDateFin.setPreferredSize(dimensionStandard);
+		panArticle.setPreferredSize(dimensionStandard);
+		panPourcentPromo.setPreferredSize(dimensionStandard);
 		
-		panNumPromotion.setBorder(BorderFactory.createEmptyBorder());
+		panDateDebut.setBorder(BorderFactory.createEmptyBorder());
 		panDescriptionPromotion.setBorder(BorderFactory.createEmptyBorder());
 		panPopulation.setBorder(BorderFactory.createEmptyBorder());
-		panCategoriePromotion.setBorder(BorderFactory.createEmptyBorder());
+		panDateFin.setBorder(BorderFactory.createEmptyBorder());
+		panArticle.setBorder(BorderFactory.createEmptyBorder());
+		panPourcentPromo.setBorder(BorderFactory.createEmptyBorder());
 		
-		numPromotionLabel = new JLabel();
-		descriptionLabel = new JLabel();
-		populationLabel = new JLabel();
-		categorieLabel = new JLabel();
+		descriptionLabel = new JLabel("Description de la promotion : ");
+		populationLabel = new JLabel(" Promotion adhérent ? ");
+		articleLabel = new JLabel("Article concerné : ");
+		dateDebutLabel = new JLabel("Date début Promotion : ");
+		dateFinLabel = new JLabel("Date fin Promotion : ");
+		pourcentLabel= new JLabel("Pourcenatge de promotion :");
 		
-		numPromotion = new JTextField();
+		pourcentPromo = new JFormattedTextField(NumberFormat.getNumberInstance());
 		description = new JTextField();
-		population = new JTextField();
-		categoriePromoBox = new JComboBox();
 		
-		categoriePromoBox.addActionListener(new ActionListener() {
+		pourcentPromo.setPreferredSize(new Dimension(90,20));
+		description.setPreferredSize(new Dimension(90,20));
+		
+		populationBox = new JComboBox();
+		populationBox.addItem("Promotion pour les adhérents");
+		populationBox.addItem("Promotion pour tous les clients");
+		populationBox.setSelectedItem("Promotion pour tous les clients");
+		
+		articleBox = new JComboBox();
+		//TODO récupération liste tous les articles
+		
+		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				itemCategoriePromoSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
+				itemArticlePromo=(String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
-		panNumPromotion.add(numPromotionLabel);
+		
 		panDescriptionPromotion.add(descriptionLabel);
 		panPopulation.add(populationLabel);
-		panCategoriePromotion.add(categorieLabel);
+		panArticle.add(articleLabel);
+		panDateDebut.add(dateDebutLabel);
+		panDateFin.add(dateFinLabel);
+		panPourcentPromo.add(pourcentLabel);
 		
-		panNumPromotion.add(numPromotion);
+		
 		panDescriptionPromotion.add(description);
-		panPopulation.add(population);
-		panCategoriePromotion.add(categoriePromoBox);
+		panPopulation.add(populationBox);
+		panArticle.add(articleBox);
+		panPourcentPromo.add(pourcentPromo);
 		
-		panneauCentralFenetre.add(panNumPromotion);
 		panneauCentralFenetre.add(panDescriptionPromotion);
 		panneauCentralFenetre.add(panPopulation);
-		panneauCentralFenetre.add(panCategoriePromotion);
+		panneauCentralFenetre.add(panPourcentPromo);
+		panneauCentralFenetre.add(panArticle);
+		panneauCentralFenetre.add(panDateDebut);
+		panneauCentralFenetre.add(panDateFin);
+		
+		
 		
 		this.getContentPane().add(panneauCentralFenetre,"Center");
 		
