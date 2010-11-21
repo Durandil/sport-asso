@@ -34,16 +34,16 @@ public class FenetreChoixCatalogue extends JDialog {
 	 * @param title
 	 * @param modal
 	 */
-	public FenetreChoixCatalogue(JFrame parent, String title, boolean modal,Article article){
+	public FenetreChoixCatalogue(JFrame parent, String title, boolean modal,int stock,String idArticle){
 		super(parent, title, modal);
-		this.setSize(200, 350);
+		this.setSize(400, 250);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(article);
+		this.initComponent(stock,idArticle);
 	}
 	
-	private void initComponent(Article article){
+	private void initComponent(int quantiteStock, String idArticle){
 		// Définition du panneau dans lequel le client sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
@@ -53,8 +53,9 @@ public class FenetreChoixCatalogue extends JDialog {
 		
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
 		quantite=new JComboBox();
-		for(int i=1;i==article.getStock();i++){
-			quantite.addItem(i);
+		
+		for(int j=1;j<quantiteStock;j++){
+			quantite.addItem(j);
 		}
 		
 		quantite.addActionListener(new ActionListener() {
@@ -62,7 +63,7 @@ public class FenetreChoixCatalogue extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String choix= (String) ((JComboBox) e.getSource()).getSelectedItem();
-				//quantiteSelectionnee=choix.toInt();
+				quantiteSelectionnee=Integer.parseInt(choix);
 			}
 		});
 		

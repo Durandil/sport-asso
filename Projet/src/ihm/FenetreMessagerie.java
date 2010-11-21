@@ -40,7 +40,7 @@ public class FenetreMessagerie extends JFrame {
     	
     	// Création d'une table contenant tous les messages envoyés par les clients au gérant
     	// après interrogation de la base de données
-	    JTable tableauMessage = new JTable(new ModeleMessagerie());     
+	    final JTable tableauMessage = new JTable(new ModeleMessagerie());     
 	    this.getContentPane().add(new JScrollPane(tableauMessage), BorderLayout.CENTER);
     	
     	
@@ -52,11 +52,24 @@ public class FenetreMessagerie extends JFrame {
     	// que le gérant peut faire sur les messages de ses clients
     	JPanel panneauTitle=new JPanel();
     	JButton boutonAjouter=new JButton("Lire");
-    	//JButton boutonSupprimer=new JButton("Supprimer");
     	JButton boutonSupprimerTout=new JButton("Supprimer tout");
     	
+    	boutonAjouter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int ligne = tableauMessage.getSelectedRow();
+				String expediteur = tableauMessage.getValueAt(ligne,0).toString();
+				String sujet = tableauMessage.getValueAt(ligne,1).toString();
+				String contenu = tableauMessage.getValueAt(ligne,2).toString();
+				String date = tableauMessage.getValueAt(ligne,3).toString();
+				
+				// ouverture de la fenetre de lecture de message
+				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date);
+				fenMessage.setVisible(true);
+			}
+		});
+    	
     	boutonSupprimerTout.addActionListener(new ActionListener() {
-			
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				Message.supprimerAllBDD(); //suppression message de la DB
@@ -67,7 +80,6 @@ public class FenetreMessagerie extends JFrame {
     	
     	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
     	panneauTitle.add(boutonAjouter);
-    	//panneauTitle.add(boutonSupprimer);
     	panneauTitle.add(boutonSupprimerTout);
     	panneauHaut.add(panneauTitle,"Center");
    
