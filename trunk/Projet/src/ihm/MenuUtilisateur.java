@@ -4,15 +4,20 @@ import ihm.FenetreCommandeArticle;
 import ihm.FenetreContactVendeur;
 import ihm.FenetreDialogGestionCompteClient;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 
 import metier.Client;
@@ -39,17 +44,28 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 	private JMenuItem itemInformations = new JMenuItem("Informations");
 	private JMenuItem itemArticles = new JMenuItem("Articles");
 	private JMenuItem itemPromotions = new JMenuItem("Promotions en cours");
+	private JLabel icon;
 	
 	// Cette variable static contiendra normalement le client en cours d'utilisation de l'application
 	// pour le moment elle sert à faire fonctionner la fenêtre
 	//public static Client client = new Particulier("julien","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
 
 	public MenuUtilisateur(){
-		this.setSize(400, 200);
+		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(null);
-			
+		this.setTitle("Bienvenue : "+ FenetreDialogIdentification.clientUserIdentifiant);
+		
+		this.setLayout(new BorderLayout());
+		icon = new JLabel(new ImageIcon("src/images/nba.jpg"));
+		JPanel panImage = new JPanel();
+		panImage.setBackground(Color.white);
+		panImage.setLayout(new BorderLayout());
+		panImage.add(icon);
+		
+		this.getContentPane().add(panImage,"Center");
+		
 		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
 		//--------------------------
 			

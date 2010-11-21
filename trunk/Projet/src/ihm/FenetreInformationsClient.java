@@ -55,7 +55,6 @@ public class FenetreInformationsClient extends JFrame {
         // Creation du panneau qui accueillera l'image
         imageFenetre = new JLabel(new ImageIcon("src/images/carte.jpg"));
 		JPanel panImage = new JPanel();
-		panImage.setBackground(Color.white);
 		panImage.setBorder(BorderFactory.createEmptyBorder());
 		panImage.add(imageFenetre);
 		

@@ -2,7 +2,9 @@ package application;
 
 import ihm.FenetreCompte;
 import ihm.MenuGerant;
+import ihm.MenuUtilisateur;
 
+import java.awt.Color;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -28,9 +30,9 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		FenetreCompte fen=new FenetreCompte();
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
 		
 		
 //		java.util.Date date = new java.util.Date();
@@ -59,11 +61,11 @@ public class Principale {
 	
 		
 //		  
-//		  
+		  
 		/**Instanciation d'une association**/ 
 
-//		Association ass = new Association("Idylliste", "idylliste@ensai.fr", "Ensai", "35047",
-//		  "0299451210", true);
+//		ASSOCIATION ASS = NEW ASSOCIATION("IDYLLISTE", "IDYLLISTE@ENSAI.FR", "ENSAI", "35047",
+//		  "0299451210", TRUE);
 //		  
 		/**Instanciation d'une autre association**/ 
 //		Association ass2 = new Association("BDE", "bde@ensai.fr", "Ensai",

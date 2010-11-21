@@ -1,12 +1,17 @@
 package ihm;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 import basededonnees.SGBD;
 
@@ -30,10 +35,21 @@ public class MenuGerant extends JFrame {
 	private JMenuItem itemCommandes = new JMenuItem("Commandes");
 	private JMenuItem itemPromotions = new JMenuItem("Promotions");
 
+	private JLabel icon;
+
 	public MenuGerant(){
-		this.setSize(400, 200);
+		this.setSize(420, 330);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
+		
+		this.setLayout(new BorderLayout());
+		icon = new JLabel(new ImageIcon("src/images/ligue.jpg"));
+		JPanel panImage = new JPanel();
+		panImage.setBackground(Color.white);
+		panImage.setLayout(new BorderLayout());
+		panImage.add(icon);
+		
+		this.getContentPane().add(panImage,"Center");
 		
 		// il faut, pour chaque item, lui implémenter son actionPerformed correspondant
 		// à la fenetre qu'il faudra ouvrir 
