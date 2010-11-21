@@ -747,4 +747,6 @@ public class SGBD {
 		return resultat;
 	}
 	
+	
+	
 }

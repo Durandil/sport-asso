@@ -30,8 +30,8 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 			ArrayList<Integer> listeStocks = SGBD.selectListeInt("ARTICLE", "STOCK");
 			ArrayList<Integer> listeEtats = SGBD.selectListeInt("ARTICLE", "PRIXINITIAL");
 		
-		
-			donnees = new Object[1000][4];
+			
+			donnees = new Object[listeIdentifiants.size()][5];
 			System.out.println("test l1 " + listeIdentifiants.size());
 			System.out.println("test l2 " + listeDescriptions.size());
 			System.out.println("test l3 " + listeStocks.size());

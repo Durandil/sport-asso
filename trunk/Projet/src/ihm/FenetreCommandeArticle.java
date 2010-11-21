@@ -1,5 +1,6 @@
 package ihm;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import basededonnees.SGBD;
 
 
 public class FenetreCommandeArticle extends JFrame{
@@ -23,7 +27,6 @@ public class FenetreCommandeArticle extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
-	private JComboBox comboBoxTri;
 
 	
 	/*
@@ -34,7 +37,7 @@ public class FenetreCommandeArticle extends JFrame{
 	public FenetreCommandeArticle(){
 		super();
 		this.setTitle("Catalogue Article");
-		this.setSize(500, 900);
+		this.setSize(500, 1000);
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -69,16 +72,17 @@ public class FenetreCommandeArticle extends JFrame{
     	JPanel panneauTableauCatalogue = new JPanel();
     	panneauTableauCatalogue.setLayout(new GridLayout(1,2,5,5));
     	
-	    JTable tableau = new JTable(new ModeleTableauCatalogue(false));
-	    //tableau.setAutoCreateRowSorter(true); // permet de trier un tableau en cliquant sur la colonne
-	    panneauTableauCatalogue.add(new JScrollPane(tableau));
+	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false));
+	    tableau.setAutoCreateRowSorter(true); // permet de trier un tableau en cliquant sur la colonne
+	    panneauTableauCatalogue.add(new JScrollPane(tableau),"North");
 	    
-	    /*comboBoxTri = new JComboBox();
-	    comboBoxTri.addItem("Trier par Prix");
-	    comboBoxTri.addItem("Trier par sport");
-	    comboBoxTri.addItem("Trier par nom d'article");
-	    panneauTableauCatalogue.add(comboBoxTri);
-	    */
+	    
+	    
+	    
+	    
+	    
+	    
+	
 	    
 	    this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
 	    
@@ -88,6 +92,24 @@ public class FenetreCommandeArticle extends JFrame{
 	        
 	    // Définition du panneau des boutons permettant la confirmation ou l'annulation de la commande en cours    
 	    JPanel panneauBouton=new JPanel();
+	    
+	    JButton commanderArticle = new JButton("Chosir un article");
+	    
+	    commanderArticle.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int ligne = tableau.getSelectedRow();
+				Object numeroArticle = tableau.getValueAt(ligne, 0);
+				String numArticle = numeroArticle.toString();
+				
+				// TODO rechercher stock associée à l'article
+				String quantite=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE",numArticle);
+				FenetreChoixCatalogue fen = new FenetreChoixCatalogue(null,"Achat d'article",true,Integer.parseInt(quantite),numArticle);
+				fen.setVisible(true);
+			}
+		});
+	    
 		JButton boutonValider=new JButton("Valider");
 			
 		boutonValider.addActionListener(new ActionListener(){
@@ -105,7 +127,8 @@ public class FenetreCommandeArticle extends JFrame{
 				setVisible(false);
 			}			
 		});
-			
+		
+		panneauBouton.add(commanderArticle);
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 			

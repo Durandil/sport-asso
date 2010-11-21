@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import basededonnees.SGBD;
 
 import metier.Article;
 
@@ -107,6 +110,20 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		catPrixBox = new JComboBox();
 		catSportBox = new JComboBox();
 		
+		ArrayList<String> listeTypeSport = new ArrayList<String>();
+		listeTypeSport= SGBD.selectListeString("TYPE_SPORT", "NOMTYPE");
+		for (int i = 0; i < listeTypeSport.size(); i++) {
+			catSportBox.addItem(listeTypeSport.get(i));
+		}
+		catSportBox.setSelectedIndex(0);
+		
+		
+		ArrayList<String> listeCategoriePrix = new ArrayList<String>();
+		listeCategoriePrix= SGBD.selectListeString("CATEGORIE", "NOMCATEGORIE");
+		for (int i = 0; i < listeCategoriePrix.size(); i++) {
+			catPrixBox.addItem(listeCategoriePrix.get(i));
+		}
+		catPrixBox.setSelectedIndex(0);
 		// il faudra implémenter une méthode permettant de récupérer les différents items
 		// ou choix de catégorie de sport et de catégorie de prix
 		// dans une autre classe et l'ajouter au comboBox avec addItem()
@@ -164,7 +181,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 				String p =poids.getText();
 				String st= stock.getText();
 				String prx=prix.getText();
-				Article art = new Article(numArticle.getText(),description.getText(),itemSportSelectionne,Float.parseFloat(p),Double.parseDouble(prx),Integer.parseInt(st),"En stock",itemPrixSelectionne);
+				Article art = new Article("1",description.getText(),itemSportSelectionne,Float.parseFloat(p),Double.parseDouble(prx),Integer.parseInt(st),"En stock",itemPrixSelectionne);
 				
 				// puis fermer la page
 				setVisible(false);
