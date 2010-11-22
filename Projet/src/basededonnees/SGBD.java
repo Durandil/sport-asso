@@ -22,9 +22,9 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	//Penser à modifier les id/mdp
 
@@ -597,7 +597,7 @@ public class SGBD {
 	
 	// Méthode qui permet de selectionner des articles 
 	// dont le stock est inférieur à la quantité seuil ou en rupture de stock
-	public ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
+	public static ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
 		
 		connecter();
 		ArrayList<ArrayList<String>> article = new ArrayList<ArrayList<String>>();

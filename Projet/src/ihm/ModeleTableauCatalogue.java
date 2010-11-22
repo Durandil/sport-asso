@@ -46,8 +46,9 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 			// création des listes pour récupérer les informations des articles qui ont besoin d'être
 			// reapprovisionnés
 			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
+			listeArticles = SGBD.selectArticlesReapprovisionnement();
 			
-			donnees = new Object[1000][4];
+			donnees = new Object[100][4];
 			
 			// on ajoute les informations dans l'objet
 			int j=0;
