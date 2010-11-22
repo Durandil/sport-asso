@@ -30,11 +30,11 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		FenetreCompte fen=new FenetreCompte();
-		//MenuUtilisateur men = new MenuUtilisateur();
+		//FenetreCompte fen=new FenetreCompte();
+		MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
-		String id = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE","IDCLIENT", "iueihtam@laposte.fr");
-		System.out.println(id);
+//		String id = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE","IDCLIENT", "iueihtam@laposte.fr");
+//		System.out.println(id);
 		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -53,8 +53,8 @@ public class Principale {
 //		String dateS2 = "07/11/2010";
 //		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
 //		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
-//		boolean b=true;
-//		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.7,b);
+//		boolean b = true;
+//		Promotion p = new Promotion("PRO99999","Promo test",date,date2,30,b);
 		
 		/**Instanciation d'une catégorie test**/
 //		Categorie cat = new Categorie("CAT99999","Test",100);

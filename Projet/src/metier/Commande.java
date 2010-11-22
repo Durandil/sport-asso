@@ -111,47 +111,47 @@ public class Commande {
 	//GRAND CHANTIER ...
 	//Méthode qui retourne le prix de la commande
 	
-	public double PrixCommande(){
-		//le client a-t-il une carte de fidelite ?
-		
-		//String idClient = SGBD.informationCommande(this.idCommande).get;
-	
-		String carteFidelite=SGBD.recupererInformationFideliteClient(this.idClient).get(0);
-		double prixCommande=0;
-		//pour chaque article de la commande...
-		
-		for (int i = 0; i < this.liste.size(); i++) {
-			
-			//récupérer le prix initial
-			int prixInit = (Integer) SGBD.informationCommande(this.idCommande).get(i)[2];
-			//quelle promotion appliquer selon la quantité ?
-			String typeArticle = (String) SGBD.informationCommande(this.idCommande).get(i)[0];
-			int quantiteCommandee = (Integer) SGBD.informationCommande(this.idCommande).get(i)[3];
-			ResultSet res1 = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1 where a.idArticle=l.idArticle and r.idCategorie=c.idCategorie and r.idQuantite=q.idQuantite and c.idCategorie=a.idCategorie and l.quantiteCommande-q."+quantiteCommandee+">=0 and a.idArticle = "+typeArticle+"order by l.quantiteCommande-"+quantiteCommandee);
-			double promo1 = res1.getDouble(1);
-			//quelle promotion exceptionnelle appliquer ?
-			
-			double promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a,  Where p.idPromo = lpa.idPromo and article.idArticle = "+typeArticle+ "And p.dateDebut < c.datecommande And p.dateFin > c.datecommande and PROMOFIDELITE=1").getDouble(1);
-			if (carteFidelite == "true"){
-			
-				if (promo2 == 0){
-					promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, Where p.idPromo = lpa.idPromo And a.idArticle = "+typeArticle+" And p.dateDebut < c.datecommande And p.dateFin > c.datecommande").getDouble(1);
-				}
-			}
-			else{
-				promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, listing_articles_commandes lac, commande c Where p.idPromo = lpa.idPromo And lpa.idArticle = a.idArticle  And a.idArticle = lac.idArticle And lac.idCommande=c.idCommande And lac.idCommande = VALEUR(idCommande) And p.dateDebut < c.datecommande And p.dateFin > c.datecommande").getDouble(1);
-			}
-			//calcul du prix de la ligne de commande
-			double prixLigne;
-			if (promo1 > promo2){
-				prixLigne = prixInit*(1-promo1)*quantiteCommandee;}
-			else{
-				prixLigne = prixInit*(1-promo2)*quantiteCommandee;}
-			//calcul du prix total de la commande
-			prixCommande=prixCommande+prixLigne;
-		}
-		
-		return prixCommande;
-	}
+//	public double PrixCommande(){
+//		//le client a-t-il une carte de fidelite ?
+//		
+//		//String idClient = SGBD.informationCommande(this.idCommande).get;
+//	
+//		String carteFidelite=SGBD.recupererInformationFideliteClient(this.idClient).get(0);
+//		double prixCommande=0;
+//		//pour chaque article de la commande...
+//		
+//		for (int i = 0; i < this.liste.size(); i++) {
+//			
+//			//récupérer le prix initial
+//			int prixInit = (Integer) SGBD.informationCommande(this.idCommande).get(i)[2];
+//			//quelle promotion appliquer selon la quantité ?
+//			String typeArticle = (String) SGBD.informationCommande(this.idCommande).get(i)[0];
+//			int quantiteCommandee = (Integer) SGBD.informationCommande(this.idCommande).get(i)[3];
+//			ResultSet res1 = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1 where a.idArticle=l.idArticle and r.idCategorie=c.idCategorie and r.idQuantite=q.idQuantite and c.idCategorie=a.idCategorie and l.quantiteCommande-q."+quantiteCommandee+">=0 and a.idArticle = "+typeArticle+"order by l.quantiteCommande-"+quantiteCommandee);
+//			double promo1 = res1.getDouble(1);
+//			//quelle promotion exceptionnelle appliquer ?
+//			
+//			double promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a,  Where p.idPromo = lpa.idPromo and article.idArticle = "+typeArticle+ "And p.dateDebut < c.datecommande And p.dateFin > c.datecommande and PROMOFIDELITE=1").getDouble(1);
+//			if (carteFidelite == "true"){
+//			
+//				if (promo2 == 0){
+//					promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, Where p.idPromo = lpa.idPromo And a.idArticle = "+typeArticle+" And p.dateDebut < c.datecommande And p.dateFin > c.datecommande").getDouble(1);
+//				}
+//			}
+//			else{
+//				promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, listing_articles_commandes lac, commande c Where p.idPromo = lpa.idPromo And lpa.idArticle = a.idArticle  And a.idArticle = lac.idArticle And lac.idCommande=c.idCommande And lac.idCommande = VALEUR(idCommande) And p.dateDebut < c.datecommande And p.dateFin > c.datecommande").getDouble(1);
+//			}
+//			//calcul du prix de la ligne de commande
+//			double prixLigne;
+//			if (promo1 > promo2){
+//				prixLigne = prixInit*(1-promo1)*quantiteCommandee;}
+//			else{
+//				prixLigne = prixInit*(1-promo2)*quantiteCommandee;}
+//			//calcul du prix total de la commande
+//			prixCommande=prixCommande+prixLigne;
+//		}
+//		
+//		return prixCommande;
+//	}
 	
 }

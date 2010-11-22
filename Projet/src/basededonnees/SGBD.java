@@ -29,8 +29,8 @@ public class SGBD {
 	//Penser à modifier les id/mdp
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 
 
@@ -93,7 +93,7 @@ public class SGBD {
 		connecter();
 		Statement st = null;
 		ResultSet res = null;
-		System.out.println("coucou");
+	
 		try {
 			st = c.createStatement();
 			res = st.executeQuery(requete);
@@ -455,8 +455,6 @@ public class SGBD {
 
 			st = c.createStatement();
 			
-			System.out.println("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
-					+ condition + "'");
 			
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
@@ -464,17 +462,17 @@ public class SGBD {
 			// Récupérer les méta données
 
 				while (res.next()) {
-					System.out.println("test");
+					
 			//Si le résultat est non nul tout se passe normalement
-					if(res.getObject(1) != null)
-					{System.out.println("if");
+					if(res.getObject(1) != null){
+					
 						s = res.getObject(1).toString();
 						
 					}
 			//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
 			//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
 					else
-					{System.out.println("else");
+					{
 						s = " ";
 					}
 

@@ -7,17 +7,21 @@ public class Association extends Client {
 
 	private String denomination;
 
+
 	// Constructeur d'une Association :
 	// Celle-ci se définit (entre autres) par une dénomination
 	
 	// Le constructeur ajoute l'association dans la table CLIENTS
 	// Et génère un mot de passe lors de l'instanciation
+
 	public Association(String denomination, String mail, String adresse,
-			String codeCommune, String telephone, boolean estFidele) {
+			String codePostal, String nomVille, String idVille, String telephone, boolean estFidele) {
 		this.denomination = denomination;
 		this.mail = mail;
 		this.adresse = adresse;
-		this.codeCommune = codeCommune;
+		this.codePostal = codePostal;
+		this.nomVille = nomVille;
+		this.idVille = idVille;
 		this.telephone = telephone;
 		this.particulierAssociation = "Association";
 		this.nbPointsFidelite = 0;
@@ -84,16 +88,20 @@ public class Association extends Client {
 			actif = "Activé";
 		}
 		
-		String requete = "INSERT INTO CLIENT (IDCLIENT, DENOMINATIONCLIENT, ADRESSECLIENT, CODECOMMUNE" +
-		", TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
+		
+		String requete = "INSERT INTO CLIENT (IDCLIENT, DENOMINATIONCLIENT, ADRESSECLIENT, IDVILLE" +
+		",NOMVILLE, CODEPOSTAL, TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
 		"'"+this.mail+"',"
 		+"'"+this.denomination+"',"
 		+"'"+this.adresse+"',"
-		+"'"+this.codeCommune+"',"
+		+"'"+this.idVille+"',"
+		+"'"+this.nomVille+"',"
+		+"'"+this.codePostal+"',"
 		+"'"+this.telephone+"',"
 		+"'"+actif+"',"
 		+"'"+this.motDePasse+"')";
 		
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 		
 		

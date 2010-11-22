@@ -42,12 +42,11 @@ Insert into TYPE_SPORT (idType, NomType) values ('TYP00009','Arts Martiaux');
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
 
 #Promo:
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('prom0001','Raquettes à prix cassé','01062010','15072010','25',0);
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('prom0002','Velo à moitié prix','15082010','01092010','50',1); 
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),25,0);
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),50,1); 
 
 #Ville
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville001', '35000', 'Rennes');
-Insert into VILLE (idVille, Codepostal, Nomville) values ('ville034', '35170', 'Bruz');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville002', '35170', 'Pont Rean');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville003', '38000', 'Grenoble');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville004', '90000', 'Belfort');
@@ -80,7 +79,13 @@ Insert into VILLE (idVille, Codepostal, Nomville) values ('ville030','69006','Ly
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville031','69007','Lyon');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville032','69008','Lyon');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville033','69009','Lyon');
-	
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville034', '35170', 'Bruz');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville035', '94800', 'Villejuif');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville036', '94000', 'Créteil');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville037', '94200', 'Ivry-sur-Seine');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville038', '94320', 'Thiais');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville039', '94600', 'Choisy-le-Roi');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville040', '92340', 'Bourg-la-Reine');
 #Client
 Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001','Rennes', '35000', '0606060606', 'Activé', 'L3R6T4X8');
 Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('iueihtam@laposte.fr', 'Ueihtam', 'Imré', '2 rue du Nord', 'ville002', 'Pont Réan','35170', '0645454545', 'Activé', 'I7H8M9XX');

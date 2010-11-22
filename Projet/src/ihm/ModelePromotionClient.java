@@ -27,9 +27,14 @@ public class ModelePromotionClient extends AbstractTableModel {
 	ArrayList<String> listeDatesDebut = SGBD.selectListeDates("PROMO",
 			"DATEDEBUT","DD/MM/YYYY");
 	ArrayList<String> listeDatesFin = SGBD.selectListeDates("PROMO", "DATEFIN","DD/MM/YYYY");
+	
+		// TODO Auto-generated method stub
 
+	
 	public ModelePromotionClient() {
 		super();
+		System.out.println(listePromos.size());
+		
 		donnees = new Object[1000][4];
 		for (int i = 0; i < listePromos.size(); i++) {
 			donnees[i][0] = listePromos.get(i);

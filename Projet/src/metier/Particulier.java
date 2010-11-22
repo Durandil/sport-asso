@@ -7,8 +7,7 @@ public class Particulier extends Client {
 
 	private String nom;
 	private String prenom;
-	private String idVille;
-	private String nomVille;
+
 
 	
 	// Constructeur d'un client Particulier
@@ -109,10 +108,10 @@ public class Particulier extends Client {
 				+"'"+this.telephone+"',"
 				+"'"+actif+"',"
 				+"'"+this.motDePasse+"')";
-		System.out.println(requete);
+
 		SGBD.executeUpdate(requete);
 		
-		System.out.println("fin requête");
+
 		
 //		if (this.estFidele) {
 //		System.out.println("est fidèle");
@@ -129,19 +128,5 @@ public class Particulier extends Client {
 
 	}
 
-	public String getIdVille() {
-		return idVille;
-	}
 
-	public void setIdVille(String idVille) {
-		this.idVille = idVille;
-	}
-
-	public void setNomVille(String nomVille) {
-		this.nomVille = nomVille;
-	}
-
-	public String getNomVille() {
-		return nomVille;
-	}
 }
