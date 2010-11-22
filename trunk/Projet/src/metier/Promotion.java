@@ -74,7 +74,12 @@ public class Promotion {
 		
 		String s = SGBD.transformation(this.dateDebut);
 		String s2 = SGBD.transformation(this.dateFin);
+		int pf = 0;
+		System.out.println(s + "  " + s2);
 		
+		if(this.promoFidelite==true){
+			pf = 1;
+		}
 		
 		String requete = "INSERT INTO PROMO (IDPROMO, NOMPROMO, DATEDEBUT," +
 		" DATEFIN, POURCENTAGEPROMO, PROMOFIDELITE) VALUES ( "
@@ -89,9 +94,9 @@ public class Promotion {
 		+ s2
 		+ "," 
 		+ this.pourcentagePromo
-		+ ",'"
-		+ this.promoFidelite
-		+"')";
+		+ ","
+		+ pf
+		+")";
 		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 	}

@@ -273,20 +273,20 @@ public class FenetreDialogCreationCompte extends JDialog{
 				// création de compte
 				/** TODO : Gestion de l'id ville...**/
 				else {
-//					String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal.getText());
-//					String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
-//					System.out.println(ville + "  " + idVille);
+					String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal.getText());
+					String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
+					System.out.println(ville + "  " + idVille);
 					
 					if (itemSelectionne == "Compte Particulier")
 					{
 						
 						Particulier p = new Particulier(nom.getText(), prenom.getText(), identifiant.getText()
-								, adresse.getText(), codePostal.getText() , "Rennes", "ville001", telephone.getText(), 
+								, adresse.getText(), codePostal.getText() , ville, idVille, telephone.getText(), 
 								estFidele);
 					} else {
-//						Association a = new Association(denomination.getText(),
-//								identifiant.getText(), adresse.getText(), s,
-//								telephone.getText(),estFidele);
+						Association a = new Association(denomination.getText(),
+								identifiant.getText(), adresse.getText(), codePostal.getText(), ville, idVille,
+								telephone.getText(),estFidele);
 					}
 					
 					//System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
