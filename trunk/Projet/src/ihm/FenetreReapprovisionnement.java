@@ -61,19 +61,41 @@ public class FenetreReapprovisionnement extends JFrame {
     	
     	// TODO Récupération du tableau avec l'ensemble ds articles en quantité insuffisante 
     	// après interroagtion de la base de données dans ModeleTableauCatalogue
-	    JTable tableau = new JTable(new ModeleTableauCatalogue(true));
+	    final JTable tableau = new JTable(new ModeleTableauCatalogue(true));
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+	    
+	    // Ajout d'un bouton permettant d'ouvrir une fenetre de commande après avoir cliqué 
+	    // sur un article dans le tableau
+	    JButton commandeBouton = new JButton("Réapprovisionner");
+	    commandeBouton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int ligne = tableau.getSelectedRow();
+				//String numArticle = tableau.getValueAt(ligne, 0).toString();
+				// vérifier que la 1ère colonne corresponde bien aux numArticle pour pouvoir faire 
+				// la suite
+				
+				//FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numArticle);
+				//fen.setVisible(true);
+			}
+		});
+	    
 	    
 	    // Ajout du bouton permettant de revenir à la page précédante grâce à l'implémenation
 	    // de la méthode ActionPerformed
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});
-	
-		this.getContentPane().add(retourBouton, BorderLayout.SOUTH);
+		
+		JPanel panneauBoutons = new JPanel();
+		panneauBoutons.add(commandeBouton,"West");
+		panneauBoutons.add(retourBouton,"East");
+		
+		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 			
 	        
 	        
