@@ -130,30 +130,30 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panAdresse.add(adresse);
 		content.add(panAdresse);
 		
-//		//ville
-//		JPanel panVille = new JPanel();
-//		panVille.setBackground(Color.white);
-//		panVille.setPreferredSize(new Dimension(260, 60));
-//		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
-//		villeLabel = new JLabel("Ville: ");
-//		ville = new JTextField(client.getVille());
-//		ville.setPreferredSize(new Dimension(90, 25));
-//		panVille.add(villeLabel);
-//		panVille.add(ville);
-//		content.add(panVille);
-//		
-//		//Code Postal
-//		JPanel panCP = new JPanel();
-//		panCP.setBackground(Color.white);
-//		panCP.setPreferredSize(new Dimension(260, 60));
-//		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
-//		cpLabel = new JLabel("Code Postal : ");
-//		codePostal = new JTextField(client.getCodePostal());
-//		codePostal.setPreferredSize(new Dimension(100,25));
-//		panCP.add(cpLabel);
-//		panCP.add(codePostal);
-//		content.add(panCP);
-//		
+		//ville
+		JPanel panVille = new JPanel();
+		panVille.setBackground(Color.white);
+		panVille.setPreferredSize(new Dimension(260, 60));
+		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
+		villeLabel = new JLabel("Ville: ");
+		ville = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMVILLE", "IDCLIENT", idclient));
+		ville.setPreferredSize(new Dimension(90, 25));
+		panVille.add(villeLabel);
+		panVille.add(ville);
+		content.add(panVille);
+		
+		//Code Postal
+		JPanel panCP = new JPanel();
+		panCP.setBackground(Color.white);
+		panCP.setPreferredSize(new Dimension(260, 60));
+		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
+		cpLabel = new JLabel("Code Postal : ");
+		codePostal = new JTextField(SGBD.selectStringConditionString("CLIENT", "CODEPOSTAL", "IDCLIENT", idclient));
+		codePostal.setPreferredSize(new Dimension(100,25));
+		panCP.add(cpLabel);
+		panCP.add(codePostal);
+		content.add(panCP);
+		
 		// Telephone
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(Color.white);

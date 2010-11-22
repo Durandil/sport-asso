@@ -112,7 +112,7 @@ public class Particulier extends Client {
 		SGBD.executeUpdate(requete);
 		
 
-		
+		//TODO : à revoir
 //		if (this.estFidele) {
 //		System.out.println("est fidèle");
 //			CompteurIdcarte++;

@@ -458,7 +458,7 @@ public class SGBD {
 			
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
-			
+
 			// Récupérer les méta données
 
 				while (res.next()) {
@@ -505,7 +505,7 @@ public class SGBD {
 			st = c.createStatement();
 
 			res = st.executeQuery("SELECT "+champ1+","+champ2+" FROM "+table);
-
+			System.out.println("SELECT "+champ1+","+champ2+" FROM "+table);
 			// Récupérer les méta données
 			ResultSetMetaData rsmd = res.getMetaData();
 
@@ -674,6 +674,7 @@ public class SGBD {
 			
 		}
 		finally{
+			
 			SGBD.fermer();
 		}
 		

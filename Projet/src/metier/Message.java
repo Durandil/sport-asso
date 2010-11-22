@@ -89,7 +89,7 @@ public class Message {
 				+ "'"+ this.contenu + "','"
 				+ this.expediteur+ "'," 
 				+ s+")";
-		
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 		
 	}
