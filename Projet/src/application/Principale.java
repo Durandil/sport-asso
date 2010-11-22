@@ -30,10 +30,11 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		//FenetreCompte fen=new FenetreCompte();
+		FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu= new MenuGerant();
-		
+		//MenuGerant menu= new MenuGerant();
+		String id = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE","IDCLIENT", "iueihtam@laposte.fr");
+		System.out.println(id);
 		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -72,8 +73,8 @@ public class Principale {
 //				  "35238", "0256842210",true);
 //		
 		/**Instanciation d'un particulier**/ 
-//		Particulier p = new Particulier("Louvel", "Alexis", "alexis.louvel@ensai.fr",
-//		  "Campus de KL", "35047", "0256986633",true);
+
+		//Particulier p = new Particulier("Louvel", "Alexis", "alexis.louvel@ensai.fr","Campus de KL", "35047", "0256986633",true);
 
 		/**Création d'un message test**/
 //		String dateSM = "12/11/2010";

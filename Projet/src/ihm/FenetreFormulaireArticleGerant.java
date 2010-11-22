@@ -112,22 +112,21 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		
 		ArrayList<String> listeTypeSport = new ArrayList<String>();
 		listeTypeSport= SGBD.selectListeString("TYPE_SPORT", "NOMTYPE");
-		for (int i = 0; i < listeTypeSport.size(); i++) {
+		if(listeTypeSport.size()>0){
+			for (int i = 0; i < listeTypeSport.size(); i++) {
 			catSportBox.addItem(listeTypeSport.get(i));
+			}
+			catSportBox.setSelectedIndex(0);
 		}
-		catSportBox.setSelectedIndex(0);
-		
 		
 		ArrayList<String> listeCategoriePrix = new ArrayList<String>();
 		listeCategoriePrix= SGBD.selectListeString("CATEGORIE", "NOMCATEGORIE");
-		for (int i = 0; i < listeCategoriePrix.size(); i++) {
-			catPrixBox.addItem(listeCategoriePrix.get(i));
-		}
-		catPrixBox.setSelectedIndex(0);
-		// il faudra implémenter une méthode permettant de récupérer les différents items
-		// ou choix de catégorie de sport et de catégorie de prix
-		// dans une autre classe et l'ajouter au comboBox avec addItem()
-		
+		 if(listeCategoriePrix.size()>0){ 
+			 for (int i = 0; i < listeCategoriePrix.size(); i++) {
+				 catPrixBox.addItem(listeCategoriePrix.get(i));
+			 }
+			 catPrixBox.setSelectedIndex(0);
+		 }
 		
 		catPrixBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
