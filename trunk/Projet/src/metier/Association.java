@@ -101,21 +101,22 @@ public class Association extends Client {
 		+"'"+actif+"',"
 		+"'"+this.motDePasse+"')";
 		
-		System.out.println(requete);
+
 		SGBD.executeUpdate(requete);
 		
-		
-		if (this.estFidele) {
-			
-			CompteurIdcarte++;
-			String idCarte=""+CompteurIdcarte;
-			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
-			"VALUES (" +
-			"'"+idCarte+"',"
-			+"'0',"
-			+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
-			SGBD.executeUpdate(requete2);
-		}
+		//TODO : à revoir
+//		if (this.estFidele) {
+//			
+//			CompteurIdcarte++;
+//			String idCarte=""+CompteurIdcarte;
+//			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
+//			"VALUES (" +
+//			"'"+idCarte+"',"
+//			+"'0',"
+//			+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
+//			System.out.println(requete2);
+//			SGBD.executeUpdate(requete2);
+//		}
 	}
 
 }

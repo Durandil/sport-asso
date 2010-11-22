@@ -90,9 +90,9 @@ public class FenetreDialogIdentification extends JDialog {
 				ArrayList<String[]> listeMailsMdps = new ArrayList<String[]>();
 				listeMailsMdps = SGBD.selectDeuxChampsString("CLIENT", "IDCLIENT", "MOTDEPASSE");
 				DialogIdentifiant login = new DialogIdentifiant(identifiant.getText(),password.getText());
-				
+				System.out.println((password.getText()));
 				for(int i=0;i<listeMailsMdps.size();i++){
-					
+					System.out.println(listeMailsMdps.get(i)[1]);
 					if(identifiant.getText().equals(listeMailsMdps.get(i)[0]))
 					{
 						present = present + 1;

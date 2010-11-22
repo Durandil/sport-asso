@@ -33,7 +33,7 @@ public class ModelePromotionClient extends AbstractTableModel {
 	
 	public ModelePromotionClient() {
 		super();
-		System.out.println(listePromos.size());
+		
 		
 		donnees = new Object[1000][4];
 		for (int i = 0; i < listePromos.size(); i++) {
