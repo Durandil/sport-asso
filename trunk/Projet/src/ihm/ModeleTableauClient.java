@@ -1,8 +1,11 @@
 package ihm;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
+
+import basededonnees.SGBD;
 
 public class ModeleTableauClient extends AbstractTableModel implements ActionListener {
 	
@@ -13,16 +16,33 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Identifiant","Dénomination","Nom","Prénom","Ville"} ;
+    private final String[] entetes={"Identifiant","Dénomination","Nom","Prénom"} ;
 	
 	
-	public ModeleTableauClient(){
+	public ModeleTableauClient(String denom,String idClient,String nom,String ville){
 		super();
+		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+		ArrayList<ArrayList<String>> listeClients = SGBD.recupererInformationRechercheClient(denom,idClient,nom,ville);
 		
+		donnees = new Object[1000][4];
 		
-		donnees= new Object[][]{
-				{"senghor@gmail.com","","Senghor","Leopold","Dakar"}
-		};
+		if (listeClients.size()>0){
+			ArrayList<String> listeIdentifiants = listeClients.get(0);
+			ArrayList<String> listeDenomination = listeClients.get(1);
+			ArrayList<String> listeNom = listeClients.get(2);
+			ArrayList<String> listePrenom = listeClients.get(3);
+		
+			
+		
+			//On ajoute les informations dans l'objet donnees
+			for(int i=0;i<listeIdentifiants.size();i++){
+				donnees[i][0] = listeIdentifiants.get(i);
+				donnees[i][1] = listeDenomination.get(i);
+				donnees[i][2] = listeNom.get(i);
+				donnees[i][3] = listePrenom.get(i);
+			}
+		}
+		
 	}
 	
 	

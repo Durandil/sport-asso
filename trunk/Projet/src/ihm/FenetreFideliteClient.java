@@ -67,8 +67,8 @@ public class FenetreFideliteClient extends JDialog {
 //		ArrayList<String> fideliteClient= new ArrayList<String>();
 //		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 //		String estFidele=fideliteClient.get(0);
-		
-		//if(estFidele.equals("false")){
+//		
+//		if(estFidele.equals("false")){
 			FenetreDialogCreationCompte.itemFidelite="Non";
 //		}
 //		else{
