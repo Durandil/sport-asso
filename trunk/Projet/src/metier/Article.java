@@ -132,7 +132,7 @@ public class Article {
 		
 	}
 	
-	public void modifierArticleBDD(){
+	public void modifierArticleBDD(String numArticle,String description,int prix,int poids,int stock){
 		
 		// TODO pour type de sport et categorie de prix, il faudrait récupérer
 		// l'identifiant à partir du nom qui sera affiché dans le menu déroulant
@@ -140,15 +140,21 @@ public class Article {
 		// possibilité : faire une méthode pour cela
 		
 		String requete=" UPDATE ARTICLE" +
-					   " SET DESCRIPTION = '" + this.description +"'," +
-					   	"    PRIXINITIAL = '" + this.prixInitial +"'," +
-					   	"    STOCK = '" + this.stock + "', " +
-					   	"    POIDS = '" + this.poids + "', " +
-					   	"    IDTYPE = '" + this.typeSport + "',"+
-					   	"    IDCATEGORIE = '"+ this.catPrix+"'"
+					   " SET DESCRIPTION = '" + description +"'," +
+					   	"    PRIXINITIAL = '" + prix +"'," +
+					   	"    STOCK = '" + stock + "', " +
+					   	"    POIDS = '" + poids +"' WHERE IDARTICLE='"+
+					   	numArticle +"'"
 						;
 		
 		SGBD.executeUpdate(requete);
 	}
 	
+	public void supprimerArticleBDD(String numArticle){
+		
+		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='"+numArticle+"'";
+		
+		SGBD.executeUpdate(requete);
+		
+	}
 }

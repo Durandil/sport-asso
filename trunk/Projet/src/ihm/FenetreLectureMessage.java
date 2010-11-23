@@ -3,6 +3,7 @@ package ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,7 +31,7 @@ public class FenetreLectureMessage extends JDialog{
 
 	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM ){
 		super(parent, title, modal);
-		this.setSize(200, 350);
+		this.setSize(400, 500);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -41,7 +42,6 @@ public class FenetreLectureMessage extends JDialog{
 		
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
-		panneauExpediteur.setBackground(Color.white);
 		panneauExpediteur.setPreferredSize(new Dimension(220, 60));
 		expediteurMessage=new JTextField(expediteur);
 		expediteurMessage.setEnabled(false); // pas modifiable
@@ -49,10 +49,10 @@ public class FenetreLectureMessage extends JDialog{
 		expediteurLabel=new JLabel("Expéditeur : ");
 		panneauExpediteur.add(expediteurLabel);
 		panneauExpediteur.add(expediteurMessage);
+		panneauExpediteur.setBorder(BorderFactory.createEmptyBorder());
 		
 		// Date Reception Message
 		JPanel panneauDate= new JPanel();
-		panneauDate.setBackground(Color.white);
 		panneauDate.setPreferredSize(new Dimension(220, 60));
 		dateMessage=new JTextField(date);
 		dateMessage.setEnabled(false);
@@ -60,10 +60,10 @@ public class FenetreLectureMessage extends JDialog{
 		dateLabel=new JLabel("Date : ");
 		panneauDate.add(dateLabel);
 		panneauDate.add(dateMessage);
+		panneauDate.setBorder(BorderFactory.createEmptyBorder());
 		
 		// Sujet Message
 		JPanel panneauSujet= new JPanel();
-		panneauSujet.setBackground(Color.white);
 		panneauSujet.setPreferredSize(new Dimension(220, 60));
 		sujetMessage=new JTextField(sujet);
 		sujetMessage.setEnabled(false);
@@ -71,22 +71,26 @@ public class FenetreLectureMessage extends JDialog{
 		sujetLabel=new JLabel("Objet : ");
 		panneauExpediteur.add(sujetLabel);
 		panneauExpediteur.add(sujetMessage);
+		panneauExpediteur.setBorder(BorderFactory.createEmptyBorder());
 		
 		// Contenu Message
 		JPanel panneauContenuMessage= new JPanel();
-		panneauContenuMessage.setBackground(Color.white);
 		panneauContenuMessage.setPreferredSize(new Dimension(220, 60));
-		contenuMessage=new JTextArea(contenu);
+		panneauContenuMessage.setBorder(BorderFactory.createEmptyBorder());
+		contenuMessage=new JTextArea(20,15);
+		contenuMessage.setText(contenu);
 		contenuMessage.setEnabled(false);
 		contenuMessage.setPreferredSize(new Dimension(90, 25));
-		contenuLabel=new JLabel("Denomination");
+		contenuLabel=new JLabel("Contenu : ");
 		panneauContenuMessage.add(contenuLabel);
 		panneauContenuMessage.add(contenuMessage);
 		
 		JPanel panneauIdentificationMessage = new JPanel();
+		panneauIdentificationMessage.setLayout(new GridLayout(3,1,5,5));
 		panneauIdentificationMessage.add(panneauExpediteur);
 		panneauIdentificationMessage.add(panneauDate);
 		panneauIdentificationMessage.add(panneauSujet);
+		panneauIdentificationMessage.setBorder(BorderFactory.createEmptyBorder());
 		
 		// Définition du panneau dans lequel seront présents les boutons de retour à la page précédente 
 		// et de suppression du message

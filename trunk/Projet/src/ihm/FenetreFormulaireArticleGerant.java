@@ -48,13 +48,13 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	}
 	
 	// Constructeur pour la modification d'un article
-	public FenetreFormulaireArticleGerant(JFrame parent, String title, boolean modal,Article article ){
+	public FenetreFormulaireArticleGerant(JFrame parent, String title, boolean modal,String idArticle){
 		super(parent, title, modal);
 		this.setSize(450, 650);
 		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(article);
+		this.initComponent(idArticle);
 	}
 	
 	
@@ -206,54 +206,56 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		this.getContentPane().add(panneauBoutonsBas,"South");
 	}
 	
-	private void initComponent(Article article){
+	private void initComponent(String idArticle){
 		//Pour le moment on ne modifie pas la catégorie de prix et de sport
+		String descriptionA = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION", "IDARTICLE", idArticle);
+		String poidsA = SGBD.selectStringConditionString("ARTICLE", "POIDS", "IDARTICLE", idArticle);
+		String prixA = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL", "IDARTICLE", idArticle);
+		String stockA = SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
+		
+		
 		JPanel panneauCentral = new JPanel();
 		
-		JPanel panNumArticle = new JPanel();
 		JPanel panDescription = new JPanel();
 		JPanel panPoids = new JPanel();
 		JPanel panStock = new JPanel();
 		JPanel panPrixInitial = new JPanel();
 		
-		panNumArticle.setPreferredSize(dimensionStandard);
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panStock.setPreferredSize(dimensionStandard);
 		panPrixInitial.setPreferredSize(dimensionStandard);
 		
-		
-		panNumArticle.setBorder(BorderFactory.createEmptyBorder());
 		panDescription.setBorder(BorderFactory.createEmptyBorder());
 		panPoids.setBorder(BorderFactory.createEmptyBorder());
 		panStock.setBorder(BorderFactory.createEmptyBorder());
 		panPrixInitial.setBorder(BorderFactory.createEmptyBorder());
 		
-		numArticleLabel = new JLabel("Numéro Article : ");
 		descriptionLabel = new JLabel("Description : ");
 		poidsLabel = new JLabel("Poids : ");
 		prixLabel = new JLabel("Prix Initial : ");
 		stockLabel = new JLabel("Stock : ");
 		
-		numArticle = new JTextField(article.getIdArticle());
-		description = new JTextField(article.getDescription());
-		poids = new JTextField(String.valueOf(article.getPoids()));
-		prix = new JTextField(String.valueOf(article.getPrixInitial()));
-		stock = new JTextField(String.valueOf(article.getStock()));
+		description = new JTextField(descriptionA);
+		poids = new JTextField(poidsA);
+		prix = new JTextField(prixA);
+		stock = new JTextField(stockA);
 		
-		panNumArticle.add(numArticleLabel);
+		description.setPreferredSize(new Dimension(100,20));
+		poids.setPreferredSize(new Dimension(100,20));
+		prix.setPreferredSize(new Dimension(100,20));
+		stock.setPreferredSize(new Dimension(100,20));
+		
 		panDescription.add(descriptionLabel);
 		panPoids.add(poidsLabel);
 		panStock.add(stockLabel);
 		panPrixInitial.add(prixLabel);
 		
-		panNumArticle.add(numArticle);
 		panDescription.add(description);
 		panPoids.add(poids);
 		panStock.add(stock);
 		panPrixInitial.add(prix);
 		
-		panneauCentral.add(panNumArticle);
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panStock);
@@ -263,7 +265,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		
 		JPanel panneauBoutonsBas = new JPanel();
 		
-		JButton boutonConfirmation = new JButton("Confirmer");
+		JButton boutonConfirmation = new JButton("Confirmer modification");
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		
 		boutonConfirmation.addActionListener(new ActionListener() {

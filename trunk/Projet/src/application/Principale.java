@@ -30,11 +30,9 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		FenetreCompte fen=new FenetreCompte();
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
-//		String id = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE","IDCLIENT", "iueihtam@laposte.fr");
-//		System.out.println(id);
+		MenuGerant menu= new MenuGerant();
 		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
