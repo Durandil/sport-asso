@@ -49,6 +49,12 @@ public class FenetreCatalogueGerant extends JFrame{
 		panIcon.setBackground(Color.white);
 		panIcon.add(icon);
     	
+		// Définition du tableau qui accueillera l'ensemble des articles disponibles
+    	// après interrogation de la base de données
+	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false));
+	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+		
+		
 		// Création du panneau qui accueille les boutons du haut permettant la gestion des articles
     	JPanel panneauBoutonHaut= new JPanel();
     	panneauBoutonHaut.setLayout(new GridLayout(1,3,5,5));
@@ -80,7 +86,11 @@ public class FenetreCatalogueGerant extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// modification de l'article selectionné dans la catalogue
+				int ligne = tableau.getSelectedRow();
+				String numArticle= tableau.getValueAt(ligne, 0).toString();
 				
+				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
+				formulaire.setVisible(true);
 			}
 		});
     	
@@ -95,10 +105,6 @@ public class FenetreCatalogueGerant extends JFrame{
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
-    	// Définition du tableau qui accueillera l'ensemble des articles disponibles
-    	// après interrogation de la base de données
-	    JTable tableau = new JTable(new ModeleTableauCatalogue(false));
-	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	    
 	    // Définition du panneau qui contiendra les boutons de confirmation et de retour à la page précédente
 	    JPanel panneauBouton=new JPanel();
