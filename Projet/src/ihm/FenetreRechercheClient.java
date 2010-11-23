@@ -36,6 +36,13 @@ public class FenetreRechercheClient extends JDialog{
 	
 	private void initComponent(){
 		
+		// Création d'un panneau qui regroupera : le bouton de recherche des clients selon les critères entrés en paramètre
+		// le tableau des résultats de la recherche
+		// et le bouton de retour à la page précédante
+		// crées et implémentés au dessus
+		final JPanel panneauBas = new JPanel();
+		panneauBas.setLayout(new BorderLayout());
+		
 		// Définition du panneau qui acceuillera tous les panneaux avec les principaux critères de recherche de clients
 		JPanel panneauChampsRecherche = new JPanel();
 		panneauChampsRecherche.setBorder(BorderFactory.createTitledBorder("Recherche de clients selon :"));
@@ -95,8 +102,7 @@ public class FenetreRechercheClient extends JDialog{
 		
 		
 		// TODO Faire le panneau de la recherche client;
-		final JTable tableauRechercheClient = new JTable(new ModeleTableauClient());
-		tableauRechercheClient.setVisible(false);
+		
 		
 		// Création du bouton de validation de la recherche
 		JButton boutonValidationRecherche = new JButton("Rechercher");
@@ -107,7 +113,9 @@ public class FenetreRechercheClient extends JDialog{
 				//Auto-generated method stub
 				// TODO afficher un tableau en dessous avec les résultats de la recherche
 				// setVisible(=True) permettra d'afficher le tableau  avec les résultats de la recherche
+				final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(denomination.getText(),numero.getText(),nom.getText(), ville.getText()));
 				tableauRechercheClient.setVisible(true);
+				panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
 			}
 		});
 		
@@ -171,16 +179,10 @@ public class FenetreRechercheClient extends JDialog{
 			}
 		});
 		panneauBasBoutons.add(boutonRetour);
-		
-		// Création d'un panneau qui regroupera : le bouton de recherche des clients selon les critères entrés en paramètre
-		// le tableau des résultats de la recherche
-		// et le bouton de retour à la page précédante
-		// crées et implémentés au dessus
-		JPanel panneauBas = new JPanel();
-		panneauBas.setLayout(new BorderLayout());
-		panneauBas.add(boutonValidationRecherche,"North");
-		panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
 		panneauBas.add(panneauBasBoutons,"South");
+		panneauBas.add(boutonValidationRecherche,"North");
+		
+		
 		
 		 
 		

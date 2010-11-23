@@ -22,9 +22,9 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	//Penser à modifier les id/mdp
 
@@ -697,8 +697,8 @@ public class SGBD {
 			
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
-			res=st.executeQuery("SELECT NBPOINTS FROM CLIENT,CARTE_FIDELITE" +
-								"WHERE CLIENT.IDCLIENT=CARTE_FIDELITE.IDCLIENT AND CLIENT.IDCLIENT='"+identifiant+"' ;");
+			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
+								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"' ;");
 			
 			boolean champVide = res.getBoolean(1);
 			
@@ -746,6 +746,49 @@ public class SGBD {
 		return resultat;
 	}
 	
-	
+	// Cette méthode permet de selectionner tous les individus satifaisant l'un des critères remplis
+	// dans la fenetre de recherche d'un client chez le gérant
+	// Elle retournera uniquement l'identifiant de l'utilisateur
+	// Pour récupérer les autres attributs, on utilisera SelectConditionString
+	public static ArrayList<ArrayList<String>> recupererInformationRechercheClient(String denomination,String idClient,String nomClient,String ville){
+		SGBD.connecter();
+		Statement st = null ;
+		ResultSet res= null;
+		ArrayList<ArrayList<String>> informationsClient = new ArrayList<ArrayList<String>>();
+		
+		try{
+			st=c.createStatement();
+			res=st.executeQuery("SELECT IDCLIENT ,DENOMINATIONCLIENT, NOMCLIENT, PRENOMCLIENT" +
+					" FROM VILLE CLIENT " +
+					"WHERE VILLE.CODECOMMUNE=CLIENT.CODECOMMUNE  " +
+					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
+					"' or NOMCLIENT='"+nomClient +"'" +
+					" or CLIENT.NOMVILLE='"+ville+"' );");
+			
+		
+			while (res.next()){
+				ArrayList<String> listeString = new ArrayList<String>();
+				String s = res.getObject(1).toString();
+				String s2 = res.getObject(2).toString();
+				String s3 = res.getObject(3).toString();
+				String s4 = res.getObject(4).toString();
+				listeString.add(s);
+				listeString.add(s2);
+				listeString.add(s3);
+				listeString.add(s4);
+				informationsClient.add(listeString);
+			}
+			
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			SGBD.fermer();
+		}
+		
+		return informationsClient;
+	}
 	
 }
