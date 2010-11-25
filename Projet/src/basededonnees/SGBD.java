@@ -538,7 +538,6 @@ public class SGBD {
 	// le prix x quantité ( requete imbriquée à réaliser)
 	public static String statistiqueClassiqueClient(String identifiant, String statistique){
 		connecter();
-		String resultat ;
 		Statement st = null;
 		ResultSet res = null;
 		String rs = "";
@@ -601,6 +600,10 @@ public class SGBD {
 		
 		connecter();
 		ArrayList<ArrayList<String>> article = new ArrayList<ArrayList<String>>();
+		ArrayList<String> listeString1 = new ArrayList<String>();
+		ArrayList<String> listeString2 = new ArrayList<String>();
+		ArrayList<String> listeString3 = new ArrayList<String>();
+		ArrayList<String> listeString4 = new ArrayList<String>();
 		Statement st = null;
 		ResultSet res = null;
 		
@@ -610,21 +613,25 @@ public class SGBD {
 			
 			res = st.executeQuery("select idarticle,description,stock,prixinitial " + "from ARTICLE " +
 					"where stock=0 or idarticle = ( select id article from articles,categorie " +
-					"where article.idcategorie = categorie.idcategorie and stock< quantitelimite) ;" );
+					"where article.idcategorie = categorie.idcategorie and stock< quantitelimite) " );
 
 			while (res.next()) {
 
-				ArrayList<String> listeString = new ArrayList<String>();
+				
 				String s = res.getObject(1).toString();
 				String s2 = res.getObject(2).toString();
 				String s3 = res.getObject(3).toString();
 				String s4 = res.getObject(4).toString();
-				listeString.add(s);
-				listeString.add(s2);
-				listeString.add(s3);
-				listeString.add(s4);
-				article.add(listeString);
+				listeString1.add(s);
+				listeString2.add(s2);
+				listeString3.add(s3);
+				listeString4.add(s4);
+				
 			}
+			article.add(listeString1);
+			article.add(listeString2);
+			article.add(listeString3);
+			article.add(listeString4);
 
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative d’interrogation : "
@@ -653,7 +660,6 @@ public class SGBD {
 								 "WHERE ARTICLE.IDARTICLE=LISTING_ARTICLES_COMMANDES.IDARTICLE and" +
 								 "IDCOMMANDE='"+ idCommande +"';");
 			
-			ResultSetMetaData rsmd = res.getMetaData();
 			
 			while (res.next()) {
 
@@ -698,8 +704,9 @@ public class SGBD {
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"' ;");
+								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
+			System.out.println(res.getString(1).toString());
 			boolean champVide = res.getBoolean(1);
 			
 			// si le client n'a pas de compte fidelité (champVide=true) 
