@@ -50,7 +50,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		quantite=new JComboBox();
 		
 		for(int j=1;j<100;j++){
-			quantite.addItem(j);
+			quantite.addItem(j+"");
 		}
 		
 		quantite.addActionListener(new ActionListener() {

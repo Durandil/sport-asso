@@ -102,20 +102,20 @@ public class FenetreRechercheClient extends JDialog{
 		
 		
 		// TODO Faire le panneau de la recherche client;
-		
-		
+	
 		// Création du bouton de validation de la recherche
 		JButton boutonValidationRecherche = new JButton("Rechercher");
 		boutonValidationRecherche.addActionListener(new ActionListener() {
-			
 			
 			public void actionPerformed(ActionEvent e) {
 				//Auto-generated method stub
 				// TODO afficher un tableau en dessous avec les résultats de la recherche
 				// setVisible(=True) permettra d'afficher le tableau  avec les résultats de la recherche
-				final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(mail.getText(),nom.getText(),denomination.getText(), ville.getText()));
-				tableauRechercheClient.setVisible(true);
-				panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
+				//final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(mail.getText(),nom.getText(),denomination.getText(), ville.getText()));
+				//tableauRechercheClient.setVisible(true);
+				//panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
+				FenetreAffichageRecherche fen = new FenetreAffichageRecherche(null, "Recherche", true, mail.getText(),nom.getText(),denomination.getText(), ville.getText());
+				fen.setVisible(true);
 			}
 		});
 		
@@ -124,48 +124,23 @@ public class FenetreRechercheClient extends JDialog{
 		JPanel panneauBasBoutons = new JPanel();
 		panneauBasBoutons.setLayout(new GridLayout(1,2,5,5));
 		
-		// TODO Afficher un champ permettant au gérant de rentrer l'identifiant de client que le gérant souhaite consulter
+		// TODO Bouton qui permet au gérant d'accèder à la fiche client qu'il souhaite consulter
 		JPanel panneauRechercheClient = new JPanel();
 		panneauRechercheClient.setLayout(new GridLayout(1,3,5,5));
-		clientLabel = new JLabel("Client recherché ?");
-		clientIdentifiant = new JTextField();
-		JButton validationRecherche = new JButton("OK");
+		JButton validationRecherche = new JButton("Accès client");
+		
 		validationRecherche.addActionListener(new ActionListener() {
-			
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stud
-				
-				//listeMails recense l'ensemble des adresses mails présentes dans la base
-				//L'entier test passe à 1 si l'adresse renseignée existe bien dans la base de données
-				//Si test reste à 0, on avertit le gérant que l'adresse n'existe pas
-				ArrayList<String> listeMails = new ArrayList<String>();
-				listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
-				byte test = 0;
-				
-				for (int i = 0; i < listeMails.size(); i++) {
-					if (clientIdentifiant.getText().equals(listeMails.get(i))) {
-						test = 1;
-					}
-				}
-				
-				if (test == 0) {
-					mailInexistant = new JOptionPane();
-					ImageIcon image = new ImageIcon("src/images/warning.png");
-					mailInexistant.showMessageDialog(null, "Cette adresse mail n'existe pas !", "Attention", JOptionPane.WARNING_MESSAGE, image);
-				}
-				else{
-					// on affiche la fiche client correspondante à l'identifiant saisi
-					ArrayList<String> client = new ArrayList<String>();
-					client=SGBD.recupererAttributClient(clientIdentifiant.getText());
-					//FicheClient ficheDuClient = new FicheClient(null, "Fiche du client : "+ clientIdentifiant.getText(), true, clientCourant);
-					//ficheDuClient.setVisible(true);
-				}
-					
+				// on affiche la fiche client correspondante à l'identifiant du client
+				ArrayList<String> client = new ArrayList<String>();
+				client=SGBD.recupererAttributClient(clientIdentifiant.getText());
+
 			}
+
 		});
-		panneauRechercheClient.add(clientLabel);
-		panneauRechercheClient.add(clientIdentifiant);
+
 		panneauRechercheClient.add(validationRecherche);
 		panneauBasBoutons.add(panneauRechercheClient);
 		

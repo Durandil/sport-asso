@@ -611,9 +611,7 @@ public class SGBD {
 		
 			st = c.createStatement();
 			
-			res = st.executeQuery("select idarticle,description,stock,prixinitial " + "from ARTICLE " +
-					"where stock=0 or idarticle = ( select id article from articles,categorie " +
-					"where article.idcategorie = categorie.idcategorie and stock< quantitelimite) " );
+			res = st.executeQuery("select idarticle,description,stock,prixinitial from ARTICLE where stock=0 or idarticle = ( select idarticle from article, categorie where article.idcategorie = categorie.idcategorie and stock< categorie.QUANTITELIMITE)" );
 
 			while (res.next()) {
 
@@ -703,8 +701,13 @@ public class SGBD {
 			
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
+			
+			
+//			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
+//								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+			
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+					"WHERE CARTE_FIDELITE.IDCLIENT='arthur.laroch@gmail.com'");
 			
 			System.out.println(res.getString(1).toString());
 			boolean champVide = res.getBoolean(1);

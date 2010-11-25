@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 
 import basededonnees.SGBD;
 
-import metier.Client;
 
 
 public class FenetreFideliteClient extends JDialog {
@@ -64,10 +63,10 @@ public class FenetreFideliteClient extends JDialog {
 		panFidelite.add(fideliteLabel);
 		
 		// TODO récupérer dans base de donnees fidelite SANS ERREUR !!!!
-		ArrayList<String> fideliteClient= new ArrayList<String>();
-		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+//		ArrayList<String> fideliteClient= new ArrayList<String>();
+//		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 //		String estFidele=fideliteClient.get(0);
-//		
+		
 //		if(estFidele.equals("false")){
 			FenetreDialogCreationCompte.itemFidelite="Non";
 //		}

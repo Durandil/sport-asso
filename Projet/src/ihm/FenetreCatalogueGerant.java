@@ -11,10 +11,13 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
+
+import metier.Article;
 
 
 public class FenetreCatalogueGerant extends JFrame{
@@ -76,7 +79,17 @@ public class FenetreCatalogueGerant extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// suppression de l'article selectionné dans le catalogue
+				int ligne = tableau.getSelectedRow();
+				String numArticle= tableau.getValueAt(ligne, 0).toString();
 				
+				// AUCUN EFFET SUR LA TABLE POUR LE MOMENT
+//				Article.supprimerArticleBDD(numArticle);
+//				
+//				JOptionPane supprime = new JOptionPane();
+//				ImageIcon image = new ImageIcon("src/images/information.png");
+//				supprime.showMessageDialog(null, "L'article a bien été supprimé", "Information", JOptionPane.INFORMATION_MESSAGE, image);
+//				tableau.removeRowSelectionInterval(ligne, ligne);
+
 			}
 		});
     	

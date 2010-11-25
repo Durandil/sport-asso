@@ -47,33 +47,23 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 			// reapprovisionnés
 			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
 			listeArticles = SGBD.selectArticlesReapprovisionnement();
+			ArrayList<String >listeIdentifiants = listeArticles.get(0);
+			ArrayList<String >listeDescriptions = listeArticles.get(1);
+			ArrayList<String >listeStocks = listeArticles.get(2);
+			ArrayList<String >listeEtats = listeArticles.get(3);
 			
 			donnees = new Object[100][4];
 			
 			// on ajoute les informations dans l'objet
-			int j=0;
-			for (ArrayList<String> arrayList : listeArticles) {
-				for(int i=0;i< arrayList.size();i++){
-					donnees[i][j] = arrayList.get(i);
-				}
-				j++;
+			for(int i=0;i< listeIdentifiants.size();i++){
+					donnees[i][0] = listeIdentifiants.get(i);
+					donnees[i][1] = listeDescriptions.get(i);
+					donnees[i][2] = listeStocks.get(i);
+					donnees[i][3] = listeEtats.get(i);
 			}
+			
 		
 		}
-		/*
-		for( Article element : ensArticles){
-				
-		 */
-		
-		/*donnees= new Object[][]{
-				{"ART1","Maillot de foot",3,"En stock"},
-				{"ART2","Maillot de rugby",6,"En stock"},
-				{"ART3","Short de foot",9,"En stock"},
-				{"ART4","Crosse de hockey sur glace",4,"En stock"},
-				{"ART5","Ballon de basket-ball",7,"En stock"}
-		};
-		donnees[5][5] = 5;
-		*/
 	}
 	
 
@@ -99,6 +89,8 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         return entetes[columnIndex];
     }
+    
+
 
 }
 

@@ -70,7 +70,7 @@ public class FenetreMessagerie extends JFrame {
 		});
     	
     	boutonSupprimerTout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Message.supprimerAllBDD(); //suppression message de la DB
 				//tableauMessage.removeAllMessage(); // suppression message tableau
@@ -92,7 +92,7 @@ public class FenetreMessagerie extends JFrame {
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent arg0) {
-			// l'instruction permet de femrer la fenetre en cours	
+			// l'instruction permet de fermer la fenetre en cours	
 			setVisible(false);
 			}			
 		});

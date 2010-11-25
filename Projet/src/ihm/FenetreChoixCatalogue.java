@@ -14,7 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import metier.Article;
+
 
 
 public class FenetreChoixCatalogue extends JDialog {

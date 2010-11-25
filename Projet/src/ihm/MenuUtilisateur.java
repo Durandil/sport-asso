@@ -1,5 +1,4 @@
 package ihm;
-import ihm.DialogMessage;
 import ihm.FenetreCommandeArticle;
 import ihm.FenetreContactVendeur;
 import ihm.FenetreDialogGestionCompteClient;
@@ -9,19 +8,14 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JRadioButtonMenuItem;
 
-import metier.Client;
-import metier.Particulier;
 
 
 public class MenuUtilisateur extends JFrame implements ActionListener{
@@ -96,6 +90,7 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 		
 		itemInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				@SuppressWarnings("unused")
 				FenetreInformationsClient contactVendeur= new FenetreInformationsClient();
 			}
 		});

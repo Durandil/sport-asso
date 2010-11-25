@@ -31,8 +31,8 @@ public class FenetreLectureMessage extends JDialog{
 
 	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM ){
 		super(parent, title, modal);
-		this.setSize(400, 500);
-		this.setLocationRelativeTo(null);
+		this.setSize(900, 300);
+		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent(exp,sujetM,contenuM,dateM);
@@ -42,10 +42,9 @@ public class FenetreLectureMessage extends JDialog{
 		
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
-		panneauExpediteur.setPreferredSize(new Dimension(220, 60));
 		expediteurMessage=new JTextField(expediteur);
 		expediteurMessage.setEnabled(false); // pas modifiable
-		expediteurMessage.setPreferredSize(new Dimension(90, 25));
+		expediteurMessage.setPreferredSize(new Dimension(130, 25));
 		expediteurLabel=new JLabel("Expéditeur : ");
 		panneauExpediteur.add(expediteurLabel);
 		panneauExpediteur.add(expediteurMessage);
@@ -53,7 +52,6 @@ public class FenetreLectureMessage extends JDialog{
 		
 		// Date Reception Message
 		JPanel panneauDate= new JPanel();
-		panneauDate.setPreferredSize(new Dimension(220, 60));
 		dateMessage=new JTextField(date);
 		dateMessage.setEnabled(false);
 		dateMessage.setPreferredSize(new Dimension(90, 25));
@@ -64,10 +62,9 @@ public class FenetreLectureMessage extends JDialog{
 		
 		// Sujet Message
 		JPanel panneauSujet= new JPanel();
-		panneauSujet.setPreferredSize(new Dimension(220, 60));
 		sujetMessage=new JTextField(sujet);
 		sujetMessage.setEnabled(false);
-		sujetMessage.setPreferredSize(new Dimension(90, 25));
+		sujetMessage.setPreferredSize(new Dimension(200, 25));
 		sujetLabel=new JLabel("Objet : ");
 		panneauExpediteur.add(sujetLabel);
 		panneauExpediteur.add(sujetMessage);
@@ -75,27 +72,24 @@ public class FenetreLectureMessage extends JDialog{
 		
 		// Contenu Message
 		JPanel panneauContenuMessage= new JPanel();
-		panneauContenuMessage.setPreferredSize(new Dimension(220, 60));
-		panneauContenuMessage.setBorder(BorderFactory.createEmptyBorder());
-		contenuMessage=new JTextArea(20,15);
+		panneauContenuMessage.setBorder(BorderFactory.createLineBorder(Color.darkGray));
+		contenuMessage=new JTextArea(5,15);
 		contenuMessage.setText(contenu);
 		contenuMessage.setEnabled(false);
-		contenuMessage.setPreferredSize(new Dimension(90, 25));
 		contenuLabel=new JLabel("Contenu : ");
 		panneauContenuMessage.add(contenuLabel);
 		panneauContenuMessage.add(contenuMessage);
 		
 		JPanel panneauIdentificationMessage = new JPanel();
-		panneauIdentificationMessage.setLayout(new GridLayout(3,1,5,5));
-		panneauIdentificationMessage.add(panneauExpediteur);
-		panneauIdentificationMessage.add(panneauDate);
-		panneauIdentificationMessage.add(panneauSujet);
-		panneauIdentificationMessage.setBorder(BorderFactory.createEmptyBorder());
+		panneauIdentificationMessage.setLayout(new BorderLayout());
+		panneauIdentificationMessage.add(panneauExpediteur,"West");
+		panneauIdentificationMessage.add(panneauDate,"Center");
+		panneauIdentificationMessage.add(panneauSujet,"East");
+		panneauIdentificationMessage.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
 		// Définition du panneau dans lequel seront présents les boutons de retour à la page précédente 
 		// et de suppression du message
 		JPanel panneauBoutonsBas=new JPanel();
-		panneauBoutonsBas.setBackground(Color.white);
 		
 		JButton boutonRetourMessagerie= new JButton("Retour à la Boite de Réception");
 		JButton boutonSupprimerMessage= new JButton("Supprimer Message");
@@ -103,14 +97,14 @@ public class FenetreLectureMessage extends JDialog{
 		//Définition des actions relatives à chaque bouton
 		
 		boutonRetourMessagerie.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				// permet le retour vers la page contenant la boite de reception du gérant
 			}			
 		});
 		
 		boutonSupprimerMessage.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO permet de supprimer le message sélectionné dans la base de donnée
 				setVisible(false);
 			}			
