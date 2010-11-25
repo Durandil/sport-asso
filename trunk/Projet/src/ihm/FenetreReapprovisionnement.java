@@ -70,14 +70,10 @@ public class FenetreReapprovisionnement extends JFrame {
 	    commandeBouton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				int ligne = tableau.getSelectedRow();
-				//String numArticle = tableau.getValueAt(ligne, 0).toString();
-				// vérifier que la 1ère colonne corresponde bien aux numArticle pour pouvoir faire 
-				// la suite
-				
-				//FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numArticle);
-				//fen.setVisible(true);
+				String numeroArticle = tableau.getValueAt(ligne, 0).toString();
+				FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numeroArticle);
+				fen.setVisible(true);
 			}
 		});
 	    

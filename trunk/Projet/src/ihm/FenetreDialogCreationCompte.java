@@ -12,13 +12,10 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 
 import basededonnees.SGBD;
@@ -34,8 +31,8 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 */
 	private static final long serialVersionUID = 1L;
 	//private DialogInfo zInfo = new DialogInfo();
-	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
-	private JTextField nom, prenom,adresse,ville,codePostal,telephone,identifiant,denomination;
+	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
+	private JTextField nom, prenom,adresse,codePostal,telephone,identifiant,denomination;
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = true;

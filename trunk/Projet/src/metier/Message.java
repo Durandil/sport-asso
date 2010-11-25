@@ -95,8 +95,6 @@ public class Message {
 	}
 	
 	// TODO il faut aussi implémenter la suppression d'un tuple (message) de la MESSAGE
-	// ainsi qu'une méthode pour supprimer tous les messages de la table de la base de données
-	// et du tableau
 	
 	public void supprimerBDD(){
 		// TODO vérifier si la requete est correcte

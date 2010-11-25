@@ -26,7 +26,11 @@ public class BDD {
 		SGBD.executeUpdate("DROP TABLE REDUCTION");
 		SGBD.executeUpdate("DROP TABLE CATEGORIE");
 		SGBD.executeUpdate("DROP TABLE QUANTITE");		
-				
+//      SGBD.executeUpdate("DROP SEQUENCE S_ARTICLE");
+//		SGBD.executeUpdate("DROP SEQUENCE S_PROMOTION");
+//		SGBD.executeUpdate("DROP SEQUENCE S_FIDELITE");
+		
+		
 		SGBD.executeUpdate("CREATE TABLE QUANTITE" +
 				"(IDQUANTITE CHAR(8),"+
 			"QUANTITE NUMBER(4),"+
@@ -139,7 +143,12 @@ public class BDD {
 				"DATEMESSAGE DATE,"+
 				"CONSTRAINT PK_MESSAGE PRIMARY KEY (IDMESSAGE),"+
 				"CONSTRAINT FK_MESSAGE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
-
+		
+		SGBD.executeUpdate("CREATE SEQUENCE S_ARTICLE");
+		
+		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION");
+		
+		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE");
 		
 	}
 	

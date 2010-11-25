@@ -1,9 +1,12 @@
 package ihm;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import basededonnees.SGBD;
 
 import metier.Article;
 
@@ -29,7 +34,8 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	private JComboBox articleBox,populationBox;
 	private JTextField description,pourcentPromo;
 	private String itemArticlePromo="";
-	
+	private JComboBox cbmoisDebut, cbjourDebut,cbanneeDebut ;
+	private JComboBox cbmoisFin, cbjourFin,cbanneeFin ;
 	
 	// Constructeur pour l'ajout d'une promotion
 	public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal ){
@@ -53,7 +59,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	
 	private void initComponent(){
 		JPanel panneauCentralFenetre = new JPanel();
-		
+		panneauCentralFenetre.setLayout(new GridLayout(6, 1,5,5));
 		
 		JPanel panDescriptionPromotion = new JPanel();
 		JPanel panPopulation = new JPanel();
@@ -69,19 +75,17 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panArticle.setPreferredSize(dimensionStandard);
 		panPourcentPromo.setPreferredSize(dimensionStandard);
 		
-		panDateDebut.setBorder(BorderFactory.createEmptyBorder());
+		panDateDebut.setBorder(BorderFactory.createTitledBorder("Date début Promotion"));
 		panDescriptionPromotion.setBorder(BorderFactory.createEmptyBorder());
 		panPopulation.setBorder(BorderFactory.createEmptyBorder());
-		panDateFin.setBorder(BorderFactory.createEmptyBorder());
+		panDateFin.setBorder(BorderFactory.createTitledBorder("Date Fin Promotion"));
 		panArticle.setBorder(BorderFactory.createEmptyBorder());
 		panPourcentPromo.setBorder(BorderFactory.createEmptyBorder());
 		
 		descriptionLabel = new JLabel("Description de la promotion : ");
 		populationLabel = new JLabel(" Promotion adhérent ? ");
 		articleLabel = new JLabel("Article concerné : ");
-		dateDebutLabel = new JLabel("Date début Promotion : ");
-		dateFinLabel = new JLabel("Date fin Promotion : ");
-		pourcentLabel= new JLabel("Pourcenatge de promotion :");
+		pourcentLabel= new JLabel("Pourcentage de promotion :");
 		
 		pourcentPromo = new JFormattedTextField(NumberFormat.getNumberInstance());
 		description = new JTextField();
@@ -96,6 +100,13 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		articleBox = new JComboBox();
 		//TODO récupération liste tous les articles
+		ArrayList<String> listeArticles = new ArrayList<String>();
+		listeArticles = SGBD.selectListeString("ARTICLE", "IDARTICLE");
+		
+		for (String article : listeArticles) {
+			articleBox.addItem(article);
+		}
+		articleBox.setSelectedIndex(0);
 		
 		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,12 +115,53 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 		
+		cbjourDebut = new JComboBox();
+		cbjourFin = new JComboBox();
+		
+		for(int i=1 ; i<32;i++){
+			cbjourDebut.addItem(i+"");
+			cbjourFin.addItem(i+"");
+		}
+
+		
+		cbmoisDebut = new JComboBox();
+		cbmoisFin = new JComboBox();
+		
+		for(int j=1 ; j<13;j++){
+			cbmoisDebut.addItem(j+"");
+			cbmoisFin.addItem(j+"");
+		}
+
+		
+		cbanneeDebut = new JComboBox();
+		cbanneeFin = new JComboBox();
+		
+		for(int k=2010 ; k<2040;k++){
+			cbanneeDebut.addItem(k+"");
+			cbanneeFin.addItem(k+"");
+		}
+
+		
+		cbanneeDebut.setVisible(true);
+		cbanneeFin.setVisible(true);
+		cbmoisFin.setVisible(true);
+		cbmoisDebut.setVisible(true);
+		cbjourFin.setVisible(true);
+		cbjourDebut.setVisible(true);
+		
+		cbanneeDebut.setPreferredSize(new Dimension(5, 7));
+		cbanneeFin.setPreferredSize(new Dimension(5, 7));
+		cbmoisFin.setPreferredSize(new Dimension(5, 5));
+		cbmoisDebut.setPreferredSize(new Dimension(5, 5));
+		cbjourFin.setPreferredSize(new Dimension(5, 5));
+		cbjourDebut.setPreferredSize(new Dimension(5, 5));
+		
+		panDateDebut.setLayout(new GridLayout(1,4,5,5));
+		panDateFin.setLayout(new GridLayout(1,4,5,5));
 		
 		panDescriptionPromotion.add(descriptionLabel);
 		panPopulation.add(populationLabel);
 		panArticle.add(articleLabel);
-		panDateDebut.add(dateDebutLabel);
-		panDateFin.add(dateFinLabel);
 		panPourcentPromo.add(pourcentLabel);
 		
 		
@@ -117,6 +169,14 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panPopulation.add(populationBox);
 		panArticle.add(articleBox);
 		panPourcentPromo.add(pourcentPromo);
+		
+		panDateDebut.add(cbjourDebut);
+		panDateDebut.add(cbmoisDebut);
+		panDateDebut.add(cbanneeDebut);
+		
+		panDateFin.add(cbjourFin);
+		panDateFin.add(cbmoisFin);
+		panDateFin.add(cbanneeFin);
 		
 		panneauCentralFenetre.add(panDescriptionPromotion);
 		panneauCentralFenetre.add(panPopulation);
@@ -137,7 +197,8 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		boutonConfirmation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//  TODO enregistrer la création d'une promotion
-
+				// vérifier que la date est possible ( par exemple qu'on ait pas un 31 février ou un 31 novembre)
+				
 				// puis fermer la page
 				setVisible(false);
 			}

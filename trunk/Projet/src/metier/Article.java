@@ -105,14 +105,11 @@ public class Article {
 
 	// Méthode permettant d'ajouter un article dans la table ARTICLES
 	public void ajouterBDD() {
-	
+				
 
 		String requete = "INSERT INTO ARTICLE (IDARTICLE, DESCRIPTION, PRIXINITIAL," +
-				" STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( "
-				+ "'"
-				+ this.idArticle
-				+ "',"
-				+ "'"
+				" STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( S_ARTICLE.NextVal"
+				+ ",'"
 				+ this.description
 				+ "',"
 				+ this.prixInitial 
@@ -134,10 +131,12 @@ public class Article {
 	
 	public void modifierArticleBDD(String numArticle,String description,int prix,int poids,int stock){
 		
+		// POUR LE MOMENT ON CONSIDERE QU'ON NE MODIFIE PAS LA CATEGORIE DE PRIX ET DE SPORT
+		// D'UN ARTICLE donc on ne tient pas compte du todo ci dessous
+		
 		// TODO pour type de sport et categorie de prix, il faudrait récupérer
 		// l'identifiant à partir du nom qui sera affiché dans le menu déroulant
 		// du formulaire de modification d'un article
-		// possibilité : faire une méthode pour cela
 		
 		String requete=" UPDATE ARTICLE" +
 					   " SET DESCRIPTION = '" + description +"'," +
@@ -150,11 +149,14 @@ public class Article {
 		SGBD.executeUpdate(requete);
 	}
 	
-	public void supprimerArticleBDD(String numArticle){
+	public static void supprimerArticleBDD(String numArticle){
 		
 		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='"+numArticle+"'";
 		
 		SGBD.executeUpdate(requete);
 		
+		String requete2 ="COMMIT";
+		
+		SGBD.executeUpdate(requete2);
 	}
 }

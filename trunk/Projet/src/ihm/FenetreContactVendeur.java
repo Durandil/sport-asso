@@ -92,11 +92,12 @@ public class FenetreContactVendeur extends JDialog{
 		JButton boutonEnvoyer=new JButton("Envoyer");
 		
 		boutonEnvoyer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				// TODO Améliorer la détermination/numérotation des IDMESSAGE
 				// il faudrait ajouter message à la base de données
 				java.util.Date date = new java.util.Date();
 				
+				@SuppressWarnings("deprecation")
 				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
 				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour);
 				//message.ajouterBDD();

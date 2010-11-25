@@ -18,7 +18,16 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 
     private final String[] entetes={"Identifiant","Dénomination","Nom","Prénom"} ;
 	
+    
 	
+	public ModeleTableauClient() {
+		super();
+		// TODO Auto-generated constructor stub
+		donnees = new Object[1000][4];
+		
+	}
+
+
 	public ModeleTableauClient(String idClient,String nom,String denom,String ville){
 		super();
 		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
@@ -48,6 +57,9 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 		}
 		
 	}
+	
+
+	
 	
 	
 	public int getColumnCount() {

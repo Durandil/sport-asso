@@ -183,9 +183,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 				/** ATTENTION : Si on ne touche pas aux Jcombobox, les items seront vides !**/
 				String typ = SGBD.selectStringConditionString("TYPE_SPORT", "IDTYPE", "NOMTYPE", itemSportSelectionne);
 				String cat = SGBD.selectStringConditionString("CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE", itemPrixSelectionne);
-				/** TODO : Gérer la génération d'un id article**/
-				//int compteur = SGBD.executeQuery("SELECT COUNT(*) FROM ARTICLE").getInt(1);
-				Article art = new Article("ART99999",description.getText(),typ,Float.parseFloat(p),Double.parseDouble(prx),Integer.parseInt(st),"En stock",cat);
+				/** TODO Gérer la génération d'un id article**/
+				
+				Article art = new Article(null,description.getText(),typ,Float.parseFloat(p),Double.parseDouble(prx),Integer.parseInt(st),"En stock",cat);
 				
 				// puis fermer la page
 				setVisible(false);
@@ -282,7 +282,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		boutonRetour.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				// Permet le retour à la page precedente
 				setVisible(false);
 				

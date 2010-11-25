@@ -1,19 +1,16 @@
 package ihm;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 
 import basededonnees.SGBD;
 
@@ -75,14 +72,6 @@ public class FenetreCommandeArticle extends JFrame{
 	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false));
 	   // tableau.setAutoCreateRowSorter(true); // permet de trier un tableau en cliquant sur la colonne
 	    panneauTableauCatalogue.add(new JScrollPane(tableau),"North");
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	
 	    
 	    this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
 	    
