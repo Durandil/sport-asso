@@ -46,21 +46,21 @@ public class Principale {
 //		Article art2 = new Article("ART99998", "Ballon spigouleux", "TYP00002", 200,
 //				15.30, 100,"En stock", "CAT00002");
 		
-//		/**Création d'une promo test**/
-//		String dateS = "05/11/2010";
-//		String dateS2 = "07/11/2010";
-//		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
-//		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
-//		boolean b = true;
-//		Promotion p = new Promotion("PRO99999","Promo test",date,date2,30,b);
-//		
-//		/**Création d'une deuxième promo test**/
-//		String dateS1 = "25/11/2010";
-//		String dateS21 = "30/11/2010";
-//		Date date1= SGBD.stringToDate(dateS1,"dd/MM/yyyy");
-//		Date date21= SGBD.stringToDate(dateS21,"dd/MM/yyyy");
-//		boolean bo = true;
-//		Promotion p2 = new Promotion("PRO8745","Promo test2",date1,date21,30,bo);
+		/**Création d'une promo test**/
+		String dateS = "05/11/2010";
+		String dateS2 = "07/11/2010";
+		Date date= SGBD.stringToDate(dateS,"dd/MM/yyyy");
+		Date date2= SGBD.stringToDate(dateS2,"dd/MM/yyyy");
+		boolean b = true;
+		Promotion p = new Promotion("PRO99999","Promo test",date,date2,0.3,b);
+		
+		/**Création d'une deuxième promo test**/
+		String dateS1 = "25/11/2010";
+		String dateS21 = "30/11/2010";
+		Date date1= SGBD.stringToDate(dateS1,"dd/MM/yyyy");
+		Date date21= SGBD.stringToDate(dateS21,"dd/MM/yyyy");
+		boolean bo = true;
+		Promotion p2 = new Promotion("PRO8745","Promo test2",date1,date21,0.4,bo);
 		
 		/**Instanciation d'une catégorie test**/
 //		Categorie cat = new Categorie("CAT99999","Test",100);
