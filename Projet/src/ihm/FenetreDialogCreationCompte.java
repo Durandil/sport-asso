@@ -275,7 +275,6 @@ public class FenetreDialogCreationCompte extends JDialog{
 				else {
 					String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal.getText());
 					String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
-					System.out.println(ville + "  " + idVille);
 					
 					if (itemSelectionne == "Compte Particulier")
 					{
