@@ -61,10 +61,10 @@ public class MenuGerant extends JFrame {
 				recherche.setVisible(true);
 				ArrayList<String> liste = new ArrayList<String>();
 				
-				//liste = SGBD.recupererAttributClient("qpuc@ensai.fr");
-				//for (String element : liste) {
-				//	System.out.println(element);
-				//}
+				liste = SGBD.recupererAttributClient("jneveu@ensai.fr");
+				for (String element : liste) {
+					System.out.println(element);
+				}
 				
 			}
 		});

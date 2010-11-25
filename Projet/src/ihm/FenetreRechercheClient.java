@@ -17,8 +17,8 @@ public class FenetreRechercheClient extends JDialog{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel numeroLabel,nomLabel,villeLabel,denominationLabel,clientLabel;
-	private JTextField numero,nom,denomination,ville,clientIdentifiant;
+	private JLabel mailLabel,nomLabel,villeLabel,denominationLabel,clientLabel;
+	private JTextField mail,nom,denomination,ville,clientIdentifiant;
 	private JSplitPane split;
 	private JOptionPane mailInexistant;
 
@@ -48,16 +48,16 @@ public class FenetreRechercheClient extends JDialog{
 		panneauChampsRecherche.setBorder(BorderFactory.createTitledBorder("Recherche de clients selon :"));
 		panneauChampsRecherche.setLayout(new GridLayout(4,1,5,5));
 		
-		// Définition d'un panneau avec le premier critère de recherche : le numéro du client
-		JPanel panneauNumero = new JPanel();
-		panneauNumero.setBackground(Color.white);
-		panneauNumero.setPreferredSize(new Dimension(110, 60));
-		panneauNumero.setBorder(BorderFactory.createTitledBorder("Identifiant du client"));
-		numeroLabel = new JLabel("Mail: ");
-		numero = new JTextField();
-		numero.setPreferredSize(new Dimension(90, 25));
-		panneauNumero.add(numeroLabel);
-		panneauNumero.add(numero);
+		// Définition d'un panneau avec le premier critère de recherche : le mail du client
+		JPanel panneauMail = new JPanel();
+		panneauMail.setBackground(Color.white);
+		panneauMail.setPreferredSize(new Dimension(110, 60));
+		panneauMail.setBorder(BorderFactory.createTitledBorder("Identifiant du client"));
+		mailLabel = new JLabel("Mail: ");
+		mail = new JTextField();
+		mail.setPreferredSize(new Dimension(90, 25));
+		panneauMail.add(mailLabel);
+		panneauMail.add(mail);
 		
 		// Définition d'un panneau avec un autre critère de recherche : le nom du client pour les particuliers
 		JPanel panneauNom = new JPanel();
@@ -94,7 +94,7 @@ public class FenetreRechercheClient extends JDialog{
 		panVille.add(ville);
 		
 		// Pour finir, nous ajoutons ces panneaux au grand panneau de recherche d'un client
-		panneauChampsRecherche.add(panneauNumero);
+		panneauChampsRecherche.add(panneauMail);
 		panneauChampsRecherche.add(panDenomination);
 		panneauChampsRecherche.add(panneauNom);
 		panneauChampsRecherche.add(panVille);
@@ -113,7 +113,7 @@ public class FenetreRechercheClient extends JDialog{
 				//Auto-generated method stub
 				// TODO afficher un tableau en dessous avec les résultats de la recherche
 				// setVisible(=True) permettra d'afficher le tableau  avec les résultats de la recherche
-				final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(denomination.getText(),numero.getText(),nom.getText(), ville.getText()));
+				final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(mail.getText(),nom.getText(),denomination.getText(), ville.getText()));
 				tableauRechercheClient.setVisible(true);
 				panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
 			}
@@ -140,7 +140,7 @@ public class FenetreRechercheClient extends JDialog{
 				//L'entier test passe à 1 si l'adresse renseignée existe bien dans la base de données
 				//Si test reste à 0, on avertit le gérant que l'adresse n'existe pas
 				ArrayList<String> listeMails = new ArrayList<String>();
-				listeMails = SGBD.selectListeString("CLIENTS", "MAIL");
+				listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
 				byte test = 0;
 				
 				for (int i = 0; i < listeMails.size(); i++) {

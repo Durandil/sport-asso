@@ -11,22 +11,22 @@ Insert into QUANTITE (idQuantite, Quantite) values ('QUA00003',15);
 Insert into QUANTITE (idQuantite, Quantite) values ('QUA00004',20);
 
 #Reduction
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00001',10);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00002',15);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00003',20);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00004',25);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00001',7.5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00002',10);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00003',15);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00004',20);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00001',5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00002',7.5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00003',10);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00004',15);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00001',2.5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00002',5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00003',7.5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00004',10);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00001',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00002',0.85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00003',0.8);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00004',0.75);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00001',0.925);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00002',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00003',0.85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00004',0.8);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00001',0.5);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00002',0.925);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00003',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00004',0.85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00001',0.975);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00002',0.95);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00003',0.925);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00004',0.9);
 
 
 #Type de Sport:
@@ -42,8 +42,8 @@ Insert into TYPE_SPORT (idType, NomType) values ('TYP00009','Arts Martiaux');
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
 
 #Promo:
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),25,0);
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),50,1); 
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),0.75,0);
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),0.5,1); 
 
 #Ville
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville001', '35000', 'Rennes');
