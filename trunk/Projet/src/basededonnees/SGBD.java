@@ -29,8 +29,8 @@ public class SGBD {
 	//Penser à modifier les id/mdp
 
 
-	private static final String ID = "id3198";
-	private static final String MDP = "id3198";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 
 
@@ -750,35 +750,63 @@ public class SGBD {
 	// dans la fenetre de recherche d'un client chez le gérant
 	// Elle retournera uniquement l'identifiant de l'utilisateur
 	// Pour récupérer les autres attributs, on utilisera SelectConditionString
-	public static ArrayList<ArrayList<String>> recupererInformationRechercheClient(String denomination,String idClient,String nomClient,String ville){
+	public static ArrayList<ArrayList<String>> recupererInformationRechercheClient(String idClient,String nomClient,String denomination,String ville){
 		SGBD.connecter();
 		Statement st = null ;
 		ResultSet res= null;
+		ArrayList<String> listeString1 = new ArrayList<String>();
+		ArrayList<String> listeString2 = new ArrayList<String>();
+		ArrayList<String> listeString3 = new ArrayList<String>();
+		ArrayList<String> listeString4 = new ArrayList<String>();
 		ArrayList<ArrayList<String>> informationsClient = new ArrayList<ArrayList<String>>();
 		
 		try{
 			st=c.createStatement();
-			res=st.executeQuery("SELECT IDCLIENT ,DENOMINATIONCLIENT, NOMCLIENT, PRENOMCLIENT" +
-					" FROM VILLE CLIENT " +
-					"WHERE VILLE.CODECOMMUNE=CLIENT.CODECOMMUNE  " +
+			
+			
+			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
+					" FROM VILLE, CLIENT " +
+					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
 					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
-					" or CLIENT.NOMVILLE='"+ville+"' );");
+					" or CLIENT.NOMVILLE='"+ville+"' )");
 			
-		
+			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
+					" FROM VILLE, CLIENT " +
+					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
+					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
+					"' or NOMCLIENT='"+nomClient +"'" +
+					" or CLIENT.NOMVILLE='"+ville+"' )");
 			while (res.next()){
-				ArrayList<String> listeString = new ArrayList<String>();
-				String s = res.getObject(1).toString();
-				String s2 = res.getObject(2).toString();
-				String s3 = res.getObject(3).toString();
-				String s4 = res.getObject(4).toString();
-				listeString.add(s);
-				listeString.add(s2);
-				listeString.add(s3);
-				listeString.add(s4);
-				informationsClient.add(listeString);
+				String s,s2,s3,s4;
+				s = res.getObject(1).toString();
+				listeString1.add(s);
+				if(res.getObject(2) != null){
+					
+					s2 = res.getObject(2).toString();
+					s3 = res.getObject(3).toString();
+					listeString2.add(s2);
+					listeString3.add(s3);
+					s4 ="";
+					listeString4.add(s4);
+					
+				}
+				else{
+					s2 = "";
+					s3 = "";
+					listeString2.add(s2);
+					listeString3.add(s3);
+					s4 = res.getObject(4).toString();
+					listeString4.add(s4);
+					
+				}	
+				
+				
 			}
-			
+			informationsClient.add(listeString1);
+			informationsClient.add(listeString2);
+			informationsClient.add(listeString3);
+			informationsClient.add(listeString4);
 		}
 		catch(SQLException e){
 			System.out.println("Echec de la tentative d’interrogation : "
