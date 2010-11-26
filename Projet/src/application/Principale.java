@@ -32,7 +32,7 @@ public class Principale {
 		
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu= new MenuGerant();
+		//MenuGerant menu= new MenuGerant();
 		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -71,12 +71,12 @@ public class Principale {
 		  
 		/**Instanciation d'une association**/ 
 
-//		ASSOCIATION ASS = NEW ASSOCIATION("IDYLLISTE", "IDYLLISTE@ENSAI.FR", "ENSAI", "35047",
-//		  "0299451210", TRUE);
+//		Association ASS = new Association("IDYLLISTE", "IDYLLISTE@ENSAI.FR", "ENSAI", "35000","Rennes","ville001",
+//		  "0299451210", true);
 //		  
 		/**Instanciation d'une autre association**/ 
 //		Association ass2 = new Association("BDE", "bde@ensai.fr", "Ensai",
-//				  "35238", "0256842210",true);
+//				  "35170","Bruz","ville034", "0256842210",true);
 //		
 		/**Instanciation d'un particulier**/ 
 

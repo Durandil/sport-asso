@@ -52,25 +52,37 @@ public class SGBDTest extends TestCase {
 	
 // test sélection 2 champs string
 	
-	public void testselectDeuxChampsString(){
-		ArrayList<String[]> result = new ArrayList<String[]>();
-		String[] listeString = new String[2];
-		String[] listeString2 = new String[2];
-		listeString[0]="PRO99999";
-		listeString[1]="Promo test";
-		listeString2[0]="PRO8745";
-		listeString2[1]="Promo test2";
-		result.add(listeString);
-		result.add(listeString2);
-//		System.out.println(result.get(1)[0]);
-//		System.out.println(SGBD.selectDeuxChampsString("Promo", "IDPromo", "NomPromo").get(1)[0]);
-		boolean b;
-		b= result.get(0)[0].equals(SGBD.selectDeuxChampsString("Promo", "IDPromo", "NomPromo").get(0)[0]);
-		System.out.println(b);
-		assertEquals(result, SGBD.selectDeuxChampsString("Promo", "IDPromo", "NomPromo"));
-	}
-	
+//	public void testselectDeuxChampsString(){
+//		ArrayList<String[]> result = new ArrayList<String[]>();
+//		String[] listeString = new String[2];
+//		String[] listeString2 = new String[2];
+//		listeString[0]="IDYLLISTE";
+//		listeString[1]="Rennes";
+//		listeString2[0]="BDE";
+//		listeString2[1]="Bruz";
+//		result.add(listeString);
+//		result.add(listeString2);
+////		System.out.println(result.get(1)[1]);
+////		System.out.println(SGBD.selectDeuxChampsString("Client", "DenominationClient", "NomVille").get(1)[1]);		
+//		
+//		assertEquals(result.get(0)[0], SGBD.selectDeuxChampsString("Client", "DenominationClient", "NomVille").get(0)[0]);
+//		assertEquals(result.get(0)[1], SGBD.selectDeuxChampsString("Client", "DenominationClient", "NomVille").get(0)[1]);
+//		assertEquals(result.get(1)[0], SGBD.selectDeuxChampsString("Client", "DenominationClient", "NomVille").get(1)[0]);
+//		assertEquals(result.get(1)[1], SGBD.selectDeuxChampsString("Client", "DenominationClient", "NomVille").get(1)[1]);
+//	}
+//	
 
+	public void testrecupererAttributClient(){
+		ArrayList<String> result=new ArrayList<String>();
+		result.add("bde@ensai.fr");
+		result.add("BDE");
+		result.add("Ensai");
+		result.add("ville034");
+		result.add("Bruz");
+		result.add("35170");
+		result.add("0256842210");
+		
+	}
 }
 
 
