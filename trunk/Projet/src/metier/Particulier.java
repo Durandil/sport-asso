@@ -120,7 +120,8 @@ public class Particulier extends Client {
 			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
 			"VALUES ( S_FIDELITE.NextVal" +","+
 			"0,"
-			+"'"+FenetreDialogIdentification.clientUserIdentifiant+"')";
+			+"'"+this.mail+"')";
+			System.out.println(requete2);
 			SGBD.executeUpdate(requete2);
 		}
 	
