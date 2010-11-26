@@ -14,21 +14,19 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import basededonnees.SGBD;
 
-import metier.Client;
 
 
 public class FenetreDialogGestionCompteClient extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
+	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
 	private TextArea adresse;
-	private Client client;
+
 
 	/**
 	 * Constructeur
@@ -137,6 +135,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
 		villeLabel = new JLabel("Ville: ");
 		ville = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMVILLE", "IDCLIENT", idclient));
+		ville.setEnabled(false);
 		ville.setPreferredSize(new Dimension(90, 25));
 		panVille.add(villeLabel);
 		panVille.add(ville);
@@ -173,7 +172,6 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			public void actionPerformed(ActionEvent arg0) {	
 				
 				// on pourra enregistrer dans base de données la modification
-				//zInfo = new DialogInfo(nom.getText(),adresse.getText(),prenom.getText(),ville.getText(),(codePostal.getText()),telephone.getText(),identifiant.getText());
 				setVisible(false);
 			}
 						

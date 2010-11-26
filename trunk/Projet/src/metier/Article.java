@@ -129,7 +129,7 @@ public class Article {
 		
 	}
 	
-	public void modifierArticleBDD(String numArticle,String description,int prix,int poids,int stock){
+	public static void modifierArticleBDD(String numArticle,String description,String prix,String poids,String stock){
 		
 		// POUR LE MOMENT ON CONSIDERE QU'ON NE MODIFIE PAS LA CATEGORIE DE PRIX ET DE SPORT
 		// D'UN ARTICLE donc on ne tient pas compte du todo ci dessous
@@ -138,13 +138,19 @@ public class Article {
 		// l'identifiant à partir du nom qui sera affiché dans le menu déroulant
 		// du formulaire de modification d'un article
 		
-		String requete=" UPDATE ARTICLE" +
-					   " SET DESCRIPTION = '" + description +"'," +
-					   	"    PRIXINITIAL = '" + prix +"'," +
-					   	"    STOCK = '" + stock + "', " +
-					   	"    POIDS = '" + poids +"' WHERE IDARTICLE='"+
-					   	numArticle +"'"
-						;
+		System.out.println("Article");
+		
+//		String requete=" UPDATE ARTICLE" 
+//					   +" SET DESCRIPTION = '" + description +"'," +
+//					   	"PRIXINITIAL = '" + prix +"'," +
+//					   	"STOCK = '" + stock + "', " +
+//					   	"POIDS = '" + poids +"' WHERE IDARTICLE='"+
+//					   	numArticle +"'"
+//						;
+		String requete=" UPDATE ARTICLE SET DESCRIPTION = '" + description +"'" +
+						" WHERE IDARTICLE='"+numArticle+"';";
+		
+		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
 	}
@@ -152,6 +158,7 @@ public class Article {
 	public static void supprimerArticleBDD(String numArticle){
 		
 		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='"+numArticle+"'";
+		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
 		
