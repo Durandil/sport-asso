@@ -28,7 +28,7 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 /** TODO : Instancier un client via l'ihm**/
 		//Initialiser la base de données
-		//BDD.init();
+		BDD.init();
 		
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();

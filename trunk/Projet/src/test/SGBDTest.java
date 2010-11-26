@@ -75,14 +75,19 @@ public class SGBDTest extends TestCase {
 	public void testrecupererAttributClient(){
 		ArrayList<String> result=new ArrayList<String>();
 		result.add("bde@ensai.fr");
+		result.add(" ");
+		result.add(" ");
 		result.add("BDE");
 		result.add("Ensai");
-		result.add("ville034");
 		result.add("Bruz");
 		result.add("35170");
 		result.add("0256842210");
+		result.add("Activé");
+		System.out.println(result);
+		System.out.println(SGBD.recupererAttributClient("bde@ensai.fr"));
+		assertEquals(result, SGBD.recupererAttributClient("bde@ensai.fr"));
 		
-	}
+			}
 }
 
 
