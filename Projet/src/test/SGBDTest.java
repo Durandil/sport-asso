@@ -72,22 +72,33 @@ public class SGBDTest extends TestCase {
 //	}
 //	
 
-	public void testrecupererAttributClient(){
-		ArrayList<String> result=new ArrayList<String>();
-		result.add("bde@ensai.fr");
-		result.add(" ");
-		result.add(" ");
-		result.add("BDE");
-		result.add("Ensai");
-		result.add("Bruz");
-		result.add("35170");
-		result.add("0256842210");
-		result.add("Activé");
+//	public void testrecupererAttributClient(){
+//		ArrayList<String> result=new ArrayList<String>();
+//		result.add("bde@ensai.fr");
+//		result.add(" ");
+//		result.add(" ");
+//		result.add("BDE");
+//		result.add("Ensai");
+//		result.add("Bruz");
+//		result.add("35170");
+//		result.add("0256842210");
+//		result.add("Activé");
+//		System.out.println(result);
+//		System.out.println(SGBD.recupererAttributClient("bde@ensai.fr"));
+//		assertEquals(result, SGBD.recupererAttributClient("bde@ensai.fr"));
+//		
+//			}
+	
+	public void testselectArticlesReapprovisionnement(){
+		ArrayList<String> result = new ArrayList<String>();
+		result.add("ART00003");
+		result.add("Velo de Course");
+		result.add("0");
+		result.add("250");
 		System.out.println(result);
-		System.out.println(SGBD.recupererAttributClient("bde@ensai.fr"));
-		assertEquals(result, SGBD.recupererAttributClient("bde@ensai.fr"));
-		
-			}
+		System.out.println(SGBD.selectArticlesReapprovisionnement());
+		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
+	}
 }
 
 
