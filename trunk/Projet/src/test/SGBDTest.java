@@ -90,14 +90,32 @@ public class SGBDTest extends TestCase {
 //			}
 	
 	public void testselectArticlesReapprovisionnement(){
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("ART00003");
-		result.add("Velo de Course");
-		result.add("0");
-		result.add("250");
+		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		ArrayList<String> listeString= new ArrayList<String>();
+		ArrayList<String> listeString2 = new ArrayList<String>();
+		ArrayList<String> listeString3 = new ArrayList<String>();
+		ArrayList<String> listeString4 = new ArrayList<String>();
+		listeString.add("ART00003");
+		listeString2.add("Velo de Course");
+		listeString3.add("0");
+		listeString4.add("250");
+		result.add(listeString);
+		result.add(listeString2);
+		result.add(listeString3);
+		result.add(listeString4);
 		System.out.println(result);
 		System.out.println(SGBD.selectArticlesReapprovisionnement());
 		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
+	}
+	
+	public void testrecupererInformationFideliteClient(){
+		ArrayList<String> result= new ArrayList<String>();
+		result.add("500");
+		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
+	}
+	
+	public void testrecupererIdentifiantDernierEnregistrementTable(){
+		
 	}
 }
 
