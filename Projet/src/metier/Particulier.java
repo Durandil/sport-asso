@@ -115,8 +115,6 @@ public class Particulier extends Client {
 
 		if (this.estFidele) {
 		System.out.println("est fidèle");
-			CompteurIdcarte++;
-			String idCarte=""+CompteurIdcarte;
 			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
 			"VALUES ( S_FIDELITE.NextVal" +","+
 			"0,"
@@ -127,6 +125,17 @@ public class Particulier extends Client {
 	
 
 	}
-
+	
+	public static void modifierBDDparticulier(String idClient,String nom,String prenom,String denomination,String adresse,String codePostal,String telephone){
+		
+		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal);
+		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
+		
+		String requete = " UPDATE CLIENT SET NOMCLIENT='"+nom+"',PRENOMCLIENT='"+prenom+"',DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"';";
+		
+		System.out.println(requete);
+		
+		SGBD.executeUpdate(requete);
+	}
 
 }

@@ -208,6 +208,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	
 	private void initComponent(String idArticle){
 		//Pour le moment on ne modifie pas la catégorie de prix et de sport
+		final String numArticle = idArticle;
 		String descriptionA = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION", "IDARTICLE", idArticle);
 		String poidsA = SGBD.selectStringConditionString("ARTICLE", "POIDS", "IDARTICLE", idArticle);
 		String prixA = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL", "IDARTICLE", idArticle);
@@ -273,6 +274,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// enregistrer la modification d'article 
+				Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText());
 				
 				// puis fermer la page
 				setVisible(false);
