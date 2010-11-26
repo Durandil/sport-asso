@@ -100,7 +100,22 @@ public class FenetreCatalogueGerant extends JFrame{
 				// TODO Auto-generated method stub
 				// modification de l'article selectionné dans la catalogue
 				int ligne = tableau.getSelectedRow();
-				String numArticle= tableau.getValueAt(ligne, 0).toString();
+				String numArticle = "";
+				if((Integer)tableau.getValueAt(ligne, 0)<10){
+					 numArticle= "ART0000" + tableau.getValueAt(ligne, 0).toString();
+				}
+				if((Integer)tableau.getValueAt(ligne, 0)<100 && (Integer)tableau.getValueAt(ligne, 0)>=10){
+					numArticle= "ART000" + tableau.getValueAt(ligne, 0).toString();
+				}
+				if((Integer)tableau.getValueAt(ligne, 0)<1000 && (Integer)tableau.getValueAt(ligne, 0)>=100){
+					numArticle= "ART00" + tableau.getValueAt(ligne, 0).toString();
+				}
+				if((Integer)tableau.getValueAt(ligne, 0)<10000 && (Integer)tableau.getValueAt(ligne, 0)>=1000){
+					numArticle= "ART0" + tableau.getValueAt(ligne, 0).toString();
+				}
+				if((Integer)tableau.getValueAt(ligne, 0)<100000 && (Integer)tableau.getValueAt(ligne, 0)>=10000){
+					numArticle= "ART" + tableau.getValueAt(ligne, 0).toString();
+				}
 				
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
 				formulaire.setVisible(true);
