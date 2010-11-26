@@ -87,11 +87,6 @@ public class Principale {
 //		Date dateM = SGBD.stringToDate(dateSM, "dd/MM/yyyy");
 //		Message m = new Message("Content", "Votre magasin est trop génial","idylliste@ensai.fr",dateM);
 //	
-
-
-
-
-		
 		
 		/** Création de 2 commandes **/
 		/** ATTENTION : Il faut que les id d'articles et de clients existent déjà dans leurs tables respectives ! **/
