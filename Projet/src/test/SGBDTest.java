@@ -114,8 +114,21 @@ public class SGBDTest extends TestCase {
 		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
 	}
 	
-	public void testrecupererIdentifiantDernierEnregistrementTable(){
-		
+	public void testrecupererInformationRechercheClient(){
+		ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
+		ArrayList<String> listeString1 = new ArrayList<String>();
+		ArrayList<String> listeString2 = new ArrayList<String>();
+		ArrayList<String> listeString3 = new ArrayList<String>();
+		ArrayList<String> listeString4 = new ArrayList<String>();
+		listeString1.add("arthur.laroch@gmail.com");
+		listeString2.add("Laroch");
+		listeString3.add("Arthur");
+		listeString4.add(" ");
+		result.add(listeString1);
+		result.add(listeString2);
+		result.add(listeString3);
+		result.add(listeString4);
+		assertEquals(result,SGBD.recupererInformationRechercheClient("arthur.laroch@gmail.com", "laroch"," " , "Rennes"));
 	}
 }
 
