@@ -29,8 +29,8 @@ public class SGBD {
 	//Penser à modifier les id/mdp
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3198";
+	private static final String MDP = "id3198";
 
 
 
@@ -531,7 +531,7 @@ public class SGBD {
 
 		return liste;
 	}
-	
+	//TODO 
 	// Méthode qui permettra de récupérer les statistiques sur le montant des commandes d'un
 	// client pour la fiche client. avg ( moyenne), min et max.
 	// pour le moment je me sers de la quantite, plus tard il faudra travailler sur
@@ -571,9 +571,9 @@ public class SGBD {
 		try{
 			st=c.createStatement();
 			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
-								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE,FIDELITE," +
+								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
 								"ETATCOMPTE FROM CLIENT,VILLE " +
-								"WHERE CLIENT.CODECOMMUNE=VILLE.CODECOMMUNE and " +
+								"WHERE CLIENT.IDVILLE=VILLE.IDVILLE and " +
 								"IDCLIENT='"+ mailIdentifiant+"';");
 			
 			ResultSetMetaData rsmd = res.getMetaData();
