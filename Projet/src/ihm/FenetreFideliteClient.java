@@ -63,16 +63,16 @@ public class FenetreFideliteClient extends JDialog {
 		panFidelite.add(fideliteLabel);
 		
 		// TODO récupérer dans base de donnees fidelite SANS ERREUR !!!!
-//		ArrayList<String> fideliteClient= new ArrayList<String>();
-//		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
-//		String estFidele=fideliteClient.get(0);
+		ArrayList<String> fideliteClient= new ArrayList<String>();
+		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+		String estFidele=fideliteClient.get(0);
 		
-//		if(estFidele.equals("false")){
+		if(estFidele.equals("false")){
 			FenetreDialogCreationCompte.itemFidelite="Non";
-//		}
-//		else{
-//			FenetreDialogCreationCompte.itemFidelite="Oui";
-//		}
+		}
+		else{
+			FenetreDialogCreationCompte.itemFidelite="Oui";
+		}
 		
 		// Création du menu déroulant sur la demande de la carte de fidélité
 		fidelite=new JComboBox();

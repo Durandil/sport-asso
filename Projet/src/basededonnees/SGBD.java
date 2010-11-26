@@ -29,8 +29,10 @@ public class SGBD {
 	//Penser à modifier les id/mdp
 
 
-	private static final String ID = "id3198";
-	private static final String MDP = "id3198";
+
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
+
 
 
 
@@ -658,6 +660,8 @@ public class SGBD {
 								 "IDCOMMANDE='"+ idCommande +"';");
 			
 			
+			
+			
 			while (res.next()) {
 
 				String[] listeString = new String[4];
@@ -691,7 +695,8 @@ public class SGBD {
 		SGBD.connecter();
 		Statement st = null ;
 		ResultSet res= null;
-		
+		String fidele = null;
+		String nbpoints = null;
 		ArrayList <String> resultat = new ArrayList<String>();
 		String estFidele="";
 		
@@ -702,23 +707,34 @@ public class SGBD {
 			// QUI ONT UNE CARTE DE FIDELITE
 			
 			
-//			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-//								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
-			
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-					"WHERE CARTE_FIDELITE.IDCLIENT='arthur.laroch@gmail.com'");
+								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-			System.out.println(res.getString(1).toString());
-			boolean champVide = res.getBoolean(1);
 			
-			// si le client n'a pas de compte fidelité (champVide=true) 
-			//alors on ajoute juste le booleen au vecteur sinon on met le booleen et le nb de points 
-			estFidele=champVide+"";
-			resultat.add(estFidele);
-			
-			if(champVide==false){
-				resultat.add(res.getObject(1).toString());
+			// Récupérer les méta données
+
+			while (res.next()) {
+				
+		//Si le résultat est non nul tout se passe normalement
+				if(res.getObject(2) != null){
+				
+					fidele = "Oui";
+					nbpoints = res.getObject(1).toString();
+					
+				}
+		//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
+		//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
+				else
+				{
+					fidele = "Non";
+					nbpoints = "0";
+				}
+
 			}
+			System.out.println(res.getString(1).toString());
+			resultat.add(fidele);
+			resultat.add(nbpoints);
+			
 			
 		}
 		catch(SQLException e){

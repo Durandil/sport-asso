@@ -26,9 +26,9 @@ public class BDD {
 		SGBD.executeUpdate("DROP TABLE REDUCTION");
 		SGBD.executeUpdate("DROP TABLE CATEGORIE");
 		SGBD.executeUpdate("DROP TABLE QUANTITE");		
-//      SGBD.executeUpdate("DROP SEQUENCE S_ARTICLE");
-//		SGBD.executeUpdate("DROP SEQUENCE S_PROMOTION");
-//		SGBD.executeUpdate("DROP SEQUENCE S_FIDELITE");
+        SGBD.executeUpdate("DROP SEQUENCE S_ARTICLE");
+		SGBD.executeUpdate("DROP SEQUENCE S_PROMOTION");
+		SGBD.executeUpdate("DROP SEQUENCE S_FIDELITE");
 		
 		
 		SGBD.executeUpdate("CREATE TABLE QUANTITE" +
