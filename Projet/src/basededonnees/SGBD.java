@@ -689,7 +689,7 @@ public class SGBD {
 		return commande;
 	}
 	
-	// cette méthode a pour but de recuprer le boolean sur la fidelité du client 
+	// cette méthode a pour but de recuperer le boolean sur la fidelité du client 
 	// et son nombre éventuel de points
 	public static ArrayList<String> recupererInformationFideliteClient(String identifiant){
 		SGBD.connecter();
@@ -723,7 +723,7 @@ public class SGBD {
 					
 				}
 		//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
-		//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
+		//(lorsque l'on y cherchait à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
 				else
 				{
 					fidele = "Non";
@@ -790,16 +790,14 @@ public class SGBD {
 			
 			
 			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM VILLE, CLIENT " +
-					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
-					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
+					" FROM CLIENT " +
+					"WHERE (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
 					" or CLIENT.NOMVILLE='"+ville+"' )");
 			
 			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM VILLE, CLIENT " +
-					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
-					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
+					" FROM CLIENT " +
+					"WHERE (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
 					" or CLIENT.NOMVILLE='"+ville+"' )");
 			while (res.next()){
