@@ -29,8 +29,10 @@ public class SGBD {
 	//Penser à modifier les id/mdp
 
 
-	private static final String ID = "id3138";
-	private static final String MDP = "id3138";
+
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
+
 
 
 
@@ -531,7 +533,7 @@ public class SGBD {
 
 		return liste;
 	}
-	
+	//TODO 
 	// Méthode qui permettra de récupérer les statistiques sur le montant des commandes d'un
 	// client pour la fiche client. avg ( moyenne), min et max.
 	// pour le moment je me sers de la quantite, plus tard il faudra travailler sur
@@ -560,7 +562,7 @@ public class SGBD {
 		}
 		return rs;
 	}
-	
+	// TODO cette requete a-t-elle vraiment un intérêt?
 	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
 	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
 		connecter();
@@ -571,10 +573,9 @@ public class SGBD {
 		try{
 			st=c.createStatement();
 			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
-								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE,FIDELITE," +
-								"ETATCOMPTE FROM CLIENT,VILLE " +
-								"WHERE CLIENT.CODECOMMUNE=VILLE.CODECOMMUNE and " +
-								"IDCLIENT='"+ mailIdentifiant+"';");
+								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
+								"ETATCOMPTE FROM CLIENT " +
+								"WHERE IDCLIENT='"+ mailIdentifiant+"';");
 			
 			ResultSetMetaData rsmd = res.getMetaData();
 			
@@ -659,6 +660,8 @@ public class SGBD {
 								 "IDCOMMANDE='"+ idCommande +"';");
 			
 			
+			
+			
 			while (res.next()) {
 
 				String[] listeString = new String[4];
@@ -692,7 +695,8 @@ public class SGBD {
 		SGBD.connecter();
 		Statement st = null ;
 		ResultSet res= null;
-		
+		String fidele = null;
+		String nbpoints = null;
 		ArrayList <String> resultat = new ArrayList<String>();
 		String estFidele="";
 		
@@ -702,24 +706,37 @@ public class SGBD {
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
 			
-			
-//			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-//								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+			System.out.println("SELECT NBPOINTS FROM CARTE_FIDELITE" +
+					" WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-					"WHERE CARTE_FIDELITE.IDCLIENT='arthur.laroch@gmail.com'");
+								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-			System.out.println(res.getString(1).toString());
-			boolean champVide = res.getBoolean(1);
 			
-			// si le client n'a pas de compte fidelité (champVide=true) 
-			//alors on ajoute juste le booleen au vecteur sinon on met le booleen et le nb de points 
-			estFidele=champVide+"";
-			resultat.add(estFidele);
-			
-			if(champVide==false){
-				resultat.add(res.getObject(1).toString());
+			// Récupérer les méta données
+
+			while (res.next()) {
+				
+		//Si le résultat est non nul tout se passe normalement
+				if(res.getObject(1) != null){
+				
+					fidele = "Oui";
+					nbpoints = res.getObject(1).toString();
+					
+				}
+		//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
+		//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
+				else
+				{
+					fidele = "Non";
+					nbpoints = "0";
+				}
+
 			}
+			System.out.println(res.getString(1).toString());
+			resultat.add(fidele);
+			resultat.add(nbpoints);
+			
 			
 		}
 		catch(SQLException e){
