@@ -30,8 +30,8 @@ public class SGBD {
 
 
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
+	private static final String ID = "id3198";
+	private static final String MDP = "id3198";
 
 
 
