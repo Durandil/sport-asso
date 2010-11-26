@@ -560,7 +560,7 @@ public class SGBD {
 		}
 		return rs;
 	}
-	
+	// TODO cette requete a-t-elle vraiment un intérêt?
 	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
 	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
 		connecter();
@@ -572,9 +572,8 @@ public class SGBD {
 			st=c.createStatement();
 			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
 								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
-								"ETATCOMPTE FROM CLIENT,VILLE " +
-								"WHERE CLIENT.IDVILLE=VILLE.IDVILLE and " +
-								"IDCLIENT='"+ mailIdentifiant+"';");
+								"ETATCOMPTE FROM CLIENT " +
+								"WHERE IDCLIENT='"+ mailIdentifiant+"';");
 			
 			ResultSetMetaData rsmd = res.getMetaData();
 			
