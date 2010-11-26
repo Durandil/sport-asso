@@ -48,10 +48,8 @@ public class FenetreAffichageRecherche extends JDialog{
 				// on affiche la fiche client correspondante à l'identifiant saisi
 				int ligne =  tableauRechercheClient.getSelectedRow();
 				String identifiant = tableauRechercheClient.getValueAt(ligne,0).toString();
-				ArrayList<String> client = new ArrayList<String>();
-				client=SGBD.recupererAttributClient(identifiant);
-				//FicheClient ficheDuClient = new FicheClient(null, "Fiche du client : "+ clientIdentifiant.getText(), true, clientCourant);
-				//ficheDuClient.setVisible(true);
+				FicheClient ficheDuClient = new FicheClient(null, "Fiche du client : "+ identifiant, true, identifiant);
+				ficheDuClient.setVisible(true);
 			}
 
 		});
