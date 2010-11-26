@@ -796,14 +796,14 @@ public class SGBD {
 					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
 					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
-					" or CLIENT.NOMVILLE='"+ville+"' )");
+					" or NOMVILLE='"+ville+"' )");
 			
 			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
 					" FROM VILLE, CLIENT " +
 					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
 					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
-					" or CLIENT.NOMVILLE='"+ville+"' )");
+					" or NOMVILLE='"+ville+"' )");
 			while (res.next()){
 				String s,s2,s3,s4;
 				s = res.getObject(1).toString();
