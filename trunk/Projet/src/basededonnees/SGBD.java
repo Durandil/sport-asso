@@ -1,6 +1,5 @@
 package basededonnees;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -22,9 +21,9 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	//Penser à modifier les id/mdp
 
@@ -186,10 +185,12 @@ public class SGBD {
 	}
 
 	// Méthode issue du TP2
+	@SuppressWarnings("finally")
 	public static boolean testerTable(String nom) throws SQLException {
 		boolean b = true;
 		connecter();
 		Statement st = null;
+		@SuppressWarnings("unused")
 		ResultSet res = null;
 		try {
 			st = c.createStatement();
@@ -314,9 +315,6 @@ public class SGBD {
 			st = c.createStatement();
 			
 			res = st.executeQuery("SELECT "+str+" FROM "+table );
-			
-			// Récupérer les méta données
-			ResultSetMetaData rsmd = res.getMetaData();
 
 			while (res.next()) {
 				
@@ -352,9 +350,6 @@ public class SGBD {
 			
 			res = st.executeQuery("SELECT TO_CHAR("+str+",'" + format + "') FROM "+table );
 
-			// Récupérer les méta données
-			ResultSetMetaData rsmd = res.getMetaData();
-
 			while (res.next()) {
 
 				String s = res.getObject(1).toString();
@@ -385,9 +380,6 @@ public class SGBD {
 			st = c.createStatement();
 			
 			res = st.executeQuery("SELECT "+var+" FROM "+table );
-
-			// Récupérer les méta données
-			ResultSetMetaData rsmd = res.getMetaData();
 
 			while (res.next()) {
 
@@ -420,9 +412,6 @@ public class SGBD {
 			st = c.createStatement();
 			
 			res = st.executeQuery("SELECT "+var+" FROM "+table );
-
-			// Récupérer les méta données
-			ResultSetMetaData rsmd = res.getMetaData();
 
 			while (res.next()) {
 
@@ -461,7 +450,6 @@ public class SGBD {
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
 
-			// Récupérer les méta données
 
 				while (res.next()) {
 					
@@ -508,8 +496,6 @@ public class SGBD {
 
 			res = st.executeQuery("SELECT "+champ1+","+champ2+" FROM "+table);
 			System.out.println("SELECT "+champ1+","+champ2+" FROM "+table);
-			// Récupérer les méta données
-			ResultSetMetaData rsmd = res.getMetaData();
 
 			while (res.next()) {
 
@@ -698,7 +684,6 @@ public class SGBD {
 		String fidele = null;
 		String nbpoints = null;
 		ArrayList <String> resultat = new ArrayList<String>();
-		String estFidele="";
 		
 		try{
 			st=c.createStatement();
