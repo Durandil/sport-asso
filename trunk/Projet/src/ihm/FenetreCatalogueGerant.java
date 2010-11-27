@@ -101,25 +101,38 @@ public class FenetreCatalogueGerant extends JFrame{
 				// modification de l'article selectionné dans la catalogue
 				int ligne = tableau.getSelectedRow();
 				String numArticle = "";
-				if((Integer)tableau.getValueAt(ligne, 0)<10){
-					 numArticle= "ART0000" + tableau.getValueAt(ligne, 0).toString();
+				int numeroArticle=0;
+				
+				try{
+					numeroArticle=Integer.parseInt(tableau.getValueAt(ligne, 0).toString());
+					
+					if(numeroArticle<10){
+						 numArticle= "ART0000" + numeroArticle;
+					}
+					if(numeroArticle<100 && numeroArticle>=10){
+						numArticle= "ART000" + tableau.getValueAt(ligne, 0).toString();
+					}
+					if(numeroArticle<1000 && numeroArticle>=100){
+						numArticle= "ART00" + tableau.getValueAt(ligne, 0).toString();
+					}
+					if(numeroArticle<10000 && numeroArticle>=1000){
+						numArticle= "ART0" + tableau.getValueAt(ligne, 0).toString();
+					}
+					if(numeroArticle<100000 && numeroArticle>=10000){
+						numArticle= "ART" + tableau.getValueAt(ligne, 0).toString();
+					}
+					
 				}
-				if((Integer)tableau.getValueAt(ligne, 0)<100 && (Integer)tableau.getValueAt(ligne, 0)>=10){
-					numArticle= "ART000" + tableau.getValueAt(ligne, 0).toString();
+				catch(NumberFormatException event){
+					numArticle=tableau.getValueAt(ligne, 0).toString();
 				}
-				if((Integer)tableau.getValueAt(ligne, 0)<1000 && (Integer)tableau.getValueAt(ligne, 0)>=100){
-					numArticle= "ART00" + tableau.getValueAt(ligne, 0).toString();
-				}
-				if((Integer)tableau.getValueAt(ligne, 0)<10000 && (Integer)tableau.getValueAt(ligne, 0)>=1000){
-					numArticle= "ART0" + tableau.getValueAt(ligne, 0).toString();
-				}
-				if((Integer)tableau.getValueAt(ligne, 0)<100000 && (Integer)tableau.getValueAt(ligne, 0)>=10000){
-					numArticle= "ART" + tableau.getValueAt(ligne, 0).toString();
+				finally{
+					FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
+					formulaire.setVisible(true);
 				}
 				
-				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
-				formulaire.setVisible(true);
 			}
+			
 		});
     	
     	

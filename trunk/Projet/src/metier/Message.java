@@ -96,18 +96,14 @@ public class Message {
 	
 	// TODO il faut aussi implémenter la suppression d'un tuple (message) de la MESSAGE
 	
-	public void supprimerBDD(){
+	public static void supprimerBDD(String identifiantMessage){
 		// TODO vérifier si la requete est correcte
 		
 		String requete = "DELETE FROM MESSAGE WHERE " +
-				"IDMESSAGE = " +"'"+ this.idMessage+ "'"+
-				" and SUJETMESSAGE = " +"'"+ this.sujet+ "'"+
-				" and CONTENUMESSAGE = " +"'"+this.contenu+"'"+
-				" and IDCLIENT = " +"'"+this.expediteur+"'"+
-				" and DATEMESSAGE = " +"'"+this.dateEnvoi+"'"
+				"IDMESSAGE = " +"'"+ identifiantMessage+ "'"
 		;
 
-		
+		SGBD.executeUpdate(requete);
 	}
 	
 	public static void supprimerAllBDD(){
