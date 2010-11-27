@@ -130,6 +130,18 @@ public class SGBDTest extends TestCase {
 		result.add(listeString4);
 		assertEquals(result,SGBD.recupererInformationRechercheClient("arthur.laroch@gmail.com", "laroch"," " , "Rennes"));
 	}
+	//Attention commande 1 2 articles (à modifier et mettre un seul)
+	//assert equals object?
+	public void testinformationCommande(){
+		ArrayList<Object[]> result=new ArrayList<Object[]>();
+		String[] listeString = new String[4];
+		listeString[0]="ART00001";
+		listeString[1]="Maillot de foot de Sochaux";
+		listeString[2]="70";
+		listeString[3]="5";
+		result.add(listeString);
+		assertEquals(result,SGBD.informationCommande("comm0001"));
+	}
 }
 
 
