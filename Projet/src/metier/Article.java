@@ -140,15 +140,15 @@ public class Article {
 		
 		System.out.println("Article");
 		
-//		String requete=" UPDATE ARTICLE" 
-//					   +" SET DESCRIPTION = '" + description +"'," +
-//					   	"PRIXINITIAL = '" + prix +"'," +
-//					   	"STOCK = '" + stock + "', " +
-//					   	"POIDS = '" + poids +"' WHERE IDARTICLE='"+
-//					   	numArticle +"'"
-//						;
-		String requete=" UPDATE ARTICLE SET DESCRIPTION = '" + description +"'" +
-						" WHERE IDARTICLE='"+numArticle+"';";
+		// POUR CEUX QUI ONT ORACLE CHEZ EUX, il faut enlever le point de virgule en fin de requete
+		
+		String requete=" UPDATE ARTICLE" 
+					   +" SET DESCRIPTION = '" + description +"'," +
+					   	"PRIXINITIAL = '" + prix +"'," +
+					   	"STOCK = '" + stock + "', " +
+					   	"POIDS = '" + poids +"' WHERE IDARTICLE='"+
+					   	numArticle +"'"
+						;
 		
 		System.out.println(requete);
 		

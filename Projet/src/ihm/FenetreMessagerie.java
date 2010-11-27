@@ -58,13 +58,15 @@ public class FenetreMessagerie extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				int ligne = tableauMessage.getSelectedRow();
-				String expediteur = tableauMessage.getValueAt(ligne,0).toString();
-				String sujet = tableauMessage.getValueAt(ligne,1).toString();
-				String contenu = tableauMessage.getValueAt(ligne,2).toString();
-				String date = tableauMessage.getValueAt(ligne,3).toString();
+				String identifiantMail = tableauMessage.getValueAt(ligne,0).toString();
+				String expediteur = tableauMessage.getValueAt(ligne,1).toString();
+				String sujet = tableauMessage.getValueAt(ligne,2).toString();
+				String contenu = tableauMessage.getValueAt(ligne,3).toString();
+				String date = tableauMessage.getValueAt(ligne,4).toString();
+				
 				
 				// ouverture de la fenetre de lecture de message
-				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date);
+				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date,identifiantMail);
 				fenMessage.setVisible(true);
 			}
 		});

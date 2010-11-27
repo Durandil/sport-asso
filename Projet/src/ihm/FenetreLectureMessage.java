@@ -29,16 +29,18 @@ public class FenetreLectureMessage extends JDialog{
 	private JTextArea contenuMessage;
 	private JLabel expediteurLabel,dateLabel,sujetLabel,contenuLabel;
 
-	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM ){
+	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM,String ident ){
 		super(parent, title, modal);
 		this.setSize(900, 300);
 		this.setLocation(50,50);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(exp,sujetM,contenuM,dateM);
+		this.initComponent(exp,sujetM,contenuM,dateM,ident);
 	}
 	
-	private void initComponent(String expediteur,String sujet,String contenu,String date){
+	private void initComponent(String expediteur,String sujet,String contenu,String date,String identifiant){
+		
+		final String numMessage=identifiant;
 		
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
@@ -105,7 +107,9 @@ public class FenetreLectureMessage extends JDialog{
 		
 		boutonSupprimerMessage.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO permet de supprimer le message sélectionné dans la base de donnée
+				
+				Message.supprimerBDD(numMessage);
+				// TODO permet de supprimer le message sélectionné du tableau
 				setVisible(false);
 			}			
 		});

@@ -30,12 +30,12 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
+		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 		
 				
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
 		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());

@@ -214,7 +214,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		String prixA = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL", "IDARTICLE", idArticle);
 		String stockA = SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
 		
-		
 		JPanel panneauCentral = new JPanel();
 		
 		JPanel panDescription = new JPanel();
