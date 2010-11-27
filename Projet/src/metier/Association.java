@@ -117,5 +117,17 @@ public class Association extends Client {
 			SGBD.executeUpdate(requete2);
 		}
 	}
+	
+public static void modifierBDDassoc(String idClient,String nom,String prenom,String denomination,String adresse,String codePostal,String telephone){
+		
+		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal);
+		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
+		
+		String requete = " UPDATE CLIENT SET NOMCLIENT='"+nom+"',PRENOMCLIENT='"+prenom+"',DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"';";
+		
+		System.out.println(requete);
+		
+		SGBD.executeUpdate(requete);
+	}
 
 }
