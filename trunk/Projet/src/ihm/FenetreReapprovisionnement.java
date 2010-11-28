@@ -74,6 +74,8 @@ public class FenetreReapprovisionnement extends JFrame {
 				String numeroArticle = tableau.getValueAt(ligne, 0).toString();
 				FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numeroArticle);
 				fen.setVisible(true);
+				tableau.setEnabled(false);// emepecher le gerant de vouloir recommander immédiatement un autre article
+				// ou celui qu'il vient de réapprovisionner
 			}
 		});
 	    

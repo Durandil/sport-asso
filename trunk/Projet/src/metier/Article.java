@@ -4,8 +4,6 @@ import basededonnees.SGBD;
 
 public class Article {
 
-	
-
 
 	// Constructeur d'un article
 	// catSport correspond à la catégorie du sport auquel l'article se rattache
@@ -166,4 +164,16 @@ public class Article {
 		
 		SGBD.executeUpdate(requete2);
 	}
+	
+	public static void modifierStockArticleBDD(String numArticle,int stock){
+		
+		// POUR CEUX QUI ONT ORACLE CHEZ EUX, il faut enlever le point de virgule en fin de requete
+		
+		String requete="UPDATE ARTICLE SET STOCK = '" + stock + "',ETATARTICLE='En stock' WHERE IDARTICLE='"+numArticle +"'";
+		
+		System.out.println(requete);
+		
+		SGBD.executeUpdate(requete);
+	}
+	
 }

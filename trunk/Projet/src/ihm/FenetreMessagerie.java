@@ -1,5 +1,4 @@
 package ihm;
-import ihm.ModelePromotionClient;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -8,7 +7,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -23,6 +21,7 @@ public class FenetreMessagerie extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static boolean suppressionMessage=false;
 
 
 	public FenetreMessagerie(){
@@ -51,10 +50,10 @@ public class FenetreMessagerie extends JFrame {
     	// Création d'un "sous-panneau" accueillant tous les boutons relatifs aux actions
     	// que le gérant peut faire sur les messages de ses clients
     	JPanel panneauTitle=new JPanel();
-    	JButton boutonAjouter=new JButton("Lire");
+    	JButton boutonLire=new JButton("Lire");
     	JButton boutonSupprimerTout=new JButton("Supprimer tout");
     	
-    	boutonAjouter.addActionListener(new ActionListener() {
+    	boutonLire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				int ligne = tableauMessage.getSelectedRow();
@@ -68,6 +67,11 @@ public class FenetreMessagerie extends JFrame {
 				// ouverture de la fenetre de lecture de message
 				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date,identifiantMail);
 				fenMessage.setVisible(true);
+				if(suppressionMessage==true){
+					tableauMessage.setEnabled(false);
+					suppressionMessage=false;
+				}
+				
 			}
 		});
     	
@@ -81,7 +85,7 @@ public class FenetreMessagerie extends JFrame {
     	
     	
     	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
-    	panneauTitle.add(boutonAjouter);
+    	panneauTitle.add(boutonLire);
     	panneauTitle.add(boutonSupprimerTout);
     	panneauHaut.add(panneauTitle,"Center");
    
@@ -110,5 +114,7 @@ public class FenetreMessagerie extends JFrame {
 	       
         
         }
+    
+    
 	
 }
