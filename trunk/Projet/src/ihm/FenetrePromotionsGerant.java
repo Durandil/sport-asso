@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import metier.Promotion;
+
 
 public class FenetrePromotionsGerant extends JFrame {
 	
@@ -36,7 +38,12 @@ public class FenetrePromotionsGerant extends JFrame {
         
     private void initComponent(){
     	
-    	//Création du panneau qui se situera en haut de la fenetre créée
+    	// Définition du tableau qui affichera l'ensemble des promotions en cours pour les différents clients
+    	// (adhérents ou non adhérents) après interrogation de la base de données dans ModelePromotionClient
+	    JTable tableauPromotions = new JTable(new ModelePromotionClient());     
+	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
+	    
+	    //Création du panneau qui se situera en haut de la fenetre créée
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
     	
@@ -58,7 +65,7 @@ public class FenetrePromotionsGerant extends JFrame {
     	boutonSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO supprimer la promotion selectionnée dans la base de donnée
-				
+				//Promotion.supprimerPromoBDD(idPromotion)
 			}
 		});
     	
@@ -76,11 +83,6 @@ public class FenetrePromotionsGerant extends JFrame {
     	panneauHaut.add(panneauTitle,"Center");
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
-    	
-    	// Définition du tableau qui affichera l'ensemble des promotions en cours pour les différents clients
-    	// (adhérents ou non adhérents) après interrogation de la base de données dans ModelePromotionClient
-	    JTable tableauPromotions = new JTable(new ModelePromotionClient());     
-	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
 	    
 	    
 	    // Définition du panneau panneauBouton qui accueillera le bouton

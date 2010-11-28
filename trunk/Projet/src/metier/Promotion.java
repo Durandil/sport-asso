@@ -115,9 +115,9 @@ public class Promotion {
 		SGBD.executeUpdate(requete);
 	}
 	
-	public void supprimerPromoBDD(){
+	public static void supprimerPromoBDD(String idPromotion){
 		
-		String requete= "DELETE FROM PROMO WHERE IDARTICLE='"+this.idPromotion+"'";
+		String requete= "DELETE FROM PROMO WHERE IDARTICLE='"+idPromotion+"'";
 		
 		SGBD.executeUpdate(requete);	
 	}
@@ -130,6 +130,9 @@ public class Promotion {
 		
 		Date dateJour =(Date) new java.util.Date();
 		Date datePromotion= (Date) new java.util.Date(anneeDate, moisDate, jourDate);
+		
+		System.out.println(dateJour.toString());
+		System.out.println(datePromotion.toString());
 		
 		if(datePromotion.before(dateJour)){
 			resultat=false;
