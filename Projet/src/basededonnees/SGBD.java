@@ -331,6 +331,39 @@ public class SGBD {
 		return listeString;
 	}
 	
+	//Méthode permettant d'obtenir l'ensemble des éléments (de nature String)
+	//d'un champ issu d'une table tous deux précisés en paramètres
+	public static ArrayList<String> selectListeStringOrdonne(String table, String str,String champOrdre) {
+		connecter();
+		ArrayList<String> listeString = new ArrayList<String>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+str+" FROM "+table + "ORDER BY "+ champOrdre+"ASC");
+
+			while (res.next()) {
+				
+				String s = res.getObject(1).toString();
+				
+				listeString.add(s);
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeString;
+	}
+	
 	//Méthode permettant d'obtenir l'ensemble des éléments 
 	//d'un champ de type date issu d'une table tous deux précisés en paramètres
 	//LE format que l'on désire obtenir est aussi précisé en paramètre
@@ -428,6 +461,38 @@ public class SGBD {
 		return listeInt;
 	}
 	
+	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés(de nature Integer)
+	//d'une variable issu d'une table tous deux précisés en paramètres
+	public static ArrayList<Integer> selectListeIntOrdonne(String table, String var,String champOrdre) {
+		connecter();
+		ArrayList<Integer> listeInt = new ArrayList<Integer>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+var+" FROM "+table+"ORDER BY "+ champOrdre+"ASC");
+
+			while (res.next()) {
+
+				Integer i = res.getInt(1);
+				listeInt.add(i);
+				
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeInt;
+	}
 	
 	//Méthode permettant de récupérer un élément d'un champ (de nature String)
 	//En apposant une condition sur un autre champ (dont les éléments sont aussi de nature String)

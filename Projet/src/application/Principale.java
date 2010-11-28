@@ -33,9 +33,9 @@ public class Principale {
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 		
 				
-		FenetreCompte fen=new FenetreCompte();
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
 		
 //		java.util.Date date = new java.util.Date();
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -44,10 +44,8 @@ public class Principale {
 //
 		
 		  /**Instanciation de 2 articles tests (et ajout dans la table **/
-//		Article art1 = new Article("ART99999", "Maillot spigouleux","TYP00001", 200,
-//				50.20, 0,"Rupture de stock", "CAT00001");
-//		Article art2 = new Article("ART99998", "Ballon spigouleux", "TYP00002", 200,
-//				15.30, 100,"En stock", "CAT00002");
+//		Article art1 = new Article("ART99999", "Maillot spigouleux","TYP00001", 200,50.20, 0,"Rupture de stock", "CAT00001");
+//		Article art2 = new Article("ART99998", "Ballon spigouleux", "TYP00002", 200,15.30, 100,"En stock", "CAT00002");
 		
 		/**Création d'une promo test**/
 //		String dateS = "05/11/2010";
