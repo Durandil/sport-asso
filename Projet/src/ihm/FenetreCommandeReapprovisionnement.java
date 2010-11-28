@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import metier.Article;
+
 public class FenetreCommandeReapprovisionnement extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +41,9 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 	}
 	
 	private void initComponent(String idArticle){
+		
+		final String identifiantArticle=idArticle;
+		
 		// Définition du panneau dans lequel le gérant sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
@@ -77,17 +82,16 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		//Définition des actions relatives à chaque bouton
 		
 		boutonValiderSelection.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				
+				Article.modifierStockArticleBDD(identifiantArticle, quantiteSelectionnee);
 				setVisible(false); // provisoire
-				// TODO il faudra ajouter la quantite selectionnée par le gérant au stock inscrit 
-				//dans la base et modifier la base de données afin de tenir compte de la modification
-				// pour l'article dans la table ARTICLE
-				// si le stock était nul alors il faut indiquer qu'il est disponible ETAT
+				
 			}			
 		});
 		
 		boutonAnnulerSelection.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// permet d'annuler la commande en cours et retour vers page principale
 				setVisible(false);
 			}			

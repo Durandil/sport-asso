@@ -82,13 +82,13 @@ public class FenetreCatalogueGerant extends JFrame{
 				int ligne = tableau.getSelectedRow();
 				String numArticle= tableau.getValueAt(ligne, 0).toString();
 				
-				// AUCUN EFFET SUR LA TABLE POUR LE MOMENT
-//				Article.supprimerArticleBDD(numArticle);
-//				
-//				JOptionPane supprime = new JOptionPane();
-//				ImageIcon image = new ImageIcon("src/images/information.png");
-//				supprime.showMessageDialog(null, "L'article a bien été supprimé", "Information", JOptionPane.INFORMATION_MESSAGE, image);
-//				tableau.removeRowSelectionInterval(ligne, ligne);
+				Article.supprimerArticleBDD(numArticle);
+				
+				JOptionPane supprime = new JOptionPane();
+				ImageIcon image = new ImageIcon("src/images/information.png");
+				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
+				tableau.removeRowSelectionInterval(ligne, ligne);
+				tableau.revalidate();
 
 			}
 		});

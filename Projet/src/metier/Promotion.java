@@ -122,4 +122,48 @@ public class Promotion {
 		SGBD.executeUpdate(requete);	
 	}
 	
+	public static boolean verifierDatePromotion(String annee,String mois,String jour){
+		boolean resultat=true;
+		int moisDate=Integer.parseInt(mois);
+		int jourDate=Integer.parseInt(jour);
+		int anneeDate=Integer.parseInt(annee);
+		
+		Date dateJour =(Date) new java.util.Date();
+		Date datePromotion= (Date) new java.util.Date(anneeDate, moisDate, jourDate);
+		
+		if(datePromotion.before(dateJour)){
+			resultat=false;
+		}
+		
+		if((moisDate==4 | moisDate==6 | moisDate==9 | moisDate==11) & jourDate==31){
+			resultat=false;
+		}
+		
+		if(moisDate==2 | jourDate>28){
+			resultat=false;
+		}
+		
+		return resultat;
+	}
+	
+	public static boolean verifierOrdreDeuxDate(String anneeAvant,String moisAvant,String jourAvant,String anneeApres,String moisApres,String jourApres){
+		boolean resultat=true;
+		int moisDateAvant=Integer.parseInt(moisAvant);
+		int jourDateAvant=Integer.parseInt(jourAvant);
+		int anneeDateAvant=Integer.parseInt(anneeAvant);
+		int moisDateApres=Integer.parseInt(moisApres);
+		int jourDateApres=Integer.parseInt(jourApres);
+		int anneeDateApres=Integer.parseInt(anneeApres);
+		
+		Date datePromotionAvant =(Date) new java.util.Date(anneeDateAvant,moisDateAvant,jourDateAvant);
+		Date datePromotionApres= (Date) new java.util.Date(anneeDateApres, moisDateApres, jourDateApres);
+		
+		if(datePromotionAvant.after(datePromotionApres)){
+			resultat=false;
+		}
+
+		
+		return resultat;
+	}
+	
 }

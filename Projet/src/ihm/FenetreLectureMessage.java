@@ -109,7 +109,7 @@ public class FenetreLectureMessage extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				Message.supprimerBDD(numMessage);
-				// TODO permet de supprimer le message sélectionné du tableau
+				FenetreMessagerie.suppressionMessage=true;
 				setVisible(false);
 			}			
 		});

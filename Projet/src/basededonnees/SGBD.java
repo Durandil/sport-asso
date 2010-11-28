@@ -27,13 +27,8 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-
-
 	private static final String ID = "id3193";
 	private static final String MDP = "id3193";
-
-
-
 
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -698,7 +693,6 @@ public class SGBD {
 								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
 			
-			// Récupérer les méta données
 
 			while (res.next()) {
 				
@@ -830,5 +824,6 @@ public class SGBD {
 		
 		return informationsClient;
 	}
+
 	
 }

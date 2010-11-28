@@ -292,6 +292,7 @@ public class FicheClient extends JDialog {
 		
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 		
+		pack();
 		
 	}
 }

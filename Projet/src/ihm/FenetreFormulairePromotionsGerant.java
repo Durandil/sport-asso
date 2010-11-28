@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import basededonnees.SGBD;
 
 import metier.Article;
+import metier.Promotion;
 
 public class FenetreFormulairePromotionsGerant extends JDialog {
 	/**
@@ -30,12 +31,20 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	// cette classe devra permettre d'ouvrir le formulaire d'ajout 
 	// ou de modification d'une promotion
 	public Dimension dimensionStandard = new Dimension(220, 60);
-	private JLabel descriptionLabel,populationLabel,articleLabel,dateDebutLabel,dateFinLabel,pourcentLabel;
+	private JLabel descriptionLabel,populationLabel,articleLabel,pourcentLabel;
 	private JComboBox articleBox,populationBox;
 	private JTextField description,pourcentPromo;
-	private String itemArticlePromo="";
 	private JComboBox cbmoisDebut, cbjourDebut,cbanneeDebut ;
 	private JComboBox cbmoisFin, cbjourFin,cbanneeFin ;
+	
+	private static String jourDebutSelectionne="11";
+	private static String moisDebutSelectionne="07";
+	private static String anneeDebutSelectionne="2005";
+	private static String jourFinSelectionne="11";
+	private static String moisFinSelectionne="07";
+	private static String anneeFinSelectionne="2005";
+	private static String populationPromo="Promotion pour tous les clients";
+	public static String articleSelectionne;
 	
 	// Constructeur pour l'ajout d'une promotion
 	public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal ){
@@ -98,6 +107,14 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		populationBox.addItem("Promotion pour tous les clients");
 		populationBox.setSelectedItem("Promotion pour tous les clients");
 		
+		populationBox.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				populationPromo = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
 		articleBox = new JComboBox();
 		//TODO récupération liste tous les articles
 		ArrayList<String> listeArticles = new ArrayList<String>();
@@ -111,7 +128,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				itemArticlePromo=(String) ((JComboBox) e.getSource()).getSelectedItem();
+				articleSelectionne =(String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
@@ -156,6 +173,55 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbjourFin.setPreferredSize(new Dimension(5, 5));
 		cbjourDebut.setPreferredSize(new Dimension(5, 5));
 		
+		cbjourDebut.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				jourDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		cbjourFin.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				jourFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbmoisDebut.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				moisDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbmoisFin.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				moisFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbanneeDebut.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				anneeDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbanneeFin.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				anneeFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		
 		panDateDebut.setLayout(new GridLayout(1,4,5,5));
 		panDateFin.setLayout(new GridLayout(1,4,5,5));
 		
@@ -198,6 +264,14 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				//  TODO enregistrer la création d'une promotion
 				// vérifier que la date est possible ( par exemple qu'on ait pas un 31 février ou un 31 novembre)
+				boolean dateDebutPossible=Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
+				boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+				boolean comparaisonDeuxDates;
+				if(dateDebutPossible==true & dateFinPossible==true){
+					comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+				}
+				
+				//Promotion promo = new Promotion(null, description.getText(), dateDebut, dateFin, pourcentagePromo, promoFidelite);
 				
 				// puis fermer la page
 				setVisible(false);
