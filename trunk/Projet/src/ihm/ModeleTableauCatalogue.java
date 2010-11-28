@@ -25,10 +25,10 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		super();
 		if( pourReapprovisionnement == false){
 			//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
-			ArrayList<String> listeIdentifiants = SGBD.selectListeString("ARTICLE","IDARTICLE");
-			ArrayList<String> listeDescriptions = SGBD.selectListeString("ARTICLE", "DESCRIPTION");
-			ArrayList<Integer> listeStocks = SGBD.selectListeInt("ARTICLE", "STOCK");
-			ArrayList<Integer> listeEtats = SGBD.selectListeInt("ARTICLE", "PRIXINITIAL");
+			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
+			ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonne("ARTICLE", "DESCRIPTION","IDARTICLE");
+			ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonne("ARTICLE", "STOCK","IDARTICLE");
+			ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonne("ARTICLE", "PRIXINITIAL","IDARTICLE");
 		
 			
 			donnees = new Object[listeIdentifiants.size()][5];
