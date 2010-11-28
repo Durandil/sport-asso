@@ -26,7 +26,7 @@ public class BDD {
 		SGBD.executeUpdate("DROP TABLE REDUCTION");
 		SGBD.executeUpdate("DROP TABLE CATEGORIE");
 		SGBD.executeUpdate("DROP TABLE QUANTITE");		
-        SGBD.executeUpdate("DROP SEQUENCE S_ARTICLE");
+        SGBD.executeUpdate("DROP SEQUENCE S_ARTICLE ");
 		SGBD.executeUpdate("DROP SEQUENCE S_PROMOTION");
 		SGBD.executeUpdate("DROP SEQUENCE S_FIDELITE");
 		SGBD.executeUpdate("DROP SEQUENCE S_MESSAGE");
@@ -145,13 +145,13 @@ public class BDD {
 				"CONSTRAINT PK_MESSAGE PRIMARY KEY (IDMESSAGE),"+
 				"CONSTRAINT FK_MESSAGE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
 		
-		SGBD.executeUpdate("CREATE SEQUENCE S_ARTICLE");
+		SGBD.executeUpdate("CREATE SEQUENCE S_ARTICLE Increment by 1 start with 5");
 		
-		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION");
+		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 3");
 		
-		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE");
+		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE  Increment by 1 start with 3 ");
 		
-		SGBD.executeUpdate("CREATE SEQUENCE S_MESSAGE");
+		SGBD.executeUpdate("CREATE SEQUENCE S_MESSAGE  Increment by 1 start with 3");
 		
 	}
 	

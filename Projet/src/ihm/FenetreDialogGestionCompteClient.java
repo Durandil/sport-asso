@@ -16,6 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import metier.Association;
+import metier.Particulier;
+
 import basededonnees.SGBD;
 
 
@@ -47,7 +50,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	 * Initialise le contenu de la boîte
 	 */
 	private void initComponent(String idclient){
-		
+		final String numClient=idclient;
 		
 		//Icone
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
@@ -169,7 +172,14 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {	
+			public void actionPerformed(ActionEvent e) {	
+				
+				if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
+					Association.modifierBDDassoc(numClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
+				}
+				else{
+					Particulier.modifierBDDparticulier(numClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
+				}
 				
 				// on pourra enregistrer dans base de données la modification
 				setVisible(false);
@@ -179,7 +189,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});

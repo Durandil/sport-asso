@@ -686,13 +686,13 @@ public class SGBD {
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
 			
-			System.out.println("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-					" WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+			System.out.println("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
+					"WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE" +
-								"WHERE CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
+								"WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-			
+			System.out.println(res.getObject(1).toString());
 
 			while (res.next()) {
 				
@@ -783,6 +783,7 @@ public class SGBD {
 					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
 					" or NOMVILLE='"+ville+"' )");
+			
 			while (res.next()){
 				String s,s2,s3,s4;
 				s = res.getObject(1).toString();

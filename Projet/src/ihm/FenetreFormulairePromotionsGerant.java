@@ -1,6 +1,5 @@
 package ihm;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -20,7 +19,6 @@ import javax.swing.JTextField;
 
 import basededonnees.SGBD;
 
-import metier.Article;
 import metier.Promotion;
 
 public class FenetreFormulairePromotionsGerant extends JDialog {
@@ -110,7 +108,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		populationBox.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				populationPromo = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -140,7 +137,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			cbjourFin.addItem(i+"");
 		}
 
-		
 		cbmoisDebut = new JComboBox();
 		cbmoisFin = new JComboBox();
 		
@@ -176,7 +172,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbjourDebut.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				jourDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -184,7 +180,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbjourFin.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				jourFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -192,7 +188,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbmoisDebut.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				moisDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -200,7 +196,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbmoisFin.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				moisFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -208,7 +204,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbanneeDebut.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				anneeDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -216,7 +212,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbanneeFin.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				anneeFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -251,8 +247,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panneauCentralFenetre.add(panDateDebut);
 		panneauCentralFenetre.add(panDateFin);
 		
-		
-		
 		this.getContentPane().add(panneauCentralFenetre,"Center");
 		
 		JPanel panneauBasFenetre = new JPanel();
@@ -262,16 +256,31 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		boutonConfirmation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//  TODO enregistrer la création d'une promotion
-				// vérifier que la date est possible ( par exemple qu'on ait pas un 31 février ou un 31 novembre)
-				boolean dateDebutPossible=Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
-				boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-				boolean comparaisonDeuxDates;
-				if(dateDebutPossible==true & dateFinPossible==true){
-					comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-				}
+				// Enregistrer la création d'une promotion
 				
-				//Promotion promo = new Promotion(null, description.getText(), dateDebut, dateFin, pourcentagePromo, promoFidelite);
+				// TODO pourquoi un article n'est pas pris en compte dans la création d'une promotion
+				// et dans la table PROMO de la base de données
+				
+//				boolean dateDebutPossible=Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
+//				boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+//				boolean comparaisonDeuxDates;
+//				if(dateDebutPossible==true & dateFinPossible==true){
+//					comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+//					if(comparaisonDeuxDates==true){
+//						java.sql.Date dateDebut= new java.sql.Date(Integer.parseInt(anneeDebutSelectionne),Integer.parseInt(moisDebutSelectionne),Integer.parseInt(jourDebutSelectionne));
+//						java.sql.Date dateFin = new java.sql.Date(Integer.parseInt(anneeFinSelectionne),Integer.parseInt(moisFinSelectionne),Integer.parseInt(jourFinSelectionne));
+//						
+//						boolean promoAdherent=true;
+//						
+//						if(populationPromo.equals("Promotion pour tous les clients")){
+//							promoAdherent=false;
+//						}
+//						
+//						Promotion promo = new Promotion(null, description.getText(), dateDebut, dateFin, Double.parseDouble(pourcentPromo.getText()), promoAdherent);
+//					}
+//				}
+				
+				
 				
 				// puis fermer la page
 				setVisible(false);

@@ -43,17 +43,17 @@ public class FenetreFideliteClient extends JDialog {
 	 * @param client : Il permet de récupérer les informations d'un client pour les utiliser dans la fenêtre
 	 * 				   
 	 */
-	public FenetreFideliteClient(JFrame parent, String title, boolean modal/*,Client client*/){
+	public FenetreFideliteClient(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
 		this.setSize(400, 500);
 		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(/*client*/);
+		this.initComponent();
 	}
 	
 	
-	private void initComponent(/*Client client*/){
+	private void initComponent(){
 		
 		// Création du panneau de gestion de la demande d'une carte de fidelité
 		JPanel panFidelite = new JPanel();
@@ -134,7 +134,7 @@ public class FenetreFideliteClient extends JDialog {
 		
 			@SuppressWarnings("unused")
 			public void actionPerformed(ActionEvent e) {
-				// TODO Gestion des bons achat du client selon le nombre de points
+				//Gestion des bons achat du client selon le nombre de points
 				// sur sa carte de fidelite
 
 				int bonAchat=0;

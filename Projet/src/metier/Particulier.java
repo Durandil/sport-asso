@@ -31,6 +31,7 @@ public class Particulier extends Client {
 		this.motDePasse = genererMdp();
 		this.idVille = idVille;
 		ajouterBDD();
+		ajouterFideliteBDD();
 		System.out.println("Votre mot de passe est : " + this.motDePasse);
 	}
 
@@ -111,27 +112,27 @@ public class Particulier extends Client {
 
 		SGBD.executeUpdate(requete);
 		
-
-
+	}
+	
+	
+	public void ajouterFideliteBDD(){
 		if (this.estFidele) {
-		System.out.println("est fidèle");
+			
 			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
-			"VALUES ( S_FIDELITE.NextVal" +","+
-			"0,"
+			"VALUES (S_FIDELITE.NextVal,"
+			+"'0',"
 			+"'"+this.mail+"')";
 			System.out.println(requete2);
 			SGBD.executeUpdate(requete2);
 		}
-	
-
 	}
 	
-	public static void modifierBDDparticulier(String idClient,String nom,String prenom,String denomination,String adresse,String codePostal,String telephone){
+	public static void modifierBDDparticulier(String idClient,String nom,String prenom,String adresse,String codePostal,String telephone){
 		
 		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal);
 		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
 		
-		String requete = " UPDATE CLIENT SET NOMCLIENT='"+nom+"',PRENOMCLIENT='"+prenom+"',DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"';";
+		String requete = " UPDATE CLIENT SET NOMCLIENT='"+nom+"',PRENOMCLIENT='"+prenom+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"';";
 		
 		System.out.println(requete);
 		
