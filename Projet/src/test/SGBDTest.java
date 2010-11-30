@@ -23,6 +23,7 @@ public class SGBDTest extends TestCase {
 	}*/
 	
 // test select date pour date fin (l'ordre doit être le même dans la base et dans le résultat)	
+// fonctionne
 
 //		public void testSelectListeDates(){
 //		ArrayList<String> result = new ArrayList<String>();
@@ -34,6 +35,7 @@ public class SGBDTest extends TestCase {
 //	}
 	
 // test select liste float
+// ok
 	
 //	public void testSelectListeFloat(){
 //		ArrayList<Float> result = new ArrayList<Float>();
@@ -43,6 +45,7 @@ public class SGBDTest extends TestCase {
 //	}
 	
 // test sélection String sous condition string
+	// ok
 	
 //	public void testselectStringConditionString(){
 //		String result = new String();
@@ -51,6 +54,7 @@ public class SGBDTest extends TestCase {
 //	}	
 	
 // test sélection 2 champs string
+	// ok
 	
 //	public void testselectDeuxChampsString(){
 //		ArrayList<String[]> result = new ArrayList<String[]>();
@@ -71,7 +75,8 @@ public class SGBDTest extends TestCase {
 //		assertEquals(result.get(1)[1], SGBD.selectDeuxChampsString("Client", "DenominationClient", "NomVille").get(1)[1]);
 //	}
 //	
-
+//  TODO
+	
 //	public void testrecupererAttributClient(){
 //		ArrayList<String> result=new ArrayList<String>();
 //		result.add("bde@ensai.fr");
@@ -88,50 +93,61 @@ public class SGBDTest extends TestCase {
 //		assertEquals(result, SGBD.recupererAttributClient("bde@ensai.fr"));
 //		
 //			}
+
+// test sur les articles en réapprovisionnement bon	
 	
-	public void testselectArticlesReapprovisionnement(){
-		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-		ArrayList<String> listeString= new ArrayList<String>();
-		ArrayList<String> listeString2 = new ArrayList<String>();
-		ArrayList<String> listeString3 = new ArrayList<String>();
-		ArrayList<String> listeString4 = new ArrayList<String>();
-		listeString.add("ART00003");
-		listeString2.add("Velo de Course");
-		listeString3.add("0");
-		listeString4.add("250");
-		result.add(listeString);
-		result.add(listeString2);
-		result.add(listeString3);
-		result.add(listeString4);
-		System.out.println(result);
-		System.out.println(SGBD.selectArticlesReapprovisionnement());
-		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
-	}
+//	public void testselectArticlesReapprovisionnement(){
+//		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> listeString= new ArrayList<String>();
+//		ArrayList<String> listeString2 = new ArrayList<String>();
+//		ArrayList<String> listeString3 = new ArrayList<String>();
+//		ArrayList<String> listeString4 = new ArrayList<String>();
+//		listeString.add("ART00003");
+//		listeString2.add("Velo de Course");
+//		listeString3.add("0");
+//		listeString4.add("250");
+//		result.add(listeString);
+//		result.add(listeString2);
+//		result.add(listeString3);
+//		result.add(listeString4);
+//		System.out.println(result);
+//		System.out.println(SGBD.selectArticlesReapprovisionnement());
+//		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
+//	}
 	
-	public void testrecupererInformationFideliteClient(){
-		ArrayList<String> result= new ArrayList<String>();
-		result.add("500");
-		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
-	}
+//  test qui fonctionne	
 	
-	public void testrecupererInformationRechercheClient(){
-		ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
-		ArrayList<String> listeString1 = new ArrayList<String>();
-		ArrayList<String> listeString2 = new ArrayList<String>();
-		ArrayList<String> listeString3 = new ArrayList<String>();
-		ArrayList<String> listeString4 = new ArrayList<String>();
-		listeString1.add("arthur.laroch@gmail.com");
-		listeString2.add("Laroch");
-		listeString3.add("Arthur");
-		listeString4.add(" ");
-		result.add(listeString1);
-		result.add(listeString2);
-		result.add(listeString3);
-		result.add(listeString4);
-		assertEquals(result,SGBD.recupererInformationRechercheClient("arthur.laroch@gmail.com", "laroch"," " , "Rennes"));
-	}
-	//Attention commande 1 2 articles (à modifier et mettre un seul)
-	//assert equals object?
+//	public void testrecupererInformationFideliteClient(){
+//		ArrayList<String> result= new ArrayList<String>();
+//		result.add("Oui");
+//		result.add("500");
+//		System.out.println(SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
+//		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
+//	}
+	
+// test qui fonctionne 
+	
+//	public void testrecupererInformationRechercheClient(){
+//		ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
+//		ArrayList<String> listeString1 = new ArrayList<String>();
+//		ArrayList<String> listeString2 = new ArrayList<String>();
+//		ArrayList<String> listeString3 = new ArrayList<String>();
+//		ArrayList<String> listeString4 = new ArrayList<String>();
+//		listeString1.add("arthur.laroch@gmail.com");
+//		listeString2.add("Laroch");
+//		listeString3.add("Arthur");
+//		listeString4.add("");
+//		result.add(listeString1);
+//		result.add(listeString2);
+//		result.add(listeString3);
+//		result.add(listeString4);
+//		System.out.println(result);
+//		System.out.println(SGBD.recupererInformationRechercheClient("", "laroch"," " , "Rennes"));
+//		assertEquals(result,SGBD.recupererInformationRechercheClient("", "laroch"," " , "Rennes"));
+//	}
+//	//Attention commande 1 2 articles (à modifier et mettre un seul)
+//	//assert equals object?
+	
 	public void testinformationCommande(){
 		ArrayList<Object[]> result=new ArrayList<Object[]>();
 		String[] listeString = new String[4];

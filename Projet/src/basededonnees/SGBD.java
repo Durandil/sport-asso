@@ -21,14 +21,14 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3198";
+	private static final String MDP = "id3198";
 
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -724,8 +724,9 @@ public class SGBD {
 			
 		}
 		catch(SQLException e){
-			
-		}
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+			}
 		finally{
 			
 			SGBD.fermer();
@@ -752,15 +753,15 @@ public class SGBD {
 			// QUI ONT UNE CARTE DE FIDELITE
 			
 			System.out.println("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
-					"WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+					" WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
-								"WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
+								" WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-			System.out.println(res.getObject(1).toString());
+			
 
 			while (res.next()) {
-				
+			
 		//Si le résultat est non nul tout se passe normalement
 				if(res.getObject(1) != null){
 				
@@ -777,7 +778,7 @@ public class SGBD {
 				}
 
 			}
-			System.out.println(res.getString(1).toString());
+			
 			resultat.add(fidele);
 			resultat.add(nbpoints);
 			
@@ -836,16 +837,14 @@ public class SGBD {
 			
 			
 			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM VILLE, CLIENT " +
-					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
-					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
+					" FROM CLIENT " +
+					"WHERE (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
 					" or NOMVILLE='"+ville+"' )");
 			
 			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM VILLE, CLIENT " +
-					"WHERE VILLE.IDVILLE=CLIENT.IDVILLE  " +
-					"and (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
+					" FROM CLIENT " +
+					"WHERE (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
 					"' or NOMCLIENT='"+nomClient +"'" +
 					" or NOMVILLE='"+ville+"' )");
 			
