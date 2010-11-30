@@ -48,9 +48,10 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 			for(int i=0;i<listeIdentifiants.size();i++){
 			
 				donnees[i][0] = listeIdentifiants.get(i);
-				donnees[i][1] = listeNom.get(i);
-				donnees[i][2] = listePrenom.get(i);
-				donnees[i][3] = listeDenomination.get(i);
+				donnees[i][1] = listeDenomination.get(i);
+				donnees[i][2] = listeNom.get(i);
+				donnees[i][3] = listePrenom.get(i);
+				
 				System.out.println(donnees[i][0] + " " + donnees[i][1] +  " " + donnees[i][2] + " " + donnees[i][3]);
 
 			}
