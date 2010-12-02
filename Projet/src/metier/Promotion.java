@@ -129,7 +129,7 @@ public class Promotion {
 		int anneeDate=Integer.parseInt(annee);
 		
 		Date dateJour =(Date) new java.util.Date();
-		Date datePromotion= (Date) new java.util.Date(anneeDate, moisDate, jourDate);
+		Date datePromotion= (Date) new java.sql.Date(anneeDate, moisDate, jourDate);
 		
 		System.out.println(dateJour.toString());
 		System.out.println(datePromotion.toString());

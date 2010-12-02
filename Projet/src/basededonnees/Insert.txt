@@ -44,8 +44,8 @@ Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
 #Promo:
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),0.75,0);
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),0.5,1); 
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00003','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),0.75,0);
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00004','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),0.5,1); 
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00003','Maillots bradés',TO_DATE('2010-08-01', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),0.4,0);
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00004','Chaussettes',TO_DATE('2010-11-01', 'YYYY-MM-DD'),TO_DATE('2010-11-23', 'YYYY-MM-DD'),0.8,1); 
 
 #Ville
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville001', '35000', 'Rennes');
@@ -116,10 +116,21 @@ Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID000
 Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00002', '100', 'cebdf@belfort.fr');
 
 #LISTING_ARTICLES_COMMANDES
-Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('comm0001', 'ART00001',5);
-Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('comm0001', 'ART00002',1);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00001', 'ART00001',5);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00001', 'ART00002',1);
 
 #LISTING_PROMOS_ARTICLES
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00004','PRO00001');
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00003','PRO00002');
 
+#Message
+SGBD.executeUpdate("CREATE TABLE MESSAGE" +
+				"(IDMESSAGE CHAR(8),"+
+				"SUJETMESSAGE VARCHAR(40),"+
+				"CONTENUMESSAGE VARCHAR(200),"+
+				"IDCLIENT VARCHAR(40),"+
+				"DATEMESSAGE DATE,"+
+				"CONSTRAINT PK_MESSAGE PRIMARY KEY (IDMESSAGE),"+
+				"CONSTRAINT FK_MESSAGE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'testa',TO_DATE('2010-12-15', 'YYYY-MM-DD'));
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00002','Prix trop élevés','Je trouve que vos maillots de football sont vraiment hors de prix', 'testp',TO_DATE('2010-12-18', 'YYYY-MM-DD'));
