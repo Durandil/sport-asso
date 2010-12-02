@@ -1,5 +1,7 @@
 package metier;
 
+import java.util.ArrayList;
+
 import ihm.FenetreDialogIdentification;
 import basededonnees.SGBD;
 
@@ -109,12 +111,41 @@ public class Association extends Client {
 	public void ajouterFideliteBDD(){
 		if (this.estFidele) {
 			
-			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)" +
-			"VALUES (S_FIDELITE.NextVal,"
-			+"'0',"
-			+"'"+this.mail+"')";
-			System.out.println(requete2);
-			SGBD.executeUpdate(requete2);
+			ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
+			"S_FIDELITE.NextVal");
+
+	String numFidelite = "";
+	int numeroFidelite = 0;
+
+	numeroFidelite = Integer.parseInt(idNonFini.get(0));
+
+	if (numeroFidelite < 10) {
+		numFidelite = "FID0000" + numeroFidelite;
+	}
+	if (numeroFidelite < 100 && numeroFidelite >= 10) {
+		numFidelite = "FID000" + numeroFidelite;
+	}
+	if (numeroFidelite < 1000 && numeroFidelite >= 100) {
+		numFidelite = "FID00" + numeroFidelite;
+	}
+	if (numeroFidelite < 10000 && numeroFidelite >= 1000) {
+		numFidelite = "FID0" + numeroFidelite;
+	}
+	if (numeroFidelite < 100000 && numeroFidelite >= 10000) {
+		numFidelite = "FID" + numeroFidelite;
+	}
+
+
+	String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)"
+			+ "VALUES ('" 
+			+ numFidelite
+			+ "','0',"
+			+ "'"
+			+ this.mail
+			+ "')";
+	System.out.println(requete2);
+	SGBD.executeUpdate(requete2);
+
 		}
 	}
 	
@@ -124,8 +155,8 @@ public class Association extends Client {
 		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal);
 		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
 		
-		String requete = " UPDATE CLIENT SET DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"';";
-		
+		String requete = " UPDATE CLIENT SET DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"'"
+		+"WHERE IDCLIENT ='" + idClient +"'";
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);

@@ -1,5 +1,8 @@
 package metier;
 
+import java.util.ArrayList;
+
+import ihm.FenetreFormulaireArticleGerant;
 import basededonnees.SGBD;
 
 public class Article {
@@ -104,10 +107,35 @@ public class Article {
 	// Méthode permettant d'ajouter un article dans la table ARTICLES
 	public void ajouterBDD() {
 				
+		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_ARTICLE.NEXTVAL");
+		
+		String numArticle = "";
+		int numeroArticle=0;
+		
 
+			numeroArticle=Integer.parseInt(idNonFini.get(0));
+			
+			if(numeroArticle<10){
+				 numArticle= "ART0000" + numeroArticle;
+			}
+			if(numeroArticle<100 && numeroArticle>=10){
+				numArticle= "ART000" + numeroArticle;
+			}
+			if(numeroArticle<1000 && numeroArticle>=100){
+				numArticle= "ART00" + numeroArticle;
+			}
+			if(numeroArticle<10000 && numeroArticle>=1000){
+				numArticle= "ART0" + numeroArticle;
+			}
+			if(numeroArticle<100000 && numeroArticle>=10000){
+				numArticle= "ART" + numeroArticle;
+			}
+		
+		
 		String requete = "INSERT INTO ARTICLE (IDARTICLE, DESCRIPTION, PRIXINITIAL," +
-				" STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( S_ARTICLE.NextVal"
-				+ ",'"
+				" STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( '"
+				+ numArticle
+				+ "','"
 				+ this.description
 				+ "',"
 				+ this.prixInitial 
@@ -124,6 +152,10 @@ public class Article {
 				+"')";
 
 		SGBD.executeUpdate(requete);
+		
+		
+		
+		
 		
 	}
 	

@@ -68,6 +68,7 @@ public class FenetreCatalogueGerant extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				// ouverture du formulaire d'ajout d'un article dans la base de donnees
+				
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
 				formulaire.setVisible(true);
 			}

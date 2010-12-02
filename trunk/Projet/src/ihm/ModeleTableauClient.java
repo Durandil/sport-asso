@@ -16,7 +16,7 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Identifiant","Dénomination","Nom","Prénom"} ;
+    private final String[] entetes={"Identifiant","Nom","Prénom","Dénomination"} ;
 	
     
 	
@@ -34,7 +34,7 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 		ArrayList<ArrayList<String>> listeClients = SGBD.recupererInformationRechercheClient(idClient,nom,denom,ville);
 		
 		donnees = new Object[1000][4];
-		System.out.println(listeClients.size());
+		System.out.println(listeClients.get(0).size());
 		if (listeClients.size()>0){
 			ArrayList<String> listeIdentifiants = listeClients.get(0);
 			ArrayList<String> listeNom = listeClients.get(1);
@@ -47,10 +47,10 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 			//On ajoute les informations dans l'objet donnees
 			for(int i=0;i<listeIdentifiants.size();i++){
 			
-				donnees[i][0] = listeIdentifiants.get(i);
-				donnees[i][1] = listeDenomination.get(i);
-				donnees[i][2] = listeNom.get(i);
-				donnees[i][3] = listePrenom.get(i);
+				donnees[i][0] = listeIdentifiants.get(i);	
+				donnees[i][1] = listeNom.get(i);
+				donnees[i][2] = listePrenom.get(i);
+				donnees[i][3] = listeDenomination.get(i);
 				
 				System.out.println(donnees[i][0] + " " + donnees[i][1] +  " " + donnees[i][2] + " " + donnees[i][3]);
 

@@ -27,8 +27,8 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -341,8 +341,8 @@ public class SGBD {
 		try {
 		
 			st = c.createStatement();
-			
-			res = st.executeQuery("SELECT "+str+" FROM "+table + "ORDER BY "+ champOrdre+"ASC");
+
+			res = st.executeQuery("SELECT "+str+" FROM "+table + " ORDER BY "+ champOrdre+" ASC");
 
 			while (res.next()) {
 				
@@ -472,7 +472,7 @@ public class SGBD {
 		
 			st = c.createStatement();
 			
-			res = st.executeQuery("SELECT "+var+" FROM "+table+"ORDER BY "+ champOrdre+"ASC");
+			res = st.executeQuery("SELECT "+var+" FROM "+table+" ORDER BY "+ champOrdre+" ASC");
 
 			while (res.next()) {
 
@@ -510,7 +510,7 @@ public class SGBD {
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
 
-
+			
 				while (res.next()) {
 					
 			//Si le résultat est non nul tout se passe normalement
@@ -555,7 +555,7 @@ public class SGBD {
 			st = c.createStatement();
 
 			res = st.executeQuery("SELECT "+champ1+","+champ2+" FROM "+table);
-			System.out.println("SELECT "+champ1+","+champ2+" FROM "+table);
+			
 
 			while (res.next()) {
 
@@ -849,8 +849,10 @@ public class SGBD {
 					" or NOMVILLE='"+ville+"' )");
 			
 			while (res.next()){
+				System.out.println("test");
 				String s,s2,s3,s4;
 				s = res.getObject(1).toString();
+				System.out.println("ID"+s);
 				listeString1.add(s);
 				if(res.getObject(2) != null){
 					
@@ -858,17 +860,18 @@ public class SGBD {
 					s3 = res.getObject(3).toString();
 					listeString2.add(s2);
 					listeString3.add(s3);
-					s4 ="";
+					s4 =" ";
 					listeString4.add(s4);
-					
+					System.out.println("P"+s2 + s3 + s4);
 				}
 				else{
-					s2 = "";
-					s3 = "";
+					s2 = " ";
+					s3 = " ";
 					listeString2.add(s2);
 					listeString3.add(s3);
 					s4 = res.getObject(4).toString();
 					listeString4.add(s4);
+					System.out.println("A"+s2 + s3 + s4);
 					
 				}	
 				

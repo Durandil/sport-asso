@@ -180,10 +180,14 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 				String p =poids.getText();
 				String st= stock.getText();
 				String prx=prix.getText();
+				p = p.replaceAll("[\\s\u00a0]+", "");
+				st = st.replaceAll("[\\s\u00a0]+", "");
+				prx = prx.replaceAll("[\\s\u00a0]+", "");
+				
 				/** ATTENTION : Si on ne touche pas aux Jcombobox, les items seront vides !**/
 				String typ = SGBD.selectStringConditionString("TYPE_SPORT", "IDTYPE", "NOMTYPE", itemSportSelectionne);
 				String cat = SGBD.selectStringConditionString("CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE", itemPrixSelectionne);
-				/** TODO Gérer la génération d'un id article**/
+				
 				
 				Article art = new Article(null,description.getText(),typ,Float.parseFloat(p),Double.parseDouble(prx),Integer.parseInt(st),"En stock",cat);
 				
