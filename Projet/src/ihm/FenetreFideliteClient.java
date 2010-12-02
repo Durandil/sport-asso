@@ -118,7 +118,7 @@ public class FenetreFideliteClient extends JDialog {
 		panPointsFidelite.setPreferredSize(new Dimension(220, 80));
 		pointsFideliteLabel = new JLabel("Nombre de points fidelité :");
 		
-		final int points=35 ; //client.getNbPointsFidelite(); // récupération du nombre de points du client entré en paramètre de initComponent()
+		final int points= Integer.parseInt(SGBD.selectStringConditionString("CARTE_FIDELITE", "NBPOINTS", "IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant)) ; // récupération du nombre de points du client entré en paramètre de initComponent()
 		pointsFidelite= new JTextField(""+points+"");
 		pointsFidelite.setPreferredSize(new Dimension(90, 25));
 		pointsFidelite.setVisible(true);

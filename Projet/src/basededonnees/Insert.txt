@@ -92,10 +92,12 @@ Insert into VILLE (idVille, Codepostal, Nomville) values ('ville040', '92340', '
 #Client
 Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001','Rennes', '35000', '0606060606', 'Activé', 'L3R6T4X8');
 Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('iueihtam@laposte.fr', 'Ueihtam', 'Imré', '2 rue du Nord', 'ville002', 'Pont Réan','35170', '0645454545', 'Activé', 'I7H8M9XX');
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('testp', 'Nom', 'Prénom', 'Adresse p', 'ville002', 'Pont Réan','35170', '0607080910', 'Activé', '1234');
 Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('lcg@free.fr', 'Les canards givrés', '11 rue de la Mairie','ville003','Grenoble', '38000', '0448488484', 'Activé', 'Canard35');
 Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('cebdf@belfort.fr', 'Club Espoir Belfortain de Football', '12 place de la mainsion du Peuple','ville004','Belfort', '90000', '0384254104', 'Activé', 'CHECHE');
 Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('idylliste@ensai.fr', 'Liste BDE 2009', 'Ensai','ville034','Bruz', '35170', '0299854469', 'Activé', 'lafinduf');
 Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('clg@ensai.fr', 'Club Laser Game de l''Ensai', 'Ensai','ville034','Bruz', '35170', '0298564711', 'Activé', 'gogogo');
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('testa', 'Asso test', 'Adresse ici','ville034','Bruz', '35170', '0203040506', 'Activé', '1234');
 
 #Commande
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0001','3 Juin 2010','arthur.laroch@gmail.com');
@@ -110,8 +112,8 @@ Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCateg
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00004', 'Raquette de Tennis', 550, 1.1, 50, 'CAT00003', 'TYP00008', 'En stock');
 
 #Carte_fidelite
-Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID501', '500', 'arthur.laroch@gmail.com');
-Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID502', '100', 'cebdf@belfort.fr');
+Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00001', '500', 'arthur.laroch@gmail.com');
+Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00002', '100', 'cebdf@belfort.fr');
 
 #LISTING_ARTICLES_COMMANDES
 Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('comm0001', 'ART00001',5);
