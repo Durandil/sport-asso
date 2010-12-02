@@ -27,8 +27,8 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
+	private static final String ID = "id3198";
+	private static final String MDP = "id3198";
 
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -699,11 +699,12 @@ public class SGBD {
 		Statement st = null ;
 		ResultSet res= null;
 		try{
+			
 			st=c.createStatement();
-			res= st.executeQuery("SELECT IDARTICLE, DESCRIPTION, PRIXINITIAL,QUANTITECOMMANDEE" +
-								 "FROM ARTICLE LISTING_ARTICLES_COMMANDES" +
-								 "WHERE ARTICLE.IDARTICLE=LISTING_ARTICLES_COMMANDES.IDARTICLE and" +
-								 "IDCOMMANDE='"+ idCommande +"';");
+			res= st.executeQuery("SELECT ARTICLE.IDARTICLE, DESCRIPTION, PRIXINITIAL,QUANTITECOMMANDEE" +
+								 " FROM ARTICLE, LISTING_ARTICLES_COMMANDES" +
+								 " WHERE ARTICLE.IDARTICLE=LISTING_ARTICLES_COMMANDES.IDARTICLE AND" +
+								 " LISTING_ARTICLES_COMMANDES.IDCOMMANDE ='"+ idCommande +"'");
 			
 			
 			
