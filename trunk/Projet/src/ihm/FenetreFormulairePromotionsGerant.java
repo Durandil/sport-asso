@@ -261,24 +261,24 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 				// TODO pourquoi un article n'est pas pris en compte dans la création d'une promotion
 				// et dans la table PROMO de la base de données
 				
-//				boolean dateDebutPossible=Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
-//				boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-//				boolean comparaisonDeuxDates;
-//				if(dateDebutPossible==true & dateFinPossible==true){
-//					comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-//					if(comparaisonDeuxDates==true){
-//						java.sql.Date dateDebut= new java.sql.Date(Integer.parseInt(anneeDebutSelectionne),Integer.parseInt(moisDebutSelectionne),Integer.parseInt(jourDebutSelectionne));
-//						java.sql.Date dateFin = new java.sql.Date(Integer.parseInt(anneeFinSelectionne),Integer.parseInt(moisFinSelectionne),Integer.parseInt(jourFinSelectionne));
-//						
-//						boolean promoAdherent=true;
-//						
-//						if(populationPromo.equals("Promotion pour tous les clients")){
-//							promoAdherent=false;
-//						}
-//						
-//						Promotion promo = new Promotion(null, description.getText(), dateDebut, dateFin, Double.parseDouble(pourcentPromo.getText()), promoAdherent);
-//					}
-//				}
+				boolean dateDebutPossible=Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
+				boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+				boolean comparaisonDeuxDates;
+				if(dateDebutPossible==true & dateFinPossible==true){
+					comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+					if(comparaisonDeuxDates==true){
+						java.sql.Date dateDebut= new java.sql.Date(Integer.parseInt(anneeDebutSelectionne),Integer.parseInt(moisDebutSelectionne),Integer.parseInt(jourDebutSelectionne));
+						java.sql.Date dateFin = new java.sql.Date(Integer.parseInt(anneeFinSelectionne),Integer.parseInt(moisFinSelectionne),Integer.parseInt(jourFinSelectionne));
+						
+						boolean promoAdherent=true;
+						
+						if(populationPromo.equals("Promotion pour tous les clients")){
+							promoAdherent=false;
+						}
+						
+						Promotion promo = new Promotion(null, description.getText(), dateDebut, dateFin, Double.parseDouble(pourcentPromo.getText()), promoAdherent);
+					}
+				}
 				
 				
 				

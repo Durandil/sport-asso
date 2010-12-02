@@ -1,6 +1,7 @@
 package metier;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 
 import basededonnees.SGBD;
@@ -13,12 +14,12 @@ public class Message {
 	private String expediteur;
 	private Date dateEnvoi ;
 	
-	// ce static doit aider à faire un compteur des idMessage
-	// A chaque fois qu'un message sera ajouté à la base, on l'incrementera de 1
-	// voir méthode ajouterBDD ci-dessous
-	private static int compteurIdentifiantMessage=0;
-	//private static int compteurIdentifiantMessage=SGBD.recupererIdentifiantDernierEnregistrementTable("MESSAGE", "IDMESSAGE");
-	
+//	// ce static doit aider à faire un compteur des idMessage
+//	// A chaque fois qu'un message sera ajouté à la base, on l'incrementera de 1
+//	// voir méthode ajouterBDD ci-dessous
+//	private static int compteurIdentifiantMessage=0;
+//	//private static int compteurIdentifiantMessage=SGBD.recupererIdentifiantDernierEnregistrementTable("MESSAGE", "IDMESSAGE");
+//	
 	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi) {
 		super();
 		this.sujet = sujet;
@@ -79,12 +80,36 @@ public class Message {
 	public void ajouterBDD() {
 		
 		String s = SGBD.transformation(this.dateEnvoi);
-		compteurIdentifiantMessage = compteurIdentifiantMessage+1;
-		System.out.println(compteurIdentifiantMessage);
-		String idMessage=""+compteurIdentifiantMessage;
+//		compteurIdentifiantMessage = compteurIdentifiantMessage+1;
+//		System.out.println(compteurIdentifiantMessage);
+//		String idMessage=""+compteurIdentifiantMessage;
+		
+		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_MESSAGE.NEXTVAL");
+		
+		String numMessage = "";
+		int numeroMessage=0;
+		
+
+			numeroMessage=Integer.parseInt(idNonFini.get(0));
+			
+			if(numeroMessage<10){
+				 numMessage= "MES0000" + numeroMessage;
+			}
+			if(numeroMessage<100 && numeroMessage>=10){
+				numMessage= "MES000" + numeroMessage;
+			}
+			if(numeroMessage<1000 && numeroMessage>=100){
+				numMessage= "MES00" + numeroMessage;
+			}
+			if(numeroMessage<10000 && numeroMessage>=1000){
+				numMessage= "MES0" + numeroMessage;
+			}
+			if(numeroMessage<100000 && numeroMessage>=10000){
+				numMessage= "MES" + numeroMessage;
+			}
 		
 		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
-				"IDCLIENT,DATEMESSAGE) VALUES ( '"+ idMessage +"',"
+				"IDCLIENT,DATEMESSAGE) VALUES ( '"+ numMessage +"',"
 				+ "'"+ this.sujet + "',"
 				+ "'"+ this.contenu + "','"
 				+ this.expediteur+ "'," 
