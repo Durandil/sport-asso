@@ -145,8 +145,8 @@ public class SGBDTest extends TestCase {
 //		System.out.println(SGBD.recupererInformationRechercheClient("", "laroch"," " , "Rennes"));
 //		assertEquals(result,SGBD.recupererInformationRechercheClient("", "laroch"," " , "Rennes"));
 //	}
-//	//Attention commande 1 2 articles (à modifier et mettre un seul)
-//	//assert equals object?
+
+// test opérationnel	
 	
 	public void testinformationCommande(){
 		ArrayList<Object[]> result=new ArrayList<Object[]>();
@@ -156,7 +156,11 @@ public class SGBDTest extends TestCase {
 		listeString[2]="70";
 		listeString[3]="5";
 		result.add(listeString);
-		assertEquals(result,SGBD.informationCommande("comm0001"));
+
+		assertEquals(result.get(0)[0], SGBD.informationCommande("comm0001").get(0)[0]);
+		assertEquals(result.get(0)[1], SGBD.informationCommande("comm0001").get(0)[1]);
+		assertEquals(result.get(0)[2], SGBD.informationCommande("comm0001").get(0)[2]);
+		assertEquals(result.get(0)[3], SGBD.informationCommande("comm0001").get(0)[3]);
 	}
 }
 
