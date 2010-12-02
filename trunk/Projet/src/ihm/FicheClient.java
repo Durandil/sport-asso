@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -33,10 +34,13 @@ public class FicheClient extends JDialog {
 	private JComboBox ActivationCompteBox;
 	private JLabel ActifCompteLabel;
 	private Dimension dimensionpanneauInformationsPersonnelles =  new Dimension(250,60);
-
+	private Dimension dimensionPanneauStatistique =  new Dimension(200,50);
+	private JLabel icon;
+	private static String etatCompte="";
+	
 	public FicheClient(JFrame parent, String title, boolean modal,String identifiantClient){
 		super(parent, title, modal);
-		this.setSize(1024, 900);
+		this.setSize(1024, 1060);
 		this.setLocation(0,0);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -47,7 +51,6 @@ public class FicheClient extends JDialog {
 		
 		// Déclaration du panneau qui contiendra les statistiques sur le client
 		JPanel panneauDroite=new JPanel();
-		//panneauDroite.setPreferredSize(new Dimension(300,500));
 		panneauDroite.setLayout(new GridLayout(5, 1));
 		
 		// Implémenter des méthodes (interrogation tables) pour obtenir les statistiques sur un client
@@ -57,50 +60,82 @@ public class FicheClient extends JDialog {
 		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
 		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
 		
-		panneauDroite.add(totalMoyenCommandes);
-		panneauDroite.add(totalMaxCommande);
+		JPanel panStat1 = new JPanel();
+		JPanel panStat2 = new JPanel();
+		JPanel panStat3 = new JPanel();
+		JPanel panStat4 = new JPanel();
+		JPanel panStat5 = new JPanel();
 		
-		panneauDroite.add(articleMaxCommande);
-		panneauDroite.add(quantiteTotaleArticleMaxCommande);
-		panneauDroite.add(dateDernierAchatArticleMaxCommande);
+		panStat1.setBackground(Color.white);
+		panStat2.setBackground(Color.white);
+		panStat3.setBackground(Color.white);
+		panStat4.setBackground(Color.white);
+		panStat5.setBackground(Color.white);
 		
-		this.getContentPane().add(panneauDroite, BorderLayout.EAST);
+		panStat1.setPreferredSize(dimensionPanneauStatistique);
+		panStat2.setPreferredSize(dimensionPanneauStatistique);
+		panStat3.setPreferredSize(dimensionPanneauStatistique);
+		panStat4.setPreferredSize(dimensionPanneauStatistique);
+		panStat5.setPreferredSize(dimensionPanneauStatistique);
 		
-		// Déclaration du panneau qui contiendra les informations personnelles du client
+		panStat1.add(totalMoyenCommandes);
+		panStat2.add(totalMaxCommande);
+		panStat3.add(articleMaxCommande);
+		panStat4.add(quantiteTotaleArticleMaxCommande);
+		panStat5.add(dateDernierAchatArticleMaxCommande);
+		
+		panStat1.setBounds(552, 90, 200,50);
+		panStat2.setBounds(552, 160,200,50);
+		panStat3.setBounds(552, 230,200,50);
+		panStat4.setBounds(552, 300,200,50);
+		panStat5.setBounds(552, 370,200,50);
+		
+		
+		this.getContentPane().add(panStat1);
+		this.getContentPane().add(panStat2);
+		this.getContentPane().add(panStat3);
+		this.getContentPane().add(panStat4);
+		this.getContentPane().add(panStat5);
+		
+
+		
+		// Déclaration du panneau de fond de l'écran
 		JPanel panneauGauche= new JPanel();
-		//panneauGauche.setPreferredSize(new Dimension(300,500));
-		
-		JPanel panneauInformationsPersonnelles=new JPanel();
-		panneauInformationsPersonnelles.setLayout(new GridLayout(8,0));
+		icon = new JLabel(new ImageIcon("src/images/fond_fiche.jpg"));
+		panneauGauche.setBackground(Color.white);
+		panneauGauche.add(icon);	
 		
 		//Identifiant
 		JPanel panIdentifiant = new JPanel();
-		panIdentifiant.setBackground(Color.white);
+		panIdentifiant.setBackground(new Color(0, 0, 0, 0));
 		panIdentifiant.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panIdentifiant.setBorder(BorderFactory.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
-		identifiant = new JTextField(SGBD.selectStringConditionString("CLIENT", "IDCLIENT", "IDCLIENT", idClient));
+		String id=SGBD.selectStringConditionString("CLIENT", "IDCLIENT", "IDCLIENT", idClient);
+		identifiant = new JTextField(id);
 		identifiant.setPreferredSize(new Dimension(120, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
-		
+		panIdentifiant.setBounds(40,120,220,60);
+		this.add(panIdentifiant);
 		
 		// La denomination
 		JPanel panDenomination= new JPanel();
-		panDenomination.setBackground(Color.white);
+		panDenomination.setBackground(new Color(0, 0, 0, 0));
 		panDenomination.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		String denominationClient = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
 		denomination=new JTextField(denominationClient);
-		denomination.setPreferredSize(new Dimension(90, 25));
+		denomination.setPreferredSize(new Dimension(90/*denominationClient.length()*/, 25));
 		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
 		denominationLabel=new JLabel("Denomination");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
-		
+		panDenomination.setBounds(40,200,220,60);
+		this.add(panDenomination);
 		
 		//Le nom
 		JPanel panNom = new JPanel();
-		panNom.setBackground(Color.white);
+		panNom.setBackground(new Color(0, 0, 0, 0));
 		panNom.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		String name = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
 		nom = new JTextField(name);
@@ -109,11 +144,12 @@ public class FicheClient extends JDialog {
 		nomLabel = new JLabel("Nom :");
 		panNom.add(nomLabel);
 		panNom.add(nom);
-		
+		panNom.setBounds(40,280,220,60);
+		this.add(panNom);
 			
 		//Le prenom
 		JPanel panPrenom = new JPanel();
-		panPrenom.setBackground(Color.white);
+		panPrenom.setBackground(new Color(0, 0, 0, 0));
 		panPrenom.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
 		prenomLabel = new JLabel("Prenom : ");
@@ -122,7 +158,8 @@ public class FicheClient extends JDialog {
 		prenom.setPreferredSize(new Dimension(90, 25));
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
-		
+		panPrenom.setBounds(40,360,220,60);
+		this.add(panPrenom);
 		
 		if(denominationClient.equals(" ")){
 			denomination.setEnabled(false);
@@ -137,7 +174,7 @@ public class FicheClient extends JDialog {
 		
 		// Le type de Compte
 		JPanel panTypeCompte=new JPanel();
-		panTypeCompte.setBackground(Color.white);
+		panTypeCompte.setBackground(new Color(0, 0, 0, 0));
 		panTypeCompte.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panTypeCompte.setBorder(BorderFactory.createTitledBorder("Type de compte"));
 		String compte = "";
@@ -149,35 +186,42 @@ public class FicheClient extends JDialog {
 		}
 		typeCompteLabel = new JLabel("Statut Compte : " + compte);
 		panTypeCompte.add(typeCompteLabel);
-		
+		panTypeCompte.setBounds(40,40,220,60);
+		this.add(panTypeCompte);
 		
 		//L'adresse
 		JPanel panAdresse = new JPanel();
-		panAdresse.setBackground(Color.white);
+		panAdresse.setBackground(new Color(0, 0, 0, 0));
 		panAdresse.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panAdresse.setBorder(BorderFactory.createTitledBorder("Adresse"));
 		adresseLabel = new JLabel("Adresse : ");
-		adresse = new JTextField(SGBD.selectStringConditionString("CLIENT", "ADRESSECLIENT", "IDCLIENT", idClient));
-		adresse.setPreferredSize(new Dimension(100, 25));
+		String adresseClient=SGBD.selectStringConditionString("CLIENT", "ADRESSECLIENT", "IDCLIENT", idClient);
+		adresse = new JTextField(adresseClient);
+		adresse.setPreferredSize(new Dimension(/*adresseClient.length()*/90, 25));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
+		panAdresse.setBounds(40,440,220,60);
+		this.add(panAdresse);
 		
 
 		//ville
 		JPanel panVille = new JPanel();
-		panVille.setBackground(Color.white);
+		panVille.setBackground(new Color(0, 0, 0, 0));
 		panVille.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
 		villeLabel = new JLabel("Ville: ");
 		ville = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMVILLE", "IDCLIENT", idClient));
 		ville.setPreferredSize(new Dimension(90, 25));
+		ville.setEnabled(false);
 		panVille.add(villeLabel);
 		panVille.add(ville);
+		panVille.setBounds(40,600,220,60);
+		this.add(panVille);
 		
 		
 		//Code Postal
 		JPanel panCP = new JPanel();
-		panCP.setBackground(Color.white);
+		panCP.setBackground(new Color(0, 0, 0, 0));
 		panCP.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Code Postal : ");
@@ -185,11 +229,13 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
+		panCP.setBounds(40,520,220,60);
+		this.add(panCP);
 		
 		
 		// Telephone
 		JPanel panTelephone = new JPanel();
-		panTelephone.setBackground(Color.white);
+		panTelephone.setBackground(new Color(0, 0, 0, 0));
 		panTelephone.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panTelephone.setBorder(BorderFactory.createTitledBorder("Telephone"));
 		telLabel = new JLabel("Numéro : ");
@@ -197,22 +243,49 @@ public class FicheClient extends JDialog {
 		telephone.setPreferredSize(new Dimension(90, 25));
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
+		panTelephone.setBounds(40,680,220,60);
+		this.add(panTelephone);
 		
 		
 		// Activation du compte
-//		JPanel panActivationCompte = new JPanel();
-//		panActivationCompte.setBackground(Color.white);
-//		panActivationCompte.setPreferredSize(new Dimension(220, 60));
-//		panActivationCompte.setBorder(BorderFactory.createTitledBorder("Activation du compte"));
-//		ActifCompteLabel = new JLabel("Compte Actif ? ");
-//		ActivationCompteBox = new JComboBox();
-//		ActivationCompteBox.addItem("True");
-//		ActivationCompteBox.addItem("False");
-//		String activite = Boolean.toString();
-//		ActivationCompteBox.setSelectedItem(activite);
-//		panActivationCompte.add(ActifCompteLabel);
-//		panActivationCompte.add(ActivationCompteBox);
-//		panneauCentral.add(panActivationCompte);
+		JPanel panActivationCompte = new JPanel();
+		panActivationCompte.setBackground(new Color(0,0,0,0));
+		panActivationCompte.setPreferredSize(new Dimension(220, 60));
+		panActivationCompte.setBorder(BorderFactory.createTitledBorder("Activation du compte"));
+		String actifCompteClient=SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient);
+		
+		ActifCompteLabel = new JLabel("Compte Actif ? ");
+		ActivationCompteBox = new JComboBox();
+		ActivationCompteBox.addItem("Oui");
+		ActivationCompteBox.addItem("Non");
+		if(actifCompteClient.equals("Activé")){
+			ActivationCompteBox.setSelectedItem("Oui");
+		}
+		else{
+			ActivationCompteBox.setSelectedItem("Non");
+		}
+		
+		ActivationCompteBox.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// Auto-generated method stub
+				String choix =(String) ((JComboBox) e.getSource()).getSelectedItem();
+				if(choix.equals("Oui")){
+					etatCompte = "Activé";
+				}
+				else{
+					etatCompte = "Desactivé";
+				}
+			}
+		});
+		
+		
+		panActivationCompte.add(ActifCompteLabel);
+		panActivationCompte.add(ActivationCompteBox);
+		panActivationCompte.setBounds(552, 550,200,50);
+		this.add(panActivationCompte);
+		
+		
 //		
 //		// Panneau Compte Fidelite
 //		JPanel panCompteFidelite = new JPanel();
@@ -249,21 +322,8 @@ public class FicheClient extends JDialog {
 //			panneauCentral.add(panPointsFidelite);
 //		}
 		
-		
-		// Nous ajoutons tous les panneaux contenant les champs d'informations sur le client dans le panneau de gauche
-		panneauInformationsPersonnelles.add(panTypeCompte);
-		panneauInformationsPersonnelles.add(panIdentifiant);
-		panneauInformationsPersonnelles.add(panDenomination);
-		panneauInformationsPersonnelles.add(panNom);
-		panneauInformationsPersonnelles.add(panPrenom);
-		panneauInformationsPersonnelles.add(panAdresse);
-		panneauInformationsPersonnelles.add(panVille);
-		panneauInformationsPersonnelles.add(panCP);
-		panneauInformationsPersonnelles.add(panTelephone);
-		panneauGauche.add(panneauInformationsPersonnelles, BorderLayout.CENTER);
-		
 
-		this.getContentPane().add(panneauGauche, BorderLayout.WEST);
+		this.getContentPane().add(panneauGauche);
 
 		// Définition du panneau accueillant les boutons situés en bas de fenêtre
 		JPanel panneauBouton=new JPanel();
@@ -271,7 +331,7 @@ public class FicheClient extends JDialog {
 			
 		boutonValider.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-			// enregistrer l'éventuelle modification par le client des données
+			// TODO enregistrer l'éventuelle modification par le client des données
 				setVisible(false);
 			}
 		});
@@ -289,8 +349,8 @@ public class FicheClient extends JDialog {
 		panneauBouton.add(retourBouton);
 		
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
-		
-		//pack();
+	
+		pack();
 		repaint();
 	}
 }

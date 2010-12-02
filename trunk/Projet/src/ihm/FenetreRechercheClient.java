@@ -113,7 +113,7 @@ public class FenetreRechercheClient extends JDialog{
 				// setVisible(=True) permettra d'afficher le tableau  avec les résultats de la recherche
 				//final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(mail.getText(),nom.getText(),denomination.getText(), ville.getText()));
 				//tableauRechercheClient.setVisible(true);
-				//panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");
+				//panneauBas.add(new JScrollPane(tableauRechercheClient),"Center");				
 				FenetreAffichageRecherche fen = new FenetreAffichageRecherche(null, "Recherche", true, mail.getText(),nom.getText(),denomination.getText(), ville.getText());
 				fen.setVisible(true);
 			}
@@ -123,26 +123,6 @@ public class FenetreRechercheClient extends JDialog{
 		// Définition du panneau des boutons du bas
 		JPanel panneauBasBoutons = new JPanel();
 		panneauBasBoutons.setLayout(new GridLayout(1,2,5,5));
-		
-		// TODO Bouton qui permet au gérant d'accèder à la fiche client qu'il souhaite consulter
-		JPanel panneauRechercheClient = new JPanel();
-		panneauRechercheClient.setLayout(new GridLayout(1,3,5,5));
-		JButton validationRecherche = new JButton("Accès client");
-		
-		validationRecherche.addActionListener(new ActionListener() {
-			@SuppressWarnings("static-access")
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stud
-				// on affiche la fiche client correspondante à l'identifiant du client
-				ArrayList<String> client = new ArrayList<String>();
-				client=SGBD.recupererAttributClient(clientIdentifiant.getText());
-
-			}
-
-		});
-
-		panneauRechercheClient.add(validationRecherche);
-		panneauBasBoutons.add(panneauRechercheClient);
 		
 		// Creation du bouton de retour à la page précédente
 		JButton boutonRetour= new JButton("Retour à la page précédente");

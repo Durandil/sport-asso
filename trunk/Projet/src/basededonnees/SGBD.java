@@ -27,8 +27,9 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3198";
-	private static final String MDP = "id3198";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
+
 
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -835,19 +836,75 @@ public class SGBD {
 		
 		try{
 			st=c.createStatement();
+			String conditionWhereOr= "WHERE (";
+			String conditionWhereAnd= "WHERE (";
+			boolean ajouterChamp=false;
 			
+			if(!idClient.equals("")){
+				conditionWhereOr=conditionWhereOr+"IDCLIENT Like '%"+idClient +"%'";
+				conditionWhereAnd=conditionWhereAnd+"IDCLIENT Like '%"+idClient +"%'";
+				ajouterChamp=true;
+				System.out.println("condition 1");
+			}
 			
-			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM CLIENT " +
-					"WHERE (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
-					"' or NOMCLIENT='"+nomClient +"'" +
-					" or NOMVILLE='"+ville+"' )");
+			if(!denomination.equals("")){
+				if(ajouterChamp==true){
+					conditionWhereOr=conditionWhereOr+" or ";
+					conditionWhereAnd=conditionWhereAnd+" and ";
+					ajouterChamp=false;
+				}
+				conditionWhereOr=conditionWhereOr+"DENOMINATIONCLIENT Like '%"+denomination +"%'";
+				conditionWhereAnd=conditionWhereAnd+"DENOMINATIONCLIENT Like '%"+denomination +"%'";
+				ajouterChamp=true;
+				System.out.println("condition 2");
+			}
+			
+			if(!nomClient.equals("")){
+				if(ajouterChamp==true){
+					conditionWhereOr=conditionWhereOr+" or ";
+					conditionWhereAnd=conditionWhereAnd+" and ";
+					ajouterChamp=false;
+				}
+				conditionWhereOr=conditionWhereOr+"NOMCLIENT Like '%"+nomClient +"%'";
+				conditionWhereAnd=conditionWhereAnd+"NOMCLIENT Like '%"+nomClient +"%'";
+				ajouterChamp=true;
+				System.out.println("condition 3");
+			}
+			
+			if(!ville.equals("")){
+				if(ajouterChamp==true){
+					conditionWhereOr=conditionWhereOr+" or ";
+					conditionWhereAnd=conditionWhereAnd+" and ";
+					ajouterChamp=false;
+				}
+				conditionWhereOr=conditionWhereOr+"NOMVILLE Like '%"+ville+"%'";
+				conditionWhereAnd=conditionWhereAnd+"NOMVILLE Like '%"+ville+"%'";
+				ajouterChamp=true;
+				System.out.println("condition 4");
+			}
+			
+			// si un utilisateur ne remplit aucun champ et appuie sur le bouton
+			// il pourra voir la liste des clients
+			if(conditionWhereOr.equals("WHERE (")){
+				conditionWhereOr="";
+				conditionWhereAnd="";
+				System.out.println("condition 5");
+			}
+			else{
+				conditionWhereOr=conditionWhereOr+" ) ";
+				conditionWhereOr=conditionWhereAnd+" ) ";
+				System.out.println("condition 6");
+			}
 			
 			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM CLIENT " +
-					"WHERE (IDCLIENT='"+idClient +"' or DENOMINATIONCLIENT='"+denomination +
-					"' or NOMCLIENT='"+nomClient +"'" +
-					" or NOMVILLE='"+ville+"' )");
+					" FROM CLIENT " + conditionWhereOr );
+			
+//			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT FROM CLIENT"+
+//					" where idclient=(select distinct(idclient) from client where idClient =(SELECT IDCLIENT FROM CLIENT " + conditionWhereOr + 
+//					" UNION  SELECT IDCLIENT  FROM CLIENT " + conditionWhereAnd+")))");
+			
+			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
+					" FROM CLIENT " + conditionWhereOr );
 			
 			while (res.next()){
 				System.out.println("test");
