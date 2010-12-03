@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import metier.Commande;
+
 
 
 
@@ -44,6 +46,7 @@ public class FenetreChoixCatalogue extends JDialog {
 	}
 	
 	private void initComponent(int quantiteStock, String idArticle){
+		final String  numArticle=idArticle;
 		// Définition du panneau dans lequel le client sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
@@ -82,16 +85,17 @@ public class FenetreChoixCatalogue extends JDialog {
 		//Définition des actions relatives à chaque bouton
 		
 		boutonValiderSelection.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				// TODO il faudra ajouter l'article concerné dans le panier avec la quantité correspondante
 				// et faire les modifications éventuelles dans la base de données.
 				// LigneCommande panierEnCours = new LigneCommande(article,quantite);
+				//Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee+"", FenetreCommandeArticle.panierClient);
 			}			
 		});
 		
 		boutonAnnulerSelection.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// permet d'annuler la sélection en cours et retour vers page principale
 				setVisible(false);
 			}			
