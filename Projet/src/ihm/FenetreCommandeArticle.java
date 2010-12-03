@@ -41,7 +41,6 @@ public class FenetreCommandeArticle extends JFrame{
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		
 		this.initComponent();
 	}         
 
@@ -86,8 +85,8 @@ public class FenetreCommandeArticle extends JFrame{
 	    // Définition du panneau des boutons permettant la confirmation ou l'annulation de la commande en cours    
 	    JPanel panneauBouton=new JPanel();
 	    
-	    JButton commanderArticle = new JButton("Chosir un article");
 	    
+	    JButton commanderArticle = new JButton("Chosir un article");
 	    commanderArticle.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
