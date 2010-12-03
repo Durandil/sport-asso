@@ -1,4 +1,6 @@
 package ihm;
+import java.util.ArrayList;
+
 import javax.swing.table.AbstractTableModel;
 
 import metier.Article;
@@ -14,26 +16,35 @@ public class ModelePanier extends AbstractTableModel {
 
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Numero","Denomination","Quantite désirée",} ;
+    private final String[] entetes={"Numero","Quantite désirée",} ;
 	
 	
-	public ModelePanier(){
+	public ModelePanier(ArrayList<String[]> panier){
 		super();
+		int taille = 1000;
+		if(panier.size()>0){
+			taille=panier.size();
+		}
 		
-		/*
-		for( Article element : ensArticles){
-				
-		 */
+		donnees= new Object[taille][2];
+		int compteur=0;
+		for (String[] strings : panier) {
+			donnees[compteur][0]=strings[0];
+			donnees[compteur][1]=strings[1];
+			compteur++;
+		}
 		
-		donnees= new Object[][]{
-//				{"ART1","Maillot de foot",3},
-//				{"ART2","Maillot de rugby",2},
-//				{"ART3","Short de foot",1},
-//				{"ART4","Crosse de hockey sur glace",2},
-//				{"ART5","Ballon de basket-ball",1}
-		};
 	}
 	
+	public void actualiserLigne(int rowIndex,ArrayList<String[]> panierCourant){
+		//this.donnees[rowIndex][1]=panierCourant.get(rowIndex)[1];
+		int compteur=0;
+		for (String[] strings : panierCourant) {
+			donnees[compteur][0]=strings[0];
+			donnees[compteur][1]=strings[1];
+			compteur++;
+		}
+	}
 	
 	public int getColumnCount() {
 		// TODO Auto-generated method stub

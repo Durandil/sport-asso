@@ -28,6 +28,8 @@ public class FenetreCommandeArticle extends JFrame{
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
 	public static ArrayList<String[]> panierClient = Commande.preparerPanier();
+	// pour conserver la derniere ligne modifiée
+	private static int ligne ;
 	
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
@@ -73,13 +75,13 @@ public class FenetreCommandeArticle extends JFrame{
     	panneauTableauCatalogue.setLayout(new GridLayout(1,2,5,5));
     	
 	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false));
-	   // tableau.setAutoCreateRowSorter(true); // permet de trier un tableau en cliquant sur la colonne
 	    panneauTableauCatalogue.add(new JScrollPane(tableau),"North");
 	    
 	    this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
 	    
 	    // Définition du panneau qui accueillera les aricles du panier
-	    JTable panier = new JTable(new ModelePanier());     
+	    final ModelePanier modPan = new ModelePanier(panierClient);
+	    final JTable panier = new JTable(modPan);     
 	    this.getContentPane().add(new JScrollPane(panier), BorderLayout.EAST);
 	        
 	    // Définition du panneau des boutons permettant la confirmation ou l'annulation de la commande en cours    
@@ -91,7 +93,7 @@ public class FenetreCommandeArticle extends JFrame{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				int ligne = tableau.getSelectedRow();
+				ligne = tableau.getSelectedRow();
 				Object numeroArticle = tableau.getValueAt(ligne, 0);
 				String numArticle = numeroArticle.toString();
 				
@@ -112,7 +114,10 @@ public class FenetreCommandeArticle extends JFrame{
 			public void actionPerformed(ActionEvent e){
 				// TODO il faudra modifier la base de données en fonction des quantités et articles achetés
 				// et enregistrer la commande dans la table COMMANDE
+				// puis vider le panier
 				setVisible(false);
+				
+				
 			}
 		});
 			
@@ -121,12 +126,25 @@ public class FenetreCommandeArticle extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// le bouton retour permet l'annulation de la commande en cours et le retour au menu utilisateur
 				setVisible(false);
+				// vider le panier une fois que le client a appuyé sur le bouton
+				Commande.viderPanier(panierClient);
+			}			
+		});
+		
+		JButton rafraichirPanierBouton = new JButton("Rafraichir le panier");
+		rafraichirPanierBouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// le bouton permet de rafraichir le tableau panier
+				modPan.actualiserLigne(ligne, panierClient);
+				modPan.fireTableDataChanged();
+				System.out.println("Dernière Ligne modifiée : "+ligne);
 			}			
 		});
 		
 		panneauBouton.add(commanderArticle);
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
+		panneauBouton.add(rafraichirPanierBouton);
 			
 	
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);

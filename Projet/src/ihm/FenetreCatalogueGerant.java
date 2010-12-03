@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,6 +25,8 @@ public class FenetreCatalogueGerant extends JFrame{
 	// Creer la base de données correspondante aux articles 
 	
 	private JLabel icon;
+	private static ArrayList<Integer> numerosLignesInserees = new ArrayList<Integer>();
+	private static ArrayList<Integer> numerosLignesSupprimees = new ArrayList<Integer>();
 
 	/**
 	 * Création du constructeur de la classe FenetreCatalogueGerant
@@ -54,23 +57,26 @@ public class FenetreCatalogueGerant extends JFrame{
     	
 		// Définition du tableau qui accueillera l'ensemble des articles disponibles
     	// après interrogation de la base de données
-	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false));
+		final ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue(false);
+	    final JTable tableau = new JTable(modTabCatalogue);
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 		
 		
 		// Création du panneau qui accueille les boutons du haut permettant la gestion des articles
     	JPanel panneauBoutonHaut= new JPanel();
     	panneauBoutonHaut.setLayout(new GridLayout(1,3,5,5));
-
+    	
     	JButton boutonAjouter=new JButton("Ajouter");
     	boutonAjouter.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// ouverture du formulaire d'ajout d'un article dans la base de donnees
 				
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
 				formulaire.setVisible(true);
+				// ajout du numéro de la derniere ligne créee
+				numerosLignesInserees.add(modTabCatalogue.getRowCount());
 			}
 		});
     	
@@ -89,7 +95,7 @@ public class FenetreCatalogueGerant extends JFrame{
 				ImageIcon image = new ImageIcon("src/images/information.png");
 				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
 				tableau.removeRowSelectionInterval(ligne, ligne);
-				tableau.revalidate();
+				
 
 			}
 		});
@@ -148,24 +154,26 @@ public class FenetreCatalogueGerant extends JFrame{
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
 	    
-	    // Définition du panneau qui contiendra les boutons de confirmation et de retour à la page précédente
+	    // Définition du panneau qui contiendra les boutons de reactualisation du tableau et de retour à la page précédente
 	    JPanel panneauBouton=new JPanel();
-		JButton boutonValider=new JButton("Confirmer");
+	    JButton boutonRafraichirTableau= new JButton("Rafraichir le catalogue");
 			
-		boutonValider.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0){
-				setVisible(false);
+		boutonRafraichirTableau.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+				modTabCatalogue.actualiserTableau(false);
+				modTabCatalogue.fireTableDataChanged();
+				//modTabCatalogue.fireTableStructureChanged();
 			}
 		});
 			
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});
 			
-		panneauBouton.add(boutonValider);
+		panneauBouton.add(boutonRafraichirTableau);
 		panneauBouton.add(retourBouton);
 			
 		// Ajout du panneau des boutons au "panneau principal" qui héberge tous les autres panneaux
