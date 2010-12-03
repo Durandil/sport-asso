@@ -21,7 +21,9 @@ import javax.swing.JTextField;
 
 import basededonnees.SGBD;
 
+import metier.Association;
 import metier.Client;
+import metier.Particulier;
 
 public class FicheClient extends JDialog {
 	
@@ -48,7 +50,7 @@ public class FicheClient extends JDialog {
 	}
 	
 	private void initComponent(String idClient){
-		
+		etatCompte =SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient); 
 		// Déclaration du panneau qui contiendra les statistiques sur le client
 		JPanel panneauDroite=new JPanel();
 		panneauDroite.setLayout(new GridLayout(5, 1));
@@ -123,7 +125,7 @@ public class FicheClient extends JDialog {
 		JPanel panDenomination= new JPanel();
 		panDenomination.setBackground(new Color(0, 0, 0, 0));
 		panDenomination.setPreferredSize(dimensionpanneauInformationsPersonnelles);
-		String denominationClient = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
+		final String denominationClient = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
 		denomination=new JTextField(denominationClient);
 		denomination.setPreferredSize(new Dimension(90/*denominationClient.length()*/, 25));
 		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
@@ -332,7 +334,13 @@ public class FicheClient extends JDialog {
 		boutonValider.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			// TODO enregistrer l'éventuelle modification par le client des données
-				setVisible(false);
+			if(denominationClient.equals(" ")){
+				Particulier.modifierBDDclient(etatCompte);
+			}
+			else{
+				Association.modifierBDDclient(etatCompte);
+			}
+			setVisible(false);
 			}
 		});
 			

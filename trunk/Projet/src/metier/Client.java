@@ -79,6 +79,15 @@ public abstract class Client extends Utilisateur{
 		this.motDePasse = motDePasse;
 	}
 
+	public static void modifierBDDclient(String etatCompte) {
+
+		String requete = " UPDATE CLIENT SET ETATCOMPTE='" + etatCompte
+				+ "'";
+
+		System.out.println(requete);
+
+		SGBD.executeUpdate(requete);
+	}
 
 	
 
