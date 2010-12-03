@@ -99,10 +99,6 @@ public class FenetreRechercheClient extends JDialog{
 		panneauChampsRecherche.add(panneauNom);
 		panneauChampsRecherche.add(panVille);
 		
-		
-		
-		// TODO Faire le panneau de la recherche client;
-	
 		// Création du bouton de validation de la recherche
 		JButton boutonValidationRecherche = new JButton("Rechercher");
 		boutonValidationRecherche.addActionListener(new ActionListener() {
@@ -129,7 +125,6 @@ public class FenetreRechercheClient extends JDialog{
 		
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Auto-generated method stub
 				setVisible(false);	
 			}
 		});

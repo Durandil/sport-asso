@@ -495,6 +495,71 @@ public class SGBD {
 		return listeInt;
 	}
 	
+	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés(de nature Integer)
+	//d'une variable issu d'une table avec une condition WHERE tous deux précisés en paramètres
+	public static ArrayList<Integer> selectListeIntOrdonneCondition(String table, String var,String champOrdre,String cond) {
+		connecter();
+		ArrayList<Integer> listeInt = new ArrayList<Integer>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+var+" FROM "+table+" WHERE "+ cond +" ORDER BY "+ champOrdre+" ASC");
+
+			while (res.next()) {
+
+				Integer i = res.getInt(1);
+				listeInt.add(i);
+				
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeInt;
+	}
+	
+	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés(de nature String)
+	//d'une variable issu d'une table avec une condition WHERE tous deux précisés en paramètres
+	public static ArrayList<String> selectListeStringOrdonneCondition(String table, String var,String champOrdre,String cond) {
+		connecter();
+		ArrayList<String> listeString = new ArrayList<String>();
+		Statement st = null;
+		ResultSet res = null;
+		try {
+		
+			st = c.createStatement();
+			
+			res = st.executeQuery("SELECT "+var+" FROM "+table+" WHERE "+cond +" ORDER BY "+ champOrdre+" ASC");
+
+			while (res.next()) {
+
+				String s = res.getObject(1).toString();;
+				listeString.add(s);
+				
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			fermer();
+
+		}
+
+		return listeString;
+	}
+	
 	//Méthode permettant de récupérer un élément d'un champ (de nature String)
 	//En apposant une condition sur un autre champ (dont les éléments sont aussi de nature String)
 	public static String selectStringConditionString(String table, String champ, String champDeCondition, String condition) {
