@@ -73,11 +73,19 @@ public class Commande {
 		ArrayList<String[]> panierClient = new ArrayList<String[]>();
 		ArrayList<String> listeClients=SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
 		
-		for(int i=0;i<=listeClients.size();i++){
-			panierClient.get(i)[0]=listeClients.get(i).toString();
-			panierClient.get(i)[1]="0";
+		for(int i=0;i<listeClients.size();i++){
+			String[] client={listeClients.get(i),"0"};
+			panierClient.add(client);
 		}
 		return panierClient;
+		
+	}
+	
+	public static void viderPanier(ArrayList<String[]> panier){
+		
+		for (int i =0; i< panier.size(); i++){
+			panier.get(i)[1]="0";
+		}
 		
 	}
 	

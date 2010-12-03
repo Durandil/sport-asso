@@ -1,5 +1,6 @@
 package application;
 
+import ihm.FenetreCommandeArticle;
 import ihm.FenetreCompte;
 import ihm.MenuGerant;
 import ihm.MenuUtilisateur;
@@ -42,7 +43,19 @@ public class Principale {
 //		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 //		String s = SGBD.transformation(sqlDate);
 //		System.out.println(s);
-//
+		
+		/** Test panier Client **/
+//		ArrayList<String[]> panierClient = new ArrayList<String[]>();
+//		ArrayList<String> listeClients=SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
+//		
+//		for(int i=0;i<listeClients.size();i++){
+//			String[] client={listeClients.get(i),"0"};
+//			panierClient.add(client);
+//		}
+//		
+//		for (int i = 0; i < panierClient.size(); i++) {
+//			System.out.println("ARTICLE : "+panierClient.get(i)[0]+", quantité dans panier :"+FenetreCommandeArticle.panierClient.get(i)[1]);
+//		}
 		
 		  /**Instanciation de 2 articles tests (et ajout dans la table **/
 //		Article art1 = new Article("ART99999", "Maillot spigouleux","TYP00001", 200,50.20, 0,"Rupture de stock", "CAT00001");

@@ -8,7 +8,7 @@ public class GerantTest extends TestCase {
 	
 	public void testActivDesactivCompte(){
 		// Désactiver le compte de Laroch Arthur
-		Gerant.activDesactivCompte();
+		
 		
 		String result="Désactivé";
 		assertEquals(result,SGBD.selectStringConditionString("Client","EtatCompte" , "NomClient", "Laroch") );
