@@ -69,7 +69,7 @@ public class Commande {
 		this.date = date;
 	}
 	
-	public void preparerPanier(){
+	public static ArrayList<String[]> preparerPanier(){
 		ArrayList<String[]> panierClient = new ArrayList<String[]>();
 		ArrayList<String> listeClients=SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
 		
@@ -77,6 +77,7 @@ public class Commande {
 			panierClient.get(i)[0]=listeClients.get(i).toString();
 			panierClient.get(i)[1]="0";
 		}
+		return panierClient;
 		
 	}
 	

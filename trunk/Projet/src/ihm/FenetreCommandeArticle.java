@@ -27,7 +27,7 @@ public class FenetreCommandeArticle extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
-	private ArrayList<String[]> panierClient = new ArrayList<String[]>();
+	public static ArrayList<String[]> panierClient = Commande.preparerPanier();
 	
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
