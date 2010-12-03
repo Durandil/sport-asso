@@ -158,7 +158,10 @@ public class Promotion {
 		int jourDateApres=Integer.parseInt(jourApres);
 		int anneeDateApres=Integer.parseInt(anneeApres);
 		
+		@SuppressWarnings("deprecation")
 		Date datePromotionAvant =(Date) new java.util.Date(anneeDateAvant,moisDateAvant,jourDateAvant);
+		System.out.println(datePromotionAvant);
+		@SuppressWarnings("deprecation")
 		Date datePromotionApres= (Date) new java.util.Date(anneeDateApres, moisDateApres, jourDateApres);
 		
 		if(datePromotionAvant.after(datePromotionApres)){

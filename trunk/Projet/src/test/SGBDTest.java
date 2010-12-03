@@ -13,13 +13,14 @@ public class SGBDTest extends TestCase {
 	
 // test select liste opérationnel	
 
-	/*	public void testSelectListeString(){
-		ArrayList<String> result= new ArrayList<String>();
-		result.add("0606060606");
-		result.add("0645454545");
-				
-		assertEquals(result,SGBD.selectListeString("client","TELEPHONE"));
-	}*/
+//		public void testSelectListeString(){
+//		ArrayList<String> result= new ArrayList<String>();
+//		result.add("0606060606");
+//		result.add("0645454545");
+//		System.out.println(result);
+//		System.out.println(SGBD.selectListeString("client","TELEPHONE"));
+//		assertEquals(result,SGBD.selectListeString("client","TELEPHONE"));
+//	}
 	
 // test select date pour date fin (l'ordre doit être le même dans la base et dans le résultat)	
 // fonctionne
@@ -65,13 +66,12 @@ public class SGBDTest extends TestCase {
 //		listeString2[1]="Bruz";
 //		result.add(listeString);
 //		result.add(listeString2);
-
 //		assertEquals(result.get(0)[0], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(0)[0]);
 //		assertEquals(result.get(0)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(0)[1]);
 //		assertEquals(result.get(1)[0], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(1)[0]);
 //		assertEquals(result.get(1)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(1)[1]);
 //	}
-//	
+	
 //  TODO
 	
 //	public void testrecupererAttributClient(){
@@ -142,20 +142,20 @@ public class SGBDTest extends TestCase {
 
 // test opérationnel	
 	
-	public void testinformationCommande(){
-		ArrayList<Object[]> result=new ArrayList<Object[]>();
-		String[] listeString = new String[4];
-		listeString[0]="ART00001";
-		listeString[1]="Maillot de foot de Sochaux";
-		listeString[2]="70";
-		listeString[3]="5";
-		result.add(listeString);
-
-		assertEquals(result.get(0)[0], SGBD.informationCommande("comm0001").get(0)[0]);
-		assertEquals(result.get(0)[1], SGBD.informationCommande("comm0001").get(0)[1]);
-		assertEquals(result.get(0)[2], SGBD.informationCommande("comm0001").get(0)[2]);
-		assertEquals(result.get(0)[3], SGBD.informationCommande("comm0001").get(0)[3]);
-	}
+//	public void testinformationCommande(){
+//		ArrayList<Object[]> result=new ArrayList<Object[]>();
+//		String[] listeString = new String[4];
+//		listeString[0]="ART00001";
+//		listeString[1]="Maillot de foot de Sochaux";
+//		listeString[2]="70";
+//		listeString[3]="5";
+//		result.add(listeString);
+//
+//		assertEquals(result.get(0)[0], SGBD.informationCommande("comm0001").get(0)[0]);
+//		assertEquals(result.get(0)[1], SGBD.informationCommande("comm0001").get(0)[1]);
+//		assertEquals(result.get(0)[2], SGBD.informationCommande("comm0001").get(0)[2]);
+//		assertEquals(result.get(0)[3], SGBD.informationCommande("comm0001").get(0)[3]);
+//	}
 }
 
 
