@@ -151,7 +151,13 @@ public class Promotion {
 		int jourDate=Integer.parseInt(jour);
 		int anneeDate=Integer.parseInt(annee);
 		
+
+
+
+		
+
 		Date dateJour = new Date(System.currentTimeMillis());
+
 		
 		System.out.println(dateJour.toString());
 		System.out.println(datePromotion.toString());
@@ -181,15 +187,17 @@ public class Promotion {
 		int anneeDateApres=Integer.parseInt(anneeApres);
 		
 		@SuppressWarnings("deprecation")
+		Date datePromoAvant = new Date(anneeDateAvant,moisDateAvant,jourDateAvant);
 		Date datePromotionAvant =(Date) new java.util.Date(anneeDateAvant,moisDateAvant,jourDateAvant);
-		System.out.println(datePromotionAvant);
+		System.out.println(datePromoAvant.toString());
+		System.out.println(datePromotionAvant.toString());
 		@SuppressWarnings("deprecation")
 		Date datePromotionApres= (Date) new java.util.Date(anneeDateApres, moisDateApres, jourDateApres);
 		
 		if(datePromotionAvant.after(datePromotionApres)){
 			resultat=false;
 		}
-
+		
 		
 		return resultat;
 	}

@@ -14,7 +14,7 @@ public class PromotionTest extends TestCase {
 //		assertEquals(bo, Promotion.verifierDatePromotion("2014", "4", "31"));
 //		
 //	}
-//
+
 //	public void testVerifierOrdreDeuxDate(){
 //		boolean b=true;
 //		assertEquals(b, Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "5"));
