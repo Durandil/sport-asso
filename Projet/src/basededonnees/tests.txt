@@ -1,0 +1,70 @@
+#Ville
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville001', '35000', 'Rennes');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville002', '35170', 'Bruz');
+
+#Categorie:
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00001','C1',100);
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00002','C2',250);
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00003','C3',500);
+Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00004','C4',1000);
+
+#Quantite
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00001',5);
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00002',10);
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00003',15);
+Insert into QUANTITE (idQuantite, Quantite) values ('QUA00004',20);
+
+#Reduction
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00001',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00002',0.85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00003',0.8);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00004',0.75);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00001',0.925);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00002',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00003',0.85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00004',0.8);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00001',0.5);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00002',0.925);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00003',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00004',0.85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00001',0.975);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00002',0.95);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00003',0.925);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00004',0.9);
+
+
+#Type de Sport:
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00001','SportWear');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00002','Camping');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00003','Sports en équipe');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00004','Sports eau');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00005','Randonnée');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00006','Cycle');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00007','Sport hiver');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00008','Sports de raquette');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00009','Arts Martiaux');
+Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
+
+#Client
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001','Rennes', '35000', '0606060606', 'Activé', 'L3R6T4X8');
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('jean.dupont@laposte.net', 'Dupont', 'Jean', '2 rue du Nord', 'ville002', 'Bruz','35170', '0645454545', 'Activé', 'I7H8M9XX');
+
+
+#Promo
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),0.75,0);
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),0.5,1); 
+
+
+#Carte_fidélité
+Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00001', '500', 'arthur.laroch@gmail.com');
+
+#Article
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00001', 'Maillot de foot de Sochaux', 350, 0.5, 70, 'CAT00002', 'TYP00001','En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00002', 'Velo de Course', 0, 5, 250, 'CAT00001', 'TYP00006', 'Rupture de stock');
+
+#Commande
+Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0001','3 Juin 2010','arthur.laroch@gmail.com');
+
+#Listing_articles_commandes
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('Comm0001', 'ART00001',5);
+
