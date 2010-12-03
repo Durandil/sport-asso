@@ -1,7 +1,6 @@
 package metier;
 
 import java.sql.Date;
-import java.util.ArrayList;
 
 import basededonnees.SGBD;
 
@@ -73,35 +72,6 @@ public class Promotion {
 	
 	public void ajouterBDD() {
 		
-//		compteurIdentifiantMessage = compteurIdentifiantMessage+1;
-//		System.out.println(compteurIdentifiantMessage);
-//		String idMessage=""+compteurIdentifiantMessage;
-		
-		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_PROMOTION.NEXTVAL");
-		
-		String numPromo = "";
-		int numeroPromo=0;
-		
-
-			numeroPromo=Integer.parseInt(idNonFini.get(0));
-			
-			if(numeroPromo<10){
-				 numPromo= "MES0000" + numeroPromo;
-			}
-			if(numeroPromo<100 && numeroPromo>=10){
-				numPromo= "MES000" + numeroPromo;
-			}
-			if(numeroPromo<1000 && numeroPromo>=100){
-				numPromo= "MES00" + numeroPromo;
-			}
-			if(numeroPromo<10000 && numeroPromo>=1000){
-				numPromo= "MES0" + numeroPromo;
-			}
-			if(numeroPromo<100000 && numeroPromo>=10000){
-				numPromo= "MES" + numeroPromo;
-			}
-		
-		this.idPromotion =numPromo;
 		String s = SGBD.transformation(this.dateDebut);
 		String s2 = SGBD.transformation(this.dateFin);
 		int pf = 0;
@@ -152,19 +122,14 @@ public class Promotion {
 		SGBD.executeUpdate(requete);	
 	}
 	
-	public static boolean verifierDatePromotion(String annee,String mois,String jour) throws Exception{
+	public static boolean verifierDatePromotion(String annee,String mois,String jour){
 		boolean resultat=true;
-		
-		String dateP = jour+mois+annee;
-		
-		Date datePromotion= SGBD.stringToDate(dateP,"ddMMyyyy");
 		int moisDate=Integer.parseInt(mois);
 		int jourDate=Integer.parseInt(jour);
 		int anneeDate=Integer.parseInt(annee);
-//		Date datePromotion= (Date) new java.sql.Date(anneeDate,moisDate,jourDate);
-			
-		Date dateJour = new Date(System.currentTimeMillis());
 		
+		Date dateJour =(Date) new java.util.Date();
+		Date datePromotion= (Date) new java.sql.Date(anneeDate, moisDate, jourDate);
 		
 		System.out.println(dateJour.toString());
 		System.out.println(datePromotion.toString());
@@ -195,7 +160,6 @@ public class Promotion {
 		
 		@SuppressWarnings("deprecation")
 		Date datePromotionAvant =(Date) new java.util.Date(anneeDateAvant,moisDateAvant,jourDateAvant);
-		System.out.println(datePromotionAvant);
 		@SuppressWarnings("deprecation")
 		Date datePromotionApres= (Date) new java.util.Date(anneeDateApres, moisDateApres, jourDateApres);
 		

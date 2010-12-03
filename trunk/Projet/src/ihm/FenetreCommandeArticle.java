@@ -3,6 +3,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -11,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import metier.Commande;
 
 import basededonnees.SGBD;
 
@@ -24,7 +27,7 @@ public class FenetreCommandeArticle extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
-
+	private ArrayList<String[]> panierClient = new ArrayList<String[]>();
 	
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
@@ -38,6 +41,7 @@ public class FenetreCommandeArticle extends JFrame{
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		
 		this.initComponent();
 	}         
 
@@ -86,15 +90,19 @@ public class FenetreCommandeArticle extends JFrame{
 	    
 	    commanderArticle.addActionListener(new ActionListener() {
 			
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				int ligne = tableau.getSelectedRow();
 				Object numeroArticle = tableau.getValueAt(ligne, 0);
 				String numArticle = numeroArticle.toString();
 				
 				// TODO rechercher stock associée à l'article
-				String quantite=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE",numArticle);
-				FenetreChoixCatalogue fen = new FenetreChoixCatalogue(null,"Achat d'article",true,Integer.parseInt(quantite),numArticle);
+				// retrancher stock deja present dans son panier
+				int indiceQuantitePanier= Commande.rechercheArticleDansPanier(numArticle, panierClient);
+				int quantitePanier= Integer.parseInt(panierClient.get(indiceQuantitePanier)[1]);
+				
+				String quantiteStock=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE",numArticle);
+				FenetreChoixCatalogue fen = new FenetreChoixCatalogue(null,"Achat d'article",true,Integer.parseInt(quantiteStock)-quantitePanier,numArticle);
 				fen.setVisible(true);
 			}
 		});
@@ -102,7 +110,7 @@ public class FenetreCommandeArticle extends JFrame{
 		JButton boutonValider=new JButton("Valider");
 			
 		boutonValider.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				// TODO il faudra modifier la base de données en fonction des quantités et articles achetés
 				// et enregistrer la commande dans la table COMMANDE
 				setVisible(false);
@@ -111,7 +119,7 @@ public class FenetreCommandeArticle extends JFrame{
 			
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// le bouton retour permet l'annulation de la commande en cours et le retour au menu utilisateur
 				setVisible(false);
 			}			
@@ -123,14 +131,10 @@ public class FenetreCommandeArticle extends JFrame{
 			
 	
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
-			
-	        
-	        
+  
 	    pack();
-	       
-        
+
         }
-	
 	
 	
 }
