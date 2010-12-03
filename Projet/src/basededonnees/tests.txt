@@ -68,3 +68,7 @@ Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0001','3 
 #Listing_articles_commandes
 Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('Comm0001', 'ART00001',5);
 
+#Message
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'arthur.laroch@gmail.com',TO_DATE('2010-12-15', 'YYYY-MM-DD'));
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00002','Prix trop élevés','Je trouve que vos maillots de football sont vraiment hors de prix', 'jean.dupont@laposte.net',TO_DATE('2010-12-18', 'YYYY-MM-DD'));
+
