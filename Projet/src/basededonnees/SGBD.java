@@ -27,8 +27,8 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 
 	// Méthode issue du TP2
@@ -659,7 +659,12 @@ public class SGBD {
 		
 			st = c.createStatement();
 			
-			res = st.executeQuery("select idarticle,description,stock,prixinitial from ARTICLE where stock=0 or idarticle = ( select idarticle from article, categorie where article.idcategorie = categorie.idcategorie and stock< categorie.QUANTITELIMITE)" );
+			String requete = "select idarticle,description,stock,prixinitial "+
+			" from ARTICLE where (stock=0 or idarticle in ( select idarticle from article, "
+			+" categorie where article.idcategorie = categorie.idcategorie and "
+			+" stock< categorie.QUANTITELIMITE))";
+			System.out.println(requete);
+			res = st.executeQuery(requete);
 
 			while (res.next()) {
 
@@ -907,10 +912,10 @@ public class SGBD {
 					" FROM CLIENT " + conditionWhereOr );
 			
 			while (res.next()){
-				System.out.println("test");
+				
 				String s,s2,s3,s4;
 				s = res.getObject(1).toString();
-				System.out.println("ID"+s);
+				
 				listeString1.add(s);
 				if(res.getObject(2) != null){
 					
@@ -920,7 +925,7 @@ public class SGBD {
 					listeString3.add(s3);
 					s4 =" ";
 					listeString4.add(s4);
-					System.out.println("P"+s2 + s3 + s4);
+					
 				}
 				else{
 					s2 = " ";
@@ -929,7 +934,7 @@ public class SGBD {
 					listeString3.add(s3);
 					s4 = res.getObject(4).toString();
 					listeString4.add(s4);
-					System.out.println("A"+s2 + s3 + s4);
+					
 					
 				}	
 				

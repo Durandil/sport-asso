@@ -190,5 +190,7 @@ public class Particulier extends Client {
 
 		SGBD.executeUpdate(requete);
 	}
+	
+
 
 }
