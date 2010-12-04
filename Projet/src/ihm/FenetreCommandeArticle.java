@@ -28,8 +28,10 @@ public class FenetreCommandeArticle extends JFrame{
 	private JLabel catalogueLabel;
 	private JLabel panierLabel;
 	public static ArrayList<String[]> panierClient = Commande.preparerPanier();
-	// pour conserver la derniere ligne modifiée
-	private static int ligne ;
+	// pour conserver la derniere ligne modifiée du catalogue en cas ajout article panier
+	private static int ligneCatalogue ;
+	// pour conserver la dernière ligne modifiée du panier en cas de retrait article panier
+	private static int lignePanier ;
 	
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
@@ -74,7 +76,7 @@ public class FenetreCommandeArticle extends JFrame{
     	JPanel panneauTableauCatalogue = new JPanel();
     	panneauTableauCatalogue.setLayout(new GridLayout(1,2,5,5));
     	
-	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false));
+	    final JTable tableau = new JTable(new ModeleTableauCatalogue(false,false));
 	    panneauTableauCatalogue.add(new JScrollPane(tableau),"North");
 	    
 	    this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
@@ -92,13 +94,10 @@ public class FenetreCommandeArticle extends JFrame{
 	    commanderArticle.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				ligne = tableau.getSelectedRow();
-				Object numeroArticle = tableau.getValueAt(ligne, 0);
+				ligneCatalogue = tableau.getSelectedRow();
+				Object numeroArticle = tableau.getValueAt(ligneCatalogue, 0);
 				String numArticle = numeroArticle.toString();
 				
-				// TODO rechercher stock associée à l'article
-				// retrancher stock deja present dans son panier
 				int indiceQuantitePanier= Commande.rechercheArticleDansPanier(numArticle, panierClient);
 				int quantitePanier= Integer.parseInt(panierClient.get(indiceQuantitePanier)[1]);
 				
@@ -135,9 +134,20 @@ public class FenetreCommandeArticle extends JFrame{
 		rafraichirPanierBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// le bouton permet de rafraichir le tableau panier
-				modPan.actualiserLigne(ligne, panierClient);
+				modPan.actualiserLigne(ligneCatalogue, panierClient);
 				modPan.fireTableDataChanged();
-				System.out.println("Dernière Ligne modifiée : "+ligne);
+				System.out.println("Dernière Ligne modifiée : "+ligneCatalogue);
+			}			
+		});
+		
+		JButton retirerPanierBouton = new JButton("Retirer un article du panier");
+		retirerPanierBouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// le bouton permet d'afficher la fenetre de retrait article du panier
+				lignePanier = tableau.getSelectedRow();
+				Object numeroArticle = tableau.getValueAt(lignePanier, 0);
+				String numArticle = numeroArticle.toString();
+				
 			}			
 		});
 		

@@ -57,7 +57,7 @@ public class FenetreCatalogueGerant extends JFrame{
     	
 		// Définition du tableau qui accueillera l'ensemble des articles disponibles
     	// après interrogation de la base de données
-		final ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue(false);
+		final ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue(false,true);
 	    final JTable tableau = new JTable(modTabCatalogue);
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 		
@@ -91,12 +91,13 @@ public class FenetreCatalogueGerant extends JFrame{
 				
 				Article.supprimerArticleBDD(numArticle);
 				
+				numerosLignesSupprimees.add(ligne);
+				
 				JOptionPane supprime = new JOptionPane();
 				ImageIcon image = new ImageIcon("src/images/information.png");
 				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
 				tableau.removeRowSelectionInterval(ligne, ligne);
 				
-
 			}
 		});
     	
@@ -160,9 +161,27 @@ public class FenetreCatalogueGerant extends JFrame{
 			
 		boutonRafraichirTableau.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-				modTabCatalogue.actualiserTableau(false);
-				modTabCatalogue.fireTableDataChanged();
+				//modTabCatalogue.actualiserTableau(false);
+				//modTabCatalogue.fireTableDataChanged();
 				//modTabCatalogue.fireTableStructureChanged();
+				
+				// on met à jour toutes les lignes qui ont été insérées
+//				for(int i=0; i<numerosLignesInserees.size();i++){
+//					modTabCatalogue.fireTableRowsInserted(numerosLignesInserees.get(i), numerosLignesInserees.get(i));
+//				}
+//				// puis on met à jour toutes les lignes supprimées
+//				for(int i=0; i<numerosLignesSupprimees.size();i++){
+//					modTabCatalogue.fireTableRowsDeleted(numerosLignesSupprimees.get(i), numerosLignesSupprimees.get(i));
+//				}
+//				// on vide les vecteurs quand on a mis à jour le tableau
+//				for(int i=0; i<numerosLignesInserees.size();i++){
+//					numerosLignesInserees.remove(i);
+//				}
+//				
+//				for(int i=0; i<numerosLignesSupprimees.size();i++){
+//					numerosLignesSupprimees.remove(i);
+//				}
+//			
 			}
 		});
 			

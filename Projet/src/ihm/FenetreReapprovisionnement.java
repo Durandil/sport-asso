@@ -61,7 +61,7 @@ public class FenetreReapprovisionnement extends JFrame {
     	
     	// TODO Récupération du tableau avec l'ensemble ds articles en quantité insuffisante 
     	// après interroagtion de la base de données dans ModeleTableauCatalogue
-	    final JTable tableau = new JTable(new ModeleTableauCatalogue(true));
+	    final JTable tableau = new JTable(new ModeleTableauCatalogue(true,true));
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	    
 	    // Ajout d'un bouton permettant d'ouvrir une fenetre de commande après avoir cliqué 
