@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import metier.Commande;
 import metier.LigneCommande;
 
 
@@ -26,8 +27,6 @@ public class FenetreSuppressionPanier extends JDialog {
 	private JComboBox quantite;
 	public static int quantiteSelectionnee ;
 	
-	//public static Article testArticle= new Article("ART1", "Maillot", "Running", (float) 0.600, 25.0, 40);
-	
 	/**
 	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client pourra choisir 
 	 * la quantitée qu'il désire de l'article sélectionné dans le tableau du catalogue
@@ -35,16 +34,18 @@ public class FenetreSuppressionPanier extends JDialog {
 	 * @param title
 	 * @param modal
 	 */
-	public FenetreSuppressionPanier(JFrame parent, String title, boolean modal,LigneCommande lignePanier){
+	public FenetreSuppressionPanier(JFrame parent, String title, boolean modal,String numeroArticle,int quantitePanier){
 		super(parent, title, modal);
 		this.setSize(200, 350);
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(lignePanier);
+		this.initComponent(quantitePanier,numeroArticle);
 	}
 	
-	private void initComponent(LigneCommande lignePanier){
+	private void initComponent(int quantiteEntree, String idArticle){
+		final String identifiantArticle = idArticle;
+		
 		// Définition du panneau dans lequel le client sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
@@ -54,8 +55,8 @@ public class FenetreSuppressionPanier extends JDialog {
 		
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité qu'il a déjà prise
 		quantite=new JComboBox();
-		for(int i=1;i==lignePanier.getQuantite();i++){
-			quantite.addItem(i);
+		for(int i=1;i==quantiteEntree;i++){
+			quantite.addItem(i+"");
 		}
 		
 		quantite.addActionListener(new ActionListener() {
@@ -63,7 +64,7 @@ public class FenetreSuppressionPanier extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				String choix= (String) ((JComboBox) e.getSource()).getSelectedItem();
-				//quantiteSelectionnee=choix.toInt();
+				quantiteSelectionnee=Integer.parseInt(choix);
 			}
 		});
 		
@@ -82,14 +83,20 @@ public class FenetreSuppressionPanier extends JDialog {
 		//Définition des actions relatives à chaque bouton
 		
 		boutonValiderSuppression.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+				// TODO il faudra faire les modifications éventuelles dans le panier.
+				Commande.enleverArticlePanier(identifiantArticle, quantiteSelectionnee+"", FenetreCommandeArticle.panierClient);
+				
+				for (int i = 0; i < FenetreCommandeArticle.panierClient.size(); i++) {
+					System.out.println("ARTICLE : "+FenetreCommandeArticle.panierClient.get(i)[0]+", quantité dans panier :"+FenetreCommandeArticle.panierClient.get(i)[1]);
+				}
 				setVisible(false);
-				// TODO il faudra faire les modifications éventuelles dans la base de données.
+				
 			}			
 		});
 		
 		boutonAnnulerSuppression.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				// permet d'annuler la sélection en cours et retour vers page principale
 				setVisible(false);
 			}			
