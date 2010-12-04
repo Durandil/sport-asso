@@ -21,26 +21,56 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
     private final String[] entetes={"Numero","Denomination","Quantite en stock","Prix Initial"} ;
 	
 	
-	public ModeleTableauCatalogue(boolean pourReapprovisionnement){
+	public ModeleTableauCatalogue(boolean pourReapprovisionnement,boolean pourTableauGerant){
 		super();
 		if( pourReapprovisionnement == false){
-			//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
-			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
-			ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
-			ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
-			ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
-		
 			
-			donnees = new Object[listeIdentifiants.size()][5];
-
-			//On ajoute les informations dans l'objet donnees
-			for(int i=0;i<listeIdentifiants.size();i++){
-				donnees[i][0] = listeIdentifiants.get(i);
-				donnees[i][1] = listeDescriptions.get(i);
-				donnees[i][2] = listeStocks.get(i);
-				donnees[i][3] = listeEtats.get(i);
+			if(pourTableauGerant == true){
+				// tableau qui  accueillera le catalogue  pour le gérant et qui doit afficher 
+				// tous les articles contrairement au client
+				
+				//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
+				ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
+				ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonne("ARTICLE", "DESCRIPTION","IDARTICLE");
+				ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonne("ARTICLE", "STOCK","IDARTICLE");
+				ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonne("ARTICLE", "PRIXINITIAL","IDARTICLE");
 			
+				
+				donnees = new Object[listeIdentifiants.size()][5];
+	
+				//On ajoute les informations dans l'objet donnees
+				for(int i=0;i<listeIdentifiants.size();i++){
+					donnees[i][0] = listeIdentifiants.get(i);
+					donnees[i][1] = listeDescriptions.get(i);
+					donnees[i][2] = listeStocks.get(i);
+					donnees[i][3] = listeEtats.get(i);
+				
+				}
+				
 			}
+			else{ 
+				// tableau qui  accueillera le catalogue  pour les clients et qui doit afficher 
+				// que les articles sont stock > 0
+				
+				//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
+				ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
+				ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
+				ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
+				ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
+			
+				
+				donnees = new Object[listeIdentifiants.size()][5];
+	
+				//On ajoute les informations dans l'objet donnees
+				for(int i=0;i<listeIdentifiants.size();i++){
+					donnees[i][0] = listeIdentifiants.get(i);
+					donnees[i][1] = listeDescriptions.get(i);
+					donnees[i][2] = listeStocks.get(i);
+					donnees[i][3] = listeEtats.get(i);
+				
+				}
+			}
+			
 		}
 		else{
 			// création des listes pour récupérer les informations des articles qui ont besoin d'être
