@@ -90,7 +90,7 @@ public class FenetreCommandeArticle extends JFrame{
 	    JPanel panneauBouton=new JPanel();
 	    
 	    
-	    JButton commanderArticle = new JButton("Chosir un article");
+	    JButton commanderArticle = new JButton("Choisir un article");
 	    commanderArticle.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -149,8 +149,8 @@ public class FenetreCommandeArticle extends JFrame{
 				String numArticle = numeroArticle.toString();
 				
 				String quantitePanier = panier.getValueAt(lignePanier, 1).toString();
-				//FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(null, "Retrait d'article du panier", true, lignePanier);
-				//fenetreRetrait.setVisible(true);
+				FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(null, "Retrait d'article du panier", true,numArticle,Integer.parseInt(quantitePanier) );
+				fenetreRetrait.setVisible(true);
 			}			
 		});
 		
@@ -158,6 +158,7 @@ public class FenetreCommandeArticle extends JFrame{
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 		panneauBouton.add(rafraichirPanierBouton);
+		panneauBouton.add(retirerPanierBouton);
 			
 	
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);

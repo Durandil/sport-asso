@@ -57,7 +57,7 @@ public class FenetreChoixCatalogue extends JDialog {
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
 		quantite=new JComboBox();
 		
-		for(int j=1;j<quantiteStock;j++){
+		for(int j=1;j<=quantiteStock;j++){
 			quantite.addItem(j+"");
 		}
 		
