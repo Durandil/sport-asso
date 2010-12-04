@@ -71,7 +71,7 @@ public class Commande {
 	
 	public static ArrayList<String[]> preparerPanier(){
 		ArrayList<String[]> panierClient = new ArrayList<String[]>();
-		ArrayList<String> listeClients=SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
+		ArrayList<String> listeClients=SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK > 0");
 		
 		for(int i=0;i<listeClients.size();i++){
 			String[] client={listeClients.get(i),"0"};
@@ -125,8 +125,11 @@ public class Commande {
 		int compteurRechercheIdentifiant=rechercheArticleDansPanier(idArticle, panier);
 		JOptionPane pbStockZero;
 		
-		if((Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])-Integer.parseInt(quantite))<= 0){
-			panier.get(compteurRechercheIdentifiant)[1]=(Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])+Integer.parseInt(quantite))+"";
+		System.out.println("Quantité panier "+Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1]));
+		System.out.println("quantite à retirer "+Integer.parseInt(quantite));
+		
+		if((Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])-Integer.parseInt(quantite))>= 0){
+			panier.get(compteurRechercheIdentifiant)[1]=(Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])-Integer.parseInt(quantite))+"";
 		}
 		else{
 			panier.get(compteurRechercheIdentifiant)[1]="0";
@@ -142,17 +145,26 @@ public class Commande {
 
 		String s = SGBD.transformation(this.date);
 		
-		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE) VALUES ( "
+		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_COMMANDE.NEXTVAL");
+		
+		String numCommande = "ID"+Integer.parseInt(idNonFini.get(0));
+		this.setIdCommande(numCommande);
+		
+		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE, IDCLIENT) VALUES ( "
 				+ "'"
-				+ this.idCommande
+				+ numCommande
 				+ "',"
 				+ s
-				+ ")";
+				+ " , '"
+				+ this.idClient
+				+ "')";
+		
+		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
 	}
 
-	// Méthode qui met à jour la table INFOCOMMANDES
+	// Méthode qui met à jour la table INFOCOMMANDES et ARTICLE
 	public void majInfoCommandes() {
 
 		String requete = null;

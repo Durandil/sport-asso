@@ -36,7 +36,7 @@ public class FenetreSuppressionPanier extends JDialog {
 	 */
 	public FenetreSuppressionPanier(JFrame parent, String title, boolean modal,String numeroArticle,int quantitePanier){
 		super(parent, title, modal);
-		this.setSize(200, 350);
+		this.setSize(500, 300);
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -55,7 +55,7 @@ public class FenetreSuppressionPanier extends JDialog {
 		
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité qu'il a déjà prise
 		quantite=new JComboBox();
-		for(int i=1;i==quantiteEntree;i++){
+		for(int i=1;i<=quantiteEntree;i++){
 			quantite.addItem(i+"");
 		}
 		

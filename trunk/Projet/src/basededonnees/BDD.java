@@ -30,6 +30,7 @@ public class BDD {
 		SGBD.executeUpdate("DROP SEQUENCE S_PROMOTION");
 		SGBD.executeUpdate("DROP SEQUENCE S_FIDELITE");
 		SGBD.executeUpdate("DROP SEQUENCE S_MESSAGE");
+		SGBD.executeUpdate("DROP SEQUENCE S_COMMANDE");
 		
 		
 		SGBD.executeUpdate("CREATE TABLE QUANTITE" +
@@ -152,6 +153,8 @@ public class BDD {
 		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE  Increment by 1 start with 3 ");
 		
 		SGBD.executeUpdate("CREATE SEQUENCE S_MESSAGE  Increment by 1 start with 3");
+		
+		SGBD.executeUpdate("CREATE SEQUENCE S_COMMANDE Increment by 1 start with 1");
 		
 	}
 	

@@ -18,7 +18,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Numero","Denomination","Quantite en stock","Prix Initial"} ;
+    private final String[] entetes={"Référence","Denomination","Quantite en stock","Prix Initial"} ;
 	
 	
 	public ModeleTableauCatalogue(boolean pourReapprovisionnement,boolean pourTableauGerant){
