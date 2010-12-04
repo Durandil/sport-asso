@@ -148,6 +148,9 @@ public class FenetreCommandeArticle extends JFrame{
 				Object numeroArticle = tableau.getValueAt(lignePanier, 0);
 				String numArticle = numeroArticle.toString();
 				
+				String quantitePanier = panier.getValueAt(lignePanier, 1).toString();
+				//FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(null, "Retrait d'article du panier", true, lignePanier);
+				//fenetreRetrait.setVisible(true);
 			}			
 		});
 		
