@@ -3,6 +3,7 @@ package ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +14,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import basededonnees.SGBD;
 
 import metier.Commande;
 
@@ -47,6 +50,17 @@ public class FenetreChoixCatalogue extends JDialog {
 	
 	private void initComponent(int quantiteStock, String idArticle){
 		final String  numArticle=idArticle;
+		
+		// Définition du panneau dans lequel le client verra la description de l'article
+		JPanel panneauDescription = new JPanel();
+		panneauDescription.setBackground(Color.white);
+		panneauDescription.setLayout(new GridLayout(2,1,0,5));
+		panneauDescription.setBorder(BorderFactory.createTitledBorder("Informations techniques"));
+		JLabel referenceArticleLabel = new JLabel("Référence : " + idArticle );
+		JLabel descriptionArticleLabel = new JLabel("Description : " + SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION", "IDARTICLE", idArticle));
+		panneauDescription.add(referenceArticleLabel);
+		panneauDescription.add(descriptionArticleLabel);
+		
 		// Définition du panneau dans lequel le client sélectionnera la quantité d'un article
 		JPanel panneauQuantite=new JPanel();
 		panneauQuantite.setBackground(Color.white);
@@ -95,7 +109,8 @@ public class FenetreChoixCatalogue extends JDialog {
 				for (int i = 0; i < FenetreCommandeArticle.panierClient.size(); i++) {
 					System.out.println("ARTICLE : "+FenetreCommandeArticle.panierClient.get(i)[0]+", quantité dans panier :"+FenetreCommandeArticle.panierClient.get(i)[1]);
 				}
-				
+				FenetreCommandeArticle.activationLigneCatalogue=true;
+				FenetreCommandeArticle.avoirRafraichiApresAjoutPanier=false;
 			}			
 		});
 		
@@ -110,6 +125,7 @@ public class FenetreChoixCatalogue extends JDialog {
 		panneauBoutons.add(boutonValiderSelection);
 		panneauBoutons.add(boutonAnnulerSelection);
 		
+		this.getContentPane().add(panneauDescription, BorderLayout.NORTH);
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 		

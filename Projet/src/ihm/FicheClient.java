@@ -42,7 +42,7 @@ public class FicheClient extends JDialog {
 	
 	public FicheClient(JFrame parent, String title, boolean modal,String identifiantClient){
 		super(parent, title, modal);
-		this.setSize(1024, 1060);
+		this.setSize(1024, 900);
 		this.setLocation(0,0);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);

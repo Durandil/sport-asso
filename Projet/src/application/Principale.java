@@ -36,7 +36,7 @@ public class Principale {
 		
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
 		
 		
 //		java.util.Date date = new java.util.Date();
@@ -50,9 +50,9 @@ public class Principale {
 //		@SuppressWarnings("deprecation")
 //		java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
 //		ArrayList<LigneCommande> listing = new ArrayList<LigneCommande>();
-//		listing.add(new LigneCommande("ART00001","15"));
+//		listing.add(new LigneCommande("ART00001","50"));
 //		
-//		Commande testco = new Commande(null, "bde@ensai.fr", listing, dateJour);
+//		Commande testco = new Commande(null, "forum@ensai.fr", listing, dateJour);
 		
 		/** Test panier Client **/
 //		ArrayList<String[]> panierClient = new ArrayList<String[]>();
