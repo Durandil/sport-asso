@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -118,7 +119,7 @@ public class FicheClient extends JDialog {
 		identifiant.setPreferredSize(new Dimension(120, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
-		panIdentifiant.setBounds(40,120,220,60);
+		panIdentifiant.setBounds(40,80,220,60);
 		this.add(panIdentifiant);
 		
 		// La denomination
@@ -132,7 +133,7 @@ public class FicheClient extends JDialog {
 		denominationLabel=new JLabel("Denomination");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
-		panDenomination.setBounds(40,200,220,60);
+		panDenomination.setBounds(40,150,220,60);
 		this.add(panDenomination);
 		
 		//Le nom
@@ -146,7 +147,7 @@ public class FicheClient extends JDialog {
 		nomLabel = new JLabel("Nom :");
 		panNom.add(nomLabel);
 		panNom.add(nom);
-		panNom.setBounds(40,280,220,60);
+		panNom.setBounds(40,220,220,60);
 		this.add(panNom);
 			
 		//Le prenom
@@ -160,7 +161,7 @@ public class FicheClient extends JDialog {
 		prenom.setPreferredSize(new Dimension(90, 25));
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
-		panPrenom.setBounds(40,360,220,60);
+		panPrenom.setBounds(40,290,220,60);
 		this.add(panPrenom);
 		
 		if(denominationClient.equals(" ")){
@@ -188,7 +189,7 @@ public class FicheClient extends JDialog {
 		}
 		typeCompteLabel = new JLabel("Statut Compte : " + compte);
 		panTypeCompte.add(typeCompteLabel);
-		panTypeCompte.setBounds(40,40,220,60);
+		panTypeCompte.setBounds(40,10,220,60);
 		this.add(panTypeCompte);
 		
 		//L'adresse
@@ -202,7 +203,7 @@ public class FicheClient extends JDialog {
 		adresse.setPreferredSize(new Dimension(/*adresseClient.length()*/90, 25));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
-		panAdresse.setBounds(40,440,220,60);
+		panAdresse.setBounds(40,360,220,60);
 		this.add(panAdresse);
 		
 
@@ -217,7 +218,7 @@ public class FicheClient extends JDialog {
 		ville.setEnabled(false);
 		panVille.add(villeLabel);
 		panVille.add(ville);
-		panVille.setBounds(40,600,220,60);
+		panVille.setBounds(40,500,220,60);
 		this.add(panVille);
 		
 		
@@ -231,7 +232,7 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-		panCP.setBounds(40,520,220,60);
+		panCP.setBounds(40,430,220,60);
 		this.add(panCP);
 		
 		
@@ -245,7 +246,7 @@ public class FicheClient extends JDialog {
 		telephone.setPreferredSize(new Dimension(90, 25));
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
-		panTelephone.setBounds(40,680,220,60);
+		panTelephone.setBounds(40,570,220,60);
 		this.add(panTelephone);
 		
 		
@@ -284,45 +285,63 @@ public class FicheClient extends JDialog {
 		
 		panActivationCompte.add(ActifCompteLabel);
 		panActivationCompte.add(ActivationCompteBox);
-		panActivationCompte.setBounds(552, 550,200,50);
+		panActivationCompte.setBounds(40,640,200,60);
 		this.add(panActivationCompte);
 		
+		// Declaration d'un panneau qui contiendra les infos concernant la fidelite
+		JPanel panneauFidelite = new JPanel();
+		panneauFidelite.setLayout(new GridLayout(2,1,0,5));
+		panneauFidelite.setPreferredSize(new Dimension(240,200));
+		panneauFidelite.setBackground(new Color(0,0,0,0));
+		panneauFidelite.setBounds(552,500,250,210);
+		this.add(panneauFidelite);
 		
-//		
-//		// Panneau Compte Fidelite
-//		JPanel panCompteFidelite = new JPanel();
-//		panCompteFidelite.setBackground(Color.white);
-//		panCompteFidelite.setPreferredSize(new Dimension(220, 60));
-//		panCompteFidelite.setBorder(BorderFactory.createEmptyBorder());
-//		compteFidelLabel = new JLabel("Possesion d'un compte Fidelité :");
-//		
-//		String fidelite="" ;
-//		if(client.isEstFidele()==true){
-//			fidelite="Oui";
-//		}
-//		else 
-//			fidelite="Non";
-//		
-//		compteFidelite = new JTextField(fidelite);
-//		compteFidelite.setPreferredSize(new Dimension(90, 25));
-//		panCompteFidelite.add(compteFidelLabel);
-//		panCompteFidelite.add(compteFidelite);
-//		panneauCentral.add(panCompteFidelite);
-//		
-//		// Panneau Nbre Points Compte Fidelite
-//		JPanel panPointsFidelite = new JPanel();
-//		panPointsFidelite.setBackground(Color.white);
-//		panPointsFidelite.setPreferredSize(new Dimension(220, 60));
-//		panPointsFidelite.setBorder(BorderFactory.createEmptyBorder());
-//		nbPointsLabel = new JLabel("Nombre de points :");
-//		nbrePoints = new JTextField();
-//		nbrePoints.setPreferredSize(new Dimension(90, 25));
-//		panPointsFidelite.add(nbPointsLabel);
-//		panPointsFidelite.add(nbrePoints);
-//		
-//		if(client.isEstFidele()==true){
-//			panneauCentral.add(panPointsFidelite);
-//		}
+		// Panneau Compte Fidelite
+		JPanel panCompteFidelite = new JPanel();
+		panCompteFidelite.setBackground(new Color(0,0,0,0));
+		panCompteFidelite.setPreferredSize(new Dimension(220, 60));
+		panCompteFidelite.setBorder(BorderFactory.createEmptyBorder());
+		compteFidelLabel = new JLabel("Possesion d'un compte Fidelité :");
+		
+		ArrayList<String> fideliteClient= new ArrayList<String>();
+		fideliteClient=SGBD.recupererInformationFideliteClient(idClient);
+		String estFidele=fideliteClient.get(0);
+		String fidelite="" ;
+		
+		if(estFidele == "false"){
+			fidelite="Non";
+		}
+		else 
+			fidelite="Oui";
+		
+		compteFidelite = new JTextField(fidelite);
+		compteFidelite.setEnabled(false);
+		compteFidelite.setPreferredSize(new Dimension(90, 25));
+		panCompteFidelite.add(compteFidelLabel);
+		panCompteFidelite.add(compteFidelite);
+		panneauFidelite.add(panCompteFidelite);
+		
+		// Panneau Nbre Points Compte Fidelite
+		JPanel panPointsFidelite = new JPanel();
+		panPointsFidelite.setBackground(new Color(0,0,0,0));
+		panPointsFidelite.setPreferredSize(new Dimension(220, 60));
+		panPointsFidelite.setBorder(BorderFactory.createEmptyBorder());
+		
+		String labelNbreDePoints="Nombre de points ";
+		String nbPointsCarte="";
+		
+		if(fidelite.equals("oui")){
+			labelNbreDePoints = labelNbreDePoints +" sur la carte de fidelite "+ SGBD.selectStringConditionString("CARTE_FIDELITE", "IDCARTEFIDELITE", "IDCLIENT", idClient)+ " :"  ;
+			nbPointsCarte=fideliteClient.get(1);
+		}
+		
+		nbPointsLabel = new JLabel(labelNbreDePoints);
+		nbrePoints = new JTextField(nbPointsCarte);
+		nbrePoints.setEnabled(false);
+		nbrePoints.setPreferredSize(new Dimension(90, 25));
+		panPointsFidelite.add(nbPointsLabel);
+		panPointsFidelite.add(nbrePoints);
+		panneauFidelite.add(panPointsFidelite);
 		
 
 		this.getContentPane().add(panneauGauche);
@@ -356,7 +375,7 @@ public class FicheClient extends JDialog {
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 		
-		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
+		this.getContentPane().add(panneauBouton, BorderLayout.EAST);
 	
 		pack();
 		repaint();
