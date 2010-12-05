@@ -34,6 +34,7 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 	private JMenuItem itemFermer = new JMenuItem("Fermer compte utilisateur");
 	private JMenuItem itemMesInformations = new JMenuItem("Mes informations");
 	private JMenuItem itemProgFidelite = new JMenuItem("Mon programme fidélité");
+	private JMenuItem itemMessagerieClient = new JMenuItem("Messagerie");
 	private JMenuItem itemContact = new JMenuItem("Nous Contacter");
 	private JMenuItem itemInformations = new JMenuItem("Informations");
 	private JMenuItem itemArticles = new JMenuItem("Articles");
@@ -59,7 +60,8 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 		panImage.add(icon);
 		
 		this.getContentPane().add(panImage,"Center");
-		
+		this.repaint();
+		this.pack();
 		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
 		//--------------------------
 			
@@ -113,6 +115,7 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 		// à l'affichage 
 		this.menuCompte.add(itemMesInformations);
 		this.menuCompte.add(itemProgFidelite);
+		this.menuCompte.add(itemMessagerieClient);
 		this.menuCompte.add(itemFermer);
 		
 		this.menuCatalogue.add(itemArticles);

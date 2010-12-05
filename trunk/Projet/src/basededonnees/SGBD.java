@@ -30,7 +30,8 @@ public class SGBD {
 	private static final String ID = "id3193";
 	private static final String MDP = "id3193";
 
-
+	private static String compteurViewStatistiqueArticle;
+	
 	// Méthode issue du TP2
 	public static boolean connecter() {
 		boolean result = true;
@@ -674,6 +675,52 @@ public class SGBD {
 		}
 		return rs;
 	}
+	
+	// Méthode qui permettra de récupérer les statistiques sur l'article le plus commande par un client donné
+	public static String statistiqueArticleClient(String identifiant){
+		connecter();
+		Statement st = null;
+		ResultSet res = null;
+		ResultSet res2=null;
+		String rs = "";
+		String nomVue="totalParArticle";
+		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_VUESTATARTICLE.NEXTVAL");
+		compteurViewStatistiqueArticle = idNonFini.get(0);
+		nomVue = nomVue+compteurViewStatistiqueArticle;
+		
+		try {
+			st = c.createStatement();
+			
+			
+			System.out.println("create view "+ nomVue +" as "  +
+					"select idArticle,sum(quantitecommandee) as totalQuantite "+
+					"from LISTING_ARTICLES_COMMANDES "+
+					"where IDCOMMANDE IN (select idCommande from COMMANDE WHERE IDCLIENT='"+identifiant+"') GROUP BY IDARTICLE");
+
+			System.out.println(" select idArticle from "+ nomVue +
+					" where totalQuantite = (select max(totalQuantite) from " +nomVue+" )");
+			
+			res= st.executeQuery("create view "+ nomVue +" as " +
+							"select idArticle,sum(quantitecommandee) as totalQuantite "+
+							"from LISTING_ARTICLES_COMMANDES "+
+							"where IDCOMMANDE IN (select idCommande from COMMANDE WHERE IDCLIENT='"+identifiant+"') GROUP BY IDARTICLE");
+			
+			res2 = st.executeQuery(" select idArticle from "+ nomVue +
+							" where totalQuantite = (select max(totalQuantite) from " +nomVue+" )");
+			
+			rs = res2.getString(0);
+			
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			fermer();
+		}
+		return rs;
+	}
+	
 	// TODO cette requete a-t-elle vraiment un intérêt?
 	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
 	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
