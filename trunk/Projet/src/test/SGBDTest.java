@@ -13,64 +13,64 @@ public class SGBDTest extends TestCase {
 	
 // test select liste opérationnel	
 
-//		public void testSelectListeString(){
-//		ArrayList<String> result= new ArrayList<String>();
-//		result.add("0606060606");
-//		result.add("0645454545");
-//		System.out.println(result);
-//		System.out.println(SGBD.selectListeString("client","TELEPHONE"));
-//		assertEquals(result,SGBD.selectListeString("client","TELEPHONE"));
-//	}
+		public void testSelectListeString(){
+		ArrayList<String> result= new ArrayList<String>();
+		result.add("0606060606");
+		result.add("0645454545");
+		System.out.println(result);
+		System.out.println(SGBD.selectListeString("client","TELEPHONE"));
+		assertEquals(result,SGBD.selectListeString("client","TELEPHONE"));
+	}
 	
 // test select date pour date fin (l'ordre doit être le même dans la base et dans le résultat)	
 // fonctionne
 
-//		public void testSelectListeDates(){
-//		ArrayList<String> result = new ArrayList<String>();
-//		String dateS = "15/07/10";
-//		String dateS2 = "01/09/10";
-//		result.add(dateS);
-//		result.add(dateS2);
-//		assertEquals(result,SGBD.selectListeDates("Promo","datefin" ,"dd/mm/yy")); 
-//	}
+		public void testSelectListeDates(){
+		ArrayList<String> result = new ArrayList<String>();
+		String dateS = "15/07/10";
+		String dateS2 = "01/09/10";
+		result.add(dateS);
+		result.add(dateS2);
+		assertEquals(result,SGBD.selectListeDates("Promo","datefin" ,"dd/mm/yy")); 
+	}
 	
 // test select liste float
 // ok
 	
-//	public void testSelectListeFloat(){
-//		ArrayList<Float> result = new ArrayList<Float>();
-//		result.add((float) 0.75);
-//		result.add((float) 0.5);
-//		assertEquals(result,SGBD.selectListeFloat("Promo", "PourcentagePromo"));
-//	}
+	public void testSelectListeFloat(){
+		ArrayList<Float> result = new ArrayList<Float>();
+		result.add((float) 0.8);
+		result.add((float) 0.5);
+		assertEquals(result,SGBD.selectListeFloat("Promo", "PourcentagePromo"));
+	}
 	
 // test sélection String sous condition string
 	// ok
 	
-//	public void testselectStringConditionString(){
-//		String result = new String();
-//		result = "Raquettes à prix cassé";
-//		assertEquals(result, SGBD.selectStringConditionString("Promo", "NomPromo", "IDPromo","PRO00001 " ));
-//	}	
+	public void testselectStringConditionString(){
+		String result = new String();
+		result = "Raquettes à prix cassé";
+		assertEquals(result, SGBD.selectStringConditionString("Promo", "NomPromo", "IDPromo","PRO00001 " ));
+	}	
 	
 // test sélection 2 champs string
 	// ok
 	
-//	public void testselectDeuxChampsString(){
-//		ArrayList<String[]> result = new ArrayList<String[]>();
-//		String[] listeString = new String[2];
-//		String[] listeString2 = new String[2];
-//		listeString[0]="Laroch";
-//		listeString[1]="Rennes";
-//		listeString2[0]="Dupont";
-//		listeString2[1]="Bruz";
-//		result.add(listeString);
-//		result.add(listeString2);
-//		assertEquals(result.get(0)[0], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(0)[0]);
-//		assertEquals(result.get(0)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(0)[1]);
-//		assertEquals(result.get(1)[0], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(1)[0]);
-//		assertEquals(result.get(1)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "NomVille").get(1)[1]);
-//	}
+	public void testselectDeuxChampsString(){
+		ArrayList<String[]> result = new ArrayList<String[]>();
+		String[] listeString = new String[2];
+		String[] listeString2 = new String[2];
+		listeString[0]="Laroch";
+		listeString[1]="4 rue de la Breiz";
+		listeString2[0]="Dupont";
+		listeString2[1]="2 rue du Nord";
+		result.add(listeString);
+		result.add(listeString2);
+		assertEquals(result.get(0)[0], SGBD.selectDeuxChampsString("Client", "NomClient", "AdresseClient").get(0)[0]);
+		assertEquals(result.get(0)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "AdresseClient").get(0)[1]);
+		assertEquals(result.get(1)[0], SGBD.selectDeuxChampsString("Client", "NomClient", "AdresseClient").get(1)[0]);
+		assertEquals(result.get(1)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "AdresseClient").get(1)[1]);
+	}
 	
 //  TODO
 	
@@ -93,31 +93,31 @@ public class SGBDTest extends TestCase {
 
 // test sur les articles en réapprovisionnement bon	
 	
-//	public void testselectArticlesReapprovisionnement(){
-//		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-//		ArrayList<String> listeString= new ArrayList<String>();
-//		ArrayList<String> listeString2 = new ArrayList<String>();
-//		ArrayList<String> listeString3 = new ArrayList<String>();
-//		ArrayList<String> listeString4 = new ArrayList<String>();
-//		listeString.add("ART00002");
-//		listeString2.add("Velo de Course");
-//		listeString3.add("0");
-//		listeString4.add("250");
-//		result.add(listeString);
-//		result.add(listeString2);
-//		result.add(listeString3);
-//		result.add(listeString4);
-//		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
-//	}
+	public void testselectArticlesReapprovisionnement(){
+		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		ArrayList<String> listeString= new ArrayList<String>();
+		ArrayList<String> listeString2 = new ArrayList<String>();
+		ArrayList<String> listeString3 = new ArrayList<String>();
+		ArrayList<String> listeString4 = new ArrayList<String>();
+		listeString.add("ART00002");
+		listeString2.add("Velo de Course");
+		listeString3.add("0");
+		listeString4.add("250");
+		result.add(listeString);
+		result.add(listeString2);
+		result.add(listeString3);
+		result.add(listeString4);
+		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
+	}
 	
 //  test qui fonctionne	
 	
-//	public void testrecupererInformationFideliteClient(){
-//		ArrayList<String> result= new ArrayList<String>();
-//		result.add("Oui");
-//		result.add("500");
-//		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
-//	}
+	public void testrecupererInformationFideliteClient(){
+		ArrayList<String> result= new ArrayList<String>();
+		result.add("Oui");
+		result.add("500");
+		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
+	}
 	
 // test qui fonctionne 
 	
@@ -142,20 +142,20 @@ public class SGBDTest extends TestCase {
 
 // test opérationnel	
 	
-//	public void testinformationCommande(){
-//		ArrayList<Object[]> result=new ArrayList<Object[]>();
-//		String[] listeString = new String[4];
-//		listeString[0]="ART00001";
-//		listeString[1]="Maillot de foot de Sochaux";
-//		listeString[2]="70";
-//		listeString[3]="5";
-//		result.add(listeString);
-//
-//		assertEquals(result.get(0)[0], SGBD.informationCommande("comm0001").get(0)[0]);
-//		assertEquals(result.get(0)[1], SGBD.informationCommande("comm0001").get(0)[1]);
-//		assertEquals(result.get(0)[2], SGBD.informationCommande("comm0001").get(0)[2]);
-//		assertEquals(result.get(0)[3], SGBD.informationCommande("comm0001").get(0)[3]);
-//	}
+	public void testinformationCommande(){
+		ArrayList<Object[]> result=new ArrayList<Object[]>();
+		String[] listeString = new String[4];
+		listeString[0]="ART00001";
+		listeString[1]="Maillot de foot de Sochaux";
+		listeString[2]="70";
+		listeString[3]="5";
+		result.add(listeString);
+
+		assertEquals(result.get(0)[0], SGBD.informationCommande("comm0001").get(0)[0]);
+		assertEquals(result.get(0)[1], SGBD.informationCommande("comm0001").get(0)[1]);
+		assertEquals(result.get(0)[2], SGBD.informationCommande("comm0001").get(0)[2]);
+		assertEquals(result.get(0)[3], SGBD.informationCommande("comm0001").get(0)[3]);
+	}
 }
 
 

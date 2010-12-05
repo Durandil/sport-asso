@@ -29,7 +29,7 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 /** TODO : Instancier un client via l'ihm**/
 		//Initialiser la base de données
-		//BDD.init();
+		BDD.init();
 		
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 		
@@ -45,8 +45,8 @@ public class Principale {
 //		System.out.println(s);
 		
 		/** test statistique **/
-		String testStat = SGBD.statistiqueArticleClient("bda@ensai.fr");
-		System.out.println("Article le plus commandé : "+ testStat);
+//		String testStat = SGBD.statistiqueArticleClient("bda@ensai.fr");
+//		System.out.println("Article le plus commandé : "+ testStat);
 		
 		/** Test commande article **/
 //		java.util.Date date = new java.util.Date();
