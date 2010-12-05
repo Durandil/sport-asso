@@ -7,7 +7,7 @@ import metier.Article;
 import metier.LigneCommande;
 
 
-public class ModelePanier extends AbstractTableModel {
+public class ModelePanier extends AbstractTableModel  {
 	
 	/**
 	 * 

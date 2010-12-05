@@ -30,6 +30,7 @@ public class Commande {
 		this.date = date;
 		ajouterBDD();
 		majInfoCommandes();
+		majArticles();
 	}
 
 	private String idClient;
@@ -164,7 +165,7 @@ public class Commande {
 		SGBD.executeUpdate(requete);
 	}
 
-	// Méthode qui met à jour la table INFOCOMMANDES et ARTICLE
+	// Méthode qui met à jour la table INFOCOMMANDES 
 	public void majInfoCommandes() {
 
 		String requete = null;
@@ -183,6 +184,33 @@ public class Commande {
 
 	}
 
+	public void majArticles(){
+		String requete = null ;
+		String nomArticle=null;
+		String quantiteReservee=null;
+		String quantiteEnStock=null;
+		
+		for (int i = 0; i < liste.size(); i++) {
+			nomArticle=liste.get(i).getArticle();
+			quantiteEnStock=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", nomArticle);
+			quantiteReservee=liste.get(i).getQuantite();
+			int nouveauStock=Integer.parseInt(quantiteEnStock)-Integer.parseInt(quantiteReservee);
+			
+			String etatArticle="En stock";
+			if(nouveauStock==0){
+				etatArticle="Rupture de stock";
+			}
+			
+			requete = "UPDATE ARTICLE SET STOCK='"+ nouveauStock+"',ETATARTICLE='"+ etatArticle+"'"
+					  +" WHERE IDARTICLE='"+ nomArticle+"'";
+			
+			System.out.println(requete);
+			
+			SGBD.executeUpdate(requete);
+			
+		}
+	}
+	
 	@Override
 	public String toString() {
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());

@@ -5,15 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import metier.Commande;
+import metier.LigneCommande;
 
 import basededonnees.SGBD;
 
@@ -29,10 +32,15 @@ public class FenetreCommandeArticle extends JFrame{
 	private JLabel panierLabel;
 	public static ArrayList<String[]> panierClient = Commande.preparerPanier();
 	// pour conserver la derniere ligne modifiée du catalogue en cas ajout article panier
-	private static int ligneCatalogue ;
+	public static int ligneCatalogue;
 	// pour conserver la dernière ligne modifiée du panier en cas de retrait article panier
-	private static int lignePanier ;
-	
+	public static int lignePanier = -1 ;
+	public static boolean retraitPanierPossible = false;
+	public static boolean activationLigneCatalogue=false;	
+	// quand un client ouvre cette fenetre, il n'a pas encore choisi d'article 
+	// donc on  met ce booleen à false et on changera la valeur s'il le fait correctement
+	private JOptionPane erreur, rafraichirPanier,erreurSelectionArticle,erreurSelectionCatalogue,erreurAvantValidation;
+	public static boolean avoirRafraichiApresAjoutPanier=false;
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
 	 * initComponent(). Cette classe permet l'affichage simultané du catalogue et du panier du client.
@@ -46,6 +54,7 @@ public class FenetreCommandeArticle extends JFrame{
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();
+		
 	}         
 
         
@@ -114,9 +123,43 @@ public class FenetreCommandeArticle extends JFrame{
 				// TODO il faudra modifier la base de données en fonction des quantités et articles achetés
 				// et enregistrer la commande dans la table COMMANDE
 				// puis vider le panier
-				setVisible(false);
+				ArrayList<LigneCommande> listeArticlesPanier= new ArrayList<LigneCommande>();
 				
-				
+				if(retraitPanierPossible==true && avoirRafraichiApresAjoutPanier == true){
+					
+					// on ne met dans liste des articles que ceux dont la quantité commandée 
+					// est supérieure à 0
+					for(String[] article : panierClient){
+						if(Integer.parseInt(article[1])>0){
+							listeArticlesPanier.add(new LigneCommande(article[0],article[1]));
+						}
+					}
+					
+					if(listeArticlesPanier.size()>0){
+						java.util.Date date = new java.util.Date();
+					
+						@SuppressWarnings("deprecation")
+						java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+					
+						Commande nouvelleCommande = new Commande(null, FenetreDialogIdentification.clientUserIdentifiant, listeArticlesPanier, dateJour);
+					}
+					else{
+						erreur = new JOptionPane();
+						ImageIcon image = new ImageIcon("src/images/warning.png");
+						erreur.showMessageDialog(null, " Aucun article n'a été sélectionné dans la commande.", "Attention", JOptionPane.WARNING_MESSAGE, image);
+						//affichage d'un message d'erreur en cas d'essai de validation sans aucun article selectionné
+					}
+					
+					Commande.viderPanier(panierClient); // vidage panier Client
+					setVisible(false);
+					
+				}
+				else{
+					erreurAvantValidation = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					erreurAvantValidation.showMessageDialog(null, " Veuillez rafraichir le panier avant de valider votre commande !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					//affichage d'un message d'erreur en cas de tentative de validation de la commande sans avoir effectué le rafraichissement du panier
+				}
 			}
 		});
 			
@@ -130,6 +173,57 @@ public class FenetreCommandeArticle extends JFrame{
 			}			
 		});
 		
+		final JButton retirerPanierBouton = new JButton("Retirer un article du panier");
+		retirerPanierBouton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				
+				lignePanier = panier.getSelectedRow();
+				
+				if(retraitPanierPossible == false){
+					rafraichirPanier = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					rafraichirPanier.showMessageDialog(null, " Veuillez rafraichir le panier !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					//affichage d'un message d'erreur en cas de tentative de retrait d'article sans avoir rafraichi le panier
+				}
+				
+				if(lignePanier == -1){
+					erreurSelectionArticle = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					erreurSelectionArticle.showMessageDialog(null, " Veuillez selectionner une ligne article dans le panier", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					//affichage d'un message d'erreur en cas de tentative de retrait d'article sans avoir selectionné d'article
+				}
+				
+				if(avoirRafraichiApresAjoutPanier==false){
+					rafraichirPanier = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					rafraichirPanier.showMessageDialog(null, " Veuillez rafraichir le panier !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
+				}
+				
+				// ligne Panier <> - 1 gère le pb si un client veut retirer un article de son panier
+				// sans l'avoir selectionné dans le tableau
+				
+				// retraitPanierPossible == true gère le pb si un client a retiré juste avant une certaine
+				// quantité d'un article et qu'il souhaite en retirer une partie sans reactualiser le tableau panier
+				
+				// avoirRafraichiApresAjoutPanier==false gère le pb si un client oublie de refraichir 
+				// le panier après avoir fait la selection d'un article
+				
+				if(lignePanier != - 1 && retraitPanierPossible == true && avoirRafraichiApresAjoutPanier==true){
+					Object numeroArticle = panier.getValueAt(lignePanier, 0);
+					String numArticle = numeroArticle.toString();
+					
+					String quantitePanier = panier.getValueAt(lignePanier, 1).toString();
+					FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(null, "Retrait d'article du panier", true,numArticle,Integer.parseInt(quantitePanier) );
+					fenetreRetrait.setVisible(true);
+				}
+
+			}			
+		});
+		//tant qu'on a pas reactualisé le panier initial qui est vide, on ne peut pas utiliser 
+		//le bouton de retrait d'article
+		retirerPanierBouton.setEnabled(false);
+		
+		
 		JButton rafraichirPanierBouton = new JButton("Rafraichir le panier");
 		rafraichirPanierBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -137,22 +231,24 @@ public class FenetreCommandeArticle extends JFrame{
 				modPan.actualiserLigne(ligneCatalogue, panierClient);
 				modPan.fireTableDataChanged();
 				System.out.println("Dernière Ligne modifiée : "+ligneCatalogue);
+				
+				// condition nécessaire pour gerer le fait qu'un client ne selectionne
+				// aucune ligne dans le catalogue avant appuyer sur rafraichir
+				if(activationLigneCatalogue==true){
+					retirerPanierBouton.setEnabled(true);
+					retraitPanierPossible=true;
+					avoirRafraichiApresAjoutPanier=true;
+				}
+				else{
+					erreurSelectionCatalogue = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					erreurSelectionCatalogue.showMessageDialog(null, " Veuillez selectionner une ligne article dans le catalogue et appuyez sur le bouton Choisir Article", "Attention", JOptionPane.WARNING_MESSAGE, image);
+				}
+				
 			}			
 		});
 		
-		JButton retirerPanierBouton = new JButton("Retirer un article du panier");
-		retirerPanierBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				// le bouton permet d'afficher la fenetre de retrait article du panier
-				lignePanier = tableau.getSelectedRow();
-				Object numeroArticle = tableau.getValueAt(lignePanier, 0);
-				String numArticle = numeroArticle.toString();
-				
-				String quantitePanier = panier.getValueAt(lignePanier, 1).toString();
-				FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(null, "Retrait d'article du panier", true,numArticle,Integer.parseInt(quantitePanier) );
-				fenetreRetrait.setVisible(true);
-			}			
-		});
+		
 		
 		panneauBouton.add(commanderArticle);
 		panneauBouton.add(boutonValider);
@@ -164,7 +260,8 @@ public class FenetreCommandeArticle extends JFrame{
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
   
 	    pack();
-
+	    
+	   
         }
 	
 	
