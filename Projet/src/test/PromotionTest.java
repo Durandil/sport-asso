@@ -20,11 +20,11 @@ public class PromotionTest extends TestCase {
 //		assertEquals(b, Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "5"));
 //		
 //	}
-	public void testVerifierOrdreDeuxDate2(){
-		boolean b=true;
-		boolean bo=false;
-		System.out.println(Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "3"));
-		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "3"));
-		
-	}
+//	public void testVerifierOrdreDeuxDate2(){
+//		boolean b=true;
+//		boolean bo=false;
+//		System.out.println(Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "3"));
+//		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "3"));
+//		
+//	}
 }

@@ -173,13 +173,9 @@ public class Particulier extends Client {
 	}
 
 	public static void modifierBDDparticulier(String idClient, String nom,
-			String prenom, String adresse, String codePostal, String telephone) {
+			String prenom, String adresse,String ville,String idVille, String codePostal, String telephone) {
 
-		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE",
-				"CODEPOSTAL", codePostal);
-		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE",
-				"CODEPOSTAL", codePostal);
-
+		
 		String requete = " UPDATE CLIENT SET NOMCLIENT='" + nom
 				+ "',PRENOMCLIENT='" + prenom + "',ADRESSECLIENT='" + adresse
 				+ "',NOMVILLE='" + ville + "',IDVILLE='" + idVille

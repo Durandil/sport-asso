@@ -66,7 +66,7 @@ Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCateg
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0001','3 Juin 2010','arthur.laroch@gmail.com');
 
 #Listing_articles_commandes
-Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('Comm0001', 'ART00001',5);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('comm0001', 'ART00001',5);
 
 #Message
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'arthur.laroch@gmail.com',TO_DATE('2010-12-15', 'YYYY-MM-DD'));
