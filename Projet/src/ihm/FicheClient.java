@@ -37,7 +37,7 @@ public class FicheClient extends JDialog {
 	private JComboBox ActivationCompteBox;
 	private JLabel ActifCompteLabel;
 	private Dimension dimensionpanneauInformationsPersonnelles =  new Dimension(250,60);
-	private Dimension dimensionPanneauStatistique =  new Dimension(200,50);
+	private Dimension dimensionPanneauStatistique =  new Dimension(300,40);
 	private JLabel icon;
 	private static String etatCompte="";
 	
@@ -51,10 +51,12 @@ public class FicheClient extends JDialog {
 	}
 	
 	private void initComponent(String idClient){
-		etatCompte =SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient); 
+		 
 		// Déclaration du panneau qui contiendra les statistiques sur le client
 		JPanel panneauDroite=new JPanel();
-		panneauDroite.setLayout(new GridLayout(5, 1));
+		panneauDroite.setLayout(new GridLayout(6,1,0,5));
+		panneauDroite.setBorder(BorderFactory.createTitledBorder("Statistiques"));
+		panneauDroite.setBackground(Color.YELLOW);
 		
 		// Implémenter des méthodes (interrogation tables) pour obtenir les statistiques sur un client
 		JLabel totalMoyenCommandes=new JLabel("Total moyen des commandes : ");
@@ -62,6 +64,7 @@ public class FicheClient extends JDialog {
 		JLabel articleMaxCommande= new JLabel("Article le plus commandé : ");
 		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
 		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
+		JButton boutonAfficherCommande = new JButton("Afficher les 5 dernières commandes");
 		
 		JPanel panStat1 = new JPanel();
 		JPanel panStat2 = new JPanel();
@@ -69,11 +72,11 @@ public class FicheClient extends JDialog {
 		JPanel panStat4 = new JPanel();
 		JPanel panStat5 = new JPanel();
 		
-		panStat1.setBackground(Color.white);
-		panStat2.setBackground(Color.white);
-		panStat3.setBackground(Color.white);
-		panStat4.setBackground(Color.white);
-		panStat5.setBackground(Color.white);
+		panStat1.setBackground(new Color(0,0,0,0));
+		panStat2.setBackground(new Color(0,0,0,0));
+		panStat3.setBackground(new Color(0,0,0,0));
+		panStat4.setBackground(new Color(0,0,0,0));
+		panStat5.setBackground(new Color(0,0,0,0));
 		
 		panStat1.setPreferredSize(dimensionPanneauStatistique);
 		panStat2.setPreferredSize(dimensionPanneauStatistique);
@@ -87,24 +90,28 @@ public class FicheClient extends JDialog {
 		panStat4.add(quantiteTotaleArticleMaxCommande);
 		panStat5.add(dateDernierAchatArticleMaxCommande);
 		
-		panStat1.setBounds(552, 90, 200,50);
-		panStat2.setBounds(552, 160,200,50);
-		panStat3.setBounds(552, 230,200,50);
-		panStat4.setBounds(552, 300,200,50);
-		panStat5.setBounds(552, 370,200,50);
+		boutonAfficherCommande.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO générer une fenetre avec la liste des 5 dernières commandes
+				
+			}
+		});
 		
+		panneauDroite.add(panStat1);
+		panneauDroite.add(panStat2);
+		panneauDroite.add(panStat3);
+		panneauDroite.add(panStat4);
+		panneauDroite.add(panStat5);
+		panneauDroite.add(boutonAfficherCommande);
 		
-		this.getContentPane().add(panStat1);
-		this.getContentPane().add(panStat2);
-		this.getContentPane().add(panStat3);
-		this.getContentPane().add(panStat4);
-		this.getContentPane().add(panStat5);
+		panneauDroite.setBounds(552,350,350,300);
 		
-
-		
+		this.getContentPane().add(panneauDroite);
+			
 		// Déclaration du panneau de fond de l'écran
 		JPanel panneauGauche= new JPanel();
-		icon = new JLabel(new ImageIcon("src/images/fond_fiche.jpg"));
+		icon = new JLabel(new ImageIcon("src/images/fond_fiche2.jpg"));
 		panneauGauche.setBackground(Color.white);
 		panneauGauche.add(icon);	
 		
@@ -119,7 +126,7 @@ public class FicheClient extends JDialog {
 		identifiant.setPreferredSize(new Dimension(120, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
-		panIdentifiant.setBounds(40,80,220,60);
+		panIdentifiant.setBounds(40,75,220,60);
 		this.add(panIdentifiant);
 		
 		// La denomination
@@ -133,7 +140,7 @@ public class FicheClient extends JDialog {
 		denominationLabel=new JLabel("Denomination");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
-		panDenomination.setBounds(40,150,220,60);
+		panDenomination.setBounds(40,140,220,60);
 		this.add(panDenomination);
 		
 		//Le nom
@@ -147,7 +154,7 @@ public class FicheClient extends JDialog {
 		nomLabel = new JLabel("Nom :");
 		panNom.add(nomLabel);
 		panNom.add(nom);
-		panNom.setBounds(40,220,220,60);
+		panNom.setBounds(40,205,220,60);
 		this.add(panNom);
 			
 		//Le prenom
@@ -161,7 +168,7 @@ public class FicheClient extends JDialog {
 		prenom.setPreferredSize(new Dimension(90, 25));
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
-		panPrenom.setBounds(40,290,220,60);
+		panPrenom.setBounds(40,270,220,60);
 		this.add(panPrenom);
 		
 		if(denominationClient.equals(" ")){
@@ -203,7 +210,7 @@ public class FicheClient extends JDialog {
 		adresse.setPreferredSize(new Dimension(/*adresseClient.length()*/90, 25));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
-		panAdresse.setBounds(40,360,220,60);
+		panAdresse.setBounds(40,335,220,60);
 		this.add(panAdresse);
 		
 
@@ -218,7 +225,7 @@ public class FicheClient extends JDialog {
 		ville.setEnabled(false);
 		panVille.add(villeLabel);
 		panVille.add(ville);
-		panVille.setBounds(40,500,220,60);
+		panVille.setBounds(40,465,220,60);
 		this.add(panVille);
 		
 		
@@ -232,7 +239,7 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-		panCP.setBounds(40,430,220,60);
+		panCP.setBounds(40,400,220,60);
 		this.add(panCP);
 		
 		
@@ -246,7 +253,7 @@ public class FicheClient extends JDialog {
 		telephone.setPreferredSize(new Dimension(90, 25));
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
-		panTelephone.setBounds(40,570,220,60);
+		panTelephone.setBounds(40,530,220,60);
 		this.add(panTelephone);
 		
 		
@@ -255,6 +262,7 @@ public class FicheClient extends JDialog {
 		panActivationCompte.setBackground(new Color(0,0,0,0));
 		panActivationCompte.setPreferredSize(new Dimension(220, 60));
 		panActivationCompte.setBorder(BorderFactory.createTitledBorder("Activation du compte"));
+		etatCompte =SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient);
 		String actifCompteClient=SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient);
 		
 		ActifCompteLabel = new JLabel("Compte Actif ? ");
@@ -285,21 +293,22 @@ public class FicheClient extends JDialog {
 		
 		panActivationCompte.add(ActifCompteLabel);
 		panActivationCompte.add(ActivationCompteBox);
-		panActivationCompte.setBounds(40,640,200,60);
+		panActivationCompte.setBounds(40,595,200,60);
 		this.add(panActivationCompte);
 		
 		// Declaration d'un panneau qui contiendra les infos concernant la fidelite
 		JPanel panneauFidelite = new JPanel();
 		panneauFidelite.setLayout(new GridLayout(2,1,0,5));
-		panneauFidelite.setPreferredSize(new Dimension(240,200));
 		panneauFidelite.setBackground(new Color(0,0,0,0));
-		panneauFidelite.setBounds(552,500,250,210);
+		panneauFidelite.setBorder(BorderFactory.createTitledBorder("Informations sur la fidélité"));
+		panneauFidelite.setPreferredSize(new Dimension(300,150));
+		panneauFidelite.setBounds(552,10,350,160);
 		this.add(panneauFidelite);
 		
 		// Panneau Compte Fidelite
 		JPanel panCompteFidelite = new JPanel();
 		panCompteFidelite.setBackground(new Color(0,0,0,0));
-		panCompteFidelite.setPreferredSize(new Dimension(220, 60));
+		panCompteFidelite.setPreferredSize(new Dimension(290, 60));
 		panCompteFidelite.setBorder(BorderFactory.createEmptyBorder());
 		compteFidelLabel = new JLabel("Possesion d'un compte Fidelité :");
 		
@@ -324,13 +333,13 @@ public class FicheClient extends JDialog {
 		// Panneau Nbre Points Compte Fidelite
 		JPanel panPointsFidelite = new JPanel();
 		panPointsFidelite.setBackground(new Color(0,0,0,0));
-		panPointsFidelite.setPreferredSize(new Dimension(220, 60));
+		panPointsFidelite.setPreferredSize(new Dimension(290, 60));
 		panPointsFidelite.setBorder(BorderFactory.createEmptyBorder());
 		
 		String labelNbreDePoints="Nombre de points ";
 		String nbPointsCarte="";
 		
-		if(fidelite.equals("oui")){
+		if(fidelite.equals("Oui")){
 			labelNbreDePoints = labelNbreDePoints +" sur la carte de fidelite "+ SGBD.selectStringConditionString("CARTE_FIDELITE", "IDCARTEFIDELITE", "IDCLIENT", idClient)+ " :"  ;
 			nbPointsCarte=fideliteClient.get(1);
 		}
@@ -375,7 +384,7 @@ public class FicheClient extends JDialog {
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 		
-		this.getContentPane().add(panneauBouton, BorderLayout.EAST);
+		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 	
 		pack();
 		repaint();

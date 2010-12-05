@@ -44,6 +44,10 @@ public class Principale {
 //		String s = SGBD.transformation(sqlDate);
 //		System.out.println(s);
 		
+		/** test statistique **/
+		String testStat = SGBD.statistiqueArticleClient("bda@ensai.fr");
+		System.out.println("Article le plus commandé : "+ testStat);
+		
 		/** Test commande article **/
 //		java.util.Date date = new java.util.Date();
 //		
