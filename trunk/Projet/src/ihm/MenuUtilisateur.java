@@ -83,6 +83,14 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 			}
 		});
 		
+		itemMessagerieClient.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//ouvrir la fenetre permettant accès à la messagerie du client
+				 FenetreMessagerie fenetre = new FenetreMessagerie(false);
+				 fenetre.setVisible(true);
+			}
+		});
+		
 		itemContact.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				FenetreContactVendeur contactVendeur= new FenetreContactVendeur(null,"Nous Contacter",true);

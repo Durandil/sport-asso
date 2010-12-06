@@ -55,7 +55,7 @@ public class MenuGerant extends JFrame {
 		// à la fenetre qu'il faudra ouvrir 
 		
 		itemGestionCompte.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				// Afficher la fenetre de recherche d'un client
 				FenetreRechercheClient recherche = new FenetreRechercheClient(null, "Recherche de clients", true);
 				recherche.setVisible(true);
@@ -70,21 +70,21 @@ public class MenuGerant extends JFrame {
 		});
 		
 		itemMessagerie.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				// Afficher la fenetre contenant la boite de reception interne du gérant
-				FenetreMessagerie message = new FenetreMessagerie();
+				FenetreMessagerie message = new FenetreMessagerie(true);
 				message.setVisible(true);
 			}
 		});
 		
 		itemFermer.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}				
 		});
 		
 		itemArticles.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				// Afficher la fenetre avec la dernière version du catalogue client
 				FenetreCatalogueGerant fenetreCatalogue = new FenetreCatalogueGerant();
 				fenetreCatalogue.setVisible(true);
@@ -92,7 +92,7 @@ public class MenuGerant extends JFrame {
 		});
 		
 		itemCommandes.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				// Afficher la fenetre contenant le tableau des articles en rupture de stock 
 				// et/ou à commander 
 				FenetreReapprovisionnement fenetreStock = new FenetreReapprovisionnement();
@@ -101,7 +101,7 @@ public class MenuGerant extends JFrame {
 		});
 		
 		itemPromotions.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0){
+			public void actionPerformed(ActionEvent e){
 				//ouvrir la fenetre permettant accès au compte
 				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant();
 				fenetrePromo.setVisible(true);

@@ -17,27 +17,52 @@ public class ModeleMessagerie extends AbstractTableModel {
     private final String[] entetes={"Numéro Message","Expéditeur","Sujet","Contenu","Date"} ;
 	
 	
-	public ModeleMessagerie(){
+	public ModeleMessagerie(boolean messagerieGerant){
 		super();
-		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
-		ArrayList<String> listeIdentifiants = SGBD.selectListeString("MESSAGE", "IDMESSAGE");
-		ArrayList<String> listeContenus = SGBD.selectListeString("MESSAGE", "CONTENUMESSAGE");
-		ArrayList<String> listeExpediteur = SGBD.selectListeString("MESSAGE", "IDCLIENT");
-		ArrayList<String> listeSujet = SGBD.selectListeString("MESSAGE", "SUJETMESSAGE");
-		ArrayList<String> listeDate = SGBD.selectListeString("MESSAGE", "DATEMESSAGE");
 		
 		
-		donnees = new Object[listeSujet.size()][5];
-		
-		//On ajoute les informations dans l'objet donnees
-		for(int i=0;i<listeExpediteur.size();i++){
-			donnees[i][0] = listeIdentifiants.get(i);
-			donnees[i][1] = listeExpediteur.get(i);
-			donnees[i][2] = listeSujet.get(i);
-			donnees[i][3] = listeContenus.get(i);
-			donnees[i][4] = listeDate.get(i);
+		if(messagerieGerant == true){
+			//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
+			ArrayList<String> listeContenus = SGBD.selectListeStringOrdonneCondition("MESSAGE", "CONTENUMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
+			ArrayList<String> listeExpediteur = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDCLIENT", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
+			ArrayList<String> listeSujet = SGBD.selectListeStringOrdonneCondition("MESSAGE", "SUJETMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
+			ArrayList<String> listeDate = SGBD.selectListeStringOrdonneCondition("MESSAGE", "DATEMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
+			
+			
+			donnees = new Object[listeSujet.size()][5];
+			
+			//On ajoute les informations dans l'objet donnees
+			for(int i=0;i<listeExpediteur.size();i++){
+				donnees[i][0] = listeIdentifiants.get(i);
+				donnees[i][1] = listeExpediteur.get(i);
+				donnees[i][2] = listeSujet.get(i);
+				donnees[i][3] = listeContenus.get(i);
+				donnees[i][4] = listeDate.get(i);
+			}
 
 		}
+		else{
+			//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
+			ArrayList<String> listeContenus = SGBD.selectListeStringOrdonneCondition("MESSAGE", "CONTENUMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
+			ArrayList<String> listeExpediteur = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDCLIENT", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
+			ArrayList<String> listeSujet = SGBD.selectListeStringOrdonneCondition("MESSAGE", "SUJETMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
+			ArrayList<String> listeDate = SGBD.selectListeStringOrdonneCondition("MESSAGE", "DATEMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
+			
+			
+			donnees = new Object[listeSujet.size()][5];
+			
+			//On ajoute les informations dans l'objet donnees
+			for(int i=0;i<listeExpediteur.size();i++){
+				donnees[i][0] = listeIdentifiants.get(i);
+				donnees[i][1] = listeExpediteur.get(i);
+				donnees[i][2] = listeSujet.get(i);
+				donnees[i][3] = listeContenus.get(i);
+				donnees[i][4] = listeDate.get(i);
+			}
+		}
+		
 	}
 	
 	

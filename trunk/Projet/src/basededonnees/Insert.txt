@@ -124,5 +124,5 @@ Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00004','PRO
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00003','PRO00002');
 
 #Message
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'testa',TO_DATE('2010-12-15', 'YYYY-MM-DD'));
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00002','Prix trop élevés','Je trouve que vos maillots de football sont vraiment hors de prix', 'testp',TO_DATE('2010-12-18', 'YYYY-MM-DD'));
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'testa',TO_DATE('2010-12-15', 'YYYY-MM-DD'),1);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00002','Prix trop élevés','En réponse à votre message, je vous confirme la baisse des tarifs sur les shorts noirs', 'testp',TO_DATE('2010-12-18', 'YYYY-MM-DD'),0);
