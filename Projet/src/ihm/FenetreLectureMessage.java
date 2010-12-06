@@ -29,18 +29,19 @@ public class FenetreLectureMessage extends JDialog{
 	private JTextArea contenuMessage;
 	private JLabel expediteurLabel,dateLabel,sujetLabel,contenuLabel;
 
-	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM,String ident ){
+	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM,String ident, boolean lectureMessageGerant ){
 		super(parent, title, modal);
 		this.setSize(900, 300);
 		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(exp,sujetM,contenuM,dateM,ident);
+		this.initComponent(exp,sujetM,contenuM,dateM,ident,lectureMessageGerant);
 	}
 	
-	private void initComponent(String expediteur,String sujet,String contenu,String date,String identifiant){
+	private void initComponent(String expediteur,String sujet,String contenu,String date,String identifiant,boolean reponseDuGerant){
 		
 		final String numMessage=identifiant;
+		final boolean reponseGerant = reponseDuGerant;
 		
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
@@ -75,7 +76,9 @@ public class FenetreLectureMessage extends JDialog{
 		// Contenu Message
 		JPanel panneauContenuMessage= new JPanel();
 		panneauContenuMessage.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-		contenuMessage=new JTextArea(5,15);
+		contenuMessage=new JTextArea(8,30);
+		contenuMessage.setLineWrap(true);
+		contenuMessage.setWrapStyleWord(true);
 		contenuMessage.setText(contenu);
 		contenuMessage.setEnabled(false);
 		contenuLabel=new JLabel("Contenu : ");
@@ -117,9 +120,10 @@ public class FenetreLectureMessage extends JDialog{
 		
 		boutonRepondre.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// générer une page de réponse à un email
-
-				setVisible(false);
+				// TODO générer une page de réponse à un email
+				dispose();
+				FenetreReponseMessage fenReponse = new FenetreReponseMessage(reponseGerant);
+				fenReponse.setVisible(true);
 			}			
 		});
 		

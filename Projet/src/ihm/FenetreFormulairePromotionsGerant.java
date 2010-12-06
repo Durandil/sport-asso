@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
@@ -133,16 +134,24 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbjourFin = new JComboBox();
 		
 		for(int i=1 ; i<32;i++){
-			cbjourDebut.addItem(i+"");
-			cbjourFin.addItem(i+"");
+			String chaine="";
+			if(i<10){
+				chaine="0";
+			}
+			cbjourDebut.addItem(chaine+i);
+			cbjourFin.addItem(chaine+i);
 		}
 
 		cbmoisDebut = new JComboBox();
 		cbmoisFin = new JComboBox();
 		
 		for(int j=1 ; j<13;j++){
-			cbmoisDebut.addItem(j+"");
-			cbmoisFin.addItem(j+"");
+			String chaine="";
+			if(j<10){
+				chaine="0";
+			}
+			cbmoisDebut.addItem(chaine+j);
+			cbmoisFin.addItem(chaine+j);
 		}
 
 		
@@ -257,21 +266,27 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		boutonConfirmation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Enregistrer la création d'une promotion
+
 				
-				// TODO pourquoi un article n'est pas pris en compte dans la création d'une promotion
-				// et dans la table PROMO de la base de données
-				
-				boolean dateDebutPossible;
 				try {
-					dateDebutPossible = Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
+					boolean dateDebutPossible = Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
 					boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
 					boolean comparaisonDeuxDates;
+					
+					System.out.println("dateDebutPossible :  "+ dateDebutPossible);
+					System.out.println("dateFinPossible : "+ dateFinPossible);
+					
 					if(dateDebutPossible==true & dateFinPossible==true){
 						comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+						System.out.println("DateDebut est avant DateFin : "+comparaisonDeuxDates);
+						
 						if(comparaisonDeuxDates==true){
-							java.sql.Date dateDebut= new java.sql.Date(Integer.parseInt(anneeDebutSelectionne),Integer.parseInt(moisDebutSelectionne),Integer.parseInt(jourDebutSelectionne));
-							java.sql.Date dateFin = new java.sql.Date(Integer.parseInt(anneeFinSelectionne),Integer.parseInt(moisFinSelectionne),Integer.parseInt(jourFinSelectionne));
+							String dateDeb = jourDebutSelectionne+moisDebutSelectionne+anneeDebutSelectionne;
+							Date dateDebut= SGBD.stringToDate(dateDeb,"ddMMyyyy");
 							
+							String dateEnd = jourFinSelectionne+moisFinSelectionne+anneeFinSelectionne;
+							Date dateFin= SGBD.stringToDate(dateEnd,"ddMMyyyy");
+
 							boolean promoAdherent=true;
 							
 							if(populationPromo.equals("Promotion pour tous les clients")){
@@ -279,6 +294,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							}
 							
 							Promotion promo = new Promotion(null,description.getText(), dateDebut, dateFin, Double.parseDouble(pourcentPromo.getText()), promoAdherent);
+							
 							
 							String requete = "INSERT INTO LISTING_PROMOS_ARTICLES(IDPROMO,IDARTICLE) values('"
 								+ promo.getIdPromotion() +"', '" + articleSelectionne;
