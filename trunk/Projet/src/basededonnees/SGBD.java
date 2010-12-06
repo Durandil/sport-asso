@@ -27,8 +27,9 @@ public class SGBD {
 	
 	//Penser à modifier les id/mdp
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 	private static String compteurViewStatistiqueArticle;
 	
@@ -1003,25 +1004,25 @@ public class SGBD {
 			// si un utilisateur ne remplit aucun champ et appuie sur le bouton
 			// il pourra voir la liste des clients
 			if(conditionWhereOr.equals("WHERE (")){
-				conditionWhereOr="";
-				conditionWhereAnd="";
+				conditionWhereOr="WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
+				conditionWhereAnd=" WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
 				System.out.println("condition 5");
 			}
 			else{
-				conditionWhereOr=conditionWhereOr+" ) ";
-				conditionWhereOr=conditionWhereAnd+" ) ";
+				conditionWhereOr=conditionWhereOr+" ) AND (VILLE.IDVILLE = CLIENT.IDVILLE) ";
+				conditionWhereOr=conditionWhereAnd+" AND VILLE.IDVILLE = CLIENT.IDVILLE) ";
 				System.out.println("condition 6");
 			}
 			
 			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM CLIENT " + conditionWhereOr );
+					" FROM CLIENT, VILLE " + conditionWhereOr);
 			
 //			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT FROM CLIENT"+
 //					" where idclient=(select distinct(idclient) from client where idClient =(SELECT IDCLIENT FROM CLIENT " + conditionWhereOr + 
 //					" UNION  SELECT IDCLIENT  FROM CLIENT " + conditionWhereAnd+")))");
 			
 			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM CLIENT " + conditionWhereOr );
+					" FROM CLIENT, VILLE " + conditionWhereOr );
 			
 			while (res.next()){
 				

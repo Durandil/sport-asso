@@ -131,13 +131,16 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panAdresse.add(adresse);
 		content.add(panAdresse);
 		
+		//Idville
+		String idville = SGBD.selectStringConditionString("CLIENT", "IDVILLE", "IDCLIENT", idclient);
+		
 		//ville
 		JPanel panVille = new JPanel();
 		panVille.setBackground(Color.white);
 		panVille.setPreferredSize(new Dimension(260, 60));
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
 		villeLabel = new JLabel("Ville: ");
-		ville = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMVILLE", "IDCLIENT", idclient));
+		ville = new JTextField(SGBD.selectStringConditionString("VILLE", "NOMVILLE", "IDVILLE", idville));
 		ville.setEnabled(false);
 		ville.setPreferredSize(new Dimension(90, 25));
 		panVille.add(villeLabel);
@@ -150,7 +153,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panCP.setPreferredSize(new Dimension(260, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Code Postal : ");
-		codePostal = new JTextField(SGBD.selectStringConditionString("CLIENT", "CODEPOSTAL", "IDCLIENT", idclient));
+		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "IDVILLE", idville));
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);

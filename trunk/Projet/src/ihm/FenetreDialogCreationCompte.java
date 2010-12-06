@@ -279,7 +279,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 					{
 						
 						Particulier p = new Particulier(nom.getText(), prenom.getText(), identifiant.getText()
-								, adresse.getText(), codePostal.getText() , ville, idVille, telephone.getText(), 
+								, adresse.getText(),  idVille, telephone.getText(), 
 								estFidele);
 					} else {
 						Association a = new Association(denomination.getText(),

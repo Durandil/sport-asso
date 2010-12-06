@@ -14,7 +14,7 @@ public abstract class Client extends Utilisateur{
 	protected String motDePasse;
 	static int CompteurIdcarte=0;
 	protected String idVille;
-	protected String nomVille;
+	
 	//static int CompteurIdcarte=SGBD.recupererIdentifiantDernierEnregistrementTable("CARTE_FIDELITE", "IDCARTEFIDELITE");
 	
 	// Méthode permettant de générer un mot de passe
@@ -63,13 +63,7 @@ public abstract class Client extends Utilisateur{
 		this.idVille = idVille;
 	}
 
-	public void setNomVille(String nomVille) {
-		this.nomVille = nomVille;
-	}
 
-	public String getNomVille() {
-		return nomVille;
-	}
 
 	public String getMotDePasse() {
 		return motDePasse;

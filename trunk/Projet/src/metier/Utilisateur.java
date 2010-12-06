@@ -5,7 +5,6 @@ public abstract class Utilisateur {
 	protected String mail;
 	protected String adresse;
 	protected String ville;
-	protected String codePostal;
 	protected String telephone;
 	protected String codeCommune;
 	
@@ -51,13 +50,7 @@ public abstract class Utilisateur {
 		this.ville = ville;
 	}
 
-	public String getCodePostal() {
-		return codePostal;
-	}
 
-	public void setCodePostal(String codePostal) {
-		this.codePostal = codePostal;
-	}
 
 	public String getCodeCommune() {
 		return codeCommune;
