@@ -106,7 +106,7 @@ public class FenetreContactVendeur extends JDialog{
 				
 				@SuppressWarnings("deprecation")
 				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour);
+				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
 				//message.ajouterBDD();
 				// fermeture de la fenetre
 				setVisible(false);

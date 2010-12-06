@@ -24,22 +24,22 @@ public class FenetreMessagerie extends JFrame {
 	public static boolean suppressionMessage=false;
 
 
-	public FenetreMessagerie(){
+	public FenetreMessagerie(boolean boiteMessagerieGerant){
 		super();
-		this.setTitle("Boite de Réception");
+		this.setTitle("Boite de Réception ");
 		this.setSize(500, 900);
 		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent();
+		this.initComponent(boiteMessagerieGerant);
 	}         
 
         
-    private void initComponent(){
+    private void initComponent(boolean messagerieGerant){
     	
     	// Création d'une table contenant tous les messages envoyés par les clients au gérant
     	// après interrogation de la base de données
-	    final JTable tableauMessage = new JTable(new ModeleMessagerie());     
+	    final JTable tableauMessage = new JTable(new ModeleMessagerie(messagerieGerant));     
 	    this.getContentPane().add(new JScrollPane(tableauMessage), BorderLayout.CENTER);
     	
     	

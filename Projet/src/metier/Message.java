@@ -13,6 +13,7 @@ public class Message {
 	private String contenu ;
 	private String expediteur;
 	private Date dateEnvoi ;
+	private boolean estEnvoyeAuGerant ;
 	
 //	// ce static doit aider à faire un compteur des idMessage
 //	// A chaque fois qu'un message sera ajouté à la base, on l'incrementera de 1
@@ -20,18 +21,29 @@ public class Message {
 //	private static int compteurIdentifiantMessage=0;
 //	//private static int compteurIdentifiantMessage=SGBD.recupererIdentifiantDernierEnregistrementTable("MESSAGE", "IDMESSAGE");
 //	
-	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi) {
+	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi,boolean messageEnvoye) {
 		super();
 		this.sujet = sujet;
 		this.contenu = contenu;
 		this.expediteur = expediteur;
 		this.dateEnvoi = dateEnvoi;
+		this.estEnvoyeAuGerant = messageEnvoye ;
 		System.out.println(toString());
 		ajouterBDD();
 	}
-
+	
 	public Message() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	public boolean isEstEnvoye() {
+		return estEnvoyeAuGerant;
+	}
+
+	public void setEstEnvoye(boolean estEnvoye) {
+		this.estEnvoyeAuGerant = estEnvoye;
 	}
 
 	public String getSujet() {
@@ -66,13 +78,13 @@ public class Message {
 		this.dateEnvoi = dateEnvoi;
 	}
 	
-	
-	
+
 	@Override
 	public String toString() {
 		return "Message [idMessage=" + idMessage + ", sujet=" + sujet
 				+ ", contenu=" + contenu + ", expediteur=" + expediteur
-				+ ", dateEnvoi=" + dateEnvoi + "]";
+				+ ", dateEnvoi=" + dateEnvoi + ", estEnvoyeAuGerant="
+				+ estEnvoyeAuGerant + "]";
 	}
 
 	// Méthode permettant d'ajouter un message dans la table MESSAGE sachant l'expéditeur
@@ -90,36 +102,43 @@ public class Message {
 		int numeroMessage=0;
 		
 
-			numeroMessage=Integer.parseInt(idNonFini.get(0));
+		numeroMessage=Integer.parseInt(idNonFini.get(0));
 			
-			if(numeroMessage<10){
-				 numMessage= "MES0000" + numeroMessage;
-			}
-			if(numeroMessage<100 && numeroMessage>=10){
-				numMessage= "MES000" + numeroMessage;
-			}
-			if(numeroMessage<1000 && numeroMessage>=100){
-				numMessage= "MES00" + numeroMessage;
-			}
-			if(numeroMessage<10000 && numeroMessage>=1000){
-				numMessage= "MES0" + numeroMessage;
-			}
-			if(numeroMessage<100000 && numeroMessage>=10000){
-				numMessage= "MES" + numeroMessage;
-			}
+		if(numeroMessage<10){
+			numMessage= "MES0000" + numeroMessage;
+		}
+		if(numeroMessage<100 && numeroMessage>=10){
+			numMessage= "MES000" + numeroMessage;
+		}
+		if(numeroMessage<1000 && numeroMessage>=100){
+			numMessage= "MES00" + numeroMessage;
+		}
+		if(numeroMessage<10000 && numeroMessage>=1000){
+			numMessage= "MES0" + numeroMessage;
+		}
+		if(numeroMessage<100000 && numeroMessage>=10000){
+			numMessage= "MES" + numeroMessage;
+		}
 		
+		int envoiMessageGerant=0 ;
+		
+		if(this.estEnvoyeAuGerant==true){
+			envoiMessageGerant=1;
+		}
+			
+			
 		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
-				"IDCLIENT,DATEMESSAGE) VALUES ( '"+ numMessage +"',"
+				"IDCLIENT,DATEMESSAGE, ESTENVOYEAUGERANT) VALUES ( '"+ numMessage +"',"
 				+ "'"+ this.sujet + "',"
 				+ "'"+ this.contenu + "','"
 				+ this.expediteur+ "'," 
-				+ s+")";
+				+ s+" , " 
+				+ envoiMessageGerant +" )";
 		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 		
 	}
 	
-	// TODO il faut aussi implémenter la suppression d'un tuple (message) de la MESSAGE
 	
 	public static void supprimerBDD(String identifiantMessage){
 		// TODO vérifier si la requete est correcte
