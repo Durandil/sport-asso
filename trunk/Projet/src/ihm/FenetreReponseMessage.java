@@ -25,23 +25,27 @@ public class FenetreReponseMessage extends JFrame {
 	private JTextArea contenuMessage;
 	private JLabel contenuLabel;
 
-	public FenetreReponseMessage(boolean ReponseDuClient) {
+	public FenetreReponseMessage(boolean ReponseDuGerant) {
 		super();
 		this.setTitle("Répondre au message");
-		this.setSize(500, 900);
+		this.setSize(500, 400);
 		this.setLocation(50,50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(ReponseDuClient);
+		this.initComponent(ReponseDuGerant);
 	}
 	
-	public void initComponent(boolean reponseDuClient){
+	public void initComponent(boolean reponseDuGerant){
 		
-		final boolean reponseClient = reponseDuClient;
+		final boolean reponseGerant = reponseDuGerant;
+		String gerant = "du client";
+		if(reponseDuGerant==true){
+			gerant="du gérant";
+		}
 		
 		// Sujet Message
 		JPanel panneauSujet= new JPanel();
-		sujetMessage=new JTextField("RE : ");
+		sujetMessage=new JTextField("RE : "+gerant);
 		sujetMessage.setPreferredSize(new Dimension(200, 25));
 		sujetLabel=new JLabel("Objet : ");
 		panneauSujet.add(sujetLabel);
@@ -51,7 +55,10 @@ public class FenetreReponseMessage extends JFrame {
 		// Contenu Message
 		JPanel panneauContenuMessage= new JPanel();
 		panneauContenuMessage.setBorder(BorderFactory.createLineBorder(Color.darkGray));
-		contenuMessage=new JTextArea(5,15);
+		contenuMessage = new JTextArea(8,30);
+		contenuMessage.setEnabled(true);
+		contenuMessage.setLineWrap(true);
+		contenuMessage.setWrapStyleWord(true);
 		contenuLabel=new JLabel("Contenu : ");
 		panneauContenuMessage.add(contenuLabel);
 		panneauContenuMessage.add(contenuMessage);
@@ -76,8 +83,6 @@ public class FenetreReponseMessage extends JFrame {
 			}			
 		});
 		
-
-		
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// TODO créer une nouvelle instance de message
@@ -85,7 +90,7 @@ public class FenetreReponseMessage extends JFrame {
 				
 				@SuppressWarnings("deprecation")
 				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-				Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,reponseClient);
+				Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,!reponseGerant);
 				setVisible(false);
 			}			
 		});

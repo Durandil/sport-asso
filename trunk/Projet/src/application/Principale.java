@@ -93,11 +93,7 @@ public class Principale {
 //		
 		/**Instanciation d'une catégorie test**/
 //		Categorie cat = new Categorie("CAT99999","Test",100);
-		
-	
-		
-//		  
-		  
+			  
 		/**Instanciation d'une association**/ 
 
 //		Association ASS = new Association("IDYLLISTE", "IDYLLISTE@ENSAI.FR", "ENSAI", "35000","Rennes","ville001",

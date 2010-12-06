@@ -36,6 +36,7 @@ public class FenetreMessagerie extends JFrame {
 
         
     private void initComponent(boolean messagerieGerant){
+    	final boolean messagerieDuGerant = messagerieGerant;
     	
     	// Création d'une table contenant tous les messages envoyés par les clients au gérant
     	// après interrogation de la base de données
@@ -65,7 +66,7 @@ public class FenetreMessagerie extends JFrame {
 				
 				
 				// ouverture de la fenetre de lecture de message
-				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date,identifiantMail);
+				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date,identifiantMail,messagerieDuGerant);
 				fenMessage.setVisible(true);
 				if(suppressionMessage==true){
 					tableauMessage.setEnabled(false);

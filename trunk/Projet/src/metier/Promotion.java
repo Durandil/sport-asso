@@ -71,6 +71,8 @@ public class Promotion {
 		this.pourcentagePromo = pourcentagePromo;
 	}
 	
+
+	
 	public void ajouterBDD() {
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_PROMOTION.NEXTVAL");
 		String numPromo = "";
@@ -78,21 +80,22 @@ public class Promotion {
 		numeroPromo=Integer.parseInt(idNonFini.get(0));
 		
 		if(numeroPromo<10){
-			numPromo= "MES0000" + numeroPromo;
+			numPromo= "PRO0000" + numeroPromo;
 		}
 		if(numeroPromo<100 && numeroPromo>=10){
-			numPromo= "MES000" + numeroPromo;
+			numPromo= "PRO000" + numeroPromo;
 		}
 		if(numeroPromo<1000 && numeroPromo>=100){
-			numPromo= "MES00" + numeroPromo;
+			numPromo= "PRO00" + numeroPromo;
 		}
 		if(numeroPromo<10000 && numeroPromo>=1000){
-			numPromo= "MES0" + numeroPromo;
+			numPromo= "PRO0" + numeroPromo;
 		}
 		if(numeroPromo<100000 && numeroPromo>=10000){
-			numPromo= "MES" + numeroPromo;
+			numPromo= "PRO" + numeroPromo;
 		}
 		
+		this.setIdPromotion(numPromo);
 		String s = SGBD.transformation(this.dateDebut);
 		String s2 = SGBD.transformation(this.dateFin);
 		int pf = 0;
@@ -151,49 +154,42 @@ public class Promotion {
 		int jourDate=Integer.parseInt(jour);
 		int anneeDate=Integer.parseInt(annee);
 		
-
-
-
-		
-
 		Date dateJour = new Date(System.currentTimeMillis());
-
 		
 		System.out.println(dateJour.toString());
 		System.out.println(datePromotion.toString());
 		
 		if(datePromotion.before(dateJour)){
 			resultat=false;
+			System.out.println("date avant aujourd'hui");
 		}
 		
 		if((moisDate==4 | moisDate==6 | moisDate==9 | moisDate==11) & jourDate==31){
 			resultat=false;
+			System.out.println("Problème du 31 des mois avril, juin, septembre et novembre");
 		}
 		
-		if(moisDate==2 | jourDate>28){
+		if(moisDate==2 & jourDate>28){
 			resultat=false;
+			System.out.println("problème du mois de février");
 		}
 		
 		return resultat;
 	}
 	
-	public static boolean verifierOrdreDeuxDate(String anneeAvant,String moisAvant,String jourAvant,String anneeApres,String moisApres,String jourApres){
+	public static boolean verifierOrdreDeuxDate(String anneeAvant,String moisAvant,String jourAvant,String anneeApres,String moisApres,String jourApres) throws Exception{
 		boolean resultat=true;
-		int moisDateAvant=Integer.parseInt(moisAvant);
-		int jourDateAvant=Integer.parseInt(jourAvant);
-		int anneeDateAvant=Integer.parseInt(anneeAvant);
-		int moisDateApres=Integer.parseInt(moisApres);
-		int jourDateApres=Integer.parseInt(jourApres);
-		int anneeDateApres=Integer.parseInt(anneeApres);
 		
-		@SuppressWarnings("deprecation")
-		Date datePromoAvant = new Date(anneeDateAvant,moisDateAvant,jourDateAvant);
-		Date datePromotionAvant =(Date) new java.util.Date(anneeDateAvant,moisDateAvant,jourDateAvant);
-		System.out.println(datePromoAvant.toString());
+
+		String dateP = jourAvant+moisAvant+anneeAvant;
+		Date datePromotionAvant= SGBD.stringToDate(dateP,"ddMMyyyy");
+		
+		String datePAfter = jourApres+moisApres+anneeApres;
+		Date datePromotionApres = SGBD.stringToDate(datePAfter,"ddMMyyyy");
+		
 		System.out.println(datePromotionAvant.toString());
-		@SuppressWarnings("deprecation")
-		Date datePromotionApres= (Date) new java.util.Date(anneeDateApres, moisDateApres, jourDateApres);
-		
+		System.out.println(datePromotionApres.toString());
+	
 		if(datePromotionAvant.after(datePromotionApres)){
 			resultat=false;
 		}
