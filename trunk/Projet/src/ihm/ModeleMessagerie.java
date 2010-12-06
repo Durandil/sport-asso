@@ -29,7 +29,6 @@ public class ModeleMessagerie extends AbstractTableModel {
 			ArrayList<String> listeSujet = SGBD.selectListeStringOrdonneCondition("MESSAGE", "SUJETMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			ArrayList<String> listeDate = SGBD.selectListeStringOrdonneCondition("MESSAGE", "DATEMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			
-			
 			donnees = new Object[listeSujet.size()][5];
 			
 			//On ajoute les informations dans l'objet donnees

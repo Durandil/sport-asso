@@ -68,9 +68,9 @@ public class FenetreLectureMessage extends JDialog{
 		sujetMessage.setEnabled(false);
 		sujetMessage.setPreferredSize(new Dimension(200, 25));
 		sujetLabel=new JLabel("Objet : ");
-		panneauExpediteur.add(sujetLabel);
-		panneauExpediteur.add(sujetMessage);
-		panneauExpediteur.setBorder(BorderFactory.createEmptyBorder());
+		panneauSujet.add(sujetLabel);
+		panneauSujet.add(sujetMessage);
+		panneauSujet.setBorder(BorderFactory.createEmptyBorder());
 		
 		// Contenu Message
 		JPanel panneauContenuMessage= new JPanel();
@@ -95,6 +95,7 @@ public class FenetreLectureMessage extends JDialog{
 		
 		JButton boutonRetourMessagerie= new JButton("Retour à la Boite de Réception");
 		JButton boutonSupprimerMessage= new JButton("Supprimer Message");
+		JButton boutonRepondre = new JButton("Répondre");
 		
 		//Définition des actions relatives à chaque bouton
 		
@@ -114,9 +115,18 @@ public class FenetreLectureMessage extends JDialog{
 			}			
 		});
 		
+		boutonRepondre.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				// générer une page de réponse à un email
+
+				setVisible(false);
+			}			
+		});
+		
 		//Ajout des boutons au panneau principal des boutons panneauBoutons
 		panneauBoutonsBas.add(boutonRetourMessagerie);
 		panneauBoutonsBas.add(boutonSupprimerMessage);
+		panneauBoutonsBas.add(boutonRepondre);
 		
 		this.getContentPane().add(panneauIdentificationMessage, BorderLayout.NORTH);
 		this.getContentPane().add(panneauContenuMessage, BorderLayout.CENTER);
