@@ -16,14 +16,12 @@ public class Particulier extends Client {
 	// Le constructeur permet d'ajouter le particulier dans la base CLIENTS
 	// Et génère un mot de passe lors de l'instanciation
 	public Particulier(String nom, String prenom, String mail, String adresse,
-			String codePostal, String nomVille, String idVille,
+			 String idVille,
 			String telephone, boolean estFidele) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
-		this.adresse = adresse;
-		this.setNomVille(nomVille);
-		this.codePostal = codePostal;
+		this.adresse = adresse;	
 		this.telephone = telephone;
 		this.particulierAssociation = "Particulier";
 		this.nbPointsFidelite = 0;
@@ -97,7 +95,7 @@ public class Particulier extends Client {
 		}
 
 		String requete = "INSERT INTO CLIENT (IDCLIENT, NOMCLIENT, PRENOMCLIENT, ADRESSECLIENT, IDVILLE"
-				+ ",NOMVILLE, CODEPOSTAL, TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "
+				+ " , TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "
 				+ "'"
 				+ this.mail
 				+ "',"
@@ -112,12 +110,6 @@ public class Particulier extends Client {
 				+ "',"
 				+ "'"
 				+ this.idVille
-				+ "',"
-				+ "'"
-				+ this.nomVille
-				+ "',"
-				+ "'"
-				+ this.codePostal
 				+ "',"
 				+ "'"
 				+ this.telephone
@@ -173,13 +165,14 @@ public class Particulier extends Client {
 	}
 
 	public static void modifierBDDparticulier(String idClient, String nom,
-			String prenom, String adresse,String ville,String idVille, String codePostal, String telephone) {
+			String prenom, String adresse,String codePostal, String telephone) {
 
+		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
 		
 		String requete = " UPDATE CLIENT SET NOMCLIENT='" + nom
 				+ "',PRENOMCLIENT='" + prenom + "',ADRESSECLIENT='" + adresse
-				+ "',NOMVILLE='" + ville + "',IDVILLE='" + idVille
-				+ "',TELEPHONE='" + telephone + "',CODEPOSTAL='" + codePostal
+				+  "',IDVILLE='" + idVille
+				+ "',TELEPHONE='" + telephone  
 				+ "' " + "WHERE IDCLIENT ='" + idClient + "'";
 
 		System.out.println(requete);

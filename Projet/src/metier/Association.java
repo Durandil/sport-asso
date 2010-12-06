@@ -21,8 +21,6 @@ public class Association extends Client {
 		this.denomination = denomination;
 		this.mail = mail;
 		this.adresse = adresse;
-		this.codePostal = codePostal;
-		this.nomVille = nomVille;
 		this.idVille = idVille;
 		this.telephone = telephone;
 		this.particulierAssociation = "Association";
@@ -93,13 +91,11 @@ public class Association extends Client {
 		
 		
 		String requete = "INSERT INTO CLIENT (IDCLIENT, DENOMINATIONCLIENT, ADRESSECLIENT, IDVILLE" +
-		",NOMVILLE, CODEPOSTAL, TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
+		", TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "+
 		"'"+this.mail+"',"
 		+"'"+this.denomination+"',"
 		+"'"+this.adresse+"',"
 		+"'"+this.idVille+"',"
-		+"'"+this.nomVille+"',"
-		+"'"+this.codePostal+"',"
 		+"'"+this.telephone+"',"
 		+"'"+actif+"',"
 		+"'"+this.motDePasse+"')";
@@ -152,11 +148,11 @@ public class Association extends Client {
 	
 	public static void modifierBDDassoc(String idClient,String denomination,String adresse,String codePostal,String telephone){
 		
-		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal);
+		
 		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
 		
-		String requete = " UPDATE CLIENT SET DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',NOMVILLE='"+ville+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone+"',CODEPOSTAL='"+codePostal+"'"
-		+"WHERE IDCLIENT ='" + idClient +"'";
+		String requete = " UPDATE CLIENT SET DENOMINATIONCLIENT='"+denomination+"',ADRESSECLIENT='"+adresse+"',IDVILLE='"+idVille+"',TELEPHONE='"+telephone
+		+"' WHERE IDCLIENT ='" + idClient +"'";
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
