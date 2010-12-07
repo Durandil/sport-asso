@@ -73,7 +73,7 @@ public class FenetreReponseMessage extends JFrame {
 		JPanel panneauBoutonsBas=new JPanel();
 		
 		JButton boutonRetourMessagerie= new JButton("Retour à la Boite de Réception");
-		JButton boutonEnvoyer = new JButton("Répondre");
+		JButton boutonEnvoyer = new JButton("Envoyer");
 		
 		//Définition des actions relatives à chaque bouton
 		

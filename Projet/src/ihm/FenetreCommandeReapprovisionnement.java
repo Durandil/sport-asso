@@ -54,7 +54,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
 		quantite=new JComboBox();
 		
-		for(int j=1;j<100;j++){
+		for(int j=1;j<501;j++){
 			quantite.addItem(j+"");
 		}
 		
@@ -85,7 +85,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				Article.modifierStockArticleBDD(identifiantArticle, quantiteSelectionnee);
-				setVisible(false); // provisoire
+				setVisible(false); 
 				
 			}			
 		});
