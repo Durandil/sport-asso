@@ -2,9 +2,6 @@ package test;
 
 import java.util.ArrayList;
 
-import metier.Promotion;
-
-import application.Principale;
 import basededonnees.SGBD;
 
 import junit.framework.TestCase;
@@ -136,8 +133,8 @@ public class SGBDTest extends TestCase {
 //		result.add(listeString3);
 //		result.add(listeString4);
 //		System.out.println(result);
-//		System.out.println(SGBD.recupererInformationRechercheClient("", "laroch"," " , "Rennes"));
-//		assertEquals(result,SGBD.recupererInformationRechercheClient("", "laroch"," " , "Rennes"));
+//		System.out.println(SGBD.recupererInformationRechercheClient("", "laroch"," " , ""));
+//		assertEquals(result,SGBD.recupererInformationRechercheClient("", "laroch"," " , ""));
 //	}
 
 // test opérationnel	

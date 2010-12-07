@@ -15,6 +15,8 @@ public class MessageTest extends TestCase {
 		Message.supprimerBDD("MES00002");
 		ArrayList<String> result=new ArrayList<String>();
 		result.add("MES00001");
+		System.out.println(result);
+		System.out.println(SGBD.selectListeString("Message", "IDMessage"));
 		assertEquals(result, SGBD.selectListeString("Message", "IDMessage"));
 	}
 
