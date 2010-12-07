@@ -49,8 +49,8 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	/**
 	 * Initialise le contenu de la boîte
 	 */
-	private void initComponent(String idclient){
-		final String numClient=idclient;
+	private void initComponent(String idClient){
+		final String numClient=idClient;
 		
 		//Icone
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
@@ -69,7 +69,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panIdentifiant.setPreferredSize(new Dimension(260, 60));
 		panIdentifiant.setBorder(BorderFactory.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
-		identifiant = new JTextField(SGBD.selectStringConditionString("CLIENT", "IDCLIENT", "IDCLIENT", idclient));
+		identifiant = new JTextField(SGBD.selectStringConditionString("CLIENT", "IDCLIENT", "IDCLIENT", idClient));
 		identifiant.setEnabled(false);
 		identifiant.setPreferredSize(new Dimension(115, 25));
 		panIdentifiant.add(identifiantLabel);
@@ -81,11 +81,11 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		// La denomination
 		// Pour savoir si le client est un particulier ou une association, on regarde le champ
 		// DENOMINATIONCLIENT dans la table, s'il est vide c'est un particulier sinon c'est une assoc
-		if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idclient).equals(" ")){
+		if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient).equals(" ")){
 			JPanel panDenomination= new JPanel();
 			panDenomination.setBackground(Color.white);
 			panDenomination.setPreferredSize(new Dimension(260, 60));
-			denomination=new JTextField(SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idclient));
+			denomination=new JTextField(SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient));
 			denomination.setPreferredSize(new Dimension(90, 25));
 			panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
 			denominationLabel=new JLabel("Denomination");
@@ -97,7 +97,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			JPanel panNom = new JPanel();
 			panNom.setBackground(Color.white);
 			panNom.setPreferredSize(new Dimension(260, 60));
-			nom = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idclient));
+			nom = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient));
 			nom.setPreferredSize(new Dimension(90, 25));
 			panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
 			nomLabel = new JLabel("Nom :");
@@ -111,7 +111,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			panPrenom.setPreferredSize(new Dimension(260, 60));
 			panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
 			prenomLabel = new JLabel("Prenom : ");
-			prenom = new JTextField(SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idclient));
+			prenom = new JTextField(SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idClient));
 			prenom.setPreferredSize(new Dimension(90, 25));
 			panPrenom.add(prenomLabel);
 			panPrenom.add(prenom);
@@ -124,7 +124,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panAdresse.setPreferredSize(new Dimension(260, 90));
 		panAdresse.setBorder(BorderFactory.createTitledBorder("Adresse"));
 		adresseLabel = new JLabel("Adresse : ");
-		adresse = new TextArea(SGBD.selectStringConditionString("CLIENT", "ADRESSECLIENT", "IDCLIENT", idclient));
+		adresse = new TextArea(SGBD.selectStringConditionString("CLIENT", "ADRESSECLIENT", "IDCLIENT", idClient));
 		adresse.setBackground(Color.LIGHT_GRAY);
 		adresse.setPreferredSize(new Dimension(140, 50));
 		panAdresse.add(adresseLabel);
@@ -132,7 +132,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		content.add(panAdresse);
 		
 		//Idville
-		String idville = SGBD.selectStringConditionString("CLIENT", "IDVILLE", "IDCLIENT", idclient);
+		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE", "IDCLIENT", idClient);
 		
 		//ville
 		JPanel panVille = new JPanel();
@@ -140,7 +140,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panVille.setPreferredSize(new Dimension(260, 60));
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
 		villeLabel = new JLabel("Ville: ");
-		ville = new JTextField(SGBD.selectStringConditionString("VILLE", "NOMVILLE", "IDVILLE", idville));
+		ville = new JTextField(SGBD.selectStringConditionString("VILLE", "NOMVILLE", "IDVILLE", idVille));
 		ville.setEnabled(false);
 		ville.setPreferredSize(new Dimension(90, 25));
 		panVille.add(villeLabel);
@@ -153,7 +153,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panCP.setPreferredSize(new Dimension(260, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Code Postal : ");
-		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "IDVILLE", idville));
+		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "IDVILLE", idVille));
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
@@ -165,7 +165,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panTelephone.setPreferredSize(new Dimension(260, 60));
 		panTelephone.setBorder(BorderFactory.createTitledBorder("Telephone"));
 		telLabel = new JLabel("Telephone : ");
-		telephone = new JTextField(SGBD.selectStringConditionString("CLIENT", "TELEPHONE", "IDCLIENT", idclient));
+		telephone = new JTextField(SGBD.selectStringConditionString("CLIENT", "TELEPHONE", "IDCLIENT", idClient));
 		telephone.setPreferredSize(new Dimension(90, 25));
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);

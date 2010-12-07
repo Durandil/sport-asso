@@ -151,11 +151,11 @@ public class BDD {
 		
 		SGBD.executeUpdate("CREATE SEQUENCE S_ARTICLE Increment by 1 start with 5");
 		
-		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 3");
+		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 5");
 		
 		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE  Increment by 1 start with 3 ");
 		
-		SGBD.executeUpdate("CREATE SEQUENCE S_MESSAGE  Increment by 1 start with 3");
+		SGBD.executeUpdate("CREATE SEQUENCE S_MESSAGE  Increment by 1 start with 5");
 		
 		SGBD.executeUpdate("CREATE SEQUENCE S_COMMANDE Increment by 1 start with 1");
 		
