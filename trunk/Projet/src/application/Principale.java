@@ -29,7 +29,7 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 /** TODO : Instancier un client via l'ihm**/
 		//Initialiser la base de données
-		//BDD.init();
+		BDD.init();
 		
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 		

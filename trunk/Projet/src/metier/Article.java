@@ -182,6 +182,7 @@ public class Article {
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
+		SGBD.executeUpdate("COMMIT");
 	}
 	
 	public static void supprimerArticleBDD(String numArticle){
@@ -208,6 +209,7 @@ public class Article {
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
+		SGBD.executeUpdate("COMMIT");
 	}
 	
 }

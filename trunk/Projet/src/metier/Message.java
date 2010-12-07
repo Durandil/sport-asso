@@ -148,6 +148,7 @@ public class Message {
 		;
 
 		SGBD.executeUpdate(requete);
+		SGBD.executeUpdate("COMMIT");
 	}
 	
 	public static void supprimerAllBDD(){
