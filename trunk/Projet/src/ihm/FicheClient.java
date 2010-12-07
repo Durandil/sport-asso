@@ -40,6 +40,7 @@ public class FicheClient extends JDialog {
 	private Dimension dimensionPanneauStatistique =  new Dimension(300,40);
 	private JLabel icon;
 	private static String etatCompte="";
+	private static final String identifiantClient = "";
 	
 	public FicheClient(JFrame parent, String title, boolean modal,String identifiantClient){
 		super(parent, title, modal);
@@ -121,8 +122,9 @@ public class FicheClient extends JDialog {
 		panIdentifiant.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panIdentifiant.setBorder(BorderFactory.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
-		String id=SGBD.selectStringConditionString("CLIENT", "IDCLIENT", "IDCLIENT", idClient);
-		identifiant = new JTextField(id);
+		final String identifiantClient=SGBD.selectStringConditionString("CLIENT", "IDCLIENT", "IDCLIENT", idClient);
+		identifiant = new JTextField(identifiantClient);
+		identifiant.setEnabled(false);
 		identifiant.setPreferredSize(new Dimension(120, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
@@ -365,11 +367,15 @@ public class FicheClient extends JDialog {
 		public void actionPerformed(ActionEvent e){
 			// TODO enregistrer l'éventuelle modification par le client des données
 			if(denominationClient.equals(" ")){
-				Particulier.modifierBDDclient(etatCompte);
+				Particulier.modifierBDDclient(identifiantClient,etatCompte);
+				Particulier.modifierBDDparticulier(identifiantClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 			}
 			else{
-				Association.modifierBDDclient(etatCompte);
+				Association.modifierBDDclient(identifiantClient,etatCompte);
+				Association.modifierBDDassoc(identifiantClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 			}
+			
+			
 			setVisible(false);
 			}
 		});
