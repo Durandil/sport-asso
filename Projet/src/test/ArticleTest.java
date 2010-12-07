@@ -13,10 +13,10 @@ public class ArticleTest extends TestCase {
 		assertEquals(result, SGBD.selectStringConditionString("Article", "PrixInitial", "IDArticle", "ART00002"));
 		
 	}
-//	
+	
 	public void testModifierStockArticleBDD(){
 		Article.modifierStockArticleBDD("ART00001",12 );
-		String result="12";
+		String result="362";
 		assertEquals(result, SGBD.selectStringConditionString("Article", "Stock","IDArticle" , "ART00001"));
 	}
 }
