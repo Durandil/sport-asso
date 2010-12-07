@@ -129,7 +129,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		}
 	}
 	
-	public void updateLigne(/*String idArticle,*/ boolean pourReapprovisionnement){
+	public void updateLigne(int numeroDernierLigneTableauAvant, boolean pourReapprovisionnement){
 		
 		if(pourReapprovisionnement==true){
 			// il faudrait updater le nombre de lignes présentes avant dans le tableau
@@ -150,11 +150,17 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 				donnees[i][3] = listeEtats.get(i);
 			}
 			
-			if(listeIdentifiants.size()>0){
-				for (int i = 0; i < listeIdentifiants.size(); i++) {
-					for (int j = 0; j < this.getColumnCount(); j++) {
-						System.out.println("ligne "+i+ " colonne  " +  j +" valeur : " + this.getValueAt(i, j));
-					}
+			if(numeroDernierLigneTableauAvant>listeIdentifiants.size()){
+				
+				int difference = numeroDernierLigneTableauAvant-listeIdentifiants.size();
+				for(int j= 0 ; j< difference;j++){
+					this.fireTableRowsDeleted(j, j);
+				}
+				
+			}
+			else{
+				
+				for (int i = 0; i <= numeroDernierLigneTableauAvant; i++) {
 					this.fireTableRowsUpdated(i, i);
 				}
 			}
