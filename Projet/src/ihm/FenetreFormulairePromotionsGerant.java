@@ -56,14 +56,14 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	}
 	
 	// Constructeur pour la modification d'une promotion
-	/*public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal,Promotion promotion ){
+	public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal,String promotion ){
 		super(parent, title, modal);
 		this.setSize(300, 650);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent(promotion);
-	}*/
+	}
 	
 	private void initComponent(){
 		JPanel panneauCentralFenetre = new JPanel();
@@ -302,14 +302,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 						}
 					}
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				
-				
-				
-				
-				// puis fermer la page
 				setVisible(false);
 			}
 		});
@@ -325,6 +320,253 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panneauBasFenetre.add(boutonRetour);
 		
 		this.getContentPane().add(panneauBasFenetre,"South");
+	}
+	
+	// surchage de la méthode initComponent pour la modification d'une promotion
+	private void initComponent(String idPromo){
+		
+		String nomPromotion = SGBD.selectStringConditionString("PROMO", "NOMPROMO", "IDPROMO", idPromo);
+		ArrayList<Integer> promoAdherent = SGBD.selectListeIntOrdonneCondition("PROMO", "PROMOADHERENT", "IDPROMO ='"+idPromo+"'", "IDPROMO");
+		String promoPopulation = "Promotion pour tous les clients";
+		if(promoAdherent.get(0)==1){
+			promoPopulation="Promotion pour les adhérents";
+		}
+		
+		JPanel panneauCentralFenetre = new JPanel();
+		panneauCentralFenetre.setLayout(new GridLayout(6, 1,5,5));
+		
+		JPanel panDescriptionPromotion = new JPanel();
+		JPanel panPopulation = new JPanel();
+		JPanel panDateDebut = new JPanel();
+		JPanel panDateFin = new JPanel();
+		JPanel panArticle =  new JPanel();
+		JPanel panPourcentPromo =  new JPanel();
+		
+		panDateDebut.setPreferredSize(dimensionStandard);
+		panDescriptionPromotion.setPreferredSize(dimensionStandard);
+		panPopulation.setPreferredSize(dimensionStandard);
+		panDateFin.setPreferredSize(dimensionStandard);
+		panArticle.setPreferredSize(dimensionStandard);
+		panPourcentPromo.setPreferredSize(dimensionStandard);
+		
+		panDateDebut.setBorder(BorderFactory.createTitledBorder("Date début Promotion"));
+		panDescriptionPromotion.setBorder(BorderFactory.createEmptyBorder());
+		panPopulation.setBorder(BorderFactory.createEmptyBorder());
+		panDateFin.setBorder(BorderFactory.createTitledBorder("Date Fin Promotion"));
+		panArticle.setBorder(BorderFactory.createEmptyBorder());
+		panPourcentPromo.setBorder(BorderFactory.createEmptyBorder());
+		
+		descriptionLabel = new JLabel("Description de la promotion : ");
+		populationLabel = new JLabel(" Promotion adhérent ? ");
+		articleLabel = new JLabel("Article concerné : ");
+		pourcentLabel= new JLabel("Pourcentage de promotion :");
+		
+		pourcentPromo = new JFormattedTextField(NumberFormat.getNumberInstance());
+		description = new JTextField();
+		
+		pourcentPromo.setPreferredSize(new Dimension(90,20));
+		description.setPreferredSize(new Dimension(90,20));
+		
+		populationBox = new JComboBox();
+		populationBox.addItem("Promotion pour les adhérents");
+		populationBox.addItem("Promotion pour tous les clients");
+		populationBox.setSelectedItem(promoPopulation);
+		
+		populationBox.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				populationPromo = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		articleBox = new JComboBox();
+		//récupération liste tous les articles
+		ArrayList<String> listeArticles = new ArrayList<String>();
+		listeArticles = SGBD.selectListeString("ARTICLE", "IDARTICLE");
+		
+		for (String article : listeArticles) {
+			articleBox.addItem(article);
+		}
+		articleBox.setSelectedIndex(0);
+		
+		articleBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				articleSelectionne =(String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		cbjourDebut = new JComboBox();
+		cbjourFin = new JComboBox();
+		
+		for(int i=1 ; i<32;i++){
+			String chaine="";
+			if(i<10){
+				chaine="0";
+			}
+			cbjourDebut.addItem(chaine+i);
+			cbjourFin.addItem(chaine+i);
+		}
+
+		cbmoisDebut = new JComboBox();
+		cbmoisFin = new JComboBox();
+		
+		for(int j=1 ; j<13;j++){
+			String chaine="";
+			if(j<10){
+				chaine="0";
+			}
+			cbmoisDebut.addItem(chaine+j);
+			cbmoisFin.addItem(chaine+j);
+		}
+
+		
+		cbanneeDebut = new JComboBox();
+		cbanneeFin = new JComboBox();
+		
+		for(int k=2010 ; k<2040;k++){
+			cbanneeDebut.addItem(k+"");
+			cbanneeFin.addItem(k+"");
+		}
+
+		
+		cbanneeDebut.setVisible(true);
+		cbanneeFin.setVisible(true);
+		cbmoisFin.setVisible(true);
+		cbmoisDebut.setVisible(true);
+		cbjourFin.setVisible(true);
+		cbjourDebut.setVisible(true);
+		
+		cbanneeDebut.setPreferredSize(new Dimension(5, 7));
+		cbanneeFin.setPreferredSize(new Dimension(5, 7));
+		cbmoisFin.setPreferredSize(new Dimension(5, 5));
+		cbmoisDebut.setPreferredSize(new Dimension(5, 5));
+		cbjourFin.setPreferredSize(new Dimension(5, 5));
+		cbjourDebut.setPreferredSize(new Dimension(5, 5));
+		
+		cbjourDebut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jourDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		cbjourFin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jourFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbmoisDebut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				moisDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbmoisFin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				moisFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbanneeDebut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anneeDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+
+		cbanneeFin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anneeFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		
+		panDateDebut.setLayout(new GridLayout(1,4,5,5));
+		panDateFin.setLayout(new GridLayout(1,4,5,5));
+		
+		panDescriptionPromotion.add(descriptionLabel);
+		panPopulation.add(populationLabel);
+		panArticle.add(articleLabel);
+		panPourcentPromo.add(pourcentLabel);
+		
+		
+		panDescriptionPromotion.add(description);
+		panPopulation.add(populationBox);
+		panArticle.add(articleBox);
+		panPourcentPromo.add(pourcentPromo);
+		
+		panDateDebut.add(cbjourDebut);
+		panDateDebut.add(cbmoisDebut);
+		panDateDebut.add(cbanneeDebut);
+		
+		panDateFin.add(cbjourFin);
+		panDateFin.add(cbmoisFin);
+		panDateFin.add(cbanneeFin);
+		
+		panneauCentralFenetre.add(panDescriptionPromotion);
+		panneauCentralFenetre.add(panPopulation);
+		panneauCentralFenetre.add(panPourcentPromo);
+		panneauCentralFenetre.add(panArticle);
+		panneauCentralFenetre.add(panDateDebut);
+		panneauCentralFenetre.add(panDateFin);
+		
+		this.getContentPane().add(panneauCentralFenetre,"Center");
+		
+		JPanel panneauBasFenetre = new JPanel();
+		
+		JButton boutonConfirmation = new JButton("Confirmer Modification");
+		JButton boutonRetour = new JButton("Retour à la page précédente");
+		
+		boutonConfirmation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//TODO Enregistrer la modification d'une promotion
+				
+				try {
+					boolean dateDebutPossible = Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
+					boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+					boolean comparaisonDeuxDates;
+					
+					System.out.println("dateDebutPossible :  "+ dateDebutPossible);
+					System.out.println("dateFinPossible : "+ dateFinPossible);
+					
+					if(dateDebutPossible==true & dateFinPossible==true){
+						comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
+						System.out.println("DateDebut est avant DateFin : "+comparaisonDeuxDates);
+						
+						if(comparaisonDeuxDates==true){
+							String dateDeb = jourDebutSelectionne+moisDebutSelectionne+anneeDebutSelectionne;
+							Date dateDebut= SGBD.stringToDate(dateDeb,"ddMMyyyy");
+							
+							String dateEnd = jourFinSelectionne+moisFinSelectionne+anneeFinSelectionne;
+							Date dateFin= SGBD.stringToDate(dateEnd,"ddMMyyyy");
+
+							boolean promoAdherent=true;
+							
+							if(populationPromo.equals("Promotion pour tous les clients")){
+								promoAdherent=false;	
+							}	
+							// TODO ICI METHODE DE MODIFICATION D'UNE PROMOTION
+						}
+					}
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+
+				setVisible(false); // fermeture de la page
+			}
+		});
+		
+		boutonRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		
+		panneauBasFenetre.add(boutonConfirmation);
+		panneauBasFenetre.add(boutonRetour);
+		
+		this.getContentPane().add(panneauBasFenetre,"South");
+	
 	}
 	
 }
