@@ -34,7 +34,7 @@ public class Particulier extends Client {
 		System.out.println("Votre mot de passe est : " + this.motDePasse);
 	}
 
-	@Override
+	
 	// Méthode toString qui est (pour l'instant) inutile
 	public String toString() {
 		String fidele = null;

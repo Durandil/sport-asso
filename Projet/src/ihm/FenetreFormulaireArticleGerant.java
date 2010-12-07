@@ -189,7 +189,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 				String cat = SGBD.selectStringConditionString("CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE", itemPrixSelectionne);
 				
 				
-				Article art = new Article(null,description.getText(),typ,Float.parseFloat(p),Double.parseDouble(prx),Integer.parseInt(st),"En stock",cat);
+				Article art = new Article(null,description.getText(),Double.parseDouble(prx),Integer.parseInt(st),Float.parseFloat(p),typ, cat,"En stock");
 				
 				// puis fermer la page
 				setVisible(false);
@@ -336,7 +336,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// enregistrer la modification d'article 
-				Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText());
+				Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText(),itemPrixSelectionne,itemSportSelectionne);
 				
 				// puis fermer la page
 				setVisible(false);
