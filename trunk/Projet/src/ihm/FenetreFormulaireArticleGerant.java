@@ -217,6 +217,14 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		String poidsA = SGBD.selectStringConditionString("ARTICLE", "POIDS", "IDARTICLE", idArticle);
 		String prixA = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL", "IDARTICLE", idArticle);
 		String stockA = SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
+		String idcategorieA = SGBD.selectStringConditionString("ARTICLE", "IDCATEGORIE", "IDARTICLE", idArticle);
+		String idtypeSportA = SGBD.selectStringConditionString("ARTICLE", "IDTYPE", "IDARTICLE", idArticle);
+		
+		System.out.println(idcategorieA);
+		System.out.println(idtypeSportA);
+		
+		String nomCategorieA = SGBD.selectStringConditionString("CATEGORIE", "NOMCATEGORIE", "IDCATEGORIE", idcategorieA);
+		String nomtypeSportA = SGBD.selectStringConditionString("TYPE_SPORT", "NOMTYPE", "IDTYPE", idtypeSportA);
 		
 		JPanel panneauCentral = new JPanel();
 		
@@ -224,21 +232,29 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		JPanel panPoids = new JPanel();
 		JPanel panStock = new JPanel();
 		JPanel panPrixInitial = new JPanel();
+		JPanel panCategoriePrix = new JPanel();
+		JPanel panCategorieSport = new JPanel();
 		
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panStock.setPreferredSize(dimensionStandard);
 		panPrixInitial.setPreferredSize(dimensionStandard);
+		panCategoriePrix.setPreferredSize(dimensionStandard);
+		panCategorieSport.setPreferredSize(dimensionStandard);
 		
 		panDescription.setBorder(BorderFactory.createEmptyBorder());
 		panPoids.setBorder(BorderFactory.createEmptyBorder());
 		panStock.setBorder(BorderFactory.createEmptyBorder());
 		panPrixInitial.setBorder(BorderFactory.createEmptyBorder());
+		panCategoriePrix.setBorder(BorderFactory.createEmptyBorder());
+		panCategorieSport.setBorder(BorderFactory.createEmptyBorder());
 		
 		descriptionLabel = new JLabel("Description : ");
 		poidsLabel = new JLabel("Poids : ");
 		prixLabel = new JLabel("Prix Initial : ");
 		stockLabel = new JLabel("Stock : ");
+		catPrixLabel = new JLabel("Catégorie de Prix : ");
+		catSportLabel = new JLabel("Catégorie de sport : ");
 		
 		description = new JTextField(descriptionA);
 		poids = new JTextField(poidsA);
@@ -250,20 +266,63 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		prix.setPreferredSize(new Dimension(100,20));
 		stock.setPreferredSize(new Dimension(100,20));
 		
+		catPrixBox = new JComboBox();
+		catSportBox = new JComboBox();
+		
+		ArrayList<String> listeTypeSport = new ArrayList<String>();
+		listeTypeSport= SGBD.selectListeString("TYPE_SPORT", "NOMTYPE");
+		if(listeTypeSport.size()>0){
+			for (int i = 0; i < listeTypeSport.size(); i++) {
+			catSportBox.addItem(listeTypeSport.get(i));
+			}
+			catSportBox.setSelectedItem(nomtypeSportA);
+		}
+		
+		ArrayList<String> listeCategoriePrix = new ArrayList<String>();
+		listeCategoriePrix= SGBD.selectListeString("CATEGORIE", "NOMCATEGORIE");
+		 if(listeCategoriePrix.size()>0){ 
+			 for (int i = 0; i < listeCategoriePrix.size(); i++) {
+				 catPrixBox.addItem(listeCategoriePrix.get(i));
+			 }
+			catPrixBox.setSelectedItem(nomCategorieA);
+
+		 }
+		
+		catPrixBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				itemPrixSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		catSportBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				itemSportSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		
 		panDescription.add(descriptionLabel);
 		panPoids.add(poidsLabel);
 		panStock.add(stockLabel);
 		panPrixInitial.add(prixLabel);
+		panCategoriePrix.add(catPrixLabel);
+		panCategorieSport.add(catSportLabel);
 		
 		panDescription.add(description);
 		panPoids.add(poids);
 		panStock.add(stock);
 		panPrixInitial.add(prix);
+		panCategoriePrix.add(catPrixBox);
+		panCategorieSport.add(catSportBox);
 		
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panStock);
 		panneauCentral.add(panPrixInitial);
+		panneauCentral.add(panCategoriePrix);
+		panneauCentral.add(panCategorieSport);
 		
 		this.getContentPane().add(panneauCentral,"Center");
 		
