@@ -129,6 +129,40 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		}
 	}
 	
+	public void updateLigne(/*String idArticle,*/ boolean pourReapprovisionnement){
+		
+		if(pourReapprovisionnement==true){
+			// il faudrait updater le nombre de lignes présentes avant dans le tableau
+			// puis deeleter le nombre de lignes ( si en trop par rapport ancien tableau)
+
+			
+			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
+			listeArticles = SGBD.selectArticlesReapprovisionnement();
+			ArrayList<String >listeIdentifiants = listeArticles.get(0);
+			ArrayList<String >listeDescriptions = listeArticles.get(1);
+			ArrayList<String >listeStocks = listeArticles.get(2);
+			ArrayList<String >listeEtats = listeArticles.get(3);
+			
+			for(int i=0;i< listeIdentifiants.size();i++){
+				donnees[i][0] = listeIdentifiants.get(i);
+				donnees[i][1] = listeDescriptions.get(i);
+				donnees[i][2] = listeStocks.get(i);
+				donnees[i][3] = listeEtats.get(i);
+			}
+			
+			if(listeIdentifiants.size()>0){
+				for (int i = 0; i < listeIdentifiants.size(); i++) {
+					for (int j = 0; j < this.getColumnCount(); j++) {
+						System.out.println("ligne "+i+ " colonne  " +  j +" valeur : " + this.getValueAt(i, j));
+					}
+					this.fireTableRowsUpdated(i, i);
+				}
+			}
+
+		}
+		
+	}
+	
 	
 	public int getColumnCount() {
 		// TODO Auto-generated method stub
