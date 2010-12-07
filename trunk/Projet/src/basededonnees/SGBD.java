@@ -25,11 +25,13 @@ public class SGBD {
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
 	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
-	//Penser à modifier les id/mdp
+	/**  TODO TODO TODO TODO TODO TODO TODO   **/
+	/** TODO : Penser à modifier les id/mdp ! **/
+	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 	private static String compteurViewStatistiqueArticle;
 	
@@ -57,6 +59,7 @@ public class SGBD {
 	public static boolean fermer() {
 		boolean result = true;
 		try {
+			
 			c.close();
 			System.out.println("Déconnexion à la base");
 		} catch (SQLException e) {
@@ -81,7 +84,8 @@ public class SGBD {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {		
+		} finally {
+			
 			fermer();
 
 		}
@@ -101,6 +105,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -327,6 +333,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -360,6 +368,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -393,6 +403,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -424,6 +436,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -457,6 +471,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -490,6 +506,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -523,6 +541,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -542,7 +562,7 @@ public class SGBD {
 		
 			st = c.createStatement();
 			
-			res = st.executeQuery("SELECT "+var+" FROM "+table+" WHERE "+cond +" ORDER BY "+ champOrdre+" ASC");
+			res = st.executeQuery("SELECT "+var+" FROM "+table+" WHERE "+cond +" AND "+ var + " IS NOT NULL ORDER BY "+ champOrdre+" ASC");
 
 			while (res.next()) {
 
@@ -556,6 +576,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -604,6 +626,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -642,6 +666,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -718,6 +744,8 @@ public class SGBD {
 					+ e.getMessage());
 		}
 		finally{
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 		}
 		return rs;
@@ -750,6 +778,8 @@ public class SGBD {
 					+ e.getMessage());
 		}
 		finally{
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 		}
 		
@@ -803,6 +833,8 @@ public class SGBD {
 					+ e.getMessage());
 
 		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			fermer();
 		}
 		
@@ -849,7 +881,8 @@ public class SGBD {
 					+ e.getMessage());
 			}
 		finally{
-			
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		
@@ -910,6 +943,8 @@ public class SGBD {
 					+ e.getMessage());
 		}
 		finally{
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		
@@ -934,6 +969,8 @@ public class SGBD {
 					+ e.getMessage());
 		}
 		finally{
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		return resultat;
@@ -1064,6 +1101,8 @@ public class SGBD {
 					+ e.getMessage());
 		}
 		finally{
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		

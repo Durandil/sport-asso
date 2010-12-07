@@ -42,7 +42,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 
 		}
 		else{
-			//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+			//Quatre listes sont créées pour récupérer les informations de la table MESSAGES
 			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
 			ArrayList<String> listeContenus = SGBD.selectListeStringOrdonneCondition("MESSAGE", "CONTENUMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
 			ArrayList<String> listeExpediteur = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDCLIENT", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
@@ -54,11 +54,15 @@ public class ModeleMessagerie extends AbstractTableModel {
 			
 			//On ajoute les informations dans l'objet donnees
 			for(int i=0;i<listeExpediteur.size();i++){
+				
+				if(listeExpediteur.get(i).equals(FenetreDialogIdentification.clientUserIdentifiant))
+				{	
 				donnees[i][0] = listeIdentifiants.get(i);
 				donnees[i][1] = listeExpediteur.get(i);
 				donnees[i][2] = listeSujet.get(i);
 				donnees[i][3] = listeContenus.get(i);
 				donnees[i][4] = listeDate.get(i);
+				}
 			}
 		}
 		
