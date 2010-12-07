@@ -148,18 +148,31 @@ public class Commande {
 		
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_COMMANDE.NEXTVAL");
 		
-		String numCommande = "ID"+Integer.parseInt(idNonFini.get(0));
+		
+		String numCommande = "";
+		int numeroCommande = 0;
+
+		numeroCommande = Integer.parseInt(idNonFini.get(0));
+
+		if (numeroCommande < 10) {
+			numCommande = "COM0000" + numeroCommande;
+		}
+		if (numeroCommande < 100 && numeroCommande >= 10) {
+			numCommande = "COM000" + numeroCommande;
+		}
+		if (numeroCommande < 1000 && numeroCommande >= 100) {
+			numCommande = "COM00" + numeroCommande;
+		}
+		if (numeroCommande < 10000 && numeroCommande >= 1000) {
+			numCommande = "COM0" + numeroCommande;
+		}
+		if (numeroCommande < 100000 && numeroCommande >= 10000) {
+			numCommande = "COM" + numeroCommande;
+		}
 		this.setIdCommande(numCommande);
-		
 		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE, IDCLIENT) VALUES ( "
-				+ "'"
-				+ numCommande
-				+ "',"
-				+ s
-				+ " , '"
-				+ this.idClient
-				+ "')";
-		
+				+ "'" + numCommande + "'," + s + " , '" + this.idClient + "')";
+
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);

@@ -100,10 +100,10 @@ Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Teleph
 Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('testa', 'Asso test', 'Adresse ici','ville034', '0203040506', 'Activé', '1234');
 
 #Commande
-Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0001','3 Juin 2010','arthur.laroch@gmail.com');
-Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0002','5 Avril 2010','lcg@free.fr');
-Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0003','11 Septembre 2009','cebdf@belfort.fr');
-Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0004','8 Mai 2010','iueihtam@laposte.fr');
+Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00001','3 Juin 2010','arthur.laroch@gmail.com');
+Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00002','5 Avril 2010','lcg@free.fr');
+Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00003','11 Septembre 2009','cebdf@belfort.fr');
+Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00004','8 Mai 2010','iueihtam@laposte.fr');
 
 #Article
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00001', 'Maillot de foot de Sochaux', 350, 0.5, 70, 'CAT00002', 'TYP00001','En stock');

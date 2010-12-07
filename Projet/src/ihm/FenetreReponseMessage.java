@@ -91,7 +91,7 @@ public class FenetreReponseMessage extends JFrame {
 				
 				@SuppressWarnings("deprecation")
 				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-				Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,!reponseGerant);
+				Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreLectureMessage.idExpediteurMessage,dateJour,!reponseGerant);
 				setVisible(false);
 			}			
 		});

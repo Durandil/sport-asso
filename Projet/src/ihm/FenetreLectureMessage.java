@@ -28,6 +28,7 @@ public class FenetreLectureMessage extends JDialog{
 	private JTextField expediteurMessage,dateMessage,sujetMessage;
 	private JTextArea contenuMessage;
 	private JLabel expediteurLabel,dateLabel,sujetLabel,contenuLabel;
+	public static String idExpediteurMessage ="";
 
 	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM,String ident, boolean lectureMessageGerant ){
 		super(parent, title, modal);
@@ -38,11 +39,13 @@ public class FenetreLectureMessage extends JDialog{
 		this.initComponent(exp,sujetM,contenuM,dateM,ident,lectureMessageGerant);
 	}
 	
+	
+	
 	private void initComponent(String expediteur,String sujet,String contenu,String date,String identifiant,boolean reponseDuGerant){
 		
 		final String numMessage=identifiant;
 		final boolean reponseGerant = reponseDuGerant;
-		
+		idExpediteurMessage = expediteur;
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
 		expediteurMessage=new JTextField(expediteur);
