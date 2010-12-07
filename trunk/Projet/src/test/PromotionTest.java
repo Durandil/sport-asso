@@ -5,26 +5,29 @@ import junit.framework.TestCase;
 
 public class PromotionTest extends TestCase {
 	
-//	public void testVerifierDatePromotion(){
+	// test ok
+	
+//	public void testVerifierDatePromotion() throws Exception{
 //		boolean b=true;
 //		assertEquals(b, Promotion.verifierDatePromotion("2015", "12", "24"));
 //		boolean bo=false;
-//		assertEquals(bo, Promotion.verifierDatePromotion("2010", "15", "09"));
 //		assertEquals(bo, Promotion.verifierDatePromotion("2011", "02", "30"));
 //		assertEquals(bo, Promotion.verifierDatePromotion("2014", "4", "31"));
 //		
 //	}
 
-//	public void testVerifierOrdreDeuxDate(){
+//	public void testVerifierOrdreDeuxDate() throws Exception{
 //		boolean b=true;
-//		assertEquals(b, Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "5"));
+//		assertEquals(b, Promotion.verifierOrdreDeuxDate("2010", "12", "03", "2010", "12", "05"));
 //		
 //	}
-//	public void testVerifierOrdreDeuxDate2(){
-//		boolean b=true;
-//		boolean bo=false;
-//		System.out.println(Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "3"));
-//		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "12", "3", "2010", "12", "3"));
-//		
-//	}
+	public void testVerifierOrdreDeuxDate2() throws Exception{
+		boolean b=true;
+		boolean bo=false;
+		assertEquals(b, Promotion.verifierOrdreDeuxDate("2010", "12", "03", "2010", "12", "03"));
+		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "08", "27", "2010", "08", "25"));
+		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "08", "27", "2010", "08", "25"));
+		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "08", "27", "2010", "08", "25"));
+		assertEquals(bo, Promotion.verifierOrdreDeuxDate("2010", "08", "27", "2010", "08", "25"));
+	}
 }
