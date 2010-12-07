@@ -200,8 +200,9 @@ public class Article {
 		
 		// POUR CEUX QUI ONT ORACLE CHEZ EUX, il faut enlever le point de virgule en fin de requete
 		String stockPresentBase = SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", numArticle) ;
+		System.out.println(stockPresentBase);
 		int nouveauStock = stock + Integer.parseInt(stockPresentBase);
-		
+		System.out.println(nouveauStock);
 		String requete="UPDATE ARTICLE SET STOCK = '" + nouveauStock + "',ETATARTICLE='En stock' WHERE IDARTICLE='"+numArticle +"'";
 		
 		System.out.println(requete);
