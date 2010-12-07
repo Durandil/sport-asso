@@ -231,26 +231,20 @@ public class Commande {
 		return "Commande [idClient=" + idClient + ", date=" + sqlDate + "]";
 	}
 	
+	// calcul du montant d'un article pour un client donne
 	public double MontantCommandePourUnArticle(String idClient, LigneCommande ligne) throws SQLException{
+		String pourcentagePromoExc="0";
+		String pourcentagePromoDegressif="0";
+		double montantArticle = 0 ;
+		ResultSet res = null ;
+		ResultSet res2 = null ;
 		
-		// recuperer prix initial
+		// recuperation prix initial et quantite commandee
 		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = Integer.parseInt(ligne.getQuantite());
 		
-		
-		//  recuperation pourcentage degressif
-		ResultSet res = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1"+
-						" where a.idArticle=l.idArticle"+
-						" and r.idCategorie=c.idCategorie"+
-						" and r.idQuantite=q.idQuantite"+
-						" and c.idCategorie=a.idCategorie"+
-						" and (l.quantiteCommande-q.quantite)>=0"+
-						" order by (l.quantiteCommande-q.quantite)");
-		
-		String pourcentagePromoDegressif = res.getObject(1).toString();
-		
-		// recuperer booleen fidelite
+		// recuperation booleen fidelite		
 		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(idClient);
 		String fidele = fideliteClient.get(0);
 		int estFidele=0;
@@ -258,25 +252,47 @@ public class Commande {
 			estFidele=1;
 		}
 		
-		if(estFidele==0){
-			ResultSet res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
-					" where p.idpromo = lpa.idPromo and lpa.idarticle='"+ ligne.getArticle()+"' and promoFidelite=0"+
-					" order by pourcentagepromo desc");
-		}
-		else{
-			ResultSet res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
-						" where p.idpromo = lpa.idPromo and lpa.idarticle= condition"+
+		try{
+			//  recuperation pourcentage degressif
+			res = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1"+
+							" where a.idArticle=l.idArticle"+
+							" and r.idCategorie=c.idCategorie"+
+							" and r.idQuantite=q.idQuantite"+
+							" and c.idCategorie=a.idCategorie"+
+							" and (l.quantiteCommande-q.quantite)>=0"+
+							" order by (l.quantiteCommande-q.quantite)");
+			
+			pourcentagePromoDegressif = res.getObject(1).toString();
+			
+			
+			// recuperation pourcentage promotion exceptionnelle
+			if(estFidele==0){
+				res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
+						" where p.idpromo = lpa.idPromo and lpa.idarticle='"+ ligne.getArticle()+"' and promoFidelite=0"+
 						" order by pourcentagepromo desc");
+			}
+			else{
+				res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
+							" where p.idpromo = lpa.idPromo and lpa.idarticle= condition"+
+							" order by pourcentagepromo desc");
+			}
+			
+			pourcentagePromoExc = res2.getObject(1).toString();
 		}
-		// recuperation pourcentage promotion exceptionnelle
-		String pourcentagePromoExc = res.getObject(1).toString();
-		
-		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
-		if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
-			promoAppliquee = Double.parseDouble(pourcentagePromoExc);
+		catch(SQLException e){
+			
+			e.printStackTrace();
+			
 		}
+		finally{
+			
+			double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
+			if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
+				promoAppliquee = Double.parseDouble(pourcentagePromoExc);
+			}
 		
-		double montantArticle = quantiteCommandee*prixInitial*(1-promoAppliquee);
+			montantArticle = quantiteCommandee*prixInitial*(1-promoAppliquee);
+		}
 		
 		return montantArticle;
 	}
