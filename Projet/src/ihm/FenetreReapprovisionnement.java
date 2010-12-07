@@ -102,7 +102,7 @@ public class FenetreReapprovisionnement extends JFrame {
 				// TODO Auto-generated method stub
 				if(doitReactualiserTableau==true){
 					// TODO méthode pour reactualiser le tableau
-					modele.updateLigne(true);
+					modele.updateLigne(modele.getRowCount(),true);
 					// change la valeur du booleen doitReactualiserTableau car la reactualisation
 					// a été effectuée
 					doitReactualiserTableau=false;
