@@ -46,8 +46,8 @@ Insert into TYPE_SPORT (idType, NomType) values ('TYP00009','Arts Martiaux');
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
 
 #Client
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001','Rennes', '35000', '0606060606', 'Activé', 'L3R6T4X8');
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Nomville, Codepostal, Telephone, Etatcompte, Motdepasse) values ('jean.dupont@laposte.net', 'Dupont', 'Jean', '2 rue du Nord', 'ville002', 'Bruz','35170', '0645454545', 'Activé', 'I7H8M9XX');
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001', '0606060606', 'Activé', 'L3R6T4X8');
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('jean.dupont@laposte.net', 'Dupont', 'Jean', '2 rue du Nord', 'ville002', '0645454545', 'Activé', 'I7H8M9XX');
 
 
 #Promo

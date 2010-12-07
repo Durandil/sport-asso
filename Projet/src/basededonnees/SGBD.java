@@ -30,8 +30,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
+	private static final String ID = "id3198";
+	private static final String MDP = "id3198";
 
 	private static String compteurViewStatistiqueArticle;
 	
@@ -751,7 +751,7 @@ public class SGBD {
 		return rs;
 	}
 	
-	// TODO cette requete a-t-elle vraiment un intérêt?
+	// TODO 
 	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
 	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
 		connecter();
