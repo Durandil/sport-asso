@@ -213,6 +213,8 @@ public class FicheClient extends JDialog {
 		panAdresse.setBounds(40,335,220,60);
 		this.add(panAdresse);
 		
+		//Idville
+		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE", "IDCLIENT", idClient);
 
 		//ville
 		JPanel panVille = new JPanel();
@@ -220,7 +222,7 @@ public class FicheClient extends JDialog {
 		panVille.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
 		villeLabel = new JLabel("Ville: ");
-		ville = new JTextField(SGBD.selectStringConditionString("CLIENT", "NOMVILLE", "IDCLIENT", idClient));
+		ville = new JTextField(SGBD.selectStringConditionString("VILLE", "NOMVILLE", "IDVILLE", idVille));
 		ville.setPreferredSize(new Dimension(90, 25));
 		ville.setEnabled(false);
 		panVille.add(villeLabel);
@@ -235,7 +237,7 @@ public class FicheClient extends JDialog {
 		panCP.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Code Postal : ");
-		codePostal = new JTextField(SGBD.selectStringConditionString("CLIENT", "CODEPOSTAL", "IDCLIENT", idClient));
+		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "IDVILLE", idVille));
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
