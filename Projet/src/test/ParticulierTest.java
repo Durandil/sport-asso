@@ -10,7 +10,7 @@ import junit.framework.TestCase;
 public class ParticulierTest extends TestCase {
 	
 	public void testModifierBDDparticulier(){
-		Particulier.modifierBDDparticulier("jean.dupont@laposte.net", "Dupont", "Jean", "10 rue du Sud", "Bruz", "ville002", "35170", "0645454545");
+		Particulier.modifierBDDparticulier("jean.dupont@laposte.net", "Dupont", "Jean", "10 rue du Sud","35170", "0645454545");
 		ArrayList<String> result=new ArrayList<String>();
 		result.add("4 rue de la Breiz");
 		result.add("10 rue du Sud");
