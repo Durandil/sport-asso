@@ -1,5 +1,7 @@
 package test;
 
+import java.util.ArrayList;
+
 import basededonnees.SGBD;
 import metier.Article;
 import junit.framework.TestCase;
@@ -19,5 +21,14 @@ public class ArticleTest extends TestCase {
 		String result="362";
 		assertEquals(result, SGBD.selectStringConditionString("Article", "Stock","IDArticle" , "ART00001"));
 	}
+	
+	public void testSupprimerArticleBDD(){
+		Article.supprimerArticleBDD("ART00003");
+		ArrayList<String> result = new ArrayList<String>();
+		result.add("ART00001");
+		result.add("ART00002");
+		assertEquals(result, SGBD.selectListeString("ARTICLE","IDARTICLE"));
+	}
+	
 }
 
