@@ -170,7 +170,6 @@ public class Article {
 		
 		System.out.println("Article");
 		
-		// POUR CEUX QUI ONT ORACLE CHEZ EUX, il faut enlever le point de virgule en fin de requete
 		
 		String requete=" UPDATE ARTICLE" 
 					   +" SET DESCRIPTION = '" + description +"'," +
@@ -200,8 +199,10 @@ public class Article {
 	public static void modifierStockArticleBDD(String numArticle,int stock){
 		
 		// POUR CEUX QUI ONT ORACLE CHEZ EUX, il faut enlever le point de virgule en fin de requete
+		String stockPresentBase = SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", numArticle) ;
+		int nouveauStock = stock + Integer.parseInt(stockPresentBase);
 		
-		String requete="UPDATE ARTICLE SET STOCK = '" + stock + "',ETATARTICLE='En stock' WHERE IDARTICLE='"+numArticle +"'";
+		String requete="UPDATE ARTICLE SET STOCK = '" + nouveauStock + "',ETATARTICLE='En stock' WHERE IDARTICLE='"+numArticle +"'";
 		
 		System.out.println(requete);
 		
