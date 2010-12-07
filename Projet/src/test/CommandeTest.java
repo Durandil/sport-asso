@@ -67,12 +67,48 @@ public class CommandeTest extends TestCase {
 //	}
 	
 	// TODO 
-//	public void testAjouterArticlePanier(){
-//		
-//	}
+	public void testAjouterArticlePanier(){
+		ArrayList<String[]> panier = new ArrayList<String[]>();
+		String[] listeString = new String[2];
+		String[] listeString2 = new String[2];
+		listeString[0]="ART00001";
+		listeString[1]="20";
+		listeString2[0]="ART00003";
+		listeString2[1]="12";
+		panier.add(listeString);
+		panier.add(listeString2);
+//		Commande.ajouterArticlePanier("ART00001","1" , panier);
+//		assertEquals("21",panier.get(0)[1]);
+//      normalement ne peut pas marcher car il n'y a pas assez d'article en stock		
+		Commande.ajouterArticlePanier("ART00003", "12", panier);
+		assertEquals("24",panier.get(1)[1]);
+	}
 	
 	//TODO
 //	public void testEnleverArticlePanier(){
+//		ArrayList<String[]> panier = new ArrayList<String[]>();
+//		String[] listeString = new String[2];
+//		String[] listeString2 = new String[2];
+//		listeString[0]="ART00001";
+//		listeString[1]="20";
+//		listeString2[0]="ART00003";
+//		listeString2[1]="12";
+//		panier.add(listeString);
+//		panier.add(listeString2);
+//		Commande.enleverArticlePanier("ART00001", "4", panier);
+//		ArrayList<String[]> result = new ArrayList<String[]>();
+//		String[] listeString3 = new String[2];
+//		String[] listeString4 = new String[2];
+//		listeString[0]="ART00001";
+//		listeString[1]="16";
+//		listeString2[0]="ART00003";
+//		listeString2[1]="12";
+//		result.add(listeString3);
+//		result.add(listeString4);
+//		assertEquals(result.get(0)[1],panier.get(0)[1]);
 //		
+//		normalement on ne peut pas enlever plus d'article qu'il n'y a dans le panier
+//		Commande.enleverArticlePanier("ART00003", "15", panier);
+//		assertEquals("12",panier.get(1)[1]);
 //	}
 }
