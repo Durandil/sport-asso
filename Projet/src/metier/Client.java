@@ -73,10 +73,10 @@ public abstract class Client extends Utilisateur{
 		this.motDePasse = motDePasse;
 	}
 
-	public static void modifierBDDclient(String etatCompte) {
+	public static void modifierBDDclient(String idClient,String etatCompte) {
 
 		String requete = " UPDATE CLIENT SET ETATCOMPTE='" + etatCompte
-				+ "'";
+				+ "' WHERE IDCLIENT = '" + idClient+ "'" ;
 
 		System.out.println(requete);
 

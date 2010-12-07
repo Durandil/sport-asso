@@ -763,8 +763,8 @@ public class SGBD {
 			st=c.createStatement();
 			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
 								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
-								"ETATCOMPTE FROM CLIENT " +
-								"WHERE IDCLIENT='"+ mailIdentifiant+"';");
+								"ETATCOMPTE FROM CLIENT VILLE" +
+								"WHERE IDCLIENT='"+ mailIdentifiant+"'" + "AND CLIENT.IDVILLE = VILLE.IDVILLE;");
 			
 			ResultSetMetaData rsmd = res.getMetaData();
 			
@@ -896,8 +896,8 @@ public class SGBD {
 		SGBD.connecter();
 		Statement st = null ;
 		ResultSet res= null;
-		String fidele = null;
-		String nbpoints = null;
+		String fidele = "Non";
+		String nbpoints = "0";
 		ArrayList <String> resultat = new ArrayList<String>();
 		
 		try{
@@ -912,7 +912,6 @@ public class SGBD {
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
 								" WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-			
 
 			while (res.next()) {
 			
@@ -925,12 +924,7 @@ public class SGBD {
 				}
 		//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
 		//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
-				else
-				{
-					fidele = "Non";
-					nbpoints = "0";
-				}
-
+		
 			}
 			
 			resultat.add(fidele);
@@ -943,7 +937,8 @@ public class SGBD {
 					+ e.getMessage());
 		}
 		finally{
-			System.out.println("Tentative de sauvegarde");
+			
+			System.out.println("Sauvegarde");
 			SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}

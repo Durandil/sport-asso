@@ -66,12 +66,15 @@ public class FenetreFideliteClient extends JDialog {
 		ArrayList<String> fideliteClient= new ArrayList<String>();
 		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 		String estFidele=fideliteClient.get(0);
-		
-		if(estFidele.equals("false")){
+		int nbPoints;
+		if(estFidele.equals("Non")){
+			nbPoints = 0;
 			FenetreDialogCreationCompte.itemFidelite="Non";
 		}
 		else{
 			FenetreDialogCreationCompte.itemFidelite="Oui";
+			nbPoints = Integer.parseInt(SGBD.selectStringConditionString("CARTE_FIDELITE", "NBPOINTS", "IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant)) ; // récupération du nombre de points du client entré en paramètre de initComponent()	
+			
 		}
 		
 		// Création du menu déroulant sur la demande de la carte de fidélité
@@ -118,7 +121,8 @@ public class FenetreFideliteClient extends JDialog {
 		panPointsFidelite.setPreferredSize(new Dimension(220, 80));
 		pointsFideliteLabel = new JLabel("Nombre de points fidelité :");
 		
-		final int points= Integer.parseInt(SGBD.selectStringConditionString("CARTE_FIDELITE", "NBPOINTS", "IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant)) ; // récupération du nombre de points du client entré en paramètre de initComponent()
+
+		final int points = nbPoints;
 		pointsFidelite= new JTextField(""+points+"");
 		pointsFidelite.setPreferredSize(new Dimension(90, 25));
 		pointsFidelite.setVisible(true);
