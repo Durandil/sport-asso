@@ -42,7 +42,7 @@ public class FenetreAffichageRecherche extends JDialog{
 		JButton validationRecherche = new JButton("Accès client");
 		
 		validationRecherche.addActionListener(new ActionListener() {
-			@SuppressWarnings("static-access")
+		@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stud
 				// on affiche la fiche client correspondante à l'identifiant saisi
