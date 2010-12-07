@@ -19,15 +19,15 @@ public class ModelePromotionClient extends AbstractTableModel {
 
 	private final Object[][] donnees;
 
-	private final String[] entetes = { " Promotions en cours", "Date de début",
+	private final String[] entetes = {"Numéro"," Promotions en cours", "Date de début",
 			"Date de fin" };
-	// Trois listes sont créées pour récupérer les informations de la table
+	// Quatre listes sont créées pour récupérer les informations de la table
 	// PROMO
 	ArrayList<String> listePromos = SGBD.selectListeString("PROMO", "NOMPROMO");
 	ArrayList<String> listeDatesDebut = SGBD.selectListeDates("PROMO",
 			"DATEDEBUT","DD/MM/YYYY");
 	ArrayList<String> listeDatesFin = SGBD.selectListeDates("PROMO", "DATEFIN","DD/MM/YYYY");
-	
+	ArrayList<String> listeIdentifiants = SGBD.selectListeString("PROMO", "IDPROMO") ;
 		// TODO Auto-generated method stub
 
 	
@@ -35,11 +35,12 @@ public class ModelePromotionClient extends AbstractTableModel {
 		super();
 		
 		
-		donnees = new Object[1000][4];
+		donnees = new Object[1000][5];
 		for (int i = 0; i < listePromos.size(); i++) {
-			donnees[i][0] = listePromos.get(i);
-			donnees[i][1] = listeDatesDebut.get(i);
-			donnees[i][2] = listeDatesFin.get(i);
+			donnees[i][0] = listeIdentifiants.get(i);
+			donnees[i][1] = listePromos.get(i);
+			donnees[i][2] = listeDatesDebut.get(i);
+			donnees[i][3] = listeDatesFin.get(i);
 
 		}
 		;

@@ -56,9 +56,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	}
 	
 	// Constructeur pour la modification d'une promotion
-	public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal,String promotion ){
+	public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal,String promotion ) throws Exception{
 		super(parent, title, modal);
-		this.setSize(300, 650);
+		this.setSize(500, 650);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -323,14 +323,28 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	}
 	
 	// surchage de la méthode initComponent pour la modification d'une promotion
-	private void initComponent(String idPromo){
+	private void initComponent(String idPromo) throws Exception{
 		
 		String nomPromotion = SGBD.selectStringConditionString("PROMO", "NOMPROMO", "IDPROMO", idPromo);
-		ArrayList<Integer> promoAdherent = SGBD.selectListeIntOrdonneCondition("PROMO", "PROMOADHERENT", "IDPROMO ='"+idPromo+"'", "IDPROMO");
-		String promoPopulation = "Promotion pour tous les clients";
-		if(promoAdherent.get(0)==1){
-			promoPopulation="Promotion pour les adhérents";
-		}
+//		ArrayList<Integer> promoAdherent = SGBD.selectListeIntOrdonneCondition("PROMO", "PROMOADHERENT", "IDPROMO ='"+idPromo+"'", "IDPROMO");
+//		String promoPopulation = "Promotion pour tous les clients";
+//		if(promoAdherent.get(0)==1){
+//			promoPopulation="Promotion pour les adhérents";
+//		}
+		//String articleConcerne = SGBD.selectStringConditionString("PROMO", "", "IDPROMO ='"+idPromo+"'", "IDPROMO");
+		String dateDe = SGBD.selectDateConditionString("PROMO", "DATEDEBUT", "IDPROMO", idPromo,"dd/MM/yyyy");
+		String dateFi = SGBD.selectDateConditionString("PROMO", "DATEFIN", "IDPROMO", idPromo,"dd/MM/yyyy");
+		
+		Date dateD= SGBD.stringToDate(dateDe,"dd/MM/yyyy");
+		Date dateF= SGBD.stringToDate(dateFi,"dd/MM/yyyy");
+		Date dateJour = new Date(System.currentTimeMillis());
+		
+		String anneeDebut=dateDe.substring(0, 4);
+		
+		System.out.println(anneeDebut);
+		
+		boolean dateDebutAvantToday = dateD.before(dateJour) ;
+		
 		
 		JPanel panneauCentralFenetre = new JPanel();
 		panneauCentralFenetre.setLayout(new GridLayout(6, 1,5,5));
@@ -362,7 +376,8 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		pourcentLabel= new JLabel("Pourcentage de promotion :");
 		
 		pourcentPromo = new JFormattedTextField(NumberFormat.getNumberInstance());
-		description = new JTextField();
+		
+		description = new JTextField(nomPromotion);
 		
 		pourcentPromo.setPreferredSize(new Dimension(90,20));
 		description.setPreferredSize(new Dimension(90,20));
@@ -370,7 +385,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		populationBox = new JComboBox();
 		populationBox.addItem("Promotion pour les adhérents");
 		populationBox.addItem("Promotion pour tous les clients");
-		populationBox.setSelectedItem(promoPopulation);
+		//populationBox.setSelectedItem(promoPopulation);
 		
 		populationBox.addActionListener(new ActionListener() {
 			
@@ -429,13 +444,25 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			cbanneeFin.addItem(k+"");
 		}
 
-		
 		cbanneeDebut.setVisible(true);
+		cbmoisDebut.setVisible(true);
+		cbjourDebut.setVisible(true);
 		cbanneeFin.setVisible(true);
 		cbmoisFin.setVisible(true);
-		cbmoisDebut.setVisible(true);
 		cbjourFin.setVisible(true);
-		cbjourDebut.setVisible(true);
+		
+
+		System.out.println(dateF.getYear());
+		System.out.println(dateF.getMonth());
+		System.out.println(dateF.getDate());
+		
+		cbanneeFin.setSelectedItem(dateF.getYear());
+		cbmoisFin.setSelectedItem(dateF.getMonth());
+		cbjourFin.setSelectedItem(dateF.getDate());
+		
+		cbanneeDebut.setSelectedItem(dateD.getYear());
+		cbmoisDebut.setSelectedItem(dateD.getMonth());
+		cbjourDebut.setSelectedItem(dateD.getDate());
 		
 		cbanneeDebut.setPreferredSize(new Dimension(5, 7));
 		cbanneeFin.setPreferredSize(new Dimension(5, 7));
@@ -507,7 +534,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panneauCentralFenetre.add(panPopulation);
 		panneauCentralFenetre.add(panPourcentPromo);
 		panneauCentralFenetre.add(panArticle);
-		panneauCentralFenetre.add(panDateDebut);
+		if(dateDebutAvantToday==false){
+			panneauCentralFenetre.add(panDateDebut);
+		}
 		panneauCentralFenetre.add(panDateFin);
 		
 		this.getContentPane().add(panneauCentralFenetre,"Center");
