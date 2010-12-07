@@ -28,6 +28,7 @@ public class FenetreReponseMessage extends JFrame {
 	public FenetreReponseMessage(boolean ReponseDuGerant) {
 		super();
 		this.setTitle("Répondre au message");
+		this.setAlwaysOnTop(true);	
 		this.setSize(500, 400);
 		this.setLocation(50,50);
 		this.setResizable(false);
