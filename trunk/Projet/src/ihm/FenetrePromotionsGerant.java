@@ -23,7 +23,7 @@ public class FenetrePromotionsGerant extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	public static int ligneTableau = 0;
 
 	public FenetrePromotionsGerant(){
 		super();
@@ -40,7 +40,8 @@ public class FenetrePromotionsGerant extends JFrame {
     	
     	// Définition du tableau qui affichera l'ensemble des promotions en cours pour les différents clients
     	// (adhérents ou non adhérents) après interrogation de la base de données dans ModelePromotionClient
-	    JTable tableauPromotions = new JTable(new ModelePromotionClient());     
+    	final ModelePromotionClient modele = new ModelePromotionClient();
+    	final JTable tableauPromotions = new JTable(modele);     
 	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
 	    
 	    //Création du panneau qui se situera en haut de la fenetre créée
@@ -72,6 +73,16 @@ public class FenetrePromotionsGerant extends JFrame {
     	boutonModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO modifier la promotion sélectionée grâce à un formulaire
+				ligneTableau = tableauPromotions.getSelectedRow();
+				String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
+				FenetreFormulairePromotionsGerant modifierPromo;
+				try {
+					modifierPromo = new FenetreFormulairePromotionsGerant(null,"Modification d'une nouvelle promotion",true,idPromo);
+					modifierPromo.setVisible(true);
+					
+				} catch (Exception e1) {	
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -91,7 +102,7 @@ public class FenetrePromotionsGerant extends JFrame {
 			
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});

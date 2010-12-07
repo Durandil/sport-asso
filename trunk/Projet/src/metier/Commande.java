@@ -231,6 +231,69 @@ public class Commande {
 		return "Commande [idClient=" + idClient + ", date=" + sqlDate + "]";
 	}
 	
+	public double MontantCommandePourUnArticle(String idClient, LigneCommande ligne) throws SQLException{
+		
+		// recuperer prix initial
+		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getArticle());
+		double prixInitial = Double.parseDouble(prixInit);
+		int quantiteCommandee = Integer.parseInt(ligne.getQuantite());
+		
+		
+		//  recuperation pourcentage degressif
+		ResultSet res = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1"+
+						" where a.idArticle=l.idArticle"+
+						" and r.idCategorie=c.idCategorie"+
+						" and r.idQuantite=q.idQuantite"+
+						" and c.idCategorie=a.idCategorie"+
+						" and (l.quantiteCommande-q.quantite)>=0"+
+						" order by (l.quantiteCommande-q.quantite)");
+		
+		String pourcentagePromoDegressif = res.getObject(1).toString();
+		
+		// recuperer booleen fidelite
+		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(idClient);
+		String fidele = fideliteClient.get(0);
+		int estFidele=0;
+		if(fidele.equals("Oui")){
+			estFidele=1;
+		}
+		
+		if(estFidele==0){
+			ResultSet res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
+					" where p.idpromo = lpa.idPromo and lpa.idarticle='"+ ligne.getArticle()+"' and promoFidelite=0"+
+					" order by pourcentagepromo desc");
+		}
+		else{
+			ResultSet res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
+						" where p.idpromo = lpa.idPromo and lpa.idarticle= condition"+
+						" order by pourcentagepromo desc");
+		}
+		// recuperation pourcentage promotion exceptionnelle
+		String pourcentagePromoExc = res.getObject(1).toString();
+		
+		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
+		if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
+			promoAppliquee = Double.parseDouble(pourcentagePromoExc);
+		}
+		
+		double montantArticle = quantiteCommandee*prixInitial*(1-promoAppliquee);
+		
+		return montantArticle;
+	}
+	
+	public double montantTotalArticle(ArrayList<LigneCommande> panier,String idClient) throws SQLException{
+		double total = 0;
+		
+		for (LigneCommande ligneCommande : panier) {
+			double montantArticle = MontantCommandePourUnArticle(idClient, ligneCommande);
+			total = total+montantArticle;
+		}
+		
+		return total ;
+	}
+	
+	
+	
 	
 	//GRAND CHANTIER ...
 	//Méthode qui retourne le prix de la commande

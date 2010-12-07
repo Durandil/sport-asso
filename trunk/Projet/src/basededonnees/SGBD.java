@@ -636,6 +636,57 @@ public class SGBD {
 		return s;
 	}
 	
+	//Méthode permettant de récupérer un élément d'un champ (de nature String)
+	//En apposant une condition sur un autre champ (dont les éléments sont aussi de nature String)
+	public static String selectDateConditionString(String table, String champDate, String champDeCondition, String condition, String format) {
+		connecter();
+		String s = null;
+		Statement st = null;
+		ResultSet res = null;
+
+		try {
+
+			st = c.createStatement();
+			
+			
+			res = st.executeQuery("SELECT TO_CHAR("+champDate+",'" + format + "')"+" FROM "+table+" WHERE "+ champDeCondition+" = '"
+					+ condition + "'");
+
+			
+				while (res.next()) {
+					
+			//Si le résultat est non nul tout se passe normalement
+					if(res.getObject(1) != null){
+					
+						s = res.getObject(1).toString();
+						
+					}
+			//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
+			//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
+					else
+					{
+						s = " ";
+					}
+
+				}
+				
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+
+		} finally {
+			System.out.println("Tentative de sauvegarde");
+			SGBD.executeUpdate("COMMIT");
+			fermer();
+
+		}
+		//Si la requête ne renvoie rien, on "remplit" s par "rien
+		
+		return s;
+	}
+	
 	//Méthode permettant de récupérer l'ensemble des éléments de DEUX champs (de nature string)
 	//d'une table donnée (tous entrés en paramètres)
 	public static ArrayList<String[]> selectDeuxChampsString(String table, String champ1, String champ2) {
