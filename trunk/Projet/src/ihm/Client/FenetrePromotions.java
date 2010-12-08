@@ -1,5 +1,5 @@
-package ihm;
-import ihm.ModelePromotionClient;
+package ihm.Client;
+import ihm.modeleTableau.ModelePromotion;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -51,7 +51,7 @@ public class FenetrePromotions extends JFrame {
     	
     	// Définition du tableau qui affichera l'ensemble des promotions en cours pour le client
     	// qui utilise l'application après interrogation de la base de données dans ModelePromotionClient
-	    JTable tableauPromotions = new JTable(new ModelePromotionClient());     
+	    JTable tableauPromotions = new JTable(new ModelePromotion());     
 	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
 	    
 	    // Définition du panneau panneauBouton qui accueillera le bouton

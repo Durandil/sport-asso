@@ -1,4 +1,6 @@
-package ihm;
+package ihm.Accueil;
+
+import ihm.MenuUtilisateur;
 
 import javax.swing.JDialog;
 import java.awt.BorderLayout;

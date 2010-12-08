@@ -1,4 +1,6 @@
-package ihm;
+package ihm.Gerant;
+
+import ihm.modeleTableau.ModeleTableauClient;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

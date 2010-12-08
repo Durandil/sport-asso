@@ -1,4 +1,4 @@
-package ihm;
+package ihm.Gerant;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;

@@ -1,4 +1,9 @@
 package ihm;
+import ihm.Gerant.FenetreCatalogueGerant;
+import ihm.Gerant.FenetrePromotionsGerant;
+import ihm.Gerant.FenetreReapprovisionnement;
+import ihm.Gerant.FenetreRechercheClient;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

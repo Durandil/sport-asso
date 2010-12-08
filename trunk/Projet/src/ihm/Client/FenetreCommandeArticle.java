@@ -1,4 +1,9 @@
-package ihm;
+package ihm.Client;
+import ihm.FenetreChoixCatalogue;
+import ihm.Accueil.FenetreDialogIdentification;
+import ihm.modeleTableau.ModelePanier;
+import ihm.modeleTableau.ModeleTableauCatalogue;
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
