@@ -1,4 +1,4 @@
-package ihm;
+package ihm.Gerant;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;

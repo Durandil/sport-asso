@@ -1,7 +1,11 @@
 package ihm;
-import ihm.FenetreCommandeArticle;
-import ihm.FenetreContactVendeur;
-import ihm.FenetreDialogGestionCompteClient;
+import ihm.Accueil.FenetreDialogIdentification;
+import ihm.Client.FenetreCommandeArticle;
+import ihm.Client.FenetreContactVendeur;
+import ihm.Client.FenetreDialogGestionCompteClient;
+import ihm.Client.FenetreFideliteClient;
+import ihm.Client.FenetreInformationsClient;
+import ihm.Client.FenetrePromotions;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

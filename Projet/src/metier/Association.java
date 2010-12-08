@@ -2,7 +2,7 @@ package metier;
 
 import java.util.ArrayList;
 
-import ihm.FenetreDialogIdentification;
+import ihm.Accueil.FenetreDialogIdentification;
 import basededonnees.SGBD;
 
 public class Association extends Client {

@@ -1,4 +1,5 @@
-package ihm;
+package ihm.Gerant;
+
 
 import java.awt.Color;
 import java.awt.Component;

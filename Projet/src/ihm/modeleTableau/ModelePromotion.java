@@ -1,4 +1,4 @@
-package ihm;
+package ihm.modeleTableau;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import basededonnees.SGBD;
 import metier.Article;
 import metier.LigneCommande;
 
-public class ModelePromotionClient extends AbstractTableModel {
+public class ModelePromotion extends AbstractTableModel {
 
 	/**
 	 * 
@@ -31,7 +31,7 @@ public class ModelePromotionClient extends AbstractTableModel {
 		// TODO Auto-generated method stub
 
 	
-	public ModelePromotionClient() {
+	public ModelePromotion() {
 		super();
 		
 		

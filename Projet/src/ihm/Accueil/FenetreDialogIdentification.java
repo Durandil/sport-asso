@@ -1,5 +1,6 @@
-package ihm;
+package ihm.Accueil;
 import ihm.DialogIdentifiant;
+import ihm.MenuUtilisateur;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

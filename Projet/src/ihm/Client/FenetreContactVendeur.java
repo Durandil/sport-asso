@@ -1,4 +1,6 @@
-package ihm;
+package ihm.Client;
+
+import ihm.Accueil.FenetreDialogIdentification;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

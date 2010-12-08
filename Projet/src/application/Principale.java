@@ -1,9 +1,9 @@
 package application;
 
-import ihm.FenetreCommandeArticle;
-import ihm.FenetreCompte;
 import ihm.MenuGerant;
 import ihm.MenuUtilisateur;
+import ihm.Accueil.FenetreCompte;
+import ihm.Client.FenetreCommandeArticle;
 
 import java.awt.Color;
 import java.sql.Date;
@@ -34,9 +34,9 @@ public class Principale {
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 		
 		
-		FenetreCompte fen=new FenetreCompte();
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
 		
 		
 //		java.util.Date date = new java.util.Date();

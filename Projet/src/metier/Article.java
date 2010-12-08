@@ -2,7 +2,7 @@ package metier;
 
 import java.util.ArrayList;
 
-import ihm.FenetreFormulaireArticleGerant;
+import ihm.Gerant.FenetreFormulaireArticleGerant;
 import basededonnees.SGBD;
 
 /**

@@ -1,5 +1,6 @@
-package ihm;
+package ihm.Accueil;
  
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;

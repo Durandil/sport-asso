@@ -1,5 +1,4 @@
-package ihm;
-import ihm.Panneau;
+package ihm.Client;
 
 import java.awt.Color;
 import java.awt.GridLayout;

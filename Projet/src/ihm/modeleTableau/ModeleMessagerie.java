@@ -1,4 +1,6 @@
-package ihm;
+package ihm.modeleTableau;
+import ihm.Accueil.FenetreDialogIdentification;
+
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;

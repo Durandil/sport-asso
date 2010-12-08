@@ -1,20 +1,29 @@
-package ihm;
-
+package ihm.modeleTableau;
 import javax.swing.table.AbstractTableModel;
 
-public class ModeleTableauCommande extends AbstractTableModel{
+import metier.Article;
+import metier.LigneCommande;
+
+
+public class ModeleCommandes extends AbstractTableModel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Identifiant","Description","Quantité","Prix Unitaire","% Remise","Remise","Total"} ;
+    private final String[] entetes={" Numéro Article","Quantité en stock"} ;
 	
 	
-	public ModeleTableauCommande(){
+	public ModeleCommandes(){
 		super();
 		
 		
 		donnees= new Object[][]{
-				{"ART0001","Maillot foot","10","12,50","15%","0","125"}
+				{"ART001",1},
+				{"ART002",0}
 		};
 	}
 	

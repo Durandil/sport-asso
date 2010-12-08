@@ -1,4 +1,6 @@
-package ihm;
+package ihm.Gerant;
+import ihm.modeleTableau.ModeleTableauCatalogue;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

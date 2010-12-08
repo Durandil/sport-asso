@@ -1,4 +1,5 @@
-package ihm;
+package ihm.Gerant;
+
 
 import java.awt.BorderLayout;
 import java.awt.Color;
