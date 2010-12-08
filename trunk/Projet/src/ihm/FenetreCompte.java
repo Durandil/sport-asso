@@ -132,7 +132,7 @@ public class FenetreCompte extends JFrame {
         // Définition des actions de chacun des boutons présents sur la fenêtre
 		boutonCreation.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				//dispose();
 				FenetreDialogCreationCompte compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
 				compte.setVisible(true); 
 			}	
@@ -141,7 +141,7 @@ public class FenetreCompte extends JFrame {
 		boutonIdentificationClient.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// On affiche le contenu de la fenêtre d'identifiaction du client
-				dispose();
+				//dispose();
 				FenetreDialogIdentification identificationClient = new FenetreDialogIdentification(null, "Identification client", true);
 				identificationClient.setVisible(true); 
 			}	
@@ -153,7 +153,7 @@ public class FenetreCompte extends JFrame {
 				// on affiche le contenu de la fenêtre d'identification du gérant avec 
 				// la même fenêtre que le gérant car on considère qu'un gérant est une extension
 				// d'un utilisateur
-				dispose();
+				//dispose();
 				FenetreDialogIdentification identificationGerant = new FenetreDialogIdentification(null,"Identification gérant",true);
 				identificationGerant.setVisible(true);
 				

@@ -61,7 +61,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	private void initComponent(){
 		JPanel panneauCentral = new JPanel();
 		
-		//JPanel panNumArticle = new JPanel();
 		JPanel panDescription = new JPanel();
 		JPanel panPoids = new JPanel();
 		JPanel panCategoriePrix = new JPanel();
@@ -69,8 +68,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		JPanel panStock = new JPanel();
 		JPanel panPrixInitial = new JPanel();
 		
-		
-		//panNumArticle.setPreferredSize(dimensionStandard);
+
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panCategoriePrix.setPreferredSize(dimensionStandard);
@@ -78,8 +76,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panStock.setPreferredSize(dimensionStandard);
 		panPrixInitial.setPreferredSize(dimensionStandard);
 		
-		
-		//panNumArticle.setBorder(BorderFactory.createEmptyBorder());
+
 		panDescription.setBorder(BorderFactory.createEmptyBorder());
 		panPoids.setBorder(BorderFactory.createEmptyBorder());
 		panCategoriePrix.setBorder(BorderFactory.createEmptyBorder());
@@ -87,7 +84,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panStock.setBorder(BorderFactory.createEmptyBorder());
 		panPrixInitial.setBorder(BorderFactory.createEmptyBorder());
 		
-		//numArticleLabel = new JLabel("Numéro d'article : ");
 		descriptionLabel = new JLabel("Description : ");
 		poidsLabel = new JLabel("Poids : ");
 		catPrixLabel = new JLabel("Catégorie de Prix : ");
@@ -95,13 +91,12 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		prixLabel = new JLabel("Prix Initial : ");
 		stockLabel = new JLabel("Stock : ");
 		
-		//numArticle = new JFormattedTextField();
+
 		description = new JTextField();
 		poids = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		prix = new JFormattedTextField(NumberFormat.getNumberInstance());
 		stock = new JFormattedTextField(NumberFormat.getIntegerInstance());
 		
-		//numArticle.setPreferredSize(new Dimension(90, 25));
 		description.setPreferredSize(new Dimension(90, 25));
 		poids.setPreferredSize(new Dimension(90, 25));
 		prix.setPreferredSize(new Dimension(90, 25));
@@ -142,7 +137,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			}
 		});
 		
-		//panNumArticle.add(numArticleLabel);
+
 		panDescription.add(descriptionLabel);
 		panPoids.add(poidsLabel);
 		panCategoriePrix.add(catPrixLabel);
@@ -150,7 +145,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panStock.add(stockLabel);
 		panPrixInitial.add(prixLabel);
 		
-		//panNumArticle.add(numArticle);
 		panDescription.add(description);
 		panPoids.add(poids);
 		panStock.add(stock);
@@ -158,7 +152,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		panCategoriePrix.add(catPrixBox);
 		panCategorieSport.add(catSportBox);
 		
-		//panneauCentral.add(panNumArticle);
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panCategoriePrix);
@@ -188,8 +181,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 				String typ = SGBD.selectStringConditionString("TYPE_SPORT", "IDTYPE", "NOMTYPE", itemSportSelectionne);
 				String cat = SGBD.selectStringConditionString("CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE", itemPrixSelectionne);
 				
-				
+				System.out.println(typ +" "+cat);
 				Article art = new Article(null,description.getText(),Double.parseDouble(prx),Integer.parseInt(st),Float.parseFloat(p),typ, cat,"En stock");
+				FenetreCatalogueGerant.modificationTableau=true;
 				
 				// puis fermer la page
 				setVisible(false);

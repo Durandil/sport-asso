@@ -27,7 +27,11 @@ public class FenetreCatalogueGerant extends JFrame{
 	private JLabel icon;
 	private static ArrayList<Integer> numerosLignesInserees = new ArrayList<Integer>();
 	private static ArrayList<Integer> numerosLignesSupprimees = new ArrayList<Integer>();
-
+	public ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue();
+	public JTable tableau = new JTable();
+	public static boolean modificationTableau=false;
+	public JPanel panneauTableau= new JPanel();
+	
 	/**
 	 * Création du constructeur de la classe FenetreCatalogueGerant
 	 * la fenetre sera créée selon les instructions de la méthode initComponent()
@@ -57,14 +61,17 @@ public class FenetreCatalogueGerant extends JFrame{
     	
 		// Définition du tableau qui accueillera l'ensemble des articles disponibles
     	// après interrogation de la base de données
-		final ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue(false,true);
-	    final JTable tableau = new JTable(modTabCatalogue);
-	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+		
+		modTabCatalogue = new ModeleTableauCatalogue(false,true);
+	    tableau = new JTable(modTabCatalogue);
+	    final JScrollPane tab = new JScrollPane(tableau);
+	    panneauTableau.add(tab);
+	    this.getContentPane().add(panneauTableau, BorderLayout.CENTER);
 		
 		
 		// Création du panneau qui accueille les boutons du haut permettant la gestion des articles
     	JPanel panneauBoutonHaut= new JPanel();
-    	panneauBoutonHaut.setLayout(new GridLayout(1,3,5,5));
+    	panneauBoutonHaut.setLayout(new GridLayout(1,4,5,5));
     	
     	JButton boutonAjouter=new JButton("Ajouter");
     	boutonAjouter.addActionListener(new ActionListener() {
@@ -75,11 +82,19 @@ public class FenetreCatalogueGerant extends JFrame{
 				
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
 				formulaire.setVisible(true);
-				// ajout du numéro de la derniere ligne créee
-				numerosLignesInserees.add(modTabCatalogue.getRowCount());
+				
+				if(modificationTableau==true){
+					panneauTableau.remove(tab);
+					modTabCatalogue = new ModeleTableauCatalogue(false,true);
+				    tableau = new JTable(modTabCatalogue);
+				    final JScrollPane tab = new JScrollPane(tableau);
+				    panneauTableau.add(tab);
+				}
+				
 			}
 		});
     	
+
     	JButton boutonSupprimer=new JButton("Supprimer");
     	boutonSupprimer.addActionListener(new ActionListener() {
 			
@@ -93,11 +108,18 @@ public class FenetreCatalogueGerant extends JFrame{
 				
 				numerosLignesSupprimees.add(ligne);
 				
-				JOptionPane supprime = new JOptionPane();
-				ImageIcon image = new ImageIcon("src/images/information.png");
-				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
-				tableau.removeRowSelectionInterval(ligne, ligne);
-				
+//				JOptionPane supprime = new JOptionPane();
+//				ImageIcon image = new ImageIcon("src/images/information.png");
+//				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
+//				tableau.removeRowSelectionInterval(ligne, ligne);
+		
+//				if(modificationTableau=true){
+//					remove(tableau);
+//					modTabCatalogue = new ModeleTableauCatalogue(false,true);
+//					tableau = new JTable(modTabCatalogue);
+//					getContentPane().add(tableau,"Center");
+//					modificationTableau=false;
+//				}
 			}
 		});
     	
@@ -137,6 +159,7 @@ public class FenetreCatalogueGerant extends JFrame{
 				finally{
 					FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
 					formulaire.setVisible(true);
+				
 				}
 				
 			}
