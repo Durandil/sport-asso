@@ -20,7 +20,15 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
     private final String[] entetes={"Référence","Denomination","Quantite en stock","Prix Initial"} ;
 	
+    
 	
+	public ModeleTableauCatalogue() {
+		super();
+		// TODO Auto-generated constructor stub
+		donnees= new Object[1000][5];
+	}
+
+
 	public ModeleTableauCatalogue(boolean pourReapprovisionnement,boolean pourTableauGerant){
 		super();
 		if( pourReapprovisionnement == false){
