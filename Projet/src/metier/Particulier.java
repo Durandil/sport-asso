@@ -5,6 +5,30 @@ import java.util.ArrayList;
 import ihm.Accueil.FenetreDialogIdentification;
 import basededonnees.SGBD;
 
+/**
+ * <b>La classe Particulier représente un particulier</b>
+ * <p>
+ * Un particulier est caractérisé par les informations suivantes  :
+ * <ul>
+ * <li>Une adresse mail qui sert d'identifiant unique et non modifiable par le client représentant l'association</li>
+ * <li>Un nom</li>
+ * <li>Un prénom</li>
+ * <li>Une adresse</li>
+ * <li>L'identifiant de la ville où l'association est basée</li>
+ * <li>Un numéro de téléphone</li>
+ * <li>Le statut du client (ici, "Particulier")</li>
+ * <li>Un booléen déterminant si l'association possède une carte de fidélité</li>
+ * <li>L'état du compte de l'association (Activé si le booléen correspondant est vrai et Désactivé sinon)</li>
+ * <li>Un mot de passe généré automatiquement</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * 
+ * @see BDD,Client,Utilisateur
+ */
+
 public class Particulier extends Client {
 
 	private String nom;
@@ -18,45 +42,18 @@ public class Particulier extends Client {
 	public Particulier(String nom, String prenom, String mail, String adresse,
 			 String idVille,
 			String telephone, boolean estFidele) {
+		this.mail = mail;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.mail = mail;
 		this.adresse = adresse;	
+		this.idVille = idVille;
 		this.telephone = telephone;
 		this.particulierAssociation = "Particulier";
-		this.nbPointsFidelite = 0;
 		this.estFidele = estFidele;
 		this.estActif = true;
 		this.motDePasse = genererMdp();
-		this.idVille = idVille;
 		ajouterBDD();
 		ajouterFideliteBDD();
-		System.out.println("Votre mot de passe est : " + this.motDePasse);
-	}
-
-	
-	// Méthode toString qui est (pour l'instant) inutile
-	public String toString() {
-		String fidele = null;
-		String actif = null;
-		if (this.estFidele == false) {
-			fidele = "Non";
-		} else {
-			fidele = "Oui";
-		}
-
-		if (this.estActif == false) {
-			actif = "Désactivé";
-		} else {
-			actif = "Activé";
-		}
-
-		return prenom + " " + nom + " est un " + particulierAssociation
-				+ "\n Mail : " + mail + "\n Adresse : " + adresse
-				+ "\n Telephone : " + telephone + "\n Carte de fidélité ? "
-				+ fidele + "\n Nombre de points fidélité : " + nbPointsFidelite
-				+ "\n État du compte : " + actif;
-
 	}
 
 	public String getNom() {
@@ -124,46 +121,22 @@ public class Particulier extends Client {
 
 	}
 
+//	Cette méthode insère une nouvelle ligne dans la table CARTE_FIDELITE
+//	Elle débute par une génération d'identifiant puis ajoute les autres informations dans la table
+		
+	
 	public void ajouterFideliteBDD() {
 		if (this.estFidele) {
-
-			ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
-					"S_FIDELITE.NextVal");
-
-			String numFidelite = "";
-			int numeroFidelite = 0;
-
-			numeroFidelite = Integer.parseInt(idNonFini.get(0));
-
-			if (numeroFidelite < 10) {
-				numFidelite = "FID0000" + numeroFidelite;
-			}
-			if (numeroFidelite < 100 && numeroFidelite >= 10) {
-				numFidelite = "FID000" + numeroFidelite;
-			}
-			if (numeroFidelite < 1000 && numeroFidelite >= 100) {
-				numFidelite = "FID00" + numeroFidelite;
-			}
-			if (numeroFidelite < 10000 && numeroFidelite >= 1000) {
-				numFidelite = "FID0" + numeroFidelite;
-			}
-			if (numeroFidelite < 100000 && numeroFidelite >= 10000) {
-				numFidelite = "FID" + numeroFidelite;
-			}
-
-
-			String requete2 = "INSERT INTO CARTE_FIDELITE (IDCARTEFIDELITE, NBPOINTS, IDCLIENT)"
-					+ "VALUES ('" 
-					+ numFidelite
-					+ "','0',"
-					+ "'"
-					+ this.mail
-					+ "')";
-			System.out.println(requete2);
-			SGBD.executeUpdate(requete2);
+				
+					CarteFidelite cf = new CarteFidelite(this.mail, 0);
+					
 		}
 	}
-
+	
+//	Cette méthode est appelée lorsque le client désire modifier certaines informations le concernant
+//	Elle récupère en premier lieu l'idVille correspondant au code postal saisi par le client et met ensuite
+//	à jour la table CLIENT
+	
 	public static void modifierBDDparticulier(String idClient, String nom,
 			String prenom, String adresse,String codePostal, String telephone) {
 

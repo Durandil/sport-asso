@@ -5,22 +5,16 @@ import basededonnees.SGBD;
 public abstract class Client extends Utilisateur{
 
 	// Classe Abstraite Client, dont héritent les classes Association et Particulier
+	// De ce fait, sont regroupées ici l'ensemble des caractéristiques communes aux deux entités :
+	// Statut, Fidélité, État du compte, mot de passe, et identifiant de la ville
 	
 
 	protected String particulierAssociation;
-	protected int nbPointsFidelite;
 	protected boolean estFidele;
 	protected boolean estActif;
 	protected String motDePasse;
-	static int CompteurIdcarte=0;
 	protected String idVille;
 	
-	//static int CompteurIdcarte=SGBD.recupererIdentifiantDernierEnregistrementTable("CARTE_FIDELITE", "IDCARTEFIDELITE");
-	
-	// Méthode permettant de générer un mot de passe
-	// Fait appel à la fonction random et aux caractères ASCII
-	// Longueur : 7 caractères
-
 
 
 	public String getParticulierAssociation() {
@@ -29,14 +23,6 @@ public abstract class Client extends Utilisateur{
 
 	public void setParticulierAssociation(String particulierAssociation) {
 		this.particulierAssociation = particulierAssociation;
-	}
-
-	public int getNbPointsFidelite() {
-		return nbPointsFidelite;
-	}
-
-	public void setNbPointsFidelite(int nbPointsFidelite) {
-		this.nbPointsFidelite = nbPointsFidelite;
 	}
 
 	public boolean isEstFidele() {
@@ -64,7 +50,6 @@ public abstract class Client extends Utilisateur{
 	}
 
 
-
 	public String getMotDePasse() {
 		return motDePasse;
 	}
@@ -73,6 +58,8 @@ public abstract class Client extends Utilisateur{
 		this.motDePasse = motDePasse;
 	}
 
+// Méthode modifiant l'état du compte client
+	
 	public static void modifierBDDclient(String idClient,String etatCompte) {
 
 		String requete = " UPDATE CLIENT SET ETATCOMPTE='" + etatCompte

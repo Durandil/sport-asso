@@ -272,10 +272,10 @@ public class FenetreDialogCreationCompte extends JDialog{
 				// création de compte
 				/** TODO : Gestion de l'id ville...**/
 				else {
-					String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "CODEPOSTAL", codePostal.getText());
+					
 					String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
 					
-					System.out.println(ville + "  " + idVille);
+					
 					
 					if (itemSelectionne == "Compte Particulier")
 					{
@@ -285,7 +285,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 								estFidele);
 					} else {
 						Association a = new Association(denomination.getText(),
-								identifiant.getText(), adresse.getText(), codePostal.getText(), ville, idVille,
+								identifiant.getText(), adresse.getText(), idVille,
 								telephone.getText(),estFidele);
 					}
 					
