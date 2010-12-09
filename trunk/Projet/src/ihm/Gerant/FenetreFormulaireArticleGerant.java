@@ -210,14 +210,14 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		String poidsA = SGBD.selectStringConditionString("ARTICLE", "POIDS", "IDARTICLE", idArticle);
 		String prixA = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL", "IDARTICLE", idArticle);
 		String stockA = SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
-		String idcategorieA = SGBD.selectStringConditionString("ARTICLE", "IDCATEGORIE", "IDARTICLE", idArticle);
-		String idtypeSportA = SGBD.selectStringConditionString("ARTICLE", "IDTYPE", "IDARTICLE", idArticle);
+		itemPrixSelectionne = SGBD.selectStringConditionString("ARTICLE", "IDCATEGORIE", "IDARTICLE", idArticle);
+		itemSportSelectionne= SGBD.selectStringConditionString("ARTICLE", "IDTYPE", "IDARTICLE", idArticle);
 		
-		System.out.println(idcategorieA);
-		System.out.println(idtypeSportA);
+		//System.out.println(idcategorieA);
+		//System.out.println(idtypeSportA);
 		
-		String nomCategorieA = SGBD.selectStringConditionString("CATEGORIE", "NOMCATEGORIE", "IDCATEGORIE", idcategorieA);
-		String nomtypeSportA = SGBD.selectStringConditionString("TYPE_SPORT", "NOMTYPE", "IDTYPE", idtypeSportA);
+		String nomCategorieA = SGBD.selectStringConditionString("CATEGORIE", "NOMCATEGORIE", "IDCATEGORIE", itemPrixSelectionne);
+		String nomtypeSportA = SGBD.selectStringConditionString("TYPE_SPORT", "NOMTYPE", "IDTYPE", itemSportSelectionne);
 		
 		JPanel panneauCentral = new JPanel();
 		
@@ -278,14 +278,16 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		catPrixBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				itemPrixSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
+				String choix =(String) ((JComboBox) e.getSource()).getSelectedItem();
+				itemPrixSelectionne=SGBD.selectStringConditionString("CATEGORIE", "NOMCATEGORIE", "IDCATEGORIE",choix);
 			}
 		});
 		
 		catSportBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				itemSportSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
+				String choix=(String) ((JComboBox) e.getSource()).getSelectedItem();
+				itemSportSelectionne=SGBD.selectStringConditionString("TYPE_SPORT", "NOMTYPE", "IDTYPE",choix);
 			}
 		});
 		

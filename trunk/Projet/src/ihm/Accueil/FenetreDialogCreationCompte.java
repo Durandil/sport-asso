@@ -28,6 +28,8 @@ import metier.Particulier;
 
 public class FenetreDialogCreationCompte extends JDialog{
 	
+	// TODO vérifier les champs avant de les valider pas de ' dans les jtextfield
+	
 	/**
 	 * 
 	 */

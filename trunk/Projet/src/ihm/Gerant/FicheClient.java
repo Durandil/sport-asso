@@ -36,7 +36,7 @@ public class FicheClient extends JDialog {
 	private JTextField identifiant,denomination,nom,prenom,adresse,ville,codePostal,telephone,compteFidelite,nbrePoints;
 	private JComboBox ActivationCompteBox;
 	private JLabel ActifCompteLabel;
-	private Dimension dimensionpanneauInformationsPersonnelles =  new Dimension(250,60);
+	private Dimension dimensionpanneauInformationsPersonnelles =  new Dimension(300,60);
 	private Dimension dimensionPanneauStatistique =  new Dimension(300,40);
 	private JLabel icon;
 	private static String etatCompte="";
@@ -65,7 +65,7 @@ public class FicheClient extends JDialog {
 		JLabel articleMaxCommande= new JLabel("Article le plus commandé : ");
 		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
 		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
-		JButton boutonAfficherCommande = new JButton("Afficher les 5 dernières commandes");
+		JComboBox comboAfficherCommande = new JComboBox();
 		
 		JPanel panStat1 = new JPanel();
 		JPanel panStat2 = new JPanel();
@@ -91,20 +91,21 @@ public class FicheClient extends JDialog {
 		panStat4.add(quantiteTotaleArticleMaxCommande);
 		panStat5.add(dateDernierAchatArticleMaxCommande);
 		
-		boutonAfficherCommande.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				// TODO générer une fenetre avec la liste des 5 dernières commandes
-				
+		ArrayList<String> listeCommandesArticles=new ArrayList<String>();
+		listeCommandesArticles= SGBD.selectListeStringOrdonneCondition("COMMANDE", "IDCOMMANDE", "IDCOMMANDE", "IDCLIENT='"+idClient+"'");
+		if(listeCommandesArticles.size()>0){
+			for (String commande : listeCommandesArticles) {
+				comboAfficherCommande.addItem(commande);
 			}
-		});
+		}
+		
 		
 		panneauDroite.add(panStat1);
 		panneauDroite.add(panStat2);
 		panneauDroite.add(panStat3);
 		panneauDroite.add(panStat4);
 		panneauDroite.add(panStat5);
-		panneauDroite.add(boutonAfficherCommande);
+		panneauDroite.add(comboAfficherCommande);
 		
 		panneauDroite.setBounds(552,350,350,300);
 		
@@ -128,7 +129,7 @@ public class FicheClient extends JDialog {
 		identifiant.setPreferredSize(new Dimension(120, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
-		panIdentifiant.setBounds(40,75,220,60);
+		panIdentifiant.setBounds(40,75,300,60);
 		this.add(panIdentifiant);
 		
 		// La denomination
@@ -137,12 +138,12 @@ public class FicheClient extends JDialog {
 		panDenomination.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		final String denominationClient = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
 		denomination=new JTextField(denominationClient);
-		denomination.setPreferredSize(new Dimension(90/*denominationClient.length()*/, 25));
+		denomination.setPreferredSize(new Dimension(110/*denominationClient.length()*/, 25));
 		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
 		denominationLabel=new JLabel("Denomination");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
-		panDenomination.setBounds(40,140,220,60);
+		panDenomination.setBounds(40,140,300,60);
 		this.add(panDenomination);
 		
 		//Le nom
@@ -156,7 +157,7 @@ public class FicheClient extends JDialog {
 		nomLabel = new JLabel("Nom :");
 		panNom.add(nomLabel);
 		panNom.add(nom);
-		panNom.setBounds(40,205,220,60);
+		panNom.setBounds(40,205,300,60);
 		this.add(panNom);
 			
 		//Le prenom
@@ -170,7 +171,7 @@ public class FicheClient extends JDialog {
 		prenom.setPreferredSize(new Dimension(90, 25));
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
-		panPrenom.setBounds(40,270,220,60);
+		panPrenom.setBounds(40,270,300,60);
 		this.add(panPrenom);
 		
 		if(denominationClient.equals(" ")){
@@ -198,7 +199,7 @@ public class FicheClient extends JDialog {
 		}
 		typeCompteLabel = new JLabel("Statut Compte : " + compte);
 		panTypeCompte.add(typeCompteLabel);
-		panTypeCompte.setBounds(40,10,220,60);
+		panTypeCompte.setBounds(40,10,300,60);
 		this.add(panTypeCompte);
 		
 		//L'adresse
@@ -212,7 +213,7 @@ public class FicheClient extends JDialog {
 		adresse.setPreferredSize(new Dimension(/*adresseClient.length()*/90, 25));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
-		panAdresse.setBounds(40,335,220,60);
+		panAdresse.setBounds(40,335,300,60);
 		this.add(panAdresse);
 		
 		//Idville
@@ -229,7 +230,7 @@ public class FicheClient extends JDialog {
 		ville.setEnabled(false);
 		panVille.add(villeLabel);
 		panVille.add(ville);
-		panVille.setBounds(40,465,220,60);
+		panVille.setBounds(40,465,300,60);
 		this.add(panVille);
 		
 		
@@ -243,7 +244,7 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100,25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-		panCP.setBounds(40,400,220,60);
+		panCP.setBounds(40,400,300,60);
 		this.add(panCP);
 		
 		
@@ -257,7 +258,7 @@ public class FicheClient extends JDialog {
 		telephone.setPreferredSize(new Dimension(90, 25));
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
-		panTelephone.setBounds(40,530,220,60);
+		panTelephone.setBounds(40,530,300,60);
 		this.add(panTelephone);
 		
 		
@@ -388,7 +389,7 @@ public class FicheClient extends JDialog {
 				setVisible(false);
 			}			
 		});
-			
+
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 		

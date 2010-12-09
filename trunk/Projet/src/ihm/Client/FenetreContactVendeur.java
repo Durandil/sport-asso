@@ -23,6 +23,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import metier.Message;
@@ -36,7 +37,7 @@ public class FenetreContactVendeur extends JDialog{
 	private static final long serialVersionUID = 1L;
 	private Message message = new Message();
 	private JTextField sujet;
-	private TextArea contenu;
+	private JTextArea contenu;
 	private JLabel sujetLabel,contenuLabel,introduction,texte;
 	
 	// Constructeur de la fentre qui sera initialisée avec initComponent()
@@ -85,7 +86,10 @@ public class FenetreContactVendeur extends JDialog{
 		contenuPan.setPreferredSize(new Dimension(260, 150));
 		contenuPan.setBorder(BorderFactory.createTitledBorder("Contenu du message"));
 		contenuLabel = new JLabel("Contenu : ");
-		contenu = new TextArea();
+		contenu = new JTextArea(5,10);
+		contenu.setBorder(BorderFactory.createLineBorder(Color.black));
+		contenu.setLineWrap(true);
+		contenu.setWrapStyleWord(true);
 		contenu.setPreferredSize(new Dimension(150, 100));
 		contenuPan.add(contenuLabel);
 		contenuPan.add(contenu);

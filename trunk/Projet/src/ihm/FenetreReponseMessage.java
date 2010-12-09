@@ -57,6 +57,7 @@ public class FenetreReponseMessage extends JFrame {
 		JPanel panneauContenuMessage= new JPanel();
 		panneauContenuMessage.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 		contenuMessage = new JTextArea(8,30);
+		contenuMessage.setBorder(BorderFactory.createLineBorder(Color.black));
 		contenuMessage.setEnabled(true);
 		contenuMessage.setLineWrap(true);
 		contenuMessage.setWrapStyleWord(true);

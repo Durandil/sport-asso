@@ -52,12 +52,12 @@ public class FenetreCatalogueGerant extends JFrame{
         
     private void initComponent(){
     	
-    	JPanel panneauHaut= new JPanel();
+    	final JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new GridLayout(2,1,5,5));
     	
     	// Récupération et ajout de l'image sur un panneau de la fenetre principale
     	icon = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
-		JPanel panIcon = new JPanel();
+		final JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.add(icon);
     	
@@ -73,10 +73,10 @@ public class FenetreCatalogueGerant extends JFrame{
 		
 		
 		// Création du panneau qui accueille les boutons du haut permettant la gestion des articles
-    	JPanel panneauBoutonHaut= new JPanel();
+    	final JPanel panneauBoutonHaut= new JPanel();
     	panneauBoutonHaut.setLayout(new GridLayout(1,4,5,5));
     	
-    	JButton boutonAjouter=new JButton("Ajouter");
+    	final JButton boutonAjouter=new JButton("Ajouter");
     	boutonAjouter.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -85,6 +85,7 @@ public class FenetreCatalogueGerant extends JFrame{
 				
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
 				formulaire.setVisible(true);
+				System.out.println("nombre lignes tableau avant ajout "+modTabCatalogue.getRowCount());
 				
 				modTabCatalogue.ajouterLigne();
 				modTabCatalogue.fireTableRowsInserted(modTabCatalogue.getRowCount(),modTabCatalogue.getRowCount());
@@ -114,14 +115,16 @@ public class FenetreCatalogueGerant extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				// suppression de l'article selectionné dans le catalogue
+				
 				int ligne = tableau.getSelectedRow();
 				String numArticle= tableau.getValueAt(ligne, 0).toString();
 
 				Article.supprimerArticleBDD(numArticle);
 //				
+				//modTabCatalogue = new ModeleTableauCatalogue();
 				modTabCatalogue.actualiserTableau(false);
-				modTabCatalogue.fireTableRowsDeleted(ligne, ligne);
-				modTabCatalogue.fireTableDataChanged();
+//				modTabCatalogue.fireTableRowsDeleted(ligne, ligne);
+//				modTabCatalogue.fireTableDataChanged();
 //				numerosLignesSupprimees.add(ligne);
 				
 //				JOptionPane supprime = new JOptionPane();
@@ -134,6 +137,8 @@ public class FenetreCatalogueGerant extends JFrame{
 				setVisible(false);
 				
 				**/
+				
+				repaint();
 				
 			}
 		});
