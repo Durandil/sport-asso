@@ -20,8 +20,8 @@ public class Commande {
 
 	
 	
-	// Le Constructeur ajoute la Commande à la table COMMANDES
-	// Et met à jour la table générique INFOCOMMANDES
+	// Le Constructeur ajoute la Commande à la table COMMANDE
+	// Et met à jour la table générique LISTING_ARTICLES_COMMANDES
 	public Commande(String idCommande, String idClient,
 			ArrayList<LigneCommande> liste, Date date) {
 		this.idCommande = idCommande;
@@ -70,6 +70,10 @@ public class Commande {
 		this.date = date;
 	}
 	
+	
+//	Méthode qui comme son nom l'indique prépare le panier en récupérant la liste des identifiants des articles
+//	qui sont disponibles
+	
 	public static ArrayList<String[]> preparerPanier(){
 		ArrayList<String[]> panierClient = new ArrayList<String[]>();
 		ArrayList<String> listeClients=SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK > 0");
@@ -82,6 +86,8 @@ public class Commande {
 		
 	}
 	
+
+//	Méthode qui comme son nom l'indique vide le panier en replaçant chacun de ses élément par "0"
 	public static void viderPanier(ArrayList<String[]> panier){
 		
 		for (int i =0; i< panier.size(); i++){
@@ -141,7 +147,7 @@ public class Commande {
 		
 	}
 	
-	// Méthode permettant d'ajouter cette commande à la table COMMANDES
+	// Méthode permettant d'ajouter cette commande à la table COMMANDE
 	public void ajouterBDD() {
 
 		String s = SGBD.transformation(this.date);
@@ -178,7 +184,7 @@ public class Commande {
 		SGBD.executeUpdate(requete);
 	}
 
-	// Méthode qui met à jour la table INFOCOMMANDES 
+	// Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES
 	public void majInfoCommandes() {
 
 		String requete = null;

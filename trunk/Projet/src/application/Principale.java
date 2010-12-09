@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import metier.Article;
 import metier.Association;
-import metier.Categorie;
+//import metier.Categorie;
 import metier.Commande;
 import metier.Gerant;
 import metier.LigneCommande;
@@ -29,12 +29,12 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 /** TODO : Instancier un client via l'ihm**/
 		//Initialiser la base de données
-		BDD.init();
+		//BDD.init();
 		
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 		
 		
-		//FenetreCompte fen=new FenetreCompte();
+		FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		

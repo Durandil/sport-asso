@@ -85,9 +85,6 @@ public class BDD {
 				" DENOMINATIONCLIENT VARCHAR(40),"+
 				" ADRESSECLIENT VARCHAR(60),"+
 				" IDVILLE CHAR(8),"+
-				/** NOMVILLE et CODEPOSTAL sont désormais redondants dans la BDD**/
-//				" NOMVILLE VARCHAR(40),"+
-//				" CODEPOSTAL CHAR(5)," +
 				" TELEPHONE CHAR(10),"+
 				" ETATCOMPTE VARCHAR(10),"+
 				"MOTDEPASSE VARCHAR(20),"+
