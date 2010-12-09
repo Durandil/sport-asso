@@ -4,11 +4,22 @@ import java.util.ArrayList;
 
 import basededonnees.SGBD;
 
+//	La classe Carte Fidelite représente une carte de fidélité.
+//	Celle-ci se décrit par son identifiant, l'identifiant du client auquel elle se rattache
+//	ainsi que le nombre de points qu'elle possède
+	
+
 public class CarteFidelite {
 	
 	private String idCarte;
 	private String idClient;
 	private int nombreDePoints;
+	
+	
+	
+//	Constructeur de la carte de fidélité
+//	Il ne prend pas en paramètre l'identifiant de la carte car ce dernier est automatiquement généré lorsque
+//	la carte est ajoutée dans la base
 	
 	public CarteFidelite(String idClient, int nombreDePoints) {
 		super();
@@ -37,6 +48,9 @@ public class CarteFidelite {
 		this.nombreDePoints = nombreDePoints;
 	}
 
+//	Méthode ajoutant la carte de fidélité dans la base
+//	Elle génère de ce fait un identifiant
+	
 	public void ajouterBDD(){
 		
 			

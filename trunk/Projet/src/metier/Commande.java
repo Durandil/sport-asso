@@ -71,7 +71,7 @@ public class Commande {
 	}
 	
 	
-//	Méthode qui comme son nom l'indique prépare le panier en récupérant la liste des identifiants des articles
+//	Méthode qui prépare le panier en récupérant la liste des identifiants des articles
 //	qui sont disponibles
 	
 	public static ArrayList<String[]> preparerPanier(){
@@ -87,7 +87,7 @@ public class Commande {
 	}
 	
 
-//	Méthode qui comme son nom l'indique vide le panier en replaçant chacun de ses élément par "0"
+//	Méthode qui vide le panier en replaçant chacun de ses élément par "0"
 	public static void viderPanier(ArrayList<String[]> panier){
 		
 		for (int i =0; i< panier.size(); i++){
@@ -96,6 +96,7 @@ public class Commande {
 		
 	}
 	
+//	Méthode qui recherche un article dans le panier et communique la quantité correspondante
 	public static int rechercheArticleDansPanier(String idArticle,ArrayList<String[]> panierClient){
 		int compteurRechercheIdentifiant=0;
 		boolean trouve=false;
@@ -110,7 +111,10 @@ public class Commande {
 		}
 		return compteurRechercheIdentifiant;
 	}
+
 	
+//	Méthode qui ajoute une quantité spécifique d'un article dans le panier 
+
 	public static void ajouterArticlePanier(String idArticle, String quantite,ArrayList<String[]> panier){
 		String stockArticle= SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
 		int compteurRechercheIdentifiant=rechercheArticleDansPanier(idArticle, panier);
@@ -128,6 +132,7 @@ public class Commande {
 		
 	}
 	
+//	Méthode qui enlève une quantité spécifique d'un article dans le panier 
 	public static void enleverArticlePanier(String idArticle, String quantite,ArrayList<String[]> panier){
 		int compteurRechercheIdentifiant=rechercheArticleDansPanier(idArticle, panier);
 		JOptionPane pbStockZero;
@@ -203,6 +208,7 @@ public class Commande {
 
 	}
 
+	// Méthode qui met à jour l'état d'un article en fonction de la quantité disponible
 	public void majArticles(){
 		String requete = null ;
 		String nomArticle=null;

@@ -72,6 +72,8 @@ public class Promotion {
 	}
 	
 
+//	Ajoute la promotion dans la base de données et génère un identifiant
+	
 	
 	public void ajouterBDD() {
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_PROMOTION.NEXTVAL");
@@ -125,6 +127,8 @@ public class Promotion {
 		SGBD.executeUpdate(requete);
 	}
 	
+	
+//	Méthode permettant de modifier la promotion dans la base de données
 	public void modifierPromoBDD(){
 		String dateD = SGBD.transformation(this.dateDebut);
 		String dateF = SGBD.transformation(this.dateFin);
@@ -138,7 +142,8 @@ public class Promotion {
 		
 		SGBD.executeUpdate(requete);
 	}
-	
+
+//	Méthode permettant de supprimer la promotion de la base de données
 	public static void supprimerPromoBDD(String idPromotion){
 		
 		String requete= "DELETE FROM PROMO WHERE IDARTICLE='"+idPromotion+"'";
@@ -146,6 +151,7 @@ public class Promotion {
 		SGBD.executeUpdate(requete);	
 	}
 	
+//	Méthode vérifiant si la date saisie est cohérente
 	public static boolean verifierDatePromotion(String annee,String mois,String jour) throws Exception{
 		boolean resultat=true;
 		String dateP = jour+mois+annee;
@@ -177,6 +183,7 @@ public class Promotion {
 		return resultat;
 	}
 	
+//	Méthode vérifiant si la 1ère date entrée en paramètre précède bien celle entrée en 2ème paramètre
 	public static boolean verifierOrdreDeuxDate(String anneeAvant,String moisAvant,String jourAvant,String anneeApres,String moisApres,String jourApres) throws Exception{
 		boolean resultat=true;
 		

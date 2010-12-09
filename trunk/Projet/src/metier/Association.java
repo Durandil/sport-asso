@@ -105,7 +105,6 @@ public class Association extends Client {
 	}
 	
 //	Cette méthode insère une nouvelle ligne dans la table CARTE_FIDELITE
-//	Elle débute par une génération d'identifiant puis ajoute les autres informations dans la table
 	
 	public void ajouterFideliteBDD(){
 		if (this.estFidele) {
