@@ -89,6 +89,12 @@ public class FenetreCatalogueGerant extends JFrame{
 				modTabCatalogue.ajouterLigne();
 				modTabCatalogue.fireTableRowsInserted(modTabCatalogue.getRowCount(),modTabCatalogue.getRowCount());
 				
+				/** solution alternative si on ne résoud pas le pb de l'affichage :
+				
+				setVisible(false);
+				
+				**/
+				
 //				if(modificationTableau==true){
 //					panneauTableau.remove(tab);
 //					modTabCatalogue = new ModeleTableauCatalogue(false,true);
@@ -96,7 +102,7 @@ public class FenetreCatalogueGerant extends JFrame{
 //				    final JScrollPane tab = new JScrollPane(tableau);
 //				    panneauTableau.add(tab);
 //				}
-				//setVisible(false);
+				
 				
 			}
 		});
@@ -122,7 +128,12 @@ public class FenetreCatalogueGerant extends JFrame{
 //				ImageIcon image = new ImageIcon("src/images/information.png");
 //				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
 //				tableau.removeRowSelectionInterval(ligne, ligne);
-//				setVisible(false);
+
+				/** solution alternative si on ne résoud pas le pb de l'affichage :
+				
+				setVisible(false);
+				
+				**/
 				
 			}
 		});
@@ -163,7 +174,11 @@ public class FenetreCatalogueGerant extends JFrame{
 				finally{
 					FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
 					formulaire.setVisible(true);
-					//setVisible(false);
+					/** solution alternative si on ne résoud pas le pb de l'affichage :
+					
+					setVisible(false);
+					
+					**/
 				}
 				
 			}
