@@ -68,9 +68,7 @@ public class MenuGerant extends JFrame {
 				FenetreRechercheClient recherche = new FenetreRechercheClient(null, "Recherche de clients", true);
 				recherche.setVisible(true);
 				ArrayList<String> liste = new ArrayList<String>();
-				
-				
-				
+					
 			}
 		});
 		

@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -147,6 +148,17 @@ public class FenetreCommandeArticle extends JFrame{
 						java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
 					
 						Commande nouvelleCommande = new Commande(null, FenetreDialogIdentification.clientUserIdentifiant, listeArticlesPanier, dateJour);
+						try {
+							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
+							for(LigneCommande ligne : listeArticlesPanier){
+								System.out.println(ligne.getArticle()+ " qté : " + ligne.getQuantite());
+							}
+							System.out.println("Montant commande : " + montantCommande);
+							
+							System.out.println();
+						} catch (SQLException e1) {
+							e1.printStackTrace();
+						}
 					}
 					else{
 						erreur = new JOptionPane();
@@ -252,8 +264,6 @@ public class FenetreCommandeArticle extends JFrame{
 				
 			}			
 		});
-		
-		
 		
 		panneauBouton.add(commanderArticle);
 		panneauBouton.add(boutonValider);
