@@ -7,12 +7,12 @@ public class PromotionTest extends TestCase {
 	
 	// test ok
 	
-//	public void testVerifierDatePromotion() throws Exception{
-//		assertTrue( Promotion.verifierDatePromotion("2015", "12", "24"));
-//		assertFalse( Promotion.verifierDatePromotion("2011", "02", "30"));
-//		assertFalse( Promotion.verifierDatePromotion("2014", "4", "31"));
-//		
-//	}
+	public void testVerifierDatePromotion() throws Exception{
+		assertTrue( Promotion.verifierDatePromotion("2015", "12", "24"));
+		assertFalse( Promotion.verifierDatePromotion("2011", "02", "30"));
+		assertFalse( Promotion.verifierDatePromotion("2014", "4", "31"));
+		
+	}
 
 	// test ok
 	
