@@ -49,6 +49,7 @@ public class MenuGerant extends JFrame {
 		this.setPreferredSize(new Dimension(900,600));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(0,0);
+		this.setResizable(false);
 		
 		this.setLayout(new BorderLayout());
 		icon = new JLabel(new ImageIcon("src/images/fenetre.jpg"));

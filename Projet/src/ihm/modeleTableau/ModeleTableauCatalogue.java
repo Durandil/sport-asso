@@ -27,7 +27,9 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		// TODO Auto-generated constructor stub
 		donnees= new Object[1000][5];
 	}
-
+	
+	
+	
 
 	public ModeleTableauCatalogue(boolean pourReapprovisionnement,boolean pourTableauGerant){
 		super();
@@ -104,16 +106,23 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		}
 	}
 	
+
+	
+	
+	
 	public void ajouterLigne(){
 		ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
 		ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
 		ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
 		ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
 		
-		donnees[listeIdentifiants.size()][0]= listeIdentifiants.get(listeIdentifiants.size());
-		donnees[listeIdentifiants.size()][1]= listeDescriptions.get(listeIdentifiants.size());
-		donnees[listeIdentifiants.size()][2]= listeStocks.get(listeIdentifiants.size());
-		donnees[listeIdentifiants.size()][3]= listeEtats.get(listeIdentifiants.size());
+		System.out.println("nombre d'articles après ajout : "+ listeIdentifiants.size());
+		System.out.println(listeIdentifiants.get(listeIdentifiants.size()-1));
+		
+		donnees[listeIdentifiants.size()][0]= listeIdentifiants.get(listeIdentifiants.size()-1);
+		donnees[listeIdentifiants.size()][1]= listeDescriptions.get(listeIdentifiants.size()-1);
+		donnees[listeIdentifiants.size()][2]= listeStocks.get(listeIdentifiants.size()-1);
+		donnees[listeIdentifiants.size()][3]= listeEtats.get(listeIdentifiants.size()-1);
 	}
 	
 	public void actualiserTableau(boolean pourReapprovisionnement){
