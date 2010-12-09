@@ -66,6 +66,7 @@ public class FenetreCatalogueGerant extends JFrame{
 		
 		modTabCatalogue = new ModeleTableauCatalogue(false,true);
 	    tableau = new JTable(modTabCatalogue);
+
 	    final JScrollPane tab = new JScrollPane(tableau);
 	    panneauTableau.add(tab);
 	    this.getContentPane().add(panneauTableau, BorderLayout.CENTER);
@@ -85,13 +86,17 @@ public class FenetreCatalogueGerant extends JFrame{
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
 				formulaire.setVisible(true);
 				
-				if(modificationTableau==true){
-					panneauTableau.remove(tab);
-					modTabCatalogue = new ModeleTableauCatalogue(false,true);
-				    tableau = new JTable(modTabCatalogue);
-				    final JScrollPane tab = new JScrollPane(tableau);
-				    panneauTableau.add(tab);
-				}
+				modTabCatalogue.ajouterLigne();
+				modTabCatalogue.fireTableRowsInserted(modTabCatalogue.getRowCount(),modTabCatalogue.getRowCount());
+				
+//				if(modificationTableau==true){
+//					panneauTableau.remove(tab);
+//					modTabCatalogue = new ModeleTableauCatalogue(false,true);
+//				    tableau = new JTable(modTabCatalogue);
+//				    final JScrollPane tab = new JScrollPane(tableau);
+//				    panneauTableau.add(tab);
+//				}
+				//setVisible(false);
 				
 			}
 		});
@@ -105,23 +110,20 @@ public class FenetreCatalogueGerant extends JFrame{
 				// suppression de l'article selectionné dans le catalogue
 				int ligne = tableau.getSelectedRow();
 				String numArticle= tableau.getValueAt(ligne, 0).toString();
-				
+
 				Article.supprimerArticleBDD(numArticle);
-				
-				numerosLignesSupprimees.add(ligne);
+//				
+				modTabCatalogue.actualiserTableau(false);
+				modTabCatalogue.fireTableRowsDeleted(ligne, ligne);
+				modTabCatalogue.fireTableDataChanged();
+//				numerosLignesSupprimees.add(ligne);
 				
 //				JOptionPane supprime = new JOptionPane();
 //				ImageIcon image = new ImageIcon("src/images/information.png");
 //				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
 //				tableau.removeRowSelectionInterval(ligne, ligne);
-		
-//				if(modificationTableau=true){
-//					remove(tableau);
-//					modTabCatalogue = new ModeleTableauCatalogue(false,true);
-//					tableau = new JTable(modTabCatalogue);
-//					getContentPane().add(tableau,"Center");
-//					modificationTableau=false;
-//				}
+//				setVisible(false);
+				
 			}
 		});
     	
@@ -161,7 +163,7 @@ public class FenetreCatalogueGerant extends JFrame{
 				finally{
 					FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
 					formulaire.setVisible(true);
-				
+					//setVisible(false);
 				}
 				
 			}
@@ -217,7 +219,7 @@ public class FenetreCatalogueGerant extends JFrame{
 			}			
 		});
 			
-		panneauBouton.add(boutonRafraichirTableau);
+		//panneauBouton.add(boutonRafraichirTableau);
 		panneauBouton.add(retourBouton);
 			
 		// Ajout du panneau des boutons au "panneau principal" qui héberge tous les autres panneaux

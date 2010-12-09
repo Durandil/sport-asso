@@ -37,6 +37,12 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	String itemSportSelectionne="";
 	String itemPrixSelectionne="";
 	Dimension dimensionStandard = new Dimension(220, 60);
+	JPanel panDescription = new JPanel();
+	JPanel panPoids = new JPanel();
+	JPanel panCategoriePrix = new JPanel();
+	JPanel panCategorieSport = new JPanel();
+	JPanel panStock = new JPanel();
+	JPanel panPrixInitial = new JPanel();
 	
 	// Constructeur pour l'ajout d'un article
 	public FenetreFormulaireArticleGerant(JFrame parent, String title, boolean modal ){
@@ -61,14 +67,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	
 	private void initComponent(){
 		JPanel panneauCentral = new JPanel();
-		
-		JPanel panDescription = new JPanel();
-		JPanel panPoids = new JPanel();
-		JPanel panCategoriePrix = new JPanel();
-		JPanel panCategorieSport = new JPanel();
-		JPanel panStock = new JPanel();
-		JPanel panPrixInitial = new JPanel();
-		
 
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
@@ -126,14 +124,14 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		
 		catPrixBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				itemPrixSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
 		catSportBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				itemSportSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -223,12 +221,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		
 		JPanel panneauCentral = new JPanel();
 		
-		JPanel panDescription = new JPanel();
-		JPanel panPoids = new JPanel();
-		JPanel panStock = new JPanel();
-		JPanel panPrixInitial = new JPanel();
-		JPanel panCategoriePrix = new JPanel();
-		JPanel panCategorieSport = new JPanel();
 		
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
@@ -285,14 +277,14 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		
 		catPrixBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				itemPrixSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
 		catSportBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				itemSportSelectionne=(String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
@@ -329,7 +321,6 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		boutonConfirmation.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				// enregistrer la modification d'article 
 				Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText(),itemPrixSelectionne,itemSportSelectionne);
 				
