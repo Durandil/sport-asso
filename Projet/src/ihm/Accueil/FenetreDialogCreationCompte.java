@@ -41,7 +41,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = true;
-	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise ;
+	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise, champsDifferents ;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
 	
@@ -260,6 +260,12 @@ public class FenetreDialogCreationCompte extends JDialog{
 				 * pour que Dénomination se grise.
 				 */
 				
+				if(! identifiant.getText().equals(identifiantVerification.getText())){
+					champsDifferents = new JOptionPane();
+					ImageIcon image = new ImageIcon("src/images/warning.png");
+					champsDifferents.showMessageDialog(null, "Le champ de vérification ne correspond pas au champ initial. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+				}
+				else{
 				//listeMails recense l'ensemble des adresses mails présentes dans la base
 				//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 				//Si test reste à 0, on ajoute le client dans la BDD
@@ -318,6 +324,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 					//System.out.println(FenetreDialogIdentification.clientUserIdentifiant);
 					MenuUtilisateur men = new MenuUtilisateur();
 				}
+			}
 			}
 						
 		});

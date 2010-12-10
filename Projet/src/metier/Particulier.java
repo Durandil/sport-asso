@@ -31,14 +31,65 @@ import basededonnees.SGBD;
 
 public class Particulier extends Client {
 
+	/**
+	 * Le nom du client
+	 * 
+	 * @see Particulier#ajouterBDD()
+	 * @see Particulier#modifierBDDparticulier(String, String, String, String, String, String)
+	 * 
+	 */
 	private String nom;
+	
+	
+	/**
+	 * Le prénom du client
+	 * 
+	 * @see Particulier#ajouterBDD()
+	 * @see Particulier#modifierBDDparticulier(String, String, String, String, String, String)
+	 * 
+	 */
 	private String prenom;
 
-	// Constructeur d'un client Particulier
-	// Le Particulier est défini (entre autres) par un nom et un prénom
-
-	// Le constructeur permet d'ajouter le particulier dans la base CLIENTS
-	// Et génère un mot de passe lors de l'instanciation
+	/**
+	 * Constructeur de la classe Particulier
+	 * <p>
+	 * Le constructeur de la classe Particulier fait appel à la méthode ajouterBDD()
+	 * qui l'ajoute dans la base de données. 
+	 * La méthode ajouterFideliteBDD() instancie un nouvel objet CarteFidelite et de ce fait
+	 * crée une nouvelle ligne dans la table CARTE_FIDELITE si le client a émis 
+	 * le souhait de posséder une carte.
+	 * L'état du compte est par défaut initialisé sur Activé (booléen estActif vrai)
+	 * Le mot de passe est généré automatiquement.
+	 * </p>
+	 * 
+	 * @param nom
+	 *            Le nom du client
+	 * @param prénom
+	 *            Le prénom du client
+	 * @param mail
+	 *            Le mail de l'association, qui est utilisé comme identifiant et n'est pas modifiable par le client
+	 * @param adresse
+	 *            L'adresse de l'association
+	 * @param idVille
+	 *            L'identifiant de la ville où est basée l'association
+	 * @param telephone
+	 *            Le numéro de téléphone de l'association
+	 * @param estFidele
+	 *            Détermine si l'association possède une carte de fidélité ou non du magasin
+	 *            
+	 * @see Particulier#nom
+	 * @see Particulier#prenom
+	 * @see Utilisateur#mail
+	 * @see Utilisateur#adresse
+	 * @see Client#idVille
+	 * @see Utilisateur#telephone
+	 * @see Client#particulierAssociation
+	 * @see Client#estFidele
+	 * @see Client#estActif
+	 * @see Utilisateur#motDePasse
+	 * @see Particulier#ajouterFideliteBDD()
+	 * @see Particulier#ajouterBDD()
+	 */
 	public Particulier(String nom, String prenom, String mail, String adresse,
 			 String idVille,
 			String telephone, boolean estFidele) {
@@ -72,18 +123,22 @@ public class Particulier extends Client {
 		this.prenom = prenom;
 	}
 
-	// Méthode permettant d'ajouter à la table CLIENTS une association
-	// *Note* Le fait d'avoir une carte de fidélité/d'avoir un compte activé
-	// est pris en compte dans l'insertion
+	/**
+	 * Ajoute le particulier dans la table CLIENT de la base de données
+	 * 
+	 * <p>
+	 * Cette méthode commence par créer une chaîne de caractères dépendant de 
+	 * la valeur du booléen (Désactivé si le booléen est faux, Activé sinon)
+	 * 
+	 * La requête se construit ensuite en fonction des caractéristiques de l'article
+	 * saisies lors de l'appel du constructeur
+	 * </p> 
+	 * 
+	 * @see BDD
+	 */
 	public void ajouterBDD() {
-		String fidele = null;
+		
 		String actif = null;
-
-		if (this.estFidele == false) {
-			fidele = "Non";
-		} else {
-			fidele = "Oui";
-		}
 
 		if (this.estActif == false) {
 			actif = "Désactivé";
@@ -121,7 +176,17 @@ public class Particulier extends Client {
 
 	}
 
-//	Cette méthode insère une nouvelle ligne dans la table CARTE_FIDELITE
+	/**
+	 * Crée un nouvel objet CarteFidelite si le client a signalé son souhait de posséder une carte de fidélité
+	 * 
+	 * <p>
+	 * De ce fait, la table CARTE_FIDELITE est mise à jour (plus de précisions
+	 * dans le commentaire concernant ce constructeur)
+	 * </p> 
+	 * 
+	 * @see CarteFidelite#CarteFidelite(String, int)
+	 * @see BDD
+	 */
 		
 	
 	public void ajouterFideliteBDD() {
@@ -132,9 +197,19 @@ public class Particulier extends Client {
 		}
 	}
 	
-//	Cette méthode est appelée lorsque le client désire modifier certaines informations le concernant
-//	Elle récupère en premier lieu l'idVille correspondant au code postal saisi par le client et met ensuite
-//	à jour la table CLIENT
+	/**
+	 * Modifie les caractéristiques du particulier dans la table CLIENT de la base de données
+	 * 
+	 * <p>
+	 * Étant donné que le client peut modifier son code postal et non l'identifiant de la ville
+	 * (auquel il n'a pas accès), la méthode commence par récupérer cet identifiant dans la table VILLE
+	 *
+	 * La requête se construit ensuite en fonction des caractéristiques de l'article
+	 * saisies lors de l'appel de la méthode
+	 * </p> 
+	 * 
+	 * @see BDD
+	 */
 	
 	public static void modifierBDDparticulier(String idClient, String nom,
 			String prenom, String adresse,String codePostal, String telephone) {

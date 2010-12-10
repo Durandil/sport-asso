@@ -137,7 +137,7 @@ public class FenetreCommandeArticle extends JFrame{
 					// est supérieure à 0
 					for(String[] article : panierClient){
 						if(Integer.parseInt(article[1])>0){
-							listeArticlesPanier.add(new LigneCommande(article[0],article[1]));
+							listeArticlesPanier.add(new LigneCommande(article[0],Integer.parseInt(article[1])));
 						}
 					}
 					

@@ -158,6 +158,7 @@ public class BDD {
 		
 		SGBD.executeUpdate("CREATE SEQUENCE S_VUESTATARTICLE Increment by 1 start with 2");
 		
+		SGBD.executeUpdate("COMMIT");
 	}
 	
 
