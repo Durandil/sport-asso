@@ -72,21 +72,66 @@ public class CarteFidelite {
 		ajouterBDD();
 	}
 
+	 /**
+     * Retourne l'id de la carte de fidélité
+     * 
+     * @return L'identifiant de la carte de fidélité
+     * 
+     */
 	public String getIdCarte() {
 		return idCarte;
 	}
+	
+	
+    /**
+     * Met à jour l'identifiant de la carte de fidélité
+     * 
+	 * @param idCarte
+	 *            L'identifiant de la carte de fidélité
+     * 
+     */
 	public void setIdCarte(String idCarte) {
 		this.idCarte = idCarte;
 	}
+	
+	 /**
+     * Retourne le mail du client (son identifiant)
+     * 
+     * @return L'identifiant du client
+     * 
+     */
 	public String getIdClient() {
 		return idClient;
 	}
+	
+    /**
+     * Met à jour l'identifiant du client
+     * 
+	 * @param idClient
+	 *            L'identifiant du client
+     * 
+     */
 	public void setIdClient(String idClient) {
 		this.idClient = idClient;
 	}
+	
+	 /**
+     * Retourne le nombre de points de la carte de fidélité
+     * 
+     * @return Le nombre de points de la carte de fidélité
+     * 
+     */
 	public int getNombreDePoints() {
 		return nombreDePoints;
 	}
+	
+    /**
+     * Met à jour le nombre de points de la carte de fidélité
+     * 
+	 * @param  nombreDePoints
+	 *            Le nombre de points de la carte de fidélité
+     * 
+     */
 	public void setNombreDePoints(int nombreDePoints) {
 		this.nombreDePoints = nombreDePoints;
 	}

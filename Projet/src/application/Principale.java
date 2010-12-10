@@ -13,7 +13,6 @@ import metier.Article;
 import metier.Association;
 //import metier.Categorie;
 import metier.Commande;
-import metier.Gerant;
 import metier.LigneCommande;
 import metier.Message;
 import metier.Particulier;

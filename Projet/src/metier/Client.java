@@ -2,14 +2,18 @@ package metier;
 
 import basededonnees.SGBD;
 
-
 /**
- * <b>La classe abstraite Client représente un clientn</b>
+ * <b>La classe abstraite Client représente un client</b>
  * <p>
  * Les classes Particulier et Association héritent de la classe Client et de ce
  * fait ont pour caractéristiques communes (en plus de celles répertoriées dans
  * la classe Utilisateur :
  * <ul>
+ * <li>Une adresse mail qui sert d'identifiant unique et non modifiable par le client</li>
+ * <li>Une adresse</li>
+ * <li>L'identifiant de la ville de l'utilisateur</li>
+ * <li>Un numéro de téléphone</li>
+ * <li>Un mot de passe généré automatiquement</li>
  * <li>Un statut (Particulier ou Association)</li>
  * <li>Un booléen indiquant la possession d'une carte de fidélité (ou non)</li>
  * <li>Un booléen indiquant si le compte du client est actif</li>
@@ -21,7 +25,49 @@ import basededonnees.SGBD;
  * 
  * @see Particulier, Association
  */
-public abstract class Client extends Utilisateur{
+public abstract class Client{
+	
+	/**
+	 * Le mail du client, non modifiable
+	 * 
+	 * @see Particulier, Association
+	 * 
+	 */
+	protected String mail;
+	
+	/**
+	 * L'adresse du client
+	 * 
+	 * @see Particulier, Association
+	 * 
+	 */
+	protected String adresse;
+	
+	/**
+	 * L'identifiant de la ville du client
+	 * 
+	 * @see Particulier, Association
+	 * 
+	 */
+	protected String idVille;
+	
+	/**
+	 * Le numéro de téléphone du client
+	 * 
+	 * @see Particulier, Association
+	 * 
+	 */
+	protected String telephone;
+	
+	/**
+	 * Le mot de passe du client
+	 * 
+	 * @see Particulier, Association
+	 * @see Client#genererMdp()
+	 * 
+	 */
+	protected String motDePasse;
+	
 	
 	/**
 	 * Le statut du client
@@ -45,6 +91,107 @@ public abstract class Client extends Utilisateur{
 
 	
 
+	
+	 /**
+     * Retourne le mail du client (son identifiant)
+     * 
+     * @return Le mail du client
+     * 
+     */
+	public String getMail() {
+		return mail;
+	}
+
+	 /**
+     * Met à jour le mail du client
+     * 
+	 * @param mail
+	 *            Le mail du client
+     * 
+     */
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	 /**
+     * Retourne l'adresse du client
+     * 
+     * @return L'adresse du client
+     * 
+     */
+	public String getAdresse() {
+		return adresse;
+	}
+
+	 /**
+     * Met à jour l'adresse du client
+     * 
+	 * @param mail
+	 *            L'adresse du client
+     */
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
+	}
+
+	 /**
+     * Retourne le numéro de téléphone du client
+     * 
+     * @return Le numéro de téléphone du client
+     * 
+     */
+	public String getTelephone() {
+		return telephone;
+	}
+
+	 /**
+     * Met à jour le numéro de téléphone du client
+     * 
+	 * @param telephone
+	 *            Le numéro de téléphone du client
+     */
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	
+	 /**
+     * Retourne l'identifiant de la ville du client
+     * 
+     * @return L'identifiant de la ville du client
+     * 
+     */
+	public String getIdVille() {
+		return idVille;
+	}
+
+	 /**
+     * Met à jour l'identifiant de la ville du client
+     * 
+	 * @param idVille
+	 *            L'identifiant de la ville du client
+     */
+	public void setIdVille(String idVille) {
+		this.idVille = idVille;
+	}
+
+	 /**
+     * Retourne le mot de passe du client
+     * 
+     * @return Le mot de passe du client
+     * 
+     */
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+	
+	 /**
+     * Met à jour le mot de passe du client
+     * 
+	 * @param motDePasse
+	 *            Le mot de passe du client
+     */
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
+	}
 
 	public String getParticulierAssociation() {
 		return particulierAssociation;
@@ -82,15 +229,35 @@ public abstract class Client extends Utilisateur{
 	 * @see CarteFidelite#CarteFidelite(String, int)
 	 * @see BDD
 	 */
-		
-	
 	public void ajouterFideliteBDD() {
 		if (this.estFidele) {
 				
 					CarteFidelite cf = new CarteFidelite(this.mail, 0);
 					
 		}
-	}	
+	}
+	
+	/**
+	 * Génère un mot de passe de 7 caractères
+	 * 
+	 * <p>
+	 * Cette méthode choisit aléatoirement 7 caractères dans la table des caractères
+	 * ASCII (les 48 premiers caractères sont exclus car trop "exotiques")
+	 * 
+	 *
+	 * </p> 
+	 * 
+	 * @return Le mot de passe généré
+	 * @see Client,Gerant
+	 */
+	protected String genererMdp(){
+		String s = "";
+		for(int i=0;i<7;i++){
+			int a =   (int) ((int)  74* Math.random()) +48;
+			char c = (char) a;
+			 s = s+c;}
+		return s;
+	}
 
 
 // Méthode modifiant l'état du compte client
