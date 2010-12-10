@@ -4,9 +4,8 @@ public abstract class Utilisateur {
 
 	protected String mail;
 	protected String adresse;
-	protected String ville;
+	protected String idVille;
 	protected String telephone;
-	protected String codeCommune;
 	protected String motDePasse;
 
 	protected String genererMdp(){
@@ -42,24 +41,15 @@ public abstract class Utilisateur {
 		this.telephone = telephone;
 	}
 	
-	public String getVille() {
-		return ville;
+	public String getIdVille() {
+		return idVille;
 	}
 
-	public void setVille(String ville) {
-		this.ville = ville;
+	public void setVille(String idVille) {
+		this.idVille = idVille;
 	}
 
 
-
-	public String getCodeCommune() {
-		return codeCommune;
-	}
-
-	public void setCodeCommune(String codeCommune) {
-		this.codeCommune = codeCommune;
-	}
-	
 	public String getMotDePasse() {
 		return motDePasse;
 	}
