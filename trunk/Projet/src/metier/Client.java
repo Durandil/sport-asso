@@ -12,7 +12,6 @@ public abstract class Client extends Utilisateur{
 	protected String particulierAssociation;
 	protected boolean estFidele;
 	protected boolean estActif;
-	protected String motDePasse;
 	protected String idVille;
 	
 
@@ -50,13 +49,7 @@ public abstract class Client extends Utilisateur{
 	}
 
 
-	public String getMotDePasse() {
-		return motDePasse;
-	}
 
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
-	}
 
 // Méthode modifiant l'état du compte client
 	

@@ -212,14 +212,14 @@ public class Commande {
 	public void majArticles(){
 		String requete = null ;
 		String nomArticle=null;
-		String quantiteReservee=null;
+		int quantiteReservee=0;
 		String quantiteEnStock=null;
 		
 		for (int i = 0; i < liste.size(); i++) {
 			nomArticle=liste.get(i).getArticle();
 			quantiteEnStock=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", nomArticle);
 			quantiteReservee=liste.get(i).getQuantite();
-			int nouveauStock=Integer.parseInt(quantiteEnStock)-Integer.parseInt(quantiteReservee);
+			int nouveauStock=Integer.parseInt(quantiteEnStock)-quantiteReservee;
 			
 			String etatArticle="En stock";
 			if(nouveauStock==0){
@@ -254,7 +254,7 @@ public class Commande {
 		// recuperation prix initial et quantite commandee
 		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getArticle());
 		double prixInitial = Double.parseDouble(prixInit);
-		int quantiteCommandee = Integer.parseInt(ligne.getQuantite());
+		int quantiteCommandee = ligne.getQuantite();
 		
 		// recuperation booleen fidelite		
 		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(idClient);

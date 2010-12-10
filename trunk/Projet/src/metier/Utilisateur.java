@@ -7,7 +7,7 @@ public abstract class Utilisateur {
 	protected String ville;
 	protected String telephone;
 	protected String codeCommune;
-	
+	protected String motDePasse;
 
 	protected String genererMdp(){
 		String s = "";
@@ -58,5 +58,13 @@ public abstract class Utilisateur {
 
 	public void setCodeCommune(String codeCommune) {
 		this.codeCommune = codeCommune;
+	}
+	
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 }

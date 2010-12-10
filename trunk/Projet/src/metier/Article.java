@@ -268,7 +268,7 @@ public class Article {
 				+ "')";
 
 		SGBD.executeUpdate(requete);
-
+		SGBD.executeUpdate("COMMIT");
 	}
 
 	
@@ -277,35 +277,39 @@ public class Article {
 	 * Modifie un article qui est déjà présent dans la table ARTICLE de la base de données
 	 * 
 	 * <p>
-	 * Cette méthode commence par récupérer l'indice de séquence de la table afin
-	 * de générer l'identifiant de l'article dans le format approprié.
 	 * La requête se construit ensuite en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel du constructeur
+	 * saisies lors de l'appel de la méthode
 	 * </p> 
+	 * 
+	 * @param idArticle
+	 *            L'identifiant unique de l'article.
+	 * @param description
+	 *            La description de l'article.
+	 * @param prix
+	 *            Le prix de l'article.
+	 * @param poids
+	 *            Le poids de l'article.
+	 * @param stock
+	 *            La quantité en stock de l'article.
+	 * @param idType
+	 *            L'identifiant de la catégorie de sport de l'article.
+	 * @param idCat
+	 *            L'identifiant de la catégorie prix de l'article.
 	 * 
 	 * @see BDD
 	 */
 	
-	public static void modifierArticleBDD(String numArticle,
+	public static void modifierArticleBDD(String idArticle,
 			String description, String prix, String poids, String stock, 
 			String idType, String idCat) {
-
-		// POUR LE MOMENT ON CONSIDERE QU'ON NE MODIFIE PAS LA CATEGORIE DE PRIX
-		// ET DE SPORT
-		// D'UN ARTICLE donc on ne tient pas compte du todo ci dessous
-
-		// TODO pour type de sport et categorie de prix, il faudrait récupérer
-		// l'identifiant à partir du nom qui sera affiché dans le menu déroulant
-		// du formulaire de modification d'un article
 
 
 		String requete = " UPDATE ARTICLE" + " SET DESCRIPTION = '"
 				+ description + "'," + "PRIXINITIAL = '" + prix + "',"
 				+ "STOCK = '" + stock + "', " + "IDTYPE ='"+ idType + "',"
 				+ "IDCATEGORIE ='" + idCat + "',"+ "POIDS = '" + poids
-				+ "' WHERE IDARTICLE='" + numArticle + "'";
+				+ "' WHERE IDARTICLE='" + idArticle + "'";
 
-		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);
 		SGBD.executeUpdate("COMMIT");
@@ -316,13 +320,13 @@ public class Article {
 	 * Supprime l'article dont l'identifiant est spécifié de la table ARTICLE 
 	 * de la base de données
 	 * 
-	 * @param numArticle
+	 * @param idArticle
 	 * 			L'identifiant de l'article
 	 * @see BDD
 	 */
-	public static void supprimerArticleBDD(String numArticle) {
+	public static void supprimerArticleBDD(String idArticle) {
 
-		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='" + numArticle
+		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='" + idArticle
 				+ "'";
 		System.out.println(requete);
 

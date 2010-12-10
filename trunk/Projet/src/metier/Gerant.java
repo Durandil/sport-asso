@@ -9,7 +9,7 @@ public class Gerant extends Utilisateur {
 	
 	private String prenom;
 	private String nom;
-	private String motDePasse;
+
 
 	public Gerant(String nom, String prenom, String mail, String adresse,
 			String ville, String codeCommune, String telephone) {
@@ -19,7 +19,6 @@ public class Gerant extends Utilisateur {
 		this.adresse = adresse;
 		this.codeCommune = codeCommune;
 		this.telephone = telephone;
-	
 		this.motDePasse = genererMdp();
 		System.out.println("Votre mot de passe est : " + this.motDePasse);
 	}
