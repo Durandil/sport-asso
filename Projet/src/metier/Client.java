@@ -2,15 +2,45 @@ package metier;
 
 import basededonnees.SGBD;
 
+
+/**
+ * <b>La classe abstraite Client représente un clientn</b>
+ * <p>
+ * Les classes Particulier et Association héritent de la classe Client et de ce
+ * fait ont pour caractéristiques communes (en plus de celles répertoriées dans
+ * la classe Utilisateur :
+ * <ul>
+ * <li>Un statut (Particulier ou Association)</li>
+ * <li>Un booléen indiquant la possession d'une carte de fidélité (ou non)</li>
+ * <li>Un booléen indiquant si le compte du client est actif</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * 
+ * @see Particulier, Association
+ */
 public abstract class Client extends Utilisateur{
-
-	// Classe Abstraite Client, dont héritent les classes Association et Particulier
-	// De ce fait, sont regroupées ici l'ensemble des caractéristiques communes aux deux entités :
-	// Statut, Fidélité, État du compte, mot de passe, et identifiant de la ville
 	
-
+	/**
+	 * Le statut du client
+	 * 
+	 * @see Association#Association(String, String, String, String, String, boolean)
+	 * @see Particulier#Particulier(String, String, String, String, String, String, boolean)
+	 */	
 	protected String particulierAssociation;
+	
+	/**
+	 * La possession ou non d'une carte de fidélité
+	 * 
+	 * @see Association#Association(String, String, String, String, String, boolean)
+	 * @see Particulier#Particulier(String, String, String, String, String, String, boolean)
+	 */	
 	protected boolean estFidele;
+	
+	
+	
 	protected boolean estActif;
 
 	
@@ -102,7 +132,7 @@ public abstract class Client extends Utilisateur{
 		
 		try{
 			int cp = Integer.parseInt(codePostal);
-			int tel = Integer.parseInt(telephone);
+			long tel = Long.parseLong(telephone);
 			
 			if(cp<=999 | cp>=96000){
 				compteBon=false;

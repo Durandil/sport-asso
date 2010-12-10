@@ -2,15 +2,15 @@
 package basededonnees;
 
 public class BDD {
-/**TODO Gérer les clés primaires et secondaires**/
+
 	
 	//Méthode permettant d'initialiser la création des tables de la BDD
 	public static void init(){
 		
 		
-		/**Attention si la méthode est lancée en dehors de l'Ensai elle ne marchera pas
-		Passer en commentaire la 2ème moitié de la méthode, exécuter la 1ère
-		Puis passer la 1ère en commentaire et exécuter la seconde**/
+//		Attention si la méthode est lancée en dehors de l'Ensai elle ne marchera pas
+//		Passer en commentaire la 2ème moitié de la méthode, exécuter la 1ère
+//		Puis passer la 1ère en commentaire et exécuter la seconde
 		
 		//On commence par supprimer les tables avant de les (re)créer
 		SGBD.executeUpdate("DROP TABLE MESSAGE");
