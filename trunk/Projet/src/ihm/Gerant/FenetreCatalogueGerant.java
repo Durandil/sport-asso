@@ -87,9 +87,9 @@ public class FenetreCatalogueGerant extends JFrame{
 				formulaire.setVisible(true);
 				System.out.println("nombre lignes tableau avant ajout "+modTabCatalogue.getRowCount());
 				
-				modTabCatalogue.ajouterLigne();
-				modTabCatalogue.fireTableRowsInserted(modTabCatalogue.getRowCount(),modTabCatalogue.getRowCount());
-				
+//				modTabCatalogue.ajouterLigne();
+//				modTabCatalogue.fireTableRowsInserted(modTabCatalogue.getRowCount(),modTabCatalogue.getRowCount());
+//				
 				/** solution alternative si on ne résoud pas le pb de l'affichage :
 				
 				setVisible(false);
@@ -122,7 +122,9 @@ public class FenetreCatalogueGerant extends JFrame{
 				Article.supprimerArticleBDD(numArticle);
 //				
 				//modTabCatalogue = new ModeleTableauCatalogue();
-				modTabCatalogue.actualiserTableau(false);
+				
+				//modTabCatalogue.actualiserTableau(false);
+				
 //				modTabCatalogue.fireTableRowsDeleted(ligne, ligne);
 //				modTabCatalogue.fireTableDataChanged();
 //				numerosLignesSupprimees.add(ligne);

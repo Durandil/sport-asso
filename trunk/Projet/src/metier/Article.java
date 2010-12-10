@@ -435,15 +435,17 @@ public class Article {
 	 */
 	public static void supprimerArticleBDD(String idArticle) {
 
-		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='" + idArticle
-				+ "'";
+//		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='" + idArticle
+//				+ "'";
+		String requete ="UPDATE ARTICLE SET ETATARTICLE='Supprimé' WHERE IDARTICLE='"+idArticle+"'";
+		
 		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);
 
-		String requete2 = "COMMIT";
-
-		SGBD.executeUpdate(requete2);
+//		String requete2 = "COMMIT";
+//
+//		SGBD.executeUpdate(requete2);
 	}
 
 	
@@ -476,7 +478,7 @@ public class Article {
 		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);
-		SGBD.executeUpdate("COMMIT");
+//		SGBD.executeUpdate("COMMIT");
 	}
 
 }
