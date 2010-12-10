@@ -22,9 +22,6 @@ import basededonnees.SGBD;
  * <li>Un état (En stock, Rupture de stock, Déstocké, etc.)</li>
  * </ul>
  * </p>
- * <p>
- * 
- * </p>
  * 
  * @see BDD,LigneCommande,Promotion
  */
