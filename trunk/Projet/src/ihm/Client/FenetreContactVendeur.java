@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -106,16 +107,36 @@ public class FenetreContactVendeur extends JDialog{
 		
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// TODO Améliorer la détermination/numérotation des IDMESSAGE
-				// il faudrait ajouter message à la base de données
-				java.util.Date date = new java.util.Date();
+				int verificationChampMessage = Message.verifierChampMessage(contenu.getText(), sujet.getText());
+				System.out.println(verificationChampMessage);
 				
-				@SuppressWarnings("deprecation")
-				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-				message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
-				//message.ajouterBDD();
-				// fermeture de la fenetre
-				setVisible(false);
+				switch (verificationChampMessage) {
+				case 0:
+					java.util.Date date = new java.util.Date();
+				
+					@SuppressWarnings("deprecation")
+					java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+					message=new Message(sujet.getText(),contenu.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
+
+					// fermeture de la fenetre
+					setVisible(false);
+					
+					break;
+				
+				case 1 : 
+					JOptionPane.showMessageDialog(null, "Il y a trop de caractères dans la zone du contenu. Reduisez votre message", "Attention", JOptionPane.ERROR_MESSAGE);	
+					break;
+				case 2 :
+					JOptionPane.showMessageDialog(null, "Il y a trop de caractères dans le champ du sujet. Reduisez l'intitulé", "Attention", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 3 :
+					JOptionPane.showMessageDialog(null, "Votre message contient un caractère interdit : ' ", "Attention", JOptionPane.ERROR_MESSAGE);
+					break;
+				default:
+					break;
+				}
+				
+				
 			}
 		});
 		

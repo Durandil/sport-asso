@@ -324,6 +324,8 @@ public abstract class Client{
 		SGBD.executeUpdate(requete);
 	}
 
+
+
 	/**
 	 * Vérifie le bon format de l'adresse mail, du code postal et du numéro de téléphone saisis
 	 * 
@@ -345,7 +347,7 @@ public abstract class Client{
 	 *            
 	 */
 	
-	public static int verifierCreationComption(String mail,String mailConfirmation,
+	public static int verifierCreationCompte(String mail,String mailConfirmation,
 			String denomination,String nom,String prenom,String telephone,String codePostal){
 		
 		//si le compte ne comporte aucune erreur la fonction retournera 0
@@ -362,7 +364,7 @@ public abstract class Client{
 			compteBon=3;
 		}
 		if(telephone.length() != 10){
-			compteBon=3;
+			compteBon=8;
 		}
 		if(denomination.contains("'") | nom.contains("'") | prenom.contains("'") | mail.contains("'")){
 			compteBon=4;
@@ -375,13 +377,13 @@ public abstract class Client{
 		try{
 			int cp = Integer.parseInt(codePostal);
 			int tel = Integer.parseInt(telephone);
-			
+
 			if(cp<=999 | cp>=96000){
 				compteBon=6;
 			}
-			if(tel<0100000000 | tel>= 0700000000){
-				compteBon = 7;
-			}
+//			if(tel<100000000 | tel>= 700000000){
+//				compteBon = 7;
+//			}
 			
 		}
 		catch(NumberFormatException exc){

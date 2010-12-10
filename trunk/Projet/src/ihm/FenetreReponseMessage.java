@@ -1,6 +1,8 @@
 package ihm;
 
 
+import ihm.Accueil.FenetreDialogIdentification;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -38,6 +41,7 @@ public class FenetreReponseMessage extends JFrame {
 	
 	public void initComponent(boolean reponseDuGerant){
 		
+
 		final boolean reponseGerant = reponseDuGerant;
 		String gerant = "du client";
 		if(reponseDuGerant==true){
@@ -88,12 +92,35 @@ public class FenetreReponseMessage extends JFrame {
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// TODO créer une nouvelle instance de message
-				java.util.Date date = new java.util.Date();
+
+				int verificationChampMessage = Message.verifierChampMessage(contenuMessage.getText(), sujetMessage.getText());
+				System.out.println(verificationChampMessage);
 				
-				@SuppressWarnings("deprecation")
-				java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-				Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreLectureMessage.idExpediteurMessage,dateJour,!reponseGerant);
-				setVisible(false);
+				switch (verificationChampMessage) {
+				case 0:
+					java.util.Date date = new java.util.Date();
+				
+					@SuppressWarnings("deprecation")
+					java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+					Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
+
+					// fermeture de la fenetre
+					setVisible(false);
+					
+					break;
+				
+				case 1 : 
+					JOptionPane.showMessageDialog(null, "Il y a trop de caractères dans la zone du contenu. Reduisez votre message", "Attention", JOptionPane.ERROR_MESSAGE);	
+					break;
+				case 2 :
+					JOptionPane.showMessageDialog(null, "Il y a trop de caractères dans le champ du sujet. Reduisez l'intitulé", "Attention", JOptionPane.ERROR_MESSAGE);
+					break;
+				case 3 :
+					JOptionPane.showMessageDialog(null, "Votre message contient un caractère interdit : ' ", "Attention", JOptionPane.ERROR_MESSAGE);
+					break;
+				default:
+					break;
+				}
 			}			
 		});
 		

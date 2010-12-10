@@ -110,7 +110,6 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}

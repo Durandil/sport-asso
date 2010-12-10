@@ -100,7 +100,7 @@ public class FenetreMessagerie extends JFrame {
 			
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent e) {
 			// l'instruction permet de fermer la fenetre en cours	
 			setVisible(false);
 			}			
