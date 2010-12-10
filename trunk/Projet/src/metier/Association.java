@@ -72,7 +72,7 @@ public class Association extends Client {
 	 * @see Client#estFidele
 	 * @see Client#estActif
 	 * @see Utilisateur#motDePasse
-	 * @see Association#ajouterFideliteBDD()
+	 * @see Client#ajouterFideliteBDD()
 	 * @see Association#ajouterBDD()
 	 */
 
@@ -144,25 +144,7 @@ public class Association extends Client {
 		SGBD.executeUpdate(requete);
 	}
 	
-	/**
-	 * Crée un nouvel objet CarteFidelite si le client a signalé son souhait de posséder une carte de fidélité
-	 * 
-	 * <p>
-	 * De ce fait, la table CARTE_FIDELITE est mise à jour (plus de précisions
-	 * dans le commentaire concernant ce constructeur)
-	 * </p> 
-	 * 
-	 * @see CarteFidelite#CarteFidelite(String, int)
-	 * @see BDD
-	 */
-	
-	public void ajouterFideliteBDD(){
-		if (this.estFidele) {
-			
-			CarteFidelite cf = new CarteFidelite(this.mail, 0);
 
-		}
-	}
 	
 	/**
 	 * Modifie les caractéristiques de l'association dans la table CLIENT de la base de données

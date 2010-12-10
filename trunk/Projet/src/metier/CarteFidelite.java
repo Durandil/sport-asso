@@ -4,22 +4,65 @@ import java.util.ArrayList;
 
 import basededonnees.SGBD;
 
-//	La classe Carte Fidelite représente une carte de fidélité.
-//	Celle-ci se décrit par son identifiant, l'identifiant du client auquel elle se rattache
-//	ainsi que le nombre de points qu'elle possède
-	
-
+/**
+ * <b>La classe CarteFidelite représente une carte de fidélité</b>
+ * <p>
+ * Une carte de fidélité est caractérisée par les informations suivantes  :
+ * <ul>
+ * <li>Un identifiant unique et non modifiable, de la forme FIDxxxxx</li>
+ * <li>Une adresse mail, identifiant du client qui possède la carte</li>
+ * <li>Le nombre de points qu'elle possède</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 
+ * </p>
+ * 
+ * @see BDD,Client
+ */
 public class CarteFidelite {
 	
+	/**
+	 * L'identifiant de la carte de fidélité, non modifiable
+	 * 
+	 * @see CarteFidelite#ajouterBDD()
+	 */
 	private String idCarte;
+	
+	
+	/**
+	 * L'adrese mail (l'identifiant) du client qui possède la carte
+	 * 
+	 * @see CarteFidelite#ajouterBDD()
+	 */
 	private String idClient;
+	
+	
+	/**
+	 * Le nombre de points de la carte de fidélité
+	 * 
+	 * @see CarteFidelite#ajouterBDD()
+	 */
 	private int nombreDePoints;
 	
 	
-	
-//	Constructeur de la carte de fidélité
-//	Il ne prend pas en paramètre l'identifiant de la carte car ce dernier est automatiquement généré lorsque
-//	la carte est ajoutée dans la base
+	/**
+	 * Constructeur de la classe CarteFidelite
+	 * <p>
+	 * Ce constructeur fait appel à la méthode ajouterBDD()
+	 * qui ajoute la carte de fidelité dans la base de données.
+	 * Il ne prend pas en paramètre l'identifiant de la carte car ce dernier est 
+	 * automatiquement généré lorsque la carte est ajoutée dans la base
+	 * </p>
+	 * 
+	 * @param idClient
+	 *            Le mail du client (son identifiant)
+	 * @param nombreDePoints
+	 *            Le nombre de points de la carte de fidélité
+	 *            
+	 * @see Client#ajouterFideliteBDD()
+	 */
+
 	
 	public CarteFidelite(String idClient, int nombreDePoints) {
 		super();
@@ -48,8 +91,21 @@ public class CarteFidelite {
 		this.nombreDePoints = nombreDePoints;
 	}
 
-//	Méthode ajoutant la carte de fidélité dans la base
-//	Elle génère de ce fait un identifiant
+
+	
+	/**
+	 * Ajoute la carte de fidelite dans la table CARTE_FIDELITE de la base de données
+	 * 
+	 * <p>
+	 * Cette méthode commence par récupérer l'indice de séquence de la table afin
+	 * de générer l'identifiant de l'article dans le format approprié.
+	 * 
+	 * La requête se construit ensuite en fonction des caractéristiques de l'article
+	 * saisies lors de l'appel du constructeur
+	 * </p> 
+	 * 
+	 * @see BDD
+	 */
 	
 	public void ajouterBDD(){
 		

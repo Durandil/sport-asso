@@ -12,7 +12,7 @@ public abstract class Client extends Utilisateur{
 	protected String particulierAssociation;
 	protected boolean estFidele;
 	protected boolean estActif;
-	protected String idVille;
+
 	
 
 
@@ -40,15 +40,27 @@ public abstract class Client extends Utilisateur{
 		this.estActif = estActif;
 	}
 	
-	public String getIdVille() {
-		return idVille;
-	}
 
-	public void setIdVille(String idVille) {
-		this.idVille = idVille;
-	}
-
-
+	/**
+	 * Crée un nouvel objet CarteFidelite si le client a signalé son souhait de posséder une carte de fidélité
+	 * 
+	 * <p>
+	 * De ce fait, la table CARTE_FIDELITE est mise à jour (plus de précisions
+	 * dans le commentaire concernant ce constructeur)
+	 * </p> 
+	 * 
+	 * @see CarteFidelite#CarteFidelite(String, int)
+	 * @see BDD
+	 */
+		
+	
+	public void ajouterFideliteBDD() {
+		if (this.estFidele) {
+				
+					CarteFidelite cf = new CarteFidelite(this.mail, 0);
+					
+		}
+	}	
 
 
 // Méthode modifiant l'état du compte client

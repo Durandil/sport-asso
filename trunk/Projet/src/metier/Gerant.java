@@ -12,12 +12,12 @@ public class Gerant extends Utilisateur {
 
 
 	public Gerant(String nom, String prenom, String mail, String adresse,
-			String ville, String codeCommune, String telephone) {
+			String idVille, String telephone) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mail = mail;
+		this.idVille = idVille;
 		this.adresse = adresse;
-		this.codeCommune = codeCommune;
 		this.telephone = telephone;
 		this.motDePasse = genererMdp();
 		System.out.println("Votre mot de passe est : " + this.motDePasse);

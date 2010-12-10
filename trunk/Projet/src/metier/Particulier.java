@@ -87,7 +87,7 @@ public class Particulier extends Client {
 	 * @see Client#estFidele
 	 * @see Client#estActif
 	 * @see Utilisateur#motDePasse
-	 * @see Particulier#ajouterFideliteBDD()
+	 * @see Client#ajouterFideliteBDD()
 	 * @see Particulier#ajouterBDD()
 	 */
 	public Particulier(String nom, String prenom, String mail, String adresse,
@@ -176,26 +176,7 @@ public class Particulier extends Client {
 
 	}
 
-	/**
-	 * Crée un nouvel objet CarteFidelite si le client a signalé son souhait de posséder une carte de fidélité
-	 * 
-	 * <p>
-	 * De ce fait, la table CARTE_FIDELITE est mise à jour (plus de précisions
-	 * dans le commentaire concernant ce constructeur)
-	 * </p> 
-	 * 
-	 * @see CarteFidelite#CarteFidelite(String, int)
-	 * @see BDD
-	 */
-		
-	
-	public void ajouterFideliteBDD() {
-		if (this.estFidele) {
-				
-					CarteFidelite cf = new CarteFidelite(this.mail, 0);
-					
-		}
-	}
+
 	
 	/**
 	 * Modifie les caractéristiques du particulier dans la table CLIENT de la base de données

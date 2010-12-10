@@ -27,7 +27,7 @@ public class Principale {
  * @throws Exception **/
 
 	public static void main(String[] args) throws Exception {
-/** TODO : Instancier un client via l'ihm**/
+
 		//Initialiser la base de données
 		//BDD.init();
 		
