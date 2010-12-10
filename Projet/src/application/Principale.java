@@ -32,11 +32,11 @@ public class Principale {
 		//BDD.init();
 		
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
-		
-		
+		String cp = "01000";
+		System.out.println(Integer.parseInt(cp));
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu= new MenuGerant();
+		//MenuGerant menu= new MenuGerant();
 		
 		
 //		java.util.Date date = new java.util.Date();
