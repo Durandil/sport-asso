@@ -33,7 +33,7 @@ public class Principale {
 		
 		//System.out.println(SGBD.recupererInformationFideliteClient("cdecavele@ensai.fr").get(0));
 
-		//FenetreCompte fen=new FenetreCompte();
+		FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		

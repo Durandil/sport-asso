@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import basededonnees.SGBD;
 
 import metier.Association;
+import metier.Client;
 import metier.Particulier;
 
 
@@ -253,85 +254,107 @@ public class FenetreDialogCreationCompte extends JDialog{
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
+			private JOptionPane erreurSaisie;
+
 			@SuppressWarnings("static-access")
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				/** ATTENTION ! Au début, le type de compte est sur "Compte Particulier" par défaut 
 				 * Mais le champ Dénomination n'est pas grisé il faut resélectionner Compte Particulier
 				 * pour que Dénomination se grise.
 				 */
 				
 				if(! identifiant.getText().equals(identifiantVerification.getText())){
+					
 					champsDifferents = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
 					champsDifferents.showMessageDialog(null, "Le champ de vérification ne correspond pas au champ initial. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+				
 				}
 				else{
-				//listeMails recense l'ensemble des adresses mails présentes dans la base
-				//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
-				//Si test reste à 0, on ajoute le client dans la BDD
-				ArrayList<String> listeMails = new ArrayList<String>();
-				listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
-				int test = 0;
-				
-				for (int i = 0; i < listeMails.size(); i++) {
-					if (identifiant.getText().equals(listeMails.get(i))) {
-						test = 1;
+					
+					int creationCompteCorrecte = Client.verifierCreationComption(identifiant.getText(), identifiantVerification.getText(), denomination.getText(), nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
+					
+					switch (creationCompteCorrecte) {
+					case 0:
+						
+						break;
+					case 1:
+						break;
+					default:
+						break;
 					}
-				}
+					
+					if(creationCompteCorrecte==0){
+						
+						//listeMails recense l'ensemble des adresses mails présentes dans la base
+						//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
+						//Si test reste à 0, on ajoute le client dans la BDD
+						ArrayList<String> listeMails = new ArrayList<String>();
+						listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
+						int test = 0;
+						
+						for (int i = 0; i < listeMails.size(); i++) {
+							if (identifiant.getText().equals(listeMails.get(i))) {
+								test = 1;
+							}
+						}
 
-				if (test == 1) {
-					mailDejaUtilise = new JOptionPane();
-					ImageIcon image = new ImageIcon("src/images/warning.png");
-					mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image);
-				}
-				// on pourra enregistrer dans base de données la nouvelle
-				// création de compte
-				/** TODO : Gestion de l'id ville...**/
-				else {
-					
-					String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
-					
-					
-					
-					if (itemSelectionne == "Compte Particulier")
-					{
-						
-						Particulier p = new Particulier(nom.getText(), prenom.getText(), identifiant.getText()
-								, adresse.getText(),  idVille, telephone.getText(), 
-								estFidele);
-					} else {
-						Association a = new Association(denomination.getText(),
-								identifiant.getText(), adresse.getText(), idVille,
-								telephone.getText(),estFidele);
+						if (test == 1) {
+							mailDejaUtilise = new JOptionPane();
+							ImageIcon image = new ImageIcon("src/images/warning.png");
+							mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image);
+						}
+						// on pourra enregistrer dans base de données la nouvelle
+						// création de compte
+						/** TODO : Gestion de l'id ville...**/
+						else {
+							
+							String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
+							
+							
+							
+							if (itemSelectionne == "Compte Particulier")
+							{	
+								Particulier p = new Particulier(nom.getText(), prenom.getText(), identifiant.getText()
+										, adresse.getText(),  idVille, telephone.getText(), 
+										estFidele);
+							} 
+							else {
+								Association a = new Association(denomination.getText(),
+										identifiant.getText(), adresse.getText(), idVille,
+										telephone.getText(),estFidele);
+							}
+
+							creationCorrecte = new JOptionPane();
+							ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
+							creationCorrecte.showMessageDialog(null, "Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText(), "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
+							
+							FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
+							
+							//On recherche le mot de passe dans la base avant de l'afficher
+							String motDePasse = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE", "IDCLIENT", identifiant.getText());
+							affichageMotDePasse = new JOptionPane();
+							affichageMotDePasse.showMessageDialog(null, "Retenez votre mot de passe : " + motDePasse, "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
+							
+
+							setVisible(false);
+							// Essai d'ouverture du menu Utilisateur après une création de compte correcte
+							MenuUtilisateur men = new MenuUtilisateur();
+							}
+				
+
 					}
-					
-					//System.out.println("Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText());
-					creationCorrecte = new JOptionPane();
-					ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
-					creationCorrecte.showMessageDialog(null, "Un nouveau compte a été crée, votre identifiant est : " + identifiant.getText(), "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
-					
-					FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
-					
-					//On recherche le mot de passe dans la base avant de l'afficher
-					String motDePasse = SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE", "IDCLIENT", identifiant.getText());
-					affichageMotDePasse = new JOptionPane();
-					affichageMotDePasse.showMessageDialog(null, "Retenez votre mot de passe : " + motDePasse, "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
-					
-					// probleme de connexion voir fonction stringConditionString (trouve pas mot passe)
-					
-					setVisible(false);
-					// Essai d'ouverture du menu Utilisateur après une création de compte correcte
-					//System.out.println(FenetreDialogIdentification.clientUserIdentifiant);
-					MenuUtilisateur men = new MenuUtilisateur();
-				}
+
 			}
-			}
-						
+				
+		}
+		
+			
 		});
 		
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});
