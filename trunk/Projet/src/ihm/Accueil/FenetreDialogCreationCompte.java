@@ -6,6 +6,7 @@ import javax.swing.JDialog;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -35,8 +36,8 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 */
 	private static final long serialVersionUID = 1L;
 	//private DialogInfo zInfo = new DialogInfo();
-	private JLabel typeCompteLabel,denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
-	private JTextField nom, prenom,adresse,codePostal,telephone,identifiant,denomination;
+	private JLabel typeCompteLabel,denominationLabel,identifiantVerifLabel, icon, nomLabel, prenomLabel, adresseLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
+	private JTextField nom, prenom,adresse,identifiantVerification,codePostal,telephone,identifiant,denomination;
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = true;
@@ -187,14 +188,21 @@ public class FenetreDialogCreationCompte extends JDialog{
 		
 		//Identifiant
 		JPanel panIdentifiant = new JPanel();
+		panIdentifiant.setLayout(new GridLayout(2,2,2,2));
 		panIdentifiant.setBackground(Color.white);
-		panIdentifiant.setPreferredSize(new Dimension(220, 60));
+		panIdentifiant.setPreferredSize(new Dimension(250, 90));
 		panIdentifiant.setBorder(BorderFactory.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
 		identifiant = new JTextField();
-		identifiant.setPreferredSize(new Dimension(90, 25));
+		identifiant.setPreferredSize(new Dimension(90, 20));
+		
+		identifiantVerification = new JTextField();
+		identifiantVerification.setPreferredSize(new Dimension(90, 20));
+		identifiantVerifLabel = new JLabel("Reconfirmer");
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
+		panIdentifiant.add(identifiantVerifLabel);
+		panIdentifiant.add(identifiantVerification);
 		
 		// La demande de carte de fidelité
 		JPanel panFidelite = new JPanel();
@@ -328,5 +336,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 		this.getContentPane().add(content, BorderLayout.CENTER);
 		this.getContentPane().add(control, BorderLayout.SOUTH);
 	}
-
+	
+	
+	
 }
