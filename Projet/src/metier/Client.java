@@ -105,29 +105,31 @@ public abstract class Client extends Utilisateur{
 		SGBD.executeUpdate(requete);
 	}
 
-	public static boolean verifierCreationComption(String mail,String mailConformation,
+	public static int verifierCreationComption(String mail,String mailConformation,
 			String denomination,String nom,String prenom,String telephone,String codePostal){
 		
-		boolean compteBon=true;
+		//si le compte ne comporte aucune erreur la fonction retournera 0
+		// sinon elle renverra le numéro de l'erreur
+		int compteBon=0;
 		
 		if(!mail.contains("@")){
-			compteBon=false;
+			compteBon=1;
 		}
 		if(!mail.equals(mailConformation)){
-			compteBon=false;
+			compteBon=2;
 		}
 		if(codePostal.length() != 5){
-			compteBon=false;
+			compteBon=3;
 		}
 		if(telephone.length() != 10){
-			compteBon=false;
+			compteBon=3;
 		}
 		if(denomination.contains("'") | nom.contains("'") | prenom.contains("'") | mail.contains("'")){
-			compteBon=false;
+			compteBon=4;
 		}
 		
 		if(denomination.length()>40 | nom.length()>40 | prenom.length()>40 | mail.length()>40){
-			compteBon=false;
+			compteBon=5;
 		}
 		
 		try{
@@ -135,10 +137,10 @@ public abstract class Client extends Utilisateur{
 			int tel = Integer.parseInt(telephone);
 			
 			if(cp<=999 | cp>=96000){
-				compteBon=false;
+				compteBon=6;
 			}
 			if(tel<0100000000 | tel>= 0700000000){
-				compteBon = false;
+				compteBon = 7;
 			}
 			
 		}
