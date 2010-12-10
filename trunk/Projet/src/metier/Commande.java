@@ -12,8 +12,63 @@ import javax.swing.JOptionPane;
 
 import basededonnees.SGBD;
 
+
+/**
+ * <b>La classe Commande représente une commande</b>
+ * <p>
+ * Une commande est caractérisé par les informations suivantes  :
+ * <ul>
+ * <li>Un identifiant unique attribué définitivement, de la forme COMxxxxx</li>
+ * <li>Une liste de LigneCommande</li>
+ * <li>Une date</li>
+ * </ul>
+ * </p>
+ * 
+ * @see BDD, LigneCommande, Promotion, FenetreCommandeArticle
+ */
+
 public class Commande {
 
+	/**
+	 * Constructeur de la classe Commande
+	 * <p>
+	 * Le constructeur de la classe Commande fait appel à la méthode ajouterBDD()
+	 * qui ajoute la commande dans la base de données.
+	 * Il appelle également une méthode qui met à jour la table LISTING_ARTICLES_COMMANDES.
+	 * Une troisième méthode est appelée dans ce constructeur : elle met à jour la table ARTICLE,
+	 * étant donné qu'à la suite d'une commande, les articles concernés voient leur stock diminuer
+	 * 
+	 * </p>
+	 * 
+	 * @param idArticle
+	 *            L'identifiant unique de l'article.
+	 * @param description
+	 *            La description de l'article.
+	 * @param prixInitial
+	 *            Le prix de l'article avant éventielles promotions et/ou
+	 *            réductions.
+	 * @param stock
+	 *            La quantité en stock de l'article.
+	 * @param poids
+	 *            Le poids de l'article.
+	 * @param typeSport
+	 *            L'identifiant de la catégorie de sport de l'article.
+	 * @param catPrix
+	 *            L'identifiant de la catégorie prix de l'article.
+	 * @param etat
+	 *            L'état de l'article en magasin.
+	 * 
+	 * @see Article#idArticle
+	 * @see Article#description
+	 * @see Article#prixInitial
+	 * @see Article#stock
+	 * @see Article#poids
+	 * @see Article#typeSport
+	 * @see Article#catPrix
+	 * @see Article#etat
+	 * @see Article#ajouterBDD()
+	 */
+	
 	// Une liste de Commande se définit par un identifiant
 	// une liste de lignes de commande
 	// Une date, et le client qui en est à l'origine

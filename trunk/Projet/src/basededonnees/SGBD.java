@@ -58,11 +58,11 @@ public class SGBD {
 	// Méthode issue du TP2
 	public static boolean fermer() {
 		boolean result = true;
-//		Statement st;
+		Statement st;
 		try {
 			
-//			st = c.createStatement();
-//			st.executeUpdate("COMMIT");
+			st = c.createStatement();
+			st.executeUpdate("COMMIT");
 			
 			c.close();
 			System.out.println("Déconnexion à la base");
