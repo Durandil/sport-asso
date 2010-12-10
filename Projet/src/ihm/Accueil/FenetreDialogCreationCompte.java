@@ -42,10 +42,10 @@ public class FenetreDialogCreationCompte extends JDialog{
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = true;
-	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise, champsDifferents ;
+	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise, erreurCreation ;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
-	
+	public int creationCompteCorrecte ;
 	
 	/**
 	 * Constructeur
@@ -153,17 +153,6 @@ public class FenetreDialogCreationCompte extends JDialog{
 		adresse.setPreferredSize(new Dimension(100, 25));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
-
-//		//ville
-//		JPanel panVille = new JPanel();
-//		panVille.setBackground(Color.white);
-//		panVille.setPreferredSize(new Dimension(220, 60));
-//		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
-//		villeLabel = new JLabel("Ville: ");
-//		ville = new JTextField();
-//		ville.setPreferredSize(new Dimension(90, 25));
-//		panVille.add(villeLabel);
-//		panVille.add(ville);
 	
 		//Code Postal
 		JPanel panCP = new JPanel();
@@ -263,29 +252,14 @@ public class FenetreDialogCreationCompte extends JDialog{
 				 * pour que Dénomination se grise.
 				 */
 				
-				if(! identifiant.getText().equals(identifiantVerification.getText())){
-					
-					champsDifferents = new JOptionPane();
+					erreurCreation = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
-					champsDifferents.showMessageDialog(null, "Le champ de vérification ne correspond pas au champ initial. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				
-				}
-				else{
 					
-					int creationCompteCorrecte = Client.verifierCreationComption(identifiant.getText(), identifiantVerification.getText(), denomination.getText(), nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
+					creationCompteCorrecte = Client.verifierCreationCompte(identifiant.getText(), identifiantVerification.getText(), denomination.getText(), nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
+					System.out.println(creationCompteCorrecte);
 					
 					switch (creationCompteCorrecte) {
 					case 0:
-						
-						break;
-					case 1:
-						break;
-					default:
-						break;
-					}
-					
-					if(creationCompteCorrecte==0){
-						
 						//listeMails recense l'ensemble des adresses mails présentes dans la base
 						//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 						//Si test reste à 0, on ajoute le client dans la BDD
@@ -301,8 +275,8 @@ public class FenetreDialogCreationCompte extends JDialog{
 
 						if (test == 1) {
 							mailDejaUtilise = new JOptionPane();
-							ImageIcon image = new ImageIcon("src/images/warning.png");
-							mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image);
+							ImageIcon image2 = new ImageIcon("src/images/warning.png");
+							mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image2);
 						}
 						// on pourra enregistrer dans base de données la nouvelle
 						// création de compte
@@ -340,15 +314,43 @@ public class FenetreDialogCreationCompte extends JDialog{
 							setVisible(false);
 							// Essai d'ouverture du menu Utilisateur après une création de compte correcte
 							MenuUtilisateur men = new MenuUtilisateur();
-							}
-				
-
+						}
+						break;
+						
+					case 1:
+						erreurCreation.showMessageDialog(null, "Votre adresse mail ne comporte pas de signe @","Attention !", JOptionPane.WARNING_MESSAGE, image);
+						
+						break;
+					case 2:
+						erreurCreation.showMessageDialog(null, "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						break;
+					case 3:
+						erreurCreation.showMessageDialog(null, "Un code postal doit contenir 5 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						break;
+					case 4:
+						erreurCreation.showMessageDialog(null, "Un des champs saisis comporte un caractère interdit : '. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						
+						break;
+					case 5:
+						erreurCreation.showMessageDialog(null, "Un des champs saisis comporte trop de caractères. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						
+						break;
+					case 6:
+						erreurCreation.showMessageDialog(null, "Le  code postal saisi est incorrect. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						
+						break;
+					case 7:
+						erreurCreation.showMessageDialog(null, "Le numéro de téléphone saisi est impossible. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						
+						break;
+					case 8 :
+						erreurCreation.showMessageDialog(null, "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+						
+					default:
+						break;
 					}
 
 			}
-				
-		}
-		
 			
 		});
 		

@@ -178,6 +178,8 @@ public class Association extends Client {
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
+		
+		
 	}
 
 }

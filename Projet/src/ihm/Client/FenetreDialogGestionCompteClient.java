@@ -1,11 +1,15 @@
 package ihm.Client;
 
+import ihm.MenuUtilisateur;
+import ihm.Accueil.FenetreDialogIdentification;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -13,10 +17,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import metier.Association;
+import metier.Client;
 import metier.Particulier;
 
 import basededonnees.SGBD;
@@ -29,7 +35,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
 	private TextArea adresse;
-
+	private JOptionPane erreurCreation ;
 
 	/**
 	 * Constructeur
@@ -175,17 +181,65 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
+			private JOptionPane erreurCreation;
+
 			public void actionPerformed(ActionEvent e) {	
 				
-				if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
-					Association.modifierBDDassoc(numClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
-				}
-				else{
-					Particulier.modifierBDDparticulier(numClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
-				}
 				
-				// on pourra enregistrer dans base de données la modification
-				setVisible(false);
+//				ImageIcon image = new ImageIcon("src/images/warning.png");
+//				
+//				int modificationCompte = 0 ;
+//				
+//				if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
+//					modificationCompte = Client.verifierCreationCompte("", "", denomination.getText(),"","", telephone.getText(), codePostal.getText());
+//
+//				}
+//				else{
+//					modificationCompte = Client.verifierCreationCompte("", "", "", nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
+//				
+//				}
+//				
+//				switch (modificationCompte) {
+//				case 0:
+					
+					if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
+						Association.modifierBDDassoc(numClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
+					}
+					else{
+						Particulier.modifierBDDparticulier(numClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
+					}
+					
+					// on pourra enregistrer dans base de données la modification
+					setVisible(false);
+					
+//					break;
+//
+//				case 3:
+//					JOptionPane.showMessageDialog(null, "Un code postal doit contenir 5 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//					break;
+//				case 4:
+//					JOptionPane.showMessageDialog(null, "Un des champs saisis comporte un caractère interdit : '. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//					
+//					break;
+//				case 5:
+//					JOptionPane.showMessageDialog(null, "Un des champs saisis comporte trop de caractères. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//					
+//					break;
+//				case 6:
+//					JOptionPane.showMessageDialog(null, "Le  code postal saisi est incorrect. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//					
+//					break;
+//				case 7:
+//					JOptionPane.showMessageDialog(null, "Le numéro de téléphone saisi est impossible. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//					
+//					break;
+//				case 8 :
+//					JOptionPane.showMessageDialog(null, "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//					
+//				default:
+//					break;
+//				}
+				
 			}
 						
 		});

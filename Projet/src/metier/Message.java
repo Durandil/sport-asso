@@ -157,5 +157,19 @@ public class Message {
 		SGBD.executeUpdate(requete);
 	}
 	
-	
+	public static int verifierChampMessage(String contenu,String sujet){
+		int champCorrect = 0 ;
+		
+		if(contenu.length()>300){
+			champCorrect = 1;
+		}
+		if(sujet.length()>90){
+			champCorrect = 2 ;
+		}
+		if(sujet.contains("'") | contenu.contains("'")){
+			champCorrect = 3 ;
+		}
+		
+		return champCorrect ;
+	}
 }
