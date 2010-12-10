@@ -1,5 +1,9 @@
 package metier;
 
+import ihm.FenetreChoixCatalogue;
+import ihm.Client.FenetreCommandeArticle;
+import ihm.Client.FenetreSuppressionPanier;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -20,6 +24,7 @@ import basededonnees.SGBD;
  * <ul>
  * <li>Un identifiant unique attribué définitivement, de la forme COMxxxxx</li>
  * <li>Une liste de LigneCommande</li>
+ * <li>Le mail du client qui a effectué la commande</li>
  * <li>Une date</li>
  * </ul>
  * </p>
@@ -28,55 +33,41 @@ import basededonnees.SGBD;
  */
 
 public class Commande {
+	
 
+	private String idCommande;
+	private ArrayList<LigneCommande> liste;
+	private String idClient;
+	private Date date;
+	
 	/**
 	 * Constructeur de la classe Commande
 	 * <p>
 	 * Le constructeur de la classe Commande fait appel à la méthode ajouterBDD()
 	 * qui ajoute la commande dans la base de données.
-	 * Il appelle également une méthode qui met à jour la table LISTING_ARTICLES_COMMANDES.
+	 * Il appelle également une méthode (majInfoCommandes()) qui met à jour la table LISTING_ARTICLES_COMMANDES.
 	 * Une troisième méthode est appelée dans ce constructeur : elle met à jour la table ARTICLE,
 	 * étant donné qu'à la suite d'une commande, les articles concernés voient leur stock diminuer
 	 * 
 	 * </p>
 	 * 
-	 * @param idArticle
-	 *            L'identifiant unique de l'article.
-	 * @param description
-	 *            La description de l'article.
-	 * @param prixInitial
-	 *            Le prix de l'article avant éventielles promotions et/ou
-	 *            réductions.
-	 * @param stock
-	 *            La quantité en stock de l'article.
-	 * @param poids
-	 *            Le poids de l'article.
-	 * @param typeSport
-	 *            L'identifiant de la catégorie de sport de l'article.
-	 * @param catPrix
-	 *            L'identifiant de la catégorie prix de l'article.
-	 * @param etat
-	 *            L'état de l'article en magasin.
-	 * 
-	 * @see Article#idArticle
-	 * @see Article#description
-	 * @see Article#prixInitial
-	 * @see Article#stock
-	 * @see Article#poids
-	 * @see Article#typeSport
-	 * @see Article#catPrix
-	 * @see Article#etat
-	 * @see Article#ajouterBDD()
+	 * @param idCommande
+	 *            L'identifiant unique de la commande.
+	 * @param liste
+	 *            La liste des lignes de commande.
+	 * @param idClient
+	 *            L'identifiant du client qui a passé la commande
+	 * @param date
+	 *            La date de la commande
+	 *            
+	 * @see Commande#idCommande
+	 * @see Commande#liste
+	 * @see Commande#idClient
+	 * @see Commande#date
+	 * @see Commande#ajouterBDD()	 
+	 * @see Commande#majInfoCommandes()
+	 * @see Commande#majArticles()
 	 */
-	
-	// Une liste de Commande se définit par un identifiant
-	// une liste de lignes de commande
-	// Une date, et le client qui en est à l'origine
-
-	
-	
-	// Le Constructeur ajoute la Commande à la table COMMANDE
-	// Et met à jour la table générique LISTING_ARTICLES_COMMANDES
 	public Commande(String idCommande, String idClient,
 			ArrayList<LigneCommande> liste, Date date) {
 		this.idCommande = idCommande;
@@ -88,61 +79,133 @@ public class Commande {
 		majArticles();
 	}
 
-	private String idClient;
-	private Date date;
-	private String idCommande;
-	private ArrayList<LigneCommande> liste;
-
+	 /**
+     * Retourne l'identifiant de la commande
+     * 
+     * @return L'identifiant de la commande
+     * 
+     */
+	public String getIdCommande() {
+		return idCommande;
+	}
+	
+	
+    /**
+     * Met à jour l'identifiant de la commande
+     * 
+     * @param idCommande
+     *            L'identifiant unique de la commande
+     * 
+     */
 	public void setIdCommande(String idCommande) {
 		this.idCommande = idCommande;
 	}
 
-	public String getIdCommande() {
-		return idCommande;
+	 /**
+     * Retourne la liste des lignes de commande
+     * 
+     * @return La liste des lignes de commandes
+     * 
+     */
+	public ArrayList<LigneCommande> getListe() {
+		return liste;
 	}
-
+	
+	
+	 /**
+     * Met à jour la liste des lignes de commande
+     * 
+     * @param liste
+     *            Liste des lignes de commandes
+     * 
+     */
 	public void setListe(ArrayList<LigneCommande> liste) {
 		this.liste = liste;
 	}
 
-	public ArrayList<LigneCommande> getListe() {
-		return liste;
-	}
-
+	
+	
+	 /**
+     * Retourne l'identifiant du client
+     * 
+     * @return L'identifiant du client
+     * 
+     */
 	public String getIdClient() {
 		return idClient;
 	}
 
+	 /**
+     * Met à jour l'identifiant du client
+     * 
+     * @param idClient
+     *            L'identifiant du client
+     * 
+     */
 	public void setIdClient(String idClient) {
 		this.idClient = idClient;
 	}
 
+	 /**
+     * Retourne la date de la commande
+     * 
+     * @return La date de la commande
+     * 
+     */
 	public Date getDate() {
 		return date;
 	}
 
+	 /**
+     * Met à jour la date de la commande
+     * 
+     * @param date
+     *            La date de la commande
+     * 
+     */
 	public void setDate(Date date) {
 		this.date = date;
 	}
 	
 	
-//	Méthode qui prépare le panier en récupérant la liste des identifiants des articles
-//	qui sont disponibles
+
+	/**
+	 * Méthode qui prépare le panier
+	 * 
+	 * <p>
+	 * Cette méthode commence par récupérer la liste des identifiants des articles disponibles.
+	 * Elle ajoute ensuite l'ensemble de ces identifiants dans le panier et initialise leur quantité à 0
+	 * </p> 
+	 * 
+	 * @return Le panier du client
+	 * @see FenetreCommandeArticle
+	 */
 	
 	public static ArrayList<String[]> preparerPanier(){
 		ArrayList<String[]> panierClient = new ArrayList<String[]>();
-		ArrayList<String> listeClients=SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK > 0");
+		ArrayList<String> listeArticles=SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK > 0");
 		
-		for(int i=0;i<listeClients.size();i++){
-			String[] client={listeClients.get(i),"0"};
-			panierClient.add(client);
+		for(int i=0;i<listeArticles.size();i++){
+			String[] article={listeArticles.get(i),"0"};
+			panierClient.add(article);
 		}
 		return panierClient;
 		
 	}
 	
+	/**
+	 * Méthode qui vide le panier
+	 * 
+	 * <p>
+	 * Cette méthode réinitialise chaque quantité d'article à 0 
+	 * </p> 
+	 * 
+	 * @param panier
+	 * 		Le panier du client
+	 * @see FenetreCommandeArticle
+	 */
 
-//	Méthode qui vide le panier en replaçant chacun de ses élément par "0"
+
 	public static void viderPanier(ArrayList<String[]> panier){
 		
 		for (int i =0; i< panier.size(); i++){
@@ -150,8 +213,28 @@ public class Commande {
 		}
 		
 	}
-	
-//	Méthode qui recherche un article dans le panier et communique la quantité correspondante
+		
+	/**
+	 * Recherche la position d'un article dans le panier
+	 * 
+	 * <p>
+	 * La méthode parcourt le panier jusqu'à ce que l'article recherché soit trouvé.
+	 * Tant que l'article en question n'est pas dans le panier, un compteur s'incrémente au fur et à mesure
+	 * Enfin, lorsque l'article est trouvé, la méthode retourne ce compteur, qui correspond
+	 * à la position de l'article dans le panier (0 si l'article est le 1er article du panier, 1 s'il est
+	 * le 2ème, etc.)
+	 * </p> 
+	 * 
+	 * @param idArticle
+	 * 		L'identifiant de l'article dont on cherche à savoir la position dans le panier
+	 * @param panierClient
+	 * 		Le panier du client
+	 * @return L'emplacement de l'article dans le panier
+	 * 
+	 * @see Commande#ajouterArticlePanier(String, String, ArrayList)
+	 * @see Commande#enleverArticlePanier(String, String, ArrayList)
+	 * @see FenetreCommandeArticle
+	 */
 	public static int rechercheArticleDansPanier(String idArticle,ArrayList<String[]> panierClient){
 		int compteurRechercheIdentifiant=0;
 		boolean trouve=false;
@@ -170,13 +253,37 @@ public class Commande {
 	
 //	Méthode qui ajoute une quantité spécifique d'un article dans le panier 
 
-	public static void ajouterArticlePanier(String idArticle, String quantite,ArrayList<String[]> panier){
+	/**
+	 * Ajoute une quantité spécifique d'un article dans le panier
+	 * 
+	 * <p>
+	 * La méthode commence par rechercher le stock de l'article concerné dans la table ARTICLE
+	 * Elle récupère ensuite l'indice correspondant à la place de cet article dans le panier
+	 * Par la suite deux cas se présentent :
+	 * Si la quantité désirée par le client est inférieure au stock, alors cette quantité 
+	 * est ajoutée au panier.
+	 * Sinon, cette quantité est limitée à la quantité disponible en stock et un message prévient le client
+	 * que le stock serait épuisé s'il valide sa commande
+	 * </p> 
+	 * 
+	 * @param idArticle
+	 * 		L'identifiant de l'article désiré par le client
+	 * @param quantite
+	 * 		La quantité commandée de l'article concerné
+	 * @param panier
+	 * 		Le panier du client
+	 * 
+	 * @see Commande#rechercheArticleDansPanier(String, ArrayList)
+	 * @see FenetreChoixCatalogue
+	 */
+	
+	public static void ajouterArticlePanier(String idArticle, int quantite,ArrayList<String[]> panier){
 		String stockArticle= SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
 		int compteurRechercheIdentifiant=rechercheArticleDansPanier(idArticle, panier);
 		JOptionPane pbStock ; 
 		
-		if((Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])+Integer.parseInt(quantite))<= Integer.parseInt(stockArticle)){
-			panier.get(compteurRechercheIdentifiant)[1]=(Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])+Integer.parseInt(quantite))+"";
+		if((Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])+quantite)<= Integer.parseInt(stockArticle)){
+			panier.get(compteurRechercheIdentifiant)[1]=(Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1])+quantite)+"";
 		}
 		else{
 			panier.get(compteurRechercheIdentifiant)[1]=Integer.parseInt(stockArticle)+"";
@@ -188,6 +295,31 @@ public class Commande {
 	}
 	
 //	Méthode qui enlève une quantité spécifique d'un article dans le panier 
+	
+	/**
+	 * Enlève une quantité spécifique d'un article dans le panier
+	 * 
+	 * <p>
+	 * La méthode commence par récupèrer l'indice correspondant à la place de cet article dans le panier
+	 * Par la suite deux cas se présentent :
+	 * Si la quantité que le client veut retirer de son panier est inférieure à la quantité intiale
+	 * alors cette quantité est retirée du panier.
+	 * Sinon, cette quantité est limitée à la quantité initiale présente dans le panier
+	 * et un message prévient le client que cette quantité tombe à 0 et qu'il ne peut supprimer
+	 * plus que ce qu'il possèdait.
+	 * </p> 
+	 * 
+	 * @param idArticle
+	 * 		L'identifiant de l'article que le client veut retirer de son panier
+	 * @param quantite
+	 * 		La quantité que le client veut retirer de son panier
+	 * @param panier
+	 * 		Le panier du client
+	 * 
+	 * @see Commande#rechercheArticleDansPanier(String, ArrayList)
+	 * @see FenetreSuppressionPanier
+	 */
+	
 	public static void enleverArticlePanier(String idArticle, String quantite,ArrayList<String[]> panier){
 		int compteurRechercheIdentifiant=rechercheArticleDansPanier(idArticle, panier);
 		JOptionPane pbStockZero;

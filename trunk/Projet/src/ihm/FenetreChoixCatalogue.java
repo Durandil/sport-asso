@@ -106,7 +106,7 @@ public class FenetreChoixCatalogue extends JDialog {
 				// TODO il faudra ajouter l'article concerné dans le panier avec la quantité correspondante
 				// et faire les modifications éventuelles dans la base de données.
 				// LigneCommande panierEnCours = new LigneCommande(article,quantite);
-				Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee+"", FenetreCommandeArticle.panierClient);
+				Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee, FenetreCommandeArticle.panierClient);
 				
 				for (int i = 0; i < FenetreCommandeArticle.panierClient.size(); i++) {
 					System.out.println("ARTICLE : "+FenetreCommandeArticle.panierClient.get(i)[0]+", quantité dans panier :"+FenetreCommandeArticle.panierClient.get(i)[1]);
