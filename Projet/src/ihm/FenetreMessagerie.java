@@ -42,8 +42,10 @@ public class FenetreMessagerie extends JFrame {
     	
     	// Création d'une table contenant tous les messages envoyés par les clients au gérant
     	// après interrogation de la base de données
-	    final JTable tableauMessage = new JTable(new ModeleMessagerie(messagerieGerant));     
-	    this.getContentPane().add(new JScrollPane(tableauMessage), BorderLayout.CENTER);
+    	final ModeleMessagerie modele =  new ModeleMessagerie(messagerieGerant);
+	    final JTable tableauMessage = new JTable(modele);  
+	    final JScrollPane tab = new JScrollPane(tableauMessage);
+	    this.getContentPane().add(tab, BorderLayout.CENTER);
     	
     	
     	//Création du panneau qui se situera en haut de la fenetre créée
@@ -55,6 +57,9 @@ public class FenetreMessagerie extends JFrame {
     	JPanel panneauTitle=new JPanel();
     	JButton boutonLire=new JButton("Lire");
     	JButton boutonSupprimerTout=new JButton("Supprimer tout");
+    	
+    	// TODO if le tableau est vide mettre setEanbled = false les button TODO
+    	// TODO TODO TODO 
     	
     	boutonLire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -74,6 +79,8 @@ public class FenetreMessagerie extends JFrame {
 					tableauMessage.setEnabled(false);
 					suppressionMessage=false;
 				}
+				
+				setVisible(false);
 				
 			}
 		});
