@@ -132,7 +132,7 @@ public abstract class Client extends Utilisateur{
 		
 		try{
 			int cp = Integer.parseInt(codePostal);
-			long tel = Long.parseLong(telephone);
+			int tel = Integer.parseInt(telephone);
 			
 			if(cp<=999 | cp>=96000){
 				compteBon=false;

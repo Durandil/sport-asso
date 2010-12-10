@@ -146,62 +146,159 @@ public class Article {
 		ajouterBDD();
 	}
 
+	
+	 /**
+     * Retourne l'id de l'article
+     * 
+     * @return L'identifiant de l'article
+     * 
+     */
 	public String getIdArticle() {
 		return idArticle;
 	}
 
+    /**
+     * Met à jour l'id de l'article
+     * 
+     * @param idArticle
+     *            L'identifiant unique de l'article
+     * 
+     */
 	public void setIdArticle(String idArticle) {
 		this.idArticle = idArticle;
 	}
 
+	 /**
+     * Retourne l'identifiant du type de sport
+     * 
+     * @return L'identifiant du type de sport auquel l'article est rattaché
+     * 
+     */
 	public String getTypeSport() {
 		return typeSport;
 	}
 
+    /**
+     * Met à jour l'id du type de sport de l'article
+     * 
+     * @param typeSport
+     *            L'identifiant de la catégorie de sport de l'article.
+     * 
+     */
 	public void setTypeSport(String typeSport) {
 		this.typeSport = typeSport;
 	}
 
+	 /**
+     * Retourne la description de l'article
+     * 
+     * @return La description de l'article
+     * 
+     */
 	public String getDescription() {
 		return description;
 	}
-
+	
+	
+    /**
+     * Met à jour la description de l'article
+     * 
+     * @param description
+     *            La description de l'article.
+     * 
+     */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	 /**
+     * Retourne le poids de l'article
+     * 
+     * @return Le poids de l'article (en grammes)
+     * 
+     */
 	public float getPoids() {
 		return poids;
 	}
 
+    /**
+     * Met à jour le poids de l'article
+     * 
+	 * @param poids
+	 *            Le poids de l'article.
+     * 
+     */
 	public void setPoids(float poids) {
 		this.poids = poids;
 	}
 
+	
+	 /**
+     * Retourne le prix initial de l'article
+     * 
+     * @return Le prix initial de l'article (avant éventuelles promotions et/ou réductions)
+     * 
+     */
 	public double getPrixInitial() {
 		return prixInitial;
 	}
 
+	
+    /**
+     * Met à jour le prix de l'article
+     * 
+	 * @param prixInitial
+	 *            Le prix de l'article avant éventielles promotions et/ou
+	 *            réductions.
+     * 
+     */
 	public void setPrixInitial(double prixInitial) {
 		this.prixInitial = prixInitial;
 	}
 
+	 /**
+     * Retourne la quantité en stock de l'article
+     * 
+     * @return La quantité en stock de l'article
+     * 
+     */
 	public int getStock() {
 		return stock;
 	}
 
+    /**
+     * Met à jour la quantité en stock de l'article
+     * 
+	 * @param stock
+	 *           La quantité en stock de l'article.
+     * 
+     */
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
+	
+	 /**
+     * Retourne l'état de l'article dans le magasin
+     * 
+     * @return L'état de l'article dans le magasin (En stock, Déstocké, En rupture de stock, Supprimé)
+     * 
+     */
+	public String getEtat() {
+		return etat;
+	}
+	
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 
-	public String getEtat() {
-		return etat;
-	}
 
+	 /**
+     * Retourne l'identifiant de la catégorie de prix de l'article
+     * 
+     * @return L'identifiant de la catégorie de prix de l'article
+     * 
+     */
 	public String getCatPrix() {
 		return catPrix;
 	}
