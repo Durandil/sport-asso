@@ -1,5 +1,6 @@
 package ihm.Accueil;
 import ihm.DialogIdentifiant;
+import ihm.MenuGerant;
 import ihm.MenuUtilisateur;
 
 import java.awt.BorderLayout;
@@ -36,7 +37,8 @@ public class FenetreDialogIdentification extends JDialog {
 	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie;
 	public static String clientUserIdentifiant=""; // permet d'avoir l'identifiant de l'utilisateur 
 													 // dans toute l'application
-	
+	public static String identifiantGerant="gerant@sport-asso.fr";
+	public static String motDePasseGerant="1234";
 	
 	public FenetreDialogIdentification(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
@@ -86,7 +88,7 @@ public class FenetreDialogIdentification extends JDialog {
 		
 		validationBouton.addActionListener(new ActionListener(){
 			@SuppressWarnings("static-access")
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				int present = 0;
 				ArrayList<String[]> listeMailsMdps = new ArrayList<String[]>();
 				listeMailsMdps = SGBD.selectDeuxChampsString("CLIENT", "IDCLIENT", "MOTDEPASSE");
@@ -118,11 +120,18 @@ public class FenetreDialogIdentification extends JDialog {
 				
 				if(present == 0)
 				{	
+					System.out.println(identifiantGerant + " "+ motDePasseGerant);
+					System.out.println(identifiant.getText()+" "+ password.getText());
 					
-					// essai d'affichage d'un message d'erreur en cas de probleme sur le compte
-					erreurCompte = new JOptionPane();
-					ImageIcon image = new ImageIcon("src/images/warning.png");
-					erreurCompte.showMessageDialog(null, "Ce compte n'existe pas, inscrivez-vous !", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					if(identifiant.getText().equals(identifiantGerant) & password.getText().equals(motDePasseGerant)){
+						MenuGerant menuGerant = new MenuGerant();
+					}
+					else{
+						// essai d'affichage d'un message d'erreur en cas de probleme sur le compte	
+						erreurCompte = new JOptionPane();
+						ImageIcon image = new ImageIcon("src/images/warning.png");
+						erreurCompte.showMessageDialog(null, "Ce compte n'existe pas, inscrivez-vous !", "Attention", JOptionPane.WARNING_MESSAGE, image);		
+					}
 				}
 				// vérifier que le login existe sinon retourner à la page précédente de choix entre création et identification
 				// lancer la page suivante si succès
@@ -133,7 +142,7 @@ public class FenetreDialogIdentification extends JDialog {
 		
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}			
 		});

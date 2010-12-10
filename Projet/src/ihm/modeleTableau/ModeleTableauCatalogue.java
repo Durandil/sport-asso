@@ -40,10 +40,10 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 				// tous les articles contrairement au client
 				
 				//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
-				ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonne("ARTICLE","IDARTICLE","IDARTICLE");
-				ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonne("ARTICLE", "DESCRIPTION","IDARTICLE");
-				ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonne("ARTICLE", "STOCK","IDARTICLE");
-				ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonne("ARTICLE", "PRIXINITIAL","IDARTICLE");
+				ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","ETATARTICLE !='Supprimé'");
+				ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","ETATARTICLE !='Supprimé'");
+				ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","ETATARTICLE !='Supprimé'");
+				ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","ETATARTICLE !='Supprimé'");
 			
 				
 				donnees = new Object[listeIdentifiants.size()][5];
@@ -63,10 +63,10 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 				// que les articles sont stock > 0
 				
 				//Quatre listes sont créées pour récupérer les informations de la table ARTICLE
-				ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
-				ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
-				ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
-				ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
+				ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0 and ETATARTICLE !='Supprimé'");
+				ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0 AND ETATARTICLE !='Supprimé'");
+				ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0 AND ETATARTICLE !='Supprimé'");
+				ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0 AND ETATARTICLE !='Supprimé'");
 			
 				
 				donnees = new Object[listeIdentifiants.size()][5];
@@ -109,93 +109,93 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 	
 	
-	
-	public void ajouterLigne(){
-		ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
-		ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
-		ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
-		ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
-		
-		System.out.println("nombre d'articles après ajout : "+ listeIdentifiants.size());
-		System.out.println(listeIdentifiants.get(listeIdentifiants.size()-1));
-		
-		donnees[listeIdentifiants.size()][0]= listeIdentifiants.get(listeIdentifiants.size()-1);
-		donnees[listeIdentifiants.size()][1]= listeDescriptions.get(listeIdentifiants.size()-1);
-		donnees[listeIdentifiants.size()][2]= listeStocks.get(listeIdentifiants.size()-1);
-		donnees[listeIdentifiants.size()][3]= listeEtats.get(listeIdentifiants.size()-1);
-	}
-	
-	public void actualiserTableau(boolean pourReapprovisionnement){
-		if(pourReapprovisionnement==false){
-			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
-			ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
-			ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
-			ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
-			
-			for(int i=0;i<listeIdentifiants.size();i++){
-				donnees[i][0] = listeIdentifiants.get(i);
-				donnees[i][1] = listeDescriptions.get(i);
-				donnees[i][2] = listeStocks.get(i);
-				donnees[i][3] = listeEtats.get(i);
-			
-			}
-		}
-		else{
-			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
-			listeArticles = SGBD.selectArticlesReapprovisionnement();
-			ArrayList<String >listeIdentifiants = listeArticles.get(0);
-			ArrayList<String >listeDescriptions = listeArticles.get(1);
-			ArrayList<String >listeStocks = listeArticles.get(2);
-			ArrayList<String >listeEtats = listeArticles.get(3);
-			
-			for(int i=0;i< listeIdentifiants.size();i++){
-				donnees[i][0] = listeIdentifiants.get(i);
-				donnees[i][1] = listeDescriptions.get(i);
-				donnees[i][2] = listeStocks.get(i);
-				donnees[i][3] = listeEtats.get(i);
-			}
-		}
-	}
-	
-	public void updateLigne(int numeroDernierLigneTableauAvant, boolean pourReapprovisionnement){
-		
-		if(pourReapprovisionnement==true){
-			// il faudrait updater le nombre de lignes présentes avant dans le tableau
-			// puis deeleter le nombre de lignes ( si en trop par rapport ancien tableau)
-
-			
-			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
-			listeArticles = SGBD.selectArticlesReapprovisionnement();
-			ArrayList<String >listeIdentifiants = listeArticles.get(0);
-			ArrayList<String >listeDescriptions = listeArticles.get(1);
-			ArrayList<String >listeStocks = listeArticles.get(2);
-			ArrayList<String >listeEtats = listeArticles.get(3);
-			
-			for(int i=0;i< listeIdentifiants.size();i++){
-				donnees[i][0] = listeIdentifiants.get(i);
-				donnees[i][1] = listeDescriptions.get(i);
-				donnees[i][2] = listeStocks.get(i);
-				donnees[i][3] = listeEtats.get(i);
-			}
-			
-			if(numeroDernierLigneTableauAvant>listeIdentifiants.size()){
-				
-				int difference = numeroDernierLigneTableauAvant-listeIdentifiants.size();
-				for(int j= 0 ; j< difference;j++){
-					this.fireTableRowsDeleted(j, j);
-				}
-				
-			}
-			else{
-				
-				for (int i = 0; i <= numeroDernierLigneTableauAvant; i++) {
-					this.fireTableRowsUpdated(i, i);
-				}
-			}
-
-		}
-		
-	}
+//	
+//	public void ajouterLigne(){
+//		ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
+//		ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
+//		ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
+//		ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
+//		
+//		System.out.println("nombre d'articles après ajout : "+ listeIdentifiants.size());
+//		System.out.println(listeIdentifiants.get(listeIdentifiants.size()-1));
+//		
+//		donnees[listeIdentifiants.size()][0]= listeIdentifiants.get(listeIdentifiants.size()-1);
+//		donnees[listeIdentifiants.size()][1]= listeDescriptions.get(listeIdentifiants.size()-1);
+//		donnees[listeIdentifiants.size()][2]= listeStocks.get(listeIdentifiants.size()-1);
+//		donnees[listeIdentifiants.size()][3]= listeEtats.get(listeIdentifiants.size()-1);
+//	}
+//	
+//	public void actualiserTableau(boolean pourReapprovisionnement){
+//		if(pourReapprovisionnement==false){
+//			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK>0");
+//			ArrayList<String> listeDescriptions = SGBD.selectListeStringOrdonneCondition("ARTICLE", "DESCRIPTION","IDARTICLE","STOCK>0");
+//			ArrayList<Integer> listeStocks = SGBD.selectListeIntOrdonneCondition("ARTICLE", "STOCK","IDARTICLE","STOCK>0");
+//			ArrayList<Integer> listeEtats = SGBD.selectListeIntOrdonneCondition("ARTICLE", "PRIXINITIAL","IDARTICLE","STOCK>0");
+//			
+//			for(int i=0;i<listeIdentifiants.size();i++){
+//				donnees[i][0] = listeIdentifiants.get(i);
+//				donnees[i][1] = listeDescriptions.get(i);
+//				donnees[i][2] = listeStocks.get(i);
+//				donnees[i][3] = listeEtats.get(i);
+//			
+//			}
+//		}
+//		else{
+//			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
+//			listeArticles = SGBD.selectArticlesReapprovisionnement();
+//			ArrayList<String >listeIdentifiants = listeArticles.get(0);
+//			ArrayList<String >listeDescriptions = listeArticles.get(1);
+//			ArrayList<String >listeStocks = listeArticles.get(2);
+//			ArrayList<String >listeEtats = listeArticles.get(3);
+//			
+//			for(int i=0;i< listeIdentifiants.size();i++){
+//				donnees[i][0] = listeIdentifiants.get(i);
+//				donnees[i][1] = listeDescriptions.get(i);
+//				donnees[i][2] = listeStocks.get(i);
+//				donnees[i][3] = listeEtats.get(i);
+//			}
+//		}
+//	}
+//	
+//	public void updateLigne(int numeroDernierLigneTableauAvant, boolean pourReapprovisionnement){
+//		
+//		if(pourReapprovisionnement==true){
+//			// il faudrait updater le nombre de lignes présentes avant dans le tableau
+//			// puis deeleter le nombre de lignes ( si en trop par rapport ancien tableau)
+//
+//			
+//			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>() ;
+//			listeArticles = SGBD.selectArticlesReapprovisionnement();
+//			ArrayList<String >listeIdentifiants = listeArticles.get(0);
+//			ArrayList<String >listeDescriptions = listeArticles.get(1);
+//			ArrayList<String >listeStocks = listeArticles.get(2);
+//			ArrayList<String >listeEtats = listeArticles.get(3);
+//			
+//			for(int i=0;i< listeIdentifiants.size();i++){
+//				donnees[i][0] = listeIdentifiants.get(i);
+//				donnees[i][1] = listeDescriptions.get(i);
+//				donnees[i][2] = listeStocks.get(i);
+//				donnees[i][3] = listeEtats.get(i);
+//			}
+//			
+//			if(numeroDernierLigneTableauAvant>listeIdentifiants.size()){
+//				
+//				int difference = numeroDernierLigneTableauAvant-listeIdentifiants.size();
+//				for(int j= 0 ; j< difference;j++){
+//					this.fireTableRowsDeleted(j, j);
+//				}
+//				
+//			}
+//			else{
+//				
+//				for (int i = 0; i <= numeroDernierLigneTableauAvant; i++) {
+//					this.fireTableRowsUpdated(i, i);
+//				}
+//			}
+//
+//		}
+//		
+//	}
 	
 	
 	public int getColumnCount() {

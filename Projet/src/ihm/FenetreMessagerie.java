@@ -58,8 +58,11 @@ public class FenetreMessagerie extends JFrame {
     	JButton boutonLire=new JButton("Lire");
     	JButton boutonSupprimerTout=new JButton("Supprimer tout");
     	
-    	// TODO if le tableau est vide mettre setEanbled = false les button TODO
-    	// TODO TODO TODO 
+    	
+    	if(modele.getRowCount() == 0){
+    		boutonLire.setEnabled(false);
+    		boutonSupprimerTout.setEnabled(false);
+    	}
     	
     	boutonLire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

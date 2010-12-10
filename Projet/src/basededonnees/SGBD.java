@@ -21,9 +21,9 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 	/** TODO : Penser à modifier les id/mdp ! **/
@@ -48,6 +48,7 @@ public class SGBD {
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative de connexion : "
 					+ e.getMessage());
+			System.out.println("RAISON 3 : " + e.getErrorCode());
 			result = false;
 
 		}
@@ -62,7 +63,7 @@ public class SGBD {
 		try {
 			
 			st = c.createStatement();
-			st.executeUpdate("COMMIT");
+			//st.executeUpdate("COMMIT");
 			
 			c.close();
 			System.out.println("Déconnexion à la base");
@@ -70,6 +71,7 @@ public class SGBD {
 			// TODO Auto-generated catch block
 			System.out.println("Echec de la tentative de connexion : "
 					+ e.getMessage());
+			System.out.println("RAISON 1: " + e.getErrorCode());
 			result = false;
 		}
 		return result;
@@ -107,6 +109,7 @@ public class SGBD {
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative d’interrogation : "
 					+ e.getMessage());
+			System.out.println("RAISON 2: " + e.getErrorCode());
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
@@ -510,7 +513,7 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -545,7 +548,7 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -580,7 +583,7 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -630,7 +633,7 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -858,9 +861,9 @@ public class SGBD {
 			st = c.createStatement();
 			
 			String requete = "select idarticle,description,stock,prixinitial "+
-			" from ARTICLE where (stock=0 or idarticle in ( select idarticle from article, "
+			" from ARTICLE where (etatarticle !='Supprimé' and (stock=0 or idarticle in ( select idarticle from article, "
 			+" categorie where article.idcategorie = categorie.idcategorie and "
-			+" stock< categorie.QUANTITELIMITE))";
+			+" stock< categorie.QUANTITELIMITE)))";
 			System.out.println(requete);
 			res = st.executeQuery(requete);
 
@@ -888,7 +891,7 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			fermer();
 		}
 		
@@ -936,7 +939,7 @@ public class SGBD {
 			}
 		finally{
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		
@@ -993,7 +996,7 @@ public class SGBD {
 		finally{
 			
 			System.out.println("Sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		
@@ -1151,7 +1154,7 @@ public class SGBD {
 		}
 		finally{
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		
