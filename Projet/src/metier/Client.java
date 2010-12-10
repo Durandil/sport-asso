@@ -86,7 +86,11 @@ public abstract class Client{
 	protected boolean estFidele;
 	
 	
-	
+	/**
+	 * L'état du compte client
+	 * 
+	 * @see Particulier,Association
+	 */	
 	protected boolean estActif;
 
 	
@@ -193,26 +197,68 @@ public abstract class Client{
 		this.motDePasse = motDePasse;
 	}
 
+	 /**
+     * Retourne le statut du client
+     * 
+     * @return Le statut du client
+     * @see Particulier, Association
+     * 
+     */
 	public String getParticulierAssociation() {
 		return particulierAssociation;
 	}
 
+	
+	 /**
+     * Met à jour le statut du client
+     * 
+	 * @param particulierAssociation
+	 *            Le statut du client
+	 */
 	public void setParticulierAssociation(String particulierAssociation) {
 		this.particulierAssociation = particulierAssociation;
 	}
 
+	 /**
+     * Retourne le booléen indiquant si le client possède une carte de fidélité 
+     * (vrai si le client est fidèle et faux sinon)
+     * 
+     * @return La fidélité du client
+     * @see Particulier, Association
+     * 
+     */
 	public boolean isEstFidele() {
 		return estFidele;
 	}
 
+	 /**
+     * Met à jour le booléen indiquant si le client possède une carte de fidélité
+     * 
+	 * @param estFidele
+	 *            La possession ou non d'une carte de fidélité
+	 */
 	public void setEstFidele(boolean estFidele) {
 		this.estFidele = estFidele;
 	}
 
+	 /**
+     * Retourne le booléen indiquant si le compte du client est activé 
+     * (vrai si le compte est activé et faux sinon)
+     * 
+     * @return L'état du compte du client
+     * @see Particulier, Association
+     * 
+     */
 	public boolean isEstActif() {
 		return estActif;
 	}
 
+	 /**
+     * Met à jour le booléen indiquant si le compte du client est activé
+     * 
+	 * @param estActif
+	 *            L'état du compte
+	 */
 	public void setEstActif(boolean estActif) {
 		this.estActif = estActif;
 	}
@@ -260,8 +306,14 @@ public abstract class Client{
 	}
 
 
-// Méthode modifiant l'état du compte client
-	
+	/**
+	 * Modifie l'état du compte d'un client 
+	 * 
+	 * @param idClient
+	 *            L'identifiant du client
+	 * @param etatCompte
+	 *            L'état du compte
+	 */
 	public static void modifierBDDclient(String idClient,String etatCompte) {
 
 		String requete = " UPDATE CLIENT SET ETATCOMPTE='" + etatCompte
@@ -272,7 +324,28 @@ public abstract class Client{
 		SGBD.executeUpdate(requete);
 	}
 
-	public static int verifierCreationComption(String mail,String mailConformation,
+	/**
+	 * Vérifie le bon format de l'adresse mail, du code postal et du numéro de téléphone saisis
+	 * 
+	 * @param mail
+	 *            Le mail saisi initialement par le client
+	 * @param mailConfirmation
+	 *            Le mail saisi dans le champ de confirmation par le client
+	 * @param denomination
+	 *            La dénomination du client (si c'est une association)
+	 * @param nom
+	 *            Le nom du client (si c'est un particulier)
+	 * @param prenom
+	 *            Le prénom du client (si c'est un particulier)
+	 * @param telephone
+	 *            Le numéro de téléphone du client
+	 * @param codePostal
+	 *            Le code postal du client
+	 *            
+	 *            
+	 */
+	
+	public static int verifierCreationComption(String mail,String mailConfirmation,
 			String denomination,String nom,String prenom,String telephone,String codePostal){
 		
 		//si le compte ne comporte aucune erreur la fonction retournera 0
@@ -282,7 +355,7 @@ public abstract class Client{
 		if(!mail.contains("@")){
 			compteBon=1;
 		}
-		if(!mail.equals(mailConformation)){
+		if(!mail.equals(mailConfirmation)){
 			compteBon=2;
 		}
 		if(codePostal.length() != 5){

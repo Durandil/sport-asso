@@ -20,9 +20,6 @@ import basededonnees.SGBD;
  * <li>Un mot de passe généré automatiquement</li>
  * </ul>
  * </p>
- * <p>
- * 
- * </p>
  * 
  * @see BDD,Client,Utilisateur
  */
