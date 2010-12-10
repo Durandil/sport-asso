@@ -94,11 +94,23 @@ public class Association extends Client {
 	}
 
 
-
+	 /**
+     * Retourne la dénomination de l'association
+     * 
+     * @return La dénomination de l'association
+     * 
+     */
 	public String getDenomination() {
 		return denomination;
 	}
 
+	 /**
+     * Met à jour la dénomination de l'association
+     * 
+	 * @param denomination
+	 *            La dénomination de l'association
+     * 
+     */
 	public void setDenomination(String denomination) {
 		this.denomination = denomination;
 	}
@@ -158,9 +170,7 @@ public class Association extends Client {
 	 * </p> 
 	 * 
 	 * @see BDD
-	 */
-
-	
+	 */	
 	public static void modifierBDDassoc(String idClient,String denomination,String adresse,String codePostal,String telephone){
 		
 		

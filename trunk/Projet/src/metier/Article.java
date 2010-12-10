@@ -288,6 +288,13 @@ public class Article {
 		return etat;
 	}
 	
+	 /**
+     * Met à jour l'état de l'article dans le magasin
+     * 
+	 * @param etat
+	 *           L'état de l'article en magasin.
+     * 
+     */
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
@@ -303,6 +310,14 @@ public class Article {
 		return catPrix;
 	}
 
+	
+	 /**
+     * Met à jour l'identifiant de la catégorie de prix
+     * 
+	 * @param etat
+	 *           L'identifiant de la catégorie prix de l'article.
+     * 
+     */
 	public void setCatPrix(String catPrix) {
 		this.catPrix = catPrix;
 	}
