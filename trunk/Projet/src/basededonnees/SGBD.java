@@ -30,8 +30,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3198";
-	private static final String MDP = "id3198";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 
 	private static String compteurViewStatistiqueArticle;
 	
@@ -63,15 +63,15 @@ public class SGBD {
 		try {
 			
 			st = c.createStatement();
-			//st.executeUpdate("COMMIT");
+			st.executeUpdate("COMMIT");
 			
 			c.close();
 			System.out.println("Déconnexion à la base");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			System.out.println("Echec de la tentative de connexion : "
 					+ e.getMessage());
-			System.out.println("RAISON 1: " + e.getErrorCode());
+			System.out.println("RAISON 1: " + e.getCause());
 			result = false;
 		}
 		return result;

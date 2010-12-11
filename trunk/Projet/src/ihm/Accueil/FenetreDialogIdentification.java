@@ -124,6 +124,7 @@ public class FenetreDialogIdentification extends JDialog {
 					System.out.println(identifiant.getText()+" "+ password.getText());
 					
 					if(identifiant.getText().equals(identifiantGerant) & password.getText().equals(motDePasseGerant)){
+						FenetreDialogIdentification.clientUserIdentifiant =  identifiantGerant ;
 						MenuGerant menuGerant = new MenuGerant();
 					}
 					else{

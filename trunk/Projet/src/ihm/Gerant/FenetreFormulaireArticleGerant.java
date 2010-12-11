@@ -349,11 +349,39 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		boutonConfirmation.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// enregistrer la modification d'article 
-				Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText(),itemPrixSelectionne,itemSportSelectionne);
 				
-				// puis fermer la page
-				setVisible(false);
+				int verificationChamp=Article.verifierChampsArticles(description.getText(), prix.getText(), poids.getText(), stock.getText());
+
+				switch (verificationChamp) {
+				case 0:
+					// enregistrer la modification d'article 
+					Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText(),itemSportSelectionne,itemPrixSelectionne);
+					
+					// puis fermer la page
+					setVisible(false);
+					
+					break;
+				case 1 :
+					JOptionPane.showMessageDialog(null,"Le champ description est trop long, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					break;
+				case 2 :
+					JOptionPane.showMessageDialog(null,"Un des champs que vous avez rempli est vide, remplissez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					break;
+				case 3 :
+					JOptionPane.showMessageDialog(null,"Le stock indiqué n'est pas valide, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					break;
+				case 4 :
+					JOptionPane.showMessageDialog(null,"Le poids indiqué n'est pas valide, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					break;
+				case 5 :
+					JOptionPane.showMessageDialog(null,"Le prix indiqué n'est pas valide, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				default:
+					break;
+				}	
+				
+
 			}
 		});
 		

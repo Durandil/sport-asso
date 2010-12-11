@@ -205,4 +205,42 @@ public class Promotion {
 		return resultat;
 	}
 	
+	public static int verifierChampPromotion(String anneeAvant,String moisAvant,String jourAvant,
+			String anneeApres,String moisApres,String jourApres,String description,
+			String pourcentagePromotion) {
+		
+		int champCorrect=0;
+		
+		try{
+			boolean dateDebutPossible = Promotion.verifierDatePromotion(anneeAvant, moisAvant, jourAvant);
+			boolean dateFinPossible=Promotion.verifierDatePromotion(anneeApres, moisApres, jourApres);
+			boolean comparaisonDeuxDates;		
+			comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeAvant, moisAvant, jourAvant, anneeApres, moisApres, jourApres);
+			
+			if(dateDebutPossible==false | dateFinPossible == false){
+				champCorrect = 1 ;
+			}
+			if(dateDebutPossible==true & dateFinPossible==true & comparaisonDeuxDates == false){
+				champCorrect = 2 ;
+			}
+			if(description.length()==0 | pourcentagePromotion.length()==0){
+				champCorrect = 3 ;
+			}
+			
+			int pourcentage = Integer.parseInt(pourcentagePromotion);
+			
+			if(pourcentage<0 | pourcentage>100){
+				champCorrect = 4 ;
+			}
+			if(description.length()>40){
+				champCorrect=5;
+			}
+		}
+		catch(Exception ex){
+			System.out.println(ex.getMessage());
+		}
+		
+		return champCorrect ; 
+	}
+	
 }
