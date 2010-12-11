@@ -129,24 +129,36 @@ public class Promotion {
 	
 	
 //	Méthode permettant de modifier la promotion dans la base de données
-	public void modifierPromoBDD(){
-		String dateD = SGBD.transformation(this.dateDebut);
-		String dateF = SGBD.transformation(this.dateFin);
+	public static void modifierPromoBDD(String numPromo,String nomPromotion, Date dateDebut,Date dateFin, String pourcentagePromo,boolean promoAdherent){
+		
+		String dateD = SGBD.transformation(dateDebut);
+		String dateF = SGBD.transformation(dateFin);
+		int pf=0;
+		if(promoAdherent==true){
+			pf = 1;
+		}
 		
 		String requete=" UPDATE PROMO" +
-		   " SET NOMPROMO = '" + this.nomPromotion +"'," +
-		   	"    DATEDEBUT = '" + dateD +"'," +
-		   	"    DATEFIN= '" + dateF + "', " +
-		   	"    POURCENTAGEPROMO= '" + this.pourcentagePromo + "'"
+		   " SET NOMPROMO = '" + nomPromotion +"'," +
+		   	"    DATEDEBUT = " + dateD +"," +
+		   	"    DATEFIN= " + dateF + ", " +
+		   	"    POURCENTAGEPROMO= " + pourcentagePromo + ", "+
+		   	"	 PROMOFIDELITE="+ pf +""+
+		   " WHERE IDPROMO='"+ numPromo+"'"
 			;
 		
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 	}
 
 //	Méthode permettant de supprimer la promotion de la base de données
 	public static void supprimerPromoBDD(String idPromotion){
 		
-		String requete= "DELETE FROM PROMO WHERE IDARTICLE='"+idPromotion+"'";
+		// TODO Supprimer de la base toutes les lignes de LISTING PROMO ARTICLES
+		// ayant pour attribut idPromotion
+		
+		
+		String requete= "DELETE FROM PROMO WHERE IDPROMO='"+idPromotion+"'";
 		
 		SGBD.executeUpdate(requete);	
 	}

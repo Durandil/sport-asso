@@ -60,6 +60,7 @@ public class FenetrePromotionsGerant extends JFrame {
 				// TODO Ajout d'une promotion
 				FenetreFormulairePromotionsGerant nouvellePromo = new FenetreFormulairePromotionsGerant(null,"Ajout d'une nouvelle promotion",true);
 				nouvellePromo.setVisible(true);
+				dispose();
 			}
 		});
     	
@@ -79,7 +80,7 @@ public class FenetrePromotionsGerant extends JFrame {
 				try {
 					modifierPromo = new FenetreFormulairePromotionsGerant(null,"Modification d'une nouvelle promotion",true,idPromo);
 					modifierPromo.setVisible(true);
-					
+					dispose();
 				} catch (Exception e1) {	
 					e1.printStackTrace();
 				}
