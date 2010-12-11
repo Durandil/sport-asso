@@ -183,7 +183,7 @@ public class Commande {
 	
 	public static ArrayList<String[]> preparerPanier(){
 		ArrayList<String[]> panierClient = new ArrayList<String[]>();
-		ArrayList<String> listeArticles=SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK > 0");
+		ArrayList<String> listeArticles=SGBD.selectListeStringOrdonneCondition("ARTICLE","IDARTICLE","IDARTICLE","STOCK > 0 and ETATARTICLE !='Supprimé'");
 		
 		for(int i=0;i<listeArticles.size();i++){
 			String[] article={listeArticles.get(i),"0"};

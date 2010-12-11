@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import metier.CarteFidelite;
+
 import basededonnees.SGBD;
 
 
@@ -33,7 +35,6 @@ public class FenetreFideliteClient extends JDialog {
 	private JComboBox fidelite;
 	private JLabel pointsFideliteLabel;
 	private JTextField pointsFidelite;
-	private JOptionPane affichageBonAchat;
 	
 	/**
 	 * Constructeur de la classe FenetreFideliteClient
@@ -66,7 +67,7 @@ public class FenetreFideliteClient extends JDialog {
 		// TODO récupérer dans base de donnees fidelite SANS ERREUR !!!!
 		ArrayList<String> fideliteClient= new ArrayList<String>();
 		fideliteClient=SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
-		String estFidele=fideliteClient.get(0);
+		final String estFidele=fideliteClient.get(0);
 		int nbPoints;
 		if(estFidele.equals("Non")){
 			nbPoints = 0;
@@ -152,9 +153,9 @@ public class FenetreFideliteClient extends JDialog {
 				}
 				else if(points<60) bonAchat=30;
 				
-				affichageBonAchat = new JOptionPane();
+				
 				ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
-				affichageBonAchat.showMessageDialog(null, "Vous disposez d'un bon d'achat de "+ bonAchat + " €", "Information sur les bons d'achat", JOptionPane.INFORMATION_MESSAGE, imageInformation);
+				JOptionPane.showMessageDialog(null, "Vous disposez d'un bon d'achat de "+ bonAchat + " €", "Information sur les bons d'achat", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 				
 			}
 		});
@@ -171,9 +172,17 @@ public class FenetreFideliteClient extends JDialog {
         JButton validationBouton = new JButton("Confirmer");
 		validationBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO enregistrer éventuelle modification de programme fidelité 
+				// Modification du programme fidelité 
 				//(par ex : passage de non à oui,on ne peut pas passer de oui à non a priori)
 				// et retourner menu utilisateur
+				System.out.println("Avant : estFidele : "+ estFidele);
+				System.out.println("Après : "+ FenetreDialogCreationCompte.itemFidelite);
+				
+				if(estFidele.equals("Non") & FenetreDialogCreationCompte.itemFidelite.equals("Oui")){
+					CarteFidelite nouvelleCarte = new CarteFidelite(FenetreDialogIdentification.clientUserIdentifiant,0);
+				}
+				
+				setVisible(false);
 			}			
 		});
         

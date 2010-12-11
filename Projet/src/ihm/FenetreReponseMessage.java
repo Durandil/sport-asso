@@ -118,6 +118,9 @@ public class FenetreReponseMessage extends JFrame {
 				case 3 :
 					JOptionPane.showMessageDialog(null, "Votre message contient un caractère interdit : ' ", "Attention", JOptionPane.ERROR_MESSAGE);
 					break;
+				case 4 :
+					JOptionPane.showMessageDialog(null, " Le contenu du message est vide, veuillez le remplir","Attention ", JOptionPane.ERROR_MESSAGE);
+					break;
 				default:
 					break;
 				}

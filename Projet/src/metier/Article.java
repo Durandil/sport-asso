@@ -480,5 +480,37 @@ public class Article {
 		SGBD.executeUpdate(requete);
 //		SGBD.executeUpdate("COMMIT");
 	}
-
+	
+	public static int verifierChampsArticles(String description,String prix,String poids,String stock){
+		int champCorrect = 0;
+		
+		if(description.length()>40){
+			champCorrect = 1;
+		}
+		if(description.length()==0 | prix.length()==0 | poids.length()==0 | stock.length()==0){
+			champCorrect = 2;
+		}
+		
+		try{
+			double prixInitial = Double.parseDouble(prix);
+			int poidsArticle = Integer.parseInt(poids);
+			int stockArticle = Integer.parseInt(stock);
+			
+			if(stockArticle<0 | stockArticle>999999){
+				champCorrect = 3 ;
+			}
+			if(poidsArticle<0 | poidsArticle>99999){
+				champCorrect = 4 ;
+			}
+			if(prixInitial<0 | prixInitial >= 1000000){
+				champCorrect = 5 ;
+			}
+		}
+		catch(NumberFormatException e){
+			System.out.println("Erreur de conversion des String en chiffres");
+		}
+		
+		return champCorrect;
+	}
+	
 }
