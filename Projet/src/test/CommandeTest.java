@@ -79,10 +79,10 @@ public class CommandeTest extends TestCase {
 		panier.add(listeString);
 		panier.add(listeString2);
 	
-		Commande.ajouterArticlePanier("ART00001","8" , panier);
+		Commande.ajouterArticlePanier("ART00001", 8, panier);
 		assertEquals("28",panier.get(0)[1]);
 	
-		Commande.ajouterArticlePanier("ART00003", "12", panier);
+		Commande.ajouterArticlePanier("ART00003", 12, panier);
 		assertEquals("24",panier.get(1)[1]);
 	}
 	
