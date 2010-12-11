@@ -132,6 +132,9 @@ public class FenetreContactVendeur extends JDialog{
 				case 3 :
 					JOptionPane.showMessageDialog(null, "Votre message contient un caractère interdit : ' ", "Attention", JOptionPane.ERROR_MESSAGE);
 					break;
+				case 4 :
+					JOptionPane.showMessageDialog(null, "Votre message est vide, remplissez le contenu", "Attention", JOptionPane.ERROR_MESSAGE);
+					break;
 				default:
 					break;
 				}

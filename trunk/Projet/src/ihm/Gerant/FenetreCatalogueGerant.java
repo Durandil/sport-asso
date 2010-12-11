@@ -103,7 +103,7 @@ public class FenetreCatalogueGerant extends JFrame{
 //				    final JScrollPane tab = new JScrollPane(tableau);
 //				    panneauTableau.add(tab);
 //				}
-				
+				dispose();
 				
 			}
 		});

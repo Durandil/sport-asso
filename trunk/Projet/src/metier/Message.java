@@ -169,6 +169,9 @@ public class Message {
 		if(sujet.contains("'") | contenu.contains("'")){
 			champCorrect = 3 ;
 		}
+		if(contenu.length()==0){
+			champCorrect=4;
+		}
 		
 		return champCorrect ;
 	}
