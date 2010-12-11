@@ -46,6 +46,15 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	private static String populationPromo="Promotion pour tous les clients";
 	public static String articleSelectionne;
 	
+	private static String jourDebutSelectionneModification;
+	private static String moisDebutSelectionneModification;
+	private static String anneeDebutSelectionneModification;
+	private static String jourFinSelectionneModification;
+	private static String moisFinSelectionneModification;
+	private static String anneeFinSelectionneModification;
+	private static String populationPromoModification;
+	public static String articleSelectionneModification;
+	
 	// Constructeur pour l'ajout d'une promotion
 	public FenetreFormulairePromotionsGerant(JFrame parent, String title, boolean modal ){
 		super(parent, title, modal);
@@ -296,7 +305,11 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							
 							
 							String requete = "INSERT INTO LISTING_PROMOS_ARTICLES(IDPROMO,IDARTICLE) values('"
-								+ promo.getIdPromotion() +"', '" + articleSelectionne;
+								+ promo.getIdPromotion() +"', '" + articleSelectionne+"')";
+							
+							System.out.println(requete);
+							
+							SGBD.executeUpdate(requete);
 							
 							setVisible(false);
 					break;
@@ -347,16 +360,18 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	
 	
 	// surchage de la méthode initComponent pour la modification d'une promotion
-	@SuppressWarnings("deprecation")
 	private void initComponent(String idPromo) throws Exception{
-		
+		final String identifiantPromotion = idPromo ; 
 		String nomPromotion = SGBD.selectStringConditionString("PROMO", "NOMPROMO", "IDPROMO", idPromo);
-//		ArrayList<Integer> promoAdherent = SGBD.selectListeIntOrdonneCondition("PROMO", "PROMOADHERENT", "IDPROMO ='"+idPromo+"'", "IDPROMO");
-//		String promoPopulation = "Promotion pour tous les clients";
-//		if(promoAdherent.get(0)==1){
-//			promoPopulation="Promotion pour les adhérents";
-//		}
-		//String articleConcerne = SGBD.selectStringConditionString("PROMO", "", "IDPROMO ='"+idPromo+"'", "IDPROMO");
+		String promotionPopulation = SGBD.selectStringConditionString("PROMO","PROMOFIDELITE","IDPROMO",idPromo);
+
+		populationPromoModification = "Promotion pour tous les clients";
+		if(promotionPopulation.equals("1")){
+			populationPromoModification="Promotion pour les adhérents";
+		}
+		
+		String pourcentagePromotion = SGBD.selectStringConditionString("PROMO", "POURCENTAGEPROMO", "IDPROMO", idPromo);
+		articleSelectionneModification = SGBD.selectStringConditionString("LISTING_PROMOS_ARTICLES","IDARTICLE","IDPROMO",idPromo);
 		String dateDe = SGBD.selectDateConditionString("PROMO", "DATEDEBUT", "IDPROMO", idPromo,"dd/MM/yyyy");
 		String dateFi = SGBD.selectDateConditionString("PROMO", "DATEFIN", "IDPROMO", idPromo,"dd/MM/yyyy");
 		
@@ -364,13 +379,10 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		Date dateF= SGBD.stringToDate(dateFi,"dd/MM/yyyy");
 		Date dateJour = new Date(System.currentTimeMillis());
 		
-
-		
-		boolean dateDebutAvantToday = dateD.before(dateJour) ;
-		
+		boolean dateDebutAvantToday = dateD.before(dateJour) ;	
 		
 		JPanel panneauCentralFenetre = new JPanel();
-		panneauCentralFenetre.setLayout(new GridLayout(6, 1,5,5));
+		panneauCentralFenetre.setLayout(new GridLayout(6,1,5,5));
 		
 		JPanel panDescriptionPromotion = new JPanel();
 		JPanel panPopulation = new JPanel();
@@ -399,6 +411,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		pourcentLabel= new JLabel("Pourcentage de promotion :");
 		
 		pourcentPromo = new JFormattedTextField(NumberFormat.getNumberInstance());
+		pourcentPromo.setText(pourcentagePromotion);
 		
 		description = new JTextField(nomPromotion);
 		
@@ -408,30 +421,30 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		populationBox = new JComboBox();
 		populationBox.addItem("Promotion pour les adhérents");
 		populationBox.addItem("Promotion pour tous les clients");
-		//populationBox.setSelectedItem(promoPopulation);
+		populationBox.setSelectedItem(populationPromoModification);
 		
 		populationBox.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				populationPromo = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				populationPromoModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
 		articleBox = new JComboBox();
 		//récupération liste tous les articles
 		ArrayList<String> listeArticles = new ArrayList<String>();
-		listeArticles = SGBD.selectListeString("ARTICLE", "IDARTICLE");
+		listeArticles = SGBD.selectListeStringOrdonneCondition("ARTICLE", "IDARTICLE","IDARTICLE","ETATARTICLE != 'Supprimé'");
 		
 		for (String article : listeArticles) {
 			articleBox.addItem(article);
 		}
-		articleBox.setSelectedIndex(0);
+		articleBox.setSelectedItem(articleSelectionneModification);
 		
 		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				articleSelectionne =(String) ((JComboBox) e.getSource()).getSelectedItem();
-				String descriptionArticleSelectionne = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION","IDARTICLE",articleSelectionne);
+				articleSelectionneModification =(String) ((JComboBox) e.getSource()).getSelectedItem();
+				String descriptionArticleSelectionne = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION","IDARTICLE",articleSelectionneModification);
 				JOptionPane.showMessageDialog(null,"vous avez sélectionné l'article : " + descriptionArticleSelectionne,"Information",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
@@ -475,14 +488,23 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbanneeFin.setVisible(true);
 		cbmoisFin.setVisible(true);
 		cbjourFin.setVisible(true);
-				
-		cbanneeFin.setSelectedItem(dateF.getYear());
-		cbmoisFin.setSelectedItem(dateF.getMonth());
-		cbjourFin.setSelectedItem(dateF.getDate());
 		
-		cbanneeDebut.setSelectedItem(dateD.getYear());
-		cbmoisDebut.setSelectedItem(dateD.getMonth());
-		cbjourDebut.setSelectedItem(dateD.getDate());
+		jourDebutSelectionneModification = dateDe.substring(0, 2);
+		moisDebutSelectionneModification = dateDe.substring(3, 5);
+		anneeDebutSelectionneModification = dateDe.substring(6, 10);
+		
+		jourFinSelectionneModification = dateFi.substring(0, 2);
+		moisFinSelectionneModification = dateFi.substring(3, 5);
+		anneeFinSelectionneModification = dateFi.substring(6, 10);
+		
+		
+		cbanneeFin.setSelectedItem(anneeFinSelectionneModification);
+		cbmoisFin.setSelectedItem(moisFinSelectionneModification);
+		cbjourFin.setSelectedItem(jourFinSelectionneModification);
+		
+		cbanneeDebut.setSelectedItem(anneeDebutSelectionneModification);
+		cbmoisDebut.setSelectedItem(moisDebutSelectionneModification);
+		cbjourDebut.setSelectedItem(jourDebutSelectionneModification);
 		
 		cbanneeDebut.setPreferredSize(new Dimension(5, 7));
 		cbanneeFin.setPreferredSize(new Dimension(5, 7));
@@ -493,37 +515,37 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		cbjourDebut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jourDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				jourDebutSelectionneModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
 		cbjourFin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jourFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				jourFinSelectionneModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 
 		cbmoisDebut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				moisDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				moisDebutSelectionneModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 
 		cbmoisFin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				moisFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				moisFinSelectionneModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 
 		cbanneeDebut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				anneeDebutSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				anneeDebutSelectionneModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 
 		cbanneeFin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				anneeFinSelectionne = (String) ((JComboBox) e.getSource()).getSelectedItem();
+				anneeFinSelectionneModification = (String) ((JComboBox) e.getSource()).getSelectedItem();
 			}
 		});
 		
@@ -554,9 +576,8 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panneauCentralFenetre.add(panPopulation);
 		panneauCentralFenetre.add(panPourcentPromo);
 		panneauCentralFenetre.add(panArticle);
-		if(dateDebutAvantToday==false){
-			panneauCentralFenetre.add(panDateDebut);
-		}
+		
+		panneauCentralFenetre.add(panDateDebut);
 		panneauCentralFenetre.add(panDateFin);
 		
 		this.getContentPane().add(panneauCentralFenetre,"Center");
@@ -568,40 +589,68 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		boutonConfirmation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//TODO Enregistrer la modification d'une promotion
-				
+				//Enregistrement la modification d'une promotion
+				int verificationChampPromotion;
 				try {
-					boolean dateDebutPossible = Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
-					boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-					boolean comparaisonDeuxDates;
-					
-					System.out.println("dateDebutPossible :  "+ dateDebutPossible);
-					System.out.println("dateFinPossible : "+ dateFinPossible);
-					
-					if(dateDebutPossible==true & dateFinPossible==true){
-						comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-						System.out.println("DateDebut est avant DateFin : "+comparaisonDeuxDates);
-						
-						if(comparaisonDeuxDates==true){
-							String dateDeb = jourDebutSelectionne+moisDebutSelectionne+anneeDebutSelectionne;
+					verificationChampPromotion = Promotion.verifierChampPromotion(anneeDebutSelectionneModification, moisDebutSelectionneModification, jourDebutSelectionneModification,
+							anneeFinSelectionneModification, moisFinSelectionneModification, jourFinSelectionneModification, 
+							description.getText(), pourcentPromo.getText());
+				
+				
+				switch (verificationChampPromotion) {
+				case 0:
+							String dateDeb = jourDebutSelectionneModification+moisDebutSelectionneModification+anneeDebutSelectionneModification;
 							Date dateDebut= SGBD.stringToDate(dateDeb,"ddMMyyyy");
 							
-							String dateEnd = jourFinSelectionne+moisFinSelectionne+anneeFinSelectionne;
+							String dateEnd = jourFinSelectionneModification+moisFinSelectionneModification+anneeFinSelectionneModification;
 							Date dateFin= SGBD.stringToDate(dateEnd,"ddMMyyyy");
 
 							boolean promoAdherent=true;
 							
-							if(populationPromo.equals("Promotion pour tous les clients")){
-								promoAdherent=false;	
-							}	
-							// TODO ICI METHODE DE MODIFICATION D'UNE PROMOTION
-						}
-					}
-				} catch (Exception ex) {
-					ex.printStackTrace();
+							if(populationPromoModification.equals("Promotion pour tous les clients")){
+								promoAdherent=false;
+							}
+							
+							// METHODE DE MODIFICATION D'UNE PROMOTION
+							Promotion.modifierPromoBDD(identifiantPromotion,description.getText(), dateDebut, dateFin, pourcentPromo.getText(),promoAdherent);
+							
+							String requete = "UPDATE LISTING_PROMOS_ARTICLES SET IDARTICLE='"+articleSelectionneModification+"'";
+							
+							System.out.println(requete);
+							
+							SGBD.executeUpdate(requete);
+							
+							
+							setVisible(false);
+					break;
+				case 1 :
+					JOptionPane.showMessageDialog(null,"Une des dates sélectionnées n'est pas valide, modifiez cette date","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 2 :
+					JOptionPane.showMessageDialog(null,"La date de début de promotion est plus récente que celle de fin de la promotion, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 3 :
+					JOptionPane.showMessageDialog(null,"Un des champs remplis est vide, remplissez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 4 :
+					JOptionPane.showMessageDialog(null,"Un pourcentage est compris entre 0 et 100, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 5 :
+					JOptionPane.showMessageDialog(null,"Il y a trop de caractères dans le champ de description de la promotion, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				default:
+					break;
 				}
+					
+				} catch (Exception e1) {
+					System.out.println(e1.getMessage());;
+				}						
 
-				setVisible(false); // fermeture de la page
 			}
 		});
 		

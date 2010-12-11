@@ -383,10 +383,10 @@ public class SGBD {
 		return listeString;
 	}
 	
-	//Méthode permettant d'obtenir l'ensemble des éléments 
+	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés
 	//d'un champ de type date issu d'une table tous deux précisés en paramètres
 	//LE format que l'on désire obtenir est aussi précisé en paramètre
-	public static ArrayList<String> selectListeDates(String table, String str, String format) {
+	public static ArrayList<String> selectListeDatesOrdonne(String table, String str, String format,String champOrdre) {
 		connecter();
 		ArrayList<String> listeString = new ArrayList<String>();
 		Statement st = null;
@@ -395,7 +395,7 @@ public class SGBD {
 		
 			st = c.createStatement();
 			
-			res = st.executeQuery("SELECT TO_CHAR("+str+",'" + format + "') FROM "+table );
+			res = st.executeQuery("SELECT TO_CHAR("+str+",'" + format + "') FROM "+table +" ORDER BY "+ champOrdre);
 
 			while (res.next()) {
 
@@ -657,7 +657,9 @@ public class SGBD {
 			
 			res = st.executeQuery("SELECT TO_CHAR("+champDate+",'" + format + "')"+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
-
+			
+			System.out.println("SELECT TO_CHAR("+champDate+",'" + format + "')"+" FROM "+table+" WHERE "+ champDeCondition+" = '"
+					+ condition + "'");
 			
 				while (res.next()) {
 					
@@ -684,7 +686,7 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
+			//SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
