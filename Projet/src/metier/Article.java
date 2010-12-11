@@ -418,10 +418,9 @@ public class Article {
 				+ "STOCK = '" + stock + "', " + "IDTYPE ='"+ idType + "',"
 				+ "IDCATEGORIE ='" + idCat + "',"+ "POIDS = '" + poids
 				+ "' WHERE IDARTICLE='" + idArticle + "'";
-
-
+		
 		SGBD.executeUpdate(requete);
-		SGBD.executeUpdate("COMMIT");
+
 	}
 
 	
@@ -493,8 +492,8 @@ public class Article {
 		
 		try{
 			double prixInitial = Double.parseDouble(prix);
-			int poidsArticle = Integer.parseInt(poids);
-			int stockArticle = Integer.parseInt(stock);
+			long poidsArticle = Long.parseLong(poids);
+			long stockArticle = Long.parseLong(stock);
 			
 			if(stockArticle<0 | stockArticle>999999){
 				champCorrect = 3 ;

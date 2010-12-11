@@ -140,8 +140,7 @@ public class FenetreCatalogueGerant extends JFrame{
 				
 				**/
 				
-				repaint();
-				
+				dispose();
 			}
 		});
     	
@@ -186,8 +185,9 @@ public class FenetreCatalogueGerant extends JFrame{
 					setVisible(false);
 					
 					**/
+					
 				}
-				
+				//dispose();
 			}
 			
 		});

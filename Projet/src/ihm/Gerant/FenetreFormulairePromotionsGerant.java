@@ -15,6 +15,7 @@ import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -114,9 +115,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		});
 		
 		articleBox = new JComboBox();
-		//TODO récupération liste tous les articles
+		// Récupération liste tous les articles
 		ArrayList<String> listeArticles = new ArrayList<String>();
-		listeArticles = SGBD.selectListeString("ARTICLE", "IDARTICLE");
+		listeArticles = SGBD.selectListeStringOrdonneCondition("ARTICLE", "IDARTICLE","IDARTICLE","ETATARTICLE != 'Supprimé'");
 		
 		for (String article : listeArticles) {
 			articleBox.addItem(article);
@@ -125,8 +126,11 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				articleSelectionne =(String) ((JComboBox) e.getSource()).getSelectedItem();
+				
+				String descriptionArticleSelectionne = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION","IDARTICLE",articleSelectionne);
+				JOptionPane.showMessageDialog(null,"vous avez sélectionné l'article : " + descriptionArticleSelectionne,"Information",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		
@@ -267,20 +271,15 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// Enregistrer la création d'une promotion
 
-				
+				int verificationChampPromotion;
 				try {
-					boolean dateDebutPossible = Promotion.verifierDatePromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne);
-					boolean dateFinPossible=Promotion.verifierDatePromotion(anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-					boolean comparaisonDeuxDates;
-					
-					System.out.println("dateDebutPossible :  "+ dateDebutPossible);
-					System.out.println("dateFinPossible : "+ dateFinPossible);
-					
-					if(dateDebutPossible==true & dateFinPossible==true){
-						comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne, anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne);
-						System.out.println("DateDebut est avant DateFin : "+comparaisonDeuxDates);
-						
-						if(comparaisonDeuxDates==true){
+					verificationChampPromotion = Promotion.verifierChampPromotion(anneeDebutSelectionne, moisDebutSelectionne, jourDebutSelectionne,
+							anneeFinSelectionne, moisFinSelectionne, jourFinSelectionne, 
+							description.getText(), pourcentPromo.getText());
+				
+				
+				switch (verificationChampPromotion) {
+				case 0:
 							String dateDeb = jourDebutSelectionne+moisDebutSelectionne+anneeDebutSelectionne;
 							Date dateDebut= SGBD.stringToDate(dateDeb,"ddMMyyyy");
 							
@@ -299,13 +298,37 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							String requete = "INSERT INTO LISTING_PROMOS_ARTICLES(IDPROMO,IDARTICLE) values('"
 								+ promo.getIdPromotion() +"', '" + articleSelectionne;
 							
-						}
-					}
+							setVisible(false);
+					break;
+				case 1 :
+					JOptionPane.showMessageDialog(null,"Une des dates sélectionnées n'est pas valide, modifiez cette date","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 2 :
+					JOptionPane.showMessageDialog(null,"La date de début de promotion est plus récente que celle de fin de la promotion, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 3 :
+					JOptionPane.showMessageDialog(null,"Un des champs remplis est vide, remplissez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 4 :
+					JOptionPane.showMessageDialog(null,"Un pourcentage est compris entre 0 et 100, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				case 5 :
+					JOptionPane.showMessageDialog(null,"Il y a trop de caractères dans le champ de description de la promotion, modifiez ce champ","Attention",JOptionPane.ERROR_MESSAGE);
+					
+					break;
+				default:
+					break;
+				}
+					
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					System.out.println(e1.getMessage());;
 				}
 				
-				setVisible(false);
+				
 			}
 		});
 		
@@ -322,7 +345,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		this.getContentPane().add(panneauBasFenetre,"South");
 	}
 	
+	
 	// surchage de la méthode initComponent pour la modification d'une promotion
+	@SuppressWarnings("deprecation")
 	private void initComponent(String idPromo) throws Exception{
 		
 		String nomPromotion = SGBD.selectStringConditionString("PROMO", "NOMPROMO", "IDPROMO", idPromo);
@@ -339,9 +364,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		Date dateF= SGBD.stringToDate(dateFi,"dd/MM/yyyy");
 		Date dateJour = new Date(System.currentTimeMillis());
 		
-		String anneeDebut=dateDe.substring(0, 4);
-		
-		System.out.println(anneeDebut);
+
 		
 		boolean dateDebutAvantToday = dateD.before(dateJour) ;
 		
@@ -406,8 +429,10 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				articleSelectionne =(String) ((JComboBox) e.getSource()).getSelectedItem();
+				String descriptionArticleSelectionne = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION","IDARTICLE",articleSelectionne);
+				JOptionPane.showMessageDialog(null,"vous avez sélectionné l'article : " + descriptionArticleSelectionne,"Information",JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		
@@ -450,12 +475,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbanneeFin.setVisible(true);
 		cbmoisFin.setVisible(true);
 		cbjourFin.setVisible(true);
-		
-
-		System.out.println(dateF.getYear());
-		System.out.println(dateF.getMonth());
-		System.out.println(dateF.getDate());
-		
+				
 		cbanneeFin.setSelectedItem(dateF.getYear());
 		cbmoisFin.setSelectedItem(dateF.getMonth());
 		cbjourFin.setSelectedItem(dateF.getDate());
