@@ -151,7 +151,7 @@ public class FenetreCommandeArticle extends JFrame{
 						try {
 							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
 							for(LigneCommande ligne : listeArticlesPanier){
-								System.out.println(ligne.getArticle()+ " qté : " + ligne.getQuantite());
+								System.out.println(ligne.getIdArticle()+ " qté : " + ligne.getQuantite());
 							}
 							System.out.println("Montant commande : " + montantCommande);
 							

@@ -28,7 +28,7 @@ public class LigneCommande {
 	 * 
 	 * @see Article
 	 */
-	private String article;
+	private String idArticle;
 	
 	
 	/**
@@ -51,28 +51,58 @@ public class LigneCommande {
 	 * @see LigneCommande#quantite
 	 * @see FenetreCommandeArticle
 	 */
-	public LigneCommande(String article, int quantite) {
+	public LigneCommande(String idArticle, int quantite) {
 
-		this.article = article;
+		this.idArticle = idArticle;
 		this.quantite = quantite;
 	}
 
+	 /**
+     * Retourne l'id de l'article
+     * 
+     * @return L'identifiant de l'article
+     * 
+     */
+	public String getIdArticle() {
+		return idArticle;
+	}
 	
-
-	public void setArticle(String article) {
-		this.article = article;
+	/**
+     * Met à jour l'id de l'article
+     * 
+     * @param idArticle
+     *            L'identifiant unique de l'article
+     * 
+     */
+	public void setIdArticle(String idArticle) {
+		this.idArticle = idArticle;
 	}
 
-	public String getArticle() {
-		return article;
-	}
-
+	 /**
+     * Retourne la quantité
+     * 
+     * @return La quantité commandée de l'article
+     * 
+     */
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
 
+	
+	/**
+     * Met à jour la quantité
+     * 
+     * @param quantite
+     *            La quantité commandée de l'article
+     * 
+     */
 	public int getQuantite() {
 		return quantite;
 	}
+
+
+
+
+
 
 }
