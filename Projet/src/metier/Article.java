@@ -23,7 +23,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD,LigneCommande,Promotion
+ * @see BDD, LigneCommande, Promotion
  */
 public class Article {
 
@@ -98,8 +98,6 @@ public class Article {
 	 * qui ajoute l'Article dans la base de données.
 	 * </p>
 	 * 
-	 * @param idArticle
-	 *            L'identifiant unique de l'article.
 	 * @param description
 	 *            La description de l'article.
 	 * @param prixInitial
@@ -116,7 +114,6 @@ public class Article {
 	 * @param etat
 	 *            L'état de l'article en magasin.
 	 * 
-	 * @see Article#idArticle
 	 * @see Article#description
 	 * @see Article#prixInitial
 	 * @see Article#stock
@@ -127,12 +124,12 @@ public class Article {
 	 * @see Article#ajouterBDD()
 	 */
 
-	public Article(String idArticle, String description, double prixInitial,
+	public Article(String description, double prixInitial,
 			int stock, float poids, String typeSport, String catPrix,
 			String etat) {
 
-		super();
-		this.idArticle = idArticle;
+		
+
 		this.description = description;
 		this.prixInitial = prixInitial;
 		this.stock = stock;
@@ -336,30 +333,31 @@ public class Article {
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
 				"S_ARTICLE.NEXTVAL");
 
-		String numArticle = "";
+
 		int numeroArticle = 0;
 
 		numeroArticle = Integer.parseInt(idNonFini.get(0));
 
 		if (numeroArticle < 10) {
-			numArticle = "ART0000" + numeroArticle;
+			this.idArticle = "ART0000" + numeroArticle;
 		}
 		if (numeroArticle < 100 && numeroArticle >= 10) {
-			numArticle = "ART000" + numeroArticle;
+			this.idArticle = "ART000" + numeroArticle;
 		}
 		if (numeroArticle < 1000 && numeroArticle >= 100) {
-			numArticle = "ART00" + numeroArticle;
+			this.idArticle = "ART00" + numeroArticle;
 		}
 		if (numeroArticle < 10000 && numeroArticle >= 1000) {
-			numArticle = "ART0" + numeroArticle;
+			this.idArticle = "ART0" + numeroArticle;
 		}
 		if (numeroArticle < 100000 && numeroArticle >= 10000) {
-			numArticle = "ART" + numeroArticle;
+			this.idArticle = "ART" + numeroArticle;
 		}
+
 
 		String requete = "INSERT INTO ARTICLE (IDARTICLE, DESCRIPTION, PRIXINITIAL,"
 				+ " STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( '"
-				+ numArticle
+				+ this.idArticle
 				+ "','"
 				+ this.description
 				+ "',"
@@ -386,7 +384,7 @@ public class Article {
 	 * Modifie un article qui est déjà présent dans la table ARTICLE de la base de données
 	 * 
 	 * <p>
-	 * La requête se construit ensuite en fonction des caractéristiques de l'article
+	 * La requête se construit en fonction des caractéristiques de l'article
 	 * saisies lors de l'appel de la méthode
 	 * </p> 
 	 * 

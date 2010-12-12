@@ -187,7 +187,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 					String cat = SGBD.selectStringConditionString("CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE", itemPrixSelectionne);
 					
 					System.out.println(typ +" "+cat);
-					Article art = new Article(null,description.getText(),Double.parseDouble(prx),Integer.parseInt(st),Float.parseFloat(p),typ, cat,"En stock");
+					Article art = new Article(description.getText(),Double.parseDouble(prx),Integer.parseInt(st),Float.parseFloat(p),typ, cat,"En stock");
 					FenetreCatalogueGerant.modificationTableau=true;
 					
 					// puis fermer la page

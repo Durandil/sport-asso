@@ -251,7 +251,6 @@ public class Commande {
 	}
 
 	
-//	Méthode qui ajoute une quantité spécifique d'un article dans le panier 
 
 	/**
 	 * Ajoute une quantité spécifique d'un article dans le panier
@@ -260,10 +259,12 @@ public class Commande {
 	 * La méthode commence par rechercher le stock de l'article concerné dans la table ARTICLE
 	 * Elle récupère ensuite l'indice correspondant à la place de cet article dans le panier
 	 * Par la suite deux cas se présentent :
-	 * Si la quantité désirée par le client est inférieure au stock, alors cette quantité 
-	 * est ajoutée au panier.
-	 * Sinon, cette quantité est limitée à la quantité disponible en stock et un message prévient le client
-	 * que le stock serait épuisé s'il valide sa commande
+	 * <ul>
+	 * <li>Si la quantité désirée par le client est inférieure au stock, alors cette quantité 
+	 * est ajoutée au panier.</li>
+	 * <li>Sinon, cette quantité est limitée à la quantité disponible en stock et un message prévient le client
+	 * que le stock serait épuisé s'il valide sa commande</li>
+	 * </ul>
 	 * </p> 
 	 * 
 	 * @param idArticle
@@ -294,7 +295,7 @@ public class Commande {
 		
 	}
 	
-//	Méthode qui enlève une quantité spécifique d'un article dans le panier 
+
 	
 	/**
 	 * Enlève une quantité spécifique d'un article dans le panier
@@ -302,11 +303,13 @@ public class Commande {
 	 * <p>
 	 * La méthode commence par récupèrer l'indice correspondant à la place de cet article dans le panier
 	 * Par la suite deux cas se présentent :
-	 * Si la quantité que le client veut retirer de son panier est inférieure à la quantité intiale
-	 * alors cette quantité est retirée du panier.
-	 * Sinon, cette quantité est limitée à la quantité initiale présente dans le panier
+	 * <ul>
+	 * <li>Si la quantité que le client veut retirer de son panier est inférieure à la quantité intiale
+	 * alors cette quantité est retirée du panier.</li>
+	 * <li>Sinon, cette quantité est limitée à la quantité initiale présente dans le panier
 	 * et un message prévient le client que cette quantité tombe à 0 et qu'il ne peut supprimer
-	 * plus que ce qu'il possèdait.
+	 * plus que ce qu'il possèdait.</li>
+	 * </ul>
 	 * </p> 
 	 * 
 	 * @param idArticle
@@ -339,7 +342,19 @@ public class Commande {
 		
 	}
 	
-	// Méthode permettant d'ajouter cette commande à la table COMMANDE
+
+	/**
+	 * Méthode qui ajoute la commande à la table COMMANDE
+	 * 
+	 * <p>
+	 * Cette méthode commence par récupérer l'indice de séquence de la table afin
+	 * de générer l'identifiant de la commande dans le format approprié.
+	 * La requête se construit ensuite en fonction des caractéristiques de la commande
+	 * saisies lors de l'appel du constructeur
+	 * </p> 
+	 * 
+	 * @see BDD
+	 */
 	public void ajouterBDD() {
 
 		String s = SGBD.transformation(this.date);
@@ -376,14 +391,24 @@ public class Commande {
 		SGBD.executeUpdate(requete);
 	}
 
-	// Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES
+	/**
+	 * Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES
+	 * 
+	 * <p>
+	 * Cette méthode commence par récupérer l'ensemble des identifiants et des quantités correspondantes
+	 * présents dans la liste de LigneCommande et les concatène dans une chaîne de caractères.
+	 * La requête se construit ensuite en fonction des caractéristiques de la commande
+	 * saisies lors de l'appel du constructeur
+	 * </p> 
+	 * 
+	 * @see BDD
+	 */
 	public void majInfoCommandes() {
 
 		String requete = null;
 		for (int i = 0; i < liste.size(); i++) {
-			String s = SGBD.transformation(this.date);
 			
-			requete = "'" + liste.get(i).getArticle() + "',"
+			requete = "'" + liste.get(i).getIdArticle() + "',"
 					+ liste.get(i).getQuantite();
 			SGBD.executeUpdate("INSERT INTO LISTING_ARTICLES_COMMANDES " 
 					+ " (IDCOMMANDE, IDARTICLE, QUANTITECOMMANDEE)  VALUES" 
@@ -396,15 +421,26 @@ public class Commande {
 	}
 
 	// Méthode qui met à jour l'état d'un article en fonction de la quantité disponible
+	/**
+	 * Méthode qui met à jour la table ARTICLE
+	 * 
+	 * <p>
+	 * Pour chacun des articles présents dans la commande, la méthode soustrait la quantité commandée
+	 * à la quantité en stock. S'il s'avère que le stock d'un article atteint 0, ce dernier sera considéré
+	 * comme étant en rupture de stock.
+	 * </p> 
+	 * 
+	 * @see BDD, Article
+	 */
 	public void majArticles(){
 		String requete = null ;
-		String nomArticle=null;
+		String idArticle=null;
 		int quantiteReservee=0;
 		String quantiteEnStock=null;
 		
 		for (int i = 0; i < liste.size(); i++) {
-			nomArticle=liste.get(i).getArticle();
-			quantiteEnStock=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", nomArticle);
+			idArticle=liste.get(i).getIdArticle();
+			quantiteEnStock=SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
 			quantiteReservee=liste.get(i).getQuantite();
 			int nouveauStock=Integer.parseInt(quantiteEnStock)-quantiteReservee;
 			
@@ -414,7 +450,7 @@ public class Commande {
 			}
 			
 			requete = "UPDATE ARTICLE SET STOCK='"+ nouveauStock+"',ETATARTICLE='"+ etatArticle+"'"
-					  +" WHERE IDARTICLE='"+ nomArticle+"'";
+					  +" WHERE IDARTICLE='"+ idArticle+"'";
 			
 			System.out.println(requete);
 			
@@ -423,12 +459,7 @@ public class Commande {
 		}
 	}
 	
-	@Override
-	public String toString() {
-		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
-		return "Commande [idClient=" + idClient + ", date=" + sqlDate + "]";
-	}
 	
 	// calcul du montant d'un article pour un client donne
 	public double MontantCommandePourUnArticle(String idClient, LigneCommande ligne) throws SQLException{
@@ -439,7 +470,7 @@ public class Commande {
 		ResultSet res2 = null ;
 		
 		// recuperation prix initial et quantite commandee
-		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getArticle());
+		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getIdArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = ligne.getQuantite();
 		
@@ -467,7 +498,7 @@ public class Commande {
 			// recuperation pourcentage promotion exceptionnelle
 			if(estFidele==0){
 				res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
-						" where p.idpromo = lpa.idPromo and lpa.idarticle='"+ ligne.getArticle()+"' and promoFidelite=0"+
+						" where p.idpromo = lpa.idPromo and lpa.idarticle='"+ ligne.getIdArticle()+"' and promoFidelite=0"+
 						" order by pourcentagepromo desc");
 			}
 			else{
