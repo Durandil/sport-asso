@@ -152,11 +152,19 @@ public class Promotion {
 	}
 
 //	Méthode permettant de supprimer la promotion de la base de données
-	public static void supprimerPromoBDD(String idPromotion){
+	public static void supprimerListing_PromoBDD(String idPromotion){
 		
-		// TODO Supprimer de la base toutes les lignes de LISTING PROMO ARTICLES
+		// Supprimer de la base toutes les lignes de LISTING PROMO ARTICLES
 		// ayant pour attribut idPromotion
 		
+		
+		String requete= "DELETE FROM LISTING_PROMOS_ARTICLES WHERE IDPROMO='"+idPromotion+"'";
+		
+		SGBD.executeUpdate(requete);	
+	}	
+	
+//	Méthode permettant de supprimer la promotion de la base de données
+	public static void supprimerPromoBDD(String idPromotion){
 		
 		String requete= "DELETE FROM PROMO WHERE IDPROMO='"+idPromotion+"'";
 		

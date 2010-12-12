@@ -57,7 +57,7 @@ public class FenetrePromotionsGerant extends JFrame {
     	
     	boutonAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Ajout d'une promotion
+				// Ajout d'une promotion
 				FenetreFormulairePromotionsGerant nouvellePromo = new FenetreFormulairePromotionsGerant(null,"Ajout d'une nouvelle promotion",true);
 				nouvellePromo.setVisible(true);
 				dispose();
@@ -66,14 +66,19 @@ public class FenetrePromotionsGerant extends JFrame {
     	
     	boutonSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO supprimer la promotion selectionnée dans la base de donnée
-				//Promotion.supprimerPromoBDD(idPromotion)
+				// Supprimer la promotion selectionnée dans la base de donnée
+				ligneTableau = tableauPromotions.getSelectedRow();
+				String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
+				
+				Promotion.supprimerListing_PromoBDD(idPromo);
+				Promotion.supprimerPromoBDD(idPromo);
+				dispose();
 			}
 		});
     	
     	boutonModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO modifier la promotion sélectionée grâce à un formulaire
+				// Modifier la promotion sélectionée grâce à un formulaire
 				ligneTableau = tableauPromotions.getSelectedRow();
 				String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
 				FenetreFormulairePromotionsGerant modifierPromo;
@@ -82,7 +87,7 @@ public class FenetrePromotionsGerant extends JFrame {
 					modifierPromo.setVisible(true);
 					dispose();
 				} catch (Exception e1) {	
-					e1.printStackTrace();
+					System.out.println(e1.getMessage());
 				}
 				
 			}
