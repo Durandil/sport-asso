@@ -459,9 +459,7 @@ public class Commande {
 		}
 	}
 	
-
 		
-	
 	// calcul du montant d'un article pour un client donne
 	public double MontantCommandePourUnArticle( String idClient, LigneCommande ligne,int estFidele) throws SQLException{
 		String pourcentagePromoExc="0";
@@ -472,48 +470,19 @@ public class Commande {
 		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getIdArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = ligne.getQuantite();
-		JOptionPane.showMessageDialog(null,prixInitial + " "+ quantiteCommandee + " "+ ligne.getArticle());
+		JOptionPane.showMessageDialog(null,prixInitial + " "+ quantiteCommandee + " "+ ligne.getIdArticle());
 	
 		//  recuperation pourcentage degressif		
-		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(this.idCommande, ligne.getArticle());
+		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(this.idCommande, ligne.getIdArticle());
 			
 		// recuperation pourcentage promotion exceptionnelle
-		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(ligne.getArticle(), estFidele);
+		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(ligne.getIdArticle(), estFidele);
 		
 		JOptionPane.showMessageDialog(null,pourcentagePromoDegressif + " " + pourcentagePromoExc);
 		
-
 		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
 		if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
 			promoAppliquee = Double.parseDouble(pourcentagePromoExc);
-
-		try{
-			//  recuperation pourcentage degressif
-			res = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1"+
-							" where a.idArticle=l.idArticle"+
-							" and r.idCategorie=c.idCategorie"+
-							" and r.idQuantite=q.idQuantite"+
-							" and c.idCategorie=a.idCategorie"+
-							" and (l.quantiteCommande-q.quantite)>=0"+
-							" order by (l.quantiteCommande-q.quantite)");
-			
-			pourcentagePromoDegressif = res.getObject(1).toString();
-			
-			
-			// recuperation pourcentage promotion exceptionnelle
-			if(estFidele==0){
-				res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
-						" where p.idpromo = lpa.idPromo and lpa.idarticle='"+ ligne.getIdArticle()+"' and promoFidelite=0"+
-						" order by pourcentagepromo desc");
-			}
-			else{
-				res2 = SGBD.executeQuery("select pourcentagepromo rownum=1 from promo p,listing_promos_articles lpa"+
-							" where p.idpromo = lpa.idPromo and lpa.idarticle= condition"+
-							" order by pourcentagepromo desc");
-			}
-			
-			pourcentagePromoExc = res2.getObject(1).toString();
-
 		}
 		
 		montantArticle = (Double) (quantiteCommandee*prixInitial*(1-promoAppliquee/100));
@@ -540,6 +509,5 @@ public class Commande {
 		
 		return total ;
 	}
-	
 	
 }

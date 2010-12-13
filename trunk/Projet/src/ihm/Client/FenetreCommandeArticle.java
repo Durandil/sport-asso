@@ -153,13 +153,11 @@ public class FenetreCommandeArticle extends JFrame{
 						try {
 							// calcul de la commande
 							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
-<<<<<<< .mine
 
-=======
 							for(LigneCommande ligne : listeArticlesPanier){
 								System.out.println(ligne.getIdArticle()+ " qté : " + ligne.getQuantite());
 							}
->>>>>>> .r179
+
 							System.out.println("Montant commande : " + montantCommande);
 							
 							// mise à jour du nombre de points sur la carte
