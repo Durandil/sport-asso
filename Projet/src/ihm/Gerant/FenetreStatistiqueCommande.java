@@ -50,6 +50,7 @@ public class FenetreStatistiqueCommande extends JDialog {
 		ModeleTableauStatCommande modele = new ModeleTableauStatCommande(idCommande);
 		JTable tableau = new JTable(modele);
 		JScrollPane tableauCommande = new JScrollPane(tableau);
+		tableau.setVisible(true);
 		tableau.setEnabled(false);
 		
 		JButton boutonRetour = new JButton("Retour à la fiche client");

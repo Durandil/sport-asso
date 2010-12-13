@@ -52,5 +52,9 @@ public class ModeleTableauStatCommande extends AbstractTableModel{
 		// TODO Auto-generated method stub
 		return donnees[rowIndex][colIndex];
 	}
-
+	
+	public String getColumnName(int columnIndex) {
+		return entetes[columnIndex];
+	}
+	
 }

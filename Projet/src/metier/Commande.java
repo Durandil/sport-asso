@@ -39,7 +39,7 @@ public class Commande {
 	private ArrayList<LigneCommande> liste;
 	private String idClient;
 	private Date date;
-	
+	private int montant ;	
 	/**
 	 * Constructeur de la classe Commande
 	 * <p>
@@ -74,6 +74,7 @@ public class Commande {
 		this.idClient = idClient;
 		this.liste = liste;
 		this.date = date;
+		this.montant = 0 ;
 		ajouterBDD();
 		majInfoCommandes();
 		majArticles();
@@ -88,6 +89,7 @@ public class Commande {
 	public String getIdCommande() {
 		return idCommande;
 	}
+	
 	
 	
     /**
@@ -167,7 +169,26 @@ public class Commande {
 		this.date = date;
 	}
 	
-	
+	 /**
+     * Retourne le montant de la commande
+     * 
+     * @return Le montant de la commande
+     * 
+     */
+	public int getMontant() {
+		return montant;
+	}
+
+	 /**
+     * Met à jour le montant de la commande
+     * 
+     * @param montant
+     *            Le montant de la commande
+     * 
+     */
+	public void setMontant(int montant) {
+		this.montant = montant;
+	}
 
 	/**
 	 * Méthode qui prépare le panier
@@ -384,13 +405,30 @@ public class Commande {
 		}
 		this.setIdCommande(numCommande);
 		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE, IDCLIENT) VALUES ( "
-				+ "'" + numCommande + "'," + s + " , '" + this.idClient + "')";
+				+ "'" + numCommande + "'," + s + " , '" + this.idClient + "', MONTANTCOMMANDE="+this.montant+" )";
 
 		System.out.println(requete);
 		
 		SGBD.executeUpdate(requete);
 	}
+	
+	/**
+	 * Méthode qui met à jour le montant de la commande dans la table COMMANDE
+	 * puisque celui a été fixé à zéro dans le constructeur de Commande
+	 * et que le calcul du montant intervient après l'ajout de la commande dans la base de données
+	 * 
+	 * @param montantCommande
+	 */
+	
+	public void majMontantCommande(int montantCommande) {
 
+		SGBD.executeUpdate(" UPDATE COMMANDE SET MONTANTCOMMANDE="+ montantCommande+" WHERE IDCOMMANDE='"+this.idCommande+"'");
+		
+		System.out.println(" UPDATE COMMANDE SET MONTANTCOMMANDE="+ montantCommande+" WHERE IDCOMMANDE='"+this.idCommande+"'");
+
+	}
+	
+	
 	/**
 	 * Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES
 	 * 
@@ -470,7 +508,7 @@ public class Commande {
 		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getIdArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = ligne.getQuantite();
-		JOptionPane.showMessageDialog(null,prixInitial + " "+ quantiteCommandee + " "+ ligne.getIdArticle());
+		JOptionPane.showMessageDialog(null,"prix initial : "+prixInitial + ", quantité : "+ quantiteCommandee + ", ref article : "+ ligne.getIdArticle());
 	
 		//  recuperation pourcentage degressif		
 		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(this.idCommande, ligne.getIdArticle());
@@ -478,7 +516,7 @@ public class Commande {
 		// recuperation pourcentage promotion exceptionnelle
 		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(ligne.getIdArticle(), estFidele);
 		
-		JOptionPane.showMessageDialog(null,pourcentagePromoDegressif + " " + pourcentagePromoExc);
+		JOptionPane.showMessageDialog(null,"Pourcenatge promo dégressif : "+pourcentagePromoDegressif + ", pourcentage promo exc : " + pourcentagePromoExc);
 		
 		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
 		if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
@@ -486,7 +524,7 @@ public class Commande {
 		}
 		
 		montantArticle = (Double) (quantiteCommandee*prixInitial*(1-promoAppliquee/100));
-		JOptionPane.showMessageDialog(null,montantArticle);
+		JOptionPane.showMessageDialog(null,"montant de l'article :"+montantArticle);
 		
 		return montantArticle;
 	}

@@ -31,7 +31,7 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 
-		FenetreCompte fen=new FenetreCompte();
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		

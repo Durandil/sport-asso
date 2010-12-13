@@ -103,8 +103,9 @@ public class FicheClient extends JDialog {
 			for (String commande : listeCommandesArticles) {
 				comboAfficherCommande.addItem(commande);
 			}
+			comboAfficherCommande.setSelectedIndex(0);
 		}
-		comboAfficherCommande.setSelectedIndex(0);
+		
 		
 		comboAfficherCommande.addActionListener(new ActionListener() {
 			
