@@ -94,6 +94,7 @@ public class Message {
 	 * @see Message#estEnvoyeAuGerant
 	 * @see Message#ajouterBDD()
 	 */
+	
 	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi,boolean messageEnvoye) {
 	
 		this.sujet = sujet;
@@ -105,7 +106,13 @@ public class Message {
 	}
 	
 	
-	 /**
+	 public Message() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	/**
      * Retourne l'id du message
      * 
      * @return L'identifiant du message
