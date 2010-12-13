@@ -6,16 +6,16 @@ public class ModeleTableauCommande extends AbstractTableModel{
 	
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Identifiant","Description","Quantité","Prix Unitaire","% Remise","Remise","Total"} ;
+    private final String[] entetes={"Identifiant",/*"Description",*/"Quantité","Total"} ;
 	
 	
 	public ModeleTableauCommande(){
 		super();
 		
 		
-		donnees= new Object[][]{
-				{"ART0001","Maillot foot","10","12,50","15%","0","125"}
-		};
+		donnees= new Object[1000][4];
+		
+		
 	}
 	
 	
