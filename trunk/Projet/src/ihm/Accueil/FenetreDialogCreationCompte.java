@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import exception.ExceptionCaractereInterdit;
 import exception.ExceptionMailDejaExistant;
 import exception.ExceptionMailSansArobase;
 import exception.ExceptionMailsDifferents;
@@ -58,8 +59,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 * @param modal
 	 * @throws ExceptionMailsDifferents
 	 * @throws ExceptionMailDejaExistant
+	 * @throws ExceptionCaractereInterdit 
 	 */
-	public FenetreDialogCreationCompte(JFrame parent, String title, boolean modal) throws ExceptionMailSansArobase, ExceptionMailsDifferents{
+	public FenetreDialogCreationCompte(JFrame parent, String title, boolean modal) throws ExceptionMailSansArobase, ExceptionMailsDifferents, ExceptionMailDejaExistant, ExceptionCaractereInterdit{
 		super(parent, title, modal);
 		this.setSize(400, 750);
 		this.setLocationRelativeTo(null);
@@ -72,7 +74,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 	/**
 	 * Initialise le contenu de la boîte
 	 */
-	private void initComponent() throws ExceptionMailsDifferents, ExceptionMailDejaExistant{
+	private void initComponent() throws ExceptionMailsDifferents, ExceptionMailDejaExistant,ExceptionCaractereInterdit{
 		//Icone
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
@@ -264,12 +266,15 @@ public class FenetreDialogCreationCompte extends JDialog{
 					creationCompteCorrecte = Client.verifierCreationCompte(identifiant.getText(), identifiantVerification.getText(), denomination.getText(), nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
 					
 				try {
+					//Vérification des champs
 					if (!identifiant.getText().equals(
 							identifiantVerification.getText())) {
 						throw new ExceptionMailsDifferents("L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.");
 					}
 					ArrayList<String> listeMails = new ArrayList<String>();
 					listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
+					
+					//Vérification de la présence de l'adresse mail dans la base
 					int test = 0;
 					for (int i = 0; i < listeMails.size(); i++) {
 						if (identifiant.getText().equals(listeMails.get(i))) {
@@ -281,12 +286,18 @@ public class FenetreDialogCreationCompte extends JDialog{
 						throw new ExceptionMailDejaExistant("Cette adresse mail est déjà utilisée par un autre utilisateur.");
 					}
 					
+					//Vérification de l'absence du caractère ' dans les champs
+					if(denomination.getText().contains("'") | nom.getText().contains("'") | prenom.getText().contains("'") | identifiant.getText().contains("'")){
+						//throw new ExceptionCaractereInterdit("Un des champs saisis comporte un caractère interdit : '. Vérifiez ce que vous avez saisi.");
+					}
+					
 				} catch (ExceptionMailsDifferents e1) {
 					System.out.println(e1.getMessage());
 					erreurCreation.showMessageDialog(null, "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
 				} catch (ExceptionMailDejaExistant e2) {
-					// TODO Auto-generated catch block
+					System.out.println(e2.getMessage());
 					e2.printStackTrace();
+					erreurCreation.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image);
 				}
 					System.out.println(creationCompteCorrecte);
 					
@@ -295,25 +306,25 @@ public class FenetreDialogCreationCompte extends JDialog{
 						//listeMails recense l'ensemble des adresses mails présentes dans la base
 						//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 						//Si test reste à 0, on ajoute le client dans la BDD
-						ArrayList<String> listeMails = new ArrayList<String>();
-						listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
-						int test = 0;
-						
-						for (int i = 0; i < listeMails.size(); i++) {
-							if (identifiant.getText().equals(listeMails.get(i))) {
-								test = 1;
-							}
-						}
-
-						if (test == 1) {
-							mailDejaUtilise = new JOptionPane();
-							ImageIcon image2 = new ImageIcon("src/images/warning.png");
-							mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image2);
-						}
+//						ArrayList<String> listeMails = new ArrayList<String>();
+//						listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
+//						int test = 0;
+//						
+//						for (int i = 0; i < listeMails.size(); i++) {
+//							if (identifiant.getText().equals(listeMails.get(i))) {
+//								test = 1;
+//							}
+//						}
+//
+//						if (test == 1) {
+//							mailDejaUtilise = new JOptionPane();
+//							ImageIcon image2 = new ImageIcon("src/images/warning.png");
+//							mailDejaUtilise.showMessageDialog(null, "Cette adresse mail est déjà utilisée par un autre utilisateur !", "Attention", JOptionPane.WARNING_MESSAGE, image2);
+//						}
 						// on pourra enregistrer dans base de données la nouvelle
 						// création de compte
 
-						else {
+//						else {
 							
 							String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
 							
@@ -346,7 +357,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 							setVisible(false);
 							// Essai d'ouverture du menu Utilisateur après une création de compte correcte
 							MenuUtilisateur men = new MenuUtilisateur();
-						}
+//						}
 						break;
 						
 					case 1:
