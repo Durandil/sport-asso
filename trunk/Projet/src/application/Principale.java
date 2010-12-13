@@ -32,7 +32,7 @@ public class Principale {
 		//BDD.init();
 
 		FenetreCompte fen=new FenetreCompte();
-		MenuUtilisateur men = new MenuUtilisateur();
+		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		
 		/** test récupération pourcentage promo exceptionnelle d'un article donne **/

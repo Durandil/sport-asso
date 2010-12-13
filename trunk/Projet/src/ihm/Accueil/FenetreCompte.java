@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import exception.ExceptionMailSansArobase;
+import exception.ExceptionMailsDifferents;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -30,7 +33,7 @@ public class FenetreCompte extends JFrame {
 	private Date heure ;
 	
 	@SuppressWarnings("deprecation")
-	public FenetreCompte(){
+	public FenetreCompte()throws ExceptionMailsDifferents{
 
 		this.setTitle("Informations client");
 		this.setSize(900, 550);
@@ -134,8 +137,18 @@ public class FenetreCompte extends JFrame {
 		boutonCreation.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				//dispose();
-				FenetreDialogCreationCompte compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
-				compte.setVisible(true); 
+				FenetreDialogCreationCompte compte = null;
+				try {
+					compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
+					compte.setVisible(true); 
+				} catch (ExceptionMailSansArobase e1) {
+					
+					e1.printStackTrace();
+				} catch (ExceptionMailsDifferents e1) {
+
+					e1.printStackTrace();
+				}
+				
 			}	
 		});
 		

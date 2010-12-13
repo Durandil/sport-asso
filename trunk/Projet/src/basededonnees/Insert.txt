@@ -77,10 +77,14 @@ Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00003','11
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00004','8 Mai 2010','iueihtam@laposte.fr');
 
 #Article
-Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00001', 'Maillot de foot de Sochaux', 350, 0.5, 70, 'CAT00002', 'TYP00001','En stock');
-Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00002', 'Ballon de basket', 350, 0.5, 20, 'CAT00002', 'TYP00003','En stock');
-Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00003', 'Velo de Course', 0, 5, 250, 'CAT00001', 'TYP00006', 'Rupture de stock');
-Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00004', 'Raquette de Tennis', 550, 1.1, 50, 'CAT00003', 'TYP00008', 'En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00001', 'Maillot de foot de Sochaux', 350, 500, 70, 'CAT00002', 'TYP00001','En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00002', 'Ballon de basket', 350, 500, 20, 'CAT00002', 'TYP00003','En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00003', 'Velo de Course', 0, 5000, 250, 'CAT00001', 'TYP00006', 'Rupture de stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00004', 'Raquette de Tennis', 550, 1100, 50, 'CAT00003', 'TYP00008', 'En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00005', 'Gants de ski', 1500, 300, 20, 'CAT00004', 'TYP00007', 'En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00006', 'Chaussettes de sport', 0, 100, 10, 'CAT00004', 'TYP00010', 'Rupture de stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00007', 'Short de bain', 0, 300, 20, 'CAT00004', 'TYP00004', 'Déstocké');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00008', 'Chronomètre', 500, 125, 30, 'CAT00002', 'TYP00010', 'En stock');
 
 #Carte_fidelite
 Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00001', '500', 'arthur.laroch@gmail.com');
