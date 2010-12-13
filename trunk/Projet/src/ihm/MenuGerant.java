@@ -33,14 +33,14 @@ public class MenuGerant extends JFrame {
 
 	private JMenuBar menuBar = new JMenuBar();
 	
-	private JMenu menuClientele = new JMenu("Clientèle");
-	private JMenu menuStock = new JMenu("Stock");
+	private JMenu menuClientele = new JMenu("Gestion Clientèle");
+	private JMenu menuStock = new JMenu("Gestion des Stock");
 
 	private JMenuItem itemGestionCompte = new JMenuItem("Gestion Compte Client");
-	private JMenuItem itemMessagerie = new JMenuItem("Messagerie");
+	private JMenuItem itemMessagerie = new JMenuItem("Messagerie gérant");
 	private JMenuItem itemFermer = new JMenuItem("Fermer");
 	private JMenuItem itemArticles = new JMenuItem("Articles");
-	private JMenuItem itemCommandes = new JMenuItem("Commandes");
+	private JMenuItem itemCommandes = new JMenuItem("Commandes de réapprovisionnement");
 	private JMenuItem itemPromotions = new JMenuItem("Promotions");
 
 	private JLabel icon;

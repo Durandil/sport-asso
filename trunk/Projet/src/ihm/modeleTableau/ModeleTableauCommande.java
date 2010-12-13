@@ -39,10 +39,7 @@ public class ModeleTableauCommande extends AbstractTableModel{
 			donnees[compteurArticle][2] = ligneCommande.getQuantite();
 			donnees[compteurArticle][3] = (int)com.montantCommandePourUnArticle(numClient, ligneCommande, fidelite)+" €";
 			compteurArticle++;
-		}
-		
-		
-		
+		}	
 	}
 	
 	

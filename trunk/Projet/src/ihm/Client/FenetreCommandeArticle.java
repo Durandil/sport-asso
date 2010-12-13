@@ -5,6 +5,7 @@ import ihm.modeleTableau.ModelePanier;
 import ihm.modeleTableau.ModeleTableauCatalogue;
 
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -48,6 +50,9 @@ public class FenetreCommandeArticle extends JFrame{
 	// donc on  met ce booleen à false et on changera la valeur s'il le fait correctement
 	public static boolean avoirRafraichiApresAjoutPanier=false;
 	
+	private static boolean utilisationBonReduction=false;
+	static int bonAchat = 0 ;
+	
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
 	 * initComponent(). Cette classe permet l'affichage simultané du catalogue et du panier du client.
@@ -68,7 +73,7 @@ public class FenetreCommandeArticle extends JFrame{
     private void initComponent(){
     	
     	// Définition du panneau qui ne contiendra que l'affichage de part et d'autre de la fenetre
-    	// des intitulés des tableaux catalogie e panier
+    	// des intitulés des tableaux catalogie et panier
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
     	
@@ -77,13 +82,37 @@ public class FenetreCommandeArticle extends JFrame{
     	panneauCatalogue.add(catalogueLabel);
     	panneauHaut.add(panneauCatalogue,"West");
     	
+    	// affichage d'un bouton à cocher uniquement pour les adhérents
+    	// pour leur demander s'ils veulent utiliser leur bon de réduction
     	JPanel panneauUtilisationBonsReduction = new JPanel();
-    	JLabel labelBonReduction= new JLabel("Cochez si vous voulez utiliser votre bon de réduction de ");
+		
+    	ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+
+		
+    	if(fideliteClient.get(0).equals("Oui")){
+    		int nbPointsCarte = Integer.parseInt(fideliteClient.get(1));
+    		bonAchat = CarteFidelite.calculerBonsReductions(nbPointsCarte);  
+		}
     	
+    	JCheckBox utiliseBonAchat = new JCheckBox("Cochez si vous voulez utiliser votre bon de réduction de "+ bonAchat + " €");
+    	utiliseBonAchat.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				utilisationBonReduction = ((JCheckBox)e.getSource()).isSelected();
+			}
+		});
+    	
+    	if(fideliteClient.get(0).equals("Oui")){
+    		panneauUtilisationBonsReduction.add(utiliseBonAchat);
+		}
+    	
+    	panneauHaut.add(panneauUtilisationBonsReduction,"Center");
     	
     	JPanel panneauPanier=new JPanel();
     	panierLabel= new JLabel("PANIER");
     	panneauPanier.add(panierLabel);
+    	
     	panneauHaut.add(panneauPanier,"East");
     	
     	
@@ -155,14 +184,20 @@ public class FenetreCommandeArticle extends JFrame{
 						Commande nouvelleCommande = new Commande(null, FenetreDialogIdentification.clientUserIdentifiant, listeArticlesPanier, dateJour);
 						try {
 							// calcul de la commande
+							
 							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
 							
-							nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
-
-							JOptionPane.showMessageDialog(null,"Montant commande : " + montantCommande);
+							ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+							
+							
+							if(utilisationBonReduction==true){
+								nouvelleCommande.majMontantCommande((int)Math.round(montantCommande)-bonAchat);
+							}
+							else{
+								nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
+							}
 							
 							// mise à jour du nombre de points sur la carte
-							ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 							if(fideliteClient.get(0).equals("Oui")){
 								int nbPointsAvant = Integer.parseInt(fideliteClient.get(1));
 								int pointsRecoltes = (int) Math.round(montantCommande);
@@ -170,6 +205,8 @@ public class FenetreCommandeArticle extends JFrame{
 								CarteFidelite.modifierBDDcarteFidelite(FenetreDialogIdentification.clientUserIdentifiant, nbPointsAvant+pointsRecoltes);
 								
 							}
+							
+							
 							
 							FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier );
 							fenetre.setVisible(true);
