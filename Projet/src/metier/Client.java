@@ -376,18 +376,20 @@ public abstract class Client{
 		
 		try{
 			int cp = Integer.parseInt(codePostal);
-			int tel = Integer.parseInt(telephone);
+			long tel = Long.parseLong(telephone);
 
 			if(cp<=999 | cp>=96000){
 				compteBon=6;
+				System.out.println(compteBon);
 			}
-//			if(tel<100000000 | tel>= 700000000){
-//				compteBon = 7;
-//			}
+			if(tel<100000000 | tel>= 800000000){
+				compteBon = 7;
+				System.out.println(compteBon);
+			}
 			
 		}
 		catch(NumberFormatException exc){
-			System.out.println("le Code Postal ou le numéro de téléphone indidiqué n'est pas bon");
+			System.out.println("le Code Postal ou le numéro de téléphone indiqué n'est pas bon");
 		}
 		
 		return compteBon ;

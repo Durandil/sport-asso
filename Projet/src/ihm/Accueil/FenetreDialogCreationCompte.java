@@ -21,6 +21,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import exception.ExceptionMailDejaExistant;
+import exception.ExceptionMailSansArobase;
+import exception.ExceptionMailsDifferents;
+
 import basededonnees.SGBD;
 
 import metier.Association;
@@ -52,8 +56,10 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 * @param parent
 	 * @param title
 	 * @param modal
+	 * @throws ExceptionMailsDifferents
+	 * @throws ExceptionMailDejaExistant
 	 */
-	public FenetreDialogCreationCompte(JFrame parent, String title, boolean modal){
+	public FenetreDialogCreationCompte(JFrame parent, String title, boolean modal) throws ExceptionMailSansArobase, ExceptionMailsDifferents{
 		super(parent, title, modal);
 		this.setSize(400, 750);
 		this.setLocationRelativeTo(null);
@@ -66,7 +72,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 	/**
 	 * Initialise le contenu de la boîte
 	 */
-	private void initComponent(){
+	private void initComponent() throws ExceptionMailsDifferents, ExceptionMailDejaExistant{
 		//Icone
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
@@ -246,7 +252,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 			private JOptionPane erreurSaisie;
 
 			@SuppressWarnings("static-access")
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){
 				/** ATTENTION ! Au début, le type de compte est sur "Compte Particulier" par défaut 
 				 * Mais le champ Dénomination n'est pas grisé il faut resélectionner Compte Particulier
 				 * pour que Dénomination se grise.
@@ -256,6 +262,32 @@ public class FenetreDialogCreationCompte extends JDialog{
 					ImageIcon image = new ImageIcon("src/images/warning.png");
 					
 					creationCompteCorrecte = Client.verifierCreationCompte(identifiant.getText(), identifiantVerification.getText(), denomination.getText(), nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
+					
+				try {
+					if (!identifiant.getText().equals(
+							identifiantVerification.getText())) {
+						throw new ExceptionMailsDifferents("L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.");
+					}
+					ArrayList<String> listeMails = new ArrayList<String>();
+					listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
+					int test = 0;
+					for (int i = 0; i < listeMails.size(); i++) {
+						if (identifiant.getText().equals(listeMails.get(i))) {
+							test = 1;
+						}
+					}
+
+					if (test == 1) {
+						throw new ExceptionMailDejaExistant("Cette adresse mail est déjà utilisée par un autre utilisateur.");
+					}
+					
+				} catch (ExceptionMailsDifferents e1) {
+					System.out.println(e1.getMessage());
+					erreurCreation.showMessageDialog(null, "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+				} catch (ExceptionMailDejaExistant e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 					System.out.println(creationCompteCorrecte);
 					
 					switch (creationCompteCorrecte) {
@@ -280,7 +312,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 						}
 						// on pourra enregistrer dans base de données la nouvelle
 						// création de compte
-						/** TODO : Gestion de l'id ville...**/
+
 						else {
 							
 							String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal.getText());
@@ -321,9 +353,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 						erreurCreation.showMessageDialog(null, "Votre adresse mail ne comporte pas de signe @","Attention !", JOptionPane.WARNING_MESSAGE, image);
 						
 						break;
-					case 2:
-						erreurCreation.showMessageDialog(null, "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-						break;
+//					case 2: //Traité
+//						erreurCreation.showMessageDialog(null, "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//						break;
 					case 3:
 						erreurCreation.showMessageDialog(null, "Un code postal doit contenir 5 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
 						break;
