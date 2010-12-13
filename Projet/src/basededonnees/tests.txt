@@ -53,6 +53,7 @@ Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, T
 #Promo
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),0.75,0);
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),0.5,1); 
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00003','Pas cher pas cher',TO_DATE('2010-12-10', 'YYYY-MM-DD'),TO_DATE('2010-12-20', 'YYYY-MM-DD'),0.5,1); 
 
 
 #Carte_fidélité
@@ -68,6 +69,10 @@ Insert into COMMANDE (idcommande, datecommande, idclient) values ('comm0001','3 
 
 #Listing_articles_commandes
 Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('comm0001', 'ART00001',5);
+
+#LISTING_PROMOS_ARTICLES
+Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00001','PRO00003');
+Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00003','PRO00002');
 
 #Message
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'arthur.laroch@gmail.com',TO_DATE('2010-12-15', 'YYYY-MM-DD'));

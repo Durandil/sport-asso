@@ -21,17 +21,17 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 	/** TODO : Penser à modifier les id/mdp ! **/
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3198";
+	private static final String MDP = "id3198";
 
 	private static String compteurViewStatistiqueArticle;
 	
