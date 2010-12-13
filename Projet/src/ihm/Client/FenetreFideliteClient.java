@@ -137,30 +137,12 @@ public class FenetreFideliteClient extends JDialog {
 		JButton boutonAffichageBons=new JButton("Afficher les bons d'achat disponibles");
 		boutonAffichageBons.addActionListener(new ActionListener() {
 			
-		
-			@SuppressWarnings("unused")
+
 			public void actionPerformed(ActionEvent e) {
 				//Gestion des bons achat du client selon le nombre de points
 				// sur sa carte de fidelite
 
-				int bonAchat=0;
-				
-				if(points <= 0) {
-					bonAchat=0;
-				}
-				else if(points<51) {
-					bonAchat=5;
-				}
-				else if(points<101){
-					bonAchat=12;
-				}
-				else if(points<201){
-					bonAchat=25;
-				}
-				else if(points<501){
-					bonAchat=70;
-				}
-				else bonAchat=150 ;
+				int bonAchat=CarteFidelite.calculerBonsReductions(points);
 				
 				ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
 				JOptionPane.showMessageDialog(null, "Vous disposez d'un bon d'achat de "+ bonAchat + " €", "Information sur les bons d'achat", JOptionPane.INFORMATION_MESSAGE, imageInformation);

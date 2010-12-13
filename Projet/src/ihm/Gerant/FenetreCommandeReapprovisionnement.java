@@ -86,9 +86,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				Article.modifierStockArticleBDD(identifiantArticle, quantiteSelectionnee);
-				FenetreReapprovisionnement.doitReactualiserTableau = true ;
 				setVisible(false); 
-				
 			}			
 		});
 		

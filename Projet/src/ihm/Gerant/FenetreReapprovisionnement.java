@@ -22,15 +22,10 @@ import javax.swing.border.Border;
 
 
 public class FenetreReapprovisionnement extends JFrame {
-	// Creer la base de données correspondante aux articles 
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel image;
 	private JLabel titreLabel;
-	public static boolean doitReactualiserTableau = false;
 	public static int ligneTableau=0;
 
 	public FenetreReapprovisionnement(){
@@ -43,7 +38,6 @@ public class FenetreReapprovisionnement extends JFrame {
 		this.initComponent();
 	}         
 
-        
     private void initComponent(){
     	
     	JPanel panneauHaut= new JPanel();
@@ -62,8 +56,8 @@ public class FenetreReapprovisionnement extends JFrame {
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
-    	// TODO Récupération du tableau avec l'ensemble ds articles en quantité insuffisante 
-    	// après interroagtion de la base de données dans ModeleTableauCatalogue
+    	//Récupération du tableau avec l'ensemble ds articles en quantité insuffisante 
+    	// après interrogation de la base de données dans ModeleTableauCatalogue
     	final ModeleTableauCatalogue modele = new ModeleTableauCatalogue(true,true);
 	    final JTable tableau = new JTable(modele);
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
@@ -74,15 +68,11 @@ public class FenetreReapprovisionnement extends JFrame {
 	    commandeBouton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				
-				if(doitReactualiserTableau==false){
-					ligneTableau = tableau.getSelectedRow();
-					String numeroArticle = tableau.getValueAt(ligneTableau, 0).toString();
-					FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numeroArticle);
-					fen.setVisible(true);
-				}
-				
-				
+				ligneTableau = tableau.getSelectedRow();
+				String numeroArticle = tableau.getValueAt(ligneTableau, 0).toString();
+				FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numeroArticle);
+				fen.setVisible(true);
+				dispose();			
 			}
 		});
 	    
@@ -96,34 +86,12 @@ public class FenetreReapprovisionnement extends JFrame {
 			}			
 		});
 		
-		
-		JButton reactualiserBouton = new JButton("Réactualiser tableau");
-		reactualiserBouton.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				if(doitReactualiserTableau==true){
-					// TODO méthode pour reactualiser le tableau
-					
-					//modele.updateLigne(modele.getRowCount(),true);
-					
-					// change la valeur du booleen doitReactualiserTableau car la reactualisation
-					// a été effectuée
-					doitReactualiserTableau=false;
-				}
-			}
-		});
-		
-		
 		JPanel panneauBoutons = new JPanel();
 		panneauBoutons.add(commandeBouton,"West");
 		panneauBoutons.add(retourBouton,"East");
-		panneauBoutons.add(reactualiserBouton,"Center");
 		
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
-			
-	        
-	        
+		
 	    pack();
 	       
         

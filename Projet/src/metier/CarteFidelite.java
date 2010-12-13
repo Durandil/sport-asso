@@ -202,4 +202,27 @@ public class CarteFidelite {
 		
 	}
 	
+	public static int calculerBonsReductions(int nbrePoints){
+		int bonAchat=0;
+		
+		if(nbrePoints <= 0) {
+			bonAchat=0;
+		}
+		else if(nbrePoints<51) {
+			bonAchat=5;
+		}
+		else if(nbrePoints<101){
+			bonAchat=12;
+		}
+		else if(nbrePoints<201){
+			bonAchat=25;
+		}
+		else if(nbrePoints<501){
+			bonAchat=70;
+		}
+		else bonAchat=150 ;
+		
+		return bonAchat;
+	}
+	
 }
