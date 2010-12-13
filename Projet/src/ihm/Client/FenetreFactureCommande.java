@@ -35,21 +35,15 @@ public class FenetreFactureCommande extends JDialog {
 	}
 	
 	private void initComponent(String idCommande, String idClient){
-		// faire des méthodes de récupération du listing des articles de la commande n°idCommande 
-		// avec leur quantité, de récupération des caractéristiques de la commande (date)
-		// calculer le total par article (en fonction de la quantité appliquer % reduction )
-		// et le montant total ( faire utiliser bon achat eventuellement)
-		// en déduire le nombre de points à rajouter sur carte fidelité
-		
 
 		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
 		String prenom = SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idClient);
 		String denomination = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
 		String adresse = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "ADRESSECLIENT", idClient);
-		String codePostal = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
-		String ville = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
+		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE", "IDCLIENT", idClient);
+		String codePostal = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "IDVILLE", idVille);
+		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "IDVILLE", idVille);
 		
-		// TODO compléter informationsCommande dans SGBD
 		
 		// creation du panneau du haut avec caractéristiques client
 		JPanel panneauHaut = new JPanel();
@@ -66,8 +60,8 @@ public class FenetreFactureCommande extends JDialog {
 		
 		
 		JPanel panneauDateCommande = new JPanel();
-		dateCommandeLabel = new JLabel("Date commande : ");
-		numCommandeLabel = new JLabel("Numéro de commande : ");
+		dateCommandeLabel = new JLabel("Date commande : "+ SGBD.selectDateConditionString("COMMANDE", "DATECOMMANDE", "IDCOMMANDE",idCommande, "dd/mm/yyyy") );
+		numCommandeLabel = new JLabel("Numéro de commande : "+idCommande);
 		panneauDateCommande.add(dateCommandeLabel);
 		panneauDateCommande.add(numCommandeLabel);
 		

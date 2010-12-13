@@ -77,6 +77,9 @@ public class FenetreCommandeArticle extends JFrame{
     	panneauCatalogue.add(catalogueLabel);
     	panneauHaut.add(panneauCatalogue,"West");
     	
+    	JPanel panneauUtilisationBonsReduction = new JPanel();
+    	JLabel labelBonReduction= new JLabel("Cochez si vous voulez utiliser votre bon de réduction de ");
+    	
     	
     	JPanel panneauPanier=new JPanel();
     	panierLabel= new JLabel("PANIER");
@@ -101,10 +104,10 @@ public class FenetreCommandeArticle extends JFrame{
 	    final ModelePanier modPan = new ModelePanier(panierClient);
 	    final JTable panier = new JTable(modPan);     
 	    this.getContentPane().add(new JScrollPane(panier), BorderLayout.EAST);
-	        
+	     
+	    
 	    // Définition du panneau des boutons permettant la confirmation ou l'annulation de la commande en cours    
 	    JPanel panneauBouton=new JPanel();
-	    
 	    
 	    JButton commanderArticle = new JButton("Choisir un article");
 	    commanderArticle.addActionListener(new ActionListener() {
