@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import exception.ExceptionCaractereInterdit;
+import exception.ExceptionMailDejaExistant;
 import exception.ExceptionMailSansArobase;
 import exception.ExceptionMailsDifferents;
 
@@ -144,9 +146,15 @@ public class FenetreCompte extends JFrame {
 				} catch (ExceptionMailSansArobase e1) {
 					
 					e1.printStackTrace();
-				} catch (ExceptionMailsDifferents e1) {
+				} catch (ExceptionMailsDifferents e2) {
 
-					e1.printStackTrace();
+					e2.printStackTrace();
+				} catch (ExceptionMailDejaExistant e3) {
+					
+					e3.printStackTrace();
+				} catch (ExceptionCaractereInterdit e4) {
+					// TODO Auto-generated catch block
+					e4.printStackTrace();
 				}
 				
 			}	
