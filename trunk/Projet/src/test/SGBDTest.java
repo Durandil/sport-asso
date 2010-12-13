@@ -28,7 +28,7 @@ public class SGBDTest extends TestCase {
 		String dateS2 = "01/09/10";
 		result.add(dateS);
 		result.add(dateS2);
-		assertEquals(result,SGBD.selectListeDates("Promo","datefin" ,"dd/mm/yy")); 
+		assertEquals(result,SGBD.selectListeDatesOrdonne("Promo","datefin" ,"dd/mm/yy","IDPROMO")); 
 	}
 	
 // test select liste float
