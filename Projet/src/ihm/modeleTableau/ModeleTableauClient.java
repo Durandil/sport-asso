@@ -1,13 +1,11 @@
 package ihm.modeleTableau;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
 import basededonnees.SGBD;
 
-public class ModeleTableauClient extends AbstractTableModel implements ActionListener {
+public class ModeleTableauClient extends AbstractTableModel {
 	
 	/**
 	 * 
@@ -17,24 +15,14 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 	private final Object[][] donnees;
 
     private final String[] entetes={"Identifiant","Nom","Prénom","Dénomination"} ;
-	
-    
-	
-	public ModeleTableauClient() {
-		super();
-		// TODO Auto-generated constructor stub
-		donnees = new Object[1000][4];
-		
-	}
-
 
 	public ModeleTableauClient(String idClient,String nom,String denom,String ville){
 		super();
 		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
 		ArrayList<ArrayList<String>> listeClients = SGBD.recupererInformationRechercheClient(idClient,nom,denom,ville);
 		
-		donnees = new Object[1000][4];
-		System.out.println(listeClients.get(0).size());
+		donnees = new Object[listeClients.get(0).size()][4];
+
 		if (listeClients.size()>0){
 			ArrayList<String> listeIdentifiants = listeClients.get(0);
 			ArrayList<String> listeNom = listeClients.get(1);
@@ -60,21 +48,15 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
 	}
 	
 
-	
-	
-	
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return entetes.length;
 	}
 
 	public int getRowCount() {
-		// TODO Auto-generated method stub
 		return donnees.length;
 	}
 
 	public Object getValueAt(int rowIndex, int colIndex) {
-		// TODO Auto-generated method stub
 		return donnees[rowIndex][colIndex];
 	}
 	
@@ -83,11 +65,6 @@ public class ModeleTableauClient extends AbstractTableModel implements ActionLis
     }
 
 
-	public void actionPerformed(ActionEvent e) {
-		
-		// TODO Auto-generated method stub
-		
-	}
     
 
 }

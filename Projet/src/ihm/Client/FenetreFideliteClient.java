@@ -148,11 +148,19 @@ public class FenetreFideliteClient extends JDialog {
 				if(points <= 0) {
 					bonAchat=0;
 				}
-				else if(points<20) {
-					bonAchat=10;
+				else if(points<51) {
+					bonAchat=5;
 				}
-				else if(points<60) bonAchat=30;
-				
+				else if(points<101){
+					bonAchat=12;
+				}
+				else if(points<201){
+					bonAchat=25;
+				}
+				else if(points<501){
+					bonAchat=70;
+				}
+				else bonAchat=150 ;
 				
 				ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
 				JOptionPane.showMessageDialog(null, "Vous disposez d'un bon d'achat de "+ bonAchat + " €", "Information sur les bons d'achat", JOptionPane.INFORMATION_MESSAGE, imageInformation);

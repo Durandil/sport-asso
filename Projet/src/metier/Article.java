@@ -417,6 +417,8 @@ public class Article {
 				+ "IDCATEGORIE ='" + idCat + "',"+ "POIDS = '" + poids
 				+ "' WHERE IDARTICLE='" + idArticle + "'";
 		
+		System.out.println(requete);
+		
 		SGBD.executeUpdate(requete);
 
 	}
@@ -489,6 +491,7 @@ public class Article {
 		}
 		
 		try{
+
 			double prixInitial = Double.parseDouble(prix);
 			long poidsArticle = Long.parseLong(poids);
 			long stockArticle = Long.parseLong(stock);

@@ -184,6 +184,7 @@ public class Promotion {
 		
 		System.out.println(dateJour.toString());
 		System.out.println(datePromotion.toString());
+		System.out.println(datePromotion.compareTo(dateJour));
 		
 		if(datePromotion.before(dateJour)){
 			resultat=false;

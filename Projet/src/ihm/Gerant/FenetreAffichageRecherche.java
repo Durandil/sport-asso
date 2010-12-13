@@ -4,11 +4,11 @@ import ihm.modeleTableau.ModeleTableauClient;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -36,7 +36,8 @@ public class FenetreAffichageRecherche extends JDialog{
 		
 		
 		JPanel panneauCentral =  new JPanel();
-		final JTable tableauRechercheClient = new JTable(new ModeleTableauClient(idClient,nom,denom, ville));
+		final ModeleTableauClient modele = new ModeleTableauClient(idClient,nom,denom, ville);
+		final JTable tableauRechercheClient = new JTable(modele);
 		tableauRechercheClient.setVisible(true);
 		panneauCentral.add(new JScrollPane(tableauRechercheClient));
 		
@@ -44,14 +45,19 @@ public class FenetreAffichageRecherche extends JDialog{
 		JButton validationRecherche = new JButton("Accès client");
 		
 		validationRecherche.addActionListener(new ActionListener() {
-		@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stud
 				// on affiche la fiche client correspondante à l'identifiant saisi
 				int ligne =  tableauRechercheClient.getSelectedRow();
-				String identifiant = tableauRechercheClient.getValueAt(ligne,0).toString();
-				FicheClient ficheDuClient = new FicheClient(null, "Fiche du client : "+ identifiant, true, identifiant);
-				ficheDuClient.setVisible(true);
+				if(ligne==-1){
+					JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée. Veuillez en sélectionner une","Attention",JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					String identifiant = tableauRechercheClient.getValueAt(ligne,0).toString();
+					dispose();
+					FicheClient ficheDuClient = new FicheClient(null, "Fiche du client : "+ identifiant, true, identifiant);
+					ficheDuClient.setVisible(true);
+										
+				}
 			}
 
 		});

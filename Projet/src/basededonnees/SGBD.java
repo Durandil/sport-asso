@@ -1047,71 +1047,53 @@ public class SGBD {
 		try{
 			st=c.createStatement();
 			String conditionWhereOr= "WHERE (";
-			String conditionWhereAnd= "WHERE (";
 			boolean ajouterChamp=false;
 			
 			if(!idClient.equals("")){
 				conditionWhereOr=conditionWhereOr+"IDCLIENT Like '%"+idClient +"%'";
-				conditionWhereAnd=conditionWhereAnd+"IDCLIENT Like '%"+idClient +"%'";
 				ajouterChamp=true;
-				System.out.println("condition 1");
 			}
 			
 			if(!denomination.equals("")){
 				if(ajouterChamp==true){
 					conditionWhereOr=conditionWhereOr+" or ";
-					conditionWhereAnd=conditionWhereAnd+" and ";
-					ajouterChamp=false;
 				}
 				conditionWhereOr=conditionWhereOr+"DENOMINATIONCLIENT Like '%"+denomination +"%'";
-				conditionWhereAnd=conditionWhereAnd+"DENOMINATIONCLIENT Like '%"+denomination +"%'";
 				ajouterChamp=true;
-				System.out.println("condition 2");
 			}
 			
 			if(!nomClient.equals("")){
 				if(ajouterChamp==true){
 					conditionWhereOr=conditionWhereOr+" or ";
-					conditionWhereAnd=conditionWhereAnd+" and ";
 					ajouterChamp=false;
 				}
 				conditionWhereOr=conditionWhereOr+"NOMCLIENT Like '%"+nomClient +"%'";
-				conditionWhereAnd=conditionWhereAnd+"NOMCLIENT Like '%"+nomClient +"%'";
 				ajouterChamp=true;
-				System.out.println("condition 3");
 			}
 			
 			if(!ville.equals("")){
 				if(ajouterChamp==true){
 					conditionWhereOr=conditionWhereOr+" or ";
-					conditionWhereAnd=conditionWhereAnd+" and ";
 					ajouterChamp=false;
 				}
 				conditionWhereOr=conditionWhereOr+"NOMVILLE Like '%"+ville+"%'";
-				conditionWhereAnd=conditionWhereAnd+"NOMVILLE Like '%"+ville+"%'";
 				ajouterChamp=true;
-				System.out.println("condition 4");
 			}
 			
 			// si un utilisateur ne remplit aucun champ et appuie sur le bouton
 			// il pourra voir la liste des clients
 			if(conditionWhereOr.equals("WHERE (")){
 				conditionWhereOr="WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
-				conditionWhereAnd=" WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
 				System.out.println("condition 5");
 			}
 			else{
 				conditionWhereOr=conditionWhereOr+" ) AND (VILLE.IDVILLE = CLIENT.IDVILLE) ";
-				conditionWhereOr=conditionWhereAnd+" AND VILLE.IDVILLE = CLIENT.IDVILLE) ";
 				System.out.println("condition 6");
 			}
 			
 			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
 					" FROM CLIENT, VILLE " + conditionWhereOr);
 			
-//			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT FROM CLIENT"+
-//					" where idclient=(select distinct(idclient) from client where idClient =(SELECT IDCLIENT FROM CLIENT " + conditionWhereOr + 
-//					" UNION  SELECT IDCLIENT  FROM CLIENT " + conditionWhereAnd+")))");
 			
 			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
 					" FROM CLIENT, VILLE " + conditionWhereOr );
@@ -1163,5 +1145,134 @@ public class SGBD {
 		return informationsClient;
 	}
 
+	public static int compterNbrePromoExceptionnellesArticle(String idArticle,int estFidele){
+		connecter();
+		Statement st = null ;
+		ResultSet res= null;
+		int nbrePromo=0;
+		String requete="";
+		
+		try{
+			st=c.createStatement();
+			
+			if(estFidele==0){
+				// si le client n'est pas adhérent au magasin, il ne peut bénéficier que des promotions
+				// sur les promotions concernant l'ensemble des clients
+				requete="select count(*) from promo,LISTING_PROMOS_ARTICLES " +
+						"where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO AND PROMOFIDELITE=0 " +
+						"and DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE " +
+						"AND LISTING_PROMOS_ARTICLES.IDARTICLE='"+idArticle+"'";
+			}
+			else{
+				// si le client est adhérent au magasin, il peut bénéficier de l'ensemble
+				// des promotions exceptionelles sur l'article
+				requete="select count(*) from promo,LISTING_PROMOS_ARTICLES " +
+						"where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO and " +
+						"DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE " +
+						"AND LISTING_PROMOS_ARTICLES.IDARTICLE='"+idArticle+"'";
+			}
+			
+			res=st.executeQuery(requete);
+			
+			String compteurPromotion="0";
+			
+			while(res.next()){
+				if(res.getObject(1) != null){
+					compteurPromotion=res.getObject(1).toString();
+				}
+			}
+			nbrePromo=Integer.parseInt(compteurPromotion);
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		catch(NumberFormatException exc){
+			System.out.println(exc.getMessage());
+		}
+		
+		
+		return nbrePromo;
+	}
+	
+	public static String recupererPourcentagePromotionExceptionnelleArticle(String idArticle,int estFidele){
+		connecter();
+		Statement st = null ;
+		ResultSet res= null;
+		String requete="";
+		String pourcentage="0";
+		
+		try{
+			st=c.createStatement();
+			
+			if(estFidele==0){
+				// si le client n'est pas adhérent au magasin, il ne peut bénéficier que des promotions
+				// sur les promotions concernant l'ensemble des clients
+				requete="select max(pourcentagepromo) from promo,LISTING_PROMOS_ARTICLES " +
+						"where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO AND PROMOFIDELITE=0 " +
+						"and DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE " +
+						"AND LISTING_PROMOS_ARTICLES.IDARTICLE='"+idArticle+"'";
+			}
+			else{
+				// si le client est adhérent au magasin, il peut bénéficier de l'ensemble
+				// des promotions exceptionelles sur l'article
+				requete="select max(pourcentagepromo) from promo,LISTING_PROMOS_ARTICLES " +
+						"where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO and " +
+						"DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE " +
+						"AND LISTING_PROMOS_ARTICLES.IDARTICLE='"+idArticle+"'";
+			}
+			
+			res=st.executeQuery(requete);
+			
+			
+			while(res.next()){
+				if(res.getObject(1) != null){
+					pourcentage=res.getObject(1).toString();
+				}
+			}	
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		
+		return pourcentage ;
+	}
+	
+	public static String recupererPourcentagePromotionDegressifArticleCommande(String identifiantCommande, String idArticle){
+		connecter();
+		Statement st = null ;
+		ResultSet res= null;
+		String requete="";
+		// on met le pourcentage de promo degressif si la requete ne retourne pas de resultat 
+		//cad si la quantite commandee de l'article est inférieure au seuil minimal nécessaire
+		// pour bénéficier d'une promotion degressive sur l'article
+		String pourcentage="0";
+		
+		try{
+			st=c.createStatement();
+			
+			requete="select max(pourcentage) from listing_articles_commandes,article,reduction,quantite"+
+				" where listing_articles_commandes.idarticle=article.idarticle"+
+				" and reduction.idcategorie=article.idcategorie"+
+				" and quantite.idquantite=reduction.idquantite"+
+				" and (listing_articles_commandes.quantitecommandee-quantite.quantite)>0"+
+				" and article.idarticle='"+idArticle+"'"+
+				" and idCommande='"+identifiantCommande+"'";
+			
+			System.out.println(requete);
+			res=st.executeQuery(requete);
+			
+			
+			while(res.next()){
+				if(res.getObject(1) != null){
+					pourcentage=res.getObject(1).toString();
+				}
+			}	
+		}
+		catch(SQLException e){
+			System.out.println(e.getMessage());
+		}
+		
+		return pourcentage ;
+	}
 	
 }

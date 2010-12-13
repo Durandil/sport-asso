@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -41,6 +42,7 @@ public class FicheClient extends JDialog {
 	private JLabel icon;
 	private static String etatCompte="";
 	private static final String identifiantClient = "";
+	private static String numeroCommande=" ";
 	
 	public FicheClient(JFrame parent, String title, boolean modal,String identifiantClient){
 		super(parent, title, modal);
@@ -66,12 +68,14 @@ public class FicheClient extends JDialog {
 		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
 		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
 		JComboBox comboAfficherCommande = new JComboBox();
+		JButton boutonValidation = new JButton("OK");
 		
 		JPanel panStat1 = new JPanel();
 		JPanel panStat2 = new JPanel();
 		JPanel panStat3 = new JPanel();
 		JPanel panStat4 = new JPanel();
 		JPanel panStat5 = new JPanel();
+		JPanel panStatCommande = new JPanel();
 		
 		panStat1.setBackground(new Color(0,0,0,0));
 		panStat2.setBackground(new Color(0,0,0,0));
@@ -91,6 +95,8 @@ public class FicheClient extends JDialog {
 		panStat4.add(quantiteTotaleArticleMaxCommande);
 		panStat5.add(dateDernierAchatArticleMaxCommande);
 		
+		panStatCommande.setLayout(new GridLayout(1,2,2,0));
+		// remplissage du ComboBox avec les commandes du client
 		ArrayList<String> listeCommandesArticles=new ArrayList<String>();
 		listeCommandesArticles= SGBD.selectListeStringOrdonneCondition("COMMANDE", "IDCOMMANDE", "IDCOMMANDE", "IDCLIENT='"+idClient+"'");
 		if(listeCommandesArticles.size()>0){
@@ -98,14 +104,36 @@ public class FicheClient extends JDialog {
 				comboAfficherCommande.addItem(commande);
 			}
 		}
+		comboAfficherCommande.setSelectedIndex(0);
 		
+		comboAfficherCommande.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				numeroCommande =(String) ((JComboBox) e.getSource()).getSelectedItem();
+			}
+		});
+		
+		// définition de l'action du bouton qui ouvrira la fenetre des statistiques d'une commande
+		boutonValidation.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if (!numeroCommande.equals(" ")){
+					FenetreStatistiqueCommande fenetre = new FenetreStatistiqueCommande(null,"Détails de la commande : "+numeroCommande,true,numeroCommande);
+					fenetre.setVisible(true);
+				}
+			}
+		});
+		// définition du panneau des statistique commande
+		panStatCommande.add(comboAfficherCommande);
+		panStatCommande.add(boutonValidation);
 		
 		panneauDroite.add(panStat1);
 		panneauDroite.add(panStat2);
 		panneauDroite.add(panStat3);
 		panneauDroite.add(panStat4);
 		panneauDroite.add(panStat5);
-		panneauDroite.add(comboAfficherCommande);
+		panneauDroite.add(panStatCommande);
 		
 		panneauDroite.setBounds(552,350,350,300);
 		

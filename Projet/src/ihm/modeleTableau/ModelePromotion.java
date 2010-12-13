@@ -34,7 +34,7 @@ public class ModelePromotion extends AbstractTableModel {
 		ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonne("PROMO", "IDPROMO","IDPROMO") ;
 		
 		
-		donnees = new Object[1000][5];
+		donnees = new Object[listeIdentifiants.size()][5];
 		for (int i = 0; i < listePromos.size(); i++) {
 			donnees[i][0] = listeIdentifiants.get(i);
 			donnees[i][1] = listePromos.get(i);

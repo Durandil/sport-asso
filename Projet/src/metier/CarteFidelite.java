@@ -193,4 +193,13 @@ public class CarteFidelite {
 
 		
 	}
+	
+	public static void modifierBDDcarteFidelite(String idClient,int nbrePoints){
+		
+		String requete="UPDATE CARTE_FIDELITE SET NBPOINTS="+nbrePoints+" WHERE IDCLIENT='"+idClient+"'";
+		
+		SGBD.executeUpdate(requete);
+		
+	}
+	
 }

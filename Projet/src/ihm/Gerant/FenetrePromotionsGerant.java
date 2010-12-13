@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -30,7 +31,7 @@ public class FenetrePromotionsGerant extends JFrame {
 		this.setTitle("Promotions en cours");
 		this.setSize(500, 600);
 		this.setLocation(50,50);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();
 	}         
@@ -55,6 +56,11 @@ public class FenetrePromotionsGerant extends JFrame {
     	JButton boutonSupprimer=new JButton("Supprimer");
     	JButton boutonModifier=new JButton("Modifier");
     	
+    	if(modele.getRowCount()==0){
+    		boutonSupprimer.setEnabled(false);
+    		boutonModifier.setEnabled(false);
+    	}
+    	
     	boutonAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Ajout d'une promotion
@@ -68,11 +74,17 @@ public class FenetrePromotionsGerant extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Supprimer la promotion selectionnée dans la base de donnée
 				ligneTableau = tableauPromotions.getSelectedRow();
-				String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
-				
-				Promotion.supprimerListing_PromoBDD(idPromo);
-				Promotion.supprimerPromoBDD(idPromo);
-				dispose();
+				if(ligneTableau==-1){
+					
+					JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée. Veuillez en sélectionner une","Attention",JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
+					
+					Promotion.supprimerListing_PromoBDD(idPromo);
+					Promotion.supprimerPromoBDD(idPromo);
+					dispose();					
+				}
 			}
 		});
     	
@@ -80,16 +92,22 @@ public class FenetrePromotionsGerant extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Modifier la promotion sélectionée grâce à un formulaire
 				ligneTableau = tableauPromotions.getSelectedRow();
-				String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
-				FenetreFormulairePromotionsGerant modifierPromo;
-				try {
-					modifierPromo = new FenetreFormulairePromotionsGerant(null,"Modification d'une nouvelle promotion",true,idPromo);
-					modifierPromo.setVisible(true);
-					dispose();
-				} catch (Exception e1) {	
-					System.out.println(e1.getMessage());
+				if(ligneTableau==-1){
+					
+					JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée. Veuillez en sélectionner une","Attention",JOptionPane.ERROR_MESSAGE);
 				}
-				
+				else{
+					String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
+					
+					FenetreFormulairePromotionsGerant modifierPromo;
+					try {
+						modifierPromo = new FenetreFormulairePromotionsGerant(null,"Modification d'une nouvelle promotion",true,idPromo);
+						modifierPromo.setVisible(true);
+						dispose();
+					} catch (Exception e1) {	
+						System.out.println(e1.getMessage());
+					}					
+				}
 			}
 		});
     	
