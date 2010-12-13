@@ -26,6 +26,7 @@ import basededonnees.SGBD;
  * <li>Une liste de LigneCommande</li>
  * <li>Le mail du client qui a effectué la commande</li>
  * <li>Une date</li>
+ * <li>Un montant</li>
  * </ul>
  * </p>
  * 
@@ -34,12 +35,50 @@ import basededonnees.SGBD;
 
 public class Commande {
 	
-
+	/**
+	 * L'Identifiant de la commande, non modifiable
+	 * 
+	 * @see Commande#ajouterBDD()
+	 * @see Commande#majInfoCommandes()
+	 */
 	private String idCommande;
-	private ArrayList<LigneCommande> liste;
+	
+	/**
+	 * La liste des lignes de commande
+	 * 
+	 * @see LigneCommande
+	 * @see Commande#ajouterBDD()
+	 * @see Commande#majInfoCommandes()
+	 * @see Commande#montantCommandePourUnArticle(String, LigneCommande, int)
+	 */
+	 private ArrayList<LigneCommande> liste;
+
+	
+	/**
+	 * L'identifiant du client qui passe la commande
+	 * 
+	 * @see Commande#ajouterBDD()
+	 * @see Commande#montantCommandePourUnArticle(String, LigneCommande, int)
+	 * @see Commande#montantTotalArticle(ArrayList, String)
+	 */
 	private String idClient;
+	
+	/**
+	 * La date de la commande
+	 * 
+	 * @see Commande#ajouterBDD()
+	 */
 	private Date date;
-	private int montant ;	
+	
+	
+	/**
+	 * Le montant de ma commande
+	 * 
+	 * @see Commande#ajouterBDD()
+	 * @see Commande#majMontantCommande(int)
+	 */
+	private int montant;
+	
 	/**
 	 * Constructeur de la classe Commande
 	 * <p>
@@ -89,7 +128,6 @@ public class Commande {
 	public String getIdCommande() {
 		return idCommande;
 	}
-	
 	
 	
     /**
@@ -405,7 +443,7 @@ public class Commande {
 		}
 		this.setIdCommande(numCommande);
 		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE, IDCLIENT) VALUES ( "
-				+ "'" + numCommande + "'," + s + " , '" + this.idClient + "', MONTANTCOMMANDE="+this.montant+" )";
+				+ "'" + numCommande + "'," + s + " , '" + this.idClient + "')";
 
 		System.out.println(requete);
 		
@@ -425,10 +463,8 @@ public class Commande {
 		SGBD.executeUpdate(" UPDATE COMMANDE SET MONTANTCOMMANDE="+ montantCommande+" WHERE IDCOMMANDE='"+this.idCommande+"'");
 		
 		System.out.println(" UPDATE COMMANDE SET MONTANTCOMMANDE="+ montantCommande+" WHERE IDCOMMANDE='"+this.idCommande+"'");
-
 	}
-	
-	
+
 	/**
 	 * Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES
 	 * 
@@ -458,7 +494,7 @@ public class Commande {
 
 	}
 
-	// Méthode qui met à jour l'état d'un article en fonction de la quantité disponible
+	
 	/**
 	 * Méthode qui met à jour la table ARTICLE
 	 * 
@@ -469,6 +505,7 @@ public class Commande {
 	 * </p> 
 	 * 
 	 * @see BDD, Article
+	 * @see SGBD#selectStringConditionString(String, String, String, String)
 	 */
 	public void majArticles(){
 		String requete = null ;
@@ -497,42 +534,101 @@ public class Commande {
 		}
 	}
 	
-		
-	// calcul du montant d'un article pour un client donne
-	public double MontantCommandePourUnArticle( String idClient, LigneCommande ligne,int estFidele) throws SQLException{
-		String pourcentagePromoExc="0";
-		String pourcentagePromoDegressif="0";
-		double montantArticle = 0 ;
-		
-		// recuperation prix initial et quantite commandee
-		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getIdArticle());
+	/**
+	 * Méthode qui calcule le montant d'une ligne de commande pour un client
+	 * 
+	 * 
+	 * <p>
+	 * Pour déterminer le montant d'une ligne de commande, autrement le coût d'un article
+	 * multiplé par la quantité, en tenant compte de l'éventuelle réduction dûe à un achat massif
+	 * (promo dégressive) ou une promotion exceptionnelle ; la méthode passe par les étapes suivantes :
+	 * <ul>
+	 * <li>La récupération du prix initial de l'article, présent dans la table ARTICLE</li>
+	 * <li>La récupération du pourcentage dégressif éventuel qui s'appliquerait à l'article </li>
+	 * <li>La récupération du pourcentage de la promotion exceptionnelle éventuelle qui s'appliquerait à l'article.
+	 * Celle-ci peut ne concerner que les clients possèdant une carte de fidélité, c'est pourquoi il est nécessaire
+	 * de préciser si le client est fidèle ou non.</li>
+	 * <li>La comparaison des deux pourcentages susnommés afin de n'appliquer que le plus avantageux</li>
+	 * <li>Enfin, le calcul du montant final</li>
+	 * </ul>
+	 * </p> 
+	 * 
+	 * @param idClient
+	 *            L'identifiant du client qui a passé la commande
+	 * @param ligne
+	 *            Une ligne de commande, composée d'un article et de la quantité commandée
+	 * @param estFidele
+	 *            Indique si le client possède une carte de fidélité (1) ou non (0)
+	 * 
+	 * @return Le montant de la ligne de commande
+	 * 
+	 * @see BDD, Article
+	 * @see SGBD#selectStringConditionString(String, String, String, String)
+	 * @see SGBD#recupererPourcentagePromotionDegressifArticleCommande(String, String)
+	 * @see SGBD#recupererPourcentagePromotionExceptionnelleArticle(String, int)
+	 */
+	public double montantCommandePourUnArticle( String idClient, LigneCommande ligne,int estFidele) throws SQLException{
+		String pourcentagePromoExc = "0";
+		String pourcentagePromoDegressif = "0";
+		double montantArticle = 0;
+
+		// Récupération du prix initial et de la quantité commandée
+		String prixInit = SGBD.selectStringConditionString("ARTICLE",
+				"PRIXINITIAL", "IDARTICLE", ligne.getIdArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = ligne.getQuantite();
-		JOptionPane.showMessageDialog(null,"prix initial : "+prixInitial + ", quantité : "+ quantiteCommandee + ", ref article : "+ ligne.getIdArticle());
-	
-		//  recuperation pourcentage degressif		
-		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(this.idCommande, ligne.getIdArticle());
-			
-		// recuperation pourcentage promotion exceptionnelle
-		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(ligne.getIdArticle(), estFidele);
+	JOptionPane.showMessageDialog(null,"prix initial : "+prixInitial + ", quantité : "+ quantiteCommandee + ", ref article : "+ ligne.getIdArticle());
+		// Récupération du pourcentage dégressif
+		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(
+						this.idCommande, ligne.getIdArticle());
+
+		// Récupération du pourcentage d'une éventuelle promotion exceptionnelle
+		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(
+						ligne.getIdArticle(), estFidele);
+
+		JOptionPane.showMessageDialog(null, pourcentagePromoDegressif + " "
+				+ pourcentagePromoExc);
 		
-		JOptionPane.showMessageDialog(null,"Pourcenatge promo dégressif : "+pourcentagePromoDegressif + ", pourcentage promo exc : " + pourcentagePromoExc);
+		// Comparaison des pourcentages dégressif et promotion exceptionnelle
+		JOptionPane.showMessageDialog(null,"Pourcentage promo dégressif : "+pourcentagePromoDegressif + ", pourcentage promo exc : " + pourcentagePromoExc);
 		
 		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
-		if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
+		if (Double.parseDouble(pourcentagePromoDegressif) < Double.parseDouble(pourcentagePromoExc)) {
 			promoAppliquee = Double.parseDouble(pourcentagePromoExc);
 		}
-		
-		montantArticle = (Double) (quantiteCommandee*prixInitial*(1-promoAppliquee/100));
+
+		//Calcul du montant final
+		montantArticle = (Double) (quantiteCommandee * prixInitial * (1 - promoAppliquee / 100));
 		JOptionPane.showMessageDialog(null,"montant de l'article :"+montantArticle);
 		
 		return montantArticle;
 	}
 	
+	/**
+	 * Méthode qui calcule le montant d'une ligne de commande pour un client
+	 * 
+	 * 
+	 * <p>
+	 * Après avoir récupéré le booléen indiquant si le client possède une carte de fidélité,
+	 * la méthode applique la méthode montantCommandePourUnArticle à chacune des lignes de
+	 * commande présente dans le panier, et renvoie le montant total de la commande.
+	 * </p> 
+	 * 
+	 * @param panier
+	 *            Le panier du client
+	 * @param idClient
+	 *            L'identifiant du client
+	 *            
+	 * @return Le montant total de la commande
+	 * 
+	 * @see BDD, Article
+	 * @see SGBD#recupererInformationFideliteClient(String)
+	 * @see Commande#montantCommandePourUnArticle(String, LigneCommande, int)
+	 */
 	public double montantTotalArticle(ArrayList<LigneCommande> panier,String idClient) throws SQLException{
 		double total = 0;
 		
-		// recuperation booleen fidelite		
+		// Récupération du booléen indiquant si le client possède une carte de fidélité
 		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(idClient);
 		String fidele = fideliteClient.get(0);
 		int estFidele=0;
@@ -541,7 +637,7 @@ public class Commande {
 		}
 		
 		for (LigneCommande ligneCommande : panier) {
-			double montantArticle = MontantCommandePourUnArticle( idClient, ligneCommande,estFidele);
+			double montantArticle = montantCommandePourUnArticle( idClient, ligneCommande,estFidele);
 			total = total+montantArticle;
 		}
 		
