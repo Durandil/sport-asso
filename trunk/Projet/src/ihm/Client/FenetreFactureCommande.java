@@ -41,14 +41,13 @@ public class FenetreFactureCommande extends JDialog {
 		// et le montant total ( faire utiliser bon achat eventuellement)
 		// en déduire le nombre de points à rajouter sur carte fidelité
 		
-		ArrayList<String> informationsClient = new ArrayList<String>();
-		informationsClient = SGBD.recupererAttributClient(idClient);
-		String nom = informationsClient.get(1);
-		String prenom = informationsClient.get(2);
-		String denomination = informationsClient.get(3);
-		String adresse = informationsClient.get(4);
-		String codePostal = informationsClient.get(5);
-		String ville = informationsClient.get(6);
+
+		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
+		String prenom = SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idClient);
+		String denomination = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
+		String adresse = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "ADRESSECLIENT", idClient);
+		String codePostal = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
+		String ville = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
 		
 		// TODO compléter informationsCommande dans SGBD
 		

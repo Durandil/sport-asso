@@ -153,12 +153,14 @@ public class FenetreCommandeArticle extends JFrame{
 						try {
 							// calcul de la commande
 							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
+							
+							nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
+							
+//							for(LigneCommande ligne : listeArticlesPanier){
+//								System.out.println(ligne.getIdArticle()+ " qté : " + ligne.getQuantite());
+//							}
 
-							for(LigneCommande ligne : listeArticlesPanier){
-								System.out.println(ligne.getIdArticle()+ " qté : " + ligne.getQuantite());
-							}
-
-							System.out.println("Montant commande : " + montantCommande);
+							JOptionPane.showMessageDialog(null,"Montant commande : " + montantCommande);
 							
 							// mise à jour du nombre de points sur la carte
 							ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
