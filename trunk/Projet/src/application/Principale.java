@@ -33,12 +33,27 @@ public class Principale {
 
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu= new MenuGerant();
+		//MenuGerant menu= new MenuGerant();
 		
-//		java.util.Date date = new java.util.Date();
-//		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-//		String s = SGBD.transformation(sqlDate);
-//		System.out.println(s);
+		/** test récupération pourcentage promo exceptionnelle d'un article donne **/
+//		int nbrePromo = SGBD.compterNbrePromoExceptionnellesArticle("ART00082", 0);
+//		System.out.println(nbrePromo);
+//		
+//		if(nbrePromo>0){
+//			String pourcent = SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00082", 0);
+//			System.out.println(pourcent);
+//		}
+
+		
+		/** test récupération pourcentage promo exceptionnelle d'un article donne et d'une commande donnée **/
+//		String pct=SGBD.recupererPourcentagePromotionDegressifArticleCommande("COM00045", "ART00082");
+//		System.out.println(pct);
+		
+		/** test calcul montant d'un article d'une commande **/
+//		LigneCommande  lignetest = new LigneCommande("ART00082", 18);
+//		double montant = Commande.MontantCommandePourUnArticle("tnb@ensai.fr", lignetest);
+//		System.out.println(montant);
+		
 		
 		/** test statistique **/
 //		String testStat = SGBD.statistiqueArticleClient("bda@ensai.fr");

@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import metier.CarteFidelite;
 import metier.Commande;
 import metier.LigneCommande;
 
@@ -45,8 +46,8 @@ public class FenetreCommandeArticle extends JFrame{
 	public static boolean activationLigneCatalogue=false;	
 	// quand un client ouvre cette fenetre, il n'a pas encore choisi d'article 
 	// donc on  met ce booleen à false et on changera la valeur s'il le fait correctement
-	private JOptionPane erreur, rafraichirPanier,erreurSelectionArticle,erreurSelectionCatalogue,erreurAvantValidation;
 	public static boolean avoirRafraichiApresAjoutPanier=false;
+	
 	/*
 	 * Définition du constructeur de la classe qui va initialiser la fenetre selon les instructions de la méthode
 	 * initComponent(). Cette classe permet l'affichage simultané du catalogue et du panier du client.
@@ -147,23 +148,37 @@ public class FenetreCommandeArticle extends JFrame{
 						@SuppressWarnings("deprecation")
 						java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
 					
+						
 						Commande nouvelleCommande = new Commande(null, FenetreDialogIdentification.clientUserIdentifiant, listeArticlesPanier, dateJour);
 						try {
+							// calcul de la commande
 							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
+<<<<<<< .mine
+
+=======
 							for(LigneCommande ligne : listeArticlesPanier){
 								System.out.println(ligne.getIdArticle()+ " qté : " + ligne.getQuantite());
 							}
+>>>>>>> .r179
 							System.out.println("Montant commande : " + montantCommande);
 							
-							System.out.println();
+							// mise à jour du nombre de points sur la carte
+							ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+							if(fideliteClient.get(0).equals("Oui")){
+								int nbPointsAvant = Integer.parseInt(fideliteClient.get(1));
+								int pointsRecoltes = (int) Math.round(montantCommande);
+								
+								CarteFidelite.modifierBDDcarteFidelite(FenetreDialogIdentification.clientUserIdentifiant, nbPointsAvant+pointsRecoltes);
+								
+							}
+
 						} catch (SQLException e1) {
 							e1.printStackTrace();
 						}
 					}
 					else{
-						erreur = new JOptionPane();
 						ImageIcon image = new ImageIcon("src/images/warning.png");
-						erreur.showMessageDialog(null, " Aucun article n'a été sélectionné dans la commande.", "Attention", JOptionPane.WARNING_MESSAGE, image);
+						JOptionPane.showMessageDialog(null, " Aucun article n'a été sélectionné dans la commande.", "Attention", JOptionPane.WARNING_MESSAGE, image);
 						//affichage d'un message d'erreur en cas d'essai de validation sans aucun article selectionné
 					}
 					
@@ -172,9 +187,8 @@ public class FenetreCommandeArticle extends JFrame{
 					
 				}
 				else{
-					erreurAvantValidation = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
-					erreurAvantValidation.showMessageDialog(null, " Veuillez rafraichir le panier avant de valider votre commande !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					JOptionPane.showMessageDialog(null, " Veuillez rafraichir le panier avant de valider votre commande !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
 					//affichage d'un message d'erreur en cas de tentative de validation de la commande sans avoir effectué le rafraichissement du panier
 				}
 			}
@@ -197,23 +211,20 @@ public class FenetreCommandeArticle extends JFrame{
 				lignePanier = panier.getSelectedRow();
 				
 				if(retraitPanierPossible == false){
-					rafraichirPanier = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
-					rafraichirPanier.showMessageDialog(null, " Veuillez rafraichir le panier !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					JOptionPane.showMessageDialog(null, " Veuillez rafraichir le panier !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
 					//affichage d'un message d'erreur en cas de tentative de retrait d'article sans avoir rafraichi le panier
 				}
 				
 				if(lignePanier == -1){
-					erreurSelectionArticle = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
-					erreurSelectionArticle.showMessageDialog(null, " Veuillez selectionner une ligne article dans le panier", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					JOptionPane.showMessageDialog(null, " Veuillez selectionner une ligne article dans le panier", "Attention", JOptionPane.WARNING_MESSAGE, image);
 					//affichage d'un message d'erreur en cas de tentative de retrait d'article sans avoir selectionné d'article
 				}
 				
 				if(avoirRafraichiApresAjoutPanier==false){
-					rafraichirPanier = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
-					rafraichirPanier.showMessageDialog(null, " Veuillez rafraichir le panier !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					JOptionPane.showMessageDialog(null, " Veuillez rafraichir le panier !!!", "Attention", JOptionPane.WARNING_MESSAGE, image);
 				}
 				
 				// ligne Panier <> - 1 gère le pb si un client veut retirer un article de son panier
@@ -257,9 +268,8 @@ public class FenetreCommandeArticle extends JFrame{
 					avoirRafraichiApresAjoutPanier=true;
 				}
 				else{
-					erreurSelectionCatalogue = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
-					erreurSelectionCatalogue.showMessageDialog(null, " Veuillez selectionner une ligne article dans le catalogue et appuyez sur le bouton Choisir Article", "Attention", JOptionPane.WARNING_MESSAGE, image);
+					JOptionPane.showMessageDialog(null, " Veuillez selectionner une ligne article dans le catalogue et appuyez sur le bouton Choisir Article", "Attention", JOptionPane.WARNING_MESSAGE, image);
 				}
 				
 			}			

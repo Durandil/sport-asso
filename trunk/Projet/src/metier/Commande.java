@@ -460,28 +460,33 @@ public class Commande {
 	}
 	
 
+		
 	
 	// calcul du montant d'un article pour un client donne
-	public double MontantCommandePourUnArticle(String idClient, LigneCommande ligne) throws SQLException{
+	public double MontantCommandePourUnArticle( String idClient, LigneCommande ligne,int estFidele) throws SQLException{
 		String pourcentagePromoExc="0";
 		String pourcentagePromoDegressif="0";
 		double montantArticle = 0 ;
-		ResultSet res = null ;
-		ResultSet res2 = null ;
 		
 		// recuperation prix initial et quantite commandee
 		String prixInit = SGBD.selectStringConditionString("ARTICLE", "PRIXINITIAL","IDARTICLE" ,ligne.getIdArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = ligne.getQuantite();
+		JOptionPane.showMessageDialog(null,prixInitial + " "+ quantiteCommandee + " "+ ligne.getArticle());
+	
+		//  recuperation pourcentage degressif		
+		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(this.idCommande, ligne.getArticle());
+			
+		// recuperation pourcentage promotion exceptionnelle
+		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(ligne.getArticle(), estFidele);
 		
-		// recuperation booleen fidelite		
-		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(idClient);
-		String fidele = fideliteClient.get(0);
-		int estFidele=0;
-		if(fidele.equals("Oui")){
-			estFidele=1;
-		}
+		JOptionPane.showMessageDialog(null,pourcentagePromoDegressif + " " + pourcentagePromoExc);
 		
+
+		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
+		if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
+			promoAppliquee = Double.parseDouble(pourcentagePromoExc);
+
 		try{
 			//  recuperation pourcentage degressif
 			res = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1"+
@@ -508,21 +513,11 @@ public class Commande {
 			}
 			
 			pourcentagePromoExc = res2.getObject(1).toString();
+
 		}
-		catch(SQLException e){
-			
-			e.printStackTrace();
-			
-		}
-		finally{
-			
-			double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
-			if(Double.parseDouble(pourcentagePromoDegressif)<Double.parseDouble(pourcentagePromoExc)){
-				promoAppliquee = Double.parseDouble(pourcentagePromoExc);
-			}
 		
-			montantArticle = quantiteCommandee*prixInitial*(1-promoAppliquee);
-		}
+		montantArticle = (Double) (quantiteCommandee*prixInitial*(1-promoAppliquee/100));
+		JOptionPane.showMessageDialog(null,montantArticle);
 		
 		return montantArticle;
 	}
@@ -530,61 +525,21 @@ public class Commande {
 	public double montantTotalArticle(ArrayList<LigneCommande> panier,String idClient) throws SQLException{
 		double total = 0;
 		
+		// recuperation booleen fidelite		
+		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(idClient);
+		String fidele = fideliteClient.get(0);
+		int estFidele=0;
+		if(fidele.equals("Oui")){
+			estFidele=1;
+		}
+		
 		for (LigneCommande ligneCommande : panier) {
-			double montantArticle = MontantCommandePourUnArticle(idClient, ligneCommande);
+			double montantArticle = MontantCommandePourUnArticle( idClient, ligneCommande,estFidele);
 			total = total+montantArticle;
 		}
 		
 		return total ;
 	}
 	
-	
-	
-	
-	//GRAND CHANTIER ...
-	//Méthode qui retourne le prix de la commande
-	
-//	public double PrixCommande(){
-//		//le client a-t-il une carte de fidelite ?
-//		
-//		//String idClient = SGBD.informationCommande(this.idCommande).get;
-//	
-//		String carteFidelite=SGBD.recupererInformationFideliteClient(this.idClient).get(0);
-//		double prixCommande=0;
-//		//pour chaque article de la commande...
-//		
-//		for (int i = 0; i < this.liste.size(); i++) {
-//			
-//			//récupérer le prix initial
-//			int prixInit = (Integer) SGBD.informationCommande(this.idCommande).get(i)[2];
-//			//quelle promotion appliquer selon la quantité ?
-//			String typeArticle = (String) SGBD.informationCommande(this.idCommande).get(i)[0];
-//			int quantiteCommandee = (Integer) SGBD.informationCommande(this.idCommande).get(i)[3];
-//			ResultSet res1 = SGBD.executeQuery("select pourcentage from article a, categorie c, quantite q, listing_articles_commandes l, reduction r rownum=1 where a.idArticle=l.idArticle and r.idCategorie=c.idCategorie and r.idQuantite=q.idQuantite and c.idCategorie=a.idCategorie and l.quantiteCommande-q."+quantiteCommandee+">=0 and a.idArticle = "+typeArticle+"order by l.quantiteCommande-"+quantiteCommandee);
-//			double promo1 = res1.getDouble(1);
-//			//quelle promotion exceptionnelle appliquer ?
-//			
-//			double promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a,  Where p.idPromo = lpa.idPromo and article.idArticle = "+typeArticle+ "And p.dateDebut < c.datecommande And p.dateFin > c.datecommande and PROMOFIDELITE=1").getDouble(1);
-//			if (carteFidelite == "true"){
-//			
-//				if (promo2 == 0){
-//					promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, Where p.idPromo = lpa.idPromo And a.idArticle = "+typeArticle+" And p.dateDebut < c.datecommande And p.dateFin > c.datecommande").getDouble(1);
-//				}
-//			}
-//			else{
-//				promo2 = SGBD.executeQuery("Select PourcentagePromo from Promo p, listing_promo_article lpa, Article a, listing_articles_commandes lac, commande c Where p.idPromo = lpa.idPromo And lpa.idArticle = a.idArticle  And a.idArticle = lac.idArticle And lac.idCommande=c.idCommande And lac.idCommande = "+this.idCommande+" And p.dateDebut < c.datecommande And p.dateFin > c.datecommande").getDouble(1);
-//			}
-//			//calcul du prix de la ligne de commande
-//			double prixLigne;
-//			if (promo1 > promo2){
-//				prixLigne = prixInit*(1-promo1)*quantiteCommandee;}
-//			else{
-//				prixLigne = prixInit*(1-promo2)*quantiteCommandee;}
-//			//calcul du prix total de la commande
-//			prixCommande=prixCommande+prixLigne;
-//		}
-//		
-//		return prixCommande;
-//	}
 	
 }

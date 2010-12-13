@@ -305,7 +305,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				String choix =(String) ((JComboBox) e.getSource()).getSelectedItem();
-				itemPrixSelectionne=SGBD.selectStringConditionString("CATEGORIE", "NOMCATEGORIE", "IDCATEGORIE",choix);
+				itemPrixSelectionne=SGBD.selectStringConditionString("CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE",choix);
 			}
 		});
 		
@@ -313,7 +313,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				
 				String choix=(String) ((JComboBox) e.getSource()).getSelectedItem();
-				itemSportSelectionne=SGBD.selectStringConditionString("TYPE_SPORT", "NOMTYPE", "IDTYPE",choix);
+				itemSportSelectionne=SGBD.selectStringConditionString("TYPE_SPORT", "IDTYPE", "NOMTYPE",choix);
 			}
 		});
 		

@@ -117,10 +117,18 @@ public class FenetreCatalogueGerant extends JFrame{
 				// suppression de l'article selectionné dans le catalogue
 				
 				int ligne = tableau.getSelectedRow();
-				String numArticle= tableau.getValueAt(ligne, 0).toString();
+				
+				if(ligne==-1){
+					
+					JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée. Veuillez en sélectionner une","Attention",JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					String numArticle= tableau.getValueAt(ligne, 0).toString();
 
-				Article.supprimerArticleBDD(numArticle);
-//				
+					Article.supprimerArticleBDD(numArticle);
+					dispose();
+				}
+				
 				//modTabCatalogue = new ModeleTableauCatalogue();
 				
 				//modTabCatalogue.actualiserTableau(false);
@@ -140,7 +148,7 @@ public class FenetreCatalogueGerant extends JFrame{
 				
 				**/
 				
-				dispose();
+				
 			}
 		});
     	
@@ -154,40 +162,48 @@ public class FenetreCatalogueGerant extends JFrame{
 				String numArticle = "";
 				int numeroArticle=0;
 				
-				try{
-					numeroArticle=Integer.parseInt(tableau.getValueAt(ligne, 0).toString());
+				if(ligne==-1){
 					
-					if(numeroArticle<10){
-						 numArticle= "ART0000" + numeroArticle;
-					}
-					if(numeroArticle<100 && numeroArticle>=10){
-						numArticle= "ART000" + tableau.getValueAt(ligne, 0).toString();
-					}
-					if(numeroArticle<1000 && numeroArticle>=100){
-						numArticle= "ART00" + tableau.getValueAt(ligne, 0).toString();
-					}
-					if(numeroArticle<10000 && numeroArticle>=1000){
-						numArticle= "ART0" + tableau.getValueAt(ligne, 0).toString();
-					}
-					if(numeroArticle<100000 && numeroArticle>=10000){
-						numArticle= "ART" + tableau.getValueAt(ligne, 0).toString();
-					}
-					
+					JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée. Veuillez en sélectionner une","Attention",JOptionPane.ERROR_MESSAGE);
 				}
-				catch(NumberFormatException event){
-					numArticle=tableau.getValueAt(ligne, 0).toString();
+				else{
+					
+					try{
+							
+						numeroArticle=Integer.parseInt(tableau.getValueAt(ligne, 0).toString());
+						
+						if(numeroArticle<10){
+							 numArticle= "ART0000" + numeroArticle;
+						}
+						if(numeroArticle<100 && numeroArticle>=10){
+							numArticle= "ART000" + tableau.getValueAt(ligne, 0).toString();
+						}
+						if(numeroArticle<1000 && numeroArticle>=100){
+							numArticle= "ART00" + tableau.getValueAt(ligne, 0).toString();
+						}
+						if(numeroArticle<10000 && numeroArticle>=1000){
+							numArticle= "ART0" + tableau.getValueAt(ligne, 0).toString();
+						}
+						if(numeroArticle<100000 && numeroArticle>=10000){
+							numArticle= "ART" + tableau.getValueAt(ligne, 0).toString();
+						}
+						
+					}
+					catch(NumberFormatException event){
+						numArticle=tableau.getValueAt(ligne, 0).toString();
+					}
+					finally{
+						FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
+						formulaire.setVisible(true);
+						/** solution alternative si on ne résoud pas le pb de l'affichage :
+						
+						setVisible(false);
+						
+						**/
+						dispose();
+					}
 				}
-				finally{
-					FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
-					formulaire.setVisible(true);
-					/** solution alternative si on ne résoud pas le pb de l'affichage :
-					
-					setVisible(false);
-					
-					**/
-					
-				}
-				//dispose();
+				
 			}
 			
 		});
