@@ -158,10 +158,6 @@ public class FenetreCommandeArticle extends JFrame{
 							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
 							
 							nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
-							
-//							for(LigneCommande ligne : listeArticlesPanier){
-//								System.out.println(ligne.getIdArticle()+ " qté : " + ligne.getQuantite());
-//							}
 
 							JOptionPane.showMessageDialog(null,"Montant commande : " + montantCommande);
 							
@@ -174,7 +170,11 @@ public class FenetreCommandeArticle extends JFrame{
 								CarteFidelite.modifierBDDcarteFidelite(FenetreDialogIdentification.clientUserIdentifiant, nbPointsAvant+pointsRecoltes);
 								
 							}
-
+							
+							FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier );
+							fenetre.setVisible(true);
+							dispose();
+							
 						} catch (SQLException e1) {
 							e1.printStackTrace();
 						}
