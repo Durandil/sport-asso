@@ -13,7 +13,7 @@ public class ArticleTest extends TestCase {
 		Article.modifierArticleBDD("ART00002","Velo de Course" ,"251" ,"5" ,"0","TYP00006","CAT00001"  );
 		String result= "251";
 		assertEquals(result, SGBD.selectStringConditionString("Article", "PrixInitial", "IDArticle", "ART00002"));
-		
+
 	}
 	
 	public void testModifierArticleBDD2(){

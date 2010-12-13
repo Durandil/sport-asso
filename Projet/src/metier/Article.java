@@ -477,7 +477,7 @@ public class Article {
 		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);
-//		SGBD.executeUpdate("COMMIT");
+
 	}
 	
 	public static int verifierChampsArticles(String description,String prix,String poids,String stock){

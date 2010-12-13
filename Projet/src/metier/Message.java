@@ -1,5 +1,7 @@
 package metier;
 
+import ihm.FenetreLectureMessage;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -243,57 +245,87 @@ public class Message {
 	public void setEstEnvoye(boolean estEnvoye) {
 		this.estEnvoyeAuGerant = estEnvoye;
 	}
-	// Méthode permettant d'ajouter un message dans la table MESSAGE sachant l'expéditeur
-	// et le nombre de message dans la table MESSAGE ( à améliorer)
+
+
+	/**
+	 * Ajoute le message dans la table MESSAGE de la base de données
+	 * 
+	 * <p>
+	 * Cette méthode commence par transformer la date d'envoi en une chaïne de caractères.
+	 * Puis elle récupère l'indice de séquence de la table afin de générer 
+	 * l'identifiant de l'article dans le format approprié.
+	 * Ensuite, en fonction de la valeur du booléen estEnvoyeAuGerant, la méthode initialise
+	 * un entier (0 ou 1) en prévision de l'insertion prochaine dans la base.
+	 * Enfin la requête se construit en fonction des caractéristiques de l'article
+	 * saisies lors de l'appel du constructeur
+	 * </p> 
+	 * 
+	 * @see BDD
+	 */
 	public void ajouterBDD() {
 		
 		String s = SGBD.transformation(this.dateEnvoi);
 
-		
-		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_MESSAGE.NEXTVAL");
-		
+		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
+				"S_MESSAGE.NEXTVAL");
 
-		int numeroMessage=0;
-		
+		int numeroMessage = 0;
 
-		numeroMessage=Integer.parseInt(idNonFini.get(0));
-			
-		if(numeroMessage<10){
-			this.idMessage= "MES0000" + numeroMessage;
+		numeroMessage = Integer.parseInt(idNonFini.get(0));
+
+		if (numeroMessage < 10) {
+			this.idMessage = "MES0000" + numeroMessage;
 		}
-		if(numeroMessage<100 && numeroMessage>=10){
-			this.idMessage= "MES000" + numeroMessage;
+		if (numeroMessage < 100 && numeroMessage >= 10) {
+			this.idMessage = "MES000" + numeroMessage;
 		}
-		if(numeroMessage<1000 && numeroMessage>=100){
-			this.idMessage= "MES00" + numeroMessage;
+		if (numeroMessage < 1000 && numeroMessage >= 100) {
+			this.idMessage = "MES00" + numeroMessage;
 		}
-		if(numeroMessage<10000 && numeroMessage>=1000){
-			this.idMessage= "MES0" + numeroMessage;
+		if (numeroMessage < 10000 && numeroMessage >= 1000) {
+			this.idMessage = "MES0" + numeroMessage;
 		}
-		if(numeroMessage<100000 && numeroMessage>=10000){
-			this.idMessage= "MES" + numeroMessage;
+		if (numeroMessage < 100000 && numeroMessage >= 10000) {
+			this.idMessage = "MES" + numeroMessage;
 		}
-		
-		int envoiMessageGerant=0 ;
-		
-		if(this.estEnvoyeAuGerant==true){
-			envoiMessageGerant=1;
+
+		int envoiMessageGerant = 0;
+
+		if (this.estEnvoyeAuGerant == true) {
+			envoiMessageGerant = 1;
 		}
-			
-			
-		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE," +
-				"IDCLIENT,DATEMESSAGE, ESTENVOYEAUGERANT) VALUES ( '"+ this.idMessage +"',"
-				+ "'"+ this.sujet + "',"
-				+ "'"+ this.contenu + "','"
-				+ this.expediteur+ "'," 
-				+ s+" , " 
-				+ envoiMessageGerant +" )";
+
+		String requete = "INSERT INTO MESSAGE (IDMESSAGE,SUJETMESSAGE,CONTENUMESSAGE,"
+				+ "IDCLIENT,DATEMESSAGE, ESTENVOYEAUGERANT) VALUES ( '"
+				+ this.idMessage
+				+ "',"
+				+ "'"
+				+ this.sujet
+				+ "',"
+				+ "'"
+				+ this.contenu
+				+ "','"
+				+ this.expediteur
+				+ "',"
+				+ s
+				+ " , "
+				+ envoiMessageGerant + " )";
 		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 		
 	}
 	
-	
+	/**
+	 * Supprime un message de la table MESSAGE de la base de données
+	 * 
+	 * <p>
+	 * Cette méthode supprime le message correspondant à l'identifiant saisi en paramètre
+	 * de la base de données.
+	 * </p> 
+	 * 
+	 * @param identifiantMessage
+	 * @see FenetreLectureMessage
+	 */
 	public static void supprimerBDD(String identifiantMessage){
 
 		
@@ -305,6 +337,16 @@ public class Message {
 		SGBD.executeUpdate("COMMIT");
 	}
 	
+	/**
+	 * Supprime tous les messages présents dans la table MESSAGE
+	 * 
+	 * <p>
+	 * Cette méthode supprime l'ensemble des messages présents dans la base de données.
+	 * </p> 
+	 * 
+	 * @param identifiantMessage
+	 * @see FenetreLectureMessage
+	 */
 	public static void supprimerAllBDD(){
 		String requete = "DELETE FROM MESSAGE";
 		

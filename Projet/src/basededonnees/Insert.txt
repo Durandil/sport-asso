@@ -11,22 +11,22 @@ Insert into QUANTITE (idQuantite, Quantite) values ('QUA00003',15);
 Insert into QUANTITE (idQuantite, Quantite) values ('QUA00004',20);
 
 #Reduction
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00001',0.9);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00002',0.85);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00003',0.8);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00004',0.75);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00001',0.925);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00002',0.9);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00003',0.85);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00004',0.8);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00001',0.5);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00002',0.925);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00003',0.9);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00004',0.85);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00001',0.975);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00002',0.95);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00003',0.925);
-Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00004',0.9);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00001',90);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00002',85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00003',8);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00004',75);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00001',92.5);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00002',90);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00003',85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00002','QUA00004',80);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00001',95);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00002',92.5);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00003',90);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00003','QUA00004',85);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00001',97.5);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00002',95);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00003',92.5);
+Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00004',90);
 
 
 #Type de Sport:
