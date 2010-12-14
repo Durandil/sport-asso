@@ -191,7 +191,13 @@ public class FenetreCommandeArticle extends JFrame{
 							
 							
 							if(utilisationBonReduction==true){
-								nouvelleCommande.majMontantCommande((int)Math.round(montantCommande)-bonAchat);
+								if((Math.round(montantCommande)-bonAchat)<0){
+									nouvelleCommande.majMontantCommande(0);
+								}
+								else{
+									nouvelleCommande.majMontantCommande((int)Math.round(montantCommande)-bonAchat);
+								}
+								
 							}
 							else{
 								nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
@@ -205,12 +211,12 @@ public class FenetreCommandeArticle extends JFrame{
 								CarteFidelite.modifierBDDcarteFidelite(FenetreDialogIdentification.clientUserIdentifiant, nbPointsAvant+pointsRecoltes);
 								
 							}
-							
-							
+								
 							
 							FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier );
 							fenetre.setVisible(true);
 							dispose();
+							bonAchat=0;
 							
 						} catch (SQLException e1) {
 							e1.printStackTrace();

@@ -83,7 +83,7 @@ public class FenetreFactureCommande extends JDialog {
 		// panneau de l'affichage du total
 		JPanel panneauBas = new JPanel();
 		panneauBas.setBorder(BorderFactory.createLineBorder(Color.gray));
-		totalLabel = new JLabel("Total commande : "+commande.montantTotalArticle(panier, idClient)+" €");
+		totalLabel = new JLabel("Total commande : "+ SGBD.selectStringConditionString("COMMANDE", "MONTANTCOMMANDE", "IDARTICLE", commande.getIdCommande())+" €");
 		panneauBas.add(totalLabel);
 		this.getContentPane().add(panneauBas,"South");
 		

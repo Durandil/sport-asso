@@ -577,7 +577,7 @@ public class Commande {
 				"PRIXINITIAL", "IDARTICLE", ligne.getIdArticle());
 		double prixInitial = Double.parseDouble(prixInit);
 		int quantiteCommandee = ligne.getQuantite();
-	JOptionPane.showMessageDialog(null,"prix initial : "+prixInitial + ", quantité : "+ quantiteCommandee + ", ref article : "+ ligne.getIdArticle());
+		
 		// Récupération du pourcentage dégressif
 		pourcentagePromoDegressif = SGBD.recupererPourcentagePromotionDegressifArticleCommande(
 						this.idCommande, ligne.getIdArticle());
@@ -586,20 +586,19 @@ public class Commande {
 		pourcentagePromoExc = SGBD.recupererPourcentagePromotionExceptionnelleArticle(
 						ligne.getIdArticle(), estFidele);
 
-		JOptionPane.showMessageDialog(null, pourcentagePromoDegressif + " "
-				+ pourcentagePromoExc);
-		
+
 		// Comparaison des pourcentages dégressif et promotion exceptionnelle
-		JOptionPane.showMessageDialog(null,"Pourcentage promo dégressif : "+pourcentagePromoDegressif + ", pourcentage promo exc : " + pourcentagePromoExc);
-		
+
 		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
 		if (Double.parseDouble(pourcentagePromoDegressif) < Double.parseDouble(pourcentagePromoExc)) {
 			promoAppliquee = Double.parseDouble(pourcentagePromoExc);
 		}
-
+		System.out.println(promoAppliquee);
+		
 		//Calcul du montant final
 		montantArticle = (Double) (quantiteCommandee * prixInitial * (1 - promoAppliquee / 100));
-		JOptionPane.showMessageDialog(null,"montant de l'article :"+montantArticle);
+		System.out.println(montantArticle);
+		
 		
 		return montantArticle;
 	}
