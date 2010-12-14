@@ -123,7 +123,6 @@ public class Article {
 	 * @see Article#etat
 	 * @see Article#ajouterBDD()
 	 */
-
 	public Article(String description, double prixInitial,
 			int stock, float poids, String typeSport, String catPrix,
 			String etat) {
@@ -326,6 +325,7 @@ public class Article {
 	 * saisies lors de l'appel du constructeur
 	 * </p> 
 	 * 
+	 * @see Article#Article(String, double, int, float, String, String, String)
 	 * @see BDD
 	 */
 	public void ajouterBDD() {
@@ -405,7 +405,6 @@ public class Article {
 	 * 
 	 * @see BDD
 	 */
-	
 	public static void modifierArticleBDD(String idArticle,
 			String description, String prix, String poids, String stock, 
 			String idType, String idCat) {

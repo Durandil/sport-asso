@@ -30,8 +30,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 
 	private static String compteurViewStatistiqueArticle;
 	
@@ -794,16 +794,13 @@ public class SGBD {
 		}
 		return rs;
 	}
-	
-	// cette méthode retourne l'identifiant de la plus grosse commande effectuée par le client ainsi que la 
-	// date de cette commande
-	
+
 	public static ArrayList<String> StatistiquePlusGrosseCommande(String identifiant){
 		connecter();
 		Statement st = null;
 		ResultSet res = null;
 		ArrayList<String> listeStat = new ArrayList<String>();
-		String id ="!g;:h,lmglmkfgAucune";
+		String id ="Aucune";
 		String date = "NA";
 
 		try {
