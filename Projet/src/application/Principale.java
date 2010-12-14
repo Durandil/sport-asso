@@ -29,13 +29,19 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 
 		//Initialiser la base de données
-		BDD.init();
+		//BDD.init();
 
 
 
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
+		
+		/** test de calcul de statistique **/
+//		String st = SGBD.statistiqueClassiqueClient("qpuc@ensai.fr","avg");
+//		String stat = SGBD.statistiqueClassiqueClient("qpuc@ensai.fr","max");
+//		System.out.println("avg : "+ st+ ", max : "+stat);
+//		
 		
 		/** test récupération pourcentage promo exceptionnelle d'un article donne **/
 //		int nbrePromo = SGBD.compterNbrePromoExceptionnellesArticle("ART00082", 0);

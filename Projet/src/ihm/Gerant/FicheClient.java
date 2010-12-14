@@ -16,15 +16,12 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import basededonnees.SGBD;
 
 import metier.Association;
-import metier.Client;
 import metier.Particulier;
 
 public class FicheClient extends JDialog {
@@ -41,7 +38,6 @@ public class FicheClient extends JDialog {
 	private Dimension dimensionPanneauStatistique =  new Dimension(300,40);
 	private JLabel icon;
 	private static String etatCompte="";
-	private static final String identifiantClient = "";
 	private static String numeroCommande=" ";
 	
 	public FicheClient(JFrame parent, String title, boolean modal,String identifiantClient){
@@ -62,8 +58,8 @@ public class FicheClient extends JDialog {
 		panneauDroite.setBackground(Color.YELLOW);
 		
 		// Implémenter des méthodes (interrogation tables) pour obtenir les statistiques sur un client
-		JLabel totalMoyenCommandes=new JLabel("Total moyen des commandes : ");
-		JLabel totalMaxCommande=new JLabel("Plus grosse commande effectuée : ");
+		JLabel totalMoyenCommandes=new JLabel("Total moyen des commandes : "+SGBD.statistiqueClassiqueClient(idClient, "avg"));
+		JLabel totalMaxCommande=new JLabel("Plus grosse commande effectuée : "+SGBD.statistiqueClassiqueClient(idClient, "max"));
 		JLabel articleMaxCommande= new JLabel("Article le plus commandé : ");
 		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
 		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
@@ -118,7 +114,7 @@ public class FicheClient extends JDialog {
 		boutonValidation.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				if (!numeroCommande.equals(" ")){
 					FenetreStatistiqueCommande fenetre = new FenetreStatistiqueCommande(null,"Détails de la commande : "+numeroCommande,true,numeroCommande);
 					fenetre.setVisible(true);
@@ -395,9 +391,12 @@ public class FicheClient extends JDialog {
 			
 		boutonValider.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-			// TODO enregistrer l'éventuelle modification par le client des données
+			// TODO verifier enregistrement l'éventuelle modification par le client des données
 			if(denominationClient.equals(" ")){
 				Particulier.modifierBDDclient(identifiantClient,etatCompte);
+				
+				//int verificationChamp=
+				
 				Particulier.modifierBDDparticulier(identifiantClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 			}
 			else{

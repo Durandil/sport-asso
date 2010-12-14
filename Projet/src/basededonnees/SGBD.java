@@ -30,8 +30,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3198";
-	private static final String MDP = "id3198";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 
 	private static String compteurViewStatistiqueArticle;
 	
@@ -48,7 +48,6 @@ public class SGBD {
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative de connexion : "
 					+ e.getMessage());
-			System.out.println("RAISON 3 : " + e.getErrorCode());
 			result = false;
 
 		}
@@ -733,24 +732,28 @@ public class SGBD {
 
 		return liste;
 	}
+	
 	//TODO 
 	// Méthode qui permettra de récupérer les statistiques sur le montant des commandes d'un
-	// client pour la fiche client. avg ( moyenne), min et max.
-	// pour le moment je me sers de la quantite, plus tard il faudra travailler sur
-	// le prix x quantité ( requete imbriquée à réaliser)
+	// client pour la fiche client.  moyenne, min et max.
+
 	public static String statistiqueClassiqueClient(String identifiant, String statistique){
 		connecter();
 		Statement st = null;
 		ResultSet res = null;
-		String rs = "";
+		String rs = "0";
 		
 		try {
 			st = c.createStatement();
-			res= st.executeQuery("SELECT"+ statistique + "(QUANTITE) FROM COMMANDES,INFOCOMMANDES,CLIENT" +
-					"WHERE COMMANDES.IDENTIFIANT=INFOCOMMANDES.IDCOMMANDE and CLIENT.IDENTIFIANT=" +
-					"COMMANDES.IDCLIENT and MAIL="+ identifiant +";");
+
+			res= st.executeQuery("select "+ statistique+"(MONTANTCOMMANDE) from commande WHERE" +
+					" IDCLIENT='"+identifiant+"'");
 			
-			rs = res.getString(0);
+			while(res.next()){
+				if(res.getString(1) != null){
+					rs = res.getString(1).toString();
+				}
+			}
 			
 		}
 		catch(SQLException e){
@@ -762,6 +765,75 @@ public class SGBD {
 		}
 		return rs;
 	}
+	
+	public static String nbreCommandeClient(String identifiant){
+		connecter();
+		Statement st = null;
+		ResultSet res = null;
+		String rs = "0";
+		
+		try {
+			st = c.createStatement();
+			
+			res= st.executeQuery("select count(*) from commande where" +
+					" IDCLIENT='"+identifiant+"'");
+			
+			while(res.next()){
+				if(res.getString(1) != null){
+					rs = res.getString(1).toString();
+				}				
+			}
+		
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			fermer();
+		}
+		return rs;
+	}
+
+	public static ArrayList<String> StatistiquePlusGrosseCommande(String identifiant){
+		connecter();
+		Statement st = null;
+		ResultSet res = null;
+		ArrayList<String> listeStat = new ArrayList<String>();
+		String id ="Aucune";
+		String date = "NA";
+
+		try {
+			st = c.createStatement();
+			res= st.executeQuery("select IDCOMMANDE,DATECOMMANDE from commande " +
+					" WHERE MONTANTCOMMANDE=(SELECT max(MONTANTCOMMANDE) from commande)" +
+					" and IDCLIENT='"+identifiant+"'");
+			
+			
+			while(res.next()){
+				if(res.getString(1) != null){
+					id=res.getString(1).toString();
+				}
+				if(res.getString(2) != null){
+					date=res.getString(2).toString();
+				}
+			}
+			
+			
+		}
+		catch(SQLException e){
+			System.out.println("Echec de la tentative d’interrogation : "
+					+ e.getMessage());
+		}
+		finally{
+			fermer();
+			listeStat.add(id);
+			listeStat.add(date);
+		}
+		return listeStat;
+	}
+	
+	
 	
 	// Méthode qui permettra de récupérer les statistiques sur l'article le plus commande par un client donné
 	public static String statistiqueArticleClient(String identifiant){
@@ -777,16 +849,7 @@ public class SGBD {
 		
 		try {
 			st = c.createStatement();
-			
-			
-			System.out.println("create view "+ nomVue +" as "  +
-					"select idArticle,sum(quantitecommandee) as totalQuantite "+
-					"from LISTING_ARTICLES_COMMANDES "+
-					"where IDCOMMANDE IN (select idCommande from COMMANDE WHERE IDCLIENT='"+identifiant+"') GROUP BY IDARTICLE");
-
-			System.out.println(" select idArticle from "+ nomVue +
-					" where totalQuantite = (select max(totalQuantite) from " +nomVue+" )");
-			
+		
 			res= st.executeQuery("create view "+ nomVue +" as " +
 							"select idArticle,sum(quantitecommandee) as totalQuantite "+
 							"from LISTING_ARTICLES_COMMANDES "+
@@ -916,9 +979,6 @@ public class SGBD {
 								 " FROM ARTICLE, LISTING_ARTICLES_COMMANDES" +
 								 " WHERE ARTICLE.IDARTICLE=LISTING_ARTICLES_COMMANDES.IDARTICLE AND" +
 								 " LISTING_ARTICLES_COMMANDES.IDCOMMANDE ='"+ idCommande +"'");
-			
-			
-			
 			
 			while (res.next()) {
 
@@ -1088,13 +1148,8 @@ public class SGBD {
 			}
 			else{
 				conditionWhereOr=conditionWhereOr+" ) AND (VILLE.IDVILLE = CLIENT.IDVILLE) ";
-				System.out.println("condition 6");
 			}
-			
-			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
-					" FROM CLIENT, VILLE " + conditionWhereOr);
-			
-			
+
 			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
 					" FROM CLIENT, VILLE " + conditionWhereOr );
 			
