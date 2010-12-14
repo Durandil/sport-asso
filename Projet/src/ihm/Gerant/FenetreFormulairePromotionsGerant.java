@@ -301,7 +301,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 								promoAdherent=false;
 							}
 							
-							Promotion promo = new Promotion(null,description.getText(), dateDebut, dateFin, Double.parseDouble(pourcentPromo.getText()), promoAdherent);
+							Promotion promo = new Promotion(description.getText(), dateDebut, dateFin, Double.parseDouble(pourcentPromo.getText()), promoAdherent);
 							
 							
 							String requete = "INSERT INTO LISTING_PROMOS_ARTICLES(IDPROMO,IDARTICLE) values('"
