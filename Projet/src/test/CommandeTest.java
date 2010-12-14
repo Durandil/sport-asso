@@ -116,4 +116,14 @@ public class CommandeTest extends TestCase {
 //		Commande.enleverArticlePanier("ART00003", "15", panier);
 
 	}
+	
+	public void testMontantCommandePourUnArticle(){
+		
+	}
+	
+	
+	public void testMontantTotalArticle(){
+		
+	}
+	
 }

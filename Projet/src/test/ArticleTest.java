@@ -37,13 +37,11 @@ public class ArticleTest extends TestCase {
 	
 	public void testSupprimerArticleBDD(){
 		Article.supprimerArticleBDD("ART00003");
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("ART00001");
-		result.add("ART00002");
-		assertEquals(result, SGBD.selectListeString("ARTICLE","IDARTICLE"));
-		String requete= "INSERT INTO ARTICLE (idArticle, Description, Stock, Poids,"
-			+" PrixInitial , idCategorie, idType, etatArticle) values"
-			+" ('ART00003', 'Raquette de Tennis', 550, 1.1, 50, 'CAT00003', 'TYP00008', 'En stock')";
+		assertEquals("Supprimé", SGBD.selectStringConditionString("ARTICLE", "ETATARTICLE", "IDARTICLE", "ART00003"));
+		
+		String requete= "UPDATE ARTICLE SET ETATARTICLE='En stock'"
+			+" WHERE IDARTICLE='ART00003'";
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 	}
 	
