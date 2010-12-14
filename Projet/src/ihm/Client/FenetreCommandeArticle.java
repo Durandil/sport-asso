@@ -213,7 +213,7 @@ public class FenetreCommandeArticle extends JFrame{
 							}
 								
 							
-							FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier );
+							FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier,bonAchat );
 							fenetre.setVisible(true);
 							dispose();
 							bonAchat=0;
