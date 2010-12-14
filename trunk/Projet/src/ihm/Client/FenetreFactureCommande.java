@@ -28,17 +28,20 @@ public class FenetreFactureCommande extends JDialog {
 	private JLabel dateCommandeLabel;
 	private JLabel numCommandeLabel;
 	private JLabel totalLabel;
+	private JLabel bonsAchatLabel;
 	
-	public FenetreFactureCommande(JFrame parent, String title, boolean modal, String identifiantClient, Commande commandeP,ArrayList<LigneCommande> panierClient ) throws SQLException{
+	public FenetreFactureCommande(JFrame parent, String title, boolean modal, String identifiantClient,
+			Commande commandeP,ArrayList<LigneCommande> panierClient,int bonsAchatUtilises) throws SQLException{
 		super(parent, title, modal);
 		this.setSize(600, 650);
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-		this.initComponent(identifiantClient,commandeP,panierClient);
+		this.initComponent(identifiantClient,commandeP,panierClient,bonsAchatUtilises);
 	}
 	
-	private void initComponent(String idClient,Commande commande,ArrayList<LigneCommande> panier) throws SQLException{
+	private void initComponent(String idClient,Commande commande,ArrayList<LigneCommande> panier,
+			int bonsAchat) throws SQLException{
 
 		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
 		String prenom = SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idClient);
@@ -82,9 +85,15 @@ public class FenetreFactureCommande extends JDialog {
 		
 		// panneau de l'affichage du total
 		JPanel panneauBas = new JPanel();
+		panneauBas.setLayout(new GridLayout(2,1,2,0));
 		panneauBas.setBorder(BorderFactory.createLineBorder(Color.gray));
-		totalLabel = new JLabel("Total commande : "+ SGBD.selectStringConditionString("COMMANDE", "MONTANTCOMMANDE", "IDARTICLE", commande.getIdCommande())+" €");
+		bonsAchatLabel = new JLabel("Nombre de points de réduction utilisés  sur votre acrte de fidélité  :  "+bonsAchat);
+		if(bonsAchat>0){
+			panneauBas.add(bonsAchatLabel);		
+		}
+		totalLabel = new JLabel("Total commande :  "+ SGBD.selectStringConditionString("COMMANDE", "MONTANTCOMMANDE", "IDCOMMANDE", commande.getIdCommande())+" €");
 		panneauBas.add(totalLabel);
+		
 		this.getContentPane().add(panneauBas,"South");
 		
 	}
