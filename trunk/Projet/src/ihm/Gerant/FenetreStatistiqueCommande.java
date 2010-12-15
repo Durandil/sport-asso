@@ -57,8 +57,8 @@ public class FenetreStatistiqueCommande extends JDialog {
 		boutonRetour.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
+				dispose();
+				//setVisible(false);
 			}
 		});
 		

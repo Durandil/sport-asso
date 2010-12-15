@@ -39,12 +39,12 @@ public class MenuGerant extends JFrame {
 	private JMenuBar menuBar = new JMenuBar();
 	
 	private JMenu menuClientele = new JMenu("Gestion Clientèle");
-	private JMenu menuStock = new JMenu("Gestion des Stock");
+	private JMenu menuStock = new JMenu("Gestion des Stocks");
 	private JMenu menuGerant = new JMenu("Compte Gérant");
 	
 	private JMenuItem itemGestionCompte = new JMenuItem("Recherche client");
 	private JMenuItem itemMessagerie = new JMenuItem("Messagerie interne ");
-	private JMenuItem itemFermer = new JMenuItem("Fermer le logiciel");
+	private JMenuItem itemFermer = new JMenuItem("Fermer le compte gérant");
 	private JMenuItem itemArticles = new JMenuItem("Gestion des articles");
 	private JMenuItem itemCommandes = new JMenuItem("Commandes de réapprovisionnement");
 	private JMenuItem itemPromotions = new JMenuItem("Gestion des promotions exceptionnelles");
@@ -133,18 +133,32 @@ public class MenuGerant extends JFrame {
 		itemMotDePasse.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//ouvrir la fenetre permettant accès au compte
-				String motPasse = JOptionPane.showInputDialog(null, "Saisissez votre nouveau mot de passe ","Modification du mot de passe actuel",JOptionPane.INFORMATION_MESSAGE);
+
+				String motPasse = ""; 
+				try { 
+				motPasse = JOptionPane.showInputDialog(null, "Saisissez votre nouveau mot de passe ","Modification du mot de passe actuel",JOptionPane.INFORMATION_MESSAGE);
+
+				if (motPasse.equals(null)) {} // on ne fait rien 
 				
-				if(!motPasse.equals("") & !motPasse.equals(FenetreDialogIdentification.motDePasseGerant)){
-					int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la modification du mot de passe","Confirmation",JOptionPane.YES_NO_OPTION);
-					
-					if(res == JOptionPane.OK_OPTION){
-						FenetreDialogIdentification.motDePasseGerant=motPasse;
+				} 
+				catch(NullPointerException npe)
+				{ 
+				motPasse = "Annulation"; 
+				} 
+				if (!motPasse.equals("Annulation") ){ 
+					if(!motPasse.equals("") & !motPasse.equals(FenetreDialogIdentification.motDePasseGerant)){
+						int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la modification du mot de passe","Confirmation",JOptionPane.YES_NO_OPTION);
+						
+						if(res == JOptionPane.OK_OPTION){
+							FenetreDialogIdentification.motDePasseGerant=motPasse;
+						}
+						
+						if(Integer.parseInt(motPasse) == JOptionPane.CANCEL_OPTION){
+							System.out.println("annulation");
+						}
+
 					}
-					
 				}
-				
-				
 			}
 		});
 		

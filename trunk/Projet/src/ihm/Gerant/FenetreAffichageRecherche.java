@@ -75,7 +75,8 @@ public class FenetreAffichageRecherche extends JDialog{
 		JButton retourRecherche = new JButton("Retour");
 		retourRecherche.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				//setVisible(false);
+				dispose();
 			}
 		});
 		panneauBouton.add(retourRecherche);
