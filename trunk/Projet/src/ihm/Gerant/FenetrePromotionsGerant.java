@@ -87,7 +87,6 @@ public class FenetrePromotionsGerant extends JFrame {
 					if(res==JOptionPane.YES_OPTION){
 						Promotion.supprimerListing_PromoBDD(idPromo);
 						Promotion.supprimerPromoBDD(idPromo);
-						dispose();	
 					}
 				}
 			}
