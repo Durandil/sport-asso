@@ -50,10 +50,10 @@ public class LigneCommande {
 	 * 
 	 * @param idArticle
 	 *            L'identifiant unique de l'article.
-	 * @param description
-	 *            La description de l'article.
+	 * @param quantite
+	 *            La quantité commandée de l'article.
 	 * 
-	 * @see LigneCommande#article
+	 * @see LigneCommande#idArticle
 	 * @see LigneCommande#quantite
 	 * @see FenetreCommandeArticle
 	 */
@@ -84,10 +84,11 @@ public class LigneCommande {
 		this.idArticle = idArticle;
 	}
 
-	 /**
-     * Retourne la quantité
+	/**
+     * Met à jour la quantité
      * 
-     * @return La quantité commandée de l'article
+     * @param quantite
+     *            La quantité commandée de l'article
      * 
      */
 	public void setQuantite(int quantite) {
@@ -95,11 +96,11 @@ public class LigneCommande {
 	}
 
 	
-	/**
-     * Met à jour la quantité
+
+	 /**
+     * Retourne la quantité
      * 
-     * @param quantite
-     *            La quantité commandée de l'article
+     * @return La quantité commandée de l'article
      * 
      */
 	public int getQuantite() {

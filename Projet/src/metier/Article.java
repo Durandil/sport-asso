@@ -23,7 +23,9 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD, LigneCommande, Promotion
+ * @see BDD
+ * @see LigneCommande
+ * @see Promotion
  */
 public class Article {
 
@@ -41,7 +43,7 @@ public class Article {
 	 * La description de l'article, modifiable par le gérant
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
 	 * @see Article#getDescription()
 	 * @see Article#setDescription(String)
 	 * 
@@ -52,7 +54,7 @@ public class Article {
 	 * Le prix de l'article, modifiable par le gérant
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
 	 * @see Article#getPrixInitial()
 	 * @see Article#setPrixInitial(double)
 	 * 
@@ -64,7 +66,7 @@ public class Article {
 	 * clients. Le gérant peut également modifier le stock de l'article.
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
 	 * @see Article#getStock()
 	 * @see Article#setStock(int)
 	 * 
@@ -75,7 +77,7 @@ public class Article {
 	 * Le poids de l'article (en grammes), modifiable par le gérant
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
 	 * @see Article#getPoids()
 	 * @see Article#setPoids(float)
 	 * 
@@ -330,7 +332,7 @@ public class Article {
 	 /**
      * Met à jour l'identifiant de la catégorie de prix
      * 
-	 * @param etat
+	 * @param catPrix
 	 *           L'identifiant de la catégorie prix de l'article.
      * 
      */

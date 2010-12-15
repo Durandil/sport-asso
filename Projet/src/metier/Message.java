@@ -1,6 +1,7 @@
 package metier;
 
 import ihm.FenetreLectureMessage;
+import ihm.FenetreMessagerie;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -138,9 +139,10 @@ public class Message {
      * @return L'identifiant du message
      * 
      */
-	public void setIdMessage(String idMessage) {
-		this.idMessage = idMessage;
+	public String getIdMessage() {
+		return idMessage;
 	}
+
 
 
 	/**
@@ -150,8 +152,8 @@ public class Message {
      *            L'identifiant unique du message
      * 
      */
-	public String getIdMessage() {
-		return idMessage;
+	public void setIdMessage(String idMessage) {
+		this.idMessage = idMessage;
 	}
 	
 	
@@ -362,8 +364,7 @@ public class Message {
 	 * Cette méthode supprime l'ensemble des messages présents dans la base de données.
 	 * </p> 
 	 * 
-	 * @param identifiantMessage
-	 * @see FenetreLectureMessage
+	 * @see FenetreMessagerie
 	 */
 	public static void supprimerAllBDD(){
 		String requete = "DELETE FROM MESSAGE";

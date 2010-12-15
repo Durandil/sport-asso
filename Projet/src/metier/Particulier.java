@@ -26,7 +26,8 @@ import basededonnees.SGBD;
  * 
  * </p>
  * 
- * @see BDD,Client,Utilisateur
+ * @see BDD
+ * @see Client
  */
 
 public class Particulier extends Client {
@@ -68,7 +69,7 @@ public class Particulier extends Client {
 	 * 
 	 * @param nom
 	 *            Le nom du client
-	 * @param prénom
+	 * @param prenom
 	 *            Le prénom du client
 	 * @param mail
 	 *            Le mail de l'association, qui est utilisé comme identifiant et n'est pas modifiable par le client
@@ -83,14 +84,14 @@ public class Particulier extends Client {
 	 *            
 	 * @see Particulier#nom
 	 * @see Particulier#prenom
-	 * @see Utilisateur#mail
-	 * @see Utilisateur#adresse
+	 * @see Client#mail
+	 * @see Client#adresse
 	 * @see Client#idVille
-	 * @see Utilisateur#telephone
+	 * @see Client#telephone
 	 * @see Client#particulierAssociation
 	 * @see Client#estFidele
 	 * @see Client#estActif
-	 * @see Utilisateur#motDePasse
+	 * @see Client#motDePasse
 	 * @see Client#ajouterFideliteBDD()
 	 * @see Particulier#ajouterBDD()
 	 * 
@@ -146,7 +147,7 @@ public class Particulier extends Client {
 	/**
      * Met à jour le prénom du particulier
      * 
-     * @param nom
+     * @param prenom
      *            Le prénom du particulier
      * 
      */
