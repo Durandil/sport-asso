@@ -38,6 +38,8 @@ public class Commande {
 	/**
 	 * L'Identifiant de la commande, non modifiable
 	 * 
+	 * @see Commande#getIdCommande()
+	 * @see Commande#setIdCommande(String)
 	 * @see Commande#ajouterBDD()
 	 * @see Commande#majInfoCommandes()
 	 */
@@ -46,6 +48,8 @@ public class Commande {
 	/**
 	 * La liste des lignes de commande
 	 * 
+	 * @see Commande#getListe()
+	 * @see Commande#setListe(ArrayList)
 	 * @see LigneCommande
 	 * @see Commande#ajouterBDD()
 	 * @see Commande#majInfoCommandes()
@@ -57,6 +61,8 @@ public class Commande {
 	/**
 	 * L'identifiant du client qui passe la commande
 	 * 
+	 * @see Commande#getIdClient()
+	 * @see Commande#setIdClient(String)
 	 * @see Commande#ajouterBDD()
 	 * @see Commande#montantCommandePourUnArticle(String, LigneCommande, int)
 	 * @see Commande#montantTotalArticle(ArrayList, String)
@@ -66,6 +72,8 @@ public class Commande {
 	/**
 	 * La date de la commande
 	 * 
+	 * @see Commande#getDate()
+	 * @see Commande#setDate(Date)
 	 * @see Commande#ajouterBDD()
 	 */
 	private Date date;
@@ -74,6 +82,8 @@ public class Commande {
 	/**
 	 * Le montant de ma commande
 	 * 
+	 * @see Commande#getMontant()
+	 * @see Commande#setMontant(int)
 	 * @see Commande#ajouterBDD()
 	 * @see Commande#majMontantCommande(int)
 	 */

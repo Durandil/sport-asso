@@ -30,44 +30,62 @@ public class Message {
 	/**
 	 * L'Identifiant du message, non modifiable
 	 * 
+	 * @see Message#getIdMessage()
+	 * @see Message#setIdMessage(String)
 	 * @see Message#ajouterBDD()
 	 * @see Message#supprimerBDD(String)
 	 * @see Message#supprimerAllBDD()
+	 * 
 	 */
 	private String idMessage ;
 	
 	/**
 	 * Le sujet du message.
 	 * 
+	 * @see Message#getSujet()
+	 * @see Message#setSujet(String)
 	 * @see Message#ajouterBDD()
+	 * 
 	 */
 	private String sujet ;
 	
 	/**
 	 * Le contenu du message.
 	 * 
+	 * @see Message#getContenu()
+	 * @see Message#setContenu(String)
 	 * @see Message#ajouterBDD()
+	 * 
 	 */
 	private String contenu ;
 	
 	/**
 	 * L'expéditeur du message.
 	 * 
+	 * @see Message#getExpediteur()
+	 * @see Message#setExpediteur(String)
 	 * @see Message#ajouterBDD()
+	 * 
 	 */
 	private String expediteur;
 	
 	/**
 	 * La date d'envoi du message.
 	 * 
+	 * @see Message#getDateEnvoi()
+	 * @see Message#setDateEnvoi(Date)
 	 * @see Message#ajouterBDD()
+	 * 
 	 */
 	private Date dateEnvoi ;
 	
 	/**
 	 * Le booléen indiquant si le message a été envoyé au gérant.
 	 * 
+	 * @see Message#isEstEnvoyeAuGerant()
+	 * @see Message#setEstEnvoyeAuGerant(boolean)
 	 * @see Message#ajouterBDD()
+	 * 
 	 */
 	private boolean estEnvoyeAuGerant ;
 	
@@ -231,7 +249,7 @@ public class Message {
      * @return Si le message a été envoyé au gérant
      * 
      */
-	public boolean isEstEnvoye() {
+	public boolean isEstEnvoyeAuGerant() {
 		return estEnvoyeAuGerant;
 	}
 
@@ -242,7 +260,7 @@ public class Message {
      *            Le booléen indiquant si le message est envoyé au gérant
      * 
      */
-	public void setEstEnvoye(boolean estEnvoye) {
+	public void setEstEnvoyeAuGerant(boolean estEnvoye) {
 		this.estEnvoyeAuGerant = estEnvoye;
 	}
 

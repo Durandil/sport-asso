@@ -29,6 +29,8 @@ public class Promotion {
 	/**
 	 * L'Identifiant de la promotion, non modifiable
 	 * 
+	 * @see Promotion#getIdPromotion()
+	 * @see Promotion#setIdPromotion(String)
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#supprimerListing_PromoBDD(String)
 	 * @see Promotion#supprimerPromoBDD(String)
@@ -38,6 +40,8 @@ public class Promotion {
 	/**
 	 * Le nom de la promotion
 	 * 
+	 * @see Promotion#getNomPromotion()
+	 * @see Promotion#setNomPromotion(String)
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String, boolean)
 	 */
@@ -47,6 +51,8 @@ public class Promotion {
 	/**
 	 * La date de début de la promotion
 	 * 
+	 * @see Promotion#getDateDebut()
+	 * @see Promotion#setDateDebut(Date)
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String, boolean)
 	 * @see Promotion#verifierChampPromotion(String, String, String, String, String, String, String, String)
@@ -58,6 +64,8 @@ public class Promotion {
 	/**
 	 * La date de fin de la promotion
 	 * 
+	 * @see Promotion#getDateFin()
+	 * @see Promotion#setDateFin(Date)
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String, boolean)
 	 * @see Promotion#verifierChampPromotion(String, String, String, String, String, String, String, String)
@@ -70,6 +78,8 @@ public class Promotion {
 	 * Le pourcentage de la promotion, ou plus exactement le pourcentage 
 	 * appliqué au prix initial : "80" pour une réduction de 20%
 	 * 
+	 * @see Promotion#getPourcentagePromo()
+	 * @see Promotion#setPourcentagePromo(double)
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String, boolean)
 	 */
@@ -78,6 +88,8 @@ public class Promotion {
 	/**
 	 * Indique si la promotion ne s'applique qu'aux clients fidèles ou à l'ensemble des clients
 	 * 
+	 * @see Promotion#getPromoFidelite()
+	 * @see Promotion#setPromoFidelite(boolean)
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String, boolean)
 	 */
@@ -121,8 +133,6 @@ public class Promotion {
 	}
 	
 	
-
-
 	 /**
      * Retourne l'id de la promotion
      * 
@@ -406,13 +416,20 @@ public class Promotion {
 	
 	/**
 	 * Vérifie si la date saisie est cohérente (à travers l'année, le mois et le jour entrés en paramètres)
-	 * 
+	 * Pour cela, la fonction procède étape par étape
 	 * <p>
-	 * La méthode suppose que la date est à l'origine cohérente.
+	 * La méthode suppose à l'origine que la date est cohérente.
 	 * Elle crée une Date correspondant aux paramètres saisis.
-	 * Elle transforme ensuite les trois paramètres en entiers.
-	 * dateJour correspond à la date actuelle
-	 * TODO à continuer
+	 * Les paramètres sont ensuite transformés en entiers.
+	 * Une nouvelle instance de Date est créée, dateJour, qui correspond à la date actuelle
+	 * Par la suite, trois tests sont effectués
+	 * <ul>
+	 * <li>Le premier vérifie que la date de la promotion précède la date du jour</li>
+	 * <li>Le second vérifie que le jour de la date n'est pas 31 si le mois comporte 30 jours
+	 * <li>Le dernier vérifie que le mois de février comporte 28 jours au plus
+	 * </ul>
+	 * Si au moins l'un de ces tests est faux alors la fonction renvoie la valeur "faux".
+	 * Si tous les tests sont réussis, la valeur renvoyée par la fonction est "vrai".
 	 * </p> 
 	 * 
 	 * @param annee

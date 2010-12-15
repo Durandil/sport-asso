@@ -34,6 +34,8 @@ public class Particulier extends Client {
 	/**
 	 * Le nom du client
 	 * 
+	 * @see Particulier#getNom()
+	 * @see Particulier#setNom(String)
 	 * @see Particulier#ajouterBDD()
 	 * @see Particulier#modifierBDDparticulier(String, String, String, String, String, String)
 	 * 
@@ -44,6 +46,8 @@ public class Particulier extends Client {
 	/**
 	 * Le prénom du client
 	 * 
+	 * @see Particulier#getNom()
+	 * @see Particulier#setNom(String)
 	 * @see Particulier#ajouterBDD()
 	 * @see Particulier#modifierBDDparticulier(String, String, String, String, String, String)
 	 * 
@@ -89,6 +93,7 @@ public class Particulier extends Client {
 	 * @see Utilisateur#motDePasse
 	 * @see Client#ajouterFideliteBDD()
 	 * @see Particulier#ajouterBDD()
+	 * 
 	 */
 	public Particulier(String nom, String prenom, String mail, String adresse,
 			 String idVille,
@@ -107,18 +112,44 @@ public class Particulier extends Client {
 		ajouterFideliteBDD();
 	}
 
+	/**
+     * Retourne le nom du particulier
+     * 
+     * @return Le nom du particulier
+     * 
+     */
 	public String getNom() {
 		return nom;
 	}
 
+	/**
+     * Met à jour le nom du particulier
+     * 
+     * @param nom
+     *            Le nom du particulier
+     * 
+     */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
+	/**
+     * Retourne le prénom du particulier
+     * 
+     * @return Le prénom du particulier
+     * 
+     */
 	public String getPrenom() {
 		return prenom;
 	}
 
+	/**
+     * Met à jour le prénom du particulier
+     * 
+     * @param nom
+     *            Le prénom du particulier
+     * 
+     */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
