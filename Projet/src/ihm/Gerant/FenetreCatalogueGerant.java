@@ -111,6 +111,7 @@ public class FenetreCatalogueGerant extends JFrame{
 					if(res==JOptionPane.OK_OPTION){
 						Article.supprimerArticleBDD(numArticle);
 						dispose();
+
 					}
 				}
 				
