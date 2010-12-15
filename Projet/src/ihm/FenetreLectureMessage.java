@@ -3,7 +3,6 @@ package ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import metier.Article;
 import metier.Message;
 
 public class FenetreLectureMessage extends JDialog{
@@ -123,7 +121,7 @@ public class FenetreLectureMessage extends JDialog{
 		
 		boutonRepondre.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO générer une page de réponse à un email
+				//Génération d'une page de réponse à un email
 				dispose();
 				FenetreReponseMessage fenReponse = new FenetreReponseMessage(reponseGerant);
 				fenReponse.setVisible(true);

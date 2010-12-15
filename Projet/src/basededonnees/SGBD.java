@@ -87,7 +87,7 @@ public class SGBD {
 			
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} finally {
 			
@@ -834,52 +834,6 @@ public class SGBD {
 	}
 	
 	
-	
-	// Méthode qui permettra de récupérer les statistiques sur l'article le plus commande par un client donné
-	public static String statistiqueArticleClient(String identifiant){
-		connecter();
-		Statement st = null;
-		ResultSet res2=null;
-		String rs = "Aucun";
-		String nomVue="totalParArticle";
-		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_VUESTATARTICLE.NEXTVAL");
-		compteurViewStatistiqueArticle = idNonFini.get(0);
-		nomVue = nomVue+compteurViewStatistiqueArticle;
-		System.out.println(nomVue);
-		
-		try {
-			st = c.createStatement();
-			
-			st.executeQuery("create view "+ nomVue +" as " +
-							"select idArticle,sum(quantitecommandee) as totalQuantite "+
-							"from LISTING_ARTICLES_COMMANDES "+
-							"where IDCOMMANDE IN (select idCommande from COMMANDE WHERE IDCLIENT='"+identifiant+"') GROUP BY IDARTICLE");
-			
-			st.executeUpdate("COMMIT");
-			
-			res2 = st.executeQuery(" select idArticle from "+ nomVue +
-							" where totalQuantite = (select max(totalQuantite) from " +nomVue+" )");
-			
-			while(res2.next()){
-				if(res2.getString(1) != null){
-					rs = res2.getString(1).toString();
-				}
-			}
-			
-			
-		}
-		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-		}
-		finally{
-			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
-			fermer();
-		}
-		return rs;
-	}
-	
 	// TODO 
 	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
 	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
@@ -1072,30 +1026,7 @@ public class SGBD {
 		return resultat;
 	}
 	
-	// cette methode permet de récupérer le numéro du dernier enregistrement de la table entrée en parametre
-	public static int recupererIdentifiantDernierEnregistrementTable(String table,String champ){
-		SGBD.connecter();
-		Statement st = null ;
-		ResultSet res= null;
-		int resultat=0;
-		
-		try{
-			st=c.createStatement();
-			res=st.executeQuery("SELECT MAX(TO_NUMBER("+champ+")) FROM "+table+ " ;");
-			
-			resultat=Integer.parseInt(res.getObject(1).toString());
-		}
-		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-		}
-		finally{
-			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
-			SGBD.fermer();
-		}
-		return resultat;
-	}
+
 	
 	// Cette méthode permet de selectionner tous les individus satifaisant l'un des critères remplis
 	// dans la fenetre de recherche d'un client chez le gérant
