@@ -80,29 +80,11 @@ public class FenetreCatalogueGerant extends JFrame{
     	boutonAjouter.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				// ouverture du formulaire d'ajout d'un article dans la base de donnees
 				
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Ajout d'article",true);
 				formulaire.setVisible(true);
-				System.out.println("nombre lignes tableau avant ajout "+modTabCatalogue.getRowCount());
-				
-//				modTabCatalogue.ajouterLigne();
-//				modTabCatalogue.fireTableRowsInserted(modTabCatalogue.getRowCount(),modTabCatalogue.getRowCount());
-//				
-				/** solution alternative si on ne résoud pas le pb de l'affichage :
-				
-				setVisible(false);
-				
-				**/
-				
-//				if(modificationTableau==true){
-//					panneauTableau.remove(tab);
-//					modTabCatalogue = new ModeleTableauCatalogue(false,true);
-//				    tableau = new JTable(modTabCatalogue);
-//				    final JScrollPane tab = new JScrollPane(tableau);
-//				    panneauTableau.add(tab);
-//				}
+
 				dispose();
 				
 			}
@@ -113,7 +95,6 @@ public class FenetreCatalogueGerant extends JFrame{
     	boutonSupprimer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				// suppression de l'article selectionné dans le catalogue
 				
 				int ligne = tableau.getSelectedRow();
@@ -124,30 +105,14 @@ public class FenetreCatalogueGerant extends JFrame{
 				}
 				else{
 					String numArticle= tableau.getValueAt(ligne, 0).toString();
-
-					Article.supprimerArticleBDD(numArticle);
-					dispose();
+					
+					int res=JOptionPane.showConfirmDialog(null, "Confirmer_vous la suppression de l'article "+ numArticle+" ? ","Confirmation",JOptionPane.YES_NO_OPTION);
+					
+					if(res==JOptionPane.OK_OPTION){
+						Article.supprimerArticleBDD(numArticle);
+						dispose();
+					}
 				}
-				
-				//modTabCatalogue = new ModeleTableauCatalogue();
-				
-				//modTabCatalogue.actualiserTableau(false);
-				
-//				modTabCatalogue.fireTableRowsDeleted(ligne, ligne);
-//				modTabCatalogue.fireTableDataChanged();
-//				numerosLignesSupprimees.add(ligne);
-				
-//				JOptionPane supprime = new JOptionPane();
-//				ImageIcon image = new ImageIcon("src/images/information.png");
-//				supprime.showMessageDialog(null, "L'article sera supprimé quand vous aurez fermé la fenêtre", "Information", JOptionPane.INFORMATION_MESSAGE, image);
-//				tableau.removeRowSelectionInterval(ligne, ligne);
-
-				/** solution alternative si on ne résoud pas le pb de l'affichage :
-				
-				setVisible(false);
-				
-				**/
-				
 				
 			}
 		});
@@ -156,7 +121,6 @@ public class FenetreCatalogueGerant extends JFrame{
     	boutonModifier.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				// modification de l'article selectionné dans la catalogue
 				int ligne = tableau.getSelectedRow();
 				String numArticle = "";
@@ -195,11 +159,7 @@ public class FenetreCatalogueGerant extends JFrame{
 					finally{
 						FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(null,"Modifier l'article "+numArticle,true,numArticle);
 						formulaire.setVisible(true);
-						/** solution alternative si on ne résoud pas le pb de l'affichage :
-						
-						setVisible(false);
-						
-						**/
+						// fermeture de la fenetre après l'ouverture du formulaire
 						dispose();
 					}
 				}
@@ -221,35 +181,7 @@ public class FenetreCatalogueGerant extends JFrame{
     	
 	    
 	    // Définition du panneau qui contiendra les boutons de reactualisation du tableau et de retour à la page précédente
-	    JPanel panneauBouton=new JPanel();
-	    JButton boutonRafraichirTableau= new JButton("Rafraichir le catalogue");
-			
-		boutonRafraichirTableau.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-				//modTabCatalogue.actualiserTableau(false);
-				//modTabCatalogue.fireTableDataChanged();
-				//modTabCatalogue.fireTableStructureChanged();
-				
-				// on met à jour toutes les lignes qui ont été insérées
-//				for(int i=0; i<numerosLignesInserees.size();i++){
-//					modTabCatalogue.fireTableRowsInserted(numerosLignesInserees.get(i), numerosLignesInserees.get(i));
-//				}
-//				// puis on met à jour toutes les lignes supprimées
-//				for(int i=0; i<numerosLignesSupprimees.size();i++){
-//					modTabCatalogue.fireTableRowsDeleted(numerosLignesSupprimees.get(i), numerosLignesSupprimees.get(i));
-//				}
-//				// on vide les vecteurs quand on a mis à jour le tableau
-//				for(int i=0; i<numerosLignesInserees.size();i++){
-//					numerosLignesInserees.remove(i);
-//				}
-//				
-//				for(int i=0; i<numerosLignesSupprimees.size();i++){
-//					numerosLignesSupprimees.remove(i);
-//				}
-//			
-			}
-		});
-			
+	    JPanel panneauBouton=new JPanel();	
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
@@ -257,14 +189,11 @@ public class FenetreCatalogueGerant extends JFrame{
 			}			
 		});
 			
-		//panneauBouton.add(boutonRafraichirTableau);
 		panneauBouton.add(retourBouton);
 			
 		// Ajout du panneau des boutons au "panneau principal" qui héberge tous les autres panneaux
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
-			
-	        
-	        
+			   
 	    pack();
 	       
         

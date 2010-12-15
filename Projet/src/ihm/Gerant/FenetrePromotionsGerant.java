@@ -80,10 +80,15 @@ public class FenetrePromotionsGerant extends JFrame {
 				}
 				else{
 					String idPromo = tableauPromotions.getValueAt(ligneTableau, 0).toString();
+					String descriptionPromo = tableauPromotions.getValueAt(ligneTableau, 1).toString();
 					
-					Promotion.supprimerListing_PromoBDD(idPromo);
-					Promotion.supprimerPromoBDD(idPromo);
-					dispose();					
+					int res = JOptionPane.showConfirmDialog(null, "Confimez-vous la suppression de la promotion "+ idPromo +" : "+ descriptionPromo ,"Confirmation",JOptionPane.YES_NO_OPTION);
+					
+					if(res==JOptionPane.YES_OPTION){
+						Promotion.supprimerListing_PromoBDD(idPromo);
+						Promotion.supprimerPromoBDD(idPromo);
+						dispose();	
+					}
 				}
 			}
 		});
@@ -104,10 +109,15 @@ public class FenetrePromotionsGerant extends JFrame {
 						modifierPromo = new FenetreFormulairePromotionsGerant(null,"Modification d'une nouvelle promotion",true,idPromo);
 						modifierPromo.setVisible(true);
 						dispose();
-					} catch (Exception e1) {	
+					} 
+					catch (Exception e1) {	
 						System.out.println(e1.getMessage());
-					}					
+					}	
+					
+					
+									
 				}
+				
 			}
 		});
     	

@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -69,10 +70,17 @@ public class FenetreReapprovisionnement extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				ligneTableau = tableau.getSelectedRow();
-				String numeroArticle = tableau.getValueAt(ligneTableau, 0).toString();
-				FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numeroArticle);
-				fen.setVisible(true);
-				dispose();			
+				
+				if(ligneTableau==-1){
+					JOptionPane.showMessageDialog(null, "Aucune ligne sélectionnée, veuillez en sélectionner une","Attention",JOptionPane.ERROR_MESSAGE,new ImageIcon("src/images/warning.png"));
+				}
+				else{
+					String numeroArticle = tableau.getValueAt(ligneTableau, 0).toString();
+					FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(null, "Commande", true, numeroArticle);
+					fen.setVisible(true);
+					dispose();
+				}
+							
 			}
 		});
 	    

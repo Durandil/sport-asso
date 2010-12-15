@@ -189,7 +189,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 					System.out.println(typ +" "+cat);
 					Article art = new Article(description.getText(),Double.parseDouble(prx),Integer.parseInt(st),Float.parseFloat(p),typ, cat,"En stock");
 					FenetreCatalogueGerant.modificationTableau=true;
-					
+
 					// puis fermer la page
 					setVisible(false);
 					

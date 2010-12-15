@@ -26,6 +26,10 @@ public class Principale {
 /** 
  * @throws Exception **/
 
+	/**
+	 * @param args
+	 * @throws Exception
+	 */
 	public static void main(String[] args) throws Exception {
 
 		//Initialiser la base de données

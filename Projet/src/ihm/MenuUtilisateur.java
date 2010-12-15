@@ -1,4 +1,5 @@
 package ihm;
+import ihm.Accueil.FenetreCompte;
 import ihm.Accueil.FenetreDialogIdentification;
 import ihm.Client.FenetreCommandeArticle;
 import ihm.Client.FenetreContactVendeur;
@@ -18,11 +19,14 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import exception.ExceptionMailsDifferents;
 
 
-public class MenuUtilisateur extends JFrame implements ActionListener{
+
+public class MenuUtilisateur extends JFrame {
 	
 	/**
 	 * 
@@ -38,21 +42,17 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 	private JMenuItem itemFermer = new JMenuItem("Fermer compte utilisateur");
 	private JMenuItem itemMesInformations = new JMenuItem("Mes informations");
 	private JMenuItem itemProgFidelite = new JMenuItem("Mon programme fidélité");
-	private JMenuItem itemMessagerieClient = new JMenuItem("Messagerie");
+	private JMenuItem itemMessagerieClient = new JMenuItem("Messagerie interne");
 	private JMenuItem itemContact = new JMenuItem("Nous Contacter");
 	private JMenuItem itemInformations = new JMenuItem("Informations");
 	private JMenuItem itemArticles = new JMenuItem("Articles");
 	private JMenuItem itemPromotions = new JMenuItem("Promotions en cours");
 	private JLabel icon;
-	
-	// Cette variable static contiendra normalement le client en cours d'utilisation de l'application
-	// pour le moment elle sert à faire fonctionner la fenêtre
-	//public static Client client = new Particulier("julien","pic","jpic@orange.fr","3 rue du Vercors","Anncey","74000","0472157898",true);
 
+	
 	public MenuUtilisateur(){
 		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Bienvenue : "+ FenetreDialogIdentification.clientUserIdentifiant);
 		
@@ -69,7 +69,21 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
 		//--------------------------
 			
-		itemFermer.addActionListener(this);
+		itemFermer.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+
+				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la déconnexion de votre compte ?","Confirmation",JOptionPane.YES_NO_OPTION);
+				if(res==JOptionPane.OK_OPTION){
+					dispose();
+					try {
+						FenetreCompte fen = new FenetreCompte();
+					} catch (ExceptionMailsDifferents e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
 		
 		itemMesInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -150,14 +164,6 @@ public class MenuUtilisateur extends JFrame implements ActionListener{
 		this.setVisible(true);
 		}
 
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if (e.getSource() == itemFermer){
-			this.dispose();
-		}
-	}
-	
-	
 }
 
 

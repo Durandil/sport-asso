@@ -1,4 +1,5 @@
 package ihm;
+import ihm.Accueil.FenetreCompte;
 import ihm.Gerant.FenetreCatalogueGerant;
 import ihm.Gerant.FenetrePromotionsGerant;
 import ihm.Gerant.FenetreReapprovisionnement;
@@ -19,7 +20,10 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import exception.ExceptionMailsDifferents;
 
 import basededonnees.SGBD;
 
@@ -36,12 +40,12 @@ public class MenuGerant extends JFrame {
 	private JMenu menuClientele = new JMenu("Gestion Clientèle");
 	private JMenu menuStock = new JMenu("Gestion des Stock");
 
-	private JMenuItem itemGestionCompte = new JMenuItem("Gestion Compte Client");
-	private JMenuItem itemMessagerie = new JMenuItem("Messagerie gérant");
-	private JMenuItem itemFermer = new JMenuItem("Fermer");
-	private JMenuItem itemArticles = new JMenuItem("Articles");
+	private JMenuItem itemGestionCompte = new JMenuItem("Recherche client");
+	private JMenuItem itemMessagerie = new JMenuItem("Messagerie interne ");
+	private JMenuItem itemFermer = new JMenuItem("Fermer le logiciel");
+	private JMenuItem itemArticles = new JMenuItem("Gestion des articles");
 	private JMenuItem itemCommandes = new JMenuItem("Commandes de réapprovisionnement");
-	private JMenuItem itemPromotions = new JMenuItem("Promotions");
+	private JMenuItem itemPromotions = new JMenuItem("Gestion des promotions exceptionnelles");
 
 	private JLabel icon;
 
@@ -83,7 +87,18 @@ public class MenuGerant extends JFrame {
 		
 		itemFermer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				
+				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la fermeture du compte gérant ?","Confirmation",JOptionPane.YES_NO_OPTION);
+				if(res==JOptionPane.OK_OPTION){
+					dispose();
+					try {
+						FenetreCompte fen = new FenetreCompte();
+						fen.setVisible(true);
+					} catch (ExceptionMailsDifferents e1) {
+						e1.printStackTrace();
+					}
+				}
+				
 			}				
 		});
 		

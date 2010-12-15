@@ -194,6 +194,20 @@ public class CarteFidelite {
 		
 	}
 	
+	/**
+	 * Modifie le nombre de points sur la carte de fidelite dans la table CARTE_FIDELITE de la base de données
+	 * 
+	 * <p>
+	 * Cette méthode effectue la modification du nombre de points sur la carte de fidelité associé
+	 * à l'identifiant du client entré en paramètre.
+	 * </p> 
+	 * 
+	 * @see BDD
+	 * 
+	 * @param String idClient : identifiant du client
+	 * @param int nbrePoints : nouveau nombre de points sur la carte
+	 */
+	
 	public static void modifierBDDcarteFidelite(String idClient,int nbrePoints){
 		
 		String requete="UPDATE CARTE_FIDELITE SET NBPOINTS="+nbrePoints+" WHERE IDCLIENT='"+idClient+"'";
@@ -202,23 +216,36 @@ public class CarteFidelite {
 		
 	}
 	
+	/**
+	 * calcule le bon de réduction associé au nombre de points sur la carte de fidelite 
+	 * 
+	 * <p>
+	 * Cette méthode va en fonction du nombre de points sur la carte de fidélité calculer 
+	 * le montant du bon de réduction pour les clients possédant un compte fidélité
+	 * </p> 
+	 * 
+	 * @param int nbrePoints : nombre de points sur la carte
+	 */
 	public static int calculerBonsReductions(int nbrePoints){
 		int bonAchat=0;
 		
 		if(nbrePoints <= 0) {
 			bonAchat=0;
 		}
-		else if(nbrePoints<51) {
+		else if(nbrePoints<101) {
 			bonAchat=5;
 		}
-		else if(nbrePoints<101){
+		else if(nbrePoints<201){
 			bonAchat=12;
 		}
-		else if(nbrePoints<201){
-			bonAchat=25;
-		}
 		else if(nbrePoints<501){
+			bonAchat=30;
+		}
+		else if(nbrePoints<1001){
 			bonAchat=70;
+		}
+		else if(nbrePoints<2001){
+			bonAchat = 150 ;
 		}
 		else bonAchat=150 ;
 		
