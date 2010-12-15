@@ -42,7 +42,7 @@ public class FenetreStatistiqueCommande extends JDialog {
 		String date = SGBD.selectStringConditionString("COMMANDE", "DATECOMMANDE", "IDCOMMANDE", idCommande);
 		JLabel dateCommandeLabel = new JLabel("Date : "+ date);
 		JLabel referenceCommandeLabel = new JLabel("Référence commande : " + idCommande);
-		JLabel montantCommandeLabel = new JLabel("Montant de la commande : ");
+		JLabel montantCommandeLabel = new JLabel("Montant de la commande : "+ SGBD.selectStringConditionString("COMMANDE", "MONTANTCOMMANDE", "IDCOMMANDE", idCommande)+" €");
 		panneauHautInformations.add(dateCommandeLabel);
 		panneauHautInformations.add(referenceCommandeLabel);
 		panneauHautInformations.add(montantCommandeLabel);

@@ -58,11 +58,14 @@ public class FicheClient extends JDialog {
 		panneauDroite.setBackground(Color.YELLOW);
 		
 		// Implémenter des méthodes (interrogation tables) pour obtenir les statistiques sur un client
-		JLabel totalMoyenCommandes=new JLabel("Total moyen des commandes : "+SGBD.statistiqueClassiqueClient(idClient, "avg"));
-		JLabel totalMaxCommande=new JLabel("Plus grosse commande effectuée : "+SGBD.statistiqueClassiqueClient(idClient, "max"));
-		JLabel articleMaxCommande= new JLabel("Article le plus commandé : ");
-		JLabel quantiteTotaleArticleMaxCommande = new JLabel("Quantité commandée de cet article : ");
-		JLabel dateDernierAchatArticleMaxCommande = new JLabel("Dernier achat de cet article : ");
+		JLabel stat1=new JLabel("Total moyen des commandes : "+SGBD.statistiqueClassiqueClient(idClient, "avg")+" €");
+		JLabel stat3=new JLabel("Plus grosse commande effectuée : "+SGBD.statistiqueClassiqueClient(idClient, "max")+" €");
+		JLabel stat2= new JLabel("Nombre de commandes effectuées : "+ SGBD.nbreCommandeClient(idClient)); 
+		//("Article le plus commandé : ");
+		JLabel stat4 = new JLabel("Référence de la plus grosse commande : " + SGBD.StatistiquePlusGrosseCommande(idClient).get(0)); 
+		//("Quantité commandée de cet article : ");
+		JLabel stat5 = new JLabel("Date de la plus grosse commande : " + SGBD.StatistiquePlusGrosseCommande(idClient).get(1).substring(0, 10));
+		//("Dernier achat de cet article : ");
 		JComboBox comboAfficherCommande = new JComboBox();
 		JButton boutonValidation = new JButton("OK");
 		
@@ -85,11 +88,11 @@ public class FicheClient extends JDialog {
 		panStat4.setPreferredSize(dimensionPanneauStatistique);
 		panStat5.setPreferredSize(dimensionPanneauStatistique);
 		
-		panStat1.add(totalMoyenCommandes);
-		panStat2.add(totalMaxCommande);
-		panStat3.add(articleMaxCommande);
-		panStat4.add(quantiteTotaleArticleMaxCommande);
-		panStat5.add(dateDernierAchatArticleMaxCommande);
+		panStat1.add(stat1);
+		panStat2.add(stat2);
+		panStat3.add(stat3);
+		panStat4.add(stat4);
+		panStat5.add(stat5);
 		
 		panStatCommande.setLayout(new GridLayout(1,2,2,0));
 		// remplissage du ComboBox avec les commandes du client

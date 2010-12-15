@@ -839,26 +839,33 @@ public class SGBD {
 	public static String statistiqueArticleClient(String identifiant){
 		connecter();
 		Statement st = null;
-		ResultSet res = null;
 		ResultSet res2=null;
-		String rs = "";
+		String rs = "Aucun";
 		String nomVue="totalParArticle";
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL", "S_VUESTATARTICLE.NEXTVAL");
 		compteurViewStatistiqueArticle = idNonFini.get(0);
 		nomVue = nomVue+compteurViewStatistiqueArticle;
+		System.out.println(nomVue);
 		
 		try {
 			st = c.createStatement();
-		
-			res= st.executeQuery("create view "+ nomVue +" as " +
+			
+			st.executeQuery("create view "+ nomVue +" as " +
 							"select idArticle,sum(quantitecommandee) as totalQuantite "+
 							"from LISTING_ARTICLES_COMMANDES "+
 							"where IDCOMMANDE IN (select idCommande from COMMANDE WHERE IDCLIENT='"+identifiant+"') GROUP BY IDARTICLE");
 			
+			st.executeUpdate("COMMIT");
+			
 			res2 = st.executeQuery(" select idArticle from "+ nomVue +
 							" where totalQuantite = (select max(totalQuantite) from " +nomVue+" )");
 			
-			rs = res2.getString(0);
+			while(res2.next()){
+				if(res2.getString(1) != null){
+					rs = res2.getString(1).toString();
+				}
+			}
+			
 			
 		}
 		catch(SQLException e){

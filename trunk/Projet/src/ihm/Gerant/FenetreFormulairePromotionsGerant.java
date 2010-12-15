@@ -311,7 +311,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							
 							SGBD.executeUpdate(requete);
 							
-							setVisible(false);
+							dispose();
+							FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+							fen.setVisible(true);
 					break;
 				case 1 :
 					JOptionPane.showMessageDialog(null,"Une des dates sélectionnées n'est pas valide, modifiez cette date","Attention",JOptionPane.ERROR_MESSAGE);
@@ -620,8 +622,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							
 							SGBD.executeUpdate(requete);
 							
-							
-							setVisible(false);
+							dispose();
+							FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+							fen.setVisible(true);
 					break;
 				case 1 :
 					JOptionPane.showMessageDialog(null,"Une des dates sélectionnées n'est pas valide, modifiez cette date","Attention",JOptionPane.ERROR_MESSAGE);

@@ -1,5 +1,6 @@
 package ihm;
 import ihm.Accueil.FenetreCompte;
+import ihm.Accueil.FenetreDialogIdentification;
 import ihm.Gerant.FenetreCatalogueGerant;
 import ihm.Gerant.FenetrePromotionsGerant;
 import ihm.Gerant.FenetreReapprovisionnement;
@@ -39,14 +40,16 @@ public class MenuGerant extends JFrame {
 	
 	private JMenu menuClientele = new JMenu("Gestion Clientèle");
 	private JMenu menuStock = new JMenu("Gestion des Stock");
-
+	private JMenu menuGerant = new JMenu("Compte Gérant");
+	
 	private JMenuItem itemGestionCompte = new JMenuItem("Recherche client");
 	private JMenuItem itemMessagerie = new JMenuItem("Messagerie interne ");
 	private JMenuItem itemFermer = new JMenuItem("Fermer le logiciel");
 	private JMenuItem itemArticles = new JMenuItem("Gestion des articles");
 	private JMenuItem itemCommandes = new JMenuItem("Commandes de réapprovisionnement");
 	private JMenuItem itemPromotions = new JMenuItem("Gestion des promotions exceptionnelles");
-
+	private JMenuItem itemMotDePasse = new JMenuItem("Modifier mot de passe");
+	
 	private JLabel icon;
 
 	public MenuGerant(){
@@ -126,6 +129,24 @@ public class MenuGerant extends JFrame {
 				fenetrePromo.setVisible(true);
 			}
 		});
+
+		itemMotDePasse.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				//ouvrir la fenetre permettant accès au compte
+				String motPasse = JOptionPane.showInputDialog(null, "Saisissez votre nouveau mot de passe ","Modification du mot de passe actuel",JOptionPane.INFORMATION_MESSAGE);
+				
+				if(!motPasse.equals("") & !motPasse.equals(FenetreDialogIdentification.motDePasseGerant)){
+					int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la modification du mot de passe","Confirmation",JOptionPane.YES_NO_OPTION);
+					
+					if(res == JOptionPane.OK_OPTION){
+						FenetreDialogIdentification.motDePasseGerant=motPasse;
+					}
+					
+				}
+				
+				
+			}
+		});
 		
 		// Ajout des différents sous-menus à leur menu correspondant comme cela a été défini
 		// dans la maquette graphique des interfaces
@@ -135,10 +156,12 @@ public class MenuGerant extends JFrame {
 		this.menuStock.add(itemArticles);
 		this.menuStock.add(itemCommandes);
 		this.menuStock.add(itemPromotions);
+		this.menuGerant.add(itemMotDePasse);
 		
 		// Ajout des menus à l'objet barre de menus qui contient tous les menus
 		this.menuBar.add(menuClientele);
 		this.menuBar.add(menuStock);
+		this.menuBar.add(menuGerant);
 		
 		//Ajout de la barre de menus à notre objet MenuGerant
 		this.setJMenuBar(menuBar);

@@ -86,14 +86,18 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				
 				Article.modifierStockArticleBDD(identifiantArticle, quantiteSelectionnee);
-				setVisible(false); 
+				dispose();
+				FenetreReapprovisionnement fen = new FenetreReapprovisionnement();
+				fen.setVisible(true);
 			}			
 		});
 		
 		boutonAnnulerSelection.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// permet d'annuler la commande en cours et retour vers page principale
-				setVisible(false);
+				dispose();
+				FenetreReapprovisionnement fen = new FenetreReapprovisionnement();
+				fen.setVisible(true);
 			}			
 		});
 		

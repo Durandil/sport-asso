@@ -159,77 +159,81 @@ public class FenetreCommandeArticle extends JFrame{
 			
 		boutonValider.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// TODO il faudra modifier la base de données en fonction des quantités et articles achetés
+				// modifier la base de données en fonction des quantités et articles achetés
 				// et enregistrer la commande dans la table COMMANDE
 				// puis vider le panier
 				ArrayList<LigneCommande> listeArticlesPanier= new ArrayList<LigneCommande>();
 				
 				if(retraitPanierPossible==true && avoirRafraichiApresAjoutPanier == true){
 					
-					// on ne met dans liste des articles que ceux dont la quantité commandée 
-					// est supérieure à 0
-					for(String[] article : panierClient){
-						if(Integer.parseInt(article[1])>0){
-							listeArticlesPanier.add(new LigneCommande(article[0],Integer.parseInt(article[1])));
+					int res = JOptionPane.showConfirmDialog(null, "Confirmer votre commande et afficher la facture","Confirmation",JOptionPane.YES_NO_OPTION);
+					if(res == JOptionPane.OK_OPTION){
+						// on ne met dans liste des articles que ceux dont la quantité commandée 
+						// est supérieure à 0
+						for(String[] article : panierClient){
+							if(Integer.parseInt(article[1])>0){
+								listeArticlesPanier.add(new LigneCommande(article[0],Integer.parseInt(article[1])));
+							}
 						}
-					}
-					
-					if(listeArticlesPanier.size()>0){
-						java.util.Date date = new java.util.Date();
-					
-						@SuppressWarnings("deprecation")
-						java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-					
 						
-						Commande nouvelleCommande = new Commande(null, FenetreDialogIdentification.clientUserIdentifiant, listeArticlesPanier, dateJour);
-						try {
-							// calcul de la commande
+						if(listeArticlesPanier.size()>0){
+							java.util.Date date = new java.util.Date();
+						
+							@SuppressWarnings("deprecation")
+							java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+						
 							
-							double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
-							
-							ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
-							
-							
-							if(utilisationBonReduction==true){
-								if((Math.round(montantCommande)-bonAchat)<0){
-									nouvelleCommande.majMontantCommande(0);
+							Commande nouvelleCommande = new Commande(null, FenetreDialogIdentification.clientUserIdentifiant, listeArticlesPanier, dateJour);
+							try {
+								// calcul de la commande
+								
+								double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
+								
+								ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+								
+								
+								if(utilisationBonReduction==true){
+									if((Math.round(montantCommande)-bonAchat)<0){
+										nouvelleCommande.majMontantCommande(0);
+									}
+									else{
+										nouvelleCommande.majMontantCommande((int)Math.round(montantCommande)-bonAchat);
+									}
+									
 								}
 								else{
-									nouvelleCommande.majMontantCommande((int)Math.round(montantCommande)-bonAchat);
+									nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
 								}
 								
-							}
-							else{
-								nouvelleCommande.majMontantCommande((int)Math.round(montantCommande));
-							}
-							
-							// mise à jour du nombre de points sur la carte
-							if(fideliteClient.get(0).equals("Oui")){
-								int nbPointsAvant = Integer.parseInt(fideliteClient.get(1));
-								int pointsRecoltes = (int) Math.round(montantCommande);
+								// mise à jour du nombre de points sur la carte
+								if(fideliteClient.get(0).equals("Oui")){
+									int nbPointsAvant = Integer.parseInt(fideliteClient.get(1));
+									int pointsRecoltes = (int) Math.round(montantCommande);
+									
+									CarteFidelite.modifierBDDcarteFidelite(FenetreDialogIdentification.clientUserIdentifiant, nbPointsAvant+pointsRecoltes);
+									
+								}
+									
 								
-								CarteFidelite.modifierBDDcarteFidelite(FenetreDialogIdentification.clientUserIdentifiant, nbPointsAvant+pointsRecoltes);
+								FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier,bonAchat,utilisationBonReduction );
+								fenetre.setVisible(true);
+								dispose();
+								bonAchat=0;
 								
+							} catch (SQLException e1) {
+								e1.printStackTrace();
 							}
-								
-							
-							FenetreFactureCommande fenetre = new FenetreFactureCommande(null, "Facture", true, FenetreDialogIdentification.clientUserIdentifiant,nouvelleCommande,listeArticlesPanier,bonAchat );
-							fenetre.setVisible(true);
-							dispose();
-							bonAchat=0;
-							
-						} catch (SQLException e1) {
-							e1.printStackTrace();
 						}
-					}
-					else{
-						ImageIcon image = new ImageIcon("src/images/warning.png");
-						JOptionPane.showMessageDialog(null, " Aucun article n'a été sélectionné dans la commande.", "Attention", JOptionPane.WARNING_MESSAGE, image);
-						//affichage d'un message d'erreur en cas d'essai de validation sans aucun article selectionné
+						else{
+							ImageIcon image = new ImageIcon("src/images/warning.png");
+							JOptionPane.showMessageDialog(null, " Aucun article n'a été sélectionné dans la commande.", "Attention", JOptionPane.WARNING_MESSAGE, image);
+							//affichage d'un message d'erreur en cas d'essai de validation sans aucun article selectionné
+						}
+						
+						Commande.viderPanier(panierClient); // vidage panier Client
+						setVisible(false);
 					}
 					
-					Commande.viderPanier(panierClient); // vidage panier Client
-					setVisible(false);
 					
 				}
 				else{
