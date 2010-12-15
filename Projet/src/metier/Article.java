@@ -32,6 +32,8 @@ public class Article {
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#supprimerArticleBDD(String)
+	 * @see Article#getIdArticle()
+	 * @see Article#setIdArticle(String)
 	 */
 	private String idArticle;
 
@@ -40,6 +42,9 @@ public class Article {
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#getDescription()
+	 * @see Article#setDescription(String)
+	 * 
 	 */
 	private String description;
 
@@ -48,6 +53,9 @@ public class Article {
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#getPrixInitial()
+	 * @see Article#setPrixInitial(double)
+	 * 
 	 */
 	private double prixInitial;
 
@@ -57,6 +65,9 @@ public class Article {
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#getStock()
+	 * @see Article#setStock(int)
+	 * 
 	 */
 	private int stock;
 
@@ -65,6 +76,9 @@ public class Article {
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String)
+	 * @see Article#getPoids()
+	 * @see Article#setPoids(float)
+	 * 
 	 */
 	private float poids;
 
@@ -72,6 +86,9 @@ public class Article {
 	 * La catégorie de sport auquel l'article se rattache
 	 * 
 	 * @see Article#ajouterBDD()
+	 * @see Article#getTypeSport()
+	 * @see Article#setTypeSport(String)
+	 * 
 	 */
 	private String typeSport;
 
@@ -79,6 +96,9 @@ public class Article {
 	 * La catégorie de prix auquel l'article se rattache
 	 * 
 	 * @see Article#ajouterBDD()
+	 * @see Article#getCatPrix()
+	 * @see Article#setCatPrix(String)
+	 * 
 	 */
 	private String catPrix;
 
@@ -88,6 +108,9 @@ public class Article {
 	 * l'article
 	 * 
 	 * @see Article#ajouterBDD()
+	 * @see Article#getEtat()
+	 * @see Article#setEtat(String)
+	 * 
 	 */
 	private String etat;
 

@@ -30,8 +30,10 @@ public class Association extends Client {
 	 * 
 	 * @see Association#ajouterBDD()
 	 * @see Association#modifierBDDassoc(String, String, String, String, String)
+	 * @see Association#getDenomination()
+	 * @see Association#setDenomination(String)
+	 * 
 	 */
-	
 	private String denomination;
 
 

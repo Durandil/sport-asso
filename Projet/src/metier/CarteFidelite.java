@@ -1,5 +1,8 @@
 package metier;
 
+import ihm.Client.FenetreCommandeArticle;
+import ihm.Client.FenetreFideliteClient;
+
 import java.util.ArrayList;
 
 import basededonnees.SGBD;
@@ -26,6 +29,9 @@ public class CarteFidelite {
 	 * L'identifiant de la carte de fidélité, non modifiable
 	 * 
 	 * @see CarteFidelite#ajouterBDD()
+	 * @see CarteFidelite#getIdCarte()
+	 * @see CarteFidelite#setIdCarte(String)
+	 * 
 	 */
 	private String idCarte;
 	
@@ -34,6 +40,9 @@ public class CarteFidelite {
 	 * L'adrese mail (l'identifiant) du client qui possède la carte
 	 * 
 	 * @see CarteFidelite#ajouterBDD()
+	 * @see CarteFidelite#getIdClient()
+	 * @see CarteFidelite#setIdClient(String)
+	 * 
 	 */
 	private String idClient;
 	
@@ -42,6 +51,9 @@ public class CarteFidelite {
 	 * Le nombre de points de la carte de fidélité
 	 * 
 	 * @see CarteFidelite#ajouterBDD()
+	 * @see CarteFidelite#getNombreDePoints()
+	 * @see CarteFidelite#setNombreDePoints(int)
+	 * 
 	 */
 	private int nombreDePoints;
 	
@@ -61,6 +73,7 @@ public class CarteFidelite {
 	 *            Le nombre de points de la carte de fidélité
 	 *            
 	 * @see Client#ajouterFideliteBDD()
+	 * 
 	 */
 
 	
@@ -202,10 +215,13 @@ public class CarteFidelite {
 	 * à l'identifiant du client entré en paramètre.
 	 * </p> 
 	 * 
-	 * @see BDD
 	 * 
-	 * @param String idClient : identifiant du client
-	 * @param int nbrePoints : nouveau nombre de points sur la carte
+	 * @param idClient 
+	 * 				L'identifiant du client
+	 * @param nbrePoints 
+	 * 				Le nouveau nombre de points sur la carte
+	 * @see BDD
+	 * @see FenetreCommandeArticle
 	 */
 	
 	public static void modifierBDDcarteFidelite(String idClient,int nbrePoints){
@@ -217,14 +233,20 @@ public class CarteFidelite {
 	}
 	
 	/**
-	 * calcule le bon de réduction associé au nombre de points sur la carte de fidelite 
+	 * Détermine le bon de réduction associé au nombre de points sur la carte de fidelite 
 	 * 
 	 * <p>
-	 * Cette méthode va en fonction du nombre de points sur la carte de fidélité calculer 
+	 * Cette méthode va en fonction du nombre de points sur la carte de fidélité déterminer
 	 * le montant du bon de réduction pour les clients possédant un compte fidélité
 	 * </p> 
 	 * 
-	 * @param int nbrePoints : nombre de points sur la carte
+	 * @param nbrePoints 
+	 * 				Le nombre de points sur la carte
+	 * 
+	 * @return La valeur du bon d'achat.
+	 * 
+	 * @see FenetreFideliteClient
+	 * @see FenetreCommandeArticle
 	 */
 	public static int calculerBonsReductions(int nbrePoints){
 		int bonAchat=0;

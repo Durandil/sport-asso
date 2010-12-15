@@ -26,7 +26,10 @@ public class LigneCommande {
 	/**
 	 * L'Identifiant de l'article commandé
 	 * 
+	 * @see LigneCommande#getIdArticle()
+	 * @see LigneCommande#setIdArticle(String)
 	 * @see Article
+	 * 
 	 */
 	private String idArticle;
 	
@@ -34,8 +37,11 @@ public class LigneCommande {
 	/**
 	 * La quantité commandée de l'article
 	 * 
+	 * @see LigneCommande#getQuantite()
+	 * @see LigneCommande#setQuantite(int)
 	 * @see Article#ajouterBDD()
 	 * @see Article#supprimerArticleBDD(String)
+	 * 
 	 */
 	private int quantite;
 	

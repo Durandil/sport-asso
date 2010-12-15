@@ -30,6 +30,8 @@ public abstract class Client{
 	/**
 	 * Le mail du client, non modifiable
 	 * 
+	 * @see Client#getMail()
+	 * @see Client#setMail(String)
 	 * @see Particulier, Association
 	 * 
 	 */
@@ -38,6 +40,8 @@ public abstract class Client{
 	/**
 	 * L'adresse du client
 	 * 
+	 * @see Client#getAdresse()
+	 * @see Client#setAdresse(String)
 	 * @see Particulier, Association
 	 * 
 	 */
@@ -46,6 +50,8 @@ public abstract class Client{
 	/**
 	 * L'identifiant de la ville du client
 	 * 
+	 * @see Client#getIdVille()
+	 * @see Client#setIdVille(String)
 	 * @see Particulier, Association
 	 * 
 	 */
@@ -54,6 +60,8 @@ public abstract class Client{
 	/**
 	 * Le numéro de téléphone du client
 	 * 
+	 * @see Client#getTelephone()
+	 * @see Client#setTelephone(String)
 	 * @see Particulier, Association
 	 * 
 	 */
@@ -62,6 +70,8 @@ public abstract class Client{
 	/**
 	 * Le mot de passe du client
 	 * 
+	 * @see Client#getMotDePasse()
+	 * @see Client#setMotDePasse(String)
 	 * @see Particulier, Association
 	 * @see Client#genererMdp()
 	 * 
@@ -72,6 +82,8 @@ public abstract class Client{
 	/**
 	 * Le statut du client
 	 * 
+	 * @see Client#getParticulierAssociation()
+	 * @see Client#setParticulierAssociation(String)
 	 * @see Association#Association(String, String, String, String, String, boolean)
 	 * @see Particulier#Particulier(String, String, String, String, String, String, boolean)
 	 */	
@@ -80,6 +92,8 @@ public abstract class Client{
 	/**
 	 * La possession ou non d'une carte de fidélité
 	 * 
+	 * @see Client#isEstFidele()
+	 * @see Client#setEstFidele(boolean)
 	 * @see Association#Association(String, String, String, String, String, boolean)
 	 * @see Particulier#Particulier(String, String, String, String, String, String, boolean)
 	 */	
@@ -89,6 +103,8 @@ public abstract class Client{
 	/**
 	 * L'état du compte client
 	 * 
+	 * @see Client#isEstActif()
+	 * @see Client#setEstActif(boolean)
 	 * @see Particulier,Association
 	 */	
 	protected boolean estActif;
