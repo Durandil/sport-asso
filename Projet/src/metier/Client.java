@@ -354,7 +354,20 @@ public abstract class Client{
 
 
 	/**
-	 * Vérifie le bon format de l'adresse mail, du code postal et du numéro de téléphone saisis
+	 * Vérifie le bon format des différents champs à saisir.
+	 * 
+	 * <p>
+	 * Cette méthode effectue des tests pour vérifier que les champs saisis 
+	 * sont conformes. Si au moins l'un des tests est non concluant, l'entier initialisé à 0
+	 * changera de valeur.
+	 * Par exemple, si l'adresse mail du champ de confirmation est différente
+	 * de l'adresse mail du champ initial, l'entier sera égal à 2.
+	 * Autre exemple : si le code postal ne comporte pas 4 ou 5 chiffres, l'entier 
+	 * sera égal à 6.
+	 * </p>
+	 * 
+	 * <b>Note : </b> L'utilisation d'un entier et non d'un booléen pour cette fonction
+	 * provient du fait que selon l'erreur relevée, le message qui sera affiché à l'écran sera différent.
 	 * 
 	 * @param mail
 	 *            Le mail saisi initialement par le client
@@ -370,15 +383,13 @@ public abstract class Client{
 	 *            Le numéro de téléphone du client
 	 * @param codePostal
 	 *            Le code postal du client
-	 *            
-	 *            
+	 *                       
+	 * @return Un entier qui est différent de 0 si les champs ne sont pas au format approprié        
 	 */
 	
 	public static int verifierCreationCompte(String mail,String mailConfirmation,
 			String denomination,String nom,String prenom,String telephone,String codePostal){
 		
-		//si le compte ne comporte aucune erreur la fonction retournera 0
-		// sinon elle renverra le numéro de l'erreur
 		int compteBon=0;
 		
 		if(!mail.contains("@")){
