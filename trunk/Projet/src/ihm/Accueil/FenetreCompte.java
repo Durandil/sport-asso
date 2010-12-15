@@ -9,9 +9,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import exception.ExceptionCaractereInterdit;
+import exception.ExceptionCodePostalDifferentDeCinqChiffres;
+import exception.ExceptionCodePostalIncorrect;
+import exception.ExceptionExcesDeCaracteres;
 import exception.ExceptionMailDejaExistant;
 import exception.ExceptionMailSansArobase;
 import exception.ExceptionMailsDifferents;
+import exception.ExceptionNumeroDeTelephoneDifferentDeDixChiffres;
+import exception.ExceptionNumeroDeTelephoneIncorrect;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -157,6 +162,21 @@ public class FenetreCompte extends JFrame {
 				} catch (ExceptionCaractereInterdit e4) {
 					// TODO Auto-generated catch block
 					e4.printStackTrace();
+				} catch (ExceptionExcesDeCaracteres e5) {
+					// TODO Auto-generated catch block
+					e5.printStackTrace();
+				} catch (ExceptionCodePostalDifferentDeCinqChiffres e6) {
+					// TODO Auto-generated catch block
+					e6.printStackTrace();
+				} catch (ExceptionNumeroDeTelephoneDifferentDeDixChiffres e7) {
+					// TODO Auto-generated catch block
+					e7.printStackTrace();
+				} catch (ExceptionCodePostalIncorrect e8) {
+					// TODO Auto-generated catch block
+					e8.printStackTrace();
+				} catch (ExceptionNumeroDeTelephoneIncorrect e9) {
+					// TODO Auto-generated catch block
+					e9.printStackTrace();
 				}
 				
 			}	
