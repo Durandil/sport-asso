@@ -31,17 +31,17 @@ public class FenetreFactureCommande extends JDialog {
 	private JLabel bonsAchatLabel;
 	
 	public FenetreFactureCommande(JFrame parent, String title, boolean modal, String identifiantClient,
-			Commande commandeP,ArrayList<LigneCommande> panierClient,int bonsAchatUtilises) throws SQLException{
+			Commande commandeP,ArrayList<LigneCommande> panierClient,int bonsAchatUtilises,boolean utilisationBonsAchat) throws SQLException{
 		super(parent, title, modal);
 		this.setSize(600, 650);
 		this.setLocation(50,50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-		this.initComponent(identifiantClient,commandeP,panierClient,bonsAchatUtilises);
+		this.initComponent(identifiantClient,commandeP,panierClient,bonsAchatUtilises,utilisationBonsAchat);
 	}
 	
 	private void initComponent(String idClient,Commande commande,ArrayList<LigneCommande> panier,
-			int bonsAchat) throws SQLException{
+			int bonsAchat,boolean utilisationBonsAchat) throws SQLException{
 
 		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
 		String prenom = SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idClient);
@@ -88,7 +88,7 @@ public class FenetreFactureCommande extends JDialog {
 		panneauBas.setLayout(new GridLayout(2,1,2,0));
 		panneauBas.setBorder(BorderFactory.createLineBorder(Color.gray));
 		bonsAchatLabel = new JLabel("Nombre de points de réduction utilisés  sur votre acrte de fidélité  :  "+bonsAchat);
-		if(bonsAchat>0){
+		if(utilisationBonsAchat == true){
 			panneauBas.add(bonsAchatLabel);		
 		}
 		totalLabel = new JLabel("Total commande :  "+ SGBD.selectStringConditionString("COMMANDE", "MONTANTCOMMANDE", "IDCOMMANDE", commande.getIdCommande())+" €");

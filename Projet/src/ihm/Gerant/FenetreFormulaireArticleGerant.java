@@ -358,7 +358,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 					Article.modifierArticleBDD(numArticle, description.getText(), prix.getText(), poids.getText(), stock.getText(),itemSportSelectionne,itemPrixSelectionne);
 					
 					// puis fermer la page
-					setVisible(false);
+					dispose();
+					FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+					fen.setVisible(true);
 					
 					break;
 				case 1 :

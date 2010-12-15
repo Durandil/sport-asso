@@ -12,12 +12,12 @@ public class ModeleTableauStatCommande extends AbstractTableModel{
 
 	private final Object[][] donnees;
 
-    private final String[] entetes={"Référence Article","Quantité commandée"} ;
+    private final String[] entetes={"Référence Article","Description","Quantité commandée"} ;
 	
 	
 	public ModeleTableauStatCommande(String idCommande) {
 		super();
-		// TODO Auto-generated constructor stub
+
 		ArrayList<String> listeArticles = new ArrayList<String>();
 		ArrayList<String> listeQuantitesCorrespondantes = new ArrayList<String>();
 		
@@ -27,12 +27,13 @@ public class ModeleTableauStatCommande extends AbstractTableModel{
 		// TODO éventuellement rechercher description article associé à l'article
 		// si l'article existe encore dans la base de données
 		
-		donnees = new Object[listeArticles.size()][4];
+		donnees = new Object[listeArticles.size()][this.getColumnCount()];
 		
 		//On ajoute les informations dans l'objet donnees
 		for(int i=0;i<listeArticles.size();i++){
 			donnees[i][0] = listeArticles.get(i);	
-			donnees[i][1] = listeQuantitesCorrespondantes.get(i);
+			donnees[i][1] = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION", "IDARTICLE", listeArticles.get(i) );
+			donnees[i][2] = listeQuantitesCorrespondantes.get(i);
 			
 		}
 		

@@ -35,8 +35,6 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 
-
-
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
@@ -45,7 +43,8 @@ public class Principale {
 //		String st = SGBD.statistiqueClassiqueClient("qpuc@ensai.fr","avg");
 //		String stat = SGBD.statistiqueClassiqueClient("qpuc@ensai.fr","max");
 //		System.out.println("avg : "+ st+ ", max : "+stat);
-//		
+//		String art = SGBD.statistiqueArticleClient("clg@ensai.fr");
+//		System.out.println(art);
 		
 		/** test récupération pourcentage promo exceptionnelle d'un article donne **/
 //		int nbrePromo = SGBD.compterNbrePromoExceptionnellesArticle("ART00082", 0);
