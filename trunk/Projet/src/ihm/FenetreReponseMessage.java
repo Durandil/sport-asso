@@ -91,7 +91,7 @@ public class FenetreReponseMessage extends JFrame {
 		
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO créer une nouvelle instance de message
+				// Création une nouvelle instance de message
 
 				int verificationChampMessage = Message.verifierChampMessage(contenuMessage.getText(), sujetMessage.getText());
 				System.out.println(verificationChampMessage);

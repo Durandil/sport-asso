@@ -57,15 +57,20 @@ public class FicheClient extends JDialog {
 		panneauDroite.setBorder(BorderFactory.createTitledBorder("Statistiques"));
 		panneauDroite.setBackground(Color.YELLOW);
 		
+		ArrayList<String> listeInformationsPlusGrosseCommande = SGBD.StatistiquePlusGrosseCommande(idClient);
+		String referencePlusGrosseCommande = listeInformationsPlusGrosseCommande.get(0);
+		String datePlusGrosseCommande = listeInformationsPlusGrosseCommande.get(1);
+		if(!datePlusGrosseCommande.equals("NA")){
+			datePlusGrosseCommande= datePlusGrosseCommande.substring(0, 10);
+		}
+		
 		// Implémenter des méthodes (interrogation tables) pour obtenir les statistiques sur un client
 		JLabel stat1=new JLabel("Total moyen des commandes : "+SGBD.statistiqueClassiqueClient(idClient, "avg")+" €");
 		JLabel stat3=new JLabel("Plus grosse commande effectuée : "+SGBD.statistiqueClassiqueClient(idClient, "max")+" €");
 		JLabel stat2= new JLabel("Nombre de commandes effectuées : "+ SGBD.nbreCommandeClient(idClient)); 
-		//("Article le plus commandé : ");
-		JLabel stat4 = new JLabel("Référence de la plus grosse commande : " + SGBD.StatistiquePlusGrosseCommande(idClient).get(0)); 
-		//("Quantité commandée de cet article : ");
-		JLabel stat5 = new JLabel("Date de la plus grosse commande : " + SGBD.StatistiquePlusGrosseCommande(idClient).get(1).substring(0, 10));
-		//("Dernier achat de cet article : ");
+		JLabel stat4 = new JLabel("Référence de la plus grosse commande : " + referencePlusGrosseCommande); 
+		JLabel stat5 = new JLabel("Date de la plus grosse commande : " + datePlusGrosseCommande);
+
 		JComboBox comboAfficherCommande = new JComboBox();
 		JButton boutonValidation = new JButton("OK");
 		

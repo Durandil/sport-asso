@@ -31,7 +31,6 @@ public class BDD {
 		SGBD.executeUpdate("DROP SEQUENCE S_FIDELITE");
 		SGBD.executeUpdate("DROP SEQUENCE S_MESSAGE");
 		SGBD.executeUpdate("DROP SEQUENCE S_COMMANDE");
-		SGBD.executeUpdate("DROP SEQUENCE S_VUESTATARTICLE");
 		
 		
 		SGBD.executeUpdate("CREATE TABLE QUANTITE" +
@@ -148,10 +147,6 @@ public class BDD {
 				"ESTENVOYEAUGERANT NUMBER(2),"+
 				"CONSTRAINT PK_MESSAGE PRIMARY KEY (IDMESSAGE),"+
 				"CONSTRAINT FK_MESSAGE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
-		
-	
-		
-		SGBD.executeUpdate("CREATE SEQUENCE S_VUESTATARTICLE Increment by 1 start with 2 nocache");
 		
 
 	}

@@ -2,6 +2,7 @@ package ihm;
 
 public class DialogIdentifiant {
 	
+	@SuppressWarnings("unused")
 	private String identifiant, password;
 
 	
