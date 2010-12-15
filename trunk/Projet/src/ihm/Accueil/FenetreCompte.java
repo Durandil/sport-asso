@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import exception.ExceptionCaractereInterdit;
@@ -142,7 +143,8 @@ public class FenetreCompte extends JFrame {
 				FenetreDialogCreationCompte compte = null;
 				try {
 					compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
-					compte.setVisible(true); 
+					compte.setVisible(true);
+					dispose();
 				} catch (ExceptionMailSansArobase e1) {
 					
 					e1.printStackTrace();
@@ -165,7 +167,8 @@ public class FenetreCompte extends JFrame {
 				// On affiche le contenu de la fenêtre d'identifiaction du client
 				//dispose();
 				FenetreDialogIdentification identificationClient = new FenetreDialogIdentification(null, "Identification client", true);
-				identificationClient.setVisible(true); 
+				identificationClient.setVisible(true);
+				dispose();
 			}	
 		});	
 		
@@ -178,14 +181,17 @@ public class FenetreCompte extends JFrame {
 				//dispose();
 				FenetreDialogIdentification identificationGerant = new FenetreDialogIdentification(null,"Identification gérant",true);
 				identificationGerant.setVisible(true);
-				
+				dispose();
 			}
 		});
 		
 		boutonDeconnexion.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// on ferme l'application
-				System.exit(0);
+				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la fermeture du logiciel ?","Confirmation",JOptionPane.YES_NO_OPTION);
+				if(res==JOptionPane.OK_OPTION){
+					System.exit(0);
+				}
 			}	
 		});	
 		
