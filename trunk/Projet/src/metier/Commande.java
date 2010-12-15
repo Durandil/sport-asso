@@ -30,7 +30,10 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD, LigneCommande, Promotion, FenetreCommandeArticle
+ * @see BDD
+ * @see LigneCommande
+ * @see Promotion
+ * @see FenetreCommandeArticle
  */
 
 public class Commande {
@@ -300,7 +303,7 @@ public class Commande {
 	 * 		Le panier du client
 	 * @return L'emplacement de l'article dans le panier
 	 * 
-	 * @see Commande#ajouterArticlePanier(String, String, ArrayList)
+	 * @see Commande#ajouterArticlePanier(String, int, ArrayList)
 	 * @see Commande#enleverArticlePanier(String, String, ArrayList)
 	 * @see FenetreCommandeArticle
 	 */
@@ -346,7 +349,6 @@ public class Commande {
 	 * @see Commande#rechercheArticleDansPanier(String, ArrayList)
 	 * @see FenetreChoixCatalogue
 	 */
-	
 	public static void ajouterArticlePanier(String idArticle, int quantite,ArrayList<String[]> panier){
 		String stockArticle= SGBD.selectStringConditionString("ARTICLE", "STOCK", "IDARTICLE", idArticle);
 		int compteurRechercheIdentifiant=rechercheArticleDansPanier(idArticle, panier);
@@ -514,7 +516,8 @@ public class Commande {
 	 * comme étant en rupture de stock.
 	 * </p> 
 	 * 
-	 * @see BDD, Article
+	 * @see BDD
+	 * @see Article
 	 * @see SGBD#selectStringConditionString(String, String, String, String)
 	 */
 	public void majArticles(){
@@ -572,7 +575,8 @@ public class Commande {
 	 * 
 	 * @return Le montant de la ligne de commande
 	 * 
-	 * @see BDD, Article
+	 * @see BDD
+	 * @see Article
 	 * @see SGBD#selectStringConditionString(String, String, String, String)
 	 * @see SGBD#recupererPourcentagePromotionDegressifArticleCommande(String, String)
 	 * @see SGBD#recupererPourcentagePromotionExceptionnelleArticle(String, int)
@@ -630,7 +634,8 @@ public class Commande {
 	 *            
 	 * @return Le montant total de la commande
 	 * 
-	 * @see BDD, Article
+	 * @see BDD
+	 * @see Article
 	 * @see SGBD#recupererInformationFideliteClient(String)
 	 * @see Commande#montantCommandePourUnArticle(String, LigneCommande, int)
 	 */

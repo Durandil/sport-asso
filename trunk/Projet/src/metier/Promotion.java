@@ -1,5 +1,7 @@
 package metier;
 
+import ihm.Gerant.FenetreFormulairePromotionsGerant;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import basededonnees.SGBD;
@@ -209,7 +211,7 @@ public class Promotion {
 	 /**
      * Met à jour la date de fin de la promotion
      * 
-     * @param dateDebut
+     * @param dateFin
      *            La date de fin de la promotion
      * 
      */
@@ -384,7 +386,7 @@ public class Promotion {
 	 * Supprime toutes les lignes de la table LISTING_PROMOS_ARTICLES 
 	 * où l'identifiant de la promotion est identique à celui précisé en paramètre
 	 * 
-	 * @param idPromo
+	 * @param idPromotion
 	 *            L'identifiant unique de la promotion.
 	 *            
 	 * @see BDD
@@ -402,7 +404,7 @@ public class Promotion {
 	 * Supprime la promotion de la table PROMO dont l'identifiant est
 	 * spécifié en paramètre
 	 * 
-	 * @param idPromo
+	 * @param idPromotion
 	 *            L'identifiant unique de la promotion.
 	 *            
 	 * @see BDD
@@ -418,15 +420,17 @@ public class Promotion {
 	 * Vérifie si la date saisie est cohérente (à travers l'année, le mois et le jour entrés en paramètres)
 	 * Pour cela, la fonction procède étape par étape
 	 * <p>
-	 * La méthode suppose à l'origine que la date est cohérente.
-	 * Elle crée une Date correspondant aux paramètres saisis.
-	 * Les paramètres sont ensuite transformés en entiers.
-	 * Une nouvelle instance de Date est créée, dateJour, qui correspond à la date actuelle
-	 * Par la suite, trois tests sont effectués
+	 * <ul>
+	 * <li>La méthode suppose à l'origine que la date est cohérente.</li>
+	 * <li>Elle crée une Date correspondant aux paramètres saisis.</li>
+	 * <li>Les paramètres sont ensuite transformés en entiers.</li>
+	 * <li>Une nouvelle instance de Date est créée, dateJour, qui correspond à la date actuelle</li>
+	 * <li>Par la suite, trois tests sont effectués :</li>
 	 * <ul>
 	 * <li>Le premier vérifie que la date de la promotion précède la date du jour</li>
 	 * <li>Le second vérifie que le jour de la date n'est pas 31 si le mois comporte 30 jours
 	 * <li>Le dernier vérifie que le mois de février comporte 28 jours au plus
+	 * </ul>
 	 * </ul>
 	 * Si au moins l'un de ces tests est faux alors la fonction renvoie la valeur "faux".
 	 * Si tous les tests sont réussis, la valeur renvoyée par la fonction est "vrai".
@@ -438,9 +442,12 @@ public class Promotion {
 	 *            Le mois de la date
 	 * @param jour
 	 *            Le jour de la date
+	 *                
+	 * @return Si la date est cohérente
 	 * 
 	 * @see Promotion#ajouterBDD()
 	 * @see SGBD#transformation(Date)
+	 * @see Promotion#verifierChampPromotion(String, String, String, String, String, String, String, String)
 	 * @see BDD
 	 */
 	public static boolean verifierDatePromotion(String annee,String mois,String jour) throws Exception{
@@ -475,16 +482,43 @@ public class Promotion {
 		return resultat;
 	}
 	
-//	Méthode vérifiant si la 1ère date entrée en paramètre précède bien celle entrée en 2ème paramètre
+	/**
+	 * Vérifie si la première date précède la seconde.
+	 * <p>
+	 * La fonction concatène les paramètres pour former deux dates sous format String
+	 * Ces String sont ensuite convertis en Date.
+	 * La méthode vérifie si la première date est avant la seconde, auquel cas le booléen retourné sera "vrai" et "faux" sinon.
+	 * </p> 
+	 * 
+	 * @param anneeAvant
+	 *            L'année de la première date
+	 * @param moisAvant
+	 *            Le mois de la première date
+	 * @param jourAvant
+	 *            Le jour de la première date
+	 * @param anneeApres
+	 *            L'année de la seconde date
+	 * @param moisApres
+	 *            Le mois de la seconde date
+	 * @param jourApres
+	 *            Le jour de la seconde date
+	 *  
+	 * @return Si la première date précède bien la seconde
+	 *            
+	 * @see Promotion#ajouterBDD()
+	 * @see SGBD#transformation(Date)
+	 * @see BDD
+	 * @see Promotion#verifierChampPromotion(String, String, String, String, String, String, String, String)
+	 */
 	public static boolean verifierOrdreDeuxDate(String anneeAvant,String moisAvant,String jourAvant,String anneeApres,String moisApres,String jourApres) throws Exception{
+		
 		boolean resultat=true;
 		
-
 		String dateP = jourAvant+moisAvant+anneeAvant;
 		Date datePromotionAvant= SGBD.stringToDate(dateP,"ddMMyyyy");
 		
-		String datePAfter = jourApres+moisApres+anneeApres;
-		Date datePromotionApres = SGBD.stringToDate(datePAfter,"ddMMyyyy");
+		String datePApres = jourApres+moisApres+anneeApres;
+		Date datePromotionApres = SGBD.stringToDate(datePApres,"ddMMyyyy");
 		
 		System.out.println(datePromotionAvant.toString());
 		System.out.println(datePromotionApres.toString());
@@ -493,11 +527,56 @@ public class Promotion {
 			resultat=false;
 		}
 		
-		
 		return resultat;
 	}
 	
-	//Vérifie si tous les champs sont corrects
+
+	/**
+	 * Vérifie si les champs saisis sont conformes aux formats attendus
+	 * <p>
+	 * Cette méthode effectue des tests pour vérifier que les champs saisis 
+	 * sont conformes. Pour ce faire, elle commence par faire appel aux fonctions
+	 * verifierDatePromotion et verifierOrdreDeuxDates. Si les booléens obtenus 
+	 * sont faux alors l'entier renvoyé sera différent de 0.<br>
+	 * D'autre part, si la longueur de la description ou celle du pourcentage est égale
+	 * à 0, l'entier passe à 3.<br>
+	 * Ensuite, si le pourcentage est incohérent, inférieur à 0 ou supérieur à 100, l'entier
+	 * renvoyé sera égal à 4.<br>
+	 * Enfin, si la longueur de la description dépasse 40 caractères, alors l'entier renvoyé sera égal à 5.<br>
+	 * Si tous les champs sont conformes alors l'entier sera égal à zéro.
+	 * <br>
+	 * <br>
+	 * <b>Note : </b> L'utilisation d'un entier et non d'un booléen pour cette fonction
+	 * provient du fait que selon l'erreur relevée, le message qui sera affiché à l'écran sera différent.
+	 * 
+	 * </p> 
+	 * 
+	 * @param anneeAvant
+	 *            L'année de la première date
+	 * @param moisAvant
+	 *            Le mois de la première date
+	 * @param jourAvant
+	 *            Le jour de la première date
+	 * @param anneeApres
+	 *            L'année de la seconde date
+	 * @param moisApres
+	 *            Le mois de la seconde date
+	 * @param jourApres
+	 *            Le jour de la seconde date
+	 * @param description
+	 *  		  La description de la promotion
+	 * @param pourcentagePromotion
+	 *  		  Le pourcentage de la promotion
+	 *  
+	 * @return Un entier qui est différent de 0 si les champs ne sont pas au format approprié
+	 *            
+	 * @see Promotion#verifierOrdreDeuxDate(String, String, String, String, String, String)
+	 * @see Promotion#verifierDatePromotion(String, String, String)
+	 * @see Promotion#ajouterBDD()
+	 * @see SGBD#transformation(Date)
+	 * @see BDD
+	 * @see FenetreFormulairePromotionsGerant
+	 */
 	public static int verifierChampPromotion(String anneeAvant,String moisAvant,String jourAvant,
 			String anneeApres,String moisApres,String jourApres,String description,
 			String pourcentagePromotion) {

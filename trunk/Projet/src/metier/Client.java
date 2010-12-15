@@ -23,7 +23,8 @@ import basededonnees.SGBD;
  * 
  * </p>
  * 
- * @see Particulier, Association
+ * @see Particulier
+ * @see Association
  */
 public abstract class Client{
 	
@@ -32,7 +33,8 @@ public abstract class Client{
 	 * 
 	 * @see Client#getMail()
 	 * @see Client#setMail(String)
-	 * @see Particulier, Association
+	 * @see Particulier
+	 * @see Association
 	 * 
 	 */
 	protected String mail;
@@ -42,7 +44,8 @@ public abstract class Client{
 	 * 
 	 * @see Client#getAdresse()
 	 * @see Client#setAdresse(String)
-	 * @see Particulier, Association
+	 * @see Particulier
+	 * @see Association
 	 * 
 	 */
 	protected String adresse;
@@ -52,7 +55,8 @@ public abstract class Client{
 	 * 
 	 * @see Client#getIdVille()
 	 * @see Client#setIdVille(String)
-	 * @see Particulier, Association
+	 * @see Particulier
+	 * @see Association
 	 * 
 	 */
 	protected String idVille;
@@ -62,7 +66,8 @@ public abstract class Client{
 	 * 
 	 * @see Client#getTelephone()
 	 * @see Client#setTelephone(String)
-	 * @see Particulier, Association
+	 * @see Particulier
+	 * @see Association
 	 * 
 	 */
 	protected String telephone;
@@ -72,8 +77,9 @@ public abstract class Client{
 	 * 
 	 * @see Client#getMotDePasse()
 	 * @see Client#setMotDePasse(String)
-	 * @see Particulier, Association
 	 * @see Client#genererMdp()
+	 * @see Particulier
+	 * @see Association
 	 * 
 	 */
 	protected String motDePasse;
@@ -105,7 +111,8 @@ public abstract class Client{
 	 * 
 	 * @see Client#isEstActif()
 	 * @see Client#setEstActif(boolean)
-	 * @see Particulier,Association
+	 * @see Particulier
+	 * @see Association
 	 */	
 	protected boolean estActif;
 
@@ -146,7 +153,7 @@ public abstract class Client{
 	 /**
      * Met à jour l'adresse du client
      * 
-	 * @param mail
+	 * @param adresse
 	 *            L'adresse du client
      */
 	public void setAdresse(String adresse) {
@@ -217,7 +224,8 @@ public abstract class Client{
      * Retourne le statut du client
      * 
      * @return Le statut du client
-     * @see Particulier, Association
+     * @see Particulier
+     * @see Association
      * 
      */
 	public String getParticulierAssociation() {
@@ -240,7 +248,9 @@ public abstract class Client{
      * (vrai si le client est fidèle et faux sinon)
      * 
      * @return La fidélité du client
-     * @see Particulier, Association
+     * @return Le statut du client
+     * @see Particulier
+     * @see Association
      * 
      */
 	public boolean isEstFidele() {
@@ -262,7 +272,8 @@ public abstract class Client{
      * (vrai si le compte est activé et faux sinon)
      * 
      * @return L'état du compte du client
-     * @see Particulier, Association
+     * @see Particulier
+     * @see Association
      * 
      */
 	public boolean isEstActif() {
@@ -310,7 +321,7 @@ public abstract class Client{
 	 * </p> 
 	 * 
 	 * @return Le mot de passe généré
-	 * @see Client,Gerant
+	 * @see Client
 	 */
 	protected String genererMdp(){
 		String s = "";

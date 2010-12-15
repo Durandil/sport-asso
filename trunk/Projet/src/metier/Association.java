@@ -1,6 +1,9 @@
 package metier;
 
+
 import java.util.ArrayList;
+import java.net.MalformedURLException;
+import java.net.URL;
 import ihm.Accueil.FenetreDialogIdentification;
 import basededonnees.SGBD;
 
@@ -21,7 +24,8 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD,Client,Utilisateur
+ * @see BDD
+ * @see Client
  */
 public class Association extends Client {
 
@@ -32,10 +36,8 @@ public class Association extends Client {
 	 * @see Association#modifierBDDassoc(String, String, String, String, String)
 	 * @see Association#getDenomination()
 	 * @see Association#setDenomination(String)
-	 * 
 	 */
 	private String denomination;
-
 
 	/**
 	 * Constructeur de la classe Association
@@ -63,18 +65,17 @@ public class Association extends Client {
 	 *            Détermine si l'association possède une carte de fidélité ou non du magasin
 	 *            
 	 * @see Association#denomination 
-	 * @see Utilisateur#mail
-	 * @see Utilisateur#adresse
+	 * @see Client#mail
+	 * @see Client#adresse
 	 * @see Client#idVille
-	 * @see Utilisateur#telephone
+	 * @see Client#telephone
 	 * @see Client#particulierAssociation
 	 * @see Client#estFidele
 	 * @see Client#estActif
-	 * @see Utilisateur#motDePasse
+	 * @see Client#motDePasse
 	 * @see Client#ajouterFideliteBDD()
 	 * @see Association#ajouterBDD()
 	 */
-
 	public Association(String denomination, String mail, String adresse,
 			String idVille, String telephone, boolean estFidele) {
 		this.denomination = denomination;

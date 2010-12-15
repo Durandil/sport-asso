@@ -21,7 +21,8 @@ import basededonnees.SGBD;
  * 
  * </p>
  * 
- * @see BDD,Client
+ * @see BDD
+ * @see Client
  */
 public class CarteFidelite {
 	
