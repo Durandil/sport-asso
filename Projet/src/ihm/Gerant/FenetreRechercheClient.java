@@ -115,7 +115,8 @@ public class FenetreRechercheClient extends JDialog{
 		
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);	
+				//setVisible(false);	
+				dispose();
 			}
 		});
 		

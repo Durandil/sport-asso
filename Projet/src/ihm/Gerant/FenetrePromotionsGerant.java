@@ -137,7 +137,7 @@ public class FenetrePromotionsGerant extends JFrame {
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 			}			
 		});
 			

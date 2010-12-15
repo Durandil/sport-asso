@@ -191,7 +191,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 					FenetreCatalogueGerant.modificationTableau=true;
 
 					// puis fermer la page
-					setVisible(false);
+					dispose();
 					
 					break;
 				case 1 :
