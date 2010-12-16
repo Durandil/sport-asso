@@ -1,16 +1,16 @@
-#Categorie:
+#Table CATEGORIE
 Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00001','C1',100);
 Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00002','C2',250);
 Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00003','C3',500);
 Insert into CATEGORIE (idCategorie, NomCategorie, QuantiteLimite) values ('CAT00004','C4',1000);
 
-#Quantite
+#Table QUANTITE
 Insert into QUANTITE (idQuantite, Quantite) values ('QUA00001',5);
 Insert into QUANTITE (idQuantite, Quantite) values ('QUA00002',10);
 Insert into QUANTITE (idQuantite, Quantite) values ('QUA00003',15);
 Insert into QUANTITE (idQuantite, Quantite) values ('QUA00004',20);
 
-#Reduction
+#Table REDUCTION
 Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00001',90);
 Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00002',85);
 Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00001','QUA00003',8);
@@ -29,7 +29,7 @@ Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004',
 Insert into REDUCTION (idCategorie, idQuantite, pourcentage) values ('CAT00004','QUA00004',90);
 
 
-#Type de Sport:
+#Table TYPE_SPORT
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00001','SportWear');
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00002','Camping');
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00003','Sports en équipe');
@@ -41,42 +41,41 @@ Insert into TYPE_SPORT (idType, NomType) values ('TYP00008','Sports de raquette'
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00009','Arts Martiaux');
 Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
 
-#Promo:
+#Table PROMO
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-06-01', 'YYYY-MM-DD'),TO_DATE('2010-07-15', 'YYYY-MM-DD'),75,0);
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-08-15', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),50,1); 
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00003','Maillots bradés',TO_DATE('2010-08-01', 'YYYY-MM-DD'),TO_DATE('2010-09-01', 'YYYY-MM-DD'),40,0);
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00004','Chaussettes',TO_DATE('2010-11-01', 'YYYY-MM-DD'),TO_DATE('2010-11-23', 'YYYY-MM-DD'),80,1); 
 
-#Ville
+#Table VILLE
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville001', '35000', 'Rennes');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville002', '35170', 'Pont Rean');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville003', '38000', 'Grenoble');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville004', '90000', 'Belfort');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville005', '75000', 'Paris');
-Insert into VILLE (idVille, Codepostal, Nomville) values ('ville006','69000','Lyon');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville006', '69000', 'Lyon');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville007', '35170', 'Bruz');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville008', '94800', 'Villejuif');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville009', '94000', 'Créteil');
-Insert into VILLE (idVille, Codepostal, Nomville) values ('ville010', '94200', 'Ivry-sur-Seine');
-Insert into VILLE (idVille, Codepostal, Nomville) values ('ville011', '94320', 'Thiais');
-Insert into VILLE (idVille, Codepostal, Nomville) values ('ville012', '94600', 'Choisy-le-Roi');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville010', '94320', 'Thiais');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville011', '44000', 'Nantes');
 
-#Client
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001', '0606060606', 'Activé', 'L3R6T4X8');
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('iueihtam@laposte.fr', 'Ueihtam', 'Imré', '2 rue du Nord', 'ville002',  '0645454545', 'Activé', 'I7H8M9XX');
-Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('testp', 'Nom', 'Prénom', 'Adresse p', 'ville004', '0607080910', 'Activé', '1234');
-Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('lcg@free.fr', 'Les canards givrés', '11 rue de la Mairie','ville003', '0448488484', 'Activé', 'Canard35');
-Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('cebdf@belfort.fr', 'Club Espoir Belfortain de Football', '12 place de la mainsion du Peuple','ville004', '0384254104', 'Activé', 'CHECHE');
-Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('qpuc@ensai.fr', 'Club QPUC', 'Ensai','ville007', '0299120077', 'Activé', 'jereste');
-Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('testa', 'Asso test', 'Adresse ici','ville009', '0203040506', 'Activé', '1234');
+#Table CLIENT
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001', '0606060606', 'Activé', 'l3R6T4x');
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('iueihtam@laposte.fr', 'Ueihtam', 'Imré', '2 rue du Nord', 'ville002',  '0645454545', 'Activé', 'I7h8m9X');
+Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('testp@free.fr', 'Nom', 'Prénom', 'Adresse p', 'ville004', '0607080910', 'Activé', '1234');
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('lcg@free.fr', 'Les canards givrés', '11 rue de la Mairie','ville003', '0448488484', 'Activé', 'Canar35');
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('cebdf@belfort.fr', 'Club Espoir Belfortain de Football', '12 place de la mainsion du Peuple','ville004', '0384254104', 'Activé', 'checher');
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('qpuc@ensai.fr', 'Club QPUC', 'Ensai','ville007', '0299120077', 'Activé', 'jereste!');
+Insert into CLIENT (idClient, Denominationclient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('testa@free.fr', 'Asso test', 'Adresse ici','ville009', '0203040506', 'Activé', '1234');
 
-#Commande
+#Table COMMANDE
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00001','3 Juin 2010','arthur.laroch@gmail.com');
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00002','5 Avril 2010','lcg@free.fr');
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00003','11 Septembre 2009','cebdf@belfort.fr');
 Insert into COMMANDE (idcommande, datecommande, idclient) values ('COM00004','8 Mai 2010','iueihtam@laposte.fr');
 
-#Article
+#Table ARTICLE
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00001', 'Maillot de foot de Sochaux', 350, 500, 70, 'CAT00002', 'TYP00001','En stock');
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00002', 'Ballon de basket', 350, 500, 20, 'CAT00002', 'TYP00003','En stock');
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00003', 'Velo de Course', 0, 5000, 250, 'CAT00001', 'TYP00006', 'Rupture de stock');
@@ -86,22 +85,28 @@ Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCateg
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00007', 'Short de bain', 0, 300, 20, 'CAT00004', 'TYP00004', 'Déstocké');
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00008', 'Chronomètre', 500, 125, 30, 'CAT00002', 'TYP00010', 'En stock');
 
-#Carte_fidelite
+#Table CARTE_FIDELITE
 Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00001', '500', 'arthur.laroch@gmail.com');
 Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00002', '100', 'cebdf@belfort.fr');
 
-#LISTING_ARTICLES_COMMANDES
+#Table LISTING_ARTICLES_COMMANDES
 Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00001', 'ART00001',5);
 Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00001', 'ART00002',1);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00002', 'ART00007',1);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00003', 'ART00006',3);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00003', 'ART00008',1);
+Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00004', 'ART00004',2);
 
-#LISTING_PROMOS_ARTICLES
+#Table LISTING_PROMOS_ARTICLES
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00004','PRO00001');
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00003','PRO00002');
+Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00001','PRO00003');
+Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00006','PRO00004');
 
-#Message
+#Table MESSAGE
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'testa',TO_DATE('2010-12-15', 'YYYY-MM-DD'),1);
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00002','Re : Merci','Merci à vous pour votre fidélité', 'testa',TO_DATE('2010-12-16', 'YYYY-MM-DD'),0);
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00003','Prix trop élevés','Les shorts noirs sont trop chers', 'testp',TO_DATE('2010-12-17', 'YYYY-MM-DD'),1);
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00004','Re : Prix trop élevés','En réponse à votre message, je vous confirme la baisse des tarifs sur les shorts noirs', 'testp',TO_DATE('2010-12-18', 'YYYY-MM-DD'),0);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00003','Prix trop élevés','Les shorts de bain sont trop chers', 'testp',TO_DATE('2010-12-17', 'YYYY-MM-DD'),1);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00004','Re : Prix trop élevés','En réponse à votre message, je vous annonce la baisse des tarifs sur les shorts de bain', 'testp',TO_DATE('2010-12-18', 'YYYY-MM-DD'),0);
 
 
