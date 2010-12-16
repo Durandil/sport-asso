@@ -32,7 +32,7 @@ public class FenetreInformationsClient extends JFrame {
         
         //Instanciation d'un objet JPanel
         Panneau panneauInformations = new Panneau();
-        panneauInformations.setBorder(BorderFactory.createTitledBorder("Mot du Gérant : Alexis Louvel"));
+        panneauInformations.setBorder(BorderFactory.createTitledBorder("Mot du Gérant : M. Poirier"));
         //Définition de sa couleur de fond
         panneauInformations.setBackground(Color.white);               
         this.getContentPane().add(panneauInformations,"Center");
