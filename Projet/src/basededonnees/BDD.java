@@ -69,7 +69,7 @@ public class BDD {
 				"PROMOFIDELITE NUMBER,"+
 				"CONSTRAINT PK_PROMO PRIMARY KEY (IDPROMO))");
 		
-		/**Si on lance la méthode de chez soi couper ici**/
+
 		SGBD.executeUpdate("CREATE TABLE VILLE" +
 				"(IDVILLE CHAR(8),"+
 				"CODEPOSTAL CHAR(5),"+
