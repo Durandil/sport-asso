@@ -52,7 +52,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 	private JTextField nom, prenom,adresse,identifiantVerification,codePostal,telephone,identifiant,denomination;
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
-	private boolean estFidele = true;
+	private boolean estFidele = false;
 	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise, erreurCreation ;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
@@ -349,61 +349,66 @@ public class FenetreDialogCreationCompte extends JDialog{
 						throw new ExceptionNumeroDeTelephoneIncorrect("Le numéro de téléphone saisi est incorrect !");
 					}
 
+					//Vérification de la présence d'un @ dans l'adresse mail
 					if (!identifiant.getText().contains("@")) {
 						throw new ExceptionMailSansArobase("Votre adresse mail ne comporte pas d'arobase !");
 					}
-					// String idVille =
-					// SGBD.selectStringConditionString("VILLE", "IDVILLE",
-					// "CODEPOSTAL", codePostal.getText());
-					//
-					//
-					//
-					// if (itemSelectionne == "Compte Particulier")
-					// {
-					// Particulier p = new Particulier(nom.getText(),
-					// prenom.getText(), identifiant.getText()
-					// , adresse.getText(), idVille, telephone.getText(),
-					// estFidele);
-					// }
-					// else {
-					// Association a = new Association(denomination.getText(),
-					// identifiant.getText(), adresse.getText(), idVille,
-					// telephone.getText(),estFidele);
-					// }
-					//
-					// creationCorrecte = new JOptionPane();
-					// ImageIcon imageInformation = new
-					// ImageIcon("src/images/information.jpg");
-					// creationCorrecte.showMessageDialog(null,
-					// "Un nouveau compte a été crée, votre identifiant est : "
-					// + identifiant.getText(), "Information",
-					// JOptionPane.INFORMATION_MESSAGE, imageInformation);
-					//
-					// FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
-					//
-					// //On recherche le mot de passe dans la base avant de
-					// l'afficher
-					// String motDePasse =
-					// SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE",
-					// "IDCLIENT", identifiant.getText());
-					// affichageMotDePasse = new JOptionPane();
-					// affichageMotDePasse.showMessageDialog(null,
-					// "Retenez votre mot de passe : " + motDePasse,
-					// "Information", JOptionPane.INFORMATION_MESSAGE,
-					// imageInformation);
-					//
-					//
-					// dispose();
-					// envoi du message avec le mot de passe 
-//					java.util.Date date = new java.util.Date();
-//					
-//					@SuppressWarnings("deprecation")
-//					java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-//					Message messageMotPasse = new Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est " +  identifiant.getText() + "et votre mot de passe est " +  motDePasse + ". Cordialement, M. Poirier ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
-//					
-					// // Essai d'ouverture du menu Utilisateur après une
-					// création de compte correcte
-					// MenuUtilisateur men = new MenuUtilisateur();
+					
+					else{
+						 String idVille =
+						 SGBD.selectStringConditionString("VILLE", "IDVILLE",
+						 "CODEPOSTAL", codePostal.getText());
+						
+						
+						
+						 if (itemSelectionne == "Compte Particulier")
+						 {
+						 Particulier p = new Particulier(nom.getText(),
+						 prenom.getText(), identifiant.getText()
+						 , adresse.getText(), idVille, telephone.getText(),
+						 estFidele);
+						 }
+						 else {
+						 Association a = new Association(denomination.getText(),
+						 identifiant.getText(), adresse.getText(), idVille,
+						 telephone.getText(),estFidele);
+						 }
+						
+						 creationCorrecte = new JOptionPane();
+						 ImageIcon imageInformation = new
+						 ImageIcon("src/images/information.jpg");
+						 creationCorrecte.showMessageDialog(null,
+						 "Un nouveau compte a été crée, votre identifiant est : "
+						 + identifiant.getText(), "Information",
+						 JOptionPane.INFORMATION_MESSAGE, imageInformation);
+						
+						 FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
+						
+						 //On recherche le mot de passe dans la base avant de
+						 //l'afficher
+						 String motDePasse =
+						 SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE",
+						 "IDCLIENT", identifiant.getText());
+						 affichageMotDePasse = new JOptionPane();
+						 affichageMotDePasse.showMessageDialog(null,
+						 "Retenez votre mot de passe : " + motDePasse,
+						 "Information", JOptionPane.INFORMATION_MESSAGE,
+						 imageInformation);
+						
+						
+						 dispose();
+						 //envoi du message avec le mot de passe 
+						java.util.Date date = new java.util.Date();
+						
+						@SuppressWarnings("deprecation")
+						java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+						Message messageMotPasse = new Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est " +  identifiant.getText() + "et votre mot de passe est " +  motDePasse + ". Cordialement, M. Poirier ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
+						
+						//Essai d'ouverture du menu Utilisateur après une
+						 //création de compte correcte
+						MenuUtilisateur men = new MenuUtilisateur();
+					}
+				
 
 				} catch (ExceptionMailsDifferents e1) {
 					System.out.println(e1.getMessage());
@@ -484,10 +489,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
 
 				}
-					System.out.println(creationCompteCorrecte);
-					
-					switch (creationCompteCorrecte) {
-					case 0:
+//					
+//					switch (creationCompteCorrecte) {
+//					case 0:
 						//listeMails recense l'ensemble des adresses mails présentes dans la base
 						//L'entier test passe à 1 si l'adresse renseignée existe déjà, auquel cas on avertit l'utilisateur
 						//Si test reste à 0, on ajoute le client dans la BDD
@@ -548,7 +552,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 //							// Essai d'ouverture du menu Utilisateur après une création de compte correcte
 //							MenuUtilisateur men = new MenuUtilisateur();
 //						}
-						break;
+//						break;
 						
 //					case 1: //Traité
 //						erreurCreation.showMessageDialog(null, "Votre adresse mail ne comporte pas de signe @","Attention !", JOptionPane.WARNING_MESSAGE, image);
@@ -579,9 +583,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 //					case 8 : //Traité
 //						erreurCreation.showMessageDialog(null, "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
 //						
-					default:
-						break;
-					}
+//					default:
+//						break;
+//					}
 
 			}
 			
