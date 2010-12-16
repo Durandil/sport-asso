@@ -1,16 +1,14 @@
 package metier;
 
-import java.util.ArrayList;
-
-import ihm.Accueil.FenetreDialogIdentification;
 import basededonnees.SGBD;
 
 /**
  * <b>La classe Particulier représente un particulier</b>
  * <p>
- * Un particulier est caractérisé par les informations suivantes  :
+ * Un particulier est caractérisé par les informations suivantes :
  * <ul>
- * <li>Une adresse mail qui sert d'identifiant unique et non modifiable par le client représentant l'association</li>
+ * <li>Une adresse mail qui sert d'identifiant unique et non modifiable par le
+ * client représentant l'association</li>
  * <li>Un nom</li>
  * <li>Un prénom</li>
  * <li>Une adresse</li>
@@ -18,12 +16,10 @@ import basededonnees.SGBD;
  * <li>Un numéro de téléphone</li>
  * <li>Le statut du client (ici, "Particulier")</li>
  * <li>Un booléen déterminant si l'association possède une carte de fidélité</li>
- * <li>L'état du compte de l'association (Activé si le booléen correspondant est vrai et Désactivé sinon)</li>
+ * <li>L'état du compte de l'association (Activé si le booléen correspondant est
+ * vrai et Désactivé sinon)</li>
  * <li>Un mot de passe généré automatiquement</li>
  * </ul>
- * </p>
- * <p>
- * 
  * </p>
  * 
  * @see BDD
@@ -38,19 +34,20 @@ public class Particulier extends Client {
 	 * @see Particulier#getNom()
 	 * @see Particulier#setNom(String)
 	 * @see Particulier#ajouterBDD()
-	 * @see Particulier#modifierBDDparticulier(String, String, String, String, String, String)
+	 * @see Particulier#modifierBDDparticulier(String, String, String, String,
+	 *      String, String)
 	 * 
 	 */
 	private String nom;
-	
-	
+
 	/**
 	 * Le prénom du client
 	 * 
 	 * @see Particulier#getNom()
 	 * @see Particulier#setNom(String)
 	 * @see Particulier#ajouterBDD()
-	 * @see Particulier#modifierBDDparticulier(String, String, String, String, String, String)
+	 * @see Particulier#modifierBDDparticulier(String, String, String, String,
+	 *      String, String)
 	 * 
 	 */
 	private String prenom;
@@ -58,13 +55,13 @@ public class Particulier extends Client {
 	/**
 	 * Constructeur de la classe Particulier
 	 * <p>
-	 * Le constructeur de la classe Particulier fait appel à la méthode ajouterBDD()
-	 * qui l'ajoute dans la base de données. 
-	 * La méthode ajouterFideliteBDD() instancie un nouvel objet CarteFidelite et de ce fait
-	 * crée une nouvelle ligne dans la table CARTE_FIDELITE si le client a émis 
-	 * le souhait de posséder une carte.
-	 * L'état du compte est par défaut initialisé sur Activé (booléen estActif vrai)
-	 * Le mot de passe est généré automatiquement.
+	 * Le constructeur de la classe Particulier fait appel à la méthode
+	 * ajouterBDD() qui l'ajoute dans la base de données. La méthode
+	 * ajouterFideliteBDD() instancie un nouvel objet CarteFidelite et de ce
+	 * fait crée une nouvelle ligne dans la table CARTE_FIDELITE si le client a
+	 * émis le souhait de posséder une carte. L'état du compte est par défaut
+	 * initialisé sur Activé (booléen estActif vrai) Le mot de passe est généré
+	 * automatiquement.
 	 * </p>
 	 * 
 	 * @param nom
@@ -72,7 +69,8 @@ public class Particulier extends Client {
 	 * @param prenom
 	 *            Le prénom du client
 	 * @param mail
-	 *            Le mail de l'association, qui est utilisé comme identifiant et n'est pas modifiable par le client
+	 *            Le mail de l'association, qui est utilisé comme identifiant et
+	 *            n'est pas modifiable par le client
 	 * @param adresse
 	 *            L'adresse de l'association
 	 * @param idVille
@@ -80,8 +78,9 @@ public class Particulier extends Client {
 	 * @param telephone
 	 *            Le numéro de téléphone de l'association
 	 * @param estFidele
-	 *            Détermine si l'association possède une carte de fidélité ou non du magasin
-	 *            
+	 *            Détermine si l'association possède une carte de fidélité ou
+	 *            non du magasin
+	 * 
 	 * @see Particulier#nom
 	 * @see Particulier#prenom
 	 * @see Client#mail
@@ -97,12 +96,11 @@ public class Particulier extends Client {
 	 * 
 	 */
 	public Particulier(String nom, String prenom, String mail, String adresse,
-			 String idVille,
-			String telephone, boolean estFidele) {
+			String idVille, String telephone, boolean estFidele) {
 		this.mail = mail;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.adresse = adresse;	
+		this.adresse = adresse;
 		this.idVille = idVille;
 		this.telephone = telephone;
 		this.particulierAssociation = "Particulier";
@@ -114,43 +112,43 @@ public class Particulier extends Client {
 	}
 
 	/**
-     * Retourne le nom du particulier
-     * 
-     * @return Le nom du particulier
-     * 
-     */
+	 * Retourne le nom du particulier
+	 * 
+	 * @return Le nom du particulier
+	 * 
+	 */
 	public String getNom() {
 		return nom;
 	}
 
 	/**
-     * Met à jour le nom du particulier
-     * 
-     * @param nom
-     *            Le nom du particulier
-     * 
-     */
+	 * Met à jour le nom du particulier
+	 * 
+	 * @param nom
+	 *            Le nom du particulier
+	 * 
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
 	/**
-     * Retourne le prénom du particulier
-     * 
-     * @return Le prénom du particulier
-     * 
-     */
+	 * Retourne le prénom du particulier
+	 * 
+	 * @return Le prénom du particulier
+	 * 
+	 */
 	public String getPrenom() {
 		return prenom;
 	}
 
 	/**
-     * Met à jour le prénom du particulier
-     * 
-     * @param prenom
-     *            Le prénom du particulier
-     * 
-     */
+	 * Met à jour le prénom du particulier
+	 * 
+	 * @param prenom
+	 *            Le prénom du particulier
+	 * 
+	 */
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
@@ -159,17 +157,17 @@ public class Particulier extends Client {
 	 * Ajoute le particulier dans la table CLIENT de la base de données
 	 * 
 	 * <p>
-	 * Cette méthode commence par créer une chaîne de caractères dépendant de 
-	 * la valeur du booléen (Désactivé si le booléen est faux, Activé sinon)
+	 * Cette méthode commence par créer une chaîne de caractères dépendant de la
+	 * valeur du booléen (Désactivé si le booléen est faux, Activé sinon)
 	 * 
-	 * La requête se construit ensuite en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel du constructeur
-	 * </p> 
+	 * La requête se construit ensuite en fonction des caractéristiques de
+	 * l'article saisies lors de l'appel du constructeur
+	 * </p>
 	 * 
 	 * @see BDD
 	 */
 	public void ajouterBDD() {
-		
+
 		String actif = null;
 
 		if (this.estActif == false) {
@@ -179,8 +177,7 @@ public class Particulier extends Client {
 		}
 
 		String requete = "INSERT INTO CLIENT (IDCLIENT, NOMCLIENT, PRENOMCLIENT, ADRESSECLIENT, IDVILLE"
-				+ " , TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( "
-				+ "'"
+				+ " , TELEPHONE, ETATCOMPTE, MOTDEPASSE) VALUES ( " + "'"
 				+ this.mail
 				+ "',"
 				+ "'"
@@ -208,38 +205,36 @@ public class Particulier extends Client {
 
 	}
 
-
-	
 	/**
-	 * Modifie les caractéristiques du particulier dans la table CLIENT de la base de données
+	 * Modifie les caractéristiques du particulier dans la table CLIENT de la
+	 * base de données
 	 * 
 	 * <p>
-	 * Étant donné que le client peut modifier son code postal et non l'identifiant de la ville
-	 * (auquel il n'a pas accès), la méthode commence par récupérer cet identifiant dans la table VILLE
-	 *
-	 * La requête se construit ensuite en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel de la méthode
-	 * </p> 
+	 * Étant donné que le client peut modifier son code postal et non
+	 * l'identifiant de la ville (auquel il n'a pas accès), la méthode commence
+	 * par récupérer cet identifiant dans la table VILLE
+	 * 
+	 * La requête se construit ensuite en fonction des caractéristiques de
+	 * l'article saisies lors de l'appel de la méthode
+	 * </p>
 	 * 
 	 * @see BDD
 	 */
-	
-	public static void modifierBDDparticulier(String idClient, String nom,
-			String prenom, String adresse,String codePostal, String telephone) {
 
-		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE", "CODEPOSTAL", codePostal);
-		
+	public static void modifierBDDparticulier(String idClient, String nom,
+			String prenom, String adresse, String codePostal, String telephone) {
+
+		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE",
+				"CODEPOSTAL", codePostal);
+
 		String requete = " UPDATE CLIENT SET NOMCLIENT='" + nom
 				+ "',PRENOMCLIENT='" + prenom + "',ADRESSECLIENT='" + adresse
-				+  "',IDVILLE='" + idVille
-				+ "',TELEPHONE='" + telephone  
-				+ "' " + "WHERE IDCLIENT ='" + idClient + "'";
+				+ "',IDVILLE='" + idVille + "',TELEPHONE='" + telephone + "' "
+				+ "WHERE IDCLIENT ='" + idClient + "'";
 
 		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);
 	}
-	
-
 
 }

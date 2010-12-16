@@ -396,7 +396,7 @@ public class FenetreDialogCreationCompte extends JDialog{
 //					
 //					@SuppressWarnings("deprecation")
 //					java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-//					Message messageMotPasse = new Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est " +  identifiant.getText() + "et votre mot de passe est " +  motDePasse + ". Cordialement ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
+//					Message messageMotPasse = new Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est " +  identifiant.getText() + "et votre mot de passe est " +  motDePasse + ". Cordialement, M. Poirier ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
 //					
 					// // Essai d'ouverture du menu Utilisateur après une
 					// création de compte correcte

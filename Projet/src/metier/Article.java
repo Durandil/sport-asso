@@ -1,8 +1,7 @@
 package metier;
 
-import java.util.ArrayList;
-
 import ihm.Gerant.FenetreFormulaireArticleGerant;
+import java.util.ArrayList;
 import basededonnees.SGBD;
 
 /**
@@ -43,7 +42,8 @@ public class Article {
 	 * La description de l'article, modifiable par le gérant
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String,
+	 *      String, String)
 	 * @see Article#getDescription()
 	 * @see Article#setDescription(String)
 	 * 
@@ -54,7 +54,8 @@ public class Article {
 	 * Le prix de l'article, modifiable par le gérant
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String,
+	 *      String, String)
 	 * @see Article#getPrixInitial()
 	 * @see Article#setPrixInitial(double)
 	 * 
@@ -66,7 +67,8 @@ public class Article {
 	 * clients. Le gérant peut également modifier le stock de l'article.
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String,
+	 *      String, String)
 	 * @see Article#getStock()
 	 * @see Article#setStock(int)
 	 * 
@@ -77,7 +79,8 @@ public class Article {
 	 * Le poids de l'article (en grammes), modifiable par le gérant
 	 * 
 	 * @see Article#ajouterBDD()
-	 * @see Article#modifierArticleBDD(String, String, String, String, String, String, String)
+	 * @see Article#modifierArticleBDD(String, String, String, String, String,
+	 *      String, String)
 	 * @see Article#getPoids()
 	 * @see Article#setPoids(float)
 	 * 
@@ -148,11 +151,8 @@ public class Article {
 	 * @see Article#etat
 	 * @see Article#ajouterBDD()
 	 */
-	public Article(String description, double prixInitial,
-			int stock, float poids, String typeSport, String catPrix,
-			String etat) {
-
-		
+	public Article(String description, double prixInitial, int stock,
+			float poids, String typeSport, String catPrix, String etat) {
 
 		this.description = description;
 		this.prixInitial = prixInitial;
@@ -164,178 +164,173 @@ public class Article {
 		ajouterBDD();
 	}
 
-	
-	 /**
-     * Retourne l'id de l'article
-     * 
-     * @return L'identifiant de l'article
-     * 
-     */
+	/**
+	 * Retourne l'id de l'article
+	 * 
+	 * @return L'identifiant de l'article
+	 * 
+	 */
 	public String getIdArticle() {
 		return idArticle;
 	}
 
-    /**
-     * Met à jour l'id de l'article
-     * 
-     * @param idArticle
-     *            L'identifiant unique de l'article
-     * 
-     */
+	/**
+	 * Met à jour l'id de l'article
+	 * 
+	 * @param idArticle
+	 *            L'identifiant unique de l'article
+	 * 
+	 */
 	public void setIdArticle(String idArticle) {
 		this.idArticle = idArticle;
 	}
 
-	 /**
-     * Retourne l'identifiant du type de sport
-     * 
-     * @return L'identifiant du type de sport auquel l'article est rattaché
-     * 
-     */
+	/**
+	 * Retourne l'identifiant du type de sport
+	 * 
+	 * @return L'identifiant du type de sport auquel l'article est rattaché
+	 * 
+	 */
 	public String getTypeSport() {
 		return typeSport;
 	}
 
-    /**
-     * Met à jour l'id du type de sport de l'article
-     * 
-     * @param typeSport
-     *            L'identifiant de la catégorie de sport de l'article.
-     * 
-     */
+	/**
+	 * Met à jour l'id du type de sport de l'article
+	 * 
+	 * @param typeSport
+	 *            L'identifiant de la catégorie de sport de l'article.
+	 * 
+	 */
 	public void setTypeSport(String typeSport) {
 		this.typeSport = typeSport;
 	}
 
-	 /**
-     * Retourne la description de l'article
-     * 
-     * @return La description de l'article
-     * 
-     */
+	/**
+	 * Retourne la description de l'article
+	 * 
+	 * @return La description de l'article
+	 * 
+	 */
 	public String getDescription() {
 		return description;
 	}
-	
-	
-    /**
-     * Met à jour la description de l'article
-     * 
-     * @param description
-     *            La description de l'article.
-     * 
-     */
+
+	/**
+	 * Met à jour la description de l'article
+	 * 
+	 * @param description
+	 *            La description de l'article.
+	 * 
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	 /**
-     * Retourne le poids de l'article
-     * 
-     * @return Le poids de l'article (en grammes)
-     * 
-     */
+	/**
+	 * Retourne le poids de l'article
+	 * 
+	 * @return Le poids de l'article (en grammes)
+	 * 
+	 */
 	public float getPoids() {
 		return poids;
 	}
 
-    /**
-     * Met à jour le poids de l'article
-     * 
+	/**
+	 * Met à jour le poids de l'article
+	 * 
 	 * @param poids
 	 *            Le poids de l'article.
-     * 
-     */
+	 * 
+	 */
 	public void setPoids(float poids) {
 		this.poids = poids;
 	}
 
-	
-	 /**
-     * Retourne le prix initial de l'article
-     * 
-     * @return Le prix initial de l'article (avant éventuelles promotions et/ou réductions)
-     * 
-     */
+	/**
+	 * Retourne le prix initial de l'article
+	 * 
+	 * @return Le prix initial de l'article (avant éventuelles promotions et/ou
+	 *         réductions)
+	 * 
+	 */
 	public double getPrixInitial() {
 		return prixInitial;
 	}
 
-	
-    /**
-     * Met à jour le prix de l'article
-     * 
+	/**
+	 * Met à jour le prix de l'article
+	 * 
 	 * @param prixInitial
-	 *            Le prix de l'article avant éventielles promotions et/ou
+	 *            Le prix de l'article avant éventuelles promotions et/ou
 	 *            réductions.
-     * 
-     */
+	 * 
+	 */
 	public void setPrixInitial(double prixInitial) {
 		this.prixInitial = prixInitial;
 	}
 
-	 /**
-     * Retourne la quantité en stock de l'article
-     * 
-     * @return La quantité en stock de l'article
-     * 
-     */
+	/**
+	 * Retourne la quantité en stock de l'article
+	 * 
+	 * @return La quantité en stock de l'article
+	 * 
+	 */
 	public int getStock() {
 		return stock;
 	}
 
-    /**
-     * Met à jour la quantité en stock de l'article
-     * 
+	/**
+	 * Met à jour la quantité en stock de l'article
+	 * 
 	 * @param stock
-	 *           La quantité en stock de l'article.
-     * 
-     */
+	 *            La quantité en stock de l'article.
+	 * 
+	 */
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
 
-	
-	 /**
-     * Retourne l'état de l'article dans le magasin
-     * 
-     * @return L'état de l'article dans le magasin (En stock, Déstocké, En rupture de stock, Supprimé)
-     * 
-     */
+	/**
+	 * Retourne l'état de l'article dans le magasin
+	 * 
+	 * @return L'état de l'article dans le magasin (En stock, Déstocké, En
+	 *         rupture de stock, Supprimé)
+	 * 
+	 */
 	public String getEtat() {
 		return etat;
 	}
-	
-	 /**
-     * Met à jour l'état de l'article dans le magasin
-     * 
+
+	/**
+	 * Met à jour l'état de l'article dans le magasin
+	 * 
 	 * @param etat
-	 *           L'état de l'article en magasin.
-     * 
-     */
+	 *            L'état de l'article en magasin.
+	 * 
+	 */
 	public void setEtat(String etat) {
 		this.etat = etat;
 	}
 
-
-	 /**
-     * Retourne l'identifiant de la catégorie de prix de l'article
-     * 
-     * @return L'identifiant de la catégorie de prix de l'article
-     * 
-     */
+	/**
+	 * Retourne l'identifiant de la catégorie de prix de l'article
+	 * 
+	 * @return L'identifiant de la catégorie de prix de l'article
+	 * 
+	 */
 	public String getCatPrix() {
 		return catPrix;
 	}
 
-	
-	 /**
-     * Met à jour l'identifiant de la catégorie de prix
-     * 
+	/**
+	 * Met à jour l'identifiant de la catégorie de prix
+	 * 
 	 * @param catPrix
-	 *           L'identifiant de la catégorie prix de l'article.
-     * 
-     */
+	 *            L'identifiant de la catégorie prix de l'article.
+	 * 
+	 */
 	public void setCatPrix(String catPrix) {
 		this.catPrix = catPrix;
 	}
@@ -344,11 +339,11 @@ public class Article {
 	 * Ajoute l'article dans la table ARTICLE de la base de données
 	 * 
 	 * <p>
-	 * Cette méthode commence par récupérer l'indice de séquence de la table afin
-	 * de générer l'identifiant de l'article dans le format approprié.
-	 * La requête se construit ensuite en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel du constructeur
-	 * </p> 
+	 * Cette méthode commence par récupérer l'indice de séquence de la table
+	 * afin de générer l'identifiant de l'article dans le format approprié. La
+	 * requête se construit ensuite en fonction des caractéristiques de
+	 * l'article saisies lors de l'appel du constructeur
+	 * </p>
 	 * 
 	 * @see Article#Article(String, double, int, float, String, String, String)
 	 * @see BDD
@@ -358,9 +353,7 @@ public class Article {
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
 				"S_ARTICLE.NEXTVAL");
 
-
 		int numeroArticle = 0;
-
 		numeroArticle = Integer.parseInt(idNonFini.get(0));
 
 		if (numeroArticle < 10) {
@@ -378,7 +371,6 @@ public class Article {
 		if (numeroArticle < 100000 && numeroArticle >= 10000) {
 			this.idArticle = "ART" + numeroArticle;
 		}
-
 
 		String requete = "INSERT INTO ARTICLE (IDARTICLE, DESCRIPTION, PRIXINITIAL,"
 				+ " STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( '"
@@ -403,15 +395,14 @@ public class Article {
 		SGBD.executeUpdate("COMMIT");
 	}
 
-	
-	
 	/**
-	 * Modifie un article qui est déjà présent dans la table ARTICLE de la base de données
+	 * Modifie un article qui est déjà présent dans la table ARTICLE de la base
+	 * de données
 	 * 
 	 * <p>
 	 * La requête se construit en fonction des caractéristiques de l'article
 	 * saisies lors de l'appel de la méthode
-	 * </p> 
+	 * </p>
 	 * 
 	 * @param idArticle
 	 *            L'identifiant unique de l'article.
@@ -430,111 +421,124 @@ public class Article {
 	 * 
 	 * @see BDD
 	 */
-	public static void modifierArticleBDD(String idArticle,
-			String description, String prix, String poids, String stock, 
-			String idType, String idCat) {
-
+	public static void modifierArticleBDD(String idArticle, String description,
+			String prix, String poids, String stock, String idType, String idCat) {
 
 		String requete = " UPDATE ARTICLE" + " SET DESCRIPTION = '"
 				+ description + "'," + "PRIXINITIAL = '" + prix + "',"
-				+ "STOCK = '" + stock + "', " + "IDTYPE ='"+ idType + "',"
-				+ "IDCATEGORIE ='" + idCat + "',"+ "POIDS = '" + poids
+				+ "STOCK = '" + stock + "', " + "IDTYPE ='" + idType + "',"
+				+ "IDCATEGORIE ='" + idCat + "'," + "POIDS = '" + poids
 				+ "' WHERE IDARTICLE='" + idArticle + "'";
-		
-		System.out.println(requete);
-		
+
 		SGBD.executeUpdate(requete);
 
 	}
 
-	
 	/**
-	 * Supprime l'article dont l'identifiant est spécifié de la table ARTICLE 
-	 * de la base de données
+	 * Supprime l'article dont l'identifiant est spécifié de la table ARTICLE de
+	 * la base de données
 	 * 
 	 * @param idArticle
-	 * 			L'identifiant de l'article
+	 *            L'identifiant de l'article
 	 * @see BDD
 	 */
 	public static void supprimerArticleBDD(String idArticle) {
 
-//		String requete = "DELETE FROM ARTICLE WHERE IDARTICLE='" + idArticle
-//				+ "'";
-		String requete ="UPDATE ARTICLE SET ETATARTICLE='Supprimé' WHERE IDARTICLE='"+idArticle+"'";
-		
-		System.out.println(requete);
+		String requete = "UPDATE ARTICLE SET ETATARTICLE='Supprimé' WHERE IDARTICLE='"
+				+ idArticle + "'";
 
 		SGBD.executeUpdate(requete);
 
-//		String requete2 = "COMMIT";
-//
-//		SGBD.executeUpdate(requete2);
 	}
 
-	
 	/**
 	 * Modifie le stock d'un article présent dans la table ARTICLE
 	 * 
 	 * @param numArticle
-	 * 			L'identifiant de l'article
+	 *            L'identifiant de l'article
 	 * @param stock
-	 * 			Nouveau stock de l'article
+	 *            Nouveau stock de l'article
 	 * @see BDD
 	 */
 	public static void modifierStockArticleBDD(String numArticle, int stock) {
 
-		// POUR CEUX QUI ONT ORACLE CHEZ EUX, il faut enlever le point de
-		// virgule en fin de requete
 		String stockPresentBase = SGBD.selectStringConditionString("ARTICLE",
 				"STOCK", "IDARTICLE", numArticle);
 		System.out.println(stockPresentBase);
 		int nouveauStock = stock + Integer.parseInt(stockPresentBase);
 
-
 		String requete = "UPDATE ARTICLE SET STOCK = '" + nouveauStock
 				+ "',ETATARTICLE='En stock' WHERE IDARTICLE='" + numArticle
 				+ "'";
 
-		System.out.println(nouveauStock);
-		
-
-		System.out.println(requete);
-
 		SGBD.executeUpdate(requete);
 
 	}
-	
-	public static int verifierChampsArticles(String description,String prix,String poids,String stock){
+
+	/**
+	 * Vérifie le bon format des différents champs à saisir lors de
+	 * l'enregistrement d'un nouvel article
+	 * 
+	 * <p>
+	 * Cette méthode effectue des tests pour vérifier que les champs saisis sont
+	 * conformes. Si au moins l'un des tests est non concluant, l'entier
+	 * initialisé à 0 changera de valeur. Par exemple, si l'un des champs est
+	 * non renseigné, l'entier sera égal à 2. Autre exemple : si le prix de
+	 * l'article est négatif ou dépasse le million d'euro, l'entier sera égal à
+	 * 5.
+	 * </p>
+	 * 
+	 * <b>Note : </b> L'utilisation d'un entier et non d'un booléen pour cette
+	 * fonction provient du fait que selon l'erreur relevée, le message qui sera
+	 * affiché à l'écran sera différent.
+	 * 
+	 * @param description
+	 *            La description de l'article
+	 * @param prix
+	 *            Le prix de l'article
+	 * @param poids
+	 *            Le poids de l'article
+	 * @param stock
+	 *            Le stock de l'article
+	 * 
+	 * @return Un entier qui est différent de 0 si les champs ne sont pas au
+	 *         format approprié
+	 * 
+	 * @see BDD
+	 * @see FenetreFormulaireArticleGerant
+	 */
+	public static int verifierChampsArticles(String description, String prix,
+			String poids, String stock) {
 		int champCorrect = 0;
-		
-		if(description.length()>40){
+
+		if (description.length() > 40) {
 			champCorrect = 1;
 		}
-		if(description.length()==0 | prix.length()==0 | poids.length()==0 | stock.length()==0){
+		if (description.length() == 0 | prix.length() == 0
+				| poids.length() == 0 | stock.length() == 0) {
 			champCorrect = 2;
 		}
-		
-		try{
+
+		try {
 
 			double prixInitial = Double.parseDouble(prix);
 			long poidsArticle = Long.parseLong(poids);
 			long stockArticle = Long.parseLong(stock);
-			
-			if(stockArticle<0 | stockArticle>999999){
-				champCorrect = 3 ;
+
+			if (stockArticle < 0 | stockArticle > 999999) {
+				champCorrect = 3;
 			}
-			if(poidsArticle<0 | poidsArticle>99999){
-				champCorrect = 4 ;
+			if (poidsArticle < 0 | poidsArticle > 99999) {
+				champCorrect = 4;
 			}
-			if(prixInitial<0 | prixInitial >= 1000000){
-				champCorrect = 5 ;
+			if (prixInitial < 0 | prixInitial >= 1000000) {
+				champCorrect = 5;
 			}
-		}
-		catch(NumberFormatException e){
+		} catch (NumberFormatException e) {
 			System.out.println("Erreur de conversion des String en chiffres");
 		}
-		
+
 		return champCorrect;
 	}
-	
+
 }
