@@ -2,24 +2,18 @@ package metier;
 
 import ihm.Client.FenetreCommandeArticle;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import basededonnees.SGBD;
-
-
 /**
  * <b>La classe LigneCommande représente une ligne de commande</b>
  * <p>
- * Une ligne de commande est caractérisée par les informations suivantes  :
+ * Une ligne de commande est caractérisée par les informations suivantes :
  * <ul>
  * <li>Un identifiant d'article</li>
  * <li>Une quantité commandée de l'article en question</li>
  * </ul>
  * </p>
-
  * 
- * @see Commande 
+ * 
+ * @see Commande
  */
 public class LigneCommande {
 
@@ -32,8 +26,7 @@ public class LigneCommande {
 	 * 
 	 */
 	private String idArticle;
-	
-	
+
 	/**
 	 * La quantité commandée de l'article
 	 * 
@@ -44,7 +37,7 @@ public class LigneCommande {
 	 * 
 	 */
 	private int quantite;
-	
+
 	/**
 	 * Constructeur de la classe LigneCommande
 	 * 
@@ -63,53 +56,46 @@ public class LigneCommande {
 		this.quantite = quantite;
 	}
 
-	 /**
-     * Retourne l'id de l'article
-     * 
-     * @return L'identifiant de l'article
-     * 
-     */
+	/**
+	 * Retourne l'id de l'article
+	 * 
+	 * @return L'identifiant de l'article
+	 * 
+	 */
 	public String getIdArticle() {
 		return idArticle;
 	}
-	
+
 	/**
-     * Met à jour l'id de l'article
-     * 
-     * @param idArticle
-     *            L'identifiant unique de l'article
-     * 
-     */
+	 * Met à jour l'id de l'article
+	 * 
+	 * @param idArticle
+	 *            L'identifiant unique de l'article
+	 * 
+	 */
 	public void setIdArticle(String idArticle) {
 		this.idArticle = idArticle;
 	}
 
 	/**
-     * Met à jour la quantité
-     * 
-     * @param quantite
-     *            La quantité commandée de l'article
-     * 
-     */
+	 * Met à jour la quantité
+	 * 
+	 * @param quantite
+	 *            La quantité commandée de l'article
+	 * 
+	 */
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
 
-	
-
-	 /**
-     * Retourne la quantité
-     * 
-     * @return La quantité commandée de l'article
-     * 
-     */
+	/**
+	 * Retourne la quantité
+	 * 
+	 * @return La quantité commandée de l'article
+	 * 
+	 */
 	public int getQuantite() {
 		return quantite;
 	}
-
-
-
-
-
 
 }

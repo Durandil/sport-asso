@@ -2,11 +2,8 @@ package metier;
 
 import ihm.FenetreLectureMessage;
 import ihm.FenetreMessagerie;
-
 import java.sql.Date;
 import java.util.ArrayList;
-
-
 import basededonnees.SGBD;
 
 /**
@@ -20,14 +17,15 @@ import basededonnees.SGBD;
  * <li>Un contenu (le corps du message)</li>
  * <li>Un expéditeur</li>
  * <li>Une date d'envoi</li>
- * <li>Un booléen qui indique si le message a été envoyé au gérant (le gérant peut répondre aux messages de ses clients)</li>
+ * <li>Un booléen qui indique si le message a été envoyé au gérant (le gérant
+ * peut répondre aux messages de ses clients)</li>
  * </ul>
  * </p>
  * 
  * @see BDD
  */
 public class Message {
-	
+
 	/**
 	 * L'Identifiant du message, non modifiable
 	 * 
@@ -38,8 +36,8 @@ public class Message {
 	 * @see Message#supprimerAllBDD()
 	 * 
 	 */
-	private String idMessage ;
-	
+	private String idMessage;
+
 	/**
 	 * Le sujet du message.
 	 * 
@@ -48,8 +46,8 @@ public class Message {
 	 * @see Message#ajouterBDD()
 	 * 
 	 */
-	private String sujet ;
-	
+	private String sujet;
+
 	/**
 	 * Le contenu du message.
 	 * 
@@ -58,8 +56,8 @@ public class Message {
 	 * @see Message#ajouterBDD()
 	 * 
 	 */
-	private String contenu ;
-	
+	private String contenu;
+
 	/**
 	 * L'expéditeur du message.
 	 * 
@@ -69,7 +67,7 @@ public class Message {
 	 * 
 	 */
 	private String expediteur;
-	
+
 	/**
 	 * La date d'envoi du message.
 	 * 
@@ -78,8 +76,8 @@ public class Message {
 	 * @see Message#ajouterBDD()
 	 * 
 	 */
-	private Date dateEnvoi ;
-	
+	private Date dateEnvoi;
+
 	/**
 	 * Le booléen indiquant si le message a été envoyé au gérant.
 	 * 
@@ -88,8 +86,8 @@ public class Message {
 	 * @see Message#ajouterBDD()
 	 * 
 	 */
-	private boolean estEnvoyeAuGerant ;
-	
+	private boolean estEnvoyeAuGerant;
+
 	/**
 	 * Constructeur de la classe Message
 	 * <p>
@@ -115,175 +113,166 @@ public class Message {
 	 * @see Message#estEnvoyeAuGerant
 	 * @see Message#ajouterBDD()
 	 */
-	
-	public Message(String sujet, String contenu, String expediteur, Date dateEnvoi,boolean messageEnvoye) {
-	
+
+	public Message(String sujet, String contenu, String expediteur,
+			Date dateEnvoi, boolean messageEnvoye) {
+
 		this.sujet = sujet;
 		this.contenu = contenu;
 		this.expediteur = expediteur;
 		this.dateEnvoi = dateEnvoi;
-		this.estEnvoyeAuGerant = messageEnvoye ;
+		this.estEnvoyeAuGerant = messageEnvoye;
 		ajouterBDD();
 	}
-	
-	
-	 public Message() {
+
+	public Message() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	/**
-     * Retourne l'id du message
-     * 
-     * @return L'identifiant du message
-     * 
-     */
+	 * Retourne l'id du message
+	 * 
+	 * @return L'identifiant du message
+	 * 
+	 */
 	public String getIdMessage() {
 		return idMessage;
 	}
 
-
-
 	/**
-     * Met à jour l'id du message
-     * 
-     * @param idMessage
-     *            L'identifiant unique du message
-     * 
-     */
+	 * Met à jour l'id du message
+	 * 
+	 * @param idMessage
+	 *            L'identifiant unique du message
+	 * 
+	 */
 	public void setIdMessage(String idMessage) {
 		this.idMessage = idMessage;
 	}
-	
-	
 
-	 /**
-     * Retourne le sujet du message
-     * 
-     * @return Le sujet du message
-     * 
-     */
+	/**
+	 * Retourne le sujet du message
+	 * 
+	 * @return Le sujet du message
+	 * 
+	 */
 	public String getSujet() {
 		return sujet;
 	}
 
 	/**
-     * Met à jour le sujet du message
-     * 
-     * @param sujet
-     *            Le sujet du message
-     * 
-     */
+	 * Met à jour le sujet du message
+	 * 
+	 * @param sujet
+	 *            Le sujet du message
+	 * 
+	 */
 	public void setSujet(String sujet) {
 		this.sujet = sujet;
 	}
 
-	 /**
-     * Retourne le contenu du message
-     * 
-     * @return Le contenu du message
-     * 
-     */
+	/**
+	 * Retourne le contenu du message
+	 * 
+	 * @return Le contenu du message
+	 * 
+	 */
 	public String getContenu() {
 		return contenu;
 	}
 
-	
 	/**
-     * Met à jour le contenu du message
-     * 
-     * @param contenu
-     *            Le contenu du message
-     * 
-     */
+	 * Met à jour le contenu du message
+	 * 
+	 * @param contenu
+	 *            Le contenu du message
+	 * 
+	 */
 	public void setContenu(String contenu) {
 		this.contenu = contenu;
 	}
 
-	 /**
-     * Retourne l'expéditeur du message
-     * 
-     * @return L'expéditeur du message
-     * 
-     */
+	/**
+	 * Retourne l'expéditeur du message
+	 * 
+	 * @return L'expéditeur du message
+	 * 
+	 */
 	public String getExpediteur() {
 		return expediteur;
 	}
 
-	
 	/**
-     * Met à jour l'expéditeur du message
-     * 
-     * @param expediteur
-     *            L'expéditeur du message
-     * 
-     */
+	 * Met à jour l'expéditeur du message
+	 * 
+	 * @param expediteur
+	 *            L'expéditeur du message
+	 * 
+	 */
 	public void setExpediteur(String expediteur) {
 		this.expediteur = expediteur;
 	}
 
-	 /**
-     * Retourne la date d'envoi du message
-     * 
-     * @return La date d'envoi du message
-     * 
-     */
+	/**
+	 * Retourne la date d'envoi du message
+	 * 
+	 * @return La date d'envoi du message
+	 * 
+	 */
 	public Date getDateEnvoi() {
 		return dateEnvoi;
 	}
 
-	
 	/**
-     * Met à jour la date d'envoi du message
-     * 
-     * @param dateEnvoi
-     *            La date d'envoi du message
-     * 
-     */
+	 * Met à jour la date d'envoi du message
+	 * 
+	 * @param dateEnvoi
+	 *            La date d'envoi du message
+	 * 
+	 */
 	public void setDateEnvoi(Date dateEnvoi) {
 		this.dateEnvoi = dateEnvoi;
 	}
-	
-	 /**
-     * Retourne le booléen indiquant si le message est envoyé au gérant
-     * 
-     * @return Si le message a été envoyé au gérant
-     * 
-     */
+
+	/**
+	 * Retourne le booléen indiquant si le message est envoyé au gérant
+	 * 
+	 * @return Si le message a été envoyé au gérant
+	 * 
+	 */
 	public boolean isEstEnvoyeAuGerant() {
 		return estEnvoyeAuGerant;
 	}
 
 	/**
-     * Met à jour le booléen indiquant si le message est envoyé au gérant
-     * 
-     * @param estEnvoye
-     *            Le booléen indiquant si le message est envoyé au gérant
-     * 
-     */
+	 * Met à jour le booléen indiquant si le message est envoyé au gérant
+	 * 
+	 * @param estEnvoye
+	 *            Le booléen indiquant si le message est envoyé au gérant
+	 * 
+	 */
 	public void setEstEnvoyeAuGerant(boolean estEnvoye) {
 		this.estEnvoyeAuGerant = estEnvoye;
 	}
-
 
 	/**
 	 * Ajoute le message dans la table MESSAGE de la base de données
 	 * 
 	 * <p>
-	 * Cette méthode commence par transformer la date d'envoi en une chaïne de caractères.
-	 * Puis elle récupère l'indice de séquence de la table afin de générer 
-	 * l'identifiant de l'article dans le format approprié.
-	 * Ensuite, en fonction de la valeur du booléen estEnvoyeAuGerant, la méthode initialise
+	 * Cette méthode commence par transformer la date d'envoi en une chaïne de
+	 * caractères. Puis elle récupère l'indice de séquence de la table afin de
+	 * générer l'identifiant de l'article dans le format approprié. Ensuite, en
+	 * fonction de la valeur du booléen estEnvoyeAuGerant, la méthode initialise
 	 * un entier (0 ou 1) en prévision de l'insertion prochaine dans la base.
-	 * Enfin la requête se construit en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel du constructeur
-	 * </p> 
+	 * Enfin la requête se construit en fonction des caractéristiques de
+	 * l'article saisies lors de l'appel du constructeur
+	 * </p>
 	 * 
 	 * @see BDD
 	 */
 	public void ajouterBDD() {
-		
+
 		String s = SGBD.transformation(this.dateEnvoi);
 
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
@@ -332,64 +321,62 @@ public class Message {
 				+ envoiMessageGerant + " )";
 		System.out.println(requete);
 		SGBD.executeUpdate(requete);
-		
+
 	}
-	
+
 	/**
 	 * Supprime un message de la table MESSAGE de la base de données
 	 * 
 	 * <p>
-	 * Cette méthode supprime le message correspondant à l'identifiant saisi en paramètre
-	 * de la base de données.
-	 * </p> 
+	 * Cette méthode supprime le message correspondant à l'identifiant saisi en
+	 * paramètre de la base de données.
+	 * </p>
 	 * 
 	 * @param identifiantMessage
 	 * @see FenetreLectureMessage
 	 */
-	public static void supprimerBDD(String identifiantMessage){
+	public static void supprimerBDD(String identifiantMessage) {
 
-		
-		String requete = "DELETE FROM MESSAGE WHERE " +
-				"IDMESSAGE = " +"'"+ identifiantMessage+ "'"
-		;
+		String requete = "DELETE FROM MESSAGE WHERE " + "IDMESSAGE = " + "'"
+				+ identifiantMessage + "'";
 
 		SGBD.executeUpdate(requete);
 		SGBD.executeUpdate("COMMIT");
 	}
-	
+
 	/**
 	 * Supprime tous les messages présents dans la table MESSAGE
 	 * 
 	 * <p>
-	 * Cette méthode supprime l'ensemble des messages présents dans la base de données.
-	 * </p> 
+	 * Cette méthode supprime l'ensemble des messages présents dans la base de
+	 * données.
+	 * </p>
 	 * 
 	 * @see FenetreMessagerie
 	 */
-	public static void supprimerAllBDD(){
+	public static void supprimerAllBDD() {
 		String requete = "DELETE FROM MESSAGE";
-		
+
 		SGBD.executeUpdate(requete);
 	}
-	
-	public static int verifierChampMessage(String contenu,String sujet){
-		int champCorrect = 0 ;
-		
-		if(contenu.length()>300){
+
+	public static int verifierChampMessage(String contenu, String sujet) {
+		int champCorrect = 0;
+
+		if (contenu.length() > 300) {
 			champCorrect = 1;
 		}
-		if(sujet.length()>90){
-			champCorrect = 2 ;
+		if (sujet.length() > 90) {
+			champCorrect = 2;
 		}
-		if(sujet.contains("'") | contenu.contains("'")){
-			champCorrect = 3 ;
+		if (sujet.contains("'") | contenu.contains("'")) {
+			champCorrect = 3;
 		}
-		if(contenu.length()==0){
-			champCorrect=4;
+		if (contenu.length() == 0) {
+			champCorrect = 4;
 		}
-		
-		return champCorrect ;
-	}
 
+		return champCorrect;
+	}
 
 }

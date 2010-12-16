@@ -303,6 +303,7 @@ public abstract class Client {
 	public void ajouterFideliteBDD() {
 		if (this.estFidele) {
 
+			@SuppressWarnings("unused")
 			CarteFidelite cf = new CarteFidelite(this.mail, 0);
 
 		}
