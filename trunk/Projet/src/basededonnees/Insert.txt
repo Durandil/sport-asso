@@ -104,9 +104,12 @@ Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00001','PRO
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00006','PRO00004');
 
 #Table MESSAGE
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Merci','Je vous remercie pour la rapidité de la livraison', 'testa',TO_DATE('2010-12-15', 'YYYY-MM-DD'),1);
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00002','Re : Merci','Merci à vous pour votre fidélité', 'testa',TO_DATE('2010-12-16', 'YYYY-MM-DD'),0);
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00003','Prix trop élevés','Les shorts de bain sont trop chers', 'testp',TO_DATE('2010-12-17', 'YYYY-MM-DD'),1);
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00004','Re : Prix trop élevés','En réponse à votre message, je vous annonce la baisse des tarifs sur les shorts de bain', 'testp',TO_DATE('2010-12-18', 'YYYY-MM-DD'),0);
+
+
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Envoi des identifiants','Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est lcg@free.fr et votre mot de passe est Canar35. Cordialement, M. Poirier', 'lcg@free.fr',TO_DATE('2010-12-12', 'YYYY-MM-DD'),0);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00002','Merci','Je vous remercie pour la rapidité de la livraison', 'arthur.laroch@gmail.com',TO_DATE('2010-12-15', 'YYYY-MM-DD'),1);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00003','Re : Merci','Merci à vous pour votre fidélité', 'arthur.laroch@gmail.com',TO_DATE('2010-12-16', 'YYYY-MM-DD'),0);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00004','Prix trop élevés','Les shorts de bain sont trop chers', 'lcg@free.fr',TO_DATE('2010-12-17', 'YYYY-MM-DD'),1);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00005','Re : Prix trop élevés','En réponse à votre message, je vous annonce la baisse des tarifs sur les shorts de bain', 'lcg@free.fr',TO_DATE('2010-12-18', 'YYYY-MM-DD'),0);
 
 

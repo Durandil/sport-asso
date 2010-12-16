@@ -48,27 +48,33 @@ public class ModeleMessagerie extends AbstractTableModel {
 			ArrayList<String> listeSujet = SGBD.selectListeStringOrdonneCondition("MESSAGE", "SUJETMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
 			ArrayList<String> listeDate = SGBD.selectListeStringOrdonneCondition("MESSAGE", "DATEMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
 			
-			int compteurNombreMesages = 0;
-			
-			for(int i=0;i<listeExpediteur.size();i++){
-				if(listeExpediteur.get(i).equals(FenetreDialogIdentification.clientUserIdentifiant)){
-					compteurNombreMesages++;
-				}
-			}
-			
-			donnees = new Object[compteurNombreMesages][5];
-			
-			//On ajoute les informations dans l'objet donnees
-			
+			int compteurNombreMessages = 0;
 			
 			for(int i=0;i<listeExpediteur.size();i++){
 				
 				if(listeExpediteur.get(i).equals(FenetreDialogIdentification.clientUserIdentifiant)){
-					donnees[i][0] = listeIdentifiants.get(i);
-					donnees[i][1] = listeExpediteur.get(i);
-					donnees[i][2] = listeSujet.get(i);
-					donnees[i][3] = listeContenus.get(i);
-					donnees[i][4] = listeDate.get(i);
+					compteurNombreMessages++;
+					
+				}
+			}
+			
+			donnees = new Object[compteurNombreMessages][5];
+			
+			//On ajoute les informations dans l'objet donnees
+			
+			System.out.println("liste exp" + listeExpediteur.size());
+			int affichageMessage = 0;
+			for(int i=0;i<listeExpediteur.size();i++){
+				
+				if(listeExpediteur.get(i).equals(FenetreDialogIdentification.clientUserIdentifiant)){
+					
+					
+					donnees[affichageMessage][0] = listeIdentifiants.get(i);
+					donnees[affichageMessage][1] = listeExpediteur.get(i);
+					donnees[affichageMessage][2] = listeSujet.get(i);
+					donnees[affichageMessage][3] = listeContenus.get(i);
+					donnees[affichageMessage][4] = listeDate.get(i);
+					affichageMessage++;
 				}
 			}
 			
