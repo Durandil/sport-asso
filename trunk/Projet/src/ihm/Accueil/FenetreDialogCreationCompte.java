@@ -349,6 +349,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 						throw new ExceptionNumeroDeTelephoneIncorrect("Le numéro de téléphone saisi est incorrect !");
 					}
 
+					if (!identifiant.getText().contains("@")) {
+						throw new ExceptionMailSansArobase("Votre adresse mail ne comporte pas d'arobase !");
+					}
 					// String idVille =
 					// SGBD.selectStringConditionString("VILLE", "IDVILLE",
 					// "CODEPOSTAL", codePostal.getText());
@@ -465,8 +468,21 @@ public class FenetreDialogCreationCompte extends JDialog{
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
-					// TODO Auto-generated catch block
+					System.out.println(e8.getMessage());
 					e8.printStackTrace();
+					erreurCreation
+					.showMessageDialog(
+							null,
+							"Le numéro de téléphone est incorrect. Vérifiez ce que vous avez saisi.",
+							"Attention !", JOptionPane.WARNING_MESSAGE,
+							image);
+				} catch (ExceptionMailSansArobase e9) {
+					System.out.println(e9.getMessage());
+					e9.printStackTrace();
+					erreurCreation.showMessageDialog(null,
+							"Votre adresse mail ne comporte pas de caractère @",
+							"Attention !", JOptionPane.WARNING_MESSAGE, image);
+
 				}
 					System.out.println(creationCompteCorrecte);
 					
@@ -534,10 +550,10 @@ public class FenetreDialogCreationCompte extends JDialog{
 //						}
 						break;
 						
-					case 1:
-						erreurCreation.showMessageDialog(null, "Votre adresse mail ne comporte pas de signe @","Attention !", JOptionPane.WARNING_MESSAGE, image);
-						
-						break;
+//					case 1: //Traité
+//						erreurCreation.showMessageDialog(null, "Votre adresse mail ne comporte pas de signe @","Attention !", JOptionPane.WARNING_MESSAGE, image);
+//						
+//						break;
 //					case 2: //Traité
 //						erreurCreation.showMessageDialog(null, "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
 //						break;
@@ -560,9 +576,9 @@ public class FenetreDialogCreationCompte extends JDialog{
 //						erreurCreation.showMessageDialog(null, "Le numéro de téléphone saisi est impossible. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
 //						
 //						break;
-					case 8 :
-						erreurCreation.showMessageDialog(null, "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-						
+//					case 8 : //Traité
+//						erreurCreation.showMessageDialog(null, "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
+//						
 					default:
 						break;
 					}
