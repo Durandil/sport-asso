@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import exception.ExceptionMailsDifferents;
+
 import basededonnees.SGBD;
 
 
@@ -136,7 +138,8 @@ public class FenetreDialogIdentification extends JDialog {
 				}
 				// vérifier que le login existe sinon retourner à la page précédente de choix entre création et identification
 				// lancer la page suivante si succès
-				setVisible(false);
+				dispose();
+				
 			}
 						
 		});
@@ -144,7 +147,13 @@ public class FenetreDialogIdentification extends JDialog {
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
+				try {
+					FenetreCompte fen = new FenetreCompte();
+					fen.setVisible(true);
+				} catch (ExceptionMailsDifferents e1) {
+					e1.printStackTrace();
+				}
 			}			
 		});
 		

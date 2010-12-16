@@ -84,7 +84,9 @@ public class FenetreReponseMessage extends JFrame {
 		
 		boutonRetourMessagerie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
+				FenetreMessagerie fenetre = new FenetreMessagerie(reponseGerant);
+				fenetre.setVisible(true);
 				// permet le retour vers la page contenant la boite de reception du gérant
 			}			
 		});
@@ -105,7 +107,9 @@ public class FenetreReponseMessage extends JFrame {
 					Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
 
 					// fermeture de la fenetre
-					setVisible(false);
+					dispose();
+					FenetreMessagerie fenetre = new FenetreMessagerie(reponseGerant);
+					fenetre.setVisible(true);
 					
 					break;
 				

@@ -35,6 +35,7 @@ import basededonnees.SGBD;
 
 import metier.Association;
 import metier.Client;
+import metier.Message;
 import metier.Particulier;
 
 
@@ -389,7 +390,14 @@ public class FenetreDialogCreationCompte extends JDialog{
 					// imageInformation);
 					//
 					//
-					// setVisible(false);
+					// dispose();
+					// envoi du message avec le mot de passe 
+//					java.util.Date date = new java.util.Date();
+//					
+//					@SuppressWarnings("deprecation")
+//					java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+//					Message messageMotPasse = new Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est " +  identifiant.getText() + "et votre mot de passe est " +  motDePasse + ". Cordialement ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
+//					
 					// // Essai d'ouverture du menu Utilisateur après une
 					// création de compte correcte
 					// MenuUtilisateur men = new MenuUtilisateur();
@@ -514,6 +522,11 @@ public class FenetreDialogCreationCompte extends JDialog{
 //							affichageMotDePasse = new JOptionPane();
 //							affichageMotDePasse.showMessageDialog(null, "Retenez votre mot de passe : " + motDePasse, "Information", JOptionPane.INFORMATION_MESSAGE, imageInformation);
 //							
+//							java.util.Date date = new java.util.Date();
+//						
+//							@SuppressWarnings("deprecation")
+//							java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
+//							Message messageMotPasse = new Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est " +  identifiant.getText() + "et votre mot de passe est " +  motDePasse + ". Cordialement ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
 //
 //							setVisible(false);
 //							// Essai d'ouverture du menu Utilisateur après une création de compte correcte

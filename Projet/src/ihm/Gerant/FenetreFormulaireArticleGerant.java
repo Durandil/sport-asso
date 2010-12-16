@@ -192,6 +192,8 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 
 					// puis fermer la page
 					dispose();
+					FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+					fen.setVisible(true);
 					
 					break;
 				case 1 :
@@ -219,7 +221,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
-				setVisible(false);
+				dispose();
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+				fen.setVisible(true);
 			}
 		});
 		
@@ -391,7 +395,9 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
-				setVisible(false);
+				dispose();
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+				fen.setVisible(true);
 				
 			}
 		});
