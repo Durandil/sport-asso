@@ -52,7 +52,7 @@ public class MenuGerant extends JFrame {
 
 	public MenuGerant(){
 		this.setPreferredSize(new Dimension(900,600));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocation(0,0);
 		this.setResizable(false);
 		

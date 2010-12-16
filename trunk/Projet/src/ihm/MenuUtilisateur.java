@@ -52,7 +52,7 @@ public class MenuUtilisateur extends JFrame {
 	
 	public MenuUtilisateur(){
 		this.setSize(400, 300);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Bienvenue : "+ FenetreDialogIdentification.clientUserIdentifiant);
 		

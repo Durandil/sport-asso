@@ -350,7 +350,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
-				setVisible(false);
+				dispose();
+				FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+				fen.setVisible(true);
 			}
 		});
 		
@@ -659,7 +661,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
+				FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+				fen.setVisible(true);
 			}
 		});
 		
