@@ -12,7 +12,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import oracle.jdbc.pool.OracleDataSource;
-import exception.ColonneInconnue;
 
 public class SGBD {
 
@@ -21,17 +20,17 @@ public class SGBD {
 	/**Note : La plupart des méthodes de cette classe sont issues du TP 2**/
 	/**********************************************************************/
 	static private Connection c;
-	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	//final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	//URL à utiliser lorsque l'on est pas à l'Ensai :
-	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
+	final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 	
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 	/** TODO : Penser à modifier les id/mdp ! **/
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 	
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -118,37 +117,6 @@ public class SGBD {
 	}
 
 	// Méthode issue du TP2
-	public static void insererTuples(String nomTable,
-			ArrayList<String> nomColonnes, ArrayList<ArrayList<String>> valeurs) {
-		connecter();
-		String colonne = "(";
-		for (int i = 0; i < nomColonnes.size(); i++) {
-
-			if (i < nomColonnes.size() - 1) {
-				colonne = colonne + nomColonnes.get(i) + " , ";
-			} else {
-				colonne = colonne + nomColonnes.get(i) + " )";
-			}
-		}
-
-		for (List<String> ligneBD : valeurs) {
-			String requete = new String();
-			for (int j = 0; j < valeurs.get(1).size(); j++) {
-
-				if (j < valeurs.get(1).size() - 1) {
-					requete = requete + " '" + ligneBD.get(j) + "' ,";
-				} else {
-					requete = requete + " '" + ligneBD.get(j) + "' ";
-				}
-			}
-
-			executeUpdate("INSERT INTO " + nomTable + " " + colonne + " VALUES"
-					+ "(" + requete + ")");
-		}
-
-	}
-
-	// Méthode issue du TP2
 	public static void afficheSelectEtoile(String table) {
 		connecter();
 		Statement st = null;
@@ -214,7 +182,7 @@ public class SGBD {
 
 	// Méthode issue du TP2
 	public static void testerColonnes(String nomTable,
-			ArrayList<String> nomColonne) throws ColonneInconnue {
+			ArrayList<String> nomColonne)  {
 		ArrayList<String> as = new ArrayList<String>(nomColonne);
 		connecter();
 		Statement st = null;
