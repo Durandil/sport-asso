@@ -268,7 +268,6 @@ public class FenetreDialogCreationCompte extends JDialog{
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
-			private JOptionPane erreurSaisie;
 
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e){

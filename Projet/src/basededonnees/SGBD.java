@@ -1,5 +1,8 @@
 package basededonnees;
 
+import ihm.modeleTableau.ModeleTableauCatalogue;
+import ihm.modeleTableau.ModeleTableauCommande;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -29,8 +32,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 	
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -662,6 +665,9 @@ public class SGBD {
 	
 	//Méthode permettant de récupérer l'ensemble des éléments de DEUX champs (de nature string)
 	//d'une table donnée (tous entrés en paramètres)
+	/**
+	 * 
+	 */
 	public static ArrayList<String[]> selectDeuxChampsString(String table, String champ1, String champ2) {
 		connecter();
 		ArrayList<String[]> liste = new ArrayList<String[]>();
@@ -699,10 +705,22 @@ public class SGBD {
 		return liste;
 	}
 	
-	//TODO 
-	// Méthode qui permettra de récupérer les statistiques sur le montant des commandes d'un
-	// client pour la fiche client.  moyenne, min et max.
-
+	
+	
+	/**
+	 *Récupère la valeur d'une statistiques sur le montant des commandes d'un
+	 *client pour la fiche client parmi la moyenne, le minimum et le maximum
+	 * 
+	 * 
+	 *@param identifiant
+	 *			identifiant du client
+	 *
+	 *@param statistique
+	 *			statistique sur le montant des commandes ("avg" pour la moyenne,"max" pour le 
+	 *			maximum et "min" pour le minimum
+	 *
+	 *@return la valeur de la statistique sur les commandes du client
+	 */
 	public static String statistiqueClassiqueClient(String identifiant, String statistique){
 		connecter();
 		Statement st = null;
@@ -732,6 +750,14 @@ public class SGBD {
 		return rs;
 	}
 	
+	/**
+	 * Retourne le nombre de commandes effectuées par un client
+	 * 
+	 * @param identifiant
+	 * 				identifiant unique du client
+	 * @return
+	 * 		le nombre de commandes effectuées par le client
+	 */
 	public static String nbreCommandeClient(String identifiant){
 		connecter();
 		Statement st = null;
@@ -760,7 +786,18 @@ public class SGBD {
 		}
 		return rs;
 	}
-
+	
+	/**
+	 * Retourne une liste contenant l'identifiant et la date de la plus grosse commande 
+	 * effectuée par un client au sens du montant de la commande
+	 * 
+	 * @param identifiant :
+	 * 				Identifiant unique du client (String)
+	 * @return
+	 * 	un arrayList contenant l'identifiant et la date de la plus grosse commande du client
+	 * entré en paramètre
+	 * 
+	 */
 	public static ArrayList<String> StatistiquePlusGrosseCommande(String identifiant){
 		connecter();
 		Statement st = null;
@@ -768,7 +805,9 @@ public class SGBD {
 		ArrayList<String> listeStat = new ArrayList<String>();
 		String id ="Aucune";
 		String date = "NA";
-
+		// Si le client n'a effectué aucune commande jusqu'à aujourd'hui, alors on retourne 
+		// "Aucune" pour l'identifiant et NA pour signifier qu'aucune date n'a été trouvé
+		
 		try {
 			st = c.createStatement();
 			res= st.executeQuery("select IDCOMMANDE,DATECOMMANDE from commande " +
@@ -799,44 +838,54 @@ public class SGBD {
 		return listeStat;
 	}
 	
-	
-	// TODO 
-	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
-	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
-		connecter();
-		ArrayList<String> client = new ArrayList<String>();
-		
-		Statement st = null ;
-		ResultSet res= null;
-		try{
-			st=c.createStatement();
-			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
-								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
-								"ETATCOMPTE FROM CLIENT VILLE" +
-								"WHERE IDCLIENT='"+ mailIdentifiant+"'" + "AND CLIENT.IDVILLE = VILLE.IDVILLE;");
-			
-			ResultSetMetaData rsmd = res.getMetaData();
-			
-			for(int i=1;i==rsmd.getColumnCount();i++){
-				client.add(res.getString(i));
-			}
-			
-		}
-		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-		}
-		finally{
-			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
-			fermer();
-		}
-		
-		return client;
-	}
-	
-	// Méthode qui permet de selectionner des articles 
-	// dont le stock est inférieur à la quantité seuil ou en rupture de stock
+//	
+//	// TODO 
+//	// Méthode qui récuperera les attributs d'un client à partir de son identifiant
+//	public static ArrayList<String> recupererAttributClient(String mailIdentifiant){
+//		connecter();
+//		ArrayList<String> client = new ArrayList<String>();
+//		
+//		Statement st = null ;
+//		ResultSet res= null;
+//		try{
+//			st=c.createStatement();
+//			res= st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT," +
+//								"ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
+//								"ETATCOMPTE FROM CLIENT VILLE" +
+//								"WHERE IDCLIENT='"+ mailIdentifiant+"'" + "AND CLIENT.IDVILLE = VILLE.IDVILLE;");
+//			
+//			ResultSetMetaData rsmd = res.getMetaData();
+//			
+//			for(int i=1;i==rsmd.getColumnCount();i++){
+//				client.add(res.getString(i));
+//			}
+//			
+//		}
+//		catch(SQLException e){
+//			System.out.println("Echec de la tentative d’interrogation : "
+//					+ e.getMessage());
+//		}
+//		finally{
+//			System.out.println("Tentative de sauvegarde");
+//			SGBD.executeUpdate("COMMIT");
+//			fermer();
+//		}
+//		
+//		return client;
+//	}
+//	
+
+	/**
+	 * Retourne la liste des articles dont le stock est inférieur à la quantité seuil 
+	 * ou en rupture de stock
+	 * 
+	 * @see ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)
+	 * 
+	 * @return la liste des articles qui ont besoin d'être réapprovisionnés du fait de leur
+	 * quantité en stock avec les identifiants en première position, puis la description de 
+	 * l'article, puis le stock présent au moment présent et pour finir le prix initial.
+	 * 
+	 */
 	public static ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
 		
 		connecter();
@@ -852,16 +901,18 @@ public class SGBD {
 		
 			st = c.createStatement();
 			
+			// La requete va selectionner les articles qui sont rupture de stock et dont la 
+			// quantité actuelle en stock est inférieure à celle de la catégorie d'article 
+			// à laquelle ils appartiennent
 			String requete = "select idarticle,description,stock,prixinitial "+
 			" from ARTICLE where (etatarticle !='Supprimé' and (stock=0 or idarticle in ( select idarticle from article, "
 			+" categorie where article.idcategorie = categorie.idcategorie and "
 			+" stock< categorie.QUANTITELIMITE)))";
-			System.out.println(requete);
+
 			res = st.executeQuery(requete);
 
 			while (res.next()) {
 
-				
 				String s = res.getObject(1).toString();
 				String s2 = res.getObject(2).toString();
 				String s3 = res.getObject(3).toString();
@@ -1040,7 +1091,7 @@ public class SGBD {
 					conditionWhereOr=conditionWhereOr+" or ";
 					ajouterChamp=false;
 				}
-				conditionWhereOr=conditionWhereOr+"NOMVILLE Like '%"+ville+"%'";
+				conditionWhereOr=conditionWhereOr+"VILLNOMVILLE Like '%"+ville+"%'";
 				ajouterChamp=true;
 			}
 			
@@ -1056,6 +1107,9 @@ public class SGBD {
 
 			res=st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
 					" FROM CLIENT, VILLE " + conditionWhereOr );
+			
+			System.out.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT" +
+					" FROM CLIENT, VILLE " + conditionWhereOr);
 			
 			while (res.next()){
 				
@@ -1102,8 +1156,23 @@ public class SGBD {
 		}
 		
 		return informationsClient;
-	}
-
+	}	
+	
+	/**
+	 * Retourne le nombre de promotions exceptionnelles valables à l'instant présent 
+	 * dans la base de données. Elle est utilisée uniquement pour le calcul du montant 
+	 * d'une commande.
+	 * 
+	 * @see Commande#montantCommandePourUnArticle()
+	 * 
+	 * @param idArticle
+	 * 				L'identifiant unique de l'article
+	 * @param estFidele
+	 * 				nombre permettant de traduire l'adhésion ou non au magasin
+	 * 
+	 * @return le nombre de promotions exceptionelles au jour d'aujourd'hui 
+	 * 		
+	 */
 	public static int compterNbrePromoExceptionnellesArticle(String idArticle,int estFidele){
 		connecter();
 		Statement st = null ;
@@ -1153,6 +1222,23 @@ public class SGBD {
 		return nbrePromo;
 	}
 	
+	/**
+	 * Retourne le pourcentage de promotion exceptionnelle existant sur un article entré
+	 * en paramètre au moment où est exécuté la méthode. Ce pourcentage de promotion 
+	 * exceptionelle dépend aussi du fait que le client soit adhérent ou non.
+	 * 
+	 * @see Commande#montantCommandePourUnArticle()
+	 * @see SGBD#compterNbrePromoExceptionnellesArticle(String, int)
+	 * 
+	 * @param idArticle
+	 * 				L'identifiant unique de l'article
+	 * @param estFidele
+	 * 				nombre permettant de traduire l'adhésion ou non au magasin
+	 * 
+	 * @return le pourcentage actuel dans les promotions exceptionnelles actuelles sur l'article
+	 * 			donné ( dans un String)
+	 * 
+	 */
 	public static String recupererPourcentagePromotionExceptionnelleArticle(String idArticle,int estFidele){
 		connecter();
 		Statement st = null ;
@@ -1196,12 +1282,19 @@ public class SGBD {
 		return pourcentage ;
 	}
 	
+	/**
+	 * Retourne 
+	 * 
+	 * @param identifiantCommande
+	 * @param idArticle
+	 * @return
+	 */
 	public static String recupererPourcentagePromotionDegressifArticleCommande(String identifiantCommande, String idArticle){
 		connecter();
 		Statement st = null ;
 		ResultSet res= null;
 		String requete="";
-		// on met le pourcentage de promo degressif si la requete ne retourne pas de resultat 
+		// on met le pourcentage de promo degressif à zéro si la requete ne retourne pas de resultat 
 		//cad si la quantite commandee de l'article est inférieure au seuil minimal nécessaire
 		// pour bénéficier d'une promotion degressive sur l'article
 		String pourcentage="0";
