@@ -6,10 +6,7 @@ import javax.swing.table.AbstractTableModel;
 import basededonnees.SGBD;
 
 public class ModeleTableauClient extends AbstractTableModel {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private final Object[][] donnees;
@@ -20,9 +17,9 @@ public class ModeleTableauClient extends AbstractTableModel {
 		super();
 		//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
 		ArrayList<ArrayList<String>> listeClients = SGBD.recupererInformationRechercheClient(idClient,nom,denom,ville);
-		
+	
 		donnees = new Object[listeClients.get(0).size()][4];
-
+		
 		if (listeClients.size()>0){
 			ArrayList<String> listeIdentifiants = listeClients.get(0);
 			ArrayList<String> listeNom = listeClients.get(1);
