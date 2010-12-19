@@ -32,8 +32,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 	
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -323,13 +323,13 @@ public class SGBD {
 	 * d'un champ issu d'une table tous deux précisés en paramètres
 	 * 
 	 * @param table
-	 * 			nom de la table sur laquelle s'applique la requete
+	 * 			Nom de la table sur laquelle s'applique la requete
 	 * @param str
-	 * 			champ de la table retourné par la requete dans un ArrayList
+	 * 			Champ de la table retourné par la requête dans un ArrayList
 	 * @param champOrdre
-	 * 			champ de la table qui va determiné l'ordre de la liste retournée
+	 * 			Champ de la table qui va déterminer l'ordre de la liste retournée
 	 * 
-	 * @return un ArrayList du champ str selon l'ordre déterminé par champOrdre
+	 * @return Un ArrayList du champ str selon l'ordre déterminé par champOrdre
 	 * 
 	 */
 	public static ArrayList<String> selectListeStringOrdonne(String table, String str,String champOrdre) {
@@ -366,19 +366,19 @@ public class SGBD {
 
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments ordonnés
-	 * d'un champ de type date issu d'une table tous deux précisés en paramètres
-	 * le format que l'on désire obtenir est aussi précisé en paramètre
+	 * d'un champ de type date issu d'une table tous deux précisés en paramètres.
+	 * Le format que l'on désire obtenir est aussi précisé en paramètre
 	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ de date
+	 * 			Table dans laquelle se trouve le champ de date
 	 * @param str
-	 * 			nom du champ de date dans la table
+	 * 			Nom du champ de date dans la table
 	 * @param format
-	 * 			format dans lequel on veut récupérer les dates dans la liste
+	 * 			Format dans lequel on veut récupérer les dates dans la liste
 	 * @param champOrdre
-	 * 			champ qui va déterminer l'ordre de la liste 
-	 * @return
-	 * 			un arraylist d'un champ de date ordonné
+	 * 			Champ qui va déterminer l'ordre de la liste 
+	 * 
+	 * @return Un arraylist d'un champ de date ordonné
 	 */
 	public static ArrayList<String> selectListeDatesOrdonne(String table, String str, String format,String champOrdre) {
 		connecter();
@@ -413,13 +413,16 @@ public class SGBD {
 
 	
 	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type float
+	 * issu d'une table tous deux précisés en paramètres.
+	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * 			Table dans laquelle se trouve le champ dont on veut obtenir la liste
 	 * @param var
-	 * 			champ de la table de nature Float que l'on souhaite récupérer
-	 * @return
-	 * 		l'ensemble des éléments (de nature Float)d'une variable issu d'une 
-	 * 		table tous deux précisés en paramètres
+	 * 			Champ de la table de nature Float que l'on souhaite récupérer
+	 * 
+	 * @return L'ensemble des éléments (de nature Float) d'une variable issue d'une 
+	 * 			table tous deux précisés en paramètres.
 	 */
 	public static ArrayList<Float> selectListeFloat(String table, String var) {
 		connecter();
@@ -454,13 +457,15 @@ public class SGBD {
 	
 
 	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type Integer
+	 * issu d'une table tous deux précisés en paramètres.
+	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * 			Table dans laquelle se trouve le champ dont on veut obtenir la liste
 	 * @param var
-	 * 			champ de la table de nature Integer que l'on souhaite récupérer
-	 * @return
-	 * 		l'ensemble des éléments (de nature int)d'une variable issu d'une 
-	 * 		table tous deux précisés en paramètres
+	 * 			Champ de la table de nature Integer que l'on souhaite récupérer
+	 * @return L'ensemble des éléments (de nature int) d'une variable issue d'une 
+	 * 			table tous deux précisés en paramètres
 	 */
 	public static ArrayList<Integer> selectListeInt(String table, String var) {
 		connecter();
@@ -496,14 +501,18 @@ public class SGBD {
 	
 
 	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type Integer
+	 * issu d'une table tous deux précisés en paramètres.
+	 * Ces éléments seront triés selon leur valeur d'une deuxième variable de la table.
+	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * 			Table dans laquelle se trouve le champ dont on veut obtenir la liste
 	 * @param var
-	 * 			champ de la table de nature Integer que l'on souhaite récupérer
+	 * 			Champ de la table de nature Integer que l'on souhaite récupérer
 	 * @param champOrdre
-	 * 			champ de la table qui doit ordonner la liste retournée 
-	 * @return
-	 * 		l'ensemble des éléments ordonnés (de nature Integer)d'une variable issu d'une 
+	 * 			Variable de la table servant à ordonner les éléments obtenus
+	 * 
+	 * @return l'ensemble des éléments ordonnés (de nature Integer) d'une variable issu d'une 
 	 * 		table tous deux précisés en paramètres
 	 */
 	public static ArrayList<Integer> selectListeIntOrdonne(String table, String var,String champOrdre) {
@@ -539,16 +548,21 @@ public class SGBD {
 	}
 	
 	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type Integer
+	 * issu d'une table tous deux précisés en paramètres.
+	 * Ces éléments seront triés selon leur valeur d'une deuxième variable de la table.
+	 * S'ajoute à cela une condition sur les élemens sélectionnés.
+	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * 			Table dans laquelle se trouve le champ dont on veut obtenir la liste
 	 * @param var
-	 * 			champ de la table de nature Integer que l'on souhaite récupérer
+	 * 			Champ de la table de nature Integer que l'on souhaite récupérer
 	 * @param champOrdre
-	 * 			champ de la table qui va déterminer l'ordre de la liste retournée
+	 * 			Variable de la table servant à ordonner les éléments obtenus
 	 * @param cond
-	 * 			condition WHERE qui va s'appliquer sur la table
-	 * @return
-	 * 		l'ensemble des éléments (de nature Integer)d'une variable issu d'une 
+	 * 			Condition WHERE qui va s'appliquer sur la table
+	 * 
+	 * @return L'ensemble des éléments (de nature Integer) d'une variable issus d'une 
 	 * 		table avec une condition WHERE tous deux précisés en paramètres
 	 */
 	public static ArrayList<Integer> selectListeIntOrdonneCondition(String table, String var,String champOrdre,String cond) {
@@ -583,17 +597,22 @@ public class SGBD {
 	
 	
 	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type String
+	 * issu d'une table tous deux précisés en paramètres.
+	 * Ces éléments seront triés selon leur valeur d'une deuxième variable de la table.
+	 * S'ajoute à cela une condition sur les élemens sélectionnés.
+	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * 			Table dans laquelle se trouve le champ dont on veut obtenir la liste
 	 * @param var
-	 * 			champ de la table de nature String que l'on souhaite récupérer
+	 * 			Champ de la table de nature String que l'on souhaite récupérer
 	 * @param champOrdre
-	 * 			champ de la table qui va déterminer l'ordre de la liste retournée
+	 * 			Variable de la table servant à ordonner les éléments obtenus
 	 * @param cond
-	 * 			condition WHERE qui va s'appliquer sur la table
-	 * @return
-	 * 		l'ensemble des éléments (de nature String)d'une variable issu d'une 
-	 * 		table avec une condition WHERE tous deux précisés en paramètres
+	 * 			Condition WHERE qui va s'appliquer sur la table
+	 * 
+	 * @return L'ensemble des éléments (de nature String) d'une variable issus d'une 
+	 * 			table avec une condition WHERE tous deux précisés en paramètres
 	 */
 	public static ArrayList<String> selectListeStringOrdonneCondition(String table, String var,String champOrdre,String cond) {
 		connecter();
@@ -627,16 +646,20 @@ public class SGBD {
 
 	
 	/**
+	 * Méthode permettant d'obtenir un élément d'un champ de type String
+	 * issu d'une table tous deux précisés en paramètres.
+	 * S'ajoute à cela une condition qui s'applique sur un autre champ
+	 * 
 	 * @param table
-	 * 			table dans laquelle se trouve le champ que l'on veut récupérer
+	 * 			Table dans laquelle se trouve le champ que l'on veut récupérer
 	 * @param champ
-	 * 			champ dans lequel on recupère l'élément
+	 * 			Champ dans lequel on recupère l'élément
 	 * @param champDeCondition
-	 * 			champ sur lequel on met une condition dans la table
+	 * 			Champ sur lequel on met une condition dans la table
 	 * @param condition
-	 * 			condition sur le champ de la table : champDeCondition
-	 * @return
-	 * 		Un élément d'un champ (de nature String) en apposant une condition 
+	 * 			Condition sur le champ de la table : champDeCondition
+	 * 
+	 * @return Un élément d'un champ (de nature String) en apposant une condition 
 	 * 		sur un autre champ (dont les éléments sont aussi de nature String)
 	 */
 	public static String selectStringConditionString(String table, String champ, String champDeCondition, String condition) {
@@ -682,19 +705,23 @@ public class SGBD {
 	
 
 	/**
-	 * @param table
-	 * 			nom de la table dans laquelle se situe l'élément à récupérer
-	 * @param champDate
-	 * 			nom du champ date à récupérer
-	 * @param champDeCondition
-	 * 			nom du champ sur lequel porte la condition
-	 * @param condition
-	 * 			condition exprimée sur champDeCondition
-	 * @param format
-	 * 			format sous lequel on retourne la date en String
+	 * Méthode permettant d'obtenir un élément d'un champ de type Date
+	 * issu d'une table tous deux précisés en paramètres.
+	 * S'ajoute à cela une condition qui s'applique sur un autre champ, qui lui est de type String
 	 * 
-	 * @return un élément d'un champ date sous forme de String en apposant une condition 
-	 * sur un autre champ (dont les éléments sont aussi de nature String
+	 * @param table
+	 * 			Nom de la table dans laquelle se situe l'élément à récupérer
+	 * @param champDate
+	 * 			Nom du champ date à récupérer
+	 * @param champDeCondition
+	 * 			Nom du champ sur lequel porte la condition
+	 * @param condition
+	 * 			Condition exprimée sur champDeCondition
+	 * @param format
+	 * 			Format sous lequel on retourne la date en String
+	 * 
+	 * @return Un élément d'un champ date sous forme de String en apposant une condition 
+	 * sur un autre champ (dont les éléments sont aussi de nature String)
 	 * 
 	 */
 	public static String selectDateConditionString(String table, String champDate, String champDeCondition, String condition, String format) {
@@ -736,18 +763,20 @@ public class SGBD {
 		
 		return s;
 	}
-	
 
 	/**
+	 *  Méthode permettant de récupérer l'ensemble des éléments de deux champs (de nature String)
+	 *	d'une table donnée (tous entrés en paramètres)
+	 *
 	 * @param table
-	 * 			table dans laquelle se situe les deux champs
+	 * 			Table dans laquelle se situe les deux champs
 	 * @param champ1
-	 * 			premier champ dont on veut récupérer les données
+	 * 			Premier champ dont on veut récupérer les données
 	 * @param champ2
-	 * 			deuxième champ dont on veut récupérer les données
-	 * @return
-	 * 		un arraylist de String[] de l'ensemble des éléments de DEUX champs (de nature 
-	 * 		string) d'une table donnée (tous entrés en paramètres)
+	 * 			Deuxième champ dont on veut récupérer les données
+	 * 
+	 * @return Un ArrayList de String[] comprenant les données
+	 * 		
 	 */
 	public static ArrayList<String[]> selectDeuxChampsString(String table, String champ1, String champ2) {
 		connecter();
@@ -783,18 +812,18 @@ public class SGBD {
 	}
 	
 	/**
-	 *Récupère la valeur d'une statistiques sur le montant des commandes d'un
-	 *client pour la fiche client parmi la moyenne, le minimum et le maximum
+	 * Récupère la valeur d'une statistiques sur le montant des commandes d'un
+	 * client pour la fiche client parmi la moyenne, le minimum et le maximum
 	 * 
 	 * 
-	 *@param identifiant
-	 *			identifiant du client
+	 * @param identifiant
+	 *			Identifiant du client
 	 *
-	 *@param statistique
-	 *			statistique sur le montant des commandes ("avg" pour la moyenne,"max" pour le 
-	 *			maximum et "min" pour le minimum
+	 * @param statistique
+	 *			Statistique sur le montant des commandes ("avg" pour la moyenne,"max" pour le 
+	 *			maximum et "min" pour le minimum)
 	 *
-	 *@return la valeur de la statistique sur les commandes du client
+	 * @return La valeur de la statistique sur les commandes du client
 	 */
 	public static String statistiqueClassiqueClient(String identifiant, String statistique){
 		connecter();
@@ -827,9 +856,9 @@ public class SGBD {
 	 * Retourne le nombre de commandes effectuées par un client
 	 * 
 	 * @param identifiant
-	 * 				identifiant unique du client
-	 * @return
-	 * 		le nombre de commandes effectuées par le client
+	 * 				Identifiant unique du client
+	 * 
+	 * @return Le nombre de commandes effectuées par le client
 	 */
 	public static String nbreCommandeClient(String identifiant){
 		connecter();
@@ -864,11 +893,11 @@ public class SGBD {
 	 * Retourne une liste contenant l'identifiant et la date de la plus grosse commande 
 	 * effectuée par un client au sens du montant de la commande
 	 * 
-	 * @param identifiant :
+	 * @param identifiant 
 	 * 				Identifiant unique du client (String)
-	 * @return
-	 * 	un arrayList contenant l'identifiant et la date de la plus grosse commande du client
-	 * entré en paramètre
+	 * 
+	 * @return Un ArrayList de String contenant l'identifiant et la date de la plus grosse commande du client
+	 * 			entrée en paramètre
 	 * 
 	 */
 	public static ArrayList<String> StatistiquePlusGrosseCommande(String identifiant){
@@ -952,12 +981,12 @@ public class SGBD {
 	 * Retourne la liste des articles dont le stock est inférieur à la quantité seuil 
 	 * ou en rupture de stock
 	 * 
-	 * @see ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)
 	 * 
 	 * @return la liste des articles qui ont besoin d'être réapprovisionnés du fait de leur
 	 * quantité en stock avec les identifiants en première position, puis la description de 
 	 * l'article, puis le stock présent au moment présent et pour finir le prix initial.
-	 * 
+	 *
+	 * @see ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)
 	 */
 	public static ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
 		
