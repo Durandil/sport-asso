@@ -1,6 +1,7 @@
 package basededonnees;
 
 import ihm.modeleTableau.ModeleTableauCatalogue;
+import ihm.modeleTableau.ModeleTableauClient;
 import ihm.modeleTableau.ModeleTableauCommande;
 
 import java.sql.Connection;
@@ -1138,15 +1139,29 @@ public class SGBD {
 	}
 	
 
-	
-	// Cette méthode permet de selectionner tous les individus satifaisant l'un des critères remplis
-	// dans la fenetre de recherche d'un client chez le gérant
-	// Elle retournera uniquement l'identifiant de l'utilisateur
-	// Pour récupérer les autres attributs, on utilisera SelectConditionString
 	/**
+	 * Cette méthode permet de selectionner tous les individus satifaisant l'un des critères remplis
+	 * dans la fenetre de recherche d'un client chez le gérant
+	 * 
 	 * @param idClient
+	 * 			chaine de caractère saisi dans le champ identifiant client
 	 * @param nomClient
-	 * @param
+	 * 			chaine de caractère saisi dans le champ nom du client pour les particuliers
+	 * @param denomination
+	 * 			chaine de caractère saisi dans le champ denomination du client pour les associations
+	 * @param ville
+	 * 			chaine de caractère saisi dans le champ ville
+	 * 
+	 * @see ModeleTableauClient#ModeleTableauClient(String, String, String, String)
+	 * 
+	 * @return 
+	 * 		<p>un ArrayList contenant  : <ul>
+	 * 		<li> un ArrayList de tous les identifiants correspondants à la recherche.</li>
+	 * 		<li> un ArrayList de tous les noms de clients correspondants à la recherche</li>
+	 * 		<li> un ArrayList de tous les prenoms de clients correspondants à la recherche</li>
+	 * 		<li> un ArrayList de toutes les dénominatiosn client correspondantes à la recherche</li>
+	 * 		</ul> <p>
+	 * 		
 	 */
 	public static ArrayList<ArrayList<String>> recupererInformationRechercheClient(String idClient,String nomClient,String denomination,String ville){
 		SGBD.connecter();
@@ -1190,7 +1205,7 @@ public class SGBD {
 					conditionWhereOr=conditionWhereOr+" or ";
 					ajouterChamp=false;
 				}
-				conditionWhereOr=conditionWhereOr+"VILLNOMVILLE Like '%"+ville+"%'";
+				conditionWhereOr=conditionWhereOr+"VILLE.NOMVILLE Like '%"+ville+"%'";
 				ajouterChamp=true;
 			}
 			
@@ -1232,12 +1247,8 @@ public class SGBD {
 					listeString2.add(s2);
 					listeString3.add(s3);
 					s4 = res.getObject(4).toString();
-					listeString4.add(s4);
-					
-					
+					listeString4.add(s4);	
 				}	
-				
-				
 			}
 			informationsClient.add(listeString1);
 			informationsClient.add(listeString2);
@@ -1245,12 +1256,10 @@ public class SGBD {
 			informationsClient.add(listeString4);
 		}
 		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
 		}
 		finally{
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
 		
@@ -1267,7 +1276,8 @@ public class SGBD {
 	 * @param idArticle
 	 * 				L'identifiant unique de l'article
 	 * @param estFidele
-	 * 				nombre permettant de traduire l'adhésion ou non au magasin
+	 * 				Indique si le client possède une carte de fidélité (1) ou non
+	 *            (0)
 	 * 
 	 * @return le nombre de promotions exceptionelles au jour d'aujourd'hui 
 	 * 		
@@ -1332,7 +1342,8 @@ public class SGBD {
 	 * @param idArticle
 	 * 				L'identifiant unique de l'article
 	 * @param estFidele
-	 * 				nombre permettant de traduire l'adhésion ou non au magasin
+	 * 				Indique si le client possède une carte de fidélité (1) ou non (0)
+	 *            
 	 * 
 	 * @return le pourcentage actuel dans les promotions exceptionnelles actuelles sur l'article
 	 * 			donné ( dans un String)
@@ -1382,11 +1393,27 @@ public class SGBD {
 	}
 	
 	/**
-	 * Retourne 
+	 * Cette méthode recherche le pourcentage de promotion dégressif d'un article d'une commande
+	 * c'est à dire associé à la quantité commandée. 
+	 * <p>
+	 * Pour informations :
+	 * <ul>
+	 * <li>Plus la quantité commandée sera importante, plus le pourcentage de promotion (degressif) 
+	 * sera important.</li> 
+	 * <li>Ce pourcentage est fonction de la catégorie de prix à laquelle est rattachée l'article.</li>
+	 * <li>Quand la quantité commandée est inférieure au seuil minimal nécessaire
+	 * pour bénéficier d'une promotion degressive sur l'article, la méthode retourne 0.</li>
+	 * </ul>
+	 * </p>
 	 * 
 	 * @param identifiantCommande
+	 * 				idenifiant de la commande à laquelle appartient l'article
 	 * @param idArticle
-	 * @return
+	 * 				identifiant unique de l'article
+	 * 
+	 * @see Commande
+	 * @see Commande#montantCommandePourUnArticle(String,LigneCommande,int)
+	 * 
 	 */
 	public static String recupererPourcentagePromotionDegressifArticleCommande(String identifiantCommande, String idArticle){
 		connecter();
