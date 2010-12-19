@@ -316,8 +316,22 @@ public class SGBD {
 		return listeString;
 	}
 	
-	//Méthode permettant d'obtenir l'ensemble des éléments (de nature String)
-	//d'un champ issu d'une table tous deux précisés en paramètres
+	
+	
+	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments (de nature String)
+	 * d'un champ issu d'une table tous deux précisés en paramètres
+	 * 
+	 * @param table
+	 * 			nom de la table sur laquelle s'applique la requete
+	 * @param str
+	 * 			champ de la table retourné par la requete dans un ArrayList
+	 * @param champOrdre
+	 * 			champ de la table qui va determiné l'ordre de la liste retournée
+	 * 
+	 * @return un ArrayList du champ str selon l'ordre déterminé par champOrdre
+	 * 
+	 */
 	public static ArrayList<String> selectListeStringOrdonne(String table, String str,String champOrdre) {
 		connecter();
 		ArrayList<String> listeString = new ArrayList<String>();
@@ -343,17 +357,29 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
 
 		return listeString;
 	}
-	
-	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés
-	//d'un champ de type date issu d'une table tous deux précisés en paramètres
-	//LE format que l'on désire obtenir est aussi précisé en paramètre
+
+	/**
+	 * Méthode permettant d'obtenir l'ensemble des éléments ordonnés
+	 * d'un champ de type date issu d'une table tous deux précisés en paramètres
+	 * le format que l'on désire obtenir est aussi précisé en paramètre
+	 * 
+	 * @param table
+	 * 			table dans laquelle se trouve le champ de date
+	 * @param str
+	 * 			nom du champ de date dans la table
+	 * @param format
+	 * 			format dans lequel on veut récupérer les dates dans la liste
+	 * @param champOrdre
+	 * 			champ qui va déterminer l'ordre de la liste 
+	 * @return
+	 * 			un arraylist d'un champ de date ordonné
+	 */
 	public static ArrayList<String> selectListeDatesOrdonne(String table, String str, String format,String champOrdre) {
 		connecter();
 		ArrayList<String> listeString = new ArrayList<String>();
@@ -378,15 +404,23 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
 
 		return listeString;
 	}
-	//Méthode permettant d'obtenir l'ensemble des éléments (de nature Float)
-	//d'une variable issu d'une table tous deux précisés en paramètres
+
+	
+	/**
+	 * @param table
+	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * @param var
+	 * 			champ de la table de nature Float que l'on souhaite récupérer
+	 * @return
+	 * 		l'ensemble des éléments (de nature Float)d'une variable issu d'une 
+	 * 		table tous deux précisés en paramètres
+	 */
 	public static ArrayList<Float> selectListeFloat(String table, String var) {
 		connecter();
 		ArrayList<Float> listeFloat = new ArrayList<Float>();
@@ -411,7 +445,6 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -419,8 +452,16 @@ public class SGBD {
 		return listeFloat;
 	}
 	
-	//Méthode permettant d'obtenir l'ensemble des éléments (de nature Integer)
-	//d'une variable issu d'une table tous deux précisés en paramètres
+
+	/**
+	 * @param table
+	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * @param var
+	 * 			champ de la table de nature Integer que l'on souhaite récupérer
+	 * @return
+	 * 		l'ensemble des éléments (de nature int)d'une variable issu d'une 
+	 * 		table tous deux précisés en paramètres
+	 */
 	public static ArrayList<Integer> selectListeInt(String table, String var) {
 		connecter();
 		ArrayList<Integer> listeInt = new ArrayList<Integer>();
@@ -446,7 +487,6 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -454,8 +494,18 @@ public class SGBD {
 		return listeInt;
 	}
 	
-	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés(de nature Integer)
-	//d'une variable issu d'une table tous deux précisés en paramètres
+
+	/**
+	 * @param table
+	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * @param var
+	 * 			champ de la table de nature Integer que l'on souhaite récupérer
+	 * @param champOrdre
+	 * 			champ de la table qui doit ordonner la liste retournée 
+	 * @return
+	 * 		l'ensemble des éléments ordonnés (de nature Integer)d'une variable issu d'une 
+	 * 		table tous deux précisés en paramètres
+	 */
 	public static ArrayList<Integer> selectListeIntOrdonne(String table, String var,String champOrdre) {
 		connecter();
 		ArrayList<Integer> listeInt = new ArrayList<Integer>();
@@ -481,7 +531,6 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
@@ -489,8 +538,19 @@ public class SGBD {
 		return listeInt;
 	}
 	
-	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés(de nature Integer)
-	//d'une variable issu d'une table avec une condition WHERE tous deux précisés en paramètres
+	/**
+	 * @param table
+	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * @param var
+	 * 			champ de la table de nature Integer que l'on souhaite récupérer
+	 * @param champOrdre
+	 * 			champ de la table qui va déterminer l'ordre de la liste retournée
+	 * @param cond
+	 * 			condition WHERE qui va s'appliquer sur la table
+	 * @return
+	 * 		l'ensemble des éléments (de nature Integer)d'une variable issu d'une 
+	 * 		table avec une condition WHERE tous deux précisés en paramètres
+	 */
 	public static ArrayList<Integer> selectListeIntOrdonneCondition(String table, String var,String champOrdre,String cond) {
 		connecter();
 		ArrayList<Integer> listeInt = new ArrayList<Integer>();
@@ -511,22 +571,30 @@ public class SGBD {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			fermer();
-
 		}
 
 		return listeInt;
 	}
 	
 	
-	//Méthode permettant d'obtenir l'ensemble des éléments ordonnés(de nature String)
-	//d'une variable issu d'une table avec une condition WHERE tous deux précisés en paramètres
+	/**
+	 * @param table
+	 * 			table dans laquelle se trouve le champ dont on veut obtenir la liste
+	 * @param var
+	 * 			champ de la table de nature String que l'on souhaite récupérer
+	 * @param champOrdre
+	 * 			champ de la table qui va déterminer l'ordre de la liste retournée
+	 * @param cond
+	 * 			condition WHERE qui va s'appliquer sur la table
+	 * @return
+	 * 		l'ensemble des éléments (de nature String)d'une variable issu d'une 
+	 * 		table avec une condition WHERE tous deux précisés en paramètres
+	 */
 	public static ArrayList<String> selectListeStringOrdonneCondition(String table, String var,String champOrdre,String cond) {
 		connecter();
 		ArrayList<String> listeString = new ArrayList<String>();
@@ -546,21 +614,31 @@ public class SGBD {
 			}
 
 		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			fermer();
-
 		}
 
 		return listeString;
 	}
 	
-	//Méthode permettant de récupérer un élément d'un champ (de nature String)
-	//En apposant une condition sur un autre champ (dont les éléments sont aussi de nature String)
+
+	
+	/**
+	 * @param table
+	 * 			table dans laquelle se trouve le champ que l'on veut récupérer
+	 * @param champ
+	 * 			champ dans lequel on recupère l'élément
+	 * @param champDeCondition
+	 * 			champ sur lequel on met une condition dans la table
+	 * @param condition
+	 * 			condition sur le champ de la table : champDeCondition
+	 * @return
+	 * 		Un élément d'un champ (de nature String) en apposant une condition 
+	 * 		sur un autre champ (dont les éléments sont aussi de nature String)
+	 */
 	public static String selectStringConditionString(String table, String champ, String champDeCondition, String condition) {
 		connecter();
 		String s = null;
@@ -568,9 +646,7 @@ public class SGBD {
 		ResultSet res = null;
 
 		try {
-
 			st = c.createStatement();
-			
 			
 			res = st.executeQuery("SELECT "+champ+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
@@ -590,28 +666,37 @@ public class SGBD {
 					{
 						s = " ";
 					}
-
 				}
 				
-			
-			
 		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			fermer();
-
 		}
 		//Si la requête ne renvoie rien, on "remplit" s par "rien
 		
 		return s;
 	}
 	
-	//Méthode permettant de récupérer un élément d'un champ (de nature String)
-	//En apposant une condition sur un autre champ (dont les éléments sont aussi de nature String)
+
+	/**
+	 * @param table
+	 * 			nom de la table dans laquelle se situe l'élément à récupérer
+	 * @param champDate
+	 * 			nom du champ date à récupérer
+	 * @param champDeCondition
+	 * 			nom du champ sur lequel porte la condition
+	 * @param condition
+	 * 			condition exprimée sur champDeCondition
+	 * @param format
+	 * 			format sous lequel on retourne la date en String
+	 * 
+	 * @return un élément d'un champ date sous forme de String en apposant une condition 
+	 * sur un autre champ (dont les éléments sont aussi de nature String
+	 * 
+	 */
 	public static String selectDateConditionString(String table, String champDate, String champDeCondition, String condition, String format) {
 		connecter();
 		String s = null;
@@ -626,47 +711,43 @@ public class SGBD {
 			res = st.executeQuery("SELECT TO_CHAR("+champDate+",'" + format + "')"+" FROM "+table+" WHERE "+ champDeCondition+" = '"
 					+ condition + "'");
 			
-			System.out.println("SELECT TO_CHAR("+champDate+",'" + format + "')"+" FROM "+table+" WHERE "+ champDeCondition+" = '"
-					+ condition + "'");
 			
-				while (res.next()) {
+			while (res.next()) {
 					
 			//Si le résultat est non nul tout se passe normalement
-					if(res.getObject(1) != null){
-					
-						s = res.getObject(1).toString();
-						
-					}
+				if(res.getObject(1) != null){
+						s = res.getObject(1).toString();	
+				}
 			//Sinon, on affecte un espace au String renvoyé (cf. Classe FenetreDialogGestionCompteClient)
 			//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
-					else
-					{
+					else{
 						s = " ";
 					}
-
-				}
-				
-			
-			
-		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-
-		} finally {
+			}		
+		} 
+		catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
+		} 
+		finally {
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			fermer();
-
 		}
-		//Si la requête ne renvoie rien, on "remplit" s par "rien
+		//Si la requête ne renvoie rien, on "remplit" s par "rien"
 		
 		return s;
 	}
 	
-	//Méthode permettant de récupérer l'ensemble des éléments de DEUX champs (de nature string)
-	//d'une table donnée (tous entrés en paramètres)
+
 	/**
-	 * 
+	 * @param table
+	 * 			table dans laquelle se situe les deux champs
+	 * @param champ1
+	 * 			premier champ dont on veut récupérer les données
+	 * @param champ2
+	 * 			deuxième champ dont on veut récupérer les données
+	 * @return
+	 * 		un arraylist de String[] de l'ensemble des éléments de DEUX champs (de nature 
+	 * 		string) d'une table donnée (tous entrés en paramètres)
 	 */
 	public static ArrayList<String[]> selectDeuxChampsString(String table, String champ1, String champ2) {
 		connecter();
@@ -679,7 +760,6 @@ public class SGBD {
 
 			res = st.executeQuery("SELECT "+champ1+","+champ2+" FROM "+table);
 			
-
 			while (res.next()) {
 
 				String[] listeString = new String[2];
@@ -691,21 +771,16 @@ public class SGBD {
 
 			}
 
-		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-
-		} finally {
+		} 
+		catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
+		} 
+		finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
-
 		}
-
 		return liste;
 	}
-	
-	
 	
 	/**
 	 *Récupère la valeur d'une statistiques sur le montant des commandes d'un
@@ -737,12 +812,10 @@ public class SGBD {
 				if(res.getString(1) != null){
 					rs = res.getString(1).toString();
 				}
-			}
-			
+			}		
 		}
 		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
 		}
 		finally{
 			fermer();
@@ -928,16 +1001,14 @@ public class SGBD {
 			article.add(listeString3);
 			article.add(listeString4);
 
-		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-
-		} finally {
+		} 
+		catch (SQLException e) {
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
+		} 
+		finally {
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			fermer();
-		}
-		
+		}		
 		return article ;
 	}
 	
@@ -976,19 +1047,21 @@ public class SGBD {
 		catch(SQLException e){
 			System.out.println("Echec de la tentative d’interrogation : "
 					+ e.getMessage());
-			}
+		}
 		finally{
 			System.out.println("Tentative de sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
 		}
-		
-		
 		return commande;
 	}
-	
-	// cette méthode a pour but de recuprer le boolean sur la fidelité du client 
-	// et son nombre éventuel de points
+	 
+	/**
+	 * @param identifiant
+	 * 			identfiant du client 
+	 * 
+	 * @return un arraylist le booleen sur l'adhésion au programme fidélité du client 
+	 * 		   et son nombre éventuel de points
+	 */
 	public static ArrayList<String> recupererInformationFideliteClient(String identifiant){
 		SGBD.connecter();
 		Statement st = null ;
@@ -1003,16 +1076,12 @@ public class SGBD {
 			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE CEUX
 			// QUI ONT UNE CARTE DE FIDELITE
 			
-			System.out.println("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
-					" WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
-			
 			res=st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT" +
 								" WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"+identifiant+"'");
 			
-
 			while (res.next()) {
 			
-		//Si le résultat est non nul tout se passe normalement
+				//Si le résultat est non nul tout se passe normalement
 				if(res.getObject(1) != null){
 				
 					fidele = "Oui";
@@ -1023,22 +1092,18 @@ public class SGBD {
 		//(lorsque l'on y chercher à vérifier si un client possède une dénomination pour savoir si c'est un particulier)
 		
 			}
-			
 			resultat.add(fidele);
 			resultat.add(nbpoints);
 			
-			
 		}
 		catch(SQLException e){
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
+			System.out.println("Echec de la tentative d’interrogation : "+ e.getMessage());
 		}
 		finally{
 			
 			System.out.println("Sauvegarde");
-			//SGBD.executeUpdate("COMMIT");
 			SGBD.fermer();
-		}
+		}	
 		
 		return resultat;
 	}
@@ -1049,6 +1114,11 @@ public class SGBD {
 	// dans la fenetre de recherche d'un client chez le gérant
 	// Elle retournera uniquement l'identifiant de l'utilisateur
 	// Pour récupérer les autres attributs, on utilisera SelectConditionString
+	/**
+	 * @param idClient
+	 * @param nomClient
+	 * @param
+	 */
 	public static ArrayList<ArrayList<String>> recupererInformationRechercheClient(String idClient,String nomClient,String denomination,String ville){
 		SGBD.connecter();
 		Statement st = null ;
