@@ -1,0 +1,29 @@
+/* Javadoc style sheet */
+
+/* Define colors, fonts and other style attributes here to override the defaults */
+
+/* Page background color */
+body { background-color: #FFFFFF; color:#000000 ; font-family:"Trebuchet MS", Helvetica, sans-serif;}
+
+/* Headings */
+h1 { font-size: 145% }
+
+/* Table colors */
+.TableHeadingColor     { background: #2E9AFE; color:#000000 } /* Bleu */
+.TableSubHeadingColor  { background: #81BEF7; color:#000000 } /* Bleu un peu plus clair */
+.TableRowColor         { background: #A9F5F2; color:#000000 } /* Bleu encore plus clair */
+
+/* Font used in left-hand frame lists */
+.FrameTitleFont   { background-color = #CEF6F5 ; font-size: 100%; font-family: "Trebuchet MS", Helvetica, sans-serif; color:#000000 }
+.FrameHeadingFont {  background-color = #CEF6F5 ; font-size:  90%; font-family: "Trebuchet MS", Helvetica, sans-serif; color:#000000 }
+.FrameItemFont    {  background-color = #CEF6F5 ; font-size:  90%; font-family: "Trebuchet MS", Helvetica, sans-serif; color:#000000 }
+
+/* Navigation bar fonts and colors */
+.NavBarCell1    { background-color:#EEEEFF; color:#000000} /* Light mauve */
+.NavBarCell1Rev { background-color:#00008B; color:#FFFFFF} /* Dark Blue */
+.NavBarFont1    { font-family: "Trebuchet MS", Helvetica, sans-serif; color:#000000;color:#000000;}
+.NavBarFont1Rev { font-family: "Trebuchet MS", Helvetica, sans-serif; color:#FFFFFF;color:#FFFFFF;}
+
+.NavBarCell2    { font-family: "Trebuchet MS", Helvetica, sans-serif; background-color:#FFFFFF; color:#000000}
+.NavBarCell3    { font-family: "Trebuchet MS", Helvetica, sans-serif; background-color:#FFFFFF; color:#000000}
+
