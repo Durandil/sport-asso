@@ -132,6 +132,10 @@ public class ModeleMessagerie extends AbstractTableModel {
 	}
 	
 	/**
+	 * @param rowIndex 
+	 * 			integer indiquant le numéro de la ligne de l'élément choisi	
+	 * @param colIndex
+	 * 			integer indiquant le numéro de la colonne de l'élément choisi 
 	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème colonne du tableau des 
 	 * 			messages
 	 */
