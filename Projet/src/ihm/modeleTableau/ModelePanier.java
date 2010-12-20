@@ -91,6 +91,15 @@ public class ModelePanier extends AbstractTableModel  {
 		return donnees.length;
 	}
 	
+	/**
+	 * @param rowIndex 
+	 * 			integer indiquant le numéro de la ligne de l'élément choisi	
+	 * @param colIndex
+	 * 			integer indiquant le numéro de la colonne de l'élément choisi 
+	 * 
+	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème colonne du tableau  
+	 * 			correspondant au panier en cours
+	 */
 	public Object getValueAt(int rowIndex, int colIndex) {
 		return donnees[rowIndex][colIndex];
 	}
