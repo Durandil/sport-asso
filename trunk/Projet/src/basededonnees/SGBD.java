@@ -1413,8 +1413,8 @@ public class SGBD {
 	 * @param idArticle
 	 * 				identifiant unique de l'article
 	 * 
-	 * @see Commande
-	 * @see Commande#montantCommandePourUnArticle(String,LigneCommande,int)
+	 * @see metier.Commande
+	 * @see metier.Commande#montantCommandePourUnArticle(String,LigneCommande,int)
 	 * 
 	 */
 	public static String recupererPourcentagePromotionDegressifArticleCommande(String identifiantCommande, String idArticle){

@@ -53,18 +53,21 @@ public class ModeleMessagerie extends AbstractTableModel {
 		
 		
 		if(messagerieGerant == true){
-			//Quatre listes sont créées pour récupérer les informations de la table ARTICLES
+			//Cinq listes sont créées pour récupérer les informations de la table MESSAGE
 			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			ArrayList<String> listeContenus = SGBD.selectListeStringOrdonneCondition("MESSAGE", "CONTENUMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			ArrayList<String> listeExpediteur = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDCLIENT", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			ArrayList<String> listeSujet = SGBD.selectListeStringOrdonneCondition("MESSAGE", "SUJETMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			ArrayList<String> listeDate = SGBD.selectListeStringOrdonneCondition("MESSAGE", "DATEMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=1");
 			
+			
+			
 			donnees = new Object[listeIdentifiants.size()][5];
 			
 			//On ajoute les informations dans l'objet donnees
 			for(int i=0;i<listeExpediteur.size();i++){
 				donnees[i][0] = listeIdentifiants.get(i);
+				
 				donnees[i][1] = listeExpediteur.get(i);
 				donnees[i][2] = listeSujet.get(i);
 				donnees[i][3] = listeContenus.get(i);
@@ -73,7 +76,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 
 		}
 		else{
-			//Quatre listes sont créées pour récupérer les informations de la table MESSAGES
+			//Cinq listes sont créées pour récupérer les informations de la table MESSAGES
 			ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
 			ArrayList<String> listeContenus = SGBD.selectListeStringOrdonneCondition("MESSAGE", "CONTENUMESSAGE", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
 			ArrayList<String> listeExpediteur = SGBD.selectListeStringOrdonneCondition("MESSAGE", "IDCLIENT", "IDMESSAGE", "ESTENVOYEAUGERANT=0");
@@ -99,7 +102,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 				if(listeExpediteur.get(i).equals(FenetreDialogIdentification.clientUserIdentifiant)){
 					
 					donnees[affichageMessage][0] = listeIdentifiants.get(i);
-					donnees[affichageMessage][1] = listeExpediteur.get(i);
+					donnees[affichageMessage][1] = FenetreDialogIdentification.identifiantGerant;
 					donnees[affichageMessage][2] = listeSujet.get(i);
 					donnees[affichageMessage][3] = listeContenus.get(i);
 					donnees[affichageMessage][4] = listeDate.get(i);

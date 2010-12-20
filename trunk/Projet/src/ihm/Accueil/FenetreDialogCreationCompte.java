@@ -479,7 +479,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 																		+ "et votre mot de passe est "
 																		+ motDePasse
 																		+ ". Cordialement, M. Poirier ",
-																FenetreDialogIdentification.identifiantGerant,
+																FenetreDialogIdentification.clientUserIdentifiant,
 																dateJour, false);
 
 														// Essai d'ouverture du
