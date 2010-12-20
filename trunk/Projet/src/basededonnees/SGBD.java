@@ -33,8 +33,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3193";
-	private static final String MDP = "id3193";
+	private static final String ID = "id3199";
+	private static final String MDP = "id3199";
 	
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -71,7 +71,6 @@ public class SGBD {
 			
 			System.out.println("Echec de la tentative de connexion : "
 					+ e.getMessage());
-			System.out.println("RAISON 1: " + e.getCause());
 			result = false;
 		}
 		return result;
@@ -309,7 +308,6 @@ public class SGBD {
 
 		} finally {
 			System.out.println("Tentative de sauvegarde");
-			SGBD.executeUpdate("COMMIT");
 			fermer();
 
 		}
