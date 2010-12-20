@@ -1,24 +1,50 @@
 package ihm.modeleTableau;
+import ihm.Client.FenetreCommandeArticle;
+
 import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
-import metier.Article;
-import metier.LigneCommande;
 
-
+/**
+ * La classe ModelePanier hérite de la classe AbstractTableModel
+ * Sa spécificité est de pouvoir afficher uniquement les articles qui sont dans l'état "En stock"
+ * en face de la quantité commandée présente dans le panier du client
+ * 
+ * @see FenetreCommandeArticle
+ *
+ */
 public class ModelePanier extends AbstractTableModel  {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * donnees contenues à l'intérieur du tableau
+	 * 
+	 * @see ModelePanier#getRowCount()
+	 * @see ModelePanier#ModelePanier(ArrayList)
+	 * @see ModelePanier#getValueAt(int, int)
+	 * 
+	 */
 	private final Object[][] donnees;
-
+	
+	/**
+	 * liste des noms de colonnes du tableau
+	 * 
+	 * @see ModelePanier#getColumnCount()
+	 * @see ModelePanier#getColumnName(int)
+	 */
     private final String[] entetes={"Numero","Quantite désirée",} ;
 	
-	
+	/**
+	 * Constructeur de la classe ModelePanier
+	 * 
+	 * @param panier 
+	 * 			ArrayList associant les identifiants d'article à leurs quantités commandées
+	 * 
+	 * @see FenetreCommandeArticle
+	 * @see FenetreCommandeArticle#initComponent()
+	 */
 	public ModelePanier(ArrayList<String[]> panier){
 		super();
 		int taille = 1000;
@@ -36,8 +62,13 @@ public class ModelePanier extends AbstractTableModel  {
 		
 	}
 	
-	public void actualiserLigne(int rowIndex,ArrayList<String[]> panierCourant){
-		//this.donnees[rowIndex][1]=panierCourant.get(rowIndex)[1];
+	/**
+	 * Cette méthode actualise le tableau actuel à l'aide du panier d'articles mis en paramètre
+	 * 
+	 * @param panierCourant 
+	 * 				un ArrayList contenant l'ensemble des articles associés leurs quantités commandées
+	 */
+	public void actualiserLignes(ArrayList<String[]> panierCourant){
 		int compteur=0;
 		for (String[] strings : panierCourant) {
 			donnees[compteur][0]=strings[0];
@@ -46,30 +77,33 @@ public class ModelePanier extends AbstractTableModel  {
 		}
 	}
 	
+	/**
+	 * @return Indique le nombre de colonnes dans le tableau
+	 */
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return entetes.length;
 	}
-
+	
+	/**
+	 * @return Indique  le nombre de lignes dans le	tableau
+	 */
 	public int getRowCount() {
-		// TODO Auto-generated method stub
 		return donnees.length;
 	}
-
+	
 	public Object getValueAt(int rowIndex, int colIndex) {
-		// TODO Auto-generated method stub
 		return donnees[rowIndex][colIndex];
 	}
 	
+	/**
+	 * @return le nom de la colonne à l'index columnIndex
+	 * 
+	 * @param columnIndex
+	 * 				l'index de la colonne dans le tableau
+	 */
     public String getColumnName(int columnIndex) {
         return entetes[columnIndex];
     }
     
-    public void removeLigne(int rowIndex) {
-       // donnees.remove(rowIndex);
-
-        //fireTableRowsDeleted(rowIndex, rowIndex);
-    }
-
 
 }

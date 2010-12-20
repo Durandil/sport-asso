@@ -1,41 +1,29 @@
 package ihm;
 import ihm.Accueil.FenetreCompte;
-import ihm.Accueil.FenetreDialogIdentification;
+
 import ihm.Gerant.FenetreCatalogueGerant;
 import ihm.Gerant.FenetrePromotionsGerant;
 import ihm.Gerant.FenetreReapprovisionnement;
 import ihm.Gerant.FenetreRechercheClient;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 import exception.ExceptionMailsDifferents;
-
-import basededonnees.SGBD;
 
 
 public class MenuGerant extends JFrame {
 	
+	
+	private static final long serialVersionUID = 1L;
+	
 	/**
+	 * Attributs de la classe Menu Gerant qui va accueillir une barre de menu
+	 * Les JMenu vont accueillir les JMenuItem qui les sous-menus sur lesquels le gérant pourra cliquer et en 
+	 * même temps accéder aux différentes fontionnalités spécifiées dans son cas d'utilisation
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
 	private JMenuBar menuBar = new JMenuBar();
 	
 	private JMenu menuClientele = new JMenu("Gestion Clientèle");
@@ -49,14 +37,22 @@ public class MenuGerant extends JFrame {
 	private JMenuItem itemPromotions = new JMenuItem("Gestion des promotions exceptionnelles");
 	
 	private JLabel icon;
-
+	
+	/**
+	 * Constructeur de la classe MenuGérant dans lequel nous spécifions toutes les caractéristiques de
+	 * notre menu. Dans un premier temps, on insère une image de fond pour la fenetre. Puis, pour chaque item,
+	 * nous allons lui spécifier son action (ie la nouvelle fenêtre à afficher) puis nous allons insérés les items
+	 * aux deux menus de la grande barre de menu.
+	 * 
+	 */
 	public MenuGerant(){
 		this.setPreferredSize(new Dimension(900,600));
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocation(0,0);
 		this.setResizable(false);
-		
 		this.setLayout(new BorderLayout());
+		
+		//Insertion de l'image au panneau final
 		icon = new JLabel(new ImageIcon("src/images/fenetre.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBackground(Color.white);
@@ -73,7 +69,6 @@ public class MenuGerant extends JFrame {
 				// Afficher la fenetre de recherche d'un client
 				FenetreRechercheClient recherche = new FenetreRechercheClient(null, "Recherche de clients", true);
 				recherche.setVisible(true);
-				ArrayList<String> liste = new ArrayList<String>();
 					
 			}
 		});

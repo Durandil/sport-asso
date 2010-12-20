@@ -1,5 +1,4 @@
 package ihm.Accueil;
-import ihm.DialogIdentifiant;
 import ihm.MenuGerant;
 import ihm.MenuUtilisateur;
 
@@ -34,11 +33,12 @@ public class FenetreDialogIdentification extends JDialog {
 	private static final long serialVersionUID = 1L;
 	//DialogIdentifiant ident= new DialogIdentifiant();
 	private JLabel identifiantLabel,passwordLabel;
-	private JTextField identifiant, motDePasse;
+	private JTextField identifiant;
 	private JPasswordField password ;
 	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie;
-	public static String clientUserIdentifiant=""; // permet d'avoir l'identifiant de l'utilisateur 
-													 // dans toute l'application
+	public static String clientUserIdentifiant=""; 
+	// permet d'avoir l'identifiant de l'utilisateur dans toute l'application
+													 
 	public static String identifiantGerant="gerant@sport-asso.fr";
 	public static String motDePasseGerant="1234";
 	
@@ -54,6 +54,8 @@ public class FenetreDialogIdentification extends JDialog {
 	
 	/**
 	 * Initialise le contenu de la boîte
+	 * 
+	 * @see FenetreDialogIdentification#FenetreDialogIdentification(JFrame, String, boolean)
 	 */
 	private void initComponent(){
 		//Le nom
@@ -94,8 +96,7 @@ public class FenetreDialogIdentification extends JDialog {
 				int present = 0;
 				ArrayList<String[]> listeMailsMdps = new ArrayList<String[]>();
 				listeMailsMdps = SGBD.selectDeuxChampsString("CLIENT", "IDCLIENT", "MOTDEPASSE");
-				DialogIdentifiant login = new DialogIdentifiant(identifiant.getText(),password.getText());
-				
+			
 				for(int i=0;i<listeMailsMdps.size();i++){
 					
 					if(identifiant.getText().equals(listeMailsMdps.get(i)[0]))
@@ -115,15 +116,22 @@ public class FenetreDialogIdentification extends JDialog {
 							ImageIcon image = new ImageIcon("src/images/warning.png");
 							erreurMotPasse.showMessageDialog(null, "Mot de passe erroné, veuillez réessayer.", "Attention", JOptionPane.WARNING_MESSAGE, image);
 							//affichage d'un message d'erreur en cas de mot de passe erroné
+							try {
+								FenetreCompte fen = new FenetreCompte();
+								fen.setVisible(true);
+							} catch (ExceptionMailsDifferents e1) {
+								e1.printStackTrace();
 							}
+						}
 					}
 					
 				}
 				
 				if(present == 0)
 				{	
-					System.out.println(identifiantGerant + " "+ motDePasseGerant);
-					System.out.println(identifiant.getText()+" "+ password.getText());
+					System.out.println(identifiant.getText().equals(identifiantGerant));
+					System.out.println(password.getText().equals(motDePasseGerant));
+					
 					
 					if(identifiant.getText().equals(identifiantGerant) & password.getText().equals(motDePasseGerant)){
 						FenetreDialogIdentification.clientUserIdentifiant =  identifiantGerant ;
@@ -133,8 +141,17 @@ public class FenetreDialogIdentification extends JDialog {
 						// essai d'affichage d'un message d'erreur en cas de probleme sur le compte	
 						erreurCompte = new JOptionPane();
 						ImageIcon image = new ImageIcon("src/images/warning.png");
-						erreurCompte.showMessageDialog(null, "Ce compte n'existe pas, inscrivez-vous !", "Attention", JOptionPane.WARNING_MESSAGE, image);		
+						erreurCompte.showMessageDialog(null, "Ce compte n'existe pas, inscrivez-vous !", "Attention", JOptionPane.WARNING_MESSAGE, image);
+
 					}
+					
+					try {
+						FenetreCompte fen = new FenetreCompte();
+						fen.setVisible(true);
+					} catch (ExceptionMailsDifferents e1) {
+						e1.printStackTrace();
+					}					
+					
 				}
 				// vérifier que le login existe sinon retourner à la page précédente de choix entre création et identification
 				// lancer la page suivante si succès

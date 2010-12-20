@@ -1,31 +1,39 @@
 package ihm.Gerant;
 
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
+import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-import basededonnees.SGBD;
-
+/**
+ * <p>Cette classe FenetreRechercheClient permet l'affichage des champs que le gérant pourra remplir
+ * pour rechercher un client :<ul>
+ * <li> l'identifiant client,</li> 
+ * <li> le nom pour les particuliers,</li>
+ * <li> la dénomination pour les associations et les collectivités,</li>
+ * <li> la ville. </li>
+ * </ul>
+ * 
+ * Des boutons seront ajoutés en bas de page pour pouvoir permettre au gérant soit de lancer la recherche
+ * soit de revenir en arrière.
+ * </p>
+ * 
+ * @author Utilisateur
+ *
+ */
 public class FenetreRechercheClient extends JDialog{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JLabel mailLabel,nomLabel,villeLabel,denominationLabel,clientLabel;
-	private JTextField mail,nom,denomination,ville,clientIdentifiant;
-	private JSplitPane split;
-	private JOptionPane mailInexistant;
 
-	// Le gérant pourra rechercher un client en fonction de son numéro, nom, ville
-	
-	
+	private static final long serialVersionUID = 1L;
+	private JLabel mailLabel,nomLabel,villeLabel,denominationLabel;
+	private JTextField mail,nom,denomination,ville;
+
+	/**
+	 * @param parent
+	 * 			
+	 * @param title
+	 * 			String contenant le titre de la fenêtre
+	 * @param modal
+	 * 			Booléen indiquant si la fenetre bloque ou non les interactions avec les autres fenêtres
+	 */
 	public FenetreRechercheClient(JFrame parent, String title, boolean modal){
 		super(parent, title, modal);
 		this.setSize(500,450);
@@ -114,15 +122,18 @@ public class FenetreRechercheClient extends JDialog{
 		JButton boutonRetour= new JButton("Retour à la page précédente");
 		
 		boutonRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//setVisible(false);	
+			public void actionPerformed(ActionEvent e) {	
 				dispose();
 			}
 		});
 		
+		// ajout des boutons crées au panneau crée plus haut pour les accueillir
 		panneauBasBoutons.add(boutonValidationRecherche);
 		panneauBasBoutons.add(boutonRetour);	
 		
+		
+		// Ajout du panneau contenant les champs de la recherche et celui des boutons
+		// au grand conteneur de panneaux de ma fenêtre
 		getContentPane().add(panneauChampsRecherche,"Center");
 		getContentPane().add(panneauBasBoutons,"South");
 	}
