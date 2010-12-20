@@ -152,31 +152,23 @@ public class FenetreCompte extends JFrame {
 					compte.setVisible(true);
 					dispose();
 				} catch (ExceptionMailSansArobase e1) {
-					
-					e1.printStackTrace();
+					System.out.println(e1.getMessage());
 				} catch (ExceptionMailsDifferents e2) {
-
-					e2.printStackTrace();
+					System.out.println(e2.getMessage());
 				} catch (ExceptionMailDejaExistant e3) {
-					
-					e3.printStackTrace();
+					System.out.println(e3.getMessage());
 				} catch (ExceptionCaractereInterdit e4) {
-					// TODO Auto-generated catch block
-					e4.printStackTrace();
+					System.out.println(e4.getMessage());
 				} catch (ExceptionExcesDeCaracteres e5) {
-					// TODO Auto-generated catch block
-					e5.printStackTrace();
+					System.out.println(e5.getMessage());
 				} catch (ExceptionCodePostalDifferentDeCinqChiffres e6) {
-					// TODO Auto-generated catch block
-					e6.printStackTrace();
+					System.out.println(e6.getMessage());
 				} catch (ExceptionNumeroDeTelephoneDifferentDeDixChiffres e7) {
-					// TODO Auto-generated catch block
-					e7.printStackTrace();
+					System.out.println(e7.getMessage());
 				} catch (ExceptionCodePostalIncorrect e8) {
-					// TODO Auto-generated catch block
-					e8.printStackTrace();
+					System.out.println(e8.getMessage());
 				} catch (ExceptionNumeroDeTelephoneIncorrect e9) {
-					e9.printStackTrace();
+					System.out.println(e9.getMessage());
 				}
 				
 			}	

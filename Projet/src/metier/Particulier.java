@@ -181,16 +181,16 @@ public class Particulier extends Client {
 				+ this.mail
 				+ "',"
 				+ "'"
-				+ this.nom
+				+ this.nom.replaceAll("'", "''")
 				+ "',"
 				+ "'"
-				+ this.prenom
+				+ this.prenom.replaceAll("'", "''")
 				+ "',"
 				+ "'"
-				+ this.adresse
+				+ this.adresse.replaceAll("'", "''")
 				+ "',"
 				+ "'"
-				+ this.idVille
+				+ this.idVille.replaceAll("'", "''")
 				+ "',"
 				+ "'"
 				+ this.telephone
@@ -216,6 +216,9 @@ public class Particulier extends Client {
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
 	 * l'article saisies lors de l'appel de la méthode
+	 * 
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
+	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
 	 * </p>
 	 * 
 	 * @see BDD
@@ -227,9 +230,9 @@ public class Particulier extends Client {
 		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE",
 				"CODEPOSTAL", codePostal);
 
-		String requete = " UPDATE CLIENT SET NOMCLIENT='" + nom
-				+ "',PRENOMCLIENT='" + prenom + "',ADRESSECLIENT='" + adresse
-				+ "',IDVILLE='" + idVille + "',TELEPHONE='" + telephone + "' "
+		String requete = " UPDATE CLIENT SET NOMCLIENT='" + nom.replaceAll("'", "''")
+				+ "',PRENOMCLIENT='" + prenom.replaceAll("'", "''") + "',ADRESSECLIENT='" + adresse.replaceAll("'", "''")
+				+ "',IDVILLE='" + idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone + "' "
 				+ "WHERE IDCLIENT ='" + idClient + "'";
 
 		System.out.println(requete);

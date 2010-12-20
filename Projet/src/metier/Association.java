@@ -123,7 +123,8 @@ public class Association extends Client {
 	 * La requête se construit ensuite en fonction des caractéristiques de
 	 * l'article saisies lors de l'appel du constructeur
 	 * </p>
-	 * 
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
+	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
 	 * @see BDD
 	 */
 
@@ -143,13 +144,13 @@ public class Association extends Client {
 				+ this.mail
 				+ "',"
 				+ "'"
-				+ this.denomination
+				+ this.denomination.replaceAll("'", "''")
 				+ "',"
 				+ "'"
-				+ this.adresse
+				+ this.adresse.replaceAll("'", "''")
 				+ "',"
 				+ "'"
-				+ this.idVille
+				+ this.idVille.replaceAll("'", "''")
 				+ "',"
 				+ "'"
 				+ this.telephone
@@ -175,6 +176,8 @@ public class Association extends Client {
 	 * La requête se construit ensuite en fonction des caractéristiques de
 	 * l'article saisies lors de l'appel de la méthode
 	 * </p>
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
+	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
 	 * 
 	 * @see BDD
 	 */
@@ -185,8 +188,8 @@ public class Association extends Client {
 				"CODEPOSTAL", codePostal);
 
 		String requete = " UPDATE CLIENT SET DENOMINATIONCLIENT='"
-				+ denomination + "',ADRESSECLIENT='" + adresse + "',IDVILLE='"
-				+ idVille + "',TELEPHONE='" + telephone + "' WHERE IDCLIENT ='"
+				+ denomination.replaceAll("'", "''") + "',ADRESSECLIENT='" + adresse.replaceAll("'", "''") +
+				"',IDVILLE='" + idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone + "' WHERE IDCLIENT ='"
 				+ idClient + "'";
 		System.out.println(requete);
 
