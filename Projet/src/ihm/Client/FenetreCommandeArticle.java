@@ -306,7 +306,7 @@ public class FenetreCommandeArticle extends JFrame{
 		rafraichirPanierBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// le bouton permet de rafraichir le tableau panier
-				modPan.actualiserLigne(ligneCatalogue, panierClient);
+				modPan.actualiserLignes(panierClient);
 				modPan.fireTableDataChanged();
 				System.out.println("Dernière Ligne modifiée : "+ligneCatalogue);
 				

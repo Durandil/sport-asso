@@ -11,6 +11,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 import metier.Article;
 import metier.Association;
 //import metier.Categorie;
@@ -24,8 +27,6 @@ import basededonnees.SGBD;
 
 public class Principale {
 
-/** 
- * @throws Exception **/
 
 	/**
 	 * @param args
@@ -35,8 +36,8 @@ public class Principale {
 
 		//Initialiser la base de données
 		//BDD.init();
-
-		FenetreCompte fen=new FenetreCompte();
+		
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		

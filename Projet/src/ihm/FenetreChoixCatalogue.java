@@ -37,9 +37,17 @@ public class FenetreChoixCatalogue extends JDialog {
 	/**
 	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client pourra choisir 
 	 * la quantitée qu'il désire de l'article sélectionné dans le tableau du catalogue
+	 * 
 	 * @param parent
+	 * 			
 	 * @param title
+	 * 			String indiquant le titre de la fenêtre
 	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
+	 * 
+	 * @see FenetreCommandeArticle
+	 * 
 	 */
 	public FenetreChoixCatalogue(JFrame parent, String title, boolean modal,int stock,String idArticle){
 		super(parent, title, modal);
@@ -70,9 +78,11 @@ public class FenetreChoixCatalogue extends JDialog {
 		panneauQuantite.setBorder(BorderFactory.createTitledBorder("Ajout au panier"));
 		quantiteLabel = new JLabel("Quantité : ");
 		
-		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
+		//Défintion d'un JComboBox dans lequel le client choisira la quantité qu'il veut ajoute ou retirer
+		// de son panier en fonction du bouton dans lequel il aura cliqué dans FenetreCommandeArticle
 		quantite=new JComboBox();
 		
+		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité en stock
 		for(int j=1;j<=quantiteStock;j++){
 			quantite.addItem(j+"");
 		}

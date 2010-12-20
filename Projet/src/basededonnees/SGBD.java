@@ -33,8 +33,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 	
 	// Méthode issue du TP2
 	public static boolean connecter() {
@@ -600,8 +600,8 @@ public class SGBD {
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type String
 	 * issu d'une table tous deux précisés en paramètres.
-	 * Ces éléments seront triés selon leur valeur d'une deuxième variable de la table.
-	 * S'ajoute à cela une condition sur les élemens sélectionnés.
+	 * Ces éléments seront triés selon les valeurs d'une deuxième variable de la table.
+	 * S'ajoute à cela une condition sur les élements sélectionnés.
 	 * 
 	 * @param table
 	 * 			Table dans laquelle se trouve le champ dont on veut obtenir la liste
@@ -982,11 +982,14 @@ public class SGBD {
 	 * Retourne la liste des articles dont le stock est inférieur à la quantité seuil 
 	 * ou en rupture de stock
 	 * 
+	 * @return <p>La liste des articles qui ont besoin d'être réapprovisionnés du fait de leur
+	 * quantité en stock insuffisante contenant : <ul>
+	 * <li> un ArrayList avec les identifiants des articles.</li> 
+	 * <li> un ArrayList avec la description de chaque article.</li>
+	 * <li> un ArrayList avec le stock présent dans la base de données.</li> 
+	 * <li> un ArrayList avec le prix initial.</li>
+	 * </ul></p>
 	 * 
-	 * @return la liste des articles qui ont besoin d'être réapprovisionnés du fait de leur
-	 * quantité en stock avec les identifiants en première position, puis la description de 
-	 * l'article, puis le stock présent au moment présent et pour finir le prix initial.
-	 *
 	 * @see ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)
 	 */
 	public static ArrayList<ArrayList<String>> selectArticlesReapprovisionnement(){
@@ -1087,9 +1090,9 @@ public class SGBD {
 	 
 	/**
 	 * @param identifiant
-	 * 			identfiant du client 
+	 * 			Identfiant du client 
 	 * 
-	 * @return un arraylist le booleen sur l'adhésion au programme fidélité du client 
+	 * @return Un arraylist indiquant l'adhésion ou non au programme fidélité du client ("Oui"/"Non")
 	 * 		   et son nombre éventuel de points
 	 */
 	public static ArrayList<String> recupererInformationFideliteClient(String identifiant){
@@ -1144,18 +1147,18 @@ public class SGBD {
 	 * dans la fenetre de recherche d'un client chez le gérant
 	 * 
 	 * @param idClient
-	 * 			chaine de caractère saisi dans le champ identifiant client
+	 * 			Une chaine de caractère saisie dans le champ identifiant client
 	 * @param nomClient
-	 * 			chaine de caractère saisi dans le champ nom du client pour les particuliers
+	 * 			Une chaine de caractère saisie dans le champ nom du client pour les particuliers
 	 * @param denomination
-	 * 			chaine de caractère saisi dans le champ denomination du client pour les associations
+	 * 			Une chaine de caractère saisie dans le champ denomination du client pour les associations
 	 * @param ville
-	 * 			chaine de caractère saisi dans le champ ville
+	 * 			Une chaine de caractère saisie dans le champ ville
 	 * 
 	 * @see ModeleTableauClient#ModeleTableauClient(String, String, String, String)
 	 * 
 	 * @return 
-	 * 		<p>un ArrayList contenant  : <ul>
+	 * 		<p>Un ArrayList contenant : <ul>
 	 * 		<li> un ArrayList de tous les identifiants correspondants à la recherche.</li>
 	 * 		<li> un ArrayList de tous les noms de clients correspondants à la recherche</li>
 	 * 		<li> un ArrayList de tous les prenoms de clients correspondants à la recherche</li>
@@ -1186,6 +1189,7 @@ public class SGBD {
 			if(!denomination.equals("")){
 				if(ajouterChamp==true){
 					conditionWhereOr=conditionWhereOr+" or ";
+					ajouterChamp=false;
 				}
 				conditionWhereOr=conditionWhereOr+"DENOMINATIONCLIENT Like '%"+denomination +"%'";
 				ajouterChamp=true;
@@ -1279,7 +1283,7 @@ public class SGBD {
 	 * 				Indique si le client possède une carte de fidélité (1) ou non
 	 *            (0)
 	 * 
-	 * @return le nombre de promotions exceptionelles au jour d'aujourd'hui 
+	 * @return Le nombre de promotions exceptionelles au jour d'aujourd'hui 
 	 * 		
 	 */
 	public static int compterNbrePromoExceptionnellesArticle(String idArticle,int estFidele){
@@ -1345,7 +1349,7 @@ public class SGBD {
 	 * 				Indique si le client possède une carte de fidélité (1) ou non (0)
 	 *            
 	 * 
-	 * @return le pourcentage actuel dans les promotions exceptionnelles actuelles sur l'article
+	 * @return Le pourcentage actuel dans les promotions exceptionnelles actuelles sur l'article
 	 * 			donné ( dans un String)
 	 * 
 	 */

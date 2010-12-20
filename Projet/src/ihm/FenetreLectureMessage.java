@@ -44,6 +44,7 @@ public class FenetreLectureMessage extends JDialog{
 		final String numMessage=identifiant;
 		final boolean reponseGerant = reponseDuGerant;
 		idExpediteurMessage = expediteur;
+		
 		// L'expéditeur
 		JPanel panneauExpediteur= new JPanel();
 		expediteurMessage=new JTextField(expediteur);

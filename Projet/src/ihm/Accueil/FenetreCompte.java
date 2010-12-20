@@ -41,6 +41,7 @@ public class FenetreCompte extends JFrame {
 	private Date heure ;
 	
 	@SuppressWarnings("deprecation")
+	
 	public FenetreCompte()throws ExceptionMailsDifferents{
 
 		this.setTitle("Informations client");
@@ -175,7 +176,6 @@ public class FenetreCompte extends JFrame {
 					// TODO Auto-generated catch block
 					e8.printStackTrace();
 				} catch (ExceptionNumeroDeTelephoneIncorrect e9) {
-					// TODO Auto-generated catch block
 					e9.printStackTrace();
 				}
 				

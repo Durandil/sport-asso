@@ -32,9 +32,7 @@ import exception.ExceptionNumeroDeTelephoneDifferentDeDixChiffres;
 import exception.ExceptionNumeroDeTelephoneIncorrect;
 
 import basededonnees.SGBD;
-
 import metier.Association;
-import metier.Client;
 import metier.Message;
 import metier.Particulier;
 
@@ -47,13 +45,12 @@ public class FenetreDialogCreationCompte extends JDialog{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	//private DialogInfo zInfo = new DialogInfo();
 	private JLabel typeCompteLabel,denominationLabel,identifiantVerifLabel, icon, nomLabel, prenomLabel, adresseLabel,cpLabel,telLabel,fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom,adresse,identifiantVerification,codePostal,telephone,identifiant,denomination;
 	private JComboBox compte, fidelite;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé vaut ainsi "vrai" à l'origine
 	private boolean estFidele = false;
-	private JOptionPane creationCorrecte, affichageMotDePasse, mailDejaUtilise, erreurCreation ;
+	private JOptionPane creationCorrecte, affichageMotDePasse, erreurCreation ;
 	public static String itemSelectionne ;
 	public static String itemFidelite ;
 	public int creationCompteCorrecte ;
@@ -61,8 +58,13 @@ public class FenetreDialogCreationCompte extends JDialog{
 	/**
 	 * Constructeur
 	 * @param parent
+	 * 		
 	 * @param title
-	 * @param modal
+	 * 		nom donné à la fenêtre
+	 * @param modal 
+ 	 *		booléen indiquant si la fenetre bloque ou non les interactions 
+ 	 *		avec les autres fenêtres
+ 	 *
 	 * @throws ExceptionMailsDifferents
 	 * @throws ExceptionMailDejaExistant
 	 * @throws ExceptionCaractereInterdit 
@@ -593,7 +595,16 @@ public class FenetreDialogCreationCompte extends JDialog{
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
+				FenetreCompte fen;
+				try {
+					fen = new FenetreCompte();
+					fen.setVisible(true);
+				} catch (ExceptionMailsDifferents e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}			
 		});
 		
