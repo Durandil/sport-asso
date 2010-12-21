@@ -380,7 +380,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Le "
 											+ jourDateDebutPromotion
 											+ "ème jour du mois de Février a été"
-											+ "saisi alors que ce dernier n'en possède que 29");
+											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
 							if ((anneeDateDebutPromotion != 2012
 									&& anneeDateDebutPromotion != 2016 && anneeDateDebutPromotion != 2020)) {
@@ -388,7 +388,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 										"Le "
 												+ jourDateDebutPromotion
 												+ "ème jour du mois de Février a été"
-												+ "saisi alors que ce dernier n'en possède que 28");
+												+ " saisi alors que ce dernier n'en possède que 28");
 							}
 
 						}
@@ -405,7 +405,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Le "
 											+ jourDateFinPromotion
 											+ "ème jour du mois de Février a été"
-											+ "saisi alors que ce dernier n'en possède que 29");
+											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
 							if ((anneeDateFinPromotion != 2012
 									&& anneeDateFinPromotion != 2016 && anneeDateFinPromotion != 2020)) {
@@ -413,7 +413,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 										"Le "
 												+ jourDateFinPromotion
 												+ "ème jour du mois de Février a été"
-												+ "saisi alors que ce dernier n'en possède que 28");
+												+ " saisi alors que ce dernier n'en possède que 28");
 							}
 
 						}
@@ -892,7 +892,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Le "
 											+ jourDateDebutPromotion
 											+ "ème jour du mois de Février a été"
-											+ "saisi alors que ce dernier n'en possède que 29");
+											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
 							if ((anneeDateDebutPromotion != 2012
 									&& anneeDateDebutPromotion != 2016 && anneeDateDebutPromotion != 2020)) {
@@ -900,7 +900,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 										"Le "
 												+ jourDateDebutPromotion
 												+ "ème jour du mois de Février a été"
-												+ "saisi alors que ce dernier n'en possède que 28");
+												+ " saisi alors que ce dernier n'en possède que 28");
 							}
 
 						}
@@ -917,7 +917,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Le "
 											+ jourDateFinPromotion
 											+ "ème jour du mois de Février a été"
-											+ "saisi alors que ce dernier n'en possède que 29");
+											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
 							if ((anneeDateFinPromotion != 2012
 									&& anneeDateFinPromotion != 2016 && anneeDateFinPromotion != 2020)) {
@@ -925,7 +925,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 										"Le "
 												+ jourDateFinPromotion
 												+ "ème jour du mois de Février a été"
-												+ "saisi alors que ce dernier n'en possède que 28");
+												+ " saisi alors que ce dernier n'en possède que 28");
 							}
 
 						}
