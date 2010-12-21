@@ -301,205 +301,152 @@ public class FenetreDialogCreationCompte extends JDialog {
 							identifiantVerification.getText())) {
 						throw new ExceptionMailsDifferents(
 								"L'adresse de confirmation est différente de la première saisie !");
-					} else {
-						ArrayList<String> listeMails = new ArrayList<String>();
-						listeMails = SGBD.selectListeString("CLIENT",
-								"IDCLIENT");
+					}
+					ArrayList<String> listeMails = new ArrayList<String>();
+					listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
 
-						// Vérification de la présence de l'adresse mail dans la
-						// base
-						int test = 0;
-						for (int i = 0; i < listeMails.size(); i++) {
-							if (identifiant.getText().equals(listeMails.get(i))) {
-								test = 1;
-							}
-						}
-
-						if (test == 1) {
-							throw new ExceptionMailDejaExistant(
-									"Cette adresse mail est déjà utilisée par un autre utilisateur !");
-						}
-
-						// Vérification de l'absence du caractère ' dans
-						// l'adresse
-						// mail
-						else {
-							if (identifiant.getText().contains("'")) {
-								throw new ExceptionCaractereInterdit(
-										"Votre adresse mail ne peut pas contenir d'apostrophe !");
-							}
-							// Vérification du nombre de caractères
-							else {
-								if (denomination.getText().length() > 40
-
-								| nom.getText().length() > 40
-										| prenom.getText().length() > 40
-										| identifiant.getText().length() > 40) {
-									throw new ExceptionExcesDeCaracteres(
-											"Un des champs saisis comporte trop de caractères !");
-								}
-								// Vérification de la longueur du code postal
-								else {
-									if (codePostal.getText().length() != 5) {
-
-										throw new ExceptionCodePostalDifferentDeCinqChiffres(
-												"Un code postal doit contenir 5 chiffres !");
-									}
-
-									// Vérification de la longueur du numéro de
-									// téléphone
-									else {
-										if (telephone.getText().length() != 10) {
-
-											throw new ExceptionNumeroDeTelephoneDifferentDeDixChiffres(
-													"Le numéro de téléphone saisi est impossible !");
-										}
-										// Vérification de la valeur du code
-										// postal
-										else {
-											int cp = Integer
-													.parseInt(codePostal
-															.getText());
-											if (cp <= 999 | cp >= 96000) {
-												throw new ExceptionCodePostalIncorrect(
-														"Le code postal saisi est incorrect !");
-											}
-											// Vérification de la cohérence du
-											// numéro de
-											// téléphone
-											else {
-												long tel = Long
-														.parseLong(telephone
-																.getText());
-												if (tel < 100000000
-														| tel >= 800000000) {
-													throw new ExceptionNumeroDeTelephoneIncorrect(
-															"Le numéro de téléphone saisi est incorrect !");
-												}
-												// Vérification de la présence
-												// d'un @
-												// dans l'adresse mail
-												else {
-													if (!identifiant.getText()
-															.contains("@")) {
-														throw new ExceptionMailSansArobase(
-																"Votre adresse mail ne comporte pas d'arobase !");
-													}
-													// Si aucune erreur relevée,
-													// la
-													// création de compte
-													// s'effectue
-													else {
-
-														String idVille = SGBD
-																.selectStringConditionString(
-																		"VILLE",
-																		"IDVILLE",
-																		"CODEPOSTAL",
-																		codePostal
-																				.getText());
-
-														if (itemSelectionne == "Compte Particulier") {
-															Particulier p = new Particulier(
-																	nom.getText(),
-																	prenom.getText(),
-																	identifiant
-																			.getText(),
-																	adresse.getText(),
-																	idVille,
-																	telephone
-																			.getText(),
-																	estFidele);
-														} else {
-															Association a = new Association(
-																	denomination
-																			.getText(),
-																	identifiant
-																			.getText(),
-																	adresse.getText(),
-																	idVille,
-																	telephone
-																			.getText(),
-																	estFidele);
-														}
-
-														creationCorrecte = new JOptionPane();
-														ImageIcon imageInformation = new ImageIcon(
-																"src/images/information.jpg");
-														creationCorrecte
-																.showMessageDialog(
-																		null,
-																		"Un nouveau compte a été crée, votre identifiant est : "
-																				+ identifiant
-																						.getText(),
-																		"Information",
-																		JOptionPane.INFORMATION_MESSAGE,
-																		imageInformation);
-
-														FenetreDialogIdentification.clientUserIdentifiant = identifiant
-																.getText();
-
-														// On recherche le mot
-														// de passe
-														// dans la base avant de
-														// l'afficher
-														String motDePasse = SGBD
-																.selectStringConditionString(
-																		"CLIENT",
-																		"MOTDEPASSE",
-																		"IDCLIENT",
-																		identifiant
-																				.getText());
-														affichageMotDePasse = new JOptionPane();
-														affichageMotDePasse
-																.showMessageDialog(
-																		null,
-																		"Retenez votre mot de passe : "
-																				+ motDePasse,
-																		"Information",
-																		JOptionPane.INFORMATION_MESSAGE,
-																		imageInformation);
-
-														dispose();
-														// envoi du message avec
-														// le mot
-														// de passe
-														java.util.Date date = new java.util.Date();
-
-														@SuppressWarnings("deprecation")
-														java.sql.Date dateJour = new java.sql.Date(
-																date.getYear(),
-																date.getMonth(),
-																date.getDate());
-														Message messageMotPasse = new Message(
-																"Envoi des identifiants",
-																"Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est "
-																		+ identifiant
-																				.getText()
-																		+ "et votre mot de passe est "
-																		+ motDePasse
-																		+ ". Cordialement, M. Poirier ",
-																FenetreDialogIdentification.clientUserIdentifiant,
-																dateJour, false);
-
-														// Essai d'ouverture du
-														// menu
-														// Utilisateur après une
-														// création de compte
-														// correcte
-														MenuUtilisateur men = new MenuUtilisateur();
-													}
-
-												}
-
-											}
-										}
-									}
-
-								}
-							}
+					// Vérification de la présence de l'adresse mail dans la
+					// base
+					int test = 0;
+					for (int i = 0; i < listeMails.size(); i++) {
+						if (identifiant.getText().equals(listeMails.get(i))) {
+							test = 1;
 						}
 					}
+
+					if (test == 1) {
+						throw new ExceptionMailDejaExistant(
+								"Cette adresse mail est déjà utilisée par un autre utilisateur !");
+					}
+
+					// Vérification de l'absence du caractère ' dans
+					// l'adresse
+					// mail
+
+					if (identifiant.getText().contains("'")) {
+						throw new ExceptionCaractereInterdit(
+								"Votre adresse mail ne peut pas contenir d'apostrophe !");
+					}
+					// Vérification du nombre de caractères
+
+					if (denomination.getText().length() > 40
+
+					| nom.getText().length() > 40
+							| prenom.getText().length() > 40
+							| identifiant.getText().length() > 40) {
+						throw new ExceptionExcesDeCaracteres(
+								"Un des champs saisis comporte trop de caractères !");
+					}
+					// Vérification de la longueur du code postal
+
+					if (codePostal.getText().length() != 5) {
+
+						throw new ExceptionCodePostalDifferentDeCinqChiffres(
+								"Un code postal doit contenir 5 chiffres !");
+					}
+
+					// Vérification de la longueur du numéro de
+					// téléphone
+
+					if (telephone.getText().length() != 10) {
+
+						throw new ExceptionNumeroDeTelephoneDifferentDeDixChiffres(
+								"Un numéro de téléphone doit être composé de 10 chiffres !");
+					}
+					// Vérification de la valeur du code
+					// postal
+
+					int cp = Integer.parseInt(codePostal.getText());
+					if (cp <= 999 | cp >= 96000) {
+						throw new ExceptionCodePostalIncorrect(
+								"Le code postal saisi est incorrect !");
+					}
+					// Vérification de la cohérence du
+					// numéro de
+					// téléphone
+
+					long tel = Long.parseLong(telephone.getText());
+					if (tel < 100000000 | tel >= 800000000) {
+						throw new ExceptionNumeroDeTelephoneIncorrect(
+								"Le numéro de téléphone saisi est incorrect !");
+					}
+					// Vérification de la présence
+					// d'un @
+					// dans l'adresse mail
+
+					if (!identifiant.getText().contains("@")) {
+						throw new ExceptionMailSansArobase(
+								"Votre adresse mail ne comporte pas d'arobase !");
+					}
+					// Si aucune erreur relevée,
+					// la
+					// création de compte
+					// s'effectue
+
+					String idVille = SGBD.selectStringConditionString("VILLE",
+							"IDVILLE", "CODEPOSTAL", codePostal.getText());
+
+					if (itemSelectionne == "Compte Particulier") {
+						Particulier p = new Particulier(nom.getText(), prenom
+								.getText(), identifiant.getText(), adresse
+								.getText(), idVille, telephone.getText(),
+								estFidele);
+					} else {
+						Association a = new Association(denomination.getText(),
+								identifiant.getText(), adresse.getText(),
+								idVille, telephone.getText(), estFidele);
+					}
+
+					creationCorrecte = new JOptionPane();
+					ImageIcon imageInformation = new ImageIcon(
+							"src/images/information.jpg");
+					creationCorrecte.showMessageDialog(null,
+							"Un nouveau compte a été crée, votre identifiant est : "
+									+ identifiant.getText(), "Information",
+							JOptionPane.INFORMATION_MESSAGE, imageInformation);
+
+					FenetreDialogIdentification.clientUserIdentifiant = identifiant
+							.getText();
+
+					// On recherche le mot
+					// de passe
+					// dans la base avant de
+					// l'afficher
+					String motDePasse = SGBD.selectStringConditionString(
+							"CLIENT", "MOTDEPASSE", "IDCLIENT",
+							identifiant.getText());
+					affichageMotDePasse = new JOptionPane();
+					affichageMotDePasse.showMessageDialog(null,
+							"Retenez votre mot de passe : " + motDePasse,
+							"Information", JOptionPane.INFORMATION_MESSAGE,
+							imageInformation);
+
+					dispose();
+					// envoi du message avec
+					// le mot
+					// de passe
+					java.util.Date date = new java.util.Date();
+
+					@SuppressWarnings("deprecation")
+					java.sql.Date dateJour = new java.sql.Date(date.getYear(),
+							date.getMonth(), date.getDate());
+					Message messageMotPasse = new Message(
+							"Envoi des identifiants",
+							"Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est "
+									+ identifiant.getText()
+									+ "et votre mot de passe est "
+									+ motDePasse
+									+ ". Cordialement, M. Poirier ",
+							FenetreDialogIdentification.clientUserIdentifiant,
+							dateJour, false);
+
+					// Essai d'ouverture du
+					// menu
+					// Utilisateur après une
+					// création de compte
+					// correcte
+					MenuUtilisateur men = new MenuUtilisateur();
+
 				} catch (ExceptionMailsDifferents e1) {
 					System.out.println(e1.getMessage());
 					erreurCreation
@@ -510,7 +457,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionMailDejaExistant e2) {
 					System.out.println(e2.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -519,7 +466,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionCaractereInterdit e3) {
 					System.out.println(e3.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -528,7 +475,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionExcesDeCaracteres e4) {
 					System.out.println(e4.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -537,7 +484,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionCodePostalDifferentDeCinqChiffres e5) {
 					System.out.println(e5.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -546,16 +493,16 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionNumeroDeTelephoneDifferentDeDixChiffres e6) {
 					System.out.println(e6.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
-									"Le numéro de téléphone saisi est impossible. Vérifiez ce que vous avez saisi.",
+									"Le numéro de téléphone doit être composé de 10 chiffres. Vérifiez ce que vous avez saisi.",
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionCodePostalIncorrect e7) {
 					System.out.println(e7.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -564,7 +511,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 					System.out.println(e8.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -573,7 +520,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 				} catch (ExceptionMailSansArobase e9) {
 					System.out.println(e9.getMessage());
-					
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -582,140 +529,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 
 				}
-				//
-				// switch (creationCompteCorrecte) {
-				// case 0:
-				// listeMails recense l'ensemble des adresses mails présentes
-				// dans la base
-				// L'entier test passe à 1 si l'adresse renseignée existe déjà,
-				// auquel cas on avertit l'utilisateur
-				// Si test reste à 0, on ajoute le client dans la BDD
-				// ArrayList<String> listeMails = new ArrayList<String>();
-				// listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
-				// int test = 0;
-				//
-				// for (int i = 0; i < listeMails.size(); i++) {
-				// if (identifiant.getText().equals(listeMails.get(i))) {
-				// test = 1;
-				// }
-				// }
-				//
-				// if (test == 1) {
-				// mailDejaUtilise = new JOptionPane();
-				// ImageIcon image2 = new ImageIcon("src/images/warning.png");
-				// mailDejaUtilise.showMessageDialog(null,
-				// "Cette adresse mail est déjà utilisée par un autre utilisateur !",
-				// "Attention", JOptionPane.WARNING_MESSAGE, image2);
-				// }
-				// on pourra enregistrer dans base de données la nouvelle
-				// création de compte
-
-				// else {
-
-				// String idVille = SGBD.selectStringConditionString("VILLE",
-				// "IDVILLE", "CODEPOSTAL", codePostal.getText());
-				//
-				//
-				//
-				// if (itemSelectionne == "Compte Particulier")
-				// {
-				// Particulier p = new Particulier(nom.getText(),
-				// prenom.getText(), identifiant.getText()
-				// , adresse.getText(), idVille, telephone.getText(),
-				// estFidele);
-				// }
-				// else {
-				// Association a = new Association(denomination.getText(),
-				// identifiant.getText(), adresse.getText(), idVille,
-				// telephone.getText(),estFidele);
-				// }
-				//
-				// creationCorrecte = new JOptionPane();
-				// ImageIcon imageInformation = new
-				// ImageIcon("src/images/information.jpg");
-				// creationCorrecte.showMessageDialog(null,
-				// "Un nouveau compte a été crée, votre identifiant est : " +
-				// identifiant.getText(), "Information",
-				// JOptionPane.INFORMATION_MESSAGE, imageInformation);
-				//
-				// FenetreDialogIdentification.clientUserIdentifiant=identifiant.getText();
-				//
-				// //On recherche le mot de passe dans la base avant de
-				// l'afficher
-				// String motDePasse =
-				// SGBD.selectStringConditionString("CLIENT", "MOTDEPASSE",
-				// "IDCLIENT", identifiant.getText());
-				// affichageMotDePasse = new JOptionPane();
-				// affichageMotDePasse.showMessageDialog(null,
-				// "Retenez votre mot de passe : " + motDePasse, "Information",
-				// JOptionPane.INFORMATION_MESSAGE, imageInformation);
-				//
-				// java.util.Date date = new java.util.Date();
-				//
-				// @SuppressWarnings("deprecation")
-				// java.sql.Date dateJour = new java.sql.Date(date.getYear(),
-				// date.getMonth(), date.getDate());
-				// Message messageMotPasse = new
-				// Message("Envoi des identifiants","Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est "
-				// + identifiant.getText() + "et votre mot de passe est " +
-				// motDePasse +
-				// ". Cordialement ",FenetreDialogIdentification.identifiantGerant,dateJour,false);
-				//
-				// setVisible(false);
-				// // Essai d'ouverture du menu Utilisateur après une création
-				// de compte correcte
-				// MenuUtilisateur men = new MenuUtilisateur();
-				// }
-				// break;
-
-				// case 1: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Votre adresse mail ne comporte pas de signe @","Attention !",
-				// JOptionPane.WARNING_MESSAGE, image);
-				//
-				// break;
-				// case 2: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "L'adresse de confirmation est différente de la première saisie. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				// break;
-				// case 3: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Un code postal doit contenir 5 chiffres. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				// break;
-				// case 4: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Un des champs saisis comporte un caractère interdit : '. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				//
-				// break;
-				// case 5: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Un des champs saisis comporte trop de caractères. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				//
-				// break;
-				// case 6: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Le code postal saisi est incorrect. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				//
-				// break;
-				// case 7: //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Le numéro de téléphone saisi est impossible. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				//
-				// break;
-				// case 8 : //Traité
-				// erreurCreation.showMessageDialog(null,
-				// "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.",
-				// "Attention !", JOptionPane.WARNING_MESSAGE, image);
-				//
-				// default:
-				// break;
-				// }
 
 			}
 
@@ -726,13 +539,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				FenetreCompte fen;
-				try {
-					fen = new FenetreCompte();
-					fen.setVisible(true);
-				} catch (ExceptionMailsDifferents e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+
+				fen = new FenetreCompte();
+				fen.setVisible(true);
 
 			}
 		});

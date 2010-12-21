@@ -101,12 +101,10 @@ public class MenuGerant extends JFrame {
 				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la fermeture du compte gérant ?","Confirmation",JOptionPane.YES_NO_OPTION);
 				if(res==JOptionPane.OK_OPTION){
 					dispose();
-					try {
+					
 						FenetreCompte fen = new FenetreCompte();
 						fen.setVisible(true);
-					} catch (ExceptionMailsDifferents e1) {
-						e1.printStackTrace();
-					}
+					
 				}
 				
 			}				
