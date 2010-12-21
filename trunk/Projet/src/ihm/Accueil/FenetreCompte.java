@@ -28,7 +28,6 @@ import java.util.Date;
 /**
  * Initialisation de la fenêtre qui servira de page d'accueil à notre application
  * 
- *
  */
 public class FenetreCompte extends JFrame {
    
@@ -57,7 +56,7 @@ public class FenetreCompte extends JFrame {
 	 * 
 	 * @throws ExceptionMailsDifferents
 	 */
-	public FenetreCompte()throws ExceptionMailsDifferents{
+	public FenetreCompte(){
 
 		this.setTitle("Informations client");
 		this.setSize(900, 550);

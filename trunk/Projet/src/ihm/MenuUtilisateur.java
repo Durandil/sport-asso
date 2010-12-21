@@ -107,12 +107,10 @@ public class MenuUtilisateur extends JFrame {
 				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la déconnexion de votre compte ?","Confirmation",JOptionPane.YES_NO_OPTION);
 				if(res == JOptionPane.OK_OPTION){
 					dispose();
-					try {
+					
 						FenetreCompte fenAccueil = new FenetreCompte();
 						fenAccueil.setVisible(true);
-					} catch (ExceptionMailsDifferents e1) {
-						e1.printStackTrace();
-					}
+					
 				}
 			}
 		});
