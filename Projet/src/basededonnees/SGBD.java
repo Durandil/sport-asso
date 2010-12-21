@@ -1273,7 +1273,7 @@ public class SGBD {
 	 * dans la base de données. Elle est utilisée uniquement pour le calcul du montant 
 	 * d'une commande.
 	 * 
-	 * @see Commande#montantCommandePourUnArticle()
+	 * @see metier.Commande#montantCommandePourUnArticle()
 	 * 
 	 * @param idArticle
 	 * 				L'identifiant unique de l'article
@@ -1338,7 +1338,7 @@ public class SGBD {
 	 * en paramètre au moment où est exécuté la méthode. Ce pourcentage de promotion 
 	 * exceptionelle dépend aussi du fait que le client soit adhérent ou non.
 	 * 
-	 * @see Commande#montantCommandePourUnArticle()
+	 * @see metier.Commande#montantCommandePourUnArticle()
 	 * @see SGBD#compterNbrePromoExceptionnellesArticle(String, int)
 	 * 
 	 * @param idArticle

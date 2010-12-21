@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-import exception.ExceptionMailsDifferents;
+import exception.Client.ExceptionMailsDifferents;
 
 
 public class MenuGerant extends JFrame {

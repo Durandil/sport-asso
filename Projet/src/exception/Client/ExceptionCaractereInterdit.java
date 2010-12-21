@@ -1,4 +1,4 @@
-package exception;
+package exception.Client;
 
 import metier.LigneCommande;
 import metier.Promotion;

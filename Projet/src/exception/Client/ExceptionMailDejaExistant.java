@@ -1,4 +1,4 @@
-package exception;
+package exception.Client;
 
 public class ExceptionMailDejaExistant extends Exception {
 
