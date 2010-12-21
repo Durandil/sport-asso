@@ -15,19 +15,34 @@ import javax.swing.JTable;
 
 import metier.Message;
 
-
+/**
+ * La classe FenetreMessagerie permet aux différents utilisateurs d'avoir accès à une boite 
+ * de réception pour pallier au fait que JavaMail ne fonctionne pas à l'Ensai. De cette
+ * boite de réception, l'utilisateur peut accéder à d'autres fenêtres permettant de
+ * lire ses messages, les supprimer ou d'y répondre.
+ * 
+ * @see FenetreLectureMessage
+ * @see FenetreReponseMessage
+ * 
+ * @author Utilisateur
+ *
+ */
 public class FenetreMessagerie extends JFrame {
 	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Booléen static permettant de controler la suppression des messages
+	 */
 	public static boolean suppressionMessage=false;
 
 	/**
+	 * Constructeur de la classe {@link FenetreMessagerie} initialisée grâce à la méthode  
+	 * @link {@link FenetreMessagerie#initComponent(boolean)}
 	 * 
 	 * @param boiteMessagerieGerant
+	 * 				Booléen indiquant quel utilisateur utilise la fenêtre (true) pour le gérant
+	 * 				et (false) pour les clients
+	 * 
 	 */
 	public FenetreMessagerie(boolean boiteMessagerieGerant){
 		super();
@@ -70,9 +85,11 @@ public class FenetreMessagerie extends JFrame {
     		boutonSupprimerTout.setEnabled(false);
     	}
     	
+    	// Définition de l'action du bouton permettant de lire un message //
+    	// 
     	boutonLire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				int ligne = tableauMessage.getSelectedRow();
 				String identifiantMail = tableauMessage.getValueAt(ligne,0).toString();
 				String expediteur = tableauMessage.getValueAt(ligne,1).toString();

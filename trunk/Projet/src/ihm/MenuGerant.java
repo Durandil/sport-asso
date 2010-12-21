@@ -12,7 +12,15 @@ import javax.swing.*;
 
 import exception.Client.ExceptionMailsDifferents;
 
-
+/**
+ * Cette classe MenuGerant permet d'initialiser la page d'accueil du gérant
+ * dans laquelle il a accès aux fonctionnalités définies dans le cas d'utilisation
+ * du gérant. Cette fenêtre apparaîtra avec une barre de menus dans lequel le gérant
+ * pourra accéder aux différents sous-menus.
+ * 
+ * @author Utilisateur
+ * @see {@link MenuGerant#MenuGerant()}
+ */
 public class MenuGerant extends JFrame {
 	
 	
@@ -39,10 +47,14 @@ public class MenuGerant extends JFrame {
 	private JLabel icon;
 	
 	/**
-	 * Constructeur de la classe MenuGérant dans lequel nous spécifions toutes les caractéristiques de
-	 * notre menu. Dans un premier temps, on insère une image de fond pour la fenetre. Puis, pour chaque item,
-	 * nous allons lui spécifier son action (ie la nouvelle fenêtre à afficher) puis nous allons insérés les items
-	 * aux deux menus de la grande barre de menu.
+	 * <p>Constructeur de la classe MenuGérant dans lequel nous spécifions toutes les caractéristiques de
+	 * notre menu. <ul>
+	 * <li> Dans un premier temps, on insère une image de fond pour la fenetre.</li>
+	 * <li> Puis, pour chaque sous-menu, nous allons lui spécifier son action (ie la nouvelle fenêtre à afficher).</li>
+	 * <li> Puis, nous allons insérer les sous-menus aux deux menus. </li>
+	 * <li> Enfin nous allons ajouter les menus à la grande barre de menus.</li>
+	 * </ul>
+	 * </p>
 	 * 
 	 */
 	public MenuGerant(){
@@ -61,12 +73,12 @@ public class MenuGerant extends JFrame {
 		
 		this.getContentPane().add(panImage,"West");
 		
-		// il faut, pour chaque item, lui implémenter son actionPerformed correspondant
-		// à la fenetre qu'il faudra ouvrir 
+		// Pour chaque sous-menu (JMenuItem), implémentation de son actionPerformed correspondant
+		// à la fenetre qu'il faut ouvrir
 		
 		itemGestionCompte.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// Afficher la fenetre de recherche d'un client
+				// Affichage la fenetre de recherche d'un client
 				FenetreRechercheClient recherche = new FenetreRechercheClient(null, "Recherche de clients", true);
 				recherche.setVisible(true);
 					
@@ -75,13 +87,15 @@ public class MenuGerant extends JFrame {
 		
 		itemMessagerie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// Afficher la fenetre contenant la boite de reception interne du gérant
+				// Affichage de la fenêtre contenant la boite de reception interne du gérant
 				FenetreMessagerie message = new FenetreMessagerie(true);
 				message.setVisible(true);
 			}
 		});
 		
 		itemFermer.addActionListener(new ActionListener(){
+			// Fermeture du menu Utilisateur et ouverture de la page d'accueil de 
+			// l'application FenetreCompte
 			public void actionPerformed(ActionEvent e) {
 				
 				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la fermeture du compte gérant ?","Confirmation",JOptionPane.YES_NO_OPTION);
@@ -100,7 +114,7 @@ public class MenuGerant extends JFrame {
 		
 		itemArticles.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// Afficher la fenetre avec la dernière version du catalogue client
+				// Affichage de la fenetre avec la dernière version du catalogue client
 				FenetreCatalogueGerant fenetreCatalogue = new FenetreCatalogueGerant();
 				fenetreCatalogue.setVisible(true);
 			}
@@ -108,8 +122,8 @@ public class MenuGerant extends JFrame {
 		
 		itemCommandes.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// Afficher la fenetre contenant le tableau des articles en rupture de stock 
-				// et/ou à commander 
+				// Afficher la fenêtre contenant le tableau des articles en rupture de stock 
+				// et nécessitant un réapprovisionnement du fait de sa qunatité en stock
 				FenetreReapprovisionnement fenetreStock = new FenetreReapprovisionnement();
 				fenetreStock.setVisible(true);
 			}
@@ -117,7 +131,8 @@ public class MenuGerant extends JFrame {
 		
 		itemPromotions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//ouvrir la fenetre permettant accès au compte
+				// Ouverture de la fenêtre permettant la gestion des promotions 
+				// exceptionnelles du magasin
 				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant();
 				fenetrePromo.setVisible(true);
 			}

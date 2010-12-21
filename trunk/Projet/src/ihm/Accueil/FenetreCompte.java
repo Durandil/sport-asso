@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 /**
- * Initialisation de la fenêtre qui serivira de page d'accueil à notre application
+ * Initialisation de la fenêtre qui servira de page d'accueil à notre application
  * 
  *
  */
