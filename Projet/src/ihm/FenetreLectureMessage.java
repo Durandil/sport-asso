@@ -17,11 +17,9 @@ import javax.swing.JTextField;
 
 import metier.Message;
 
+
 public class FenetreLectureMessage extends JDialog{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField expediteurMessage,dateMessage,sujetMessage;
 	private JTextArea contenuMessage;

@@ -25,20 +25,36 @@ import javax.swing.JPanel;
 import exception.Client.ExceptionMailsDifferents;
 
 
-
+/**
+ * Cette classe MenuUtilisateur permet d'initialiser la page d'accueil des clients
+ * dans laquelle ils ont accès aux fonctionnalités définies dans le cas d'utilisation
+ * des clients. Cette fenêtre apparaîtra avec une barre de menus dans lequel le client
+ * pourra accéder aux différents sous-menus.
+ * 
+ * @author Utilisateur
+ * @see {@link MenuUtilisateur#MenuUtilisateur()}
+ */
 public class MenuUtilisateur extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Creation d'une instance de barre de menus dans laquelle nous allons insérer les
+	 * quatre JMenu
+	 */
 	private JMenuBar menuBar = new JMenuBar();
+	/**
+	 * Initialisation des instances des menus dans lesquels nous allons insérer les
+	 * sous-menus JMenuItem correspondant à chaque menu JMenu
+	 */
 	private JMenu menuCompte = new JMenu("Mon Compte");
 	private JMenu menuCatalogue = new JMenu("Catalogue");
 	private JMenu menuPromotions = new JMenu("Promotions");
 	private JMenu menuContact = new JMenu("Contact");
 		
-	
+	/**
+	 * Initialisation des instances des sous-menus qui permettront à terme l'accès aux
+	 * différentes fonctionnalités du menu utilisateur
+	 */
 	private JMenuItem itemFermer = new JMenuItem("Fermer compte utilisateur");
 	private JMenuItem itemMesInformations = new JMenuItem("Mes informations");
 	private JMenuItem itemProgFidelite = new JMenuItem("Mon programme fidélité");
@@ -47,37 +63,53 @@ public class MenuUtilisateur extends JFrame {
 	private JMenuItem itemInformations = new JMenuItem("Informations");
 	private JMenuItem itemArticles = new JMenuItem("Articles");
 	private JMenuItem itemPromotions = new JMenuItem("Promotions en cours");
+	
 	private JLabel icon;
 
-	
+	/**
+	 * <p> Constructeur de la fenêtre MenuUtilisateur où nous allons :<ul>
+	 * <li> ajouter une image de fond pour la fenêtre.</li>
+	 * <li> initialiser tous nos sous-menus avec leurs actions correspondantes. </li>
+	 * <li> ajouter les sous-menus à leur menu respectif.</li>
+	 * <li> ajouter les menus à la barre de menus. </li>
+	 * </ul>
+	 * </p>
+	 */
 	public MenuUtilisateur(){
 		this.setSize(400, 300);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Bienvenue : "+ FenetreDialogIdentification.clientUserIdentifiant);
-		
 		this.setLayout(new BorderLayout());
+		
+		// Ajout d'une image de fond pour la fenêtre//
+		//------------------------------------------//
 		icon = new JLabel(new ImageIcon("src/images/nba.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBackground(Color.white);
 		panImage.setLayout(new BorderLayout());
 		panImage.add(icon);
 		
+		// Ajout de la fenêtre au conteneur de la fenêtre//
+		//-----------------------------------------------//
 		this.getContentPane().add(panImage,"Center");
 		this.repaint();
 		this.pack();
-		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes
-		//--------------------------
+		
+		
+		//On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes//
+		//---------------------------------------------------------------------------//
 			
 		itemFermer.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 
 				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la déconnexion de votre compte ?","Confirmation",JOptionPane.YES_NO_OPTION);
-				if(res==JOptionPane.OK_OPTION){
+				if(res == JOptionPane.OK_OPTION){
 					dispose();
 					try {
-						FenetreCompte fen = new FenetreCompte();
+						FenetreCompte fenAccueil = new FenetreCompte();
+						fenAccueil.setVisible(true);
 					} catch (ExceptionMailsDifferents e1) {
 						e1.printStackTrace();
 					}
@@ -95,7 +127,8 @@ public class MenuUtilisateur extends JFrame {
 		
 		itemProgFidelite.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//ouvrir la fenetre permettant accès au informations sur programme de fidelite
+				 // Ouverture de la fenetre permettant l'accès aux informations sur le 
+				 // programme de fidelite
 				 FenetreFideliteClient fenetreProgrammeFidelite =new  FenetreFideliteClient(null,"programme fidelité",true);
 				 fenetreProgrammeFidelite.setVisible(true);
 			}
@@ -103,7 +136,7 @@ public class MenuUtilisateur extends JFrame {
 		
 		itemMessagerieClient.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//ouvrir la fenetre permettant accès à la messagerie du client
+				 //Ouverture de la fenetre permettant l'accès à la messagerie du client
 				 FenetreMessagerie fenetre = new FenetreMessagerie(false);
 				 fenetre.setVisible(true);
 			}
@@ -111,7 +144,8 @@ public class MenuUtilisateur extends JFrame {
 		
 		itemContact.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				FenetreContactVendeur contactVendeur= new FenetreContactVendeur(null,"Nous Contacter",true);
+				// Ouverture de la fenêtre permettant d'envoyer un message au gérant
+				FenetreContactVendeur contactVendeur = new FenetreContactVendeur(null,"Nous Contacter",true);
 				contactVendeur.setVisible(true);
 			}
 		});
@@ -119,12 +153,15 @@ public class MenuUtilisateur extends JFrame {
 		itemInformations.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				@SuppressWarnings("unused")
-				FenetreInformationsClient contactVendeur= new FenetreInformationsClient();
+				// Ouverture de la fenêtre permettant l'accès aux informations 
+				// concernant le magasin
+				FenetreInformationsClient fenInformations = new FenetreInformationsClient();
 			}
 		});
 		
 		itemArticles.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				// Ouverture de la fenêtre permettant l'achat d'articles
 				FenetreCommandeArticle catalogue = new FenetreCommandeArticle();
 				catalogue.setVisible(true);
 			}
@@ -132,13 +169,15 @@ public class MenuUtilisateur extends JFrame {
 		
 		itemPromotions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				// Ouverture de la fenêtre de consultations des promotions
 				FenetrePromotions promotion = new FenetrePromotions();
 				promotion.setVisible(true);
 			}
 		});
 		
-		// Ajout des sous-menus à leur menu respectif dans l'ordre descendant que l'on désire 
-		// à l'affichage 
+		// Ajout des sous-menus à leur menu respectif dans l'ordre descendant//
+		// que l'on désire à l'affichage ------------------------------------//
+		//-------------------------------------------------------------------//
 		this.menuCompte.add(itemMesInformations);
 		this.menuCompte.add(itemProgFidelite);
 		this.menuCompte.add(itemMessagerieClient);
@@ -151,15 +190,16 @@ public class MenuUtilisateur extends JFrame {
 		this.menuContact.add(itemInformations);
 		this.menuContact.add(itemContact);
 			
-	    //L'ordre d'ajout va déterminer l'ordre d'apparition dans le menu de gauche à droite
-	    //Le premier ajouté sera tout à gauche de la barre de menu et inversement pour le dernier
+	    //L'ordre d'ajout va déterminer l'ordre d'apparition dans le menu de gauche à droite     //
+	    //Le premier ajouté sera tout à gauche de la barre de menu et inversement pour le dernier//
+		//---------------------------------------------------------------------------------------//
 		this.menuBar.add(menuCompte);
 		this.menuBar.add(menuCatalogue);
 		this.menuBar.add(menuPromotions);
 		this.menuBar.add(menuContact);
-		//-------------------------
 		
-		//Ajout de la barre de menu à notre objet MenuUtilisateur
+		//Ajout de la barre de menu à notre objet MenuUtilisateur//
+		//-------------------------------------------------------//
 		this.setJMenuBar(menuBar);
 		this.setVisible(true);
 		}

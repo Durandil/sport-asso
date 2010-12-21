@@ -21,13 +21,36 @@ import javax.swing.JTextField;
 
 import metier.Message;
 
+/**
+ * Cette classe FenetreReponseMessage fait suite à la fenêtre {@link FenetreLectureMessage} lorsque l'utilisateur
+ * appuie sur le bouton Répondre.  Cette classe définit les composants permettant l'affichage
+ * des champs de saisie du sujet et de saisie du contenu du message. Elle permet à un
+ * utilisateur de répondre à un message envoyé par un autre utilisateur à travers la 
+ * messagerie interne de l'application.
+ * 
+ * @see {@link FenetreLectureMessage}
+ * @see {@link FenetreMessagerie}
+ * 
+ * @author Utilisateur
+ *
+ */
 public class FenetreReponseMessage extends JFrame {
-
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JTextField sujetMessage;
 	private JLabel sujetLabel;
 	private JTextArea contenuMessage;
 	private JLabel contenuLabel;
-
+	
+	/**
+	 * Constructeur de la classe FenetreReponseMessage qui sera initialisée grâce à la méthode
+	 * {@link FenetreReponseMessage#initComponent(boolean)}
+	 * 
+	 * @param ReponseDuGerant
+	 * 				Booléen indiquant quel utilisateur utilise la fenêtre (true) pour le gérant
+	 * 				et (false) pour le client
+	 */
 	public FenetreReponseMessage(boolean ReponseDuGerant) {
 		super();
 		this.setTitle("Répondre au message");
@@ -39,6 +62,17 @@ public class FenetreReponseMessage extends JFrame {
 		this.initComponent(ReponseDuGerant);
 	}
 	
+	/**
+	 * <p>Initialisation des composants de la fenêtre de reponse : <ul>
+	 * <li> un JPanel contenant le champ de saisie du sujet du message.</li>	
+	 * <li> un JPanel contenant le champ de saisie du corps du message.</li>
+	 * <li> un JPanel contenant les boutons de retour à la boite de réception et d'envoi
+	 * du message.</li>
+	 * 
+	 * @param reponseDuGerant
+	 * 			Booléen indiquant quel utilisateur utilise la fenêtre (true) pour le gérant
+	 * 			et (false) pour le client
+	 */
 	public void initComponent(boolean reponseDuGerant){
 		
 
@@ -80,8 +114,11 @@ public class FenetreReponseMessage extends JFrame {
 		JButton boutonRetourMessagerie= new JButton("Retour à la Boite de Réception");
 		JButton boutonEnvoyer = new JButton("Envoyer");
 		
-		//Définition des actions relatives à chaque bouton
+		//Définition des actions relatives à chaque bouton//
+		//------------------------------------------------//
 		
+		// Création du bouton permettant le retour à la messagerie //
+		//---------------------------------------------------------//
 		boutonRetourMessagerie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -91,6 +128,9 @@ public class FenetreReponseMessage extends JFrame {
 			}			
 		});
 		
+		// Création du bouton permettant d'envoyer un message après avoir vérifier que les
+		// champs remplis respectent les critères pour être inscrits dans la base de données //
+		//-----------------------------------------------------------------------------------//
 		boutonEnvoyer.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// Création une nouvelle instance de message
@@ -104,7 +144,7 @@ public class FenetreReponseMessage extends JFrame {
 				
 					@SuppressWarnings("deprecation")
 					java.sql.Date dateJour = new java.sql.Date(date.getYear(), date.getMonth(), date.getDate());
-					Message message=new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
+					new Message(sujetMessage.getText(),contenuMessage.getText(),FenetreDialogIdentification.clientUserIdentifiant,dateJour,true);
 
 					// fermeture de la fenetre
 					dispose();
@@ -135,6 +175,7 @@ public class FenetreReponseMessage extends JFrame {
 		panneauBoutonsBas.add(boutonRetourMessagerie);
 		panneauBoutonsBas.add(boutonEnvoyer);
 		
+		//Ajout des JPanel crées ci-dessus au conteneur de la fenêtre
 		this.getContentPane().add(panneauIdentificationMessage, BorderLayout.NORTH);
 		this.getContentPane().add(panneauContenuMessage, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutonsBas, BorderLayout.SOUTH);

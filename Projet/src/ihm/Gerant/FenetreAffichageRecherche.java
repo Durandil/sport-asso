@@ -20,6 +20,13 @@ public class FenetreAffichageRecherche extends JDialog{
 	
 	/**
 	 * 
+	 * @param parent
+	 * 			JFrame utilisé pour créer la fenêtre			
+	 * @param title
+	 * 			String indiquant le titre de la fenêtre
+	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
 	 */
 	public FenetreAffichageRecherche(JFrame parent, String title, boolean modal,String idClient,String nom,String denom,String ville){
 		super(parent, title, modal);

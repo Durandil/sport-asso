@@ -84,7 +84,18 @@ public class FenetreCommandeArticle extends JFrame{
 	}         
 
     /**
-     * Initialisation     
+     * <p>Initialisation  des composants de la fenêtre de commande d'articles :<ul> 
+     * <li> Un JPanel en haut de la fenêtre qui contiendra les intitulés des tableaux catalogue/panier
+     * ainsi que le JCheckBox pour pouvoir utiliser un bon d'achat.</li>
+     * <li> un JPanel à gauche qui accueillera le tableau avec le catalogue des articles 
+     * en stock.</li> 
+     * <li> un JPanel à droite qui accueillera le tableau avec le panier courant des articles
+     * commandés.</li>
+     * <li> un JPanel en bas de la fenêtre qui accueillera les boutons ajout et retirer un 
+     * article du panier, rafraichir le panier, valider la commande et retour au 
+     * menu utilisateur.</li>
+     * <ul>
+     * </p>
      */
     private void initComponent(){
     	
@@ -188,18 +199,27 @@ public class FenetreCommandeArticle extends JFrame{
 			}
 		});
 	    
+	    /**
+	     * <p> Dans le bouton Valider, nous allons effectuer succesivement les actions 
+	     * suivantes : <ul>
+	     * <li>Creation du panier final qui ne contient que les articles commandés 
+	     * en quantité non nulles</li>
+		 * <li>Enregistrement de  la commande dans la table COMMANDE</li>
+		 * <li>Calcul du montant de la facture en tenant compte du fait qu'un client 
+		 * puisse utiliser ses points de fidélité pour les adhérents</li>
+		 * <li>Modification de la base de données en fonction des quantités et 
+		 * articles achetés</li>
+		 * <li>Mise à jour de la carte fidélité pour les adhérents</li>
+		 * <li>Affichage de la facture</li>
+		 * <li>Vidage du panier</li>
+		 * </ul>
+		 * </p>
+	     */
 		JButton boutonValider=new JButton("Valider");
 			
 		boutonValider.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				// Creation du panier final qui ne contient que les articles commandés en quantité non nulles
-				// Enregistrement de  la commande dans la table COMMANDE
-				// Calcul du montant de la facture en tenant compte du fait qu'un client 
-				// puisse utiliser ses points de fidélité pour les adhérents
-				// Modification de la base de données en fonction des quantités et articles achetés
-				// Mise à jour de la carte fidélité pour les adhérents
-				// Affichage de la facture
-				// Vidage du panier
+				
 				ArrayList<LigneCommande> listeArticlesPanier= new ArrayList<LigneCommande>();
 				
 				if(retraitPanierPossible==true && avoirRafraichiApresAjoutPanier == true){
@@ -368,7 +388,7 @@ public class FenetreCommandeArticle extends JFrame{
 				modPan.actualiserLignes(panierClient);
 				modPan.fireTableDataChanged();
 			
-				// Condition nécessaire pour gérer le fait qu'un client ne selectionne
+				// Condition nécessaire pour gérer le fait qu'un client ne puisse selectionner
 				// aucune ligne dans le catalogue avant d'appuyer sur rafraîchir
 				if(activationLigneCatalogue==true){
 					retirerPanierBouton.setEnabled(true);
@@ -383,13 +403,14 @@ public class FenetreCommandeArticle extends JFrame{
 			}			
 		});
 		
+		//Ajout des boutons aux JPanel des boutons panneauBouton
 		panneauBouton.add(commanderArticle);
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 		panneauBouton.add(rafraichirPanierBouton);
 		panneauBouton.add(retirerPanierBouton);
 			
-	
+		// Ajout du JPanel des boutons au conteneur de la fenêtre
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
   
 	    pack();
