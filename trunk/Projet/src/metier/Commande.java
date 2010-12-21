@@ -1,6 +1,6 @@
 package metier;
 
-import ihm.FenetreChoixCatalogue;
+import ihm.Client.FenetreChoixCatalogue;
 import ihm.Client.FenetreCommandeArticle;
 import ihm.Client.FenetreSuppressionPanier;
 

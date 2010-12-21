@@ -1,36 +1,36 @@
 package ihm.Client;
 
-import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.*;
+import javax.swing.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-
+/**
+ * La classe FenetreInformationsClient permet d'afficher la fenêtre regroupant le descriptif du
+ * magasin aux clients accédant au sous-menu "Informations" dans le menu "Contact". 
+ * Nous retrouvons le message de présentation de l'entreprise, un panneau avec l'adresse et le numéro
+ * de téléphone ainsi qu'une carte pour localiser le magasin
+ * 
+ * @author Utilisateur
+ * @see ihm.MenuUtilisateur
+ * @see Panneau
+ */
 public class FenetreInformationsClient extends JFrame {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel imageFenetre;
 
-	// Cette fenêtre va permettre de donner un descriptif du magasin aux clients 
-	// accédant au sous-menu "Informations" dans le menu "Contact"
-	
+	/**
+	 * Constructeur de la classe qui initialise la fenêtre et ses composants
+	 */
 	public FenetreInformationsClient(){
         
         this.setTitle("Qui sommes-nous ?");
         this.setSize(750, 400);
-        this.setLocationRelativeTo(null);               
+        this.setLocation(50,50);               
         this.setResizable(false);
         this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
         
-        //Instanciation d'un objet JPanel
+        //Instanciation d'un objet JPanel pour mettre le panneau contenant le message de présentation
+        // du magasin
         Panneau panneauInformations = new Panneau();
         panneauInformations.setBorder(BorderFactory.createTitledBorder("Mot du Gérant : M. Poirier"));
         //Définition de sa couleur de fond
@@ -42,7 +42,7 @@ public class FenetreInformationsClient extends JFrame {
         panneauBas.setLayout(new GridLayout(1,2,5,5));
         panneauBas.setBorder(BorderFactory.createTitledBorder("Localisation"));
         
-        // Creation du panneau avec l'adresse et le téléphone
+        // Creation du panneau avec l'adresse et le téléphone du magasin
         JPanel panneauInformationsSupp = new JPanel();
         JLabel adresse = new JLabel("Adresse : Rue Blaise Pascal - BP 37203 - 35172 BRUZ cedex");
         JLabel telephone = new JLabel("Téléphone : +33 (0)2 99 05 32 32");
@@ -51,7 +51,7 @@ public class FenetreInformationsClient extends JFrame {
         
         panneauBas.add(panneauInformationsSupp);
         
-        // Creation du panneau qui accueillera l'image
+        // Creation du panneau qui accueillera l'image (la carte de france)
         imageFenetre = new JLabel(new ImageIcon("src/images/carte.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBorder(BorderFactory.createEmptyBorder());
@@ -60,7 +60,6 @@ public class FenetreInformationsClient extends JFrame {
 		panneauBas.add(panImage);
         
         this.getContentPane().add(panneauBas,"South");
-        
         
         this.setVisible(true);
 	}       

@@ -21,6 +21,14 @@ import metier.LigneCommande;
 
 import basededonnees.SGBD;
 
+/**
+ * Cette classe FenetreFactureCommande permet d'afficher une facture correspondant à la 
+ * commande effectuée juste avant dans {@link FenetreCommandeArticle}.
+ * 
+ * @author Utilisateur
+ *
+ * @see {@link FenetreFactureCommande#FenetreFactureCommande(JFrame, String, boolean, String, Commande, ArrayList, int, boolean)}
+ */
 public class FenetreFactureCommande extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
@@ -30,6 +38,29 @@ public class FenetreFactureCommande extends JDialog {
 	private JLabel totalLabel;
 	private JLabel bonsAchatLabel;
 	
+	/**
+	 * Constructeur de la classe {@link FenetreFactureCommande} grâce aux instructions
+	 * de la méthode {@link FenetreFactureCommande#initComponent(String, Commande, ArrayList, int, boolean)}
+	 * 
+	 * @param parent
+	 * 			JFrame utilisé pour créer la fenêtre			
+	 * @param title
+	 * 			String indiquant le titre de la fenêtre
+	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
+	 * @param identifiantClient
+	 * 			Identifiant unique du client
+	 * @param commandeP
+	 * 			Instance de la classe Commande contenant les informations de la commande
+	 * @param panierClient
+	 * 			ArrayList<LigneCommande> répertoriant la liste des articles commandés en quantité non nulles
+	 * @param bonsAchatUtilises
+	 * 			Entier indiquant le montant du bon d'achat du client
+	 * @param utilisationBonsAchat
+	 * 			Booléen indiquant si le client a utilisé son bon d'achat 
+	 * @throws SQLException
+	 */
 	public FenetreFactureCommande(JFrame parent, String title, boolean modal, String identifiantClient,
 			Commande commandeP,ArrayList<LigneCommande> panierClient,int bonsAchatUtilises,boolean utilisationBonsAchat) throws SQLException{
 		super(parent, title, modal);
@@ -40,9 +71,31 @@ public class FenetreFactureCommande extends JDialog {
 		this.initComponent(identifiantClient,commandeP,panierClient,bonsAchatUtilises,utilisationBonsAchat);
 	}
 	
+	/**
+	 * <p>Initialisation de la fenêtre d'affichage de la facture avec les composants : <ul>
+	 * <li> Un JPanel comportant les informations relatives au client</li>
+	 * <li> Un JPanel comportant les informations relatives à la commande</li>
+	 * <li> Un tableau comportant la liste des articles commandés
+	 * <li> Un JPanel comportant le montant total de la commande après déduction du bon d'achat </li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param idClient
+	 * 			Identifiant unique du client
+	 * @param commande
+	 * 			Instance de la classe Commande contenant les informations de la commande
+	 * @param panier
+	 * 			ArrayList<LigneCommande> répertoriant la liste des articles commandés en quantité non nulles
+	 * @param bonsAchat
+	 * 			Entier indiquant le montant du bon d'achat du client
+	 * @param utilisationBonsAchat
+	 * 			Booléen indiquant si le client a utilisé son bon d'achat
+	 * @throws SQLException
+	 */
 	private void initComponent(String idClient,Commande commande,ArrayList<LigneCommande> panier,
 			int bonsAchat,boolean utilisationBonsAchat) throws SQLException{
-
+		
+		// Récupération des différentes informations du client
 		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", idClient);
 		String prenom = SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", idClient);
 		String denomination = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
@@ -52,7 +105,7 @@ public class FenetreFactureCommande extends JDialog {
 		String ville = SGBD.selectStringConditionString("VILLE", "NOMVILLE", "IDVILLE", idVille);
 		
 		
-		// creation du panneau du haut avec caractéristiques client
+		// Création du  panneau JPanel du haut qui contiendra les caractéristiques du client
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new GridLayout(3,1,5,5));
 		
@@ -65,7 +118,8 @@ public class FenetreFactureCommande extends JDialog {
 		panneauCaracteristiquesClient.add(adresseLabel);
 		panneauCaracteristiquesClient.add(cpVilleLabel);
 		
-		
+		// Création du JPanel qui contiendra les informations relatives à la commande
+		// le numéro et la date de la commande
 		JPanel panneauDateCommande = new JPanel();
 		dateCommandeLabel = new JLabel("Date commande : "+ commande.getDate() );
 		numCommandeLabel = new JLabel("Numéro de commande : "+commande.getIdCommande());
@@ -76,18 +130,20 @@ public class FenetreFactureCommande extends JDialog {
 		panneauHaut.add(panneauDateCommande);
 		this.getContentPane().add(panneauHaut,"North");
 		
-		// creation du tableau avec le listing de la commande
+		// creation du tableau avec le listing de tous les articles achetés dans la commande
 		ModeleTableauCommande modele = new ModeleTableauCommande(panier,commande,idClient);
 		JTable tableau = new JTable(modele);
 		JScrollPane tab = new JScrollPane(tableau);
 		tableau.setEnabled(false);
 		this.getContentPane().add(tab,"Center");
 		
-		// panneau de l'affichage du total
+		// Création d'un JPanel qui contindra le montant total de la commande
+		// après utilisation du bon d'achat
 		JPanel panneauBas = new JPanel();
 		panneauBas.setLayout(new GridLayout(2,1,2,0));
 		panneauBas.setBorder(BorderFactory.createLineBorder(Color.gray));
-		bonsAchatLabel = new JLabel("Nombre de points de réduction utilisés  sur votre acrte de fidélité  :  "+bonsAchat);
+		bonsAchatLabel = new JLabel("Nombre de points de réduction utilisés  sur votre carte de fidélité  :  "+bonsAchat);
+		// si le client a utilisé son bon achat, on affiche le montant du bon de réduction
 		if(utilisationBonsAchat == true){
 			panneauBas.add(bonsAchatLabel);		
 		}

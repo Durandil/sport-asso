@@ -25,23 +25,38 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-
+/**
+ * Initialisation de la fenêtre qui serivira de page d'accueil à notre application
+ * 
+ *
+ */
 public class FenetreCompte extends JFrame {
    
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Initialisation des composants JButton pour la fenêtre
+	 */
 	private JButton boutonCreation = new JButton(" Créer un compte");
 	private JButton boutonIdentificationClient = new JButton(" Identification Client");
 	private JButton boutonIdentificationGerant = new JButton("Identification Gerant");
 	private JButton boutonDeconnexion = new JButton("Déconnexion");
+	/**
+	 * Initialisation des autres composants
+	 */
 	private JPanel pan = new JPanel();
 	private JLabel icon,iconEast,iconWest, accueilLabel,heureLabel,dateLabel; 
+	/**
+	 * Initialisation de l'instance Date pour récupérer plus tard la date du système
+	 */
 	private Date heure ;
 	
-	@SuppressWarnings("deprecation")
 	
+	/**
+	 * Constructeur de la fenetre d'accueil de l'application dans lequel 
+	 * on retrouve les boutons de création de compte, d'authentification et de déconnexion
+	 * 
+	 * @throws ExceptionMailsDifferents
+	 */
 	public FenetreCompte()throws ExceptionMailsDifferents{
 
 		this.setTitle("Informations client");
@@ -56,7 +71,7 @@ public class FenetreCompte extends JFrame {
         this.setContentPane(pan);
         
         // je vais scinder mon écran en plusierus parties pour pouvoir insérer des images, des boutons 
-        // aux endroits que je désire
+        // à différents endroits de la fenetre
         this.setLayout(new BorderLayout());
         
         // Définition du panneau qui se trouvera en haut de la fenêtre
@@ -111,6 +126,7 @@ public class FenetreCompte extends JFrame {
 		panHeure.add(panneauDate);
 		panHeure.add(panneauHeure);
 		
+		// Ajout des 3 panneaux qui viennent d'être crées dans le JPanel qui sera en haut de la fenêtre
 		panneauHaut.add("West",panIcon);
 		panneauHaut.add("Center",panAccueil);
 		panneauHaut.add("East",panHeure);
@@ -145,7 +161,7 @@ public class FenetreCompte extends JFrame {
         // Définition des actions de chacun des boutons présents sur la fenêtre
 		boutonCreation.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//dispose();
+				// affichage de la fenêtre de creation de compte pour le client
 				FenetreDialogCreationCompte compte = null;
 				try {
 					compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
@@ -187,10 +203,9 @@ public class FenetreCompte extends JFrame {
 		boutonIdentificationGerant.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// on affiche le contenu de la fenêtre d'identification du gérant avec 
+				// Affichage du contenu de la fenêtre d'identification du gérant avec 
 				// la même fenêtre que le gérant car on considère qu'un gérant est une extension
 				// d'un utilisateur
-				//dispose();
 				FenetreDialogIdentification identificationGerant = new FenetreDialogIdentification(null,"Identification gérant",true);
 				identificationGerant.setVisible(true);
 				dispose();

@@ -33,8 +33,8 @@ public class SGBD {
 	/**  TODO TODO TODO TODO TODO TODO TODO   **/
 
 
-	private static final String ID = "id3199";
-	private static final String MDP = "id3199";
+	private static final String ID = "id3193";
+	private static final String MDP = "id3193";
 	
 	// Méthode issue du TP2
 	public static boolean connecter() {

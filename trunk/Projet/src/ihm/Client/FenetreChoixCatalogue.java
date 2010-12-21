@@ -1,6 +1,5 @@
-package ihm;
+package ihm.Client;
 
-import ihm.Client.FenetreCommandeArticle;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,7 +35,7 @@ public class FenetreChoixCatalogue extends JDialog {
 	
 	/**
 	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client pourra choisir 
-	 * la quantitée qu'il désire de l'article sélectionné dans le tableau du catalogue
+	 * la quantité qu'il désire ajouter de l'article sélectionné dans le tableau du catalogue
 	 * 
 	 * @param parent
 	 * 			
@@ -58,6 +57,22 @@ public class FenetreChoixCatalogue extends JDialog {
 		this.initComponent(stock,idArticle);
 	}
 	
+	/**
+	 * <p> Initialisation des composants de la fenêtre :<ul>
+	 * <li> le JPanel contenant la description de l'article.</li>
+	 * <li> le JPanel contenant le JComboBox permettant de sélectionner la quantité à ajouter
+	 * au panier sans dépasser la quantité en stock de l'article.</li>
+	 * <li> le JPanel contenant les boutons de confirmation ou d'annulation des actions 
+	 * effectuées sur la fenêtre.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param quantiteStock
+	 * 				Entier désignant la quantité actuellement en stock de l'article
+	 * 
+	 * @param idArticle
+	 * 				Identifiant de l'article dont on veut ajouter une certaine quantité au panier
+	 */
 	private void initComponent(int quantiteStock, String idArticle){
 		final String  numArticle=idArticle;
 		
@@ -90,7 +105,7 @@ public class FenetreChoixCatalogue extends JDialog {
 		quantite.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				String choix= (String) ((JComboBox) e.getSource()).getSelectedItem();
 				quantiteSelectionnee=Integer.parseInt(choix);
 			}
@@ -112,16 +127,17 @@ public class FenetreChoixCatalogue extends JDialog {
 		
 		boutonValiderSelection.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				// TODO il faudra ajouter l'article concerné dans le panier avec la quantité correspondante
-				// et faire les modifications éventuelles dans la base de données.
-				// LigneCommande panierEnCours = new LigneCommande(article,quantite);
+				dispose();
+				// Ajout de la quantité selectionnée au panier du client
 				Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee, FenetreCommandeArticle.panierClient);
 				
-				for (int i = 0; i < FenetreCommandeArticle.panierClient.size(); i++) {
-					System.out.println("ARTICLE : "+FenetreCommandeArticle.panierClient.get(i)[0]+", quantité dans panier :"+FenetreCommandeArticle.panierClient.get(i)[1]);
-				}
+				// On change la valeur du booléen pour indiquer le client a bien 
+				// sélectionné une ligne dans le catalogue
 				FenetreCommandeArticle.activationLigneCatalogue=true;
+				
+				// On change la valeur du booleen avoirRafraichiApresAjoutPanier pour qu'il ne
+				// puisse pas faire deux ajouts consécutifs d'un même article sans
+				// rafraîchir le panier
 				FenetreCommandeArticle.avoirRafraichiApresAjoutPanier=false;
 			}			
 		});
