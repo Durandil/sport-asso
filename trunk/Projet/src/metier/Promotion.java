@@ -22,7 +22,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  */
 public class Promotion {
 
@@ -291,7 +291,7 @@ public class Promotion {
 	 * 
 	 * @see Promotion#Promotion(String, Date, Date, double, boolean)
 	 * @see SGBD#transformation(Date)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void ajouterBDD() {
 		ArrayList<String> idNonFini = SGBD.selectListeString("DUAL",
@@ -359,7 +359,7 @@ public class Promotion {
 	 * 
 	 * @see Promotion#ajouterBDD()
 	 * @see SGBD#transformation(Date)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void modifierPromoBDD(String idPromo, String nomPromotion,
 			Date dateDebut, Date dateFin, String pourcentagePromo,
@@ -388,7 +388,7 @@ public class Promotion {
 	 * @param idPromotion
 	 *            L'identifiant unique de la promotion.
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void supprimerListing_PromoBDD(String idPromotion) {
 
@@ -405,7 +405,7 @@ public class Promotion {
 	 * @param idPromotion
 	 *            L'identifiant unique de la promotion.
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void supprimerPromoBDD(String idPromotion) {
 
@@ -451,7 +451,7 @@ public class Promotion {
 	 * @see SGBD#transformation(Date)
 	 * @see Promotion#verifierChampPromotion(String, String, String, String,
 	 *      String, String, String, String)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static boolean verifierDatePromotion(String annee, String mois,
 			String jour) throws Exception {
@@ -515,7 +515,7 @@ public class Promotion {
 	 * 
 	 * @see Promotion#ajouterBDD()
 	 * @see SGBD#transformation(Date)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see Promotion#verifierChampPromotion(String, String, String, String,
 	 *      String, String, String, String)
 	 */
@@ -587,7 +587,7 @@ public class Promotion {
 	 * @see Promotion#verifierDatePromotion(String, String, String)
 	 * @see Promotion#ajouterBDD()
 	 * @see SGBD#transformation(Date)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see FenetreFormulairePromotionsGerant
 	 */
 	public static int verifierChampPromotion(String anneeAvant,

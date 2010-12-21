@@ -21,7 +21,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  * @see Client
  */
 public class Association extends Client {
@@ -125,7 +125,7 @@ public class Association extends Client {
 	 * </p>
 	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
 	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 
 	public void ajouterBDD() {
@@ -179,7 +179,7 @@ public class Association extends Client {
 	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
 	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void modifierBDDassoc(String idClient, String denomination,
 			String adresse, String codePostal, String telephone) {

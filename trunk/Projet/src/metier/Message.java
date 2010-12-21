@@ -22,7 +22,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  */
 public class Message {
 
@@ -269,7 +269,7 @@ public class Message {
 	 * l'article saisies lors de l'appel du constructeur
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void ajouterBDD() {
 

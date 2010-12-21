@@ -22,7 +22,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  * @see LigneCommande
  * @see Promotion
  */
@@ -346,7 +346,7 @@ public class Article {
 	 * </p>
 	 * 
 	 * @see Article#Article(String, double, int, float, String, String, String)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void ajouterBDD() {
 
@@ -419,7 +419,7 @@ public class Article {
 	 * @param idCat
 	 *            L'identifiant de la catégorie prix de l'article.
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void modifierArticleBDD(String idArticle, String description,
 			String prix, String poids, String stock, String idType, String idCat) {
@@ -440,7 +440,7 @@ public class Article {
 	 * 
 	 * @param idArticle
 	 *            L'identifiant de l'article
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void supprimerArticleBDD(String idArticle) {
 
@@ -458,7 +458,7 @@ public class Article {
 	 *            L'identifiant de l'article
 	 * @param stock
 	 *            Nouveau stock de l'article
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public static void modifierStockArticleBDD(String numArticle, int stock) {
 
@@ -504,7 +504,7 @@ public class Article {
 	 * @return Un entier qui est différent de 0 si les champs ne sont pas au
 	 *         format approprié
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see FenetreFormulaireArticleGerant
 	 */
 	public static int verifierChampsArticles(String description, String prix,

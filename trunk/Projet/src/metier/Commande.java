@@ -26,7 +26,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  * @see LigneCommande
  * @see Promotion
  * @see FenetreCommandeArticle
@@ -441,7 +441,7 @@ public class Commande {
 	 * commande saisies lors de l'appel du constructeur
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void ajouterBDD() {
 
@@ -510,7 +510,7 @@ public class Commande {
 	 * du constructeur
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void majInfoCommandes() {
 
@@ -536,7 +536,7 @@ public class Commande {
 	 * de stock.
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see Article
 	 * @see SGBD#selectStringConditionString(String, String, String, String)
 	 */
@@ -605,7 +605,7 @@ public class Commande {
 	 * 
 	 * @return Le montant de la ligne de commande
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see Article
 	 * @see SGBD#selectStringConditionString(String, String, String, String)
 	 * @see SGBD#recupererPourcentagePromotionDegressifArticleCommande(String,
@@ -668,7 +668,7 @@ public class Commande {
 	 * 
 	 * @return Le montant total de la commande
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see Article
 	 * @see SGBD#recupererInformationFideliteClient(String)
 	 * @see Commande#montantCommandePourUnArticle(String, LigneCommande, int)

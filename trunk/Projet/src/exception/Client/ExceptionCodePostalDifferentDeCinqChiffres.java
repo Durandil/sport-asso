@@ -1,4 +1,4 @@
-package exception;
+package exception.Client;
 
 public class ExceptionCodePostalDifferentDeCinqChiffres extends Exception {
 

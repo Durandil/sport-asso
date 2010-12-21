@@ -298,7 +298,7 @@ public abstract class Client {
 	 * </p>
 	 * 
 	 * @see CarteFidelite#CarteFidelite(String, int)
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void ajouterFideliteBDD() {
 		if (this.estFidele) {

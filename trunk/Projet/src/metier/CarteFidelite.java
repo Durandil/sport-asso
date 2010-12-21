@@ -19,7 +19,7 @@ import basededonnees.SGBD;
  * 
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  * @see Client
  */
 public class CarteFidelite {
@@ -155,7 +155,7 @@ public class CarteFidelite {
 	 * l'article saisies lors de l'appel du constructeur
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 
 	public void ajouterBDD() {
@@ -208,7 +208,7 @@ public class CarteFidelite {
 	 *            L'identifiant du client
 	 * @param nbrePoints
 	 *            Le nouveau nombre de points sur la carte
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 * @see FenetreCommandeArticle
 	 */
 

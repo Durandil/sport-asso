@@ -22,7 +22,7 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @see BDD
+ * @see basededonnees.BDD
  * @see Client
  */
 
@@ -164,7 +164,7 @@ public class Particulier extends Client {
 	 * l'article saisies lors de l'appel du constructeur
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 	public void ajouterBDD() {
 
@@ -221,7 +221,7 @@ public class Particulier extends Client {
 	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
 	 * </p>
 	 * 
-	 * @see BDD
+	 * @see basededonnees.BDD
 	 */
 
 	public static void modifierBDDparticulier(String idClient, String nom,

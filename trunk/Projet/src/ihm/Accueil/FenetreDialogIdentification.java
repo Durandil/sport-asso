@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import exception.ExceptionMailsDifferents;
+import exception.Client.ExceptionMailsDifferents;
 
 import basededonnees.SGBD;
 

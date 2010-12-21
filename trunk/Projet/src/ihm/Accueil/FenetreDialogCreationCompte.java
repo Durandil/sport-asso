@@ -21,15 +21,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import exception.ExceptionCaractereInterdit;
-import exception.ExceptionCodePostalDifferentDeCinqChiffres;
-import exception.ExceptionCodePostalIncorrect;
 import exception.ExceptionExcesDeCaracteres;
-import exception.ExceptionMailDejaExistant;
-import exception.ExceptionMailSansArobase;
-import exception.ExceptionMailsDifferents;
-import exception.ExceptionNumeroDeTelephoneDifferentDeDixChiffres;
-import exception.ExceptionNumeroDeTelephoneIncorrect;
+import exception.Client.ExceptionCaractereInterdit;
+import exception.Client.ExceptionCodePostalDifferentDeCinqChiffres;
+import exception.Client.ExceptionCodePostalIncorrect;
+import exception.Client.ExceptionMailDejaExistant;
+import exception.Client.ExceptionMailSansArobase;
+import exception.Client.ExceptionMailsDifferents;
+import exception.Client.ExceptionNumeroDeTelephoneDifferentDeDixChiffres;
+import exception.Client.ExceptionNumeroDeTelephoneIncorrect;
 
 import basededonnees.SGBD;
 import metier.Association;
