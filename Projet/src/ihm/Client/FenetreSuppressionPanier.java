@@ -21,22 +21,39 @@ import basededonnees.SGBD;
 import metier.Commande;
 import metier.LigneCommande;
 
-
+/**
+ * Cette classe FenetreSuppression s'affiche une fois que le client a choisi un article 
+ * dans son panier  et qu'il souhaite en enlever une certaine quantité
+ * 
+ * @author Utilisateur
+ * @see FenetreCommandeArticle
+ */
 public class FenetreSuppressionPanier extends JDialog {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
 	private JComboBox quantite;
 	public static int quantiteSelectionnee ;
 	
 	/**
-	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client pourra choisir 
-	 * la quantitée qu'il désire de l'article sélectionné dans le tableau du catalogue
+	 * Constructeur de la classe FenetreSuppression dans laquelle le client pourra choisir 
+	 * la quantité qu'il désire enlever de l'article sélectionné dans le tableau du catalogue
+	 * 
 	 * @param parent
+	 * 			
 	 * @param title
+	 * 			String indiquant le titre de la fenêtre
 	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
+	 * @param numeroArticle
+	 * 			Identifiant de l'article dont on veut retirer une certaine quantité
+	 * @param quantitePanier
+	 * 			Entier désignant la quantité actuellement commandée de l'article par le client
+	 * 
+	 * @see FenetreCommandeArticle
+	 * @see {@link FenetreSuppressionPanier#initComponent(int, String)}
+	 * 
 	 */
 	public FenetreSuppressionPanier(JFrame parent, String title, boolean modal,String numeroArticle,int quantitePanier){
 		super(parent, title, modal);
@@ -47,6 +64,22 @@ public class FenetreSuppressionPanier extends JDialog {
 		this.initComponent(quantitePanier,numeroArticle);
 	}
 	
+	/**
+	 * <p> Initialisation des composants de la fenêtre :<ul>
+	 * <li> le JPanel contenant la description de l'article.</li>
+	 * <li> le JPanel contenant le JComboBox permettant de sélectionner la quantité à retirer
+	 * du panier sans dépasser la quantité déjà commandée.</li>
+	 * <li> le JPanel contenant les boutons de confirmation ou d'annulation des actions 
+	 * effectuées sur la fenêtre.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param quantiteEntree
+	 * 				Entier désignant la quantité actuellement commandée de l'article par le client
+	 * 
+	 * @param idArticle
+	 * 				Identifiant de l'article dont on veut retirer une certaine quantité
+	 */
 	private void initComponent(int quantiteEntree, String idArticle){
 		final String identifiantArticle = idArticle;
 		
@@ -67,7 +100,8 @@ public class FenetreSuppressionPanier extends JDialog {
 		panneauQuantite.setBorder(BorderFactory.createTitledBorder("Supprimer du panier"));
 		quantiteLabel = new JLabel("Quantité : ");
 		
-		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité qu'il a déjà prise
+		// Pour gérer la quantité selectionnée, il ne pourra dépasser la quantité 
+		// qu'il a déjà commandée de l'article
 		quantite=new JComboBox();
 		for(int i=1;i<=quantiteEntree;i++){
 			quantite.addItem(i+"");
@@ -98,13 +132,13 @@ public class FenetreSuppressionPanier extends JDialog {
 		
 		boutonValiderSuppression.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO il faudra faire les modifications éventuelles dans le panier.
+				// Modificationdans le panier.
 				Commande.enleverArticlePanier(identifiantArticle, quantiteSelectionnee+"", FenetreCommandeArticle.panierClient);
 				
-				for (int i = 0; i < FenetreCommandeArticle.panierClient.size(); i++) {
-					System.out.println("ARTICLE : "+FenetreCommandeArticle.panierClient.get(i)[0]+", quantité dans panier :"+FenetreCommandeArticle.panierClient.get(i)[1]);
-				}
-				setVisible(false);
+				dispose();
+				// On change la valeur du booleen retraitPanierPossible pour qu'il ne
+				// puisse pas faire deux retraits consécutifs d'un même article sans
+				// rafraîchir le panier
 				FenetreCommandeArticle.retraitPanierPossible=false;
 				
 			}			
@@ -113,7 +147,7 @@ public class FenetreSuppressionPanier extends JDialog {
 		boutonAnnulerSuppression.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// permet d'annuler la sélection en cours et retour vers page principale
-				setVisible(false);
+				dispose();
 			}			
 		});
 		
@@ -121,6 +155,7 @@ public class FenetreSuppressionPanier extends JDialog {
 		panneauBoutons.add(boutonValiderSuppression);
 		panneauBoutons.add(boutonAnnulerSuppression);
 		
+		// Ajout des JPanel crées ci-dessus dans le conteneur de la fenêtre
 		this.getContentPane().add(panneauDescription, BorderLayout.NORTH);
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);

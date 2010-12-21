@@ -25,7 +25,10 @@ public class FenetreMessagerie extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static boolean suppressionMessage=false;
 
-
+	/**
+	 * 
+	 * @param boiteMessagerieGerant
+	 */
 	public FenetreMessagerie(boolean boiteMessagerieGerant){
 		super();
 		this.setTitle("Boite de Réception ");
@@ -52,13 +55,16 @@ public class FenetreMessagerie extends JFrame {
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new BorderLayout());
     	
-    	// Création d'un "sous-panneau" accueillant tous les boutons relatifs aux actions
-    	// que le gérant peut faire sur les messages de ses clients
+    	/**
+    	 * Création d'un "sous-panneau" accueillant tous les boutons relatifs aux actions
+    	 * que le gérant peut faire sur les messages de ses clients, qui sera inséré dans panneauHaut
+    	 */
     	JPanel panneauTitle=new JPanel();
     	JButton boutonLire=new JButton("Lire");
     	JButton boutonSupprimerTout=new JButton("Supprimer tout");
     	
-    	// si le tableau est vide, on désactive les boutons
+    	// si le tableau est vide, on désactive les boutons afin d'éviter aux utilisateurs de vouloir 
+    	// faire des actions dans un tableau vide
     	if(modele.getRowCount() == 0){
     		boutonLire.setEnabled(false);
     		boutonSupprimerTout.setEnabled(false);
@@ -90,14 +96,14 @@ public class FenetreMessagerie extends JFrame {
     	
     	boutonSupprimerTout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				Message.supprimerAllBDD(); //suppression message de la DB
-				//tableauMessage.removeAllMessage(); // suppression message tableau
+				// Suppression de tous les messages de la Base de Données correspondants à l'utilisateur
+				// courant de l'application
+				Message.supprimerAllBDD(); 
+
 			}
 		});
-    	
-    	
-    	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
+    		
+    	// Ajout de ses boutons au sous-panneau << panneauTitle>>  et de celui-ci au "panneau du haut"
     	panneauTitle.add(boutonLire);
     	panneauTitle.add(boutonSupprimerTout);
     	panneauHaut.add(panneauTitle,"Center");
