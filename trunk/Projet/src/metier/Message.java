@@ -127,7 +127,7 @@ public class Message {
 
 	public Message() {
 		super();
-		
+
 	}
 
 	/**
@@ -319,7 +319,7 @@ public class Message {
 				+ s
 				+ " , "
 				+ envoiMessageGerant + " )";
-		System.out.println(requete);
+
 		SGBD.executeUpdate(requete);
 
 	}
@@ -359,23 +359,26 @@ public class Message {
 
 		SGBD.executeUpdate(requete);
 	}
-	
+
 	/**
-	 * Vérifie le contenu des champs remplis dans les fenêtres d'envoi de messages
+	 * Vérifie le contenu des champs remplis dans les fenêtres d'envoi de
+	 * messages
 	 * 
 	 * @param contenu
-	 * 			Contenu du message saisi par l'utilisateur
+	 *            Contenu du message saisi par l'utilisateur
 	 * @param sujet
-	 * 			Sujet du message saisi par l'utilisateur
-	 * @return
-	 * 			<p>Un entier désignant une éventuelle erreur :<ul>
-	 * 			<li> 0 si aucune erreur n'est trouvée </li>
-	 * 			<li> 1 si le champ contenu dépasse la longueur autorisée </li>
-	 * 			<li> 2 si le champ sujet dépasse la longueur autorisée </li>
-	 * 			<li> 3 si l'un des champs remplis contient un signe interdit " ' " </li>
-	 * 			<li> 4 si le champ contenu est vide </li>
-	 * 			</ul>
-	 * 			<p>
+	 *            Sujet du message saisi par l'utilisateur
+	 * @return <p>
+	 *         Un entier désignant une éventuelle erreur :
+	 *         <ul>
+	 *         <li>0 si aucune erreur n'est trouvée</li>
+	 *         <li>1 si le champ contenu dépasse la longueur autorisée</li>
+	 *         <li>2 si le champ sujet dépasse la longueur autorisée</li>
+	 *         <li>3 si l'un des champs remplis contient un signe interdit " ' "
+	 *         </li>
+	 *         <li>4 si le champ contenu est vide</li>
+	 *         </ul>
+	 *         <p>
 	 */
 	public static int verifierChampMessage(String contenu, String sujet) {
 		int champCorrect = 0;
