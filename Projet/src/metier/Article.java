@@ -342,7 +342,9 @@ public class Article {
 	 * Cette méthode commence par récupérer l'indice de séquence de la table
 	 * afin de générer l'identifiant de l'article dans le format approprié. La
 	 * requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel du constructeur
+	 * l'article saisies lors de l'appel du constructeur La méthode replaceAll
+	 * est utilisée pour doubler les éventuelles apostrophes présentes dans la
+	 * description, évitant ainsi une erreur lors de l'exécution de la requête
 	 * </p>
 	 * 
 	 * @see Article#Article(String, double, int, float, String, String, String)
@@ -376,7 +378,7 @@ public class Article {
 				+ " STOCK, POIDS,IDTYPE,IDCATEGORIE, ETATARTICLE) VALUES ( '"
 				+ this.idArticle
 				+ "','"
-				+ this.description
+				+ this.description.replaceAll("'", "''")
 				+ "',"
 				+ this.prixInitial
 				+ ","
@@ -390,18 +392,18 @@ public class Article {
 				+ "','"
 				+ this.etat
 				+ "')";
-
 		SGBD.executeUpdate(requete);
 		SGBD.executeUpdate("COMMIT");
 	}
 
 	/**
 	 * Modifie un article qui est déjà présent dans la table ARTICLE de la base
-	 * de données
-	 * 
+	 * de données.
 	 * <p>
 	 * La requête se construit en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel de la méthode
+	 * saisies lors de l'appel de la méthode La méthode replaceAll est utilisée
+	 * pour doubler les éventuelles apostrophes présentes dans la description,
+	 * évitant ainsi une erreur lors de l'exécution de la requête
 	 * </p>
 	 * 
 	 * @param idArticle
@@ -425,10 +427,10 @@ public class Article {
 			String prix, String poids, String stock, String idType, String idCat) {
 
 		String requete = " UPDATE ARTICLE" + " SET DESCRIPTION = '"
-				+ description + "'," + "PRIXINITIAL = '" + prix + "',"
-				+ "STOCK = '" + stock + "', " + "IDTYPE ='" + idType + "',"
-				+ "IDCATEGORIE ='" + idCat + "'," + "POIDS = '" + poids
-				+ "' WHERE IDARTICLE='" + idArticle + "'";
+				+ description.replaceAll("'", "''") + "'," + "PRIXINITIAL = '"
+				+ prix + "'," + "STOCK = '" + stock + "', " + "IDTYPE ='"
+				+ idType + "'," + "IDCATEGORIE ='" + idCat + "'," + "POIDS = '"
+				+ poids + "' WHERE IDARTICLE='" + idArticle + "'";
 
 		SGBD.executeUpdate(requete);
 
@@ -475,70 +477,73 @@ public class Article {
 
 	}
 
-	/**
-	 * Vérifie le bon format des différents champs à saisir lors de
-	 * l'enregistrement d'un nouvel article
-	 * 
-	 * <p>
-	 * Cette méthode effectue des tests pour vérifier que les champs saisis sont
-	 * conformes. Si au moins l'un des tests est non concluant, l'entier
-	 * initialisé à 0 changera de valeur. Par exemple, si l'un des champs est
-	 * non renseigné, l'entier sera égal à 2. Autre exemple : si le prix de
-	 * l'article est négatif ou dépasse le million d'euro, l'entier sera égal à
-	 * 5.
-	 * </p>
-	 * 
-	 * <b>Note : </b> L'utilisation d'un entier et non d'un booléen pour cette
-	 * fonction provient du fait que selon l'erreur relevée, le message qui sera
-	 * affiché à l'écran sera différent.
-	 * 
-	 * @param description
-	 *            La description de l'article
-	 * @param prix
-	 *            Le prix de l'article
-	 * @param poids
-	 *            Le poids de l'article
-	 * @param stock
-	 *            Le stock de l'article
-	 * 
-	 * @return Un entier qui est différent de 0 si les champs ne sont pas au
-	 *         format approprié
-	 * 
-	 * @see basededonnees.BDD
-	 * @see FenetreFormulaireArticleGerant
-	 */
-	public static int verifierChampsArticles(String description, String prix,
-			String poids, String stock) {
-		int champCorrect = 0;
-
-		if (description.length() > 40) {
-			champCorrect = 1;
-		}
-		if (description.length() == 0 | prix.length() == 0
-				| poids.length() == 0 | stock.length() == 0) {
-			champCorrect = 2;
-		}
-
-		try {
-
-			double prixInitial = Double.parseDouble(prix);
-			long poidsArticle = Long.parseLong(poids);
-			long stockArticle = Long.parseLong(stock);
-
-			if (stockArticle < 0 | stockArticle > 999999) {
-				champCorrect = 3;
-			}
-			if (poidsArticle < 0 | poidsArticle > 99999) {
-				champCorrect = 4;
-			}
-			if (prixInitial < 0 | prixInitial >= 1000000) {
-				champCorrect = 5;
-			}
-		} catch (NumberFormatException e) {
-			System.out.println("Erreur de conversion des String en chiffres");
-		}
-
-		return champCorrect;
-	}
+	// /**
+	// * Vérifie le bon format des différents champs à saisir lors de
+	// * l'enregistrement d'un nouvel article
+	// *
+	// * <p>
+	// * Cette méthode effectue des tests pour vérifier que les champs saisis
+	// sont
+	// * conformes. Si au moins l'un des tests est non concluant, l'entier
+	// * initialisé à 0 changera de valeur. Par exemple, si l'un des champs est
+	// * non renseigné, l'entier sera égal à 2. Autre exemple : si le prix de
+	// * l'article est négatif ou dépasse le million d'euro, l'entier sera égal
+	// à
+	// * 5.
+	// * </p>
+	// *
+	// * <b>Note : </b> L'utilisation d'un entier et non d'un booléen pour cette
+	// * fonction provient du fait que selon l'erreur relevée, le message qui
+	// sera
+	// * affiché à l'écran sera différent.
+	// *
+	// * @param description
+	// * La description de l'article
+	// * @param prix
+	// * Le prix de l'article
+	// * @param poids
+	// * Le poids de l'article
+	// * @param stock
+	// * Le stock de l'article
+	// *
+	// * @return Un entier qui est différent de 0 si les champs ne sont pas au
+	// * format approprié
+	// *
+	// * @see basededonnees.BDD
+	// * @see FenetreFormulaireArticleGerant
+	// */
+	// public static int verifierChampsArticles(String description, String prix,
+	// String poids, String stock) {
+	// int champCorrect = 0;
+	//
+	// if (description.length() > 40) {
+	// champCorrect = 1;
+	// }
+	// if (description.length() == 0 | prix.length() == 0
+	// | poids.length() == 0 | stock.length() == 0) {
+	// champCorrect = 2;
+	// }
+	//
+	// try {
+	//
+	// double prixInitial = Double.parseDouble(prix);
+	// long poidsArticle = Long.parseLong(poids);
+	// long stockArticle = Long.parseLong(stock);
+	//
+	// if (stockArticle < 0 | stockArticle > 999999) {
+	// champCorrect = 3;
+	// }
+	// if (poidsArticle < 0 | poidsArticle > 999999) {
+	// champCorrect = 4;
+	// }
+	// if (prixInitial < 0 | prixInitial >= 1000000) {
+	// champCorrect = 5;
+	// }
+	// } catch (NumberFormatException e) {
+	// System.out.println("Erreur de conversion des String en chiffres");
+	// }
+	//
+	// return champCorrect;
+	// }
 
 }

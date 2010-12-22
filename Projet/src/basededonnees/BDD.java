@@ -95,7 +95,7 @@ public class BDD {
 				+ "DESCRIPTION VARCHAR(40),"
 				+ "PRIXINITIAL NUMBER(6,2),"
 				+ "STOCK NUMBER(6),"
-				+ "POIDS NUMBER(5),"
+				+ "POIDS NUMBER(6),"
 				+ "IDTYPE CHAR(8),"
 				+ "IDCATEGORIE CHAR(8),"
 				+ "ETATARTICLE VARCHAR(20),"

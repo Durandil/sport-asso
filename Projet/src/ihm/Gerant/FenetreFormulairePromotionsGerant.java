@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import exception.ExceptionChampVide;
 import exception.ExceptionExcesDeCaracteres;
 import exception.Promotion.ExceptionDateAvantAujourdhui;
+import exception.Promotion.ExceptionDatesIdentiques;
 import exception.Promotion.ExceptionMoisDeFevrier;
 import exception.Promotion.ExceptionMoisDeFevrierAnneeBissextile;
 import exception.Promotion.ExceptionMoisDeTrenteJours;
@@ -373,8 +374,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					if (moisDateDebutPromotion == 2
 							& jourDateDebutPromotion > 28) {
 						position = "début";
-						if ((anneeDateDebutPromotion == 2012
-								|| anneeDateDebutPromotion == 2016 || anneeDateDebutPromotion == 2020)
+						if (anneeDateDebutPromotion%4 == 0
 								&& jourDateDebutPromotion > 29) {
 							throw new ExceptionMoisDeFevrierAnneeBissextile(
 									"Le "
@@ -382,8 +382,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ "ème jour du mois de Février a été"
 											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
-							if ((anneeDateDebutPromotion != 2012
-									&& anneeDateDebutPromotion != 2016 && anneeDateDebutPromotion != 2020)) {
+							if (anneeDateDebutPromotion%4 != 0) {
 								throw new ExceptionMoisDeFevrier(
 										"Le "
 												+ jourDateDebutPromotion
@@ -398,8 +397,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					// (mois de février)
 					if (moisDateFinPromotion == 2 & jourDateFinPromotion > 28) {
 						position = "fin";
-						if ((anneeDateFinPromotion == 2012
-								|| anneeDateFinPromotion == 2016 || anneeDateFinPromotion == 2020)
+						if (anneeDateFinPromotion%4 == 0
 								&& jourDateFinPromotion > 29) {
 							throw new ExceptionMoisDeFevrierAnneeBissextile(
 									"Le "
@@ -407,8 +405,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ "ème jour du mois de Février a été"
 											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
-							if ((anneeDateFinPromotion != 2012
-									&& anneeDateFinPromotion != 2016 && anneeDateFinPromotion != 2020)) {
+							if (anneeDateFinPromotion%4 != 0) {
 								throw new ExceptionMoisDeFevrier(
 										"Le "
 												+ jourDateFinPromotion
@@ -426,6 +423,13 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 								"La date de début de promotion est postérieure à celle de fin");
 					}
 
+					// Vérifie que les dates de début et de fin sont différentes
+					if (dateDebutPromotion.equals(dateFinPromotion)) {
+						throw new ExceptionDatesIdentiques(
+								"La date de début de promotion est identique à celle de fin");
+					}
+					
+					
 					// Vérifie que tous les champs sont remplis
 					if (description.getText().length() == 0
 							| pourcentPromo.getText().length() == 0) {
@@ -515,22 +519,29 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									null,
 									"La date de fin de promotion est plus récente que celle de début de la promotion, vérifiez vos dates",
 									"Attention", JOptionPane.ERROR_MESSAGE);
-				} catch (ExceptionChampVide e6) {
+				} catch (ExceptionDatesIdentiques e6) {
 					System.out.println(e6.getMessage());
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Les dates de début et de fin de promotion sont identiques, vérifiez les",
+									"Attention", JOptionPane.ERROR_MESSAGE);
+				} catch (ExceptionChampVide e7) {
+					System.out.println(e7.getMessage());
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"Au moins l'un des champs est vide, veuillez renseigner tous les champs",
 									"Attention", JOptionPane.ERROR_MESSAGE);
-				} catch (ExceptionExcesDeCaracteres e7) {
-					System.out.println(e7.getMessage());
+				} catch (ExceptionExcesDeCaracteres e8) {
+					System.out.println(e8.getMessage());
 					JOptionPane
 							.showMessageDialog(
 									null,
-									"La description de la promotion est trop longue, veuillez la raccourcir",
+									"La description de la promotion est trop longue (40 caractères maximum), veuillez la raccourcir",
 									"Attention", JOptionPane.ERROR_MESSAGE);
-				} catch (ExceptionPourcentageAberrant e8) {
-					System.out.println(e8.getMessage());
+				} catch (ExceptionPourcentageAberrant e9) {
+					System.out.println(e9.getMessage());
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -538,9 +549,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				}
 
-				catch (Exception e9) {
-					// TODO Auto-generated catch block
-					e9.printStackTrace();
+				catch (Exception e10) {
+				
+					e10.printStackTrace();
 				}
 			}
 		});
@@ -885,8 +896,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					if (moisDateDebutPromotion == 2
 							& jourDateDebutPromotion > 28) {
 						position = "début";
-						if ((anneeDateDebutPromotion == 2012
-								|| anneeDateDebutPromotion == 2016 || anneeDateDebutPromotion == 2020)
+						if (anneeDateDebutPromotion%4 == 0
 								&& jourDateDebutPromotion > 29) {
 							throw new ExceptionMoisDeFevrierAnneeBissextile(
 									"Le "
@@ -894,8 +904,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ "ème jour du mois de Février a été"
 											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
-							if ((anneeDateDebutPromotion != 2012
-									&& anneeDateDebutPromotion != 2016 && anneeDateDebutPromotion != 2020)) {
+							if (anneeDateDebutPromotion%4 != 0) {
 								throw new ExceptionMoisDeFevrier(
 										"Le "
 												+ jourDateDebutPromotion
@@ -910,8 +919,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					// (mois de février)
 					if (moisDateFinPromotion == 2 & jourDateFinPromotion > 28) {
 						position = "fin";
-						if ((anneeDateFinPromotion == 2012
-								|| anneeDateFinPromotion == 2016 || anneeDateFinPromotion == 2020)
+						if (anneeDateFinPromotion%4 == 0
 								&& jourDateFinPromotion > 29) {
 							throw new ExceptionMoisDeFevrierAnneeBissextile(
 									"Le "
@@ -919,8 +927,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ "ème jour du mois de Février a été"
 											+ " saisi alors que ce dernier n'en possède que 29");
 						} else {
-							if ((anneeDateFinPromotion != 2012
-									&& anneeDateFinPromotion != 2016 && anneeDateFinPromotion != 2020)) {
+							if (anneeDateFinPromotion%4 != 0) {
 								throw new ExceptionMoisDeFevrier(
 										"Le "
 												+ jourDateFinPromotion
@@ -936,6 +943,13 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					if (dateDebutPromotion.after(dateFinPromotion)) {
 						throw new ExceptionOrdreDeDeuxDates(
 								"La date de début de promotion est postérieure à celle de fin");
+					}
+					
+
+					// Vérifie que les dates de début et de fin sont différentes
+					if (dateDebutPromotion.equals(dateFinPromotion)) {
+						throw new ExceptionDatesIdentiques(
+								"La date de début de promotion est identique à celle de fin");
 					}
 
 					// Vérifie que tous les champs sont remplis
@@ -1018,6 +1032,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ position
 											+ " de la promotion : vous avez saisi un jour inexistant pour le mois de février (29 jours), modifiez cette date",
 									"Attention", JOptionPane.ERROR_MESSAGE);
+					
 				} catch (ExceptionOrdreDeDeuxDates e5) {
 					System.out.println(e5.getMessage());
 					JOptionPane
@@ -1025,22 +1040,29 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									null,
 									"La date de fin de promotion est plus récente que celle de début de la promotion, vérifiez vos dates",
 									"Attention", JOptionPane.ERROR_MESSAGE);
-				} catch (ExceptionChampVide e6) {
+				} catch (ExceptionDatesIdentiques e6) {
 					System.out.println(e6.getMessage());
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Les dates de début et de fin de promotion sont identiques, vérifiez les",
+									"Attention", JOptionPane.ERROR_MESSAGE);
+				} catch (ExceptionChampVide e7) {
+					System.out.println(e7.getMessage());
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"Au moins l'un des champs est vide, veuillez renseigner tous les champs",
 									"Attention", JOptionPane.ERROR_MESSAGE);
-				} catch (ExceptionExcesDeCaracteres e7) {
-					System.out.println(e7.getMessage());
+				} catch (ExceptionExcesDeCaracteres e8) {
+					System.out.println(e8.getMessage());
 					JOptionPane
 							.showMessageDialog(
 									null,
-									"La description de la promotion est trop longue, veuillez la raccourcir",
+									"La description de la promotion est trop longue (40 caractères maximum), veuillez la raccourcir",
 									"Attention", JOptionPane.ERROR_MESSAGE);
-				} catch (ExceptionPourcentageAberrant e8) {
-					System.out.println(e8.getMessage());
+				} catch (ExceptionPourcentageAberrant e9) {
+					System.out.println(e9.getMessage());
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -1048,9 +1070,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				}
 
-				catch (Exception e9) {
+				catch (Exception e10) {
 					// TODO Auto-generated catch block
-					e9.printStackTrace();
+					e10.printStackTrace();
 				}
 
 			}
