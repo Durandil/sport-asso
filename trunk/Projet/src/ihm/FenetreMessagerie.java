@@ -30,10 +30,6 @@ import metier.Message;
 public class FenetreMessagerie extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	/**
-	 * Booléen static permettant de controler la suppression des messages
-	 */
-	public static boolean suppressionMessage=false;
 
 	/**
 	 * Constructeur de la classe {@link FenetreMessagerie} initialisée grâce à la méthode  
@@ -86,10 +82,10 @@ public class FenetreMessagerie extends JFrame {
     	}
     	
     	// Définition de l'action du bouton permettant de lire un message //
-    	// 
+    	//----------------------------------------------------------------//
     	boutonLire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				// Récupération de la ligne selctionnée et des attributs du message
 				int ligne = tableauMessage.getSelectedRow();
 				String identifiantMail = tableauMessage.getValueAt(ligne,0).toString();
 				String expediteur = tableauMessage.getValueAt(ligne,1).toString();
@@ -98,15 +94,13 @@ public class FenetreMessagerie extends JFrame {
 				String date = tableauMessage.getValueAt(ligne,4).toString();
 				
 				
-				// ouverture de la fenetre de lecture de message
-				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, getTitle(), true, expediteur, sujet, contenu, date,identifiantMail,messagerieDuGerant);
+				// Ouverture de la fenetre de lecture de message en passant en paramètre
+				// du constructeur les attributs du message selectionné
+				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, "Message : "+ sujet, true, expediteur, sujet, contenu, date,identifiantMail,messagerieDuGerant);
 				fenMessage.setVisible(true);
-				if(suppressionMessage==true){
-					tableauMessage.setEnabled(false);
-					suppressionMessage=false;
-				}
 				
-				setVisible(false);
+				// Fermeture de la fenête
+				dispose();
 				
 			}
 		});
@@ -135,7 +129,7 @@ public class FenetreMessagerie extends JFrame {
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
 			// l'instruction permet de fermer la fenetre en cours	
-			setVisible(false);
+			dispose();
 			}			
 		});
 			
@@ -143,11 +137,8 @@ public class FenetreMessagerie extends JFrame {
 			
 	
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
-			
-	        
-	        
-	    pack();
-	       
+  
+	    pack();      
         
         }
     

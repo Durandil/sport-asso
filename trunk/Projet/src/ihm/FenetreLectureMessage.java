@@ -17,7 +17,15 @@ import javax.swing.JTextField;
 
 import metier.Message;
 
-
+/**
+ * Cette classe FenetreLectureMessage permet à tout utilisateur de l'application ayant un 
+ * message dans sa boite de réception interne de pouvoir lire le message
+ * Elle est construite à partir de {@link FenetreLectureMessage#FenetreLectureMessage(JFrame, String, boolean, String, String, String, String, String, boolean)}
+ * 
+ * @author Utilisateur
+ * 
+ *
+ */
 public class FenetreLectureMessage extends JDialog{
 
 	private static final long serialVersionUID = 1L;
@@ -25,8 +33,36 @@ public class FenetreLectureMessage extends JDialog{
 	private JTextArea contenuMessage;
 	private JLabel expediteurLabel,dateLabel,sujetLabel,contenuLabel;
 	public static String idExpediteurMessage ="";
-
-	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,String exp, String sujetM,String contenuM,String dateM,String ident, boolean lectureMessageGerant ){
+	
+	/**
+	 * Constructeur de la fenêtre de lecture de message qui prend en paramètre tous les 
+	 * attributs d'un message. Cette fenêtre est construite à partir de {@link FenetreLectureMessage#initComponent(String, String, String, String, String, boolean)}
+	 * 
+	 * @param parent
+	 *            JFrame utilisé pour créer la fenêtre
+	 * @param title
+	 *            String indiquant le titre de la fenêtre
+	 * @param modal
+	 *            Booléen indiquant si la fenêtre doit bloquer ou non les
+	 *            interactions avec les autres fenêtres
+	 * @param exp
+	 * 			  Identifiant unique de l'expéditeur
+	 * @param sujetM
+	 * 			  Sujet du message selectionné pour être lu
+	 * @param contenuM
+	 * 			  Contenu du message selectionné pour être lu
+	 * @param dateM
+	 * 			  Date d'envoi du message selectionné pour être lu
+	 * @param ident
+	 * 			  Identifiant unique du message
+	 * @param lectureMessageGerant
+	 * 			  Booléen indiquant si le message lu est une réponse du gérant 
+	 * 			  (true) pour les clients et (false) pour le gérant
+	 */
+	public FenetreLectureMessage(JFrame parent, String title, boolean modal ,
+			String exp, String sujetM,String contenuM,String dateM,
+			String ident, boolean lectureMessageGerant ){
+		
 		super(parent, title, modal);
 		this.setSize(900, 300);
 		this.setLocation(50,50);
@@ -36,8 +72,32 @@ public class FenetreLectureMessage extends JDialog{
 	}
 	
 	
-	
-	private void initComponent(String expediteur,String sujet,String contenu,String date,String identifiant,boolean reponseDuGerant){
+	/**
+	 * <p>Initialisation des composants contenus dans la fenêtre: <ul>
+	 * <li> un JPanel en haut de la fenêtre accueillant la date d'envoi, l'expéditeur 
+	 * et le sujet du message. </li>
+	 * <li> un JPanel au centre de la fenêtre accueillant le contenu du message.</li>
+	 * <li> un JPanel en bas de fenêtre contenant trois boutons : retour à la page précédente,
+	 * répondre au message ou supprimer.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param expediteur
+	 * 			  Identifiant unique de l'expéditeur 
+	 * @param sujet
+	 * 			  Sujet du message selectionné pour être lu
+	 * @param contenu
+	 * 			  Contenu du message selectionné pour être lu
+	 * @param date
+	 * 			  Date d'envoi du message selectionné pour être lu
+	 * @param identifiant
+	 * 			  Identifiant unique du message
+	 * @param reponseDuGerant
+	 * 			  Booléen indiquant si le message lu est une réponse du gérant 
+	 * 			  (true) pour les clients et (false) pour le gérant
+	 */
+	private void initComponent(String expediteur,String sujet,String contenu,
+			String date,String identifiant,boolean reponseDuGerant){
 		
 		final String numMessage=identifiant;
 		final boolean reponseGerant = reponseDuGerant;
@@ -104,20 +164,28 @@ public class FenetreLectureMessage extends JDialog{
 		
 		boutonRetourMessagerie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
+				dispose();
 				// permet le retour vers la page contenant la boite de reception du gérant
 			}			
 		});
 		
+		// Définition de l'action du bouton supprimer
 		boutonSupprimerMessage.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
+				// Suppression du message de la base de données
 				Message.supprimerBDD(numMessage);
-				FenetreMessagerie.suppressionMessage=true;
-				setVisible(false);
+				
+				// Fermeture de la fenêtre et ouverture d'une nouvelle 
+				// fenêtre boite de réception
+				dispose();
+				FenetreMessagerie messagerie = new FenetreMessagerie(reponseGerant);
+				messagerie.setVisible(true);
 			}			
 		});
 		
+		// Définition de l'action du bouton répondre qui ferme  la //
+		// page en cours et ouvre une fenêtre de réponse au message//
+		//---------------------------------------------------------//
 		boutonRepondre.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				//Génération d'une page de réponse à un email
@@ -127,11 +195,12 @@ public class FenetreLectureMessage extends JDialog{
 			}			
 		});
 		
-		//Ajout des boutons au panneau principal des boutons panneauBoutons
+		//Ajout des boutons au JPanel principal des boutons : panneauBoutons
 		panneauBoutonsBas.add(boutonRetourMessagerie);
 		panneauBoutonsBas.add(boutonSupprimerMessage);
 		panneauBoutonsBas.add(boutonRepondre);
 		
+		// Ajout des 3 principaux JPanel au conteneur de la fenêtre
 		this.getContentPane().add(panneauIdentificationMessage, BorderLayout.NORTH);
 		this.getContentPane().add(panneauContenuMessage, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutonsBas, BorderLayout.SOUTH);

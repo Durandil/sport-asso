@@ -28,7 +28,14 @@ import metier.Particulier;
 import basededonnees.SGBD;
 
 
-
+/**
+ * La classe FenetreDialogGestionCompteClient permet à un utilisateur client de pouvoir
+ * consulter ses informations personnelles et aussi de pouvoir en modifier certaines sous 
+ * réserve que les modifications effectuées soient correctes
+ * 
+ * @author Utilisateur
+ *
+ */
 public class FenetreDialogGestionCompteClient extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -38,10 +45,19 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private JOptionPane erreurCreation ;
 
 	/**
-	 * Constructeur
+	 * Constructeur qui ouvre une fenetre permettant la gestion d'un compte client avec 
+	 * différents champs de saisie initialisés dans {@link FenetreDialogGestionCompteClient#initComponent(String)}
+	 * 
 	 * @param parent
+	 *            JFrame utilisé pour créer la fenêtre
 	 * @param title
+	 *            String indiquant le titre de la fenêtre
 	 * @param modal
+	 *            Booléen indiquant si la fenêtre doit bloquer ou non les
+	 *            interactions avec les autres fenêtres
+	 * @param idclient
+	 * 			  Identifiant unique du client qui veut consulter ses informations personnelles	
+	 * 
 	 */
 	public FenetreDialogGestionCompteClient(JFrame parent, String title, boolean modal,String idclient){
 		super(parent, title, modal);
@@ -53,7 +69,16 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	}
 	
 	/**
-	 * Initialise le contenu de la boîte
+	 * <p>Initialisation du contenu de la fenêtre :<ul>
+	 * <li> un JPanel pour afficher une image sur la fenêtre.</li>
+	 * <li> un JPanel pour chacun des champs que l'on peut modifier (codePostal,téléphone,...)</li>
+	 * <li> un JPanel contenant deux boutons : Confirmer les modifications et Annuler les 
+	 * modifications.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @param idClient
+	 * 				Identifiant unique du client qui veut consulter ses informations personnelles
 	 */
 	private void initComponent(String idClient){
 		final String numClient=idClient;
