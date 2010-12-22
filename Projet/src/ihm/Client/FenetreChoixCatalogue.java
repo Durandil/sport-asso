@@ -22,12 +22,16 @@ import metier.Commande;
 
 
 
-
+/**
+ * La classe FenetreChoixCatalogue permet de créer une fenêtre dans laquelle le client pourra choisir 
+ * la quantité qu'il désire ajouter de l'article sélectionné dans le tableau du catalogue tout
+ * en voyant une description de l'article selectionné.
+ * 
+ * @author Utilisateur
+ *
+ */
 public class FenetreChoixCatalogue extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
 	private JComboBox quantite;
@@ -38,7 +42,7 @@ public class FenetreChoixCatalogue extends JDialog {
 	 * la quantité qu'il désire ajouter de l'article sélectionné dans le tableau du catalogue
 	 * 
 	 * @param parent
-	 * 			
+	 *            JFrame utilisé pour créer la fenêtre	
 	 * @param title
 	 * 			String indiquant le titre de la fenêtre
 	 * @param modal
