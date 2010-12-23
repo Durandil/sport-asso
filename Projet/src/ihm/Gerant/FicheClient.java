@@ -23,12 +23,17 @@ import basededonnees.SGBD;
 
 import metier.Association;
 import metier.Particulier;
-
+/**
+ * <b> Cette classe permet d'afficher la fiche personnelle d'un client par le gérant. </b>
+ * <p> Dans cette classe on peut retrouver les informations personnelles du client, les 
+ * informations concernant son programme fidélité et des statistiques sur ces commandes. </p>
+ * 
+ * @author Utilisateur
+ *
+ * @see {@link FenetreAffichageRecherche}
+ */
 public class FicheClient extends JDialog {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JLabel typeCompteLabel,identifiantLabel,denominationLabel,nomLabel,prenomLabel,adresseLabel,villeLabel,cpLabel,telLabel,compteFidelLabel,nbPointsLabel;
 	private JTextField identifiant,denomination,nom,prenom,adresse,ville,codePostal,telephone,compteFidelite,nbrePoints;
@@ -40,6 +45,20 @@ public class FicheClient extends JDialog {
 	private static String etatCompte="";
 	private static String numeroCommande=" ";
 	
+	/**
+	 * Constructeur de la fiche client dont les composants sont initialisés dans 
+	 * {@link FicheClient#FicheClient(JFrame, String, boolean, String)}.
+	 * 
+	 * @param parent
+	 *            JFrame utilisé pour créer la fenêtre
+	 * @param title
+	 *            String indiquant le titre de la fenêtre
+	 * @param modal
+	 *            Booléen indiquant si la fenêtre doit bloquer ou non les
+	 *            interactions avec les autres fenêtres
+	 * @param identifiantClient
+	 * 			  Identifiant unique du client dont on va afficher la fiche
+	 */
 	public FicheClient(JFrame parent, String title, boolean modal,String identifiantClient){
 		super(parent, title, modal);
 		this.setSize(1024, 900);
@@ -49,13 +68,42 @@ public class FicheClient extends JDialog {
 		this.initComponent(identifiantClient);
 	}
 	
+	/**
+	 * <p> Initialisation de la fenêtre avec les composants : <ul>
+	 * <li> un JPanel qui contiendra le fond d'écran de la fenêtre. </li>
+	 * <li> Plusieurs JPanel situé à gauche de la fenêtre qui vont accueillir les informations personnelles
+	 * (nom,prenom,adresse,tel,...).</li>
+	 * <li> un JPanel situé en haut à droite avec les informations du programme fidélité 
+	 * du client. </li>
+	 * <li> un JPanel situé en bas à droite avec les statistiques des commandes du client.</li>
+	 * <li> un JPanel en bas contenant les 2 boutons de la fenêtre : Confirmer et Retour à 
+	 * lapage précédente.</li>
+	 * </ul>
+	 * </p>
+	 *
+	 * @param idClient
+	 * 			 Identifiant unique du client dont on va afficher la fiche
+	 * 
+	 */
 	private void initComponent(String idClient){
 		 
-		// Déclaration du panneau qui contiendra les statistiques sur le client
+		// Déclaration du panneau de fond de l'écran //
+		//-------------------------------------------//
+		JPanel panneauGauche= new JPanel();
+		icon = new JLabel(new ImageIcon("src/images/fond_fiche2.jpg"));
+		panneauGauche.setBackground(Color.white);
+		panneauGauche.add(icon);
+		
+		// Déclaration du panneau qui contiendra les statistiques sur le client //
+		//----------------------------------------------------------------------//
 		JPanel panneauDroite=new JPanel();
 		panneauDroite.setLayout(new GridLayout(6,1,0,5));
 		panneauDroite.setBorder(BorderFactory.createTitledBorder("Statistiques"));
 		panneauDroite.setBackground(Color.YELLOW);
+
+		
+		// Interrogation  des tables pour obtenir les statistiques sur un client //
+		//-----------------------------------------------------------------------//
 		
 		ArrayList<String> listeInformationsPlusGrosseCommande = SGBD.StatistiquePlusGrosseCommande(idClient);
 		String referencePlusGrosseCommande = listeInformationsPlusGrosseCommande.get(0);
@@ -64,22 +112,23 @@ public class FicheClient extends JDialog {
 			datePlusGrosseCommande= datePlusGrosseCommande.substring(0, 10);
 		}
 		
-		// Implémenter des méthodes (interrogation tables) pour obtenir les statistiques sur un client
-		JLabel stat1=new JLabel("Total moyen des commandes : "+SGBD.statistiqueClassiqueClient(idClient, "avg")+" €");
+		JLabel stat1=new JLabel("Total moyen des commandes : "+Math.round(Float.parseFloat(SGBD.statistiqueClassiqueClient(idClient, "avg")))+" €");
 		JLabel stat3=new JLabel("Plus grosse commande effectuée : "+SGBD.statistiqueClassiqueClient(idClient, "max")+" €");
 		JLabel stat2= new JLabel("Nombre de commandes effectuées : "+ SGBD.nbreCommandeClient(idClient)); 
 		JLabel stat4 = new JLabel("Référence de la plus grosse commande : " + referencePlusGrosseCommande); 
 		JLabel stat5 = new JLabel("Date de la plus grosse commande : " + datePlusGrosseCommande);
-
-		JComboBox comboAfficherCommande = new JComboBox();
-		JButton boutonValidation = new JButton("OK");
 		
+
+		
+		// Création des 5 JPanel qui va accueillir les résultats des requêtes statistiques //
+		//---------------------------------------------------------------------------------//
 		JPanel panStat1 = new JPanel();
 		JPanel panStat2 = new JPanel();
 		JPanel panStat3 = new JPanel();
 		JPanel panStat4 = new JPanel();
 		JPanel panStat5 = new JPanel();
 		JPanel panStatCommande = new JPanel();
+		panStatCommande.setLayout(new GridLayout(1,2,2,0));
 		
 		panStat1.setBackground(new Color(0,0,0,0));
 		panStat2.setBackground(new Color(0,0,0,0));
@@ -99,8 +148,13 @@ public class FicheClient extends JDialog {
 		panStat4.add(stat4);
 		panStat5.add(stat5);
 		
-		panStatCommande.setLayout(new GridLayout(1,2,2,0));
-		// remplissage du ComboBox avec les commandes du client
+		// Création d'un JComboBox et d'un bouton pour pouvoir consulter les anciennes //
+		// ------------------------ factures d'un client ------------------------------//
+		//-----------------------------------------------------------------------------//
+		
+		JComboBox comboAfficherCommande = new JComboBox();
+
+		// Remplissage du JComboBox avec les commandes du client
 		ArrayList<String> listeCommandesArticles=new ArrayList<String>();
 		listeCommandesArticles= SGBD.selectListeStringOrdonneCondition("COMMANDE", "IDCOMMANDE", "IDCOMMANDE", "IDCLIENT='"+idClient+"'");
 		if(listeCommandesArticles.size()>0){
@@ -110,7 +164,8 @@ public class FicheClient extends JDialog {
 			comboAfficherCommande.setSelectedIndex(0);
 		}
 		
-		
+		// Définition de l'action du JComboBox qui permet de récupérer le numéro de // 
+		// ---------- la commande dont on souhaite afficher la facture -------------//
 		comboAfficherCommande.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -118,7 +173,11 @@ public class FicheClient extends JDialog {
 			}
 		});
 		
-		// définition de l'action du bouton qui ouvrira la fenetre des statistiques d'une commande
+		// Définition de l'action du bouton qui ouvrira la fenetre des statistiques //
+		// --------------------------- d'une commande (facture) --------------------//
+		//------------------------------------------------------------------------- //
+		JButton boutonValidation = new JButton("OK");
+		
 		boutonValidation.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -129,28 +188,29 @@ public class FicheClient extends JDialog {
 				}
 			}
 		});
-		// définition du panneau des statistique commande
-		panStatCommande.add(comboAfficherCommande);
+		
+		// Ajout du JComboBox et du bouton au JPanel qui leur est destiné //
+		//----------------------------------------------------------------//
 		panStatCommande.add(boutonValidation);
 		
+		// Ajout des JPanel de chaque statistique au grand JPanel des statistiques //
+		//-------------------------------------------------------------------------//
 		panneauDroite.add(panStat1);
 		panneauDroite.add(panStat2);
 		panneauDroite.add(panStat3);
 		panneauDroite.add(panStat4);
 		panneauDroite.add(panStat5);
 		panneauDroite.add(panStatCommande);
-		
+	
 		panneauDroite.setBounds(552,350,350,300);
 		
+		// Ajout du JPanel des statistiques sur la fenêtre //
+		//-------------------------------------------------//
 		this.getContentPane().add(panneauDroite);
-			
-		// Déclaration du panneau de fond de l'écran
-		JPanel panneauGauche= new JPanel();
-		icon = new JLabel(new ImageIcon("src/images/fond_fiche2.jpg"));
-		panneauGauche.setBackground(Color.white);
-		panneauGauche.add(icon);	
+				
 		
-		//Identifiant
+		// Création d'un JPanel pour l'identifiant //
+		//-----------------------------------------//
 		JPanel panIdentifiant = new JPanel();
 		panIdentifiant.setBackground(new Color(0, 0, 0, 0));
 		panIdentifiant.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -165,13 +225,14 @@ public class FicheClient extends JDialog {
 		panIdentifiant.setBounds(40,75,300,60);
 		this.add(panIdentifiant);
 		
-		// La denomination
+		// Création d'un JPanel pour la denomination //
+		//-------------------------------------------//
 		JPanel panDenomination= new JPanel();
 		panDenomination.setBackground(new Color(0, 0, 0, 0));
 		panDenomination.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		final String denominationClient = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
 		denomination=new JTextField(denominationClient);
-		denomination.setPreferredSize(new Dimension(110/*denominationClient.length()*/, 25));
+		denomination.setPreferredSize(new Dimension(110, 25));
 		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
 		denominationLabel=new JLabel("Denomination");
 		panDenomination.add(denominationLabel);
@@ -179,7 +240,8 @@ public class FicheClient extends JDialog {
 		panDenomination.setBounds(40,140,300,60);
 		this.add(panDenomination);
 		
-		//Le nom
+		// Création d'un JPanel pour le nom //
+		//----------------------------------//
 		JPanel panNom = new JPanel();
 		panNom.setBackground(new Color(0, 0, 0, 0));
 		panNom.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -193,7 +255,8 @@ public class FicheClient extends JDialog {
 		panNom.setBounds(40,205,300,60);
 		this.add(panNom);
 			
-		//Le prenom
+		// Création d'un JPanel pour le prenom //
+		//-------------------------------------//
 		JPanel panPrenom = new JPanel();
 		panPrenom.setBackground(new Color(0, 0, 0, 0));
 		panPrenom.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -218,7 +281,8 @@ public class FicheClient extends JDialog {
 			prenom.setEnabled(false);
 		}
 		
-		// Le type de Compte
+		// Création d'un JPanel pour le type de Compte //
+		//---------------------------------------------//
 		JPanel panTypeCompte=new JPanel();
 		panTypeCompte.setBackground(new Color(0, 0, 0, 0));
 		panTypeCompte.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -235,7 +299,8 @@ public class FicheClient extends JDialog {
 		panTypeCompte.setBounds(40,10,300,60);
 		this.add(panTypeCompte);
 		
-		//L'adresse
+		// Création d'un JPanel pour l'adresse //
+		//-------------------------------------//
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(new Color(0, 0, 0, 0));
 		panAdresse.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -243,7 +308,7 @@ public class FicheClient extends JDialog {
 		adresseLabel = new JLabel("Adresse : ");
 		String adresseClient=SGBD.selectStringConditionString("CLIENT", "ADRESSECLIENT", "IDCLIENT", idClient);
 		adresse = new JTextField(adresseClient);
-		adresse.setPreferredSize(new Dimension(/*adresseClient.length()*/90, 25));
+		adresse.setPreferredSize(new Dimension(90, 25));
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
 		panAdresse.setBounds(40,335,300,60);
@@ -252,7 +317,8 @@ public class FicheClient extends JDialog {
 		//Idville
 		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE", "IDCLIENT", idClient);
 
-		//ville
+		// Création d'un JPanel pour la ville //
+		//------------------------------------//
 		JPanel panVille = new JPanel();
 		panVille.setBackground(new Color(0, 0, 0, 0));
 		panVille.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -267,7 +333,8 @@ public class FicheClient extends JDialog {
 		this.add(panVille);
 		
 		
-		//Code Postal
+		// Création d'un JPanel pour  le Code Postal //
+		//-------------------------------------------//
 		JPanel panCP = new JPanel();
 		panCP.setBackground(new Color(0, 0, 0, 0));
 		panCP.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -281,7 +348,8 @@ public class FicheClient extends JDialog {
 		this.add(panCP);
 		
 		
-		// Telephone
+		// Création d'un JPanel pour le Telephone //
+		//----------------------------------------//
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(new Color(0, 0, 0, 0));
 		panTelephone.setPreferredSize(dimensionpanneauInformationsPersonnelles);
@@ -295,7 +363,8 @@ public class FicheClient extends JDialog {
 		this.add(panTelephone);
 		
 		
-		// Activation du compte
+		// Création d'un JPanel pour l'Activation du compte //
+		//--------------------------------------------------//
 		JPanel panActivationCompte = new JPanel();
 		panActivationCompte.setBackground(new Color(0,0,0,0));
 		panActivationCompte.setPreferredSize(new Dimension(220, 60));
@@ -303,6 +372,8 @@ public class FicheClient extends JDialog {
 		etatCompte =SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient);
 		String actifCompteClient=SGBD.selectStringConditionString("CLIENT", "ETATCOMPTE", "IDCLIENT", idClient);
 		
+		// Définition d'un JComboBox pour modifier l'état d'un compte //
+		//------------------------------------------------------------//
 		ActifCompteLabel = new JLabel("Compte Actif ? ");
 		ActivationCompteBox = new JComboBox();
 		ActivationCompteBox.addItem("Oui");
@@ -317,7 +388,6 @@ public class FicheClient extends JDialog {
 		ActivationCompteBox.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// Auto-generated method stub
 				String choix =(String) ((JComboBox) e.getSource()).getSelectedItem();
 				if(choix.equals("Oui")){
 					etatCompte = "Activé";
@@ -334,7 +404,8 @@ public class FicheClient extends JDialog {
 		panActivationCompte.setBounds(40,595,200,60);
 		this.add(panActivationCompte);
 		
-		// Declaration d'un panneau qui contiendra les infos concernant la fidelite
+		// Declaration d'un panneau qui contiendra les infos concernant la fidelite //
+		//--------------------------------------------------------------------------//
 		JPanel panneauFidelite = new JPanel();
 		panneauFidelite.setLayout(new GridLayout(2,1,0,5));
 		panneauFidelite.setBackground(new Color(0,0,0,0));
@@ -343,7 +414,8 @@ public class FicheClient extends JDialog {
 		panneauFidelite.setBounds(552,10,350,160);
 		this.add(panneauFidelite);
 		
-		// Panneau Compte Fidelite
+		// Création d'un JPanel pour le Compte Fidelite //
+		//----------------------------------------------//
 		JPanel panCompteFidelite = new JPanel();
 		panCompteFidelite.setBackground(new Color(0,0,0,0));
 		panCompteFidelite.setPreferredSize(new Dimension(290, 60));
@@ -368,7 +440,8 @@ public class FicheClient extends JDialog {
 		panCompteFidelite.add(compteFidelite);
 		panneauFidelite.add(panCompteFidelite);
 		
-		// Panneau Nbre Points Compte Fidelite
+		// Création d'un JPanel pour le Nombre de Points sur le Compte Fidélité //
+		//----------------------------------------------------------------------//
 		JPanel panPointsFidelite = new JPanel();
 		panPointsFidelite.setBackground(new Color(0,0,0,0));
 		panPointsFidelite.setPreferredSize(new Dimension(290, 60));
@@ -393,8 +466,12 @@ public class FicheClient extends JDialog {
 
 		this.getContentPane().add(panneauGauche);
 
-		// Définition du panneau accueillant les boutons situés en bas de fenêtre
+		// Définition du panneau accueillant les boutons situés en bas de fenêtre //
+		//------------------------------------------------------------------------//
 		JPanel panneauBouton=new JPanel();
+		
+		// Définition d'un bouton qui permet de confirmer les modifications faites dans //
+		// ------ la fiche client dans les JTextField et dans les JComboBox ------------//
 		JButton boutonValider=new JButton("Confirmer");
 			
 		boutonValider.addActionListener(new ActionListener(){
@@ -416,19 +493,24 @@ public class FicheClient extends JDialog {
 			setVisible(false);
 			}
 		});
-			
+		
+		// Définition du bouton permettant le retour à la page précédante et l'annulation //
+		// ----------- des modifications en cours tout en fermant la fenêtre -------------//
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
-			// bouton permettant le retour à la page précédante et l'annulation des modifications en cours 
-			// tout en fermant la fenêtre
-				setVisible(false);
+			
+				dispose();
 			}			
 		});
-
+		
+		// Ajout des boutons au JPanel des boutons //
+		//-----------------------------------------//
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
 		
+		// Ajout du JPanel en bas de la fenêtre //
+		//--------------------------------------//
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 	
 		pack();
