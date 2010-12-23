@@ -17,18 +17,25 @@ import javax.swing.JTable;
 import metier.Promotion;
 
 /**
+ * Cette classe permet au gérant de gérer l'ensemble des promotions exceptionnelles du 
+ * magasin
  * 
  * @author Utilisateur
  *
+ * @see FenetreFormulairePromotionsGerant
  */
 public class FenetrePromotionsGerant extends JFrame {
 	
 
 	private static final long serialVersionUID = 1L;
+	/**
+	 * Entier static permettant de récupérer le numéro de la ligne selectionnée dans le tableau
+	 */
 	public static int ligneTableau = 0;
 	
 	/**
-	 * 
+	 * <b> Constructeur de la classe {@link FenetrePromotionsGerant}. </b>
+	 * <p> La fenetre sera créée selon les instructions de la méthode initComponent(). </p>
 	 */
 	public FenetrePromotionsGerant(){
 		super();
@@ -41,23 +48,35 @@ public class FenetrePromotionsGerant extends JFrame {
 	}         
 
     /**
-     *     
+     * <p> Initialisation des composants de la fenêtre : <ul>
+     * <li> un JPanel accueillant les boutons qui permettent de gérer l'ensemble des promotions
+     * (Ajouter, modifier et supprimer une promotion).</li>
+     * <li> un JPanel accueillant un tableau avec la liste des promotions. </li>
+     * <li> un JPanel accueillant le boutons de retour à la page précédente. </li>
+     * </ul>
+     * </p>
+     * 
+     * @see FenetreFormulairePromotionsGerant
+     * @see ModelePromotion
+     * @see ModelePromotion#ModelePromotion()
      */
     private void initComponent(){
     	
-    	// Définition du tableau qui affichera l'ensemble des promotions en cours pour les différents clients
-    	// (adhérents ou non adhérents) après interrogation de la base de données dans ModelePromotionClient
+    	// Définition du tableau qui affichera l'ensemble des promotions en cours pour //
+    	// les différents clients (adhérents ou non adhérents) après interrogation de  //
+    	// -------------- la base de données dans ModelePromotionClient ---------------//
+    	//-----------------------------------------------------------------------------//
+    	
     	final ModelePromotion modele = new ModelePromotion();
     	final JTable tableauPromotions = new JTable(modele);     
-	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
+
 	    
-	    //Création du panneau qui se situera en haut de la fenetre créée
-    	JPanel panneauHaut= new JPanel();
-    	panneauHaut.setLayout(new BorderLayout());
     	
-    	// Création d'un "sous-panneau" accueillant tous les boutons relatifs aux actions
-    	// que le gérant peut faire sur les promotions en cours : soit en ajouter, soit en modifier soit en supprimer
+    	// Création d'un JPanel accueillant tous les boutons relatifs aux actions  //
+    	// que le gérant peut faire sur les promotions en cours : soit en ajouter  //
+    	// --------------- soit en modifier soit en supprimer -------------------  //
     	JPanel panneauTitle=new JPanel();
+    	
     	JButton boutonAjouter=new JButton("Ajouter");
     	JButton boutonSupprimer=new JButton("Supprimer");
     	JButton boutonModifier=new JButton("Modifier");
@@ -66,6 +85,9 @@ public class FenetrePromotionsGerant extends JFrame {
     		boutonSupprimer.setEnabled(false);
     		boutonModifier.setEnabled(false);
     	}
+    	
+    	// Définition de l'action spécifique du bouton ajouter pour lequel nous ouvrons //
+    	//--------------- juste un formulaire de création de promotion -----------------//
     	
     	boutonAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -76,6 +98,10 @@ public class FenetrePromotionsGerant extends JFrame {
 			}
 		});
     	
+    	// Définition du bouton permettant de supprimer une promotion de la base //
+    	// Nous vérifions d'abord qu'une ligne a bien été selectionnée et nous   //
+    	// demandons l'accord du gérant avant de supprimer la promotion          //
+    	//-----------------------------------------------------------------------//
     	boutonSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Supprimer la promotion selectionnée dans la base de donnée
@@ -98,6 +124,8 @@ public class FenetrePromotionsGerant extends JFrame {
 			}
 		});
     	
+    	// Définition du bouton permettant de modifier une promotion //
+    	//-----------------------------------------------------------//
     	boutonModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Modifier la promotion sélectionée grâce à un formulaire
@@ -118,25 +146,23 @@ public class FenetrePromotionsGerant extends JFrame {
 					catch (Exception e1) {	
 						System.out.println(e1.getMessage());
 					}	
-					
-					
-									
-				}
-				
+			
+				}	
 			}
 		});
     	
-    	// Ajout de ses boutons au "sous-panneau" et de celui au "panneau du haut"
+	   
+    	
+    	// Ajout de ses boutons de gestion des promotions au JPanel panneauTitle //
+    	//-----------------------------------------------------------------------//
     	panneauTitle.add(boutonAjouter);
     	panneauTitle.add(boutonSupprimer);
     	panneauTitle.add(boutonModifier);
-    	panneauHaut.add(panneauTitle,"Center");
-    	
-    	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
+
 	    
-	    
-	    // Définition du panneau panneauBouton qui accueillera le bouton
-	    // permettant de retourner à la page précédente 
+	    // Définition du panneau panneauBouton qui accueillera le bouton permettant de //
+	    // ------ retourner à la page précédente en fermant celle en cours ------------//
+    	//-----------------------------------------------------------------------------//
 	    JPanel panneauBouton=new JPanel();
 			
 		JButton retourBouton = new JButton("Retour");
@@ -147,13 +173,14 @@ public class FenetrePromotionsGerant extends JFrame {
 		});
 			
 		panneauBouton.add(retourBouton);
-	
+		
+		// Ajout des composants au conteneur de la fenêtre //
+		//-------------------------------------------------//
+		this.getContentPane().add(panneauTitle, BorderLayout.NORTH);
+	    this.getContentPane().add(new JScrollPane(tableauPromotions), BorderLayout.CENTER);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
-			
-	        
-	        
-	    pack();
-	       
+			        
+	    pack();	       
         
         }
 	
