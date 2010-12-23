@@ -60,11 +60,6 @@ public class Promotion {
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String,
 	 *      boolean)
-	 * @see Promotion#verifierChampPromotion(String, String, String, String,
-	 *      String, String, String, String)
-	 * @see Promotion#verifierDatePromotion(String, String, String)
-	 * @see Promotion#verifierOrdreDeuxDate(String, String, String, String,
-	 *      String, String)
 	 */
 	private Date dateDebut;
 
@@ -76,11 +71,6 @@ public class Promotion {
 	 * @see Promotion#ajouterBDD()
 	 * @see Promotion#modifierPromoBDD(String, String, Date, Date, String,
 	 *      boolean)
-	 * @see Promotion#verifierChampPromotion(String, String, String, String,
-	 *      String, String, String, String)
-	 * @see Promotion#verifierDatePromotion(String, String, String)
-	 * @see Promotion#verifierOrdreDeuxDate(String, String, String, String,
-	 *      String, String)
 	 */
 	private Date dateFin;
 
