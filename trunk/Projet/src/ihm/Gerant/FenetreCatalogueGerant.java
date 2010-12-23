@@ -26,9 +26,11 @@ import metier.Article;
 public class FenetreCatalogueGerant extends JFrame{
 	// Creer la base de données correspondante aux articles 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel icon;
-	private static ArrayList<Integer> numerosLignesInserees = new ArrayList<Integer>();
-	private static ArrayList<Integer> numerosLignesSupprimees = new ArrayList<Integer>();
 	public ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue();
 	public JTable tableau = new JTable();
 	public static boolean modificationTableau=false;
