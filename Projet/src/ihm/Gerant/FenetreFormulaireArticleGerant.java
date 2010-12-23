@@ -1,11 +1,8 @@
 package ihm.Gerant;
 
-import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -29,13 +26,17 @@ import basededonnees.SGBD;
 
 import metier.Article;
 
-public class FenetreFormulaireArticleGerant extends JDialog {
-	// cette classe devra permettre d'ouvrir le formulaire d'ajout
-	// ou de modification d'un article dans le catalogue
+/**
+ * Cette classe devra permettre d'ouvrir le formulaire d'ajout 
+ * ou de modification d'un article dans le catalogue
+ * 
+ * @author Utilisateur
+ *	
+ *@see {@link FenetreCatalogueGerant}
+ */
+public class FenetreFormulaireArticleGerant extends JDialog{
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	JLabel numArticleLabel, descriptionLabel, poidsLabel, catPrixLabel,
 			catSportLabel, prixLabel, stockLabel;

@@ -16,16 +16,20 @@ import javax.swing.JTable;
 
 import metier.Promotion;
 
-
+/**
+ * 
+ * @author Utilisateur
+ *
+ */
 public class FenetrePromotionsGerant extends JFrame {
 	
 
+	private static final long serialVersionUID = 1L;
+	public static int ligneTableau = 0;
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	public static int ligneTableau = 0;
-
 	public FenetrePromotionsGerant(){
 		super();
 		this.setTitle("Promotions en cours");
@@ -36,7 +40,9 @@ public class FenetrePromotionsGerant extends JFrame {
 		this.initComponent();
 	}         
 
-        
+    /**
+     *     
+     */
     private void initComponent(){
     	
     	// Définition du tableau qui affichera l'ensemble des promotions en cours pour les différents clients

@@ -21,14 +21,30 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 
-
+/**
+ * <b>FenetreReapprovisionnement permet gérer le réapprovisionnement des articles en quantité faible </b>
+ * 
+ * <p>Elle permet d'afficher une fenêtre dans laquelle le gérant
+ * peut visualiser et commander les articles en quantite insuffisante par rapport à leur catégorie
+ * ou en rupture de stock. La liste des articles est visible dans un tableau.</p>
+ * @author Utilisateur
+ *
+ *@see {@link FenetreReapprovisionnement#FenetreReapprovisionnement()}
+ *@see {@link FenetreReapprovisionnement#initComponent()}
+ *
+ */
 public class FenetreReapprovisionnement extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel image;
 	private JLabel titreLabel;
 	public static int ligneTableau=0;
-
+	
+	/**
+	 * Constructeur de la fenetre permettant de réapprovisionner les articles en faible quantité.
+	 * Les composants de la fenêtre sont initialisés dans 
+	 * {@link FenetreReapprovisionnement#initComponent()}.
+	 */
 	public FenetreReapprovisionnement(){
 		super();
 		this.setTitle("Articles à commander");
@@ -38,16 +54,30 @@ public class FenetreReapprovisionnement extends JFrame {
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();
 	}         
-
+	
+	/**
+	 * <p>Initialisation des composants de la fenêtre :<ul>
+	 * <li> un JPanel pour mettre un texte de présentation de la fenêtre.</li>
+	 * <li> un JPanel contenant un tableau qui affiche les articles.</li>
+	 * <li> un JPanel contenant les deux boutons pour réapprovisionner un article.</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @see {@link ModeleTableauCatalogue}
+	 * @see {@link ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)}
+	 */
     private void initComponent(){
     	
+    	// Création d'un JPanel pour mettre un texte introductif à la fenêtre //
+    	//--------------------------------------------------------------------//
     	JPanel panneauHaut= new JPanel();
     	panneauHaut.setLayout(new GridLayout(2,1,5,5));
     	
     	titreLabel = new JLabel("Réapprovisionnement des articles en rupture de stock ou en quantité insuffisante");
     	panneauHaut.add(titreLabel);
     	
-    	// Ajout d'une image entre le tableau et l'introduction dans le haut de la fenetre
+    	// Ajout d'une image entre le tableau et l'introduction dans le haut de la fenetre //
+    	//---------------------------------------------------------------------------------//
     	image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
@@ -57,13 +87,14 @@ public class FenetreReapprovisionnement extends JFrame {
     	
     	this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
     	
-    	//Récupération du tableau avec l'ensemble ds articles en quantité insuffisante 
-    	// après interrogation de la base de données dans ModeleTableauCatalogue
+    	//Récupération du tableau avec l'ensemble ds articles en quantité insuffisante //
+    	// après interrogation de la base de données dans ModeleTableauCatalogue       //
+    	//-----------------------------------------------------------------------------//
     	final ModeleTableauCatalogue modele = new ModeleTableauCatalogue(true,true);
 	    final JTable tableau = new JTable(modele);
 	    this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 	    
-	    // Ajout d'un bouton permettant d'ouvrir une fenetre de commande après avoir cliqué 
+	    // Ajout d'un bouton permettant d'ouvrir une fenêtre de commande après avoir cliqué 
 	    // sur un article dans le tableau
 	    JButton commandeBouton = new JButton("Réapprovisionner");
 	    commandeBouton.addActionListener(new ActionListener() {
@@ -94,10 +125,16 @@ public class FenetreReapprovisionnement extends JFrame {
 			}			
 		});
 		
+		// Création d'un JPanel pour accueillir les deux boutons crées au dessus//
+		//----------------------------------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
+		
+		// Ajout des boutons au JPanel //
+		//-----------------------------//
 		panneauBoutons.add(commandeBouton,"West");
 		panneauBoutons.add(retourBouton,"East");
 		
+		// Ajout du JPanel des boutons en bas de la fenêtre
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 		
 	    pack();
