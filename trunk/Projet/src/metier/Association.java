@@ -30,7 +30,7 @@ public class Association extends Client {
 	 * La dénomination (le nom) de l'association
 	 * 
 	 * @see Association#ajouterBDD()
-	 * @see Association#modifierBDDassoc(String, String, String, String, String)
+	 * @see Association#modifierBDDAssoc(String, String, String, String, String)
 	 * @see Association#getDenomination()
 	 * @see Association#setDenomination(String)
 	 */
@@ -40,12 +40,13 @@ public class Association extends Client {
 	 * Constructeur de la classe Association
 	 * <p>
 	 * Le constructeur de la classe Association fait appel à la méthode
-	 * ajouterBDD() qui l'ajoute dans la base de données. La méthode
-	 * ajouterFideliteBDD() instancie un nouvel objet CarteFidelite et de ce
-	 * fait crée une nouvelle ligne dans la table CARTE_FIDELITE si le client a
-	 * émis le souhait de posséder une carte. L'état du compte est par défaut
-	 * initialisé sur Activé (booléen estActif vrai) Le mot de passe est généré
-	 * automatiquement.
+	 * ajouterBDD() qui l'ajoute dans la base de données. <br>
+	 * La méthode ajouterFideliteBDD() instancie un nouvel objet CarteFidelite
+	 * et de ce fait crée une nouvelle ligne dans la table CARTE_FIDELITE si le
+	 * client a émis le souhait de posséder une carte. <br>
+	 * L'état du compte est par défaut initialisé sur Activé (booléen estActif
+	 * vrai).<br>
+	 * Le mot de passe est généré automatiquement.
 	 * </p>
 	 * 
 	 * @param denomination
@@ -123,8 +124,10 @@ public class Association extends Client {
 	 * La requête se construit ensuite en fonction des caractéristiques de
 	 * l'article saisies lors de l'appel du constructeur
 	 * </p>
-	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
-	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
+	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
+	 * requête SQL)
+	 * 
 	 * @see basededonnees.BDD
 	 */
 
@@ -170,27 +173,29 @@ public class Association extends Client {
 	 * 
 	 * <p>
 	 * Étant donné que le client peut modifier son code postal et non
-	 * l'identifiant de la ville (auquel il n'a pas accès), la méthode commence
-	 * par récupérer cet identifiant dans la table VILLE
+	 * l'identifiant de la ville (auquel il n'a pas accès) ; la méthode commence
+	 * par récupérer cet identifiant dans la table VILLE.<br>
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
 	 * l'article saisies lors de l'appel de la méthode
 	 * </p>
-	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
-	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
+	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
+	 * requête SQL)
 	 * 
 	 * @see basededonnees.BDD
 	 */
-	public static void modifierBDDassoc(String idClient, String denomination,
+	public static void modifierBDDAssoc(String idClient, String denomination,
 			String adresse, String codePostal, String telephone) {
 
 		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE",
 				"CODEPOSTAL", codePostal);
 
 		String requete = " UPDATE CLIENT SET DENOMINATIONCLIENT='"
-				+ denomination.replaceAll("'", "''") + "',ADRESSECLIENT='" + adresse.replaceAll("'", "''") +
-				"',IDVILLE='" + idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone + "' WHERE IDCLIENT ='"
-				+ idClient + "'";
+				+ denomination.replaceAll("'", "''") + "',ADRESSECLIENT='"
+				+ adresse.replaceAll("'", "''") + "',IDVILLE='"
+				+ idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone
+				+ "' WHERE IDCLIENT ='" + idClient + "'";
 		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);

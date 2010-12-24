@@ -113,7 +113,6 @@ public class Message {
 	 * @see Message#estEnvoyeAuGerant
 	 * @see Message#ajouterBDD()
 	 */
-
 	public Message(String sujet, String contenu, String expediteur,
 			Date dateEnvoi, boolean messageEnvoye) {
 
@@ -123,11 +122,6 @@ public class Message {
 		this.dateEnvoi = dateEnvoi;
 		this.estEnvoyeAuGerant = messageEnvoye;
 		ajouterBDD();
-	}
-
-	public Message() {
-		super();
-
 	}
 
 	/**
@@ -261,12 +255,17 @@ public class Message {
 	 * 
 	 * <p>
 	 * Cette méthode commence par transformer la date d'envoi en une chaïne de
-	 * caractères. Puis elle récupère l'indice de séquence de la table afin de
-	 * générer l'identifiant de l'article dans le format approprié. Ensuite, en
-	 * fonction de la valeur du booléen estEnvoyeAuGerant, la méthode initialise
-	 * un entier (0 ou 1) en prévision de l'insertion prochaine dans la base.
+	 * caractères. <br>
+	 * Puis elle récupère l'indice de séquence de la table afin de générer
+	 * l'identifiant de l'article dans le format approprié.<br>
+	 * Ensuite, en fonction de la valeur du booléen estEnvoyeAuGerant, la
+	 * méthode initialise un entier (0 ou 1) en prévision de l'insertion
+	 * prochaine dans la base. <br>
 	 * Enfin la requête se construit en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel du constructeur
+	 * l'article saisies lors de l'appel du constructeur<br>
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
+	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
+	 * requête SQL)
 	 * </p>
 	 * 
 	 * @see basededonnees.BDD
@@ -309,16 +308,13 @@ public class Message {
 				+ this.idMessage
 				+ "',"
 				+ "'"
-				+ this.sujet
+				+ this.sujet.replaceAll("'", "''")
 				+ "',"
 				+ "'"
-				+ this.contenu
+				+ this.contenu.replaceAll("'", "''")
 				+ "','"
 				+ this.expediteur
-				+ "',"
-				+ s
-				+ " , "
-				+ envoiMessageGerant + " )";
+				+ "'," + s + " , " + envoiMessageGerant + " )";
 
 		SGBD.executeUpdate(requete);
 
@@ -361,8 +357,8 @@ public class Message {
 	}
 
 	/**
-	 * Vérifie le contenu des champs remplis dans les fenêtres d'envoi de
-	 * messages
+	 * TODO : Traiter les exceptions correspondantes ! Vérifie le contenu des
+	 * champs remplis dans les fenêtres d'envoi de messages
 	 * 
 	 * @param contenu
 	 *            Contenu du message saisi par l'utilisateur
@@ -380,23 +376,23 @@ public class Message {
 	 *         </ul>
 	 *         <p>
 	 */
-	public static int verifierChampMessage(String contenu, String sujet) {
-		int champCorrect = 0;
-
-		if (contenu.length() > 300) {
-			champCorrect = 1;
-		}
-		if (sujet.length() > 90) {
-			champCorrect = 2;
-		}
-		if (sujet.contains("'") | contenu.contains("'")) {
-			champCorrect = 3;
-		}
-		if (contenu.length() == 0) {
-			champCorrect = 4;
-		}
-
-		return champCorrect;
-	}
+//	public static int verifierChampMessage(String contenu, String sujet) {
+//		int champCorrect = 0;
+//
+//		if (contenu.length() > 300) {
+//			champCorrect = 1;
+//		}
+//		if (sujet.length() > 90) {
+//			champCorrect = 2;
+//		}
+//		if (sujet.contains("'") | contenu.contains("'")) {
+//			champCorrect = 3;
+//		}
+//		if (contenu.length() == 0) {
+//			champCorrect = 4;
+//		}
+//
+//		return champCorrect;
+//	}
 
 }

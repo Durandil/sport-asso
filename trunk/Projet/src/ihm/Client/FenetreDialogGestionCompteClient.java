@@ -228,7 +228,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 //				case 0:
 					
 					if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
-						Association.modifierBDDassoc(numClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
+						Association.modifierBDDAssoc(numClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 					}
 					else{
 						Particulier.modifierBDDparticulier(numClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe Article représente un article</b>
+ * <b>La classe Article représente un article.</b>
  * <p>
  * Un article est caractérisé par les informations suivantes (que l'on retrouve
  * dans la base de données) :
@@ -120,7 +120,7 @@ public class Article {
 	private String etat;
 
 	/**
-	 * Constructeur de la classe Article
+	 * Constructeur de la classe Article.
 	 * <p>
 	 * Le constructeur de la classe Article fait appel à la méthode ajouterBDD()
 	 * qui ajoute l'Article dans la base de données.
@@ -342,9 +342,10 @@ public class Article {
 	 * Cette méthode commence par récupérer l'indice de séquence de la table
 	 * afin de générer l'identifiant de l'article dans le format approprié. La
 	 * requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel du constructeur La méthode replaceAll
-	 * est utilisée pour doubler les éventuelles apostrophes présentes dans la
-	 * description, évitant ainsi une erreur lors de l'exécution de la requête
+	 * l'article saisies lors de l'appel du constructeur.<br>
+	 * La méthode replaceAll est utilisée pour doubler les éventuelles
+	 * apostrophes présentes dans la description, évitant ainsi une erreur lors
+	 * de l'exécution de la requête.
 	 * </p>
 	 * 
 	 * @see Article#Article(String, double, int, float, String, String, String)
@@ -401,7 +402,7 @@ public class Article {
 	 * de données.
 	 * <p>
 	 * La requête se construit en fonction des caractéristiques de l'article
-	 * saisies lors de l'appel de la méthode La méthode replaceAll est utilisée
+	 * saisies lors de l'appel de la méthode. La méthode replaceAll est utilisée
 	 * pour doubler les éventuelles apostrophes présentes dans la description,
 	 * évitant ainsi une erreur lors de l'exécution de la requête
 	 * </p>
@@ -476,6 +477,5 @@ public class Article {
 		SGBD.executeUpdate(requete);
 
 	}
-
 
 }

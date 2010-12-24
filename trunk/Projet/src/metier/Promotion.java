@@ -271,11 +271,12 @@ public class Promotion {
 	 * 
 	 * <p>
 	 * Cette méthode commence par récupérer l'indice de séquence de la table
-	 * afin de générer l'identifiant de la promotion dans le format approprié.
+	 * afin de générer l'identifiant de la promotion dans le format approprié.<br>
 	 * Ensuite, la méthode génère deux chaînes de caractères à partir des dates
 	 * ainsi qu'un entier qui vaut 0 si la promotion concerne l'ensemble des
-	 * clients et 1 sinon. La requête se construit ensuite en fonction des
-	 * caractéristiques de la promotion saisies lors de l'appel du constructeur.
+	 * clients et 1 sinon.<br>
+	 * La requête se construit ensuite en fonction des caractéristiques de la
+	 * promotion saisies lors de l'appel du constructeur.
 	 * 
 	 * </p>
 	 * 
@@ -330,9 +331,9 @@ public class Promotion {
 	 * <p>
 	 * Similairement à la méthode ajouterBDD(), cette méthode commence par
 	 * transformer les dates en chaînes de caractères puis crée un nouvel entier
-	 * en fonction de la valeur du booléen promoFidele La requête se construit
-	 * ensutie en fonction des autres caractéristiques de la promotion saisies
-	 * lors de l'appel de la méthode
+	 * en fonction de la valeur du booléen promoFidele. <br>
+	 * La requête se construit ensutie en fonction des autres caractéristiques
+	 * de la promotion saisies lors de l'appel de la méthode
 	 * </p>
 	 * 
 	 * @param idPromo

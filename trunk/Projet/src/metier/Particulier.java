@@ -56,12 +56,13 @@ public class Particulier extends Client {
 	 * Constructeur de la classe Particulier
 	 * <p>
 	 * Le constructeur de la classe Particulier fait appel à la méthode
-	 * ajouterBDD() qui l'ajoute dans la base de données. La méthode
-	 * ajouterFideliteBDD() instancie un nouvel objet CarteFidelite et de ce
-	 * fait crée une nouvelle ligne dans la table CARTE_FIDELITE si le client a
-	 * émis le souhait de posséder une carte. L'état du compte est par défaut
-	 * initialisé sur Activé (booléen estActif vrai) Le mot de passe est généré
-	 * automatiquement.
+	 * ajouterBDD() qui l'ajoute dans la base de données. <br>
+	 * La méthode ajouterFideliteBDD() instancie un nouvel objet CarteFidelite
+	 * et de ce fait crée une nouvelle ligne dans la table CARTE_FIDELITE si le
+	 * client a émis le souhait de posséder une carte. <br>
+	 * L'état du compte est par défaut initialisé sur Activé (booléen estActif
+	 * vrai). <br>
+	 * Le mot de passe est généré automatiquement.
 	 * </p>
 	 * 
 	 * @param nom
@@ -215,10 +216,11 @@ public class Particulier extends Client {
 	 * par récupérer cet identifiant dans la table VILLE
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel de la méthode
+	 * l'article saisies lors de l'appel de la méthode<br>
 	 * 
-	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les apostrophes
-	 * par des doubles apostrophes (pour éviter des erreurs dans la requête SQL) 
+	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
+	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
+	 * requête SQL)
 	 * </p>
 	 * 
 	 * @see basededonnees.BDD
@@ -230,10 +232,12 @@ public class Particulier extends Client {
 		String idVille = SGBD.selectStringConditionString("VILLE", "IDVILLE",
 				"CODEPOSTAL", codePostal);
 
-		String requete = " UPDATE CLIENT SET NOMCLIENT='" + nom.replaceAll("'", "''")
-				+ "',PRENOMCLIENT='" + prenom.replaceAll("'", "''") + "',ADRESSECLIENT='" + adresse.replaceAll("'", "''")
-				+ "',IDVILLE='" + idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone + "' "
-				+ "WHERE IDCLIENT ='" + idClient + "'";
+		String requete = " UPDATE CLIENT SET NOMCLIENT='"
+				+ nom.replaceAll("'", "''") + "',PRENOMCLIENT='"
+				+ prenom.replaceAll("'", "''") + "',ADRESSECLIENT='"
+				+ adresse.replaceAll("'", "''") + "',IDVILLE='"
+				+ idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone
+				+ "' " + "WHERE IDCLIENT ='" + idClient + "'";
 
 		System.out.println(requete);
 

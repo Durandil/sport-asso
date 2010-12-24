@@ -486,7 +486,7 @@ public class FicheClient extends JDialog {
 			}
 			else{
 				Association.modifierBDDclient(identifiantClient,etatCompte);
-				Association.modifierBDDassoc(identifiantClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
+				Association.modifierBDDAssoc(identifiantClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 			}
 			
 			

@@ -55,12 +55,12 @@ public class CarteFidelite {
 	private int nombreDePoints;
 
 	/**
-	 * Constructeur de la classe CarteFidelite
+	 * Constructeur de la classe CarteFidelite.
 	 * <p>
 	 * Ce constructeur fait appel à la méthode ajouterBDD() qui ajoute la carte
 	 * de fidelité dans la base de données. Il ne prend pas en paramètre
 	 * l'identifiant de la carte car ce dernier est automatiquement généré
-	 * lorsque la carte est ajoutée dans la base
+	 * lorsque la carte est ajoutée dans la base.
 	 * </p>
 	 * 
 	 * @param idClient
@@ -145,7 +145,7 @@ public class CarteFidelite {
 
 	/**
 	 * Ajoute la carte de fidelite dans la table CARTE_FIDELITE de la base de
-	 * données
+	 * données.
 	 * 
 	 * <p>
 	 * Cette méthode commence par récupérer l'indice de séquence de la table
@@ -196,7 +196,7 @@ public class CarteFidelite {
 
 	/**
 	 * Modifie le nombre de points sur la carte de fidelite dans la table
-	 * CARTE_FIDELITE de la base de données
+	 * CARTE_FIDELITE de la base de données.
 	 * 
 	 * <p>
 	 * Cette méthode effectue la modification du nombre de points sur la carte
@@ -223,12 +223,12 @@ public class CarteFidelite {
 
 	/**
 	 * Détermine le bon de réduction associé au nombre de points sur la carte de
-	 * fidelite
+	 * fidelite.
 	 * 
 	 * <p>
 	 * Cette méthode va en fonction du nombre de points sur la carte de fidélité
 	 * déterminer le montant du bon de réduction pour les clients possédant un
-	 * compte fidélité
+	 * compte fidélité.
 	 * </p>
 	 * 
 	 * @param nbrePoints
