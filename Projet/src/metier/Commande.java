@@ -77,7 +77,7 @@ public class Commande {
 	private Date date;
 
 	/**
-	 * Le montant de ma commande
+	 * Le montant de la commande
 	 * 
 	 * @see Commande#getMontant()
 	 * @see Commande#setMontant(int)
@@ -90,11 +90,12 @@ public class Commande {
 	 * Constructeur de la classe Commande
 	 * <p>
 	 * Le constructeur de la classe Commande fait appel à la méthode
-	 * ajouterBDD() qui ajoute la commande dans la base de données. Il appelle
-	 * également une méthode (majInfoCommandes()) qui met à jour la table
-	 * LISTING_ARTICLES_COMMANDES. Une troisième méthode est appelée dans ce
-	 * constructeur : elle met à jour la table ARTICLE, étant donné qu'à la
-	 * suite d'une commande, les articles concernés voient leur stock diminuer
+	 * ajouterBDD() qui ajoute la commande dans la base de données.<br>
+	 * Il appelle également une méthode (majInfoCommandes()) qui met à jour la
+	 * table LISTING_ARTICLES_COMMANDES. <br>
+	 * Une troisième méthode est appelée dans ce constructeur : elle met à jour
+	 * la table ARTICLE, étant donné qu'à la suite d'une commande, les articles
+	 * concernés voient leur stock diminuer
 	 * 
 	 * </p>
 	 * 
@@ -323,8 +324,9 @@ public class Commande {
 	 * 
 	 * <p>
 	 * La méthode commence par rechercher le stock de l'article concerné dans la
-	 * table ARTICLE Elle récupère ensuite l'indice correspondant à la place de
-	 * cet article dans le panier Par la suite deux cas se présentent :
+	 * table ARTICLE. Elle récupère ensuite l'indice correspondant à la place de
+	 * cet article dans le panier.<br>
+	 * Par la suite deux cas se présentent :
 	 * <ul>
 	 * <li>Si la quantité désirée par le client est inférieure au stock, alors
 	 * cette quantité est ajoutée au panier.</li>
@@ -376,7 +378,8 @@ public class Commande {
 	 * 
 	 * <p>
 	 * La méthode commence par récupèrer l'indice correspondant à la place de
-	 * cet article dans le panier Par la suite deux cas se présentent :
+	 * cet article dans le panier. <br>
+	 * Par la suite deux cas se présentent :
 	 * <ul>
 	 * <li>Si la quantité que le client veut retirer de son panier est
 	 * inférieure à la quantité intiale alors cette quantité est retirée du
