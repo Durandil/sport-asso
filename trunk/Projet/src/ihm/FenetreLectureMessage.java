@@ -190,7 +190,7 @@ public class FenetreLectureMessage extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				//Génération d'une page de réponse à un email
 				dispose();
-				FenetreReponseMessage fenReponse = new FenetreReponseMessage(reponseGerant);
+				FenetreReponseMessage fenReponse = new FenetreReponseMessage(reponseGerant,sujetMessage.getText());
 				fenReponse.setVisible(true);
 			}			
 		});

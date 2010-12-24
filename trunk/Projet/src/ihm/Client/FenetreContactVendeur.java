@@ -155,6 +155,22 @@ public class FenetreContactVendeur extends JDialog {
 						throw new ExceptionExcesDeCaracteres(
 								"Le sujet du message est trop long !");
 					}
+					else{
+						 // si aucun problème n'est détecté, nous allons enregistrer
+						 // le message et fermer la
+						 // fenêtre
+						 java.util.Date date = new java.util.Date();
+						
+						 @SuppressWarnings("deprecation")
+						 java.sql.Date dateJour = new java.sql.Date(date.getYear(),
+						 date.getMonth(), date.getDate());
+						 new Message(sujet.getText(), contenu.getText(),
+						 FenetreDialogIdentification.clientUserIdentifiant,
+						 dateJour, true);
+						
+						 // fermeture de la fenetre
+						dispose();
+					}
 
 				} catch (ExceptionChampVide e2) {
 					System.out.println(e2.getMessage());

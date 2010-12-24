@@ -334,71 +334,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				}
-				// int verificationChamp = Article.verifierChampsArticles(
-				// description.getText(), prx, p, st);
-				//
-				// switch (verificationChamp) {
-				// case 0:
-				//
-				// /**
-				// * ATTENTION : Si on ne touche pas aux Jcombobox, les items
-				// * seront vides !
-				// **/
-				// String typ = SGBD.selectStringConditionString("TYPE_SPORT",
-				// "IDTYPE", "NOMTYPE", itemSportSelectionne);
-				// String cat = SGBD.selectStringConditionString("CATEGORIE",
-				// "IDCATEGORIE", "NOMCATEGORIE", itemPrixSelectionne);
-				//
-				// System.out.println(typ + " " + cat);
-				// Article art = new Article(description.getText(), Double
-				// .parseDouble(prx), Integer.parseInt(st), Float
-				// .parseFloat(p), typ, cat, "En stock");
-				// FenetreCatalogueGerant.modificationTableau = true;
-				//
-				// // puis fermer la page
-				// dispose();
-				// FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
-				// fen.setVisible(true);
-				//
-				// break;
-				// case 1:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le champ description est trop long, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 2:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Un des champs que vous avez rempli est vide, remplissez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 3:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le stock indiqué n'est pas valide, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 4:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le poids indiqué n'est pas valide, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 5:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le prix indiqué n'est pas valide, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// default:
-				// break;
-				// }
+
 			}
 		});
 		
