@@ -18,6 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import exception.ExceptionChampVide;
+import exception.ExceptionExcesDeCaracteres;
+
 import metier.Message;
 
 /**
@@ -51,7 +54,7 @@ public class FenetreReponseMessage extends JFrame {
 	 *            Booléen indiquant quel utilisateur utilise la fenêtre (true)
 	 *            pour le gérant et (false) pour le client
 	 */
-	public FenetreReponseMessage(boolean ReponseDuGerant) {
+	public FenetreReponseMessage(boolean reponseDuGerant, String sujetDuMessage) {
 		super();
 		this.setTitle("Répondre au message");
 		this.setAlwaysOnTop(true);
@@ -59,7 +62,7 @@ public class FenetreReponseMessage extends JFrame {
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.initComponent(ReponseDuGerant);
+		this.initComponent(reponseDuGerant, sujetDuMessage);
 	}
 
 	/**
@@ -74,18 +77,20 @@ public class FenetreReponseMessage extends JFrame {
 	 * @param reponseDuGerant
 	 *            Booléen indiquant quel utilisateur utilise la fenêtre (true)
 	 *            pour le gérant et (false) pour le client
+	 * @param sujetDuMessage
+	 *            Sujet du message intial (auquel l'utilisateur va répondre)
 	 */
-	public void initComponent(boolean reponseDuGerant) {
+	public void initComponent(boolean reponseDuGerant, String sujetDuMessage) {
 
 		final boolean reponseGerant = reponseDuGerant;
-		String gerant = "du client";
+		String gerant = "client";
 		if (reponseDuGerant == true) {
-			gerant = "du gérant";
+			gerant = "gérant";
 		}
 
 		// Sujet Message
 		JPanel panneauSujet = new JPanel();
-		sujetMessage = new JTextField("RE : " + gerant);
+		sujetMessage = new JTextField("RE (" + gerant + ") : " + sujetDuMessage);
 		sujetMessage.setPreferredSize(new Dimension(200, 25));
 		sujetLabel = new JLabel("Objet : ");
 		panneauSujet.add(sujetLabel);
@@ -141,6 +146,64 @@ public class FenetreReponseMessage extends JFrame {
 		// -----------------------------------------------------------------------------------//
 		boutonEnvoyer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
+				String champ = "";
+				try {
+					if (contenuMessage.getText().length() == 0) {
+						champ = "corps";
+						throw new ExceptionChampVide(
+								"Le contenu du message est vide !");
+					}
+					if (sujetMessage.getText().length() == 0) {
+						champ = "sujet";
+						throw new ExceptionChampVide(
+								"Le message n'a pas de sujet !");
+					}
+
+					if (contenuMessage.getText().length() > 300) {
+						champ = "corps";
+						throw new ExceptionExcesDeCaracteres(
+								"Le corps du message est trop long !");
+					}
+					if (sujetMessage.getText().length() > 90) {
+						champ = "sujet";
+						throw new ExceptionExcesDeCaracteres(
+								"Le sujet du message est trop long !");
+					} else {
+						java.util.Date date = new java.util.Date();
+
+						@SuppressWarnings("deprecation")
+						java.sql.Date dateJour = new java.sql.Date(date
+								.getYear(), date.getMonth(), date.getDate());
+						new Message(sujetMessage.getText(), contenuMessage
+								.getText(),
+								FenetreLectureMessage.idExpediteurMessage,
+								dateJour, false);
+
+						// fermeture de la fenetre
+						dispose();
+						FenetreMessagerie fenetre = new FenetreMessagerie(
+								reponseGerant);
+						fenetre.setVisible(true);
+
+					}
+
+				} catch (ExceptionChampVide e2) {
+					System.out.println(e2.getMessage());
+					JOptionPane.showMessageDialog(null,
+							"Votre message n'a pas de " + champ
+									+ ",veuillez le préciser.", "Attention",
+							JOptionPane.ERROR_MESSAGE);
+				} catch (ExceptionExcesDeCaracteres e3) {
+					System.out.println(e3.getMessage());
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Le "
+											+ champ
+											+ " de votre message est trop long,veuillez le raccourcir",
+									"Attention", JOptionPane.ERROR_MESSAGE);
+				}
 				// Création une nouvelle instance de message
 
 				// int verificationChampMessage = Message.verifierChampMessage(
