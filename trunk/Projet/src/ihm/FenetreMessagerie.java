@@ -93,15 +93,14 @@ public class FenetreMessagerie extends JFrame {
 				String contenu = tableauMessage.getValueAt(ligne,3).toString();
 				String date = tableauMessage.getValueAt(ligne,4).toString();
 				
+				// Fermeture de la fenête
+				dispose();
 				
 				// Ouverture de la fenetre de lecture de message en passant en paramètre
 				// du constructeur les attributs du message selectionné
 				FenetreLectureMessage fenMessage = new FenetreLectureMessage(null, "Message : "+ sujet, true, expediteur, sujet, contenu, date,identifiantMail,messagerieDuGerant);
 				fenMessage.setVisible(true);
-				
-				// Fermeture de la fenête
-				dispose();
-				
+					
 			}
 		});
     	

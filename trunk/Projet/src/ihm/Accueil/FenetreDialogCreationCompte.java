@@ -53,13 +53,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 			fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom, adresse, identifiantVerification,
 			codePostal, telephone, identifiant, denomination;
-	private JComboBox compte, fidelite;
+	private JComboBox compte, fidelite,ville;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé
 	// vaut ainsi "vrai" à l'origine
 	private boolean estFidele = false;
 	private JOptionPane creationCorrecte, affichageMotDePasse, erreurCreation;
 	public static String itemSelectionne;
 	public static String itemFidelite;
+	public static String codePostalSelectionne;
 	public int creationCompteCorrecte;
 
 	/**
@@ -203,7 +204,25 @@ public class FenetreDialogCreationCompte extends JDialog {
 		codePostal = new JTextField();
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
-		panCP.add(codePostal);
+		panCP.add(codePostal);		
+		
+//		ville= new JComboBox();
+//		ArrayList<String> listeVille = SGBD.selectListeString("VILLE", "NOMVILLE");
+//		for (String nomVille : listeVille) {
+//			ville.addItem(nomVille);
+//		}
+//		ville.setSelectedIndex(0);
+//		ville.addActionListener(new ActionListener() {
+//			
+//			public void actionPerformed(ActionEvent e) {
+//				String nomVille= (String) ((JComboBox) e.getSource())
+//								.getSelectedItem();
+//				codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
+//				codePostal.setText(codePostalSelectionne);
+//			}
+//		});
+//		ville.setEnabled(false);
+		
 
 		// Telephone
 		JPanel panTelephone = new JPanel();
@@ -273,7 +292,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 		content.add(panNom);
 		content.add(panPrenom);
 		content.add(panAdresse);
-		// content.add(panVille);
 		content.add(panCP);
 		content.add(panTelephone);
 		content.add(panFidelite);
@@ -357,10 +375,17 @@ public class FenetreDialogCreationCompte extends JDialog {
 					// postal
 
 					int cp = Integer.parseInt(codePostal.getText());
-					if (cp <= 999 | cp >= 96000) {
+					if ( cp <= 999 | cp >= 96000 ) {
 						throw new ExceptionCodePostalIncorrect(
 								"Le code postal saisi est incorrect !");
 					}
+					
+					// Verification code postal base de donnees
+					if(!SGBD.verifierCodePostalExisteDansBase(codePostal.getText())){
+						throw new ExceptionCodePostalIncorrect("Le code postal n'existe pas" +
+								"dans la base de données actuelle !");
+					}
+					
 					// Vérification de la cohérence du
 					// numéro de
 					// téléphone
@@ -506,9 +531,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 					erreurCreation
 							.showMessageDialog(
 									null,
-									"Le code postal saisi est incorrect. Vérifiez ce que vous avez saisi.",
+									e7.getMessage(),
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
+					
+					
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 					System.out.println(e8.getMessage());
 
