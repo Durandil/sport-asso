@@ -348,6 +348,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 								"Votre adresse mail ne peut pas contenir d'apostrophe !");
 					}
 					
+
 					
 					// Vérification du nombre de caractères
 
