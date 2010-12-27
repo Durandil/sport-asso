@@ -349,5 +349,6 @@ public abstract class Client {
 
 		SGBD.executeUpdate(requete);
 	}
-
+	
+	
 }

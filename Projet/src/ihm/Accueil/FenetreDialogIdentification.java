@@ -208,8 +208,8 @@ public class FenetreDialogIdentification extends JDialog {
 
 					// Puis on affiche de nouveau la fenetre d'accueil
 
-					FenetreCompte fen = new FenetreCompte();
-					fen.setVisible(true);
+					//FenetreCompte fen = new FenetreCompte();
+					//fen.setVisible(true);
 
 				} catch (ExceptionMotDePasseErrone e2) {
 					
@@ -224,8 +224,8 @@ public class FenetreDialogIdentification extends JDialog {
 					
 
 					// Puis on affiche de nouveau la fenetre d'accueil
-					FenetreCompte fen = new FenetreCompte();
-					fen.setVisible(true);
+					//FenetreCompte fen = new FenetreCompte();
+					//fen.setVisible(true);
 
 				}
 

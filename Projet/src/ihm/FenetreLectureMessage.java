@@ -166,6 +166,8 @@ public class FenetreLectureMessage extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				// permet le retour vers la page contenant la boite de reception du gérant
+				FenetreMessagerie messagerie = new FenetreMessagerie(reponseGerant);
+				messagerie.setVisible(true);
 			}			
 		});
 		

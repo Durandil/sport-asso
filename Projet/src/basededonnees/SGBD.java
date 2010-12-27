@@ -54,12 +54,12 @@ public class SGBD {
 	/**
 	 * L'identifiant utilisé pour la connexion
 	 */
-	private static final String ID = "id3199";
+	private static final String ID = "id3193";
 
 	/**
 	 * Le mot de passe utilisé pour la connnexion
 	 */
-	private static final String MDP = "id3199";
+	private static final String MDP = "id3193";
 
 	/**
 	 * Permet à l'utilisateur de se connecter à sa base de données
@@ -1223,8 +1223,8 @@ public class SGBD {
 					conditionWhereOr = conditionWhereOr + " or ";
 					ajouterChamp = false;
 				}
-				conditionWhereOr = conditionWhereOr + "VILLE.NOMVILLE Like '%"
-						+ ville + "%'";
+				conditionWhereOr = conditionWhereOr + "LOWER(VILLE.NOMVILLE) Like '%"
+						+ ville.toLowerCase() + "%'";
 				ajouterChamp = true;
 			}
 
@@ -1482,5 +1482,29 @@ public class SGBD {
 
 		return pourcentage;
 	}
+	
+	/**
+	 * La méthode vérifie si le code postal saisi dans les formulaires existe dans 
+	 * la base de données des villes
+	 * 
+	 * @param cp
+	 * 			code postal saisi par l'utilisateur
+	 * @return
+	 * 			si le code postal existe ou non
+	 */
+	public static boolean verifierCodePostalExisteDansBase(String cp){
+		boolean existe = false ;
 
+		ArrayList<String> listeCodePostal = selectListeString("VILLE", "CODEPOSTAL");
+		
+		for (String codePostal : listeCodePostal) {
+			
+			if(codePostal.equals(cp)){
+				existe = true ;
+			}
+		}
+		
+		return existe ;
+	}
+	
 }
