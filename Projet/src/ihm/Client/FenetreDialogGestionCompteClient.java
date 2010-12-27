@@ -14,12 +14,20 @@ import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import exception.ExceptionExcesDeCaracteres;
+import exception.Client.ExceptionCaractereInterdit;
+import exception.Client.ExceptionCodePostalDifferentDeCinqChiffres;
+import exception.Client.ExceptionCodePostalIncorrect;
+import exception.Client.ExceptionNumeroDeTelephoneDifferentDeDixChiffres;
+import exception.Client.ExceptionNumeroDeTelephoneIncorrect;
 
 import metier.Association;
 import metier.Client;
@@ -42,7 +50,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private JLabel denominationLabel, icon, nomLabel, prenomLabel, adresseLabel,villeLabel,cpLabel,telLabel, identifiantLabel;
 	private JTextField nom, prenom,ville,codePostal,telephone,identifiant,denomination;
 	private TextArea adresse;
-	private JOptionPane erreurCreation ;
+	private JComboBox listeVille ;
 
 	/**
 	 * Constructeur qui ouvre une fenetre permettant la gestion d'un compte client avec 
@@ -190,6 +198,27 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panCP.add(codePostal);
 		content.add(panCP);
 		
+		listeVille= new JComboBox();
+		ArrayList<String> listeVilles = SGBD.selectListeString("VILLE", "NOMVILLE");
+		for (String nomVille : listeVilles) {
+			listeVille.addItem(nomVille);
+		}
+		listeVille.setSelectedIndex(0);
+		listeVille.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String nomVille= (String) ((JComboBox) e.getSource())
+								.getSelectedItem();
+				
+				String codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
+				codePostal.setText(codePostalSelectionne);
+			}
+		});
+		
+		listeVille.setEnabled(false);
+		listeVille.setVisible(false);
+		panCP.add(listeVille);
+		
 		// Telephone
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(Color.white);
@@ -206,26 +235,88 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		JButton validationBouton = new JButton("Valider");
 		
 		validationBouton.addActionListener(new ActionListener(){
-			private JOptionPane erreurCreation;
 
 			public void actionPerformed(ActionEvent e) {	
 				
-				
-//				ImageIcon image = new ImageIcon("src/images/warning.png");
-//				
-//				int modificationCompte = 0 ;
-//				
-//				if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
-//					modificationCompte = Client.verifierCreationCompte("", "", denomination.getText(),"","", telephone.getText(), codePostal.getText());
-//
-//				}
-//				else{
-//					modificationCompte = Client.verifierCreationCompte("", "", "", nom.getText(), prenom.getText(), telephone.getText(), codePostal.getText());
-//				
-//				}
-//				
-//				switch (modificationCompte) {
-//				case 0:
+				try{
+					
+					// Vérification de la validité de la dénomination saisie pour les
+					// associations et du couple nom/prénom pour les particuliers
+					
+					if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
+						
+						if(denomination.getText().length() > 40){
+							throw new ExceptionExcesDeCaracteres("La dénomination " +
+									"contient trop de caractères !");
+						}
+						if(denomination.getText().contains("'")){
+							throw new ExceptionCaractereInterdit("La dénomination "+
+									"contient un caractère interdit !");
+						}
+					}
+					else{
+						
+						if(prenom.getText().length() > 40 |
+								nom.getText().length() >40 ){
+							throw new ExceptionExcesDeCaracteres("Un des champs saisis" +
+									" contient trop de caractères !");
+						}
+						if(prenom.getText().contains("'") | nom.getText().contains("'")){
+							throw new ExceptionCaractereInterdit("Un des champs saisis " +
+									"contient un caractère interdit !");
+						}
+					}
+					
+					// Vérification de la validité de l'adresse 
+					
+					if(adresse.getText().length() > 40){
+						throw new ExceptionExcesDeCaracteres("L'adresse saisie contient" +
+								" trop de caractères !");
+					}
+					
+					if(adresse.getText().contains("'")){
+						throw new ExceptionCaractereInterdit("L'adresse saisie contient " +
+								"un caractère interdit !");
+					}
+					
+					// Vérification de la longueur du numéro de téléphone
+					
+					if(telephone.getText().length() != 10){
+						throw new ExceptionNumeroDeTelephoneDifferentDeDixChiffres(
+						"Un numéro de téléphone doit être composé de 10 chiffres !");
+					}
+					
+					// Vérification du numéro de téléphone
+					
+					long tel = Long.parseLong(telephone.getText());
+					if (tel < 100000000 | tel >= 800000000) {
+						throw new ExceptionNumeroDeTelephoneIncorrect(
+								"Le numéro de téléphone saisi est incorrect !");
+					}
+					
+					// Vérification de la longueur du code postal 
+					
+					if (codePostal.getText().length() != 5) {
+						throw new ExceptionCodePostalDifferentDeCinqChiffres(
+								"Un code postal doit contenir 5 chiffres !");
+					}
+					
+					// Vérification du code postal saisi
+					
+					int cp = Integer.parseInt(codePostal.getText());
+					if ( cp <= 999 | cp >= 96000 ) {
+						throw new ExceptionCodePostalIncorrect(
+								"Le code postal saisi est incorrect !");
+					}
+					
+					// Verification code postal base de donnees
+					
+					if(!SGBD.verifierCodePostalExisteDansBase(codePostal.getText())){
+						throw new ExceptionCodePostalIncorrect("Le code postal n'existe pas" +
+								" dans la base de données actuelle !");
+					}
+					
+					// Si aucune erreur détectée, alors enregistrement des modifications
 					
 					if(!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", numClient).equals(" ")){
 						Association.modifierBDDAssoc(numClient, denomination.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
@@ -233,37 +324,33 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 					else{
 						Particulier.modifierBDDparticulier(numClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 					}
-					
+				
 					// on pourra enregistrer dans base de données la modification
-					setVisible(false);
+					setVisible(false);					
 					
-//					break;
-//
-//				case 3:
-//					JOptionPane.showMessageDialog(null, "Un code postal doit contenir 5 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-//					break;
-//				case 4:
-//					JOptionPane.showMessageDialog(null, "Un des champs saisis comporte un caractère interdit : '. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-//					
-//					break;
-//				case 5:
-//					JOptionPane.showMessageDialog(null, "Un des champs saisis comporte trop de caractères. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-//					
-//					break;
-//				case 6:
-//					JOptionPane.showMessageDialog(null, "Le  code postal saisi est incorrect. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-//					
-//					break;
-//				case 7:
-//					JOptionPane.showMessageDialog(null, "Le numéro de téléphone saisi est impossible. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-//					
-//					break;
-//				case 8 :
-//					JOptionPane.showMessageDialog(null, "Le numéro de téléphone doit comporter 10 chiffres. Vérifiez ce que vous avez saisi.", "Attention !", JOptionPane.WARNING_MESSAGE, image);
-//					
-//				default:
-//					break;
-//				}
+				}
+				catch(ExceptionExcesDeCaracteres e1){
+					JOptionPane.showMessageDialog(null, e1.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
+				}
+				catch(ExceptionCaractereInterdit e2){
+					JOptionPane.showMessageDialog(null, e2.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
+				} 
+				catch(ExceptionCodePostalDifferentDeCinqChiffres e3) {
+					JOptionPane.showMessageDialog(null, e3.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
+				}
+				catch(ExceptionNumeroDeTelephoneDifferentDeDixChiffres e4){
+					JOptionPane.showMessageDialog(null, e4.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
+				}
+				catch(ExceptionCodePostalIncorrect e5){
+					JOptionPane.showMessageDialog(null, e5.getMessage(),"Attention ",JOptionPane.WARNING_MESSAGE);
+					codePostal.setVisible(false);
+					listeVille.setEnabled(true);
+					listeVille.setVisible(true);
+				}
+				catch(ExceptionNumeroDeTelephoneIncorrect e6){
+					JOptionPane.showMessageDialog(null, e6.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
+				}
+
 				
 			}
 						

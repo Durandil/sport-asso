@@ -347,13 +347,27 @@ public class FenetreDialogCreationCompte extends JDialog {
 						throw new ExceptionCaractereInterdit(
 								"Votre adresse mail ne peut pas contenir d'apostrophe !");
 					}
+					
+					// Vérification de l'absence du caractère ' dans
+					// le nom, la dénomination, le prénom et adresse
+					
+					if (denomination.getText().contains("'")
+
+							| nom.getText().contains("'")
+									| prenom.getText().contains("'")
+									| adresse.getText().contains("'")) {
+						throw new ExceptionCaractereInterdit(" Un des champs saisis" +
+								"contient une apostrophe !");
+					}
+					
 					// Vérification du nombre de caractères
 
 					if (denomination.getText().length() > 40
 
 					| nom.getText().length() > 40
 							| prenom.getText().length() > 40
-							| identifiant.getText().length() > 40) {
+							| identifiant.getText().length() > 40
+							| adresse.getText().length() > 60) {
 						throw new ExceptionExcesDeCaracteres(
 								"Un des champs saisis comporte trop de caractères !");
 					}
