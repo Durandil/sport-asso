@@ -37,8 +37,8 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		FenetreCompte fen=new FenetreCompte();
-		//MenuUtilisateur men = new MenuUtilisateur();
+		//FenetreCompte fen=new FenetreCompte();
+		MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		
 //		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient("tnb@ensai.fr");
