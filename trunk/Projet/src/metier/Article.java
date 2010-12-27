@@ -1,6 +1,5 @@
 package metier;
 
-import ihm.Gerant.FenetreFormulaireArticleGerant;
 import java.util.ArrayList;
 import basededonnees.SGBD;
 

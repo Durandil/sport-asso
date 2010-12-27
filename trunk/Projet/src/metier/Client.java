@@ -1,6 +1,5 @@
 package metier;
 
-import ihm.Accueil.FenetreDialogCreationCompte;
 import basededonnees.SGBD;
 
 /**
