@@ -55,7 +55,7 @@ public class FenetreRechercheClient extends JDialog{
 		panneauMail.setBackground(Color.white);
 		panneauMail.setPreferredSize(new Dimension(110, 60));
 		panneauMail.setBorder(BorderFactory.createTitledBorder("Identifiant du client"));
-		mailLabel = new JLabel("Mail: ");
+		mailLabel = new JLabel("Mail : ");
 		mail = new JTextField();
 		mail.setPreferredSize(new Dimension(90, 25));
 		panneauMail.add(mailLabel);
@@ -67,7 +67,7 @@ public class FenetreRechercheClient extends JDialog{
 		panneauNom.setBackground(Color.white);
 		panneauNom.setPreferredSize(new Dimension(110, 60));
 		panneauNom.setBorder(BorderFactory.createTitledBorder("Nom du client pour les particuliers"));
-		nomLabel = new JLabel("Nom: ");
+		nomLabel = new JLabel("Nom : ");
 		nom = new JTextField();
 		nom.setPreferredSize(new Dimension(90, 25));
 		panneauNom.add(nomLabel);
@@ -81,7 +81,7 @@ public class FenetreRechercheClient extends JDialog{
 		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination de l'association ou de la collectivité"));
 		denomination=new JTextField();
 		denomination.setPreferredSize(new Dimension(90, 25));
-		denominationLabel=new JLabel("Denomination");
+		denominationLabel=new JLabel("Denomination : ");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
 		
@@ -90,7 +90,7 @@ public class FenetreRechercheClient extends JDialog{
 		panVille.setBackground(Color.white);
 		panVille.setPreferredSize(new Dimension(110, 60));
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville du client"));
-		villeLabel = new JLabel("Ville: ");
+		villeLabel = new JLabel("Ville : ");
 		ville = new JTextField();
 		ville.setPreferredSize(new Dimension(90, 25));
 		panVille.add(villeLabel);

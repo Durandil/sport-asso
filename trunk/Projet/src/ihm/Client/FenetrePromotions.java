@@ -88,14 +88,16 @@ public class FenetrePromotions extends JFrame {
 				if(ligne != -1){
 					String numPromotion = tableauPromotions.getValueAt(ligne, 0).toString();
 					String description = SGBD.selectStringConditionString("PROMO","NOMPROMO", "IDPROMO", numPromotion);
-					String pourcentagePromo = SGBD.selectStringConditionString("PROMO","NOMPROMO", "POURCENTAGEPROMO", numPromotion);
-					String article = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION", "IDARTICLE", SGBD.selectStringConditionString("LISTING_PROMOS_ARTICLES", "IDARTICLE", "IDPROMO", numPromotion));
+					String pourcentagePromo = SGBD.selectStringConditionString("PROMO", "POURCENTAGEPROMO","IDPROMO", numPromotion);
+					String identifiantArticleCorrespondant = SGBD.selectStringConditionString("LISTING_PROMOS_ARTICLES", "IDARTICLE", "IDPROMO", numPromotion);
+					String article = SGBD.selectStringConditionString("ARTICLE", "DESCRIPTION", "IDARTICLE", identifiantArticleCorrespondant);
 					String dateDebut = SGBD.selectDateConditionString("PROMO", "DATEDEBUT", "IDPROMO", numPromotion, "dd/mm/yyyy");
 					String dateFin = SGBD.selectDateConditionString("PROMO", "DATEFIN", "IDPROMO", numPromotion, "dd/mm/yyyy");
 					
-					JOptionPane.showMessageDialog(null, "Bénéficiez de la promotion " + description+
-							" sur l'article "+ article +" avec une pourcentage de "+ pourcentagePromo + " du "+
-							dateDebut + " jusqu'au "+ dateFin);					
+					JOptionPane.showMessageDialog(null, "Bénéficiez de la promotion : " + description+ "\n" +
+							" sur l'article "+ article + " référencé par "+ identifiantArticleCorrespondant +"\n" 
+							+" avec une remise de "+ pourcentagePromo +" %" + "\n" 
+							+ " du "+ dateDebut + " jusqu'au "+ dateFin+ " inclus");					
 				}
 			}
 			

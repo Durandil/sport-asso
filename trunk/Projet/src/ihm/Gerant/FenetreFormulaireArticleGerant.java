@@ -430,6 +430,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 		poids = new JTextField(poidsA);
 		prix = new JTextField(prixA);
 		stock = new JTextField(stockA);
+		stock.setEnabled(false);
 
 		description.setPreferredSize(new Dimension(100, 20));
 		poids.setPreferredSize(new Dimension(100, 20));

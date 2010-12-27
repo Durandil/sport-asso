@@ -59,6 +59,10 @@ Insert into VILLE (idVille, Codepostal, Nomville) values ('ville008', '94800', '
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville009', '94000', 'Créteil');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville010', '94320', 'Thiais');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville011', '44000', 'Nantes');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville012', '86000', 'Poitiers');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville013', '45000', 'Orléans');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville014', '62000', 'Arras');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville015', '59000', 'Lille');
 
 #Table CLIENT
 Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001', '0606060606', 'Activé', 'l3R6T4x');
@@ -104,7 +108,6 @@ Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00001','PRO
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00006','PRO00004');
 
 #Table MESSAGE
-
 
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Envoi des identifiants','Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est lcg@free.fr et votre mot de passe est Canar35. Cordialement, M. Poirier', 'lcg@free.fr',TO_DATE('2010-12-12', 'YYYY-MM-DD'),0);
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00002','Merci','Je vous remercie pour la rapidité de la livraison', 'arthur.laroch@gmail.com',TO_DATE('2010-12-15', 'YYYY-MM-DD'),1);

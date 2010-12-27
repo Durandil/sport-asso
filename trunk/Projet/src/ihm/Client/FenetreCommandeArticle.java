@@ -133,7 +133,7 @@ public class FenetreCommandeArticle extends JFrame{
 		});
     	
     	// Si le client est adhérent, on lui affiche le bouton à cocher dans sa fenêtre
-    	if(fideliteClient.get(0).equals("Oui")){
+    	if(fideliteClient.get(0).equals("Oui") & bonAchat > 0){
     		panneauUtilisationBonsReduction.add(utiliseBonAchat);
 		}
     	
