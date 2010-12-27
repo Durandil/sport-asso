@@ -191,6 +191,7 @@ public class FicheClient extends JDialog {
 		
 		// Ajout du JComboBox et du bouton au JPanel qui leur est destiné //
 		//----------------------------------------------------------------//
+		panStatCommande.add(comboAfficherCommande);
 		panStatCommande.add(boutonValidation);
 		
 		// Ajout des JPanel de chaque statistique au grand JPanel des statistiques //
