@@ -1,7 +1,5 @@
 package test;
 
-import java.util.ArrayList;
-
 import basededonnees.SGBD;
 import metier.Article;
 import junit.framework.TestCase;

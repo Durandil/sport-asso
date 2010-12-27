@@ -249,10 +249,6 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 							throw new ExceptionExcesDeCaracteres("La dénomination " +
 									"contient trop de caractères !");
 						}
-						if(denomination.getText().contains("'")){
-							throw new ExceptionCaractereInterdit("La dénomination "+
-									"contient un caractère interdit !");
-						}
 					}
 					else{
 						
@@ -260,10 +256,6 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 								nom.getText().length() >40 ){
 							throw new ExceptionExcesDeCaracteres("Un des champs saisis" +
 									" contient trop de caractères !");
-						}
-						if(prenom.getText().contains("'") | nom.getText().contains("'")){
-							throw new ExceptionCaractereInterdit("Un des champs saisis " +
-									"contient un caractère interdit !");
 						}
 					}
 					
@@ -274,10 +266,6 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 								" trop de caractères !");
 					}
 					
-					if(adresse.getText().contains("'")){
-						throw new ExceptionCaractereInterdit("L'adresse saisie contient " +
-								"un caractère interdit !");
-					}
 					
 					// Vérification de la longueur du numéro de téléphone
 					
@@ -332,23 +320,20 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 				catch(ExceptionExcesDeCaracteres e1){
 					JOptionPane.showMessageDialog(null, e1.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
 				}
-				catch(ExceptionCaractereInterdit e2){
+				catch(ExceptionCodePostalDifferentDeCinqChiffres e2) {
 					JOptionPane.showMessageDialog(null, e2.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
-				} 
-				catch(ExceptionCodePostalDifferentDeCinqChiffres e3) {
+				}
+				catch(ExceptionNumeroDeTelephoneDifferentDeDixChiffres e3){
 					JOptionPane.showMessageDialog(null, e3.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
 				}
-				catch(ExceptionNumeroDeTelephoneDifferentDeDixChiffres e4){
-					JOptionPane.showMessageDialog(null, e4.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
-				}
-				catch(ExceptionCodePostalIncorrect e5){
-					JOptionPane.showMessageDialog(null, e5.getMessage(),"Attention ",JOptionPane.WARNING_MESSAGE);
+				catch(ExceptionCodePostalIncorrect e4){
+					JOptionPane.showMessageDialog(null, e4.getMessage(),"Attention ",JOptionPane.WARNING_MESSAGE);
 					codePostal.setVisible(false);
 					listeVille.setEnabled(true);
 					listeVille.setVisible(true);
 				}
-				catch(ExceptionNumeroDeTelephoneIncorrect e6){
-					JOptionPane.showMessageDialog(null, e6.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
+				catch(ExceptionNumeroDeTelephoneIncorrect e5){
+					JOptionPane.showMessageDialog(null, e5.getMessage()+" veuillez modifier le champ concerné","Attention ",JOptionPane.WARNING_MESSAGE);
 				}
 
 				

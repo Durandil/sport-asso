@@ -1,29 +1,9 @@
 package application;
 
+import basededonnees.BDD;
 import ihm.MenuGerant;
 import ihm.MenuUtilisateur;
 import ihm.Accueil.FenetreCompte;
-import ihm.Accueil.FenetreDialogIdentification;
-import ihm.Client.FenetreCommandeArticle;
-
-import java.awt.Color;
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-
-import metier.Article;
-import metier.Association;
-//import metier.Categorie;
-import metier.Commande;
-import metier.LigneCommande;
-import metier.Message;
-import metier.Particulier;
-import metier.Promotion;
-import basededonnees.BDD;
-import basededonnees.SGBD;
 
 public class Principale {
 
@@ -38,7 +18,7 @@ public class Principale {
 		//BDD.init();
 		
 		//FenetreCompte fen=new FenetreCompte();
-		MenuUtilisateur men = new MenuUtilisateur();
+		//MenuUtilisateur men = new MenuUtilisateur();
 		//MenuGerant menu= new MenuGerant();
 		
 //		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient("tnb@ensai.fr");
