@@ -196,7 +196,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panAdresse.add(adresse);
 
 		// Code Postal
-		JPanel panCP = new JPanel();
+		final JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(220, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
@@ -206,23 +206,25 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panCP.add(cpLabel);
 		panCP.add(codePostal);		
 		
-//		ville= new JComboBox();
-//		ArrayList<String> listeVille = SGBD.selectListeString("VILLE", "NOMVILLE");
-//		for (String nomVille : listeVille) {
-//			ville.addItem(nomVille);
-//		}
-//		ville.setSelectedIndex(0);
-//		ville.addActionListener(new ActionListener() {
-//			
-//			public void actionPerformed(ActionEvent e) {
-//				String nomVille= (String) ((JComboBox) e.getSource())
-//								.getSelectedItem();
-//				codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
-//				codePostal.setText(codePostalSelectionne);
-//			}
-//		});
-//		ville.setEnabled(false);
+		ville= new JComboBox();
+		ArrayList<String> listeVille = SGBD.selectListeString("VILLE", "NOMVILLE");
+		for (String nomVille : listeVille) {
+			ville.addItem(nomVille);
+		}
+		ville.setSelectedIndex(0);
+		ville.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String nomVille= (String) ((JComboBox) e.getSource())
+								.getSelectedItem();
+				codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
+				codePostal.setText(codePostalSelectionne);
+			}
+		});
 		
+		ville.setEnabled(false);
+		ville.setVisible(false);
+		panCP.add(ville);
 
 		// Telephone
 		JPanel panTelephone = new JPanel();
@@ -383,7 +385,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					// Verification code postal base de donnees
 					if(!SGBD.verifierCodePostalExisteDansBase(codePostal.getText())){
 						throw new ExceptionCodePostalIncorrect("Le code postal n'existe pas" +
-								"dans la base de données actuelle !");
+								" dans la base de données actuelle !");
 					}
 					
 					// Vérification de la cohérence du
@@ -459,7 +461,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 							"Envoi des identifiants",
 							"Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est "
 									+ identifiant.getText()
-									+ "et votre mot de passe est "
+									+ " et votre mot de passe est "
 									+ motDePasse
 									+ ". Cordialement, M. Poirier ",
 							FenetreDialogIdentification.clientUserIdentifiant,
@@ -535,6 +537,10 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 					
+					codePostal.setVisible(false);
+					ville.setEnabled(true);
+					ville.setVisible(true);
+
 					
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 					System.out.println(e8.getMessage());
