@@ -478,10 +478,14 @@ public class FicheClient extends JDialog {
 		boutonValider.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 			// TODO verifier enregistrement l'éventuelle modification par le client des données
+			
+//			try{
+//				
+//			}
+//			catch()
+			
 			if(denominationClient.equals(" ")){
 				Particulier.modifierBDDclient(identifiantClient,etatCompte);
-				
-				//int verificationChamp=
 				
 				Particulier.modifierBDDparticulier(identifiantClient, nom.getText(), prenom.getText(), adresse.getText(), codePostal.getText(), telephone.getText());
 			}
@@ -491,7 +495,7 @@ public class FicheClient extends JDialog {
 			}
 			
 			
-			setVisible(false);
+			dispose();
 			}
 		});
 		

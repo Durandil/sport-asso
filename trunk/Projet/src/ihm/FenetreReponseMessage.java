@@ -180,11 +180,13 @@ public class FenetreReponseMessage extends JFrame {
 								FenetreLectureMessage.idExpediteurMessage,
 								dateJour, false);
 
-						// fermeture de la fenetre
-						dispose();
+						
 						FenetreMessagerie fenetre = new FenetreMessagerie(
 								reponseGerant);
 						fenetre.setVisible(true);
+						
+						// fermeture de la fenetre
+						dispose();
 
 					}
 
@@ -194,6 +196,7 @@ public class FenetreReponseMessage extends JFrame {
 							"Votre message n'a pas de " + champ
 									+ ",veuillez le préciser.", "Attention",
 							JOptionPane.ERROR_MESSAGE);
+					
 				} catch (ExceptionExcesDeCaracteres e3) {
 					System.out.println(e3.getMessage());
 					JOptionPane
