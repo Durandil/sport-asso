@@ -1,5 +1,6 @@
 package basededonnees;
 
+import ihm.Gerant.FenetreFormulairePromotionsGerant;
 import ihm.modeleTableau.ModeleTableauCatalogue;
 import ihm.modeleTableau.ModeleTableauClient;
 import ihm.modeleTableau.ModeleTableauCommande;
@@ -31,12 +32,12 @@ import oracle.jdbc.pool.OracleDataSource;
 public class SGBD {
 
 	/**
-	 * Permet de se connecter à la base
+	 * Permet de se connecter à la base.
 	 */
 	static private Connection c;
 
 	/**
-	 * Adresse de la base de données
+	 * Adresse de la base de données.
 	 */
 	// final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	// URL à utiliser lorsque l'on est pas à l'Ensai :
@@ -47,23 +48,23 @@ public class SGBD {
 	/** TODO TODO TODO TODO TODO TODO TODO **/
 
 	/**
-	 * L'identifiant utilisé pour la connexion
+	 * L'identifiant utilisé pour la connexion.
 	 */
 	private static final String ID = "id3199";
 
 	/**
-	 * Le mot de passe utilisé pour la connnexion
+	 * Le mot de passe utilisé pour la connnexion.
 	 */
 	private static final String MDP = "id3199";
 
 	/**
-	 * Permet à l'utilisateur de se connecter à sa base de données
+	 * Permet à l'utilisateur de se connecter à sa base de données.
 	 * 
 	 * <p>
 	 * L'adresse URL de la base de données, l'identifiant et le mot de passe
-	 * permettant de s'y connecter auront été définis au préalable
+	 * permettant de s'y connecter auront été définis au préalable.
 	 * 
-	 * Une Exception de type SQL est levée si la connexion échoue
+	 * Une Exception de type SQL est levée si la connexion échoue.
 	 * </p>
 	 * 
 	 * @return Si la connexion s'est bien déroulée
@@ -93,7 +94,7 @@ public class SGBD {
 	 * <p>
 	 * Avant la déconnexion, la méthode sauvegarde les éventuels changements
 	 * opérés sur le base de données. Une Exception de type SQL est levée si la
-	 * connexion échoue
+	 * connexion échoue.
 	 * </p>
 	 * 
 	 * @return Si la déconnexion s'est bien déroulée
@@ -125,7 +126,8 @@ public class SGBD {
 	 * 
 	 * Une Exception de type SQL est levée si la mise à jour échoue.
 	 * 
-	 * Dans tous les cas, la méthode ferme ensuite la connexion.
+	 * Dans tous les cas, la méthode ferme la connexion après la tentative de
+	 * mise à jour.
 	 * </p>
 	 * 
 	 * @param requete
@@ -157,13 +159,14 @@ public class SGBD {
 	 * 
 	 * Une Exception de type SQL est levée si l'interrogation échoue.
 	 * 
-	 * Dans tous les cas, la méthode ferme ensuite la connexion.
+	 * Dans tous les cas, la méthode ferme la connexion après la tentative
+	 * d'interrogation.
 	 * </p>
 	 * 
 	 * @param requete
 	 *            La requête SQL à exécuter
 	 * 
-	 * @return L'objet ResultSet issu de la requête SQL exécutée.
+	 * @return L'objet ResultSet issu de la requête SQL exécutée
 	 */
 	public static ResultSet executeQuery(String requete) {
 		connecter();
@@ -191,13 +194,16 @@ public class SGBD {
 	 * <p>
 	 * Plus précisement, la méthode renvoie une chaine de caractères
 	 * correspondant à la date précisée en paramètre directement utilisable dans
-	 * une requête SQL
+	 * une requête SQL.
 	 * </p>
 	 * 
 	 * @param date
 	 *            L'objet Date que l'on cherche à transformer
 	 * @return Une chaîne de caractères pouvant être utilisée dans une requête
 	 *         SQL
+	 * 
+	 * @see metier.Promotion#modifierPromoBDD(String, String, Date, Date,
+	 *      String, boolean)
 	 */
 	public static String transformation(Date date) {
 		java.sql.Date sqlDate = new java.sql.Date(date.getTime());
@@ -211,15 +217,20 @@ public class SGBD {
 	 * Transforme une chaîne de caractères en un objet Date.
 	 * <p>
 	 * Plus précisement, la méthode utilise le format spécifié en paramètre pour
-	 * instancier un nouvel objet Date à partir de la chaîne de caractères.  
+	 * instancier un nouvel objet Date à partir de la chaîne de caractères.
 	 * </p>
 	 * 
 	 * @param sDate
-	 *            Chaîne de caractères qui exprime une date (exemple : "25/12/2010")
+	 *            Chaîne de caractères qui exprime une date (exemple :
+	 *            "25/12/2010")
 	 * @param sFormat
-	 * 			  Format de la chaîne de caractères. (exemple pour la date ci dessus "dd/MM/yyyy"
-	 * 			  Ce format répond aux conventions d'écriture de la classe SimpleDateFormat, utilisée dans cette méthode
+	 *            Format de la chaîne de caractères. (exemple pour la date ci
+	 *            dessus "dd/MM/yyyy". <br>
+	 *            Ce format répond aux conventions d'écriture de la classe
+	 *            SimpleDateFormat, utilisée dans cette méthode
 	 * @return Un objet Date correspondant à la chaine de caractères saisie
+	 * 
+	 * @see ihm.Gerant.FenetreFormulairePromotionsGerant
 	 */
 	public static Date stringToDate(String sDate, String sFormat)
 			throws Exception {
@@ -230,20 +241,21 @@ public class SGBD {
 		return sDate2;
 	}
 
-	
-
-
-	
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments (de nature String)
-	 * d'un champ issu d'une table tous deux précisés en paramètres
+	 * d'un champ issu d'une table tous deux précisés en paramètres.
 	 * 
 	 * @param table
-	 *            Nom de la table sur laquelle s'applique la requete
+	 *            Nom de la table sur laquelle s'applique la requête
 	 * @param str
 	 *            Champ de la table retourné par la requête dans un ArrayList
 	 * 
 	 * @return Un ArrayList du champ str
+	 * 
+	 * @see metier
+	 * @see ihm.Accueil.FenetreDialogCreationCompte
+	 * @see ihm.Gerant.FenetreFormulaireArticleGerant
+	 * @see ihm.Client.FenetreDialogGestionCompteClient
 	 * 
 	 */
 	public static ArrayList<String> selectListeString(String table, String str) {
@@ -280,8 +292,8 @@ public class SGBD {
 
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments (de nature String)
-	 * d'un champ issu d'une table tous deux précisés en paramètres. Ces éléments
-	 * seront ordonnés selon la variable champOrdre de la table.
+	 * d'un champ issu d'une table tous deux précisés en paramètres. Ces
+	 * éléments seront ordonnés selon la variable champOrdre de la table.
 	 * 
 	 * @param table
 	 *            Nom de la table sur laquelle s'applique la requete
@@ -293,6 +305,7 @@ public class SGBD {
 	 * 
 	 * @return Un ArrayList du champ str selon l'ordre déterminé par champOrdre
 	 * 
+	 * @see ihm.modeleTableau.ModelePromotion
 	 */
 	public static ArrayList<String> selectListeStringOrdonne(String table,
 			String str, String champOrdre) {
@@ -331,7 +344,8 @@ public class SGBD {
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments ordonnés d'un champ
 	 * de type date issu d'une table tous deux précisés en paramètres. Le format
-	 * que l'on désire obtenir est aussi précisé en paramètre
+	 * que l'on désire obtenir est aussi précisé en paramètre. <br>
+	 * L'ordre des dates ainsi obtenues est déterminé par champOrdre.
 	 * 
 	 * @param table
 	 *            Table dans laquelle se trouve le champ de date
@@ -343,6 +357,8 @@ public class SGBD {
 	 *            Champ qui va déterminer l'ordre de la liste
 	 * 
 	 * @return Un arraylist d'un champ de date ordonné
+	 * 
+	 * @see ihm.modeleTableau.ModelePromotion
 	 */
 	public static ArrayList<String> selectListeDatesOrdonne(String table,
 			String str, String format, String champOrdre) {
@@ -377,6 +393,9 @@ public class SGBD {
 		return listeString;
 	}
 
+	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
+	/** TODO : Méthode jamais appelée sauf pour les tests **/
+	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
 	 * float issu d'une table tous deux précisés en paramètres.
@@ -421,6 +440,9 @@ public class SGBD {
 		return listeFloat;
 	}
 
+	/** TODO TODO TODO TODO TODO TODO **/
+	/** TODO : Méthode jamais appelée **/
+	/** TODO TODO TODO TODO TODO TODO **/
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
 	 * Integer issu d'une table tous deux précisés en paramètres.
@@ -431,7 +453,7 @@ public class SGBD {
 	 * @param var
 	 *            Champ de la table de nature Integer que l'on souhaite
 	 *            récupérer
-	 * @return L'ensemble des éléments (de nature int) d'une variable issue
+	 * @return L'ensemble des éléments (de nature Integer) d'une variable issue
 	 *         d'une table tous deux précisés en paramètres
 	 */
 	public static ArrayList<Integer> selectListeInt(String table, String var) {
@@ -465,6 +487,9 @@ public class SGBD {
 		return listeInt;
 	}
 
+	/** TODO TODO TODO TODO TODO TODO **/
+	/** TODO : Méthode jamais appelée **/
+	/** TODO TODO TODO TODO TODO TODO **/
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
 	 * Integer issu d'une table tous deux précisés en paramètres. Ces éléments
@@ -518,8 +543,8 @@ public class SGBD {
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
 	 * Integer issu d'une table tous deux précisés en paramètres. Ces éléments
-	 * seront triés selon leur valeur d'une deuxième variable de la table.
-	 * S'ajoute à cela une condition sur les élemens sélectionnés.
+	 * seront triés selon leur valeur d'une deuxième variable de la table. <br>
+	 * S'ajoute à cela une condition sur les élements sélectionnés.
 	 * 
 	 * @param table
 	 *            Table dans laquelle se trouve le champ dont on veut obtenir la
@@ -535,6 +560,8 @@ public class SGBD {
 	 * @return L'ensemble des éléments (de nature Integer) d'une variable issus
 	 *         d'une table avec une condition WHERE tous deux précisés en
 	 *         paramètres
+	 * 
+	 * @see ihm.modeleTableau.ModeleTableauCatalogue
 	 */
 	public static ArrayList<Integer> selectListeIntOrdonneCondition(
 			String table, String var, String champOrdre, String cond) {
@@ -587,6 +614,13 @@ public class SGBD {
 	 * @return L'ensemble des éléments (de nature String) d'une variable issus
 	 *         d'une table avec une condition WHERE tous deux précisés en
 	 *         paramètres
+	 * 
+	 * @see ihm.Gerant.FenetreFormulairePromotionsGerant
+	 * @see ihm.Gerant.FicheClient
+	 * @see ihm.modeleTableau.ModeleMessagerie
+	 * @see ihm.modeleTableau.ModeleTableauCatalogue
+	 * @see ihm.modeleTableau.ModeleTableauStatCommande
+	 * @see metier.Commande#preparerPanier()
 	 */
 	public static ArrayList<String> selectListeStringOrdonneCondition(
 			String table, String var, String champOrdre, String cond) {
@@ -625,7 +659,7 @@ public class SGBD {
 	/**
 	 * Méthode permettant d'obtenir un élément d'un champ de type String issu
 	 * d'une table tous deux précisés en paramètres. S'ajoute à cela une
-	 * condition qui s'applique sur un autre champ
+	 * condition qui s'applique sur un autre champ.
 	 * 
 	 * @param table
 	 *            Table dans laquelle se trouve le champ que l'on veut récupérer
@@ -639,6 +673,10 @@ public class SGBD {
 	 * @return Un élément d'un champ (de nature String) en apposant une
 	 *         condition sur un autre champ (dont les éléments sont aussi de
 	 *         nature String)
+	 * 
+	 * @see ihm.Accueil
+	 * @see ihm.Client
+	 * @see ihm.Gerant
 	 */
 	public static String selectStringConditionString(String table,
 			String champ, String champDeCondition, String condition) {
@@ -686,7 +724,7 @@ public class SGBD {
 	/**
 	 * Méthode permettant d'obtenir un élément d'un champ de type Date issu
 	 * d'une table tous deux précisés en paramètres. S'ajoute à cela une
-	 * condition qui s'applique sur un autre champ, qui lui est de type String
+	 * condition qui s'applique sur un autre champ, qui lui est de type String0
 	 * 
 	 * @param table
 	 *            Nom de la table dans laquelle se situe l'élément à récupérer
@@ -703,6 +741,8 @@ public class SGBD {
 	 *         condition sur un autre champ (dont les éléments sont aussi de
 	 *         nature String)
 	 * 
+	 * @see ihm.Gerant.FenetreFormulairePromotionsGerant
+	 * @see ihm.Client.FenetrePromotions
 	 */
 	public static String selectDateConditionString(String table,
 			String champDate, String champDeCondition, String condition,
@@ -748,7 +788,7 @@ public class SGBD {
 
 	/**
 	 * Méthode permettant de récupérer l'ensemble des éléments de deux champs
-	 * (de nature String) d'une table donnée (tous entrés en paramètres)
+	 * (de nature String) d'une table donnée (tous entrés en paramètres).
 	 * 
 	 * @param table
 	 *            Table dans laquelle se situe les deux champs
@@ -759,6 +799,7 @@ public class SGBD {
 	 * 
 	 * @return Un ArrayList de String[] comprenant les données
 	 * 
+	 * @see ihm.Accueil.FenetreDialogIdentification
 	 */
 	public static ArrayList<String[]> selectDeuxChampsString(String table,
 			String champ1, String champ2) {
@@ -796,7 +837,7 @@ public class SGBD {
 
 	/**
 	 * Récupère la valeur d'une statistiques sur le montant des commandes d'un
-	 * client pour la fiche client parmi la moyenne, le minimum et le maximum
+	 * client pour la fiche client parmi la moyenne, le minimum et le maximum.
 	 * 
 	 * 
 	 * @param identifiant
@@ -807,6 +848,8 @@ public class SGBD {
 	 *            moyenne,"max" pour le maximum et "min" pour le minimum)
 	 * 
 	 * @return La valeur de la statistique sur les commandes du client
+	 * 
+	 * @see ihm.Gerant.FicheClient
 	 */
 	public static String statistiqueClassiqueClient(String identifiant,
 			String statistique) {
@@ -837,12 +880,14 @@ public class SGBD {
 	}
 
 	/**
-	 * Retourne le nombre de commandes effectuées par un client
+	 * Retourne le nombre de commandes effectuées par un client.
 	 * 
 	 * @param identifiant
 	 *            Identifiant unique du client
 	 * 
 	 * @return Le nombre de commandes effectuées par le client
+	 * 
+	 * @see ihm.Gerant.FicheClient
 	 */
 	public static String nbreCommandeClient(String identifiant) {
 		connecter();
@@ -873,7 +918,7 @@ public class SGBD {
 
 	/**
 	 * Retourne une liste contenant l'identifiant et la date de la plus grosse
-	 * commande effectuée par un client au sens du montant de la commande
+	 * commande effectuée par un client au sens du montant de la commande.
 	 * 
 	 * @param identifiant
 	 *            Identifiant unique du client (String)
@@ -881,8 +926,9 @@ public class SGBD {
 	 * @return Un ArrayList de String contenant l'identifiant et la date de la
 	 *         plus grosse commande du client entrée en paramètre
 	 * 
+	 * @see ihm.Gerant.FicheClient
 	 */
-	public static ArrayList<String> StatistiquePlusGrosseCommande(
+	public static ArrayList<String> statistiquePlusGrosseCommande(
 			String identifiant) {
 		connecter();
 		Statement st = null;
@@ -921,8 +967,9 @@ public class SGBD {
 		return listeStat;
 	}
 
-	//
-	// // TODO
+	/** TODO TODO TODO TODO TODO TODO TODO **/
+	/** TODO : Méthode à utiliser ou pas ? **/
+	/** TODO TODO TODO TODO TODO TODO TODO **/
 	// // Méthode qui récuperera les attributs d'un client à partir de son
 	// identifiant
 	// public static ArrayList<String> recupererAttributClient(String
@@ -965,7 +1012,7 @@ public class SGBD {
 
 	/**
 	 * Retourne la liste des articles dont le stock est inférieur à la quantité
-	 * seuil ou en rupture de stock
+	 * seuil ou en rupture de stock.
 	 * 
 	 * @return <p>
 	 *         La liste des articles qui ont besoin d'être réapprovisionnés du
@@ -1034,6 +1081,9 @@ public class SGBD {
 		return article;
 	}
 
+	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
+	/** TODO : Méthode jamais appelée sauf pour les tests **/
+	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
 	// TODO cette méthode doit permettre de récupérer l'ensemble des
 	// indormations nécessaires
 	// à la commande n° idCommande passée en paramètre
@@ -1080,11 +1130,20 @@ public class SGBD {
 	}
 
 	/**
+	 * Indique si un client possède une carte de fidélité et le nombre de points
+	 * qu'il possède le cas échéant
+	 * 
 	 * @param identifiant
-	 *            Identfiant du client
+	 *            Identifant du client
 	 * 
 	 * @return Un arraylist indiquant l'adhésion ou non au programme fidélité du
 	 *         client ("Oui"/"Non") et son nombre éventuel de points
+	 * 
+	 * @see ihm.Client.FenetreCommandeArticle
+	 * @see ihm.Client.FenetreFideliteClient
+	 * @see ihm.Gerant.FicheClient
+	 * @see ihm.modeleTableau.ModeleTableauCommande
+	 * @see metier.Commande
 	 */
 	public static ArrayList<String> recupererInformationFideliteClient(
 			String identifiant) {
@@ -1139,7 +1198,7 @@ public class SGBD {
 	/**
 	 * Cette méthode permet de selectionner tous les individus satifaisant l'un
 	 * des critères remplis dans la fenetre de recherche d'un client chez le
-	 * gérant
+	 * gérant.
 	 * 
 	 * @param idClient
 	 *            Une chaine de caractère saisie dans le champ identifiant
@@ -1170,6 +1229,7 @@ public class SGBD {
 	 *         </ul>
 	 *         <p>
 	 * 
+	 * @see ihm.modeleTableau.ModeleTableauClient
 	 */
 	public static ArrayList<ArrayList<String>> recupererInformationRechercheClient(
 			String idClient, String nomClient, String denomination, String ville) {
@@ -1218,8 +1278,9 @@ public class SGBD {
 					conditionWhereOr = conditionWhereOr + " or ";
 					ajouterChamp = false;
 				}
-				conditionWhereOr = conditionWhereOr + "LOWER(VILLE.NOMVILLE) Like '%"
-						+ ville.toLowerCase() + "%'";
+				conditionWhereOr = conditionWhereOr
+						+ "LOWER(VILLE.NOMVILLE) Like '%" + ville.toLowerCase()
+						+ "%'";
 				ajouterChamp = true;
 			}
 
@@ -1279,12 +1340,16 @@ public class SGBD {
 		return informationsClient;
 	}
 
+	/** TODO TODO TODO TODO TODO TODO **/
+	/** TODO : Méthode jamais appelée **/
+	/** TODO TODO TODO TODO TODO TODO **/
 	/**
 	 * Retourne le nombre de promotions exceptionnelles valables à l'instant
 	 * présent dans la base de données. Elle est utilisée uniquement pour le
 	 * calcul du montant d'une commande.
 	 * 
-	 * @see metier.Commande#montantCommandePourUnArticle(String, metier.LigneCommande, int)
+	 * @see metier.Commande#montantCommandePourUnArticle(String,
+	 *      metier.LigneCommande, int)
 	 * 
 	 * @param idArticle
 	 *            L'identifiant unique de l'article
@@ -1351,7 +1416,8 @@ public class SGBD {
 	 * pourcentage de promotion exceptionelle dépend aussi du fait que le client
 	 * soit adhérent ou non.
 	 * 
-	 * @see metier.Commande#montantCommandePourUnArticle(String, metier.LigneCommande, int)
+	 * @see metier.Commande#montantCommandePourUnArticle(String,
+	 *      metier.LigneCommande, int)
 	 * @see SGBD#compterNbrePromoExceptionnellesArticle(String, int)
 	 * 
 	 * @param idArticle
@@ -1360,10 +1426,10 @@ public class SGBD {
 	 *            Indique si le client possède une carte de fidélité (1) ou non
 	 *            (0)
 	 * 
-	 * 
 	 * @return Le pourcentage actuel dans les promotions exceptionnelles
 	 *         actuelles sur l'article donné ( dans un String)
 	 * 
+	 * @see metier.Commande
 	 */
 	public static String recupererPourcentagePromotionExceptionnelleArticle(
 			String idArticle, int estFidele) {
@@ -1477,29 +1543,33 @@ public class SGBD {
 
 		return pourcentage;
 	}
-	
+
 	/**
-	 * La méthode vérifie si le code postal saisi dans les formulaires existe dans 
-	 * la base de données des villes
+	 * La méthode vérifie si le code postal saisi dans les formulaires existe
+	 * dans la base de données des villes.
 	 * 
 	 * @param cp
-	 * 			code postal saisi par l'utilisateur
-	 * @return
-	 * 			si le code postal existe ou non
+	 *            Code postal saisi par l'utilisateur
+	 * @return Si le code postal existe ou non
+	 * 
+	 * @see ihm.Accueil.FenetreDialogCreationCompte
+	 * @see ihm.Client.FenetreDialogGestionCompteClient
+	 * @see ihm.Gerant.FicheClient
 	 */
-	public static boolean verifierCodePostalExisteDansBase(String cp){
-		boolean existe = false ;
+	public static boolean verifierCodePostalExisteDansBase(String cp) {
+		boolean existe = false;
 
-		ArrayList<String> listeCodePostal = selectListeString("VILLE", "CODEPOSTAL");
-		
+		ArrayList<String> listeCodePostal = selectListeString("VILLE",
+				"CODEPOSTAL");
+
 		for (String codePostal : listeCodePostal) {
-			
-			if(codePostal.equals(cp)){
-				existe = true ;
+
+			if (codePostal.equals(cp)) {
+				existe = true;
 			}
 		}
-		
-		return existe ;
+
+		return existe;
 	}
-	
+
 }

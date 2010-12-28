@@ -1,14 +1,16 @@
 package basededonnees;
 
 /**
- * Classe ayant pour but d'initialiser la base de données
+ * Classe ayant pour but d'initialiser la base de données.
  * 
  */
 public class BDD {
 
 	/**
 	 * Méthode permettant d'initialiser la base de données à travers les
-	 * requêtes SQL
+	 * requêtes SQL.
+	 * 
+	 * @see SGBD#executeUpdate(String)
 	 */
 	public static void init() {
 

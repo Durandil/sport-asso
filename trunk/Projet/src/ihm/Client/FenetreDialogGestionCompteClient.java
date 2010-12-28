@@ -1,8 +1,5 @@
 package ihm.Client;
 
-import ihm.MenuUtilisateur;
-import ihm.Accueil.FenetreDialogIdentification;
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,14 +20,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import exception.ExceptionExcesDeCaracteres;
-import exception.Client.ExceptionCaractereInterdit;
 import exception.Client.ExceptionCodePostalDifferentDeCinqChiffres;
 import exception.Client.ExceptionCodePostalIncorrect;
 import exception.Client.ExceptionNumeroDeTelephoneDifferentDeDixChiffres;
 import exception.Client.ExceptionNumeroDeTelephoneIncorrect;
 
 import metier.Association;
-import metier.Client;
 import metier.Particulier;
 
 import basededonnees.SGBD;

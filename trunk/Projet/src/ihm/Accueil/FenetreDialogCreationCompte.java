@@ -53,7 +53,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 			fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom, adresse, identifiantVerification,
 			codePostal, telephone, identifiant, denomination;
-	private JComboBox compte, fidelite,ville;
+	private JComboBox compte, fidelite, ville;
 	// Par défaut, le client désire une carte de fiélité, le booléen associé
 	// vaut ainsi "vrai" à l'origine
 	private boolean estFidele = false;
@@ -204,24 +204,26 @@ public class FenetreDialogCreationCompte extends JDialog {
 		codePostal = new JTextField();
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
-		panCP.add(codePostal);		
-		
-		ville= new JComboBox();
-		ArrayList<String> listeVille = SGBD.selectListeString("VILLE", "NOMVILLE");
+		panCP.add(codePostal);
+
+		ville = new JComboBox();
+		ArrayList<String> listeVille = SGBD.selectListeString("VILLE",
+				"NOMVILLE");
 		for (String nomVille : listeVille) {
 			ville.addItem(nomVille);
 		}
 		ville.setSelectedIndex(0);
 		ville.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				String nomVille= (String) ((JComboBox) e.getSource())
-								.getSelectedItem();
-				codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
+				String nomVille = (String) ((JComboBox) e.getSource())
+						.getSelectedItem();
+				codePostalSelectionne = SGBD.selectStringConditionString(
+						"VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
 				codePostal.setText(codePostalSelectionne);
 			}
 		});
-		
+
 		ville.setEnabled(false);
 		ville.setVisible(false);
 		panCP.add(ville);
@@ -347,9 +349,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 						throw new ExceptionCaractereInterdit(
 								"Votre adresse mail ne peut pas contenir d'apostrophe !");
 					}
-					
 
-					
 					// Vérification du nombre de caractères
 
 					if (denomination.getText().length() > 40
@@ -381,17 +381,19 @@ public class FenetreDialogCreationCompte extends JDialog {
 					// postal
 
 					int cp = Integer.parseInt(codePostal.getText());
-					if ( cp <= 999 | cp >= 96000 ) {
+					if (cp <= 999 | cp >= 96000) {
 						throw new ExceptionCodePostalIncorrect(
 								"Le code postal saisi est incorrect !");
 					}
-					
+
 					// Verification code postal base de donnees
-					if(!SGBD.verifierCodePostalExisteDansBase(codePostal.getText())){
-						throw new ExceptionCodePostalIncorrect("Le code postal n'existe pas" +
-								" dans la base de données actuelle !");
+					if (!SGBD.verifierCodePostalExisteDansBase(codePostal
+							.getText())) {
+						throw new ExceptionCodePostalIncorrect(
+								"Le code postal n'existe pas"
+										+ " dans la base de données actuelle !");
 					}
-					
+
 					// Vérification de la cohérence du
 					// numéro de
 					// téléphone
@@ -418,6 +420,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 							"IDVILLE", "CODEPOSTAL", codePostal.getText());
 
 					if (itemSelectionne == "Compte Particulier") {
+
 						Particulier p = new Particulier(nom.getText(), prenom
 								.getText(), identifiant.getText(), adresse
 								.getText(), idVille, telephone.getText(),
@@ -534,18 +537,13 @@ public class FenetreDialogCreationCompte extends JDialog {
 				} catch (ExceptionCodePostalIncorrect e7) {
 					System.out.println(e7.getMessage());
 
-					erreurCreation
-							.showMessageDialog(
-									null,
-									e7.getMessage(),
-									"Attention !", JOptionPane.WARNING_MESSAGE,
-									image);
-					
+					erreurCreation.showMessageDialog(null, e7.getMessage(),
+							"Attention !", JOptionPane.WARNING_MESSAGE, image);
+
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
 					ville.setVisible(true);
 
-					
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 					System.out.println(e8.getMessage());
 
