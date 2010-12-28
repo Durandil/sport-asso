@@ -128,7 +128,7 @@ public class FicheClient extends JDialog {
 		// -----------------------------------------------------------------------//
 
 		ArrayList<String> listeInformationsPlusGrosseCommande = SGBD
-				.StatistiquePlusGrosseCommande(idClient);
+				.statistiquePlusGrosseCommande(idClient);
 		String referencePlusGrosseCommande = listeInformationsPlusGrosseCommande
 				.get(0);
 		String datePlusGrosseCommande = listeInformationsPlusGrosseCommande

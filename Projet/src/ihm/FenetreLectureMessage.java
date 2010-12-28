@@ -22,9 +22,6 @@ import metier.Message;
  * message dans sa boite de réception interne de pouvoir lire le message
  * Elle est construite à partir de {@link FenetreLectureMessage#FenetreLectureMessage(JFrame, String, boolean, String, String, String, String, String, boolean)}
  * 
- * @author Utilisateur
- * 
- *
  */
 public class FenetreLectureMessage extends JDialog{
 
