@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe Commande représente une commande</b>
+ * <b>La classe Commande représente une commande.</b>
  * <p>
  * Une commande est caractérisé par les informations suivantes :
  * <ul>
@@ -35,7 +35,7 @@ import basededonnees.SGBD;
 public class Commande {
 
 	/**
-	 * L'Identifiant de la commande, non modifiable
+	 * L'Identifiant de la commande, non modifiable.
 	 * 
 	 * @see Commande#getIdCommande()
 	 * @see Commande#setIdCommande(String)
@@ -45,7 +45,7 @@ public class Commande {
 	private String idCommande;
 
 	/**
-	 * La liste des lignes de commande
+	 * La liste des lignes de commande.
 	 * 
 	 * @see Commande#getListe()
 	 * @see Commande#setListe(ArrayList)
@@ -57,7 +57,7 @@ public class Commande {
 	private ArrayList<LigneCommande> liste;
 
 	/**
-	 * L'identifiant du client qui passe la commande
+	 * L'identifiant du client qui passe la commande.
 	 * 
 	 * @see Commande#getIdClient()
 	 * @see Commande#setIdClient(String)
@@ -68,7 +68,7 @@ public class Commande {
 	private String idClient;
 
 	/**
-	 * La date de la commande
+	 * La date de la commande.
 	 * 
 	 * @see Commande#getDate()
 	 * @see Commande#setDate(Date)
@@ -77,7 +77,7 @@ public class Commande {
 	private Date date;
 
 	/**
-	 * Le montant de la commande
+	 * Le montant de la commande.
 	 * 
 	 * @see Commande#getMontant()
 	 * @see Commande#setMontant(int)
@@ -87,7 +87,7 @@ public class Commande {
 	private int montant;
 
 	/**
-	 * Constructeur de la classe Commande
+	 * Constructeur de la classe Commande.
 	 * <p>
 	 * Le constructeur de la classe Commande fait appel à la méthode
 	 * ajouterBDD() qui ajoute la commande dans la base de données.<br>
@@ -239,7 +239,7 @@ public class Commande {
 	 * <p>
 	 * Cette méthode commence par récupérer la liste des identifiants des
 	 * articles disponibles. Elle ajoute ensuite l'ensemble de ces identifiants
-	 * dans le panier et initialise leur quantité à 0
+	 * dans le panier et initialise leur quantité à 0.
 	 * </p>
 	 * 
 	 * @return Le panier du client
@@ -261,10 +261,10 @@ public class Commande {
 	}
 
 	/**
-	 * Méthode qui vide le panier
+	 * Méthode qui vide le panier.
 	 * 
 	 * <p>
-	 * Cette méthode réinitialise chaque quantité d'article à 0
+	 * Cette méthode réinitialise chaque quantité d'article à 0.
 	 * </p>
 	 * 
 	 * @param panier
@@ -281,15 +281,15 @@ public class Commande {
 	}
 
 	/**
-	 * Recherche la position d'un article dans le panier
+	 * Recherche la position d'un article dans le panier.
 	 * 
 	 * <p>
 	 * La méthode parcourt le panier jusqu'à ce que l'article recherché soit
 	 * trouvé. Tant que l'article en question n'est pas dans le panier, un
-	 * compteur s'incrémente au fur et à mesure Enfin, lorsque l'article est
-	 * trouvé, la méthode retourne ce compteur, qui correspond à la position de
-	 * l'article dans le panier (0 si l'article est le 1er article du panier, 1
-	 * s'il est le 2ème, etc.)
+	 * compteur s'incrémente au fur et à mesure.<br>
+	 * Enfin, lorsque l'article est trouvé, la méthode retourne ce compteur, qui
+	 * correspond à la position de l'article dans le panier (0 si l'article est
+	 * le 1er article du panier, 1 s'il est le 2ème, etc.)
 	 * </p>
 	 * 
 	 * @param idArticle
@@ -320,7 +320,7 @@ public class Commande {
 	}
 
 	/**
-	 * Ajoute une quantité spécifique d'un article dans le panier
+	 * Ajoute une quantité spécifique d'un article dans le panier.
 	 * 
 	 * <p>
 	 * La méthode commence par rechercher le stock de l'article concerné dans la
@@ -374,7 +374,7 @@ public class Commande {
 	}
 
 	/**
-	 * Enlève une quantité spécifique d'un article dans le panier
+	 * Enlève une quantité spécifique d'un article dans le panier.
 	 * 
 	 * <p>
 	 * La méthode commence par récupèrer l'indice correspondant à la place de
@@ -441,7 +441,7 @@ public class Commande {
 	 * Cette méthode commence par récupérer l'indice de séquence de la table
 	 * afin de générer l'identifiant de la commande dans le format approprié. La
 	 * requête se construit ensuite en fonction des caractéristiques de la
-	 * commande saisies lors de l'appel du constructeur
+	 * commande saisies lors de l'appel du constructeur.
 	 * </p>
 	 * 
 	 * @see basededonnees.BDD
@@ -486,7 +486,7 @@ public class Commande {
 	 * Méthode qui met à jour le montant de la commande dans la table COMMANDE
 	 * puisque celui a été fixé à zéro dans le constructeur de Commande et que
 	 * le calcul du montant intervient après l'ajout de la commande dans la base
-	 * de données
+	 * de données.
 	 * 
 	 * @param montantCommande
 	 */
@@ -503,7 +503,7 @@ public class Commande {
 	}
 
 	/**
-	 * Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES
+	 * Méthode qui met à jour la table LISTING_ARTICLES_COMMANDES.
 	 * 
 	 * <p>
 	 * Cette méthode commence par récupérer l'ensemble des identifiants et des

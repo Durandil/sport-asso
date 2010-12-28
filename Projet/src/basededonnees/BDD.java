@@ -80,7 +80,7 @@ public class BDD {
 				+ "CONSTRAINT PK_CLIENT PRIMARY KEY (IDCLIENT),"
 				+ "CONSTRAINT FK_CLIENT_VILLE FOREIGN KEY (IDVILLE) REFERENCES VILLE)");
 
-		SGBD.executeUpdate("CREATE SEQUENCE S_COMMANDE Increment by 1 start with 1 nocache");
+		SGBD.executeUpdate("CREATE SEQUENCE S_COMMANDE Increment by 1 start with 5 nocache");
 		SGBD.executeUpdate("CREATE TABLE COMMANDE"
 				+ "(IDCOMMANDE CHAR(8),"
 				+ "DATECOMMANDE DATE,"

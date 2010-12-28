@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe CarteFidelite représente une carte de fidélité</b>
+ * <b>La classe CarteFidelite représente une carte de fidélité.</b>
  * <p>
  * Une carte de fidélité est caractérisée par les informations suivantes :
  * <ul>
@@ -25,7 +25,7 @@ import basededonnees.SGBD;
 public class CarteFidelite {
 
 	/**
-	 * L'identifiant de la carte de fidélité, non modifiable
+	 * L'identifiant de la carte de fidélité, non modifiable.
 	 * 
 	 * @see CarteFidelite#ajouterBDD()
 	 * @see CarteFidelite#getIdCarte()
@@ -35,7 +35,7 @@ public class CarteFidelite {
 	private String idCarte;
 
 	/**
-	 * L'adrese mail (l'identifiant) du client qui possède la carte
+	 * L'adrese mail (l'identifiant) du client qui possède la carte.
 	 * 
 	 * @see CarteFidelite#ajouterBDD()
 	 * @see CarteFidelite#getIdClient()
@@ -45,7 +45,7 @@ public class CarteFidelite {
 	private String idClient;
 
 	/**
-	 * Le nombre de points de la carte de fidélité
+	 * Le nombre de points de la carte de fidélité.
 	 * 
 	 * @see CarteFidelite#ajouterBDD()
 	 * @see CarteFidelite#getNombreDePoints()
@@ -64,7 +64,7 @@ public class CarteFidelite {
 	 * </p>
 	 * 
 	 * @param idClient
-	 *            Le mail du client (son identifiant)
+	 *            L'identifiant du client (son adresse mail)
 	 * @param nombreDePoints
 	 *            Le nombre de points de la carte de fidélité
 	 * 

@@ -3,7 +3,7 @@ package metier;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe abstraite Client représente un client</b>
+ * <b>La classe abstraite Client représente un client.</b>
  * <p>
  * Les classes Particulier et Association héritent de la classe Client et de ce
  * fait ont pour caractéristiques communes :
@@ -26,7 +26,7 @@ import basededonnees.SGBD;
 public abstract class Client {
 
 	/**
-	 * Le mail du client, non modifiable
+	 * Le mail du client, non modifiable.
 	 * 
 	 * @see Client#getMail()
 	 * @see Client#setMail(String)
@@ -37,7 +37,7 @@ public abstract class Client {
 	protected String mail;
 
 	/**
-	 * L'adresse du client
+	 * L'adresse du client.
 	 * 
 	 * @see Client#getAdresse()
 	 * @see Client#setAdresse(String)
@@ -48,7 +48,7 @@ public abstract class Client {
 	protected String adresse;
 
 	/**
-	 * L'identifiant de la ville du client
+	 * L'identifiant de la ville du client.
 	 * 
 	 * @see Client#getIdVille()
 	 * @see Client#setIdVille(String)
@@ -59,7 +59,7 @@ public abstract class Client {
 	protected String idVille;
 
 	/**
-	 * Le numéro de téléphone du client
+	 * Le numéro de téléphone du client.
 	 * 
 	 * @see Client#getTelephone()
 	 * @see Client#setTelephone(String)
@@ -70,7 +70,7 @@ public abstract class Client {
 	protected String telephone;
 
 	/**
-	 * Le mot de passe du client
+	 * Le mot de passe du client.
 	 * 
 	 * @see Client#getMotDePasse()
 	 * @see Client#setMotDePasse(String)
@@ -82,7 +82,7 @@ public abstract class Client {
 	protected String motDePasse;
 
 	/**
-	 * Le statut du client
+	 * Le statut du client.
 	 * 
 	 * @see Client#getParticulierAssociation()
 	 * @see Client#setParticulierAssociation(String)
@@ -94,7 +94,7 @@ public abstract class Client {
 	protected String particulierAssociation;
 
 	/**
-	 * La possession ou non d'une carte de fidélité
+	 * La possession ou non d'une carte de fidélité.
 	 * 
 	 * @see Client#isEstFidele()
 	 * @see Client#setEstFidele(boolean)
@@ -106,7 +106,7 @@ public abstract class Client {
 	protected boolean estFidele;
 
 	/**
-	 * L'état du compte client
+	 * L'état du compte client.
 	 * 
 	 * @see Client#isEstActif()
 	 * @see Client#setEstActif(boolean)
@@ -308,12 +308,12 @@ public abstract class Client {
 	}
 
 	/**
-	 * Génère un mot de passe de 7 caractères
+	 * Génère un mot de passe de 7 caractères.
 	 * 
 	 * <p>
 	 * Cette méthode choisit aléatoirement 7 caractères dans la table des
 	 * caractères ASCII (les 48 premiers caractères sont exclus car trop
-	 * "exotiques")
+	 * "exotiques").
 	 * 
 	 * 
 	 * </p>
@@ -332,7 +332,7 @@ public abstract class Client {
 	}
 
 	/**
-	 * Modifie l'état du compte d'un client
+	 * Modifie l'état du compte d'un client.
 	 * 
 	 * @param idClient
 	 *            L'identifiant du client

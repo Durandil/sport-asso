@@ -24,7 +24,7 @@ import metier.Article;
  * 
  * @author Utilisateur
  * 
- * @see {@link FenetreReapprovisionnement}
+ * {@link FenetreReapprovisionnement}
  *
  */
 public class FenetreCommandeReapprovisionnement extends JDialog {

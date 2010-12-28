@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe Message représente un message</b>
+ * <b>La classe Message représente un message.</b>
  * <p>
  * Un message est caractérisé par les informations suivantes (que l'on retrouve
  * dans la base de données) :
@@ -27,7 +27,7 @@ import basededonnees.SGBD;
 public class Message {
 
 	/**
-	 * L'Identifiant du message, non modifiable
+	 * L'Identifiant du message, non modifiable.
 	 * 
 	 * @see Message#getIdMessage()
 	 * @see Message#setIdMessage(String)
@@ -79,7 +79,9 @@ public class Message {
 	private Date dateEnvoi;
 
 	/**
-	 * Le booléen indiquant si le message a été envoyé au gérant.
+	 * Le booléen indiquant si le message a été envoyé au gérant.<br>
+	 * Permet de distinguer les messages envoyés aux gérant de ceux que le
+	 * gérant envoie aux clients.
 	 * 
 	 * @see Message#isEstEnvoyeAuGerant()
 	 * @see Message#setEstEnvoyeAuGerant(boolean)
@@ -89,22 +91,22 @@ public class Message {
 	private boolean estEnvoyeAuGerant;
 
 	/**
-	 * Constructeur de la classe Message
+	 * Constructeur de la classe Message.
 	 * <p>
 	 * Le constructeur de la classe Message fait appel à la méthode ajouterBDD()
 	 * qui ajoute le message dans la base de données.
 	 * </p>
 	 * 
 	 * @param sujet
-	 *            Le sujet du message.
+	 *            Le sujet du message
 	 * @param contenu
-	 *            Le contenu du message.
+	 *            Le contenu du message
 	 * @param expediteur
-	 *            L'éxpéditeur du message.
+	 *            L'éxpéditeur du message
 	 * @param dateEnvoi
-	 *            La date du message.
+	 *            La date du message
 	 * @param messageEnvoye
-	 *            Le booléen indiquant si le message a été envoyé au gérant.
+	 *            Le booléen indiquant si le message a été envoyé au gérant
 	 * 
 	 * @see Message#sujet
 	 * @see Message#contenu
@@ -251,7 +253,7 @@ public class Message {
 	}
 
 	/**
-	 * Ajoute le message dans la table MESSAGE de la base de données
+	 * Ajoute le message dans la table MESSAGE de la base de données.
 	 * 
 	 * <p>
 	 * Cette méthode commence par transformer la date d'envoi en une chaïne de
@@ -262,10 +264,10 @@ public class Message {
 	 * méthode initialise un entier (0 ou 1) en prévision de l'insertion
 	 * prochaine dans la base. <br>
 	 * Enfin la requête se construit en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel du constructeur<br>
+	 * l'article saisies lors de l'appel du constructeur.<br>
 	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
 	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
-	 * requête SQL)
+	 * requête SQL).
 	 * </p>
 	 * 
 	 * @see basededonnees.BDD
@@ -321,7 +323,7 @@ public class Message {
 	}
 
 	/**
-	 * Supprime un message de la table MESSAGE de la base de données
+	 * Supprime un message de la table MESSAGE de la base de données.
 	 * 
 	 * <p>
 	 * Cette méthode supprime le message correspondant à l'identifiant saisi en
@@ -341,7 +343,7 @@ public class Message {
 	}
 
 	/**
-	 * Supprime tous les messages présents dans la table MESSAGE
+	 * Supprime tous les messages présents dans la table MESSAGE.
 	 * 
 	 * <p>
 	 * Cette méthode supprime l'ensemble des messages présents dans la base de
@@ -355,44 +357,5 @@ public class Message {
 
 		SGBD.executeUpdate(requete);
 	}
-
-	/**
-	 * TODO : Traiter les exceptions correspondantes ! Vérifie le contenu des
-	 * champs remplis dans les fenêtres d'envoi de messages
-	 * 
-	 * @param contenu
-	 *            Contenu du message saisi par l'utilisateur
-	 * @param sujet
-	 *            Sujet du message saisi par l'utilisateur
-	 * @return <p>
-	 *         Un entier désignant une éventuelle erreur :
-	 *         <ul>
-	 *         <li>0 si aucune erreur n'est trouvée</li>
-	 *         <li>1 si le champ contenu dépasse la longueur autorisée</li>
-	 *         <li>2 si le champ sujet dépasse la longueur autorisée</li>
-	 *         <li>3 si l'un des champs remplis contient un signe interdit " ' "
-	 *         </li>
-	 *         <li>4 si le champ contenu est vide</li>
-	 *         </ul>
-	 *         <p>
-	 */
-//	public static int verifierChampMessage(String contenu, String sujet) {
-//		int champCorrect = 0;
-//
-//		if (contenu.length() > 300) {
-//			champCorrect = 1;
-//		}
-//		if (sujet.length() > 90) {
-//			champCorrect = 2;
-//		}
-//		if (sujet.contains("'") | contenu.contains("'")) {
-//			champCorrect = 3;
-//		}
-//		if (contenu.length() == 0) {
-//			champCorrect = 4;
-//		}
-//
-//		return champCorrect;
-//	}
 
 }

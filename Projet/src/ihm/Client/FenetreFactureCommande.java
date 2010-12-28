@@ -27,7 +27,7 @@ import basededonnees.SGBD;
  * 
  * @author Utilisateur
  *
- * @see {@link FenetreFactureCommande#FenetreFactureCommande(JFrame, String, boolean, String, Commande, ArrayList, int, boolean)}
+ * {@link FenetreFactureCommande#FenetreFactureCommande(JFrame, String, boolean, String, Commande, ArrayList, int, boolean)}
  */
 public class FenetreFactureCommande extends JDialog {
 	

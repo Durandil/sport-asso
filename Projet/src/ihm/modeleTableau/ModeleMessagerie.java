@@ -15,7 +15,7 @@ import basededonnees.SGBD;
  * afficher l'ensemble des messages pour un utilisateur donné
  * 
  * @see FenetreContactVendeur
- * @see FenetreMessagerie
+ * @see ihm.FenetreMessagerie
  */
 public class ModeleMessagerie extends AbstractTableModel {
 
@@ -51,7 +51,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 	 *            <p>
 	 * 
 	 * @see FenetreContactVendeur
-	 * @see FenetreMessagerie
+	 * @see ihm.FenetreMessagerie
 	 */
 	public ModeleMessagerie(boolean messagerieGerant) {
 		super();

@@ -31,7 +31,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 	 * donnees contenues à l'intérieur du tableau
 	 * 
 	 * @see ModeleTableauCatalogue#getRowCount()
-	 * @see ModeleTableauCatalogue#ModeleTableauStatCommande(String)
+	 * @see ModeleTableauStatCommande
 	 * @see ModeleTableauCatalogue#getValueAt(int, int)
 	 * 
 	 */

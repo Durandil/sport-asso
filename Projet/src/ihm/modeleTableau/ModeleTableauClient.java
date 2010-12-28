@@ -43,7 +43,7 @@ public class ModeleTableauClient extends AbstractTableModel {
     /**
      * Construit des tableaux correspondants aux résultats de la recherche de clients du gérant
      * 
-     * @see {@link SGBD#recupererInformationRechercheClient(String, String, String, String)}
+     * {@link SGBD#recupererInformationRechercheClient(String, String, String, String)}
      * 
      * @param idClient
      * 			String saisi dans le champ de recherche identifiant client

@@ -19,7 +19,7 @@ import exception.Client.ExceptionMailsDifferents;
  * pourra accéder aux différents sous-menus.
  * 
  * @author Utilisateur
- * @see {@link MenuGerant#MenuGerant()}
+ * {@link MenuGerant#MenuGerant()}
  */
 public class MenuGerant extends JFrame {
 	
