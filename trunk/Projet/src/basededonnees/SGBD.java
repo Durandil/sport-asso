@@ -49,12 +49,12 @@ public class SGBD {
 	/**
 	 * L'identifiant utilisé pour la connexion
 	 */
-	private static final String ID = "id3198";
+	private static final String ID = "id3199";
 
 	/**
 	 * Le mot de passe utilisé pour la connnexion
 	 */
-	private static final String MDP = "id3198";
+	private static final String MDP = "id3199";
 
 	/**
 	 * Permet à l'utilisateur de se connecter à sa base de données
@@ -1284,7 +1284,7 @@ public class SGBD {
 	 * présent dans la base de données. Elle est utilisée uniquement pour le
 	 * calcul du montant d'une commande.
 	 * 
-	 * @see metier.Commande#montantCommandePourUnArticle()
+	 * @see metier.Commande#montantCommandePourUnArticle(String, metier.LigneCommande, int)
 	 * 
 	 * @param idArticle
 	 *            L'identifiant unique de l'article
@@ -1351,7 +1351,7 @@ public class SGBD {
 	 * pourcentage de promotion exceptionelle dépend aussi du fait que le client
 	 * soit adhérent ou non.
 	 * 
-	 * @see metier.Commande#montantCommandePourUnArticle()
+	 * @see metier.Commande#montantCommandePourUnArticle(String, metier.LigneCommande, int)
 	 * @see SGBD#compterNbrePromoExceptionnellesArticle(String, int)
 	 * 
 	 * @param idArticle

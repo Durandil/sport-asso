@@ -42,7 +42,7 @@ import metier.Promotion;
  * 
  * @author Utilisateur
  * 
- * @see {@link FenetrePromotionsGerant}
+ * @see FenetrePromotionsGerant
  */
 
 public class FenetreFormulairePromotionsGerant extends JDialog {
@@ -87,7 +87,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
 	 * 			fenêtres
 	 * 
-	 * @see {@link FenetreFormulairePromotionsGerant#initComponent()}
+	 * {@link FenetreFormulairePromotionsGerant#initComponent()}
 	 */
 	public FenetreFormulairePromotionsGerant(JFrame parent, String title,
 			boolean modal) {

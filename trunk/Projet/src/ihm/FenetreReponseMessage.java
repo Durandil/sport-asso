@@ -31,8 +31,8 @@ import metier.Message;
  * un utilisateur de répondre à un message envoyé par un autre utilisateur à
  * travers la messagerie interne de l'application.
  * 
- * @see {@link FenetreLectureMessage}
- * @see {@link FenetreMessagerie}
+ * {@link FenetreLectureMessage}
+ * {@link FenetreMessagerie}
  * 
  * @author Utilisateur
  * 
@@ -48,9 +48,9 @@ public class FenetreReponseMessage extends JFrame {
 
 	/**
 	 * Constructeur de la classe FenetreReponseMessage qui sera initialisée
-	 * grâce à la méthode {@link FenetreReponseMessage#initComponent(boolean)}
+	 * grâce à la méthode {@link FenetreReponseMessage#initComponent(boolean, String)}
 	 * 
-	 * @param ReponseDuGerant
+	 * @param reponseDuGerant
 	 *            Booléen indiquant quel utilisateur utilise la fenêtre (true)
 	 *            pour le gérant et (false) pour le client
 	 */

@@ -28,7 +28,7 @@ import basededonnees.SGBD;
 public class Article {
 
 	/**
-	 * L'Identifiant de l'article, non modifiable
+	 * L'Identifiant de l'article, non modifiable.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#supprimerArticleBDD(String)
@@ -38,7 +38,7 @@ public class Article {
 	private String idArticle;
 
 	/**
-	 * La description de l'article, modifiable par le gérant
+	 * La description de l'article, modifiable par le gérant.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String,
@@ -50,7 +50,7 @@ public class Article {
 	private String description;
 
 	/**
-	 * Le prix de l'article, modifiable par le gérant
+	 * Le prix de l'article, modifiable par le gérant.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String,
@@ -62,8 +62,8 @@ public class Article {
 	private double prixInitial;
 
 	/**
-	 * La quantité en stock de l'article, variant selon les commandes des
-	 * clients. Le gérant peut également modifier le stock de l'article.
+	 * La quantité en stock de l'article, variant au fil des commandes des
+	 * clients. Le gérant peut également modifier le stock de l'article à travers des réapprovisionnements.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String,
@@ -75,7 +75,7 @@ public class Article {
 	private int stock;
 
 	/**
-	 * Le poids de l'article (en grammes), modifiable par le gérant
+	 * Le poids de l'article (en grammes), modifiable par le gérant.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String,
@@ -87,7 +87,7 @@ public class Article {
 	private float poids;
 
 	/**
-	 * La catégorie de sport auquel l'article se rattache
+	 * La catégorie de sport auquel l'article se rattache.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#getTypeSport()
@@ -97,7 +97,7 @@ public class Article {
 	private String typeSport;
 
 	/**
-	 * La catégorie de prix auquel l'article se rattache
+	 * La catégorie de prix auquel l'article se rattache.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#getCatPrix()
@@ -109,7 +109,7 @@ public class Article {
 	/**
 	 * L'état de l'article : varie selon les commandes des clients. Les
 	 * réapprovisionnement éventuels du gérant affectent également l'état de
-	 * l'article
+	 * l'article.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#getEtat()
@@ -198,7 +198,7 @@ public class Article {
 	 * Met à jour l'id du type de sport de l'article
 	 * 
 	 * @param typeSport
-	 *            L'identifiant de la catégorie de sport de l'article.
+	 *            L'identifiant de la catégorie de sport de l'article
 	 * 
 	 */
 	public void setTypeSport(String typeSport) {
@@ -219,7 +219,7 @@ public class Article {
 	 * Met à jour la description de l'article
 	 * 
 	 * @param description
-	 *            La description de l'article.
+	 *            La description de l'article
 	 * 
 	 */
 	public void setDescription(String description) {
@@ -240,7 +240,7 @@ public class Article {
 	 * Met à jour le poids de l'article
 	 * 
 	 * @param poids
-	 *            Le poids de l'article.
+	 *            Le poids de l'article
 	 * 
 	 */
 	public void setPoids(float poids) {
@@ -284,7 +284,7 @@ public class Article {
 	 * Met à jour la quantité en stock de l'article
 	 * 
 	 * @param stock
-	 *            La quantité en stock de l'article.
+	 *            La quantité en stock de l'article
 	 * 
 	 */
 	public void setStock(int stock) {
@@ -306,7 +306,7 @@ public class Article {
 	 * Met à jour l'état de l'article dans le magasin
 	 * 
 	 * @param etat
-	 *            L'état de l'article en magasin.
+	 *            L'état de l'article en magasin
 	 * 
 	 */
 	public void setEtat(String etat) {
@@ -327,7 +327,7 @@ public class Article {
 	 * Met à jour l'identifiant de la catégorie de prix
 	 * 
 	 * @param catPrix
-	 *            L'identifiant de la catégorie prix de l'article.
+	 *            L'identifiant de la catégorie prix de l'article
 	 * 
 	 */
 	public void setCatPrix(String catPrix) {

@@ -3,7 +3,7 @@ package metier;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe Association représente une association</b>
+ * <b>La classe Association représente une association.</b>
  * <p>
  * Une association est caractérisée par les informations suivantes :
  * <ul>
@@ -27,7 +27,7 @@ import basededonnees.SGBD;
 public class Association extends Client {
 
 	/**
-	 * La dénomination (le nom) de l'association
+	 * La dénomination (le nom) de l'association.
 	 * 
 	 * @see Association#ajouterBDD()
 	 * @see Association#modifierBDDAssoc(String, String, String, String, String)
@@ -119,14 +119,14 @@ public class Association extends Client {
 	 * 
 	 * <p>
 	 * Cette méthode commence par créer une chaîne de caractères dépendant de la
-	 * valeur du booléen (Désactivé si le booléen est faux, Activé sinon)
+	 * valeur du booléen (Désactivé si le booléen est faux, Activé sinon).
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel du constructeur
+	 * l'article saisies lors de l'appel du constructeur.
 	 * </p>
 	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
 	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
-	 * requête SQL)
+	 * requête SQL).
 	 * 
 	 * @see basededonnees.BDD
 	 */
@@ -169,7 +169,7 @@ public class Association extends Client {
 
 	/**
 	 * Modifie les caractéristiques de l'association dans la table CLIENT de la
-	 * base de données
+	 * base de données.
 	 * 
 	 * <p>
 	 * Étant donné que le client peut modifier son code postal et non
@@ -177,11 +177,11 @@ public class Association extends Client {
 	 * par récupérer cet identifiant dans la table VILLE.<br>
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel de la méthode
+	 * l'article saisies lors de l'appel de la méthode.
 	 * </p>
 	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
 	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
-	 * requête SQL)
+	 * requête SQL).
 	 * 
 	 * @see basededonnees.BDD
 	 */

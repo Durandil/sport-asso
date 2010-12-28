@@ -3,7 +3,7 @@ package metier;
 import ihm.Client.FenetreCommandeArticle;
 
 /**
- * <b>La classe LigneCommande représente une ligne de commande</b>
+ * <b>La classe LigneCommande représente une ligne de commande.</b>
  * <p>
  * Une ligne de commande est caractérisée par les informations suivantes :
  * <ul>
@@ -18,7 +18,7 @@ import ihm.Client.FenetreCommandeArticle;
 public class LigneCommande {
 
 	/**
-	 * L'Identifiant de l'article commandé
+	 * L'Identifiant de l'article commandé.
 	 * 
 	 * @see LigneCommande#getIdArticle()
 	 * @see LigneCommande#setIdArticle(String)
@@ -28,7 +28,7 @@ public class LigneCommande {
 	private String idArticle;
 
 	/**
-	 * La quantité commandée de l'article
+	 * La quantité commandée de l'article.
 	 * 
 	 * @see LigneCommande#getQuantite()
 	 * @see LigneCommande#setQuantite(int)
@@ -39,7 +39,7 @@ public class LigneCommande {
 	private int quantite;
 
 	/**
-	 * Constructeur de la classe LigneCommande
+	 * Constructeur de la classe LigneCommande.
 	 * 
 	 * @param idArticle
 	 *            L'identifiant unique de l'article.

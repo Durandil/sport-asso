@@ -52,7 +52,7 @@ public class FenetreSuppressionPanier extends JDialog {
 	 * 			Entier désignant la quantité actuellement commandée de l'article par le client
 	 * 
 	 * @see FenetreCommandeArticle
-	 * @see {@link FenetreSuppressionPanier#initComponent(int, String)}
+	 * {@link FenetreSuppressionPanier#initComponent(int, String)}
 	 * 
 	 */
 	public FenetreSuppressionPanier(JFrame parent, String title, boolean modal,String numeroArticle,int quantitePanier){

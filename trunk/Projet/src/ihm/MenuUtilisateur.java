@@ -31,8 +31,7 @@ import exception.Client.ExceptionMailsDifferents;
  * des clients. Cette fenêtre apparaîtra avec une barre de menus dans lequel le client
  * pourra accéder aux différents sous-menus.
  * 
- * @author Utilisateur
- * @see {@link MenuUtilisateur#MenuUtilisateur()}
+ * {@link MenuUtilisateur#MenuUtilisateur()}
  */
 public class MenuUtilisateur extends JFrame {
 	

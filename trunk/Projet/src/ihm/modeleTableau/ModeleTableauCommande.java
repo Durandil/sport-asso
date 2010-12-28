@@ -38,7 +38,7 @@ public class ModeleTableauCommande extends AbstractTableModel{
 	 * donnees contenues à l'intérieur du tableau
 	 * 
 	 * @see ModeleTableauCommande#getRowCount()
-	 * @see ModeleTableauCommande#ModeleTableauCommande(ArrayList, Commande, String)(String)
+	 * @see ModeleTableauCommande#ModeleTableauCommande(ArrayList, Commande, String)
 	 * @see ModeleTableauCommande#getValueAt(int, int)
 	 * 
 	 */
@@ -69,9 +69,9 @@ public class ModeleTableauCommande extends AbstractTableModel{
 	 * 			Identifiant du client venant de valider sa commande
 	 * @throws SQLException
 	 * 
-	 * @see {@link SGBD#recupererInformationFideliteClient(String)}
-	 * @see {@link SGBD#selectStringConditionString(String, String, String, String)}
-	 * @see {@link Commande}
+	 * {@link SGBD#recupererInformationFideliteClient(String)}
+	 * {@link SGBD#selectStringConditionString(String, String, String, String)}
+	 * {@link Commande}
 	 * 
 	 */
 	public ModeleTableauCommande(ArrayList<LigneCommande> panier,Commande com,String numClient) throws SQLException{

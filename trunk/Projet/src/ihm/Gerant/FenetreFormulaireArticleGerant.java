@@ -32,7 +32,7 @@ import metier.Article;
  * 
  * @author Utilisateur
  *	
- *@see {@link FenetreCatalogueGerant}
+ * {@link FenetreCatalogueGerant}
  */
 public class FenetreFormulaireArticleGerant extends JDialog{
 

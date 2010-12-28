@@ -29,8 +29,8 @@ import javax.swing.border.Border;
  * ou en rupture de stock. La liste des articles est visible dans un tableau.</p>
  * @author Utilisateur
  *
- *@see {@link FenetreReapprovisionnement#FenetreReapprovisionnement()}
- *@see {@link FenetreReapprovisionnement#initComponent()}
+ *@see FenetreReapprovisionnement#FenetreReapprovisionnement()
+ *@see FenetreReapprovisionnement#initComponent()
  *
  */
 public class FenetreReapprovisionnement extends JFrame {
@@ -63,8 +63,8 @@ public class FenetreReapprovisionnement extends JFrame {
 	 * </ul>
 	 * </p>
 	 * 
-	 * @see {@link ModeleTableauCatalogue}
-	 * @see {@link ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)}
+	 * @see ModeleTableauCatalogue
+	 * @see ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)
 	 */
     private void initComponent(){
     	

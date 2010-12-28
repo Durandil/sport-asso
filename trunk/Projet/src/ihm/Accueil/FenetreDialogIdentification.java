@@ -33,7 +33,8 @@ public class FenetreDialogIdentification extends JDialog {
 	private JLabel identifiantLabel, passwordLabel;
 	private JTextField identifiant;
 	private JPasswordField password;
-	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie;
+	private JOptionPane erreurMotPasse, erreurCompte, identificationReussie,
+			compteDesactive;
 
 	/**
 	 * permet d'avoir l'identifiant de l'utilisateur dans toute l'application
@@ -126,6 +127,7 @@ public class FenetreDialogIdentification extends JDialog {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				try {
+					String etat;
 					int present = 0;
 					ArrayList<String[]> listeMailsMdps = new ArrayList<String[]>();
 					listeMailsMdps = SGBD.selectDeuxChampsString("CLIENT",
@@ -147,18 +149,43 @@ public class FenetreDialogIdentification extends JDialog {
 								// Si l'identification est correcte, on affiche
 								// un message pour le signifier
 								// puis on ouvre le menu utilisateur
+								
+								//On récupère l'état du compte client (Activé ou Désactivé)
+								etat = SGBD.selectStringConditionString(
+										"CLIENT", "ETATCOMPTE", "IDCLIENT",
+										listeMailsMdps.get(i)[0]);
+								System.out.println(etat);
+								
+								//Si le compte est désactivé, le client est averti
+								if (etat.equals("Désactivé")) {
+									compteDesactive = new JOptionPane();
+									ImageIcon imageInformation = new ImageIcon(
+											"src/images/information.jpg");
+									compteDesactive
+											.showMessageDialog(
+													null,
+													"Ce compte a été désactivé. Veuillez contacter le gérant à l'adresse suivante : "
+															+ identifiantGerant
+															+ " pour plus d'informations.",
+													"Information",
+													JOptionPane.INFORMATION_MESSAGE,
+													imageInformation);
+								} 
+								//Si le compte est actif, l'identification est réussie
+								else {
+									identificationReussie = new JOptionPane();
+									ImageIcon imageInformation = new ImageIcon(
+											"src/images/information.jpg");
+									identificationReussie.showMessageDialog(
+											null, "Identification réussie !",
+											"Information",
+											JOptionPane.INFORMATION_MESSAGE,
+											imageInformation);
+									clientUserIdentifiant = identifiant
+											.getText();
 
-								identificationReussie = new JOptionPane();
-								ImageIcon imageInformation = new ImageIcon(
-										"src/images/information.jpg");
-								identificationReussie.showMessageDialog(null,
-										"Identification réussie !",
-										"Information",
-										JOptionPane.INFORMATION_MESSAGE,
-										imageInformation);
-								clientUserIdentifiant = identifiant.getText();
-
-								MenuUtilisateur men = new MenuUtilisateur();
+									MenuUtilisateur men = new MenuUtilisateur();
+								}
 							} else {
 								// Au contraire, on indique à l'utilisateur
 								// qu'il a saisi un mauvais mot de passe
@@ -196,7 +223,7 @@ public class FenetreDialogIdentification extends JDialog {
 					}
 					dispose();
 				} catch (ExceptionCompteInexistant e1) {
-					
+
 					System.out.println(e1.getMessage());
 					// Affichage d'un message d'erreur en cas de probleme sur le
 					// compte
@@ -208,11 +235,11 @@ public class FenetreDialogIdentification extends JDialog {
 
 					// Puis on affiche de nouveau la fenetre d'accueil
 
-					//FenetreCompte fen = new FenetreCompte();
-					//fen.setVisible(true);
+					// FenetreCompte fen = new FenetreCompte();
+					// fen.setVisible(true);
 
 				} catch (ExceptionMotDePasseErrone e2) {
-					
+
 					System.out.println(e2.getMessage());
 					// Affichage d'un message d'erreur en cas de probleme sur le
 					// mot de passe
@@ -221,11 +248,10 @@ public class FenetreDialogIdentification extends JDialog {
 					erreurMotPasse.showMessageDialog(null,
 							"Mot de passe erroné, veuillez réessayer.",
 							"Attention", JOptionPane.WARNING_MESSAGE, image);
-					
 
 					// Puis on affiche de nouveau la fenetre d'accueil
-					//FenetreCompte fen = new FenetreCompte();
-					//fen.setVisible(true);
+					// FenetreCompte fen = new FenetreCompte();
+					// fen.setVisible(true);
 
 				}
 

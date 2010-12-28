@@ -60,8 +60,8 @@ public class ModelePromotion extends AbstractTableModel {
 	 * <li> sa date de début</li>
 	 * <li> sa date de fin</li>
 	 * 
-	 * @see {@link SGBD#selectListeStringOrdonne(String, String, String)}
-	 * @see {@link SGBD#selectListeDatesOrdonne(String, String, String, String)}
+	 * {@link SGBD#selectListeStringOrdonne(String, String, String)}
+	 * {@link SGBD#selectListeDatesOrdonne(String, String, String, String)}
 	 * 
 	 */
 	public ModelePromotion() {

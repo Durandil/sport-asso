@@ -26,8 +26,8 @@ import javax.swing.JTable;
  * 
  * @author Utilisateur
  *
- * @see {@link FenetreAffichageRecherche#FenetreAffichageRecherche(JFrame, String, boolean, String, String, String, String)}
- * @see {@link ModeleTableauClient}
+ * @see FenetreAffichageRecherche#FenetreAffichageRecherche(JFrame, String, boolean, String, String, String, String)
+ * @see ModeleTableauClient
  */
 public class FenetreAffichageRecherche extends JDialog{
 	
@@ -80,9 +80,9 @@ public class FenetreAffichageRecherche extends JDialog{
      * @param ville
      *			String saisi dans le champ de recherche ville client
      *
-     * @see {@link FicheClient}
+     * {@link FicheClient}
      * 
-     * @see {@link ModeleTableauClient }
+     * {@link ModeleTableauClient }
 	 */
 	private void initComponent(String idClient,String nom,String denom,String ville){
 		

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe Promotion représente une promotion</b>
+ * <b>La classe Promotion représente une promotion.</b>
  * <p>
  * Une promotion est caractérisée par les informations suivantes (que l'on
  * retrouve dans la base de données) :
@@ -26,12 +26,8 @@ import basededonnees.SGBD;
  */
 public class Promotion {
 
-	// promoFidelite pour spécifier qui est concerné par la promotion
-	// true si pour les détenteurs de carte de fidelité, false si pour tout le
-	// monde
-
 	/**
-	 * L'Identifiant de la promotion, non modifiable
+	 * L'Identifiant de la promotion, non modifiable.
 	 * 
 	 * @see Promotion#getIdPromotion()
 	 * @see Promotion#setIdPromotion(String)
@@ -42,7 +38,7 @@ public class Promotion {
 	private String idPromotion;
 
 	/**
-	 * Le nom de la promotion
+	 * Le nom de la promotion.
 	 * 
 	 * @see Promotion#getNomPromotion()
 	 * @see Promotion#setNomPromotion(String)
@@ -53,7 +49,7 @@ public class Promotion {
 	private String nomPromotion;
 
 	/**
-	 * La date de début de la promotion
+	 * La date de début de la promotion.
 	 * 
 	 * @see Promotion#getDateDebut()
 	 * @see Promotion#setDateDebut(Date)
@@ -64,7 +60,7 @@ public class Promotion {
 	private Date dateDebut;
 
 	/**
-	 * La date de fin de la promotion
+	 * La date de fin de la promotion.
 	 * 
 	 * @see Promotion#getDateFin()
 	 * @see Promotion#setDateFin(Date)
@@ -76,7 +72,7 @@ public class Promotion {
 
 	/**
 	 * Le pourcentage de la promotion, ou plus exactement le pourcentage
-	 * appliqué au prix initial : "80" pour une réduction de 20%
+	 * appliqué au prix initial : "80" pour une réduction de 20%.
 	 * 
 	 * @see Promotion#getPourcentagePromo()
 	 * @see Promotion#setPourcentagePromo(double)
@@ -88,7 +84,7 @@ public class Promotion {
 
 	/**
 	 * Indique si la promotion ne s'applique qu'aux clients fidèles ou à
-	 * l'ensemble des clients
+	 * l'ensemble des clients.
 	 * 
 	 * @see Promotion#getPromoFidelite()
 	 * @see Promotion#setPromoFidelite(boolean)
@@ -99,7 +95,7 @@ public class Promotion {
 	private boolean promoFidelite;
 
 	/**
-	 * Constructeur de la classe Promotion
+	 * Constructeur de la classe Promotion.
 	 * <p>
 	 * Le constructeur de la classe Promotion fait appel à la méthode
 	 * ajouterBDD() qui ajoute la promotion dans la base de données.
@@ -267,7 +263,7 @@ public class Promotion {
 	}
 
 	/**
-	 * Ajoute la promotion dans la table PROMO de la base de données
+	 * Ajoute la promotion dans la table PROMO de la base de données.
 	 * 
 	 * <p>
 	 * Cette méthode commence par récupérer l'indice de séquence de la table
@@ -325,15 +321,15 @@ public class Promotion {
 	}
 
 	/**
-	 * Modifie une promotion qui est déjà présent dans la table PROMO de la base
-	 * de données
+	 * Modifie une promotion qui est déjà présente dans la table PROMO de la
+	 * base de données.
 	 * 
 	 * <p>
 	 * Similairement à la méthode ajouterBDD(), cette méthode commence par
 	 * transformer les dates en chaînes de caractères puis crée un nouvel entier
 	 * en fonction de la valeur du booléen promoFidele. <br>
 	 * La requête se construit ensutie en fonction des autres caractéristiques
-	 * de la promotion saisies lors de l'appel de la méthode
+	 * de la promotion saisies lors de l'appel de la méthode.
 	 * </p>
 	 * 
 	 * @param idPromo
@@ -376,7 +372,7 @@ public class Promotion {
 
 	/**
 	 * Supprime toutes les lignes de la table LISTING_PROMOS_ARTICLES où
-	 * l'identifiant de la promotion est identique à celui précisé en paramètre
+	 * l'identifiant de la promotion est identique à celui précisé en paramètre.
 	 * 
 	 * @param idPromotion
 	 *            L'identifiant unique de la promotion.
@@ -393,7 +389,7 @@ public class Promotion {
 
 	/**
 	 * Supprime la promotion de la table PROMO dont l'identifiant est spécifié
-	 * en paramètre
+	 * en paramètre.
 	 * 
 	 * @param idPromotion
 	 *            L'identifiant unique de la promotion.
@@ -407,231 +403,5 @@ public class Promotion {
 
 		SGBD.executeUpdate(requete);
 	}
-
-	// /**
-	// * Vérifie si la date saisie est cohérente (à travers l'année, le mois et
-	// le
-	// * jour entrés en paramètres) Pour cela, la fonction procède étape par
-	// étape
-	// * <p>
-	// * <ul>
-	// * <li>La méthode suppose à l'origine que la date est cohérente.</li>
-	// * <li>Elle crée une Date correspondant aux paramètres saisis.</li>
-	// * <li>Les paramètres sont ensuite transformés en entiers.</li>
-	// * <li>Une nouvelle instance de Date est créée, dateJour, qui correspond à
-	// * la date actuelle</li>
-	// * <li>Par la suite, trois tests sont effectués :</li>
-	// * <ul>
-	// * <li>Le premier vérifie que la date de la promotion précède la date du
-	// * jour</li>
-	// * <li>Le second vérifie que le jour de la date n'est pas 31 si le mois
-	// * comporte 30 jours
-	// * <li>Le dernier vérifie que le mois de février comporte 28 jours au plus
-	// * </ul>
-	// * </ul> Si au moins l'un de ces tests est faux alors la fonction renvoie
-	// la
-	// * valeur "faux". Si tous les tests sont réussis, la valeur renvoyée par
-	// la
-	// * fonction est "vrai".
-	// * </p>
-	// *
-	// * @param annee
-	// * L'année de la date
-	// * @param mois
-	// * Le mois de la date
-	// * @param jour
-	// * Le jour de la date
-	// *
-	// * @return Si la date est cohérente
-	// *
-	// * @see Promotion#ajouterBDD()
-	// * @see SGBD#transformation(Date)
-	// * @see Promotion#verifierChampPromotion(String, String, String, String,
-	// * String, String, String, String)
-	// * @see basededonnees.BDD
-	// */
-	// public static boolean verifierDatePromotion(String annee, String mois,
-	// String jour) throws Exception {
-	// boolean resultat = true;
-	// String dateP = jour + mois + annee;
-	// Date datePromotion = SGBD.stringToDate(dateP, "ddMMyyyy");
-	// int moisDate = Integer.parseInt(mois);
-	// int jourDate = Integer.parseInt(jour);
-	// @SuppressWarnings("unused")
-	// int anneeDate = Integer.parseInt(annee);
-	//
-	// Date dateJour = new Date(System.currentTimeMillis());
-	//
-	// System.out.println(dateJour.toString());
-	// System.out.println(datePromotion.toString());
-	// System.out.println(datePromotion.compareTo(dateJour));
-	//
-	// if (datePromotion.before(dateJour)) {
-	// resultat = false;
-	// System.out.println("date avant aujourd'hui");
-	// }
-	//
-	// if ((moisDate == 4 | moisDate == 6 | moisDate == 9 | moisDate == 11)
-	// & jourDate == 31) {
-	// resultat = false;
-	// System.out
-	// .println("Problème du 31 des mois avril, juin, septembre et novembre");
-	// }
-	//
-	// if (moisDate == 2 & jourDate > 28) {
-	// resultat = false;
-	// System.out.println("problème du mois de février");
-	// }
-	//
-	// return resultat;
-	// }
-	//
-	// /**
-	// * Vérifie si la première date précède la seconde.
-	// * <p>
-	// * La fonction concatène les paramètres pour former deux dates sous format
-	// * String Ces String sont ensuite convertis en Date. La méthode vérifie si
-	// * la première date est avant la seconde, auquel cas le booléen retourné
-	// * sera "vrai" et "faux" sinon.
-	// * </p>
-	// *
-	// * @param anneeAvant
-	// * L'année de la première date
-	// * @param moisAvant
-	// * Le mois de la première date
-	// * @param jourAvant
-	// * Le jour de la première date
-	// * @param anneeApres
-	// * L'année de la seconde date
-	// * @param moisApres
-	// * Le mois de la seconde date
-	// * @param jourApres
-	// * Le jour de la seconde date
-	// *
-	// * @return Si la première date précède bien la seconde
-	// *
-	// * @see Promotion#ajouterBDD()
-	// * @see SGBD#transformation(Date)
-	// * @see basededonnees.BDD
-	// * @see Promotion#verifierChampPromotion(String, String, String, String,
-	// * String, String, String, String)
-	// */
-	// public static boolean verifierOrdreDeuxDate(String anneeAvant,
-	// String moisAvant, String jourAvant, String anneeApres,
-	// String moisApres, String jourApres) throws Exception {
-	//
-	// boolean resultat = true;
-	//
-	// String dateP = jourAvant + moisAvant + anneeAvant;
-	// Date datePromotionAvant = SGBD.stringToDate(dateP, "ddMMyyyy");
-	//
-	// String datePApres = jourApres + moisApres + anneeApres;
-	// Date datePromotionApres = SGBD.stringToDate(datePApres, "ddMMyyyy");
-	//
-	// System.out.println(datePromotionAvant.toString());
-	// System.out.println(datePromotionApres.toString());
-	//
-	// if (datePromotionAvant.after(datePromotionApres)) {
-	// resultat = false;
-	// }
-	//
-	// return resultat;
-	// }
-	//
-	// /**
-	// * TODO : Devenu inutile
-	// *
-	// * Vérifie si les champs saisis sont conformes aux formats attendus
-	// * <p>
-	// * Cette méthode effectue des tests pour vérifier que les champs saisis
-	// sont
-	// * conformes. Pour ce faire, elle commence par faire appel aux fonctions
-	// * verifierDatePromotion et verifierOrdreDeuxDates. Si les booléens
-	// obtenus
-	// * sont faux alors l'entier renvoyé sera différent de 0.<br>
-	// * D'autre part, si la longueur de la description ou celle du pourcentage
-	// * est égale à 0, l'entier passe à 3.<br>
-	// * Ensuite, si le pourcentage est incohérent, inférieur à 0 ou supérieur à
-	// * 100, l'entier renvoyé sera égal à 4.<br>
-	// * Enfin, si la longueur de la description dépasse 40 caractères, alors
-	// * l'entier renvoyé sera égal à 5.<br>
-	// * Si tous les champs sont conformes alors l'entier sera égal à zéro. <br>
-	// * <br>
-	// * <b>Note : </b> L'utilisation d'un entier et non d'un booléen pour cette
-	// * fonction provient du fait que selon l'erreur relevée, le message qui
-	// sera
-	// * affiché à l'écran sera différent.
-	// *
-	// * </p>
-	// *
-	// * @param anneeAvant
-	// * L'année de la première date
-	// * @param moisAvant
-	// * Le mois de la première date
-	// * @param jourAvant
-	// * Le jour de la première date
-	// * @param anneeApres
-	// * L'année de la seconde date
-	// * @param moisApres
-	// * Le mois de la seconde date
-	// * @param jourApres
-	// * Le jour de la seconde date
-	// * @param description
-	// * La description de la promotion
-	// * @param pourcentagePromotion
-	// * Le pourcentage de la promotion
-	// *
-	// * @return Un entier qui est différent de 0 si les champs ne sont pas au
-	// * format approprié
-	// *
-	// * @see Promotion#verifierOrdreDeuxDate(String, String, String, String,
-	// * String, String)
-	// * @see Promotion#verifierDatePromotion(String, String, String)
-	// * @see Promotion#ajouterBDD()
-	// * @see SGBD#transformation(Date)
-	// * @see basededonnees.BDD
-	// * @see FenetreFormulairePromotionsGerant
-	// */
-	// public static int verifierChampPromotion(String anneeAvant,
-	// String moisAvant, String jourAvant, String anneeApres,
-	// String moisApres, String jourApres, String description,
-	// String pourcentagePromotion) {
-	//
-	// int champCorrect = 0;
-	//
-	// try {
-	// boolean dateDebutPossible = Promotion.verifierDatePromotion(
-	// anneeAvant, moisAvant, jourAvant);
-	// boolean dateFinPossible = Promotion.verifierDatePromotion(
-	// anneeApres, moisApres, jourApres);
-	// boolean comparaisonDeuxDates;
-	// comparaisonDeuxDates = Promotion.verifierOrdreDeuxDate(anneeAvant,
-	// moisAvant, jourAvant, anneeApres, moisApres, jourApres);
-	//
-	// if (dateDebutPossible == false | dateFinPossible == false) {
-	// champCorrect = 1;
-	// }
-	// if (dateDebutPossible == true & dateFinPossible == true
-	// & comparaisonDeuxDates == false) {
-	// champCorrect = 2;
-	// }
-	// if (description.length() == 0 | pourcentagePromotion.length() == 0) {
-	// champCorrect = 3;
-	// }
-	//
-	// int pourcentage = Integer.parseInt(pourcentagePromotion);
-	//
-	// if (pourcentage < 0 | pourcentage > 100) {
-	// champCorrect = 4;
-	// }
-	// if (description.length() > 40) {
-	// champCorrect = 5;
-	// }
-	// } catch (Exception ex) {
-	// System.out.println(ex.getMessage());
-	// }
-	//
-	// return champCorrect;
-	// }
 
 }

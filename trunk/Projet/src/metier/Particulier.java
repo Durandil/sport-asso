@@ -3,7 +3,7 @@ package metier;
 import basededonnees.SGBD;
 
 /**
- * <b>La classe Particulier représente un particulier</b>
+ * <b>La classe Particulier représente un particulier.</b>
  * <p>
  * Un particulier est caractérisé par les informations suivantes :
  * <ul>
@@ -29,7 +29,7 @@ import basededonnees.SGBD;
 public class Particulier extends Client {
 
 	/**
-	 * Le nom du client
+	 * Le nom du client.
 	 * 
 	 * @see Particulier#getNom()
 	 * @see Particulier#setNom(String)
@@ -41,7 +41,7 @@ public class Particulier extends Client {
 	private String nom;
 
 	/**
-	 * Le prénom du client
+	 * Le prénom du client.
 	 * 
 	 * @see Particulier#getNom()
 	 * @see Particulier#setNom(String)
@@ -53,7 +53,7 @@ public class Particulier extends Client {
 	private String prenom;
 
 	/**
-	 * Constructeur de la classe Particulier
+	 * Constructeur de la classe Particulier.
 	 * <p>
 	 * Le constructeur de la classe Particulier fait appel à la méthode
 	 * ajouterBDD() qui l'ajoute dans la base de données. <br>
@@ -155,14 +155,14 @@ public class Particulier extends Client {
 	}
 
 	/**
-	 * Ajoute le particulier dans la table CLIENT de la base de données
+	 * Ajoute le particulier dans la table CLIENT de la base de données.
 	 * 
 	 * <p>
 	 * Cette méthode commence par créer une chaîne de caractères dépendant de la
-	 * valeur du booléen (Désactivé si le booléen est faux, Activé sinon)
+	 * valeur du booléen (Désactivé si le booléen est faux, Activé sinon).
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel du constructeur
+	 * l'article saisies lors de l'appel du constructeur.
 	 * </p>
 	 * 
 	 * @see basededonnees.BDD
@@ -208,19 +208,19 @@ public class Particulier extends Client {
 
 	/**
 	 * Modifie les caractéristiques du particulier dans la table CLIENT de la
-	 * base de données
+	 * base de données.
 	 * 
 	 * <p>
 	 * Étant donné que le client peut modifier son code postal et non
 	 * l'identifiant de la ville (auquel il n'a pas accès), la méthode commence
-	 * par récupérer cet identifiant dans la table VILLE
+	 * par récupérer cet identifiant dans la table VILLE.
 	 * 
 	 * La requête se construit ensuite en fonction des caractéristiques de
-	 * l'article saisies lors de l'appel de la méthode<br>
+	 * l'article saisies lors de l'appel de la méthode.<br>
 	 * 
 	 * <b>Note :</b> La méthode replaceAll est utilisée pour remplacer les
 	 * apostrophes par des doubles apostrophes (pour éviter des erreurs dans la
-	 * requête SQL)
+	 * requête SQL).
 	 * </p>
 	 * 
 	 * @see basededonnees.BDD
