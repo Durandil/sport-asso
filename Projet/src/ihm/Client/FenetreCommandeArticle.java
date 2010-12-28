@@ -114,7 +114,7 @@ public class FenetreCommandeArticle extends JFrame{
     	JPanel panneauUtilisationBonsReduction = new JPanel();
 		
     	//Récupération des informations concernant la fidélité du client
-    	ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+    	final ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 		
     	// Si le client est adhérent, on calcule le montant de leur bon de réduction
     	if(fideliteClient.get(0).equals("Oui")){
@@ -246,7 +246,7 @@ public class FenetreCommandeArticle extends JFrame{
 								double montantCommande = nouvelleCommande.montantTotalArticle(listeArticlesPanier, FenetreDialogIdentification.clientUserIdentifiant);
 								
 								
-								ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+//								ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 								
 								if(utilisationBonReduction==true){
 									
@@ -285,7 +285,7 @@ public class FenetreCommandeArticle extends JFrame{
 								bonAchat=0;
 								
 							} catch (SQLException e1) {
-								e1.printStackTrace();
+								System.out.println(e1.getMessage());
 							}
 							
 						}
