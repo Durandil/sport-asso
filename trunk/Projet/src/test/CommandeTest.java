@@ -117,17 +117,5 @@ public class CommandeTest extends TestCase {
 
 	}
 	
-	public void testMontantCommandePourUnArticle(){
-		
-		
-		
-		
-		
-	}
-	
-	
-	public void testMontantTotalArticle(){
-		
-	}
 	
 }
