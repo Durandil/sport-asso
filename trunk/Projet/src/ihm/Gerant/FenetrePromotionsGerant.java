@@ -36,8 +36,10 @@ public class FenetrePromotionsGerant extends JFrame {
 	/**
 	 * <b> Constructeur de la classe {@link FenetrePromotionsGerant}. </b>
 	 * <p> La fenetre sera créée selon les instructions de la méthode initComponent(). </p>
+	 * 
+	 * 
 	 */
-	public FenetrePromotionsGerant(){
+	public FenetrePromotionsGerant() {
 		super();
 		this.setTitle("Promotions en cours");
 		this.setSize(500, 600);
@@ -56,18 +58,20 @@ public class FenetrePromotionsGerant extends JFrame {
      * </ul>
      * </p>
      * 
+     * @throws Exception 
+     * 
      * @see FenetreFormulairePromotionsGerant
      * @see ModelePromotion
      * @see ModelePromotion#ModelePromotion()
      */
-    private void initComponent(){
+    private void initComponent() {
     	
     	// Définition du tableau qui affichera l'ensemble des promotions en cours pour //
     	// les différents clients (adhérents ou non adhérents) après interrogation de  //
     	// -------------- la base de données dans ModelePromotionClient ---------------//
     	//-----------------------------------------------------------------------------//
     	
-    	final ModelePromotion modele = new ModelePromotion();
+    	final ModelePromotion modele = new ModelePromotion(true);
     	final JTable tableauPromotions = new JTable(modele);     
 
 	    

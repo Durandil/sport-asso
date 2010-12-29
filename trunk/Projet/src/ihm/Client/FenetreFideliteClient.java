@@ -119,11 +119,7 @@ public class FenetreFideliteClient extends JDialog {
 																			// points
 																			// du
 																			// client
-																			// entré
-																			// en
-																			// paramètre
-																			// de
-																			// initComponent()
+
 
 		}
 
@@ -236,18 +232,30 @@ public class FenetreFideliteClient extends JDialog {
 				dispose();
 			}
 		});
-
-		JButton annulationBouton = new JButton("Annuler");
+		
+		String nomBouton = "Annuler";
+		if(estFidele.equals("Oui")){
+			nomBouton = "Retour";
+		}
+		
+		JButton annulationBouton = new JButton(nomBouton);
 		annulationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
 
-		// ajout des boutons au panneau panneauBoutons
+		// Ajout des boutons au panneau panneauBoutons
 		panneauBoutons.add(validationBouton);
 		panneauBoutons.add(annulationBouton);
-
+		
+		// Si le client est adhérent, on ne lui affiche que le bouton retour
+		// car il ne modifie aucun paramètre sur son compte donc le bouton
+		// confirmer n'a plus aucun intérêt
+		if(estFidele.equals("Oui")){
+			validationBouton.setVisible(false);
+		}
+		
 		this.getContentPane().add(panneauCentral, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 	}

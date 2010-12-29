@@ -194,7 +194,8 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		content.add(panCP);
 		
 		listeVille= new JComboBox();
-		ArrayList<String> listeVilles = SGBD.selectListeString("VILLE", "NOMVILLE");
+		ArrayList<String> listeVilles = SGBD.selectListeStringOrdonne("VILLE","NOMVILLE",
+						"NOMVILLE");
 		for (String nomVille : listeVilles) {
 			listeVille.addItem(nomVille);
 		}

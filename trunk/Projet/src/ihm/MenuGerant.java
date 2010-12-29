@@ -131,7 +131,7 @@ public class MenuGerant extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				// Ouverture de la fenêtre permettant la gestion des promotions 
 				// exceptionnelles du magasin
-				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant();
+				FenetrePromotionsGerant fenetrePromo =new FenetrePromotionsGerant();
 				fenetrePromo.setVisible(true);
 			}
 		});
