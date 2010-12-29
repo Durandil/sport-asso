@@ -60,28 +60,50 @@ public class ModelePromotion extends AbstractTableModel {
 	 * <li> sa date de début</li>
 	 * <li> sa date de fin</li>
 	 * 
-	 * {@link SGBD#selectListeStringOrdonne(String, String, String)}
-	 * {@link SGBD#selectListeDatesOrdonne(String, String, String, String)}
+	 * @param pourGerant
+	 * 				Booléen indiquant pour quel utilisateur est destiné le tableau 
+	 * 				(true) pour le gérant et (false) pour les clients
+	 * 
+	 * 
+	 * @see {@link SGBD#selectListeStringOrdonne(String, String, String)}
+	 * @see {@link SGBD#selectListeDatesOrdonne(String, String, String, String)}
 	 * 
 	 */
-	public ModelePromotion() {
+	public ModelePromotion(boolean pourGerant) {
 		super();
-		// Quatre listes sont créées pour récupérer les informations de la table PROMO
-		ArrayList<String> listePromos = SGBD.selectListeStringOrdonne("PROMO", "NOMPROMO","IDPROMO");
-		ArrayList<String> listeDatesDebut = SGBD.selectListeDatesOrdonne("PROMO",
-				"DATEDEBUT","DD/MM/YYYY","IDPROMO");
-		ArrayList<String> listeDatesFin = SGBD.selectListeDatesOrdonne("PROMO", "DATEFIN","DD/MM/YYYY","IDPROMO");
-		ArrayList<String> listeIdentifiants = SGBD.selectListeStringOrdonne("PROMO", "IDPROMO","IDPROMO") ;
+		ArrayList<String> listePromos = new ArrayList<String>();
+		ArrayList<String> listeDatesDebut = new ArrayList<String>(); 
+		ArrayList<String> listeDatesFin = new ArrayList<String>();
+		ArrayList<String> listeIdentifiants = new ArrayList<String>();
 		
+		if(pourGerant){
+			// Quatre listes sont créées pour récupérer les informations de la table PROMO
+			listePromos = SGBD.selectListeStringOrdonne("PROMO", "NOMPROMO","IDPROMO");
+			listeDatesDebut = SGBD.selectListeDatesOrdonne("PROMO",
+					"DATEDEBUT","DD/MM/YYYY","IDPROMO");
+			listeDatesFin = SGBD.selectListeDatesOrdonne("PROMO", "DATEFIN","DD/MM/YYYY","IDPROMO");
+			listeIdentifiants = SGBD.selectListeStringOrdonne("PROMO", "IDPROMO","IDPROMO") ;
+						
+		}
+		else{
+			listePromos = SGBD.selectListeStringOrdonneCondition("PROMO", "NOMPROMO",
+					"IDPROMO", "DATEFIN > SYSDATE");
+			listeIdentifiants = SGBD.selectListeStringOrdonneCondition("PROMO", "IDPROMO",
+					"IDPROMO", "DATEFIN > SYSDATE");
+			listeDatesDebut = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEDEBUT",
+					"IDPROMO", "DATEFIN > SYSDATE");
+			listeDatesFin = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEFIN",
+					"IDPROMO", "DATEFIN > SYSDATE");
+		}
+
 		// on ajoute les informations dans le tableau
 		donnees = new Object[listeIdentifiants.size()][5];
 		for (int i = 0; i < listePromos.size(); i++) {
 			donnees[i][0] = listeIdentifiants.get(i);
 			donnees[i][1] = listePromos.get(i);
 			donnees[i][2] = listeDatesDebut.get(i);
-			donnees[i][3] = listeDatesFin.get(i);
-		};
-		
+			donnees[i][3] = listeDatesFin.get(i);		
+		};	
 	}
 
 	/**

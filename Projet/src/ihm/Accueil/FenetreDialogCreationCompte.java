@@ -207,8 +207,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panCP.add(codePostal);
 
 		ville = new JComboBox();
-		ArrayList<String> listeVille = SGBD.selectListeString("VILLE",
+		ArrayList<String> listeVille = SGBD.selectListeStringOrdonne("VILLE","NOMVILLE",
 				"NOMVILLE");
+				
 		for (String nomVille : listeVille) {
 			ville.addItem(nomVille);
 		}

@@ -41,7 +41,7 @@ public class FenetrePromotions extends JFrame {
 	 * 
 	 * @see ModelePromotion
 	 */
-	public FenetrePromotions(){
+	public FenetrePromotions() {
 		super();
 		this.setTitle("Promotions en cours");
 		this.setSize(500, 900);
@@ -58,6 +58,7 @@ public class FenetrePromotions extends JFrame {
      * <li> le JPanel contenant le bouton de retour à la page précédente.</li>
      * </ul>
      * </p>
+     *  
      *     
      */
     private void initComponent(){
@@ -76,7 +77,7 @@ public class FenetrePromotions extends JFrame {
    	
     	// Définition du tableau qui affichera l'ensemble des promotions en cours pour le client
     	// qui utilise l'application après interrogation de la base de données dans ModelePromotionClient
-	    ModelePromotion modele = new ModelePromotion();
+	    ModelePromotion modele = new ModelePromotion(false);
     	final JTable tableauPromotions = new JTable(modele);
     	
     	// ajout d'un detecteur des actions de la souris pour afficher les détails d'une 
