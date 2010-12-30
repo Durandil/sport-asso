@@ -633,13 +633,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
 				dispose();
-				FenetrePromotionsGerant fen = null;
-				try {
-					fen = new FenetrePromotionsGerant();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
 				fen.setVisible(true);
 			}
 		});
