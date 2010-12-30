@@ -58,6 +58,7 @@ public class FicheClient extends JDialog {
 			300, 60);
 	private Dimension dimensionPanneauStatistique = new Dimension(300, 40);
 	private JLabel icon;
+	private JComboBox listeVille;
 	private static String etatCompte = "";
 	private static String numeroCommande = " ";
 
@@ -398,6 +399,29 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
+		
+		listeVille= new JComboBox();
+		ArrayList<String> listeVilles = SGBD.selectListeStringOrdonne("VILLE","NOMVILLE",
+						"NOMVILLE");
+		for (String nomVille : listeVilles) {
+			listeVille.addItem(nomVille);
+		}
+		listeVille.setSelectedIndex(0);
+		listeVille.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				String nomVille= (String) ((JComboBox) e.getSource())
+								.getSelectedItem();
+				
+				String codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
+				codePostal.setText(codePostalSelectionne);
+			}
+		});
+		
+		listeVille.setEnabled(false);
+		listeVille.setVisible(false);
+		panCP.add(listeVille);
+		
 		panCP.setBounds(40, 400, 300, 60);
 		this.add(panCP);
 
@@ -650,9 +674,9 @@ public class FicheClient extends JDialog {
 									image);
 					
 					codePostal.setVisible(false);
-					ville.setEnabled(true);
-					ville.setVisible(true);
-
+					listeVille.setEnabled(true);
+					listeVille.setVisible(true);
+					repaint();
 					
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 					System.out.println(e8.getMessage());

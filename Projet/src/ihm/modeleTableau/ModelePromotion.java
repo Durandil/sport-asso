@@ -61,12 +61,12 @@ public class ModelePromotion extends AbstractTableModel {
 	 * <li> sa date de fin</li>
 	 * 
 	 * @param pourGerant
-	 * 				Booléen indiquant pour quel utilisateur est destiné le tableau 
-	 * 				(true) pour le gérant et (false) pour les clients
+	 * 				<p>Booléen indiquant pour quel utilisateur est destiné le tableau 
+	 * 				(true) pour le gérant et (false) pour les clients. </p>
 	 * 
 	 * 
-	 * @see {@link SGBD#selectListeStringOrdonne(String, String, String)}
-	 * @see {@link SGBD#selectListeDatesOrdonne(String, String, String, String)}
+	 * {@link SGBD#selectListeStringOrdonne(String, String, String)}
+	 * {@link SGBD#selectListeDatesOrdonne(String, String, String, String)}
 	 * 
 	 */
 	public ModelePromotion(boolean pourGerant) {

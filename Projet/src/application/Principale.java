@@ -19,7 +19,7 @@ public class Principale {
 		
 		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
+		MenuGerant menu= new MenuGerant();
 		
 //		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient("tnb@ensai.fr");
 //		System.out.println(fideliteClient.get(0));

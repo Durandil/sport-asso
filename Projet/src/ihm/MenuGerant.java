@@ -58,7 +58,7 @@ public class MenuGerant extends JFrame {
 	 * 
 	 */
 	public MenuGerant(){
-		this.setPreferredSize(new Dimension(900,600));
+		this.setPreferredSize(new Dimension(663,314));
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setLocation(0,0);
 		this.setResizable(false);
@@ -131,7 +131,7 @@ public class MenuGerant extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				// Ouverture de la fenêtre permettant la gestion des promotions 
 				// exceptionnelles du magasin
-				FenetrePromotionsGerant fenetrePromo =new FenetrePromotionsGerant();
+				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant();
 				fenetrePromo.setVisible(true);
 			}
 		});
@@ -156,5 +156,6 @@ public class MenuGerant extends JFrame {
 		this.setVisible(true);
 		
 		pack();
+		repaint();
 	}
 }
