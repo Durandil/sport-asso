@@ -118,7 +118,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 				
 				Article.modifierStockArticleBDD(identifiantArticle, quantiteSelectionnee);
 				dispose();
-				FenetreReapprovisionnement fen = new FenetreReapprovisionnement();
+				FenetreReapprovisionnement fen = new FenetreReapprovisionnement(null, true);
 				fen.setVisible(true);
 			}			
 		});
@@ -132,7 +132,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// permet d'annuler la commande en cours et retour vers page principale
 				dispose();
-				FenetreReapprovisionnement fen = new FenetreReapprovisionnement();
+				FenetreReapprovisionnement fen = new FenetreReapprovisionnement(null,true);
 				fen.setVisible(true);
 			}			
 		});

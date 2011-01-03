@@ -538,7 +538,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 
 					SGBD.executeUpdate(requete);
 					dispose();
-					FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+					FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null,true);
 					fen.setVisible(true);
 
 				} catch (ExceptionDateAvantAujourdhui e1) {
@@ -633,7 +633,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
 				dispose();
-				FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+				FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null,true);
 				fen.setVisible(true);
 			}
 		});
@@ -819,11 +819,21 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		cbanneeFin.setVisible(true);
 		cbmoisFin.setVisible(true);
 		cbjourFin.setVisible(true);
-
+		
+		// Nous allons empêcher le gérant de pouvoir modifier 
+		// une date de début de promotion
+		// qui est déjà passée
+		Date dateDebutPromotion = SGBD.stringToDate(dateDe, "dd/MM/yyyy");;
+		Date dateJour = new Date(System.currentTimeMillis());
+		
+		if(dateDebutPromotion.before(dateJour)){
+			panDateDebut.setVisible(false);
+		}
+		
 		jourDebutSelectionneModification = dateDe.substring(0, 2);
 		moisDebutSelectionneModification = dateDe.substring(3, 5);
 		anneeDebutSelectionneModification = dateDe.substring(6, 10);
-
+		
 		jourFinSelectionneModification = dateFi.substring(0, 2);
 		moisFinSelectionneModification = dateFi.substring(3, 5);
 		anneeFinSelectionneModification = dateFi.substring(6, 10);
@@ -1104,7 +1114,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					SGBD.executeUpdate(requete);
 
 					dispose();
-					FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+					FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null,true);
 					fen.setVisible(true);
 
 				} catch (ExceptionDateAvantAujourdhui e1) {
@@ -1197,7 +1207,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				FenetrePromotionsGerant fen = new FenetrePromotionsGerant();
+				FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null,true);
 				fen.setVisible(true);
 			}
 		});

@@ -10,6 +10,7 @@ import ihm.Client.FenetrePromotions;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,6 +22,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import basededonnees.SGBD;
 
 import exception.Client.ExceptionMailsDifferents;
 
@@ -75,10 +78,19 @@ public class MenuUtilisateur extends JFrame {
 	 * </p>
 	 */
 	public MenuUtilisateur(){
-		this.setSize(400, 300);
+		this.setSize(500, 300);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.setLocationRelativeTo(null);
-		this.setTitle("Bienvenue : "+ FenetreDialogIdentification.clientUserIdentifiant);
+		
+		Dimension dimensionEcran = this.getToolkit().getScreenSize();
+		this.setLocation((dimensionEcran.width-this.getSize().width)/2,(dimensionEcran.height-this.getSize().height)/2);
+		
+		// Récupération du nom et prénom pour les particuliers 
+		// et la dénomination pour les collectivités et associations
+		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT", "IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant);
+		String prenom = SGBD.selectStringConditionString("CLIENT", "PRENOMCLIENT", "IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant);
+		String denomination = SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant);
+		
+		this.setTitle("Bienvenue : "+ nom+" "+prenom+denomination);
 		this.setLayout(new BorderLayout());
 		
 		// Ajout d'une image de fond pour la fenêtre//

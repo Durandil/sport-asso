@@ -33,7 +33,7 @@ import javax.swing.border.Border;
  *@see FenetreReapprovisionnement#initComponent()
  *
  */
-public class FenetreReapprovisionnement extends JFrame {
+public class FenetreReapprovisionnement extends JDialog {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel image;
@@ -44,10 +44,15 @@ public class FenetreReapprovisionnement extends JFrame {
 	 * Constructeur de la fenetre permettant de réapprovisionner les articles en faible quantité.
 	 * Les composants de la fenêtre sont initialisés dans 
 	 * {@link FenetreReapprovisionnement#initComponent()}.
+	 * 
+	 * @param parent
+	 * 			JFrame utilisé pour créer la fenêtre			
+	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
 	 */
-	public FenetreReapprovisionnement(){
-		super();
-		this.setTitle("Articles à commander");
+	public FenetreReapprovisionnement(JFrame parent, boolean modal){
+		super(parent, "Articles à commander", modal);
 		this.setSize(300,400);
 		this.setLocation(50,50);
 		this.setResizable(true);
