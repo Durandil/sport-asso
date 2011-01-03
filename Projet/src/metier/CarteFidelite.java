@@ -214,9 +214,13 @@ public class CarteFidelite {
 
 	public static void modifierBDDcarteFidelite(String idClient, int nbrePoints) {
 
+		if(nbrePoints<0){
+			nbrePoints = 0;
+		}
 		String requete = "UPDATE CARTE_FIDELITE SET NBPOINTS=" + nbrePoints
 				+ " WHERE IDCLIENT='" + idClient + "'";
 
+		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 
 	}
@@ -260,4 +264,41 @@ public class CarteFidelite {
 		return bonAchat;
 	}
 
+	/**
+	 * Détermine le nombre de points associé au bon d'achat utilisé lors d'une
+	 * commmande.
+	 * 
+	 * <p>
+	 * Cette méthode va en fonction du bon d'achat utilisé lors d'une commmande
+	 * déterminer le montant du nombre de points qui sera enlevé de la carte de
+	 * fidélité.
+	 * </p>
+	 * 
+	 * @param bonAchat
+	 *            La valeur du bon d'achat.
+	 * 
+	 * @return Le nombre de points correspondant
+	 * 
+	 * @see FenetreFideliteClient
+	 * @see FenetreCommandeArticle
+	 */
+	public static int calculerNombreDePoints(int bonAchat) {
+		int nombreDePoints = 0;
+
+		if (bonAchat == 0) {
+			nombreDePoints = 0;
+		} else if (bonAchat == 5) {
+			nombreDePoints = 100;
+		} else if (bonAchat == 12) {
+			nombreDePoints = 200;
+		} else if (bonAchat == 30) {
+			nombreDePoints = 500;
+		} else if (bonAchat == 70) {
+			nombreDePoints = 1000;
+		} else if (bonAchat == 150) {
+			nombreDePoints = 2000;
+		}
+
+		return nombreDePoints;
+	}
 }

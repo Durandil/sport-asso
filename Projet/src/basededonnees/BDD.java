@@ -59,7 +59,7 @@ public class BDD {
 				+ "NOMTYPE VARCHAR(20),"
 				+ "CONSTRAINT PK_TYPE_SPORT PRIMARY KEY (IDTYPE))");
 
-		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 5 nocache");
+		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 7 nocache");
 		SGBD.executeUpdate("CREATE TABLE PROMO" + "(IDPROMO CHAR(8),"
 				+ "NOMPROMO VARCHAR(40)," 
 				+ "DATEDEBUT DATE," 
@@ -85,7 +85,7 @@ public class BDD {
 				+ "CONSTRAINT PK_CLIENT PRIMARY KEY (IDCLIENT),"
 				+ "CONSTRAINT FK_CLIENT_VILLE FOREIGN KEY (IDVILLE) REFERENCES VILLE)");
 
-		SGBD.executeUpdate("CREATE SEQUENCE S_COMMANDE Increment by 1 start with 5 nocache");
+		SGBD.executeUpdate("CREATE SEQUENCE S_COMMANDE Increment by 1 start with 6 nocache");
 		SGBD.executeUpdate("CREATE TABLE COMMANDE"
 				+ "(IDCOMMANDE CHAR(8),"
 				+ "DATECOMMANDE DATE,"
@@ -108,7 +108,7 @@ public class BDD {
 				+ "CONSTRAINT FK_ARTICLE_TYPE_SPORT FOREIGN KEY (IDTYPE) REFERENCES TYPE_SPORT,"
 				+ "CONSTRAINT FK_ARTICLE_CATEGORIE FOREIGN KEY (IDCATEGORIE) REFERENCES CATEGORIE)");
 
-		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE  Increment by 1 start with 3 nocache");
+		SGBD.executeUpdate("CREATE SEQUENCE S_FIDELITE  Increment by 1 start with 4 nocache");
 		SGBD.executeUpdate("CREATE TABLE CARTE_FIDELITE"
 				+ "(IDCARTEFIDELITE CHAR(8),"
 				+ "NBPOINTS NUMBER(5),"

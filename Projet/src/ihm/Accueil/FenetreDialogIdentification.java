@@ -154,10 +154,11 @@ public class FenetreDialogIdentification extends JDialog {
 								etat = SGBD.selectStringConditionString(
 										"CLIENT", "ETATCOMPTE", "IDCLIENT",
 										listeMailsMdps.get(i)[0]);
-								System.out.println(etat);
+								
 								
 								//Si le compte est désactivé, le client est averti
 								if (etat.equals("Désactivé")) {
+									
 									compteDesactive = new JOptionPane();
 									ImageIcon imageInformation = new ImageIcon(
 											"src/images/information.jpg");

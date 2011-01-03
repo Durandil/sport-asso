@@ -472,7 +472,7 @@ public class FicheClient extends JDialog {
 				if (choix.equals("Oui")) {
 					etatCompte = "Activé";
 				} else {
-					etatCompte = "Desactivé";
+					etatCompte = "Désactivé";
 				}
 			}
 		});
