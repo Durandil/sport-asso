@@ -316,6 +316,7 @@ public class Promotion {
 				+ this.idPromotion + "'," + "'"
 				+ this.nomPromotion.replaceAll("'", "''") + "'," + s + "," + s2
 				+ "," + this.pourcentagePromo + "," + pf + ")";
+		
 		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 	}

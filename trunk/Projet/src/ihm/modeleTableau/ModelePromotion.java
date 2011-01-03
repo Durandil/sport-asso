@@ -1,5 +1,6 @@
 package ihm.modeleTableau;
 
+import ihm.Accueil.FenetreDialogIdentification;
 import ihm.Client.FenetrePromotions;
 import ihm.Gerant.FenetrePromotionsGerant;
 
@@ -86,14 +87,38 @@ public class ModelePromotion extends AbstractTableModel {
 						
 		}
 		else{
-			listePromos = SGBD.selectListeStringOrdonneCondition("PROMO", "NOMPROMO",
-					"IDPROMO", "DATEFIN > SYSDATE");
-			listeIdentifiants = SGBD.selectListeStringOrdonneCondition("PROMO", "IDPROMO",
-					"IDPROMO", "DATEFIN > SYSDATE");
-			listeDatesDebut = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEDEBUT",
-					"IDPROMO", "DATEFIN > SYSDATE");
-			listeDatesFin = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEFIN",
-					"IDPROMO", "DATEFIN > SYSDATE");
+			// Récupération des informations concernant la fidélité de l'utilisateur
+			ArrayList<String> fideliteUtilisateur = SGBD.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
+			
+			// Récupération des informations sur les promotions exceptionnelles selon
+			// l'adhésion ou non au programme de fidélité du client
+			
+			if(fideliteUtilisateur.get(0).equals("Oui")){
+				// s'il est adhérent, il peut bénéficier de toutes les promotions
+				// exceptionnelles ( adhérent + toute la clientèle)
+				listePromos = SGBD.selectListeStringOrdonneCondition("PROMO", "NOMPROMO",
+						"IDPROMO", "DATEFIN > SYSDATE");
+				listeIdentifiants = SGBD.selectListeStringOrdonneCondition("PROMO", "IDPROMO",
+						"IDPROMO", "DATEFIN > SYSDATE");
+				listeDatesDebut = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEDEBUT",
+						"IDPROMO", "DATEFIN > SYSDATE");
+				listeDatesFin = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEFIN",
+						"IDPROMO", "DATEFIN > SYSDATE");
+				
+			}
+			else{
+				// sinon, il n'aura accès qu'aux promotions exceptionnelles réservées
+				// à l'ensemble de la population
+				listePromos = SGBD.selectListeStringOrdonneCondition("PROMO", "NOMPROMO",
+						"IDPROMO", "DATEFIN > SYSDATE AND PROMOFIDELITE=0");
+				listeIdentifiants = SGBD.selectListeStringOrdonneCondition("PROMO", "IDPROMO",
+						"IDPROMO", "DATEFIN > SYSDATE AND PROMOFIDELITE=0");
+				listeDatesDebut = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEDEBUT",
+						"IDPROMO", "DATEFIN > SYSDATE AND PROMOFIDELITE=0");
+				listeDatesFin = SGBD.selectListeStringOrdonneCondition("PROMO", "DATEFIN",
+						"IDPROMO", "DATEFIN > SYSDATE AND PROMOFIDELITE=0");
+			}
+			
 		}
 
 		// on ajoute les informations dans le tableau

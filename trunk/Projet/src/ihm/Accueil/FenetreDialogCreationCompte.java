@@ -25,6 +25,7 @@ import exception.ExceptionExcesDeCaracteres;
 import exception.Client.ExceptionCaractereInterdit;
 import exception.Client.ExceptionCodePostalDifferentDeCinqChiffres;
 import exception.Client.ExceptionCodePostalIncorrect;
+import exception.Client.ExceptionItemSelectionneJComboBox;
 import exception.Client.ExceptionMailDejaExistant;
 import exception.Client.ExceptionMailSansArobase;
 import exception.Client.ExceptionMailsDifferents;
@@ -40,9 +41,6 @@ import metier.Particulier;
  * Classe représentant la fenêtre s'affichant lors de la création de compte.
  */
 public class FenetreDialogCreationCompte extends JDialog {
-
-	// TODO vérifier les champs avant de les valider pas de ' dans les
-	// jtextfield
 
 	/**
 	 * 
@@ -61,8 +59,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 	public static String itemSelectionne;
 	public static String itemFidelite;
 	public static String codePostalSelectionne;
-	public int creationCompteCorrecte;
-
+	// Booléens permettant de controler que le client a bien cliqué dans les
+	// deux JComboBox de la fenêtre
+	private static boolean itemTypeCompteSelectionne = false ;
+	private static boolean itemFideliteSelectionne = false ;
+	
 	/**
 	 * Constructeur
 	 * 
@@ -130,12 +131,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 		compte.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				//Récupération du type de compte sélectionné
 				itemSelectionne = (String) ((JComboBox) e.getSource())
 						.getSelectedItem();
-				// int indiceComboBox=((JComboBox)
-				// e.getSource()).getSelectedIndex();
-
+				
+				// Changement de l'état du booléen pour controler le clic
+				// dans le menu déroulant du client
+				itemTypeCompteSelectionne = true ;
+				
 				if (itemSelectionne == "Compte Particulier") {
 					nom.setEnabled(true);
 					prenom.setEnabled(true);
@@ -273,7 +276,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		fidelite.setSelectedItem("Non");
 		fidelite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
+				// Changement de l'état du booléen pour controler le clic
+				// dans le menu déroulant du client
+				itemFideliteSelectionne = true ;
+				
 				// Le booléen estFidele passe à faux si l'utilisateur répond
 				// "Non" à la question
 				// Il reste à vrai s'il répond "Oui"
@@ -412,6 +419,21 @@ public class FenetreDialogCreationCompte extends JDialog {
 						throw new ExceptionMailSansArobase(
 								"Votre adresse mail ne comporte pas d'arobase !");
 					}
+					
+					// Vérification de la sélection d'un item dans chacun des deux
+					// menus déroulants
+					
+					if( !itemTypeCompteSelectionne ){
+						throw new ExceptionItemSelectionneJComboBox(
+								"Vous n'avez pas sélectionné votre type de compte !");
+					}
+					
+					if( !itemFideliteSelectionne ){
+						throw new ExceptionItemSelectionneJComboBox(
+								"Vous n'avez pas choisi si vous désiriez un compte" +
+								"fidélité dans le magasin !");
+					}
+					
 					// Si aucune erreur relevée,
 					// la
 					// création de compte
@@ -481,6 +503,12 @@ public class FenetreDialogCreationCompte extends JDialog {
 					// création de compte
 					// correcte
 					MenuUtilisateur men = new MenuUtilisateur();
+					
+					// Changement de la valeur des booléens permettant de gérer les clics
+					// sur les menus déroulants afin qu'ils soient bien à false
+					// s'ils veulent créer un nouveau compte
+					itemFideliteSelectionne = false ;
+					itemTypeCompteSelectionne = false ;
 
 				} catch (ExceptionMailsDifferents e1) {
 					System.out.println(e1.getMessage());
@@ -565,7 +593,17 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 
 				}
-
+				catch (ExceptionItemSelectionneJComboBox e10){
+					System.out.println(e10.getMessage());
+					
+					erreurCreation
+							.showMessageDialog(
+									null,
+									e10.getMessage(),
+									"Attention !", JOptionPane.WARNING_MESSAGE,
+									image);
+					
+				}
 			}
 
 		});

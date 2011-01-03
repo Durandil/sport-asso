@@ -69,7 +69,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	public FenetreFormulaireArticleGerant(JFrame parent, String title,
 			boolean modal) {
 		super(parent, title, modal);
-		this.setSize(450, 650);
+		this.setSize(450, 600);
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -95,7 +95,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	public FenetreFormulaireArticleGerant(JFrame parent, String title,
 			boolean modal, String idArticle) {
 		super(parent, title, modal);
-		this.setSize(450, 650);
+		this.setSize(450, 600);
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
