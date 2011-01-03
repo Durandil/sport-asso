@@ -69,7 +69,7 @@ public class FenetreCompte extends JFrame {
         //On prévient notre JFrame que ce sera notre JPanel qui sera son contentPane
         this.setContentPane(pan);
         
-        // je vais scinder mon écran en plusierus parties pour pouvoir insérer des images, des boutons 
+        // Nous allons scinder l'écran en plusieurs parties pour pouvoir insérer des images, des boutons 
         // à différents endroits de la fenetre
         this.setLayout(new BorderLayout());
         
@@ -160,7 +160,7 @@ public class FenetreCompte extends JFrame {
         // Définition des actions de chacun des boutons présents sur la fenêtre
 		boutonCreation.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// affichage de la fenêtre de creation de compte pour le client
+				// Affichage de la fenêtre de creation de compte pour le client
 				FenetreDialogCreationCompte compte = null;
 				try {
 					compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
@@ -191,7 +191,7 @@ public class FenetreCompte extends JFrame {
 		
 		boutonIdentificationClient.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// On affiche le contenu de la fenêtre d'identifiaction du client
+				// Affichage du contenu de la fenêtre d'identifiaction du client
 				//dispose();
 				FenetreDialogIdentification identificationClient = new FenetreDialogIdentification(null, "Identification client", true);
 				identificationClient.setVisible(true);
@@ -213,7 +213,7 @@ public class FenetreCompte extends JFrame {
 		
 		boutonDeconnexion.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// on ferme l'application
+				// Fermeture de l'application
 				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la fermeture du logiciel ?","Confirmation",JOptionPane.YES_NO_OPTION);
 				if(res==JOptionPane.OK_OPTION){
 					System.exit(0);

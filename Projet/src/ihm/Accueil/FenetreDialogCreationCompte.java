@@ -208,7 +208,10 @@ public class FenetreDialogCreationCompte extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-
+		
+		// Définition d'un menu déroulant des villes de la base de données
+		// qui sera proposé aux utilisateurs qui ont saisi un code postal
+		// qui n'existe pas encore dans la base de données
 		ville = new JComboBox();
 		ArrayList<String> listeVille = SGBD.selectListeStringOrdonne("VILLE","NOMVILLE",
 				"NOMVILLE");
@@ -227,7 +230,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 				codePostal.setText(codePostalSelectionne);
 			}
 		});
-
+		
 		ville.setEnabled(false);
 		ville.setVisible(false);
 		panCP.add(ville);
@@ -307,8 +310,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 		content.add(panCP);
 		content.add(panTelephone);
 		content.add(panFidelite);
-
+		
+		// Définition du panneau qui accueillera les deux boutons de la fenêtre //
+		//----------------------------------------------------------------------//
 		JPanel control = new JPanel();
+		
+		// Définition de l'action du bouton Valider qui vérifie d'abord que les //
+		// champs ont été correctement saisis puis enregistre les informations  //
+		// --------------- du compte dans la base de données -------------------//
 		JButton validationBouton = new JButton("Valider");
 
 		validationBouton.addActionListener(new ActionListener() {
@@ -506,7 +515,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					
 					// Changement de la valeur des booléens permettant de gérer les clics
 					// sur les menus déroulants afin qu'ils soient bien à false
-					// s'ils veulent créer un nouveau compte
+					// si l'utilisateur veut créer un nouveau compte
 					itemFideliteSelectionne = false ;
 					itemTypeCompteSelectionne = false ;
 
@@ -568,7 +577,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 					erreurCreation.showMessageDialog(null, e7.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
-
+					
+					// Comme l'utilisateur a fait une erreur de saisie de code postal
+					// nous lui affichons le menu déroulant à la place du champ de saisie
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
 					ville.setVisible(true);
@@ -607,22 +618,26 @@ public class FenetreDialogCreationCompte extends JDialog {
 			}
 
 		});
-
+		
+		// Définition de l'action du bouton Annuler qui ferme la fenêtre et //
+		// ------ retourne sur la fenêtre d'accueil de l'application -------//
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				FenetreCompte fen;
-
-				fen = new FenetreCompte();
+				FenetreCompte fen = new FenetreCompte();
 				fen.setVisible(true);
 
 			}
 		});
-
+		
+		// Ajout des deux boutons au JPanel des boutons : control //
+		//--------------------------------------------------------//
 		control.add(validationBouton);
 		control.add(annulationBouton);
-
+		
+		// Ajout des composants au conteneur de la fenêtre //
+		//-------------------------------------------------//
 		this.getContentPane().add(panIcon, BorderLayout.WEST);
 		this.getContentPane().add(content, BorderLayout.CENTER);
 		this.getContentPane().add(control, BorderLayout.SOUTH);
