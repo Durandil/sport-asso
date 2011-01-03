@@ -63,6 +63,11 @@ Insert into VILLE (idVille, Codepostal, Nomville) values ('ville012', '86000', '
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville013', '45000', 'Orléans');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville014', '62000', 'Arras');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville015', '59000', 'Lille');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville016', '29000', 'Brest');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville017', '01000', 'Bourg en Bresse');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville018', '33000', 'Bordeaux');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville019', '76000', 'Rouen');
+Insert into VILLE (idVille, Codepostal, Nomville) values ('ville020', '56000', 'Vannes');
 
 #Table CLIENT
 Insert into CLIENT (idClient, NomClient, PrenomClient, Adresseclient, Idville, Telephone, Etatcompte, Motdepasse) values ('arthur.laroch@gmail.com', 'Laroch', 'Arthur', '4 rue de la Breiz', 'ville001', '0606060606', 'Activé', 'l3R6T4x');
