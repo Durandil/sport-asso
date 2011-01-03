@@ -692,10 +692,10 @@ public class FicheClient extends JDialog {
 			}
 		});
 
-		// Définition du bouton permettant le retour à la page précédante et
-		// l'annulation //
-		// ----------- des modifications en cours tout en fermant la fenêtre
-		// -------------//
+		// Définition du bouton permettant le retour à la page précédante et  //
+		// l'annulation des modifications en cours tout en fermant la fenêtre //
+		//--------------------------------------------------------------------//
+
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
