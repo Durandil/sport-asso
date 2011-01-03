@@ -29,7 +29,7 @@ import metier.Article;
  * 
  * @see FenetreFormulaireArticleGerant
  */
-public class FenetreCatalogueGerant extends JFrame{
+public class FenetreCatalogueGerant extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private JLabel icon;
@@ -41,10 +41,15 @@ public class FenetreCatalogueGerant extends JFrame{
 	 * <b> Création du constructeur de la classe FenetreCatalogueGerant. </b>
 	 * <p> La fenetre sera créée selon les instructions de la méthode initComponent(). </p>
 	 * 
+	 * @param parent
+	 * 			JFrame utilisé pour créer la fenêtre			
+	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
+	 * 
 	 */
-	public FenetreCatalogueGerant(){
-		super();
-		this.setTitle("Gestion du Catalogue Article");
+	public FenetreCatalogueGerant(JFrame parent, boolean modal){
+		super(parent, "Gestion du Catalogue Article", modal);
 		this.setSize(500, 700);
 		this.setLocation(50,50);
 		this.setResizable(false);

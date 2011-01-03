@@ -58,9 +58,13 @@ public class MenuGerant extends JFrame {
 	 * 
 	 */
 	public MenuGerant(){
+		this.setSize(663,314);
 		this.setPreferredSize(new Dimension(663,314));
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.setLocation(0,0);
+		
+		Dimension dimensionEcran = this.getToolkit().getScreenSize();
+		this.setLocation((dimensionEcran.width-this.getSize().width)/2,(dimensionEcran.height-this.getSize().height)/2);
+		
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
 		
@@ -113,7 +117,7 @@ public class MenuGerant extends JFrame {
 		itemArticles.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				// Affichage de la fenetre avec la dernière version du catalogue client
-				FenetreCatalogueGerant fenetreCatalogue = new FenetreCatalogueGerant();
+				FenetreCatalogueGerant fenetreCatalogue = new FenetreCatalogueGerant(null,true);
 				fenetreCatalogue.setVisible(true);
 			}
 		});
@@ -122,7 +126,7 @@ public class MenuGerant extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				// Afficher la fenêtre contenant le tableau des articles en rupture de stock 
 				// et nécessitant un réapprovisionnement du fait de sa qunatité en stock
-				FenetreReapprovisionnement fenetreStock = new FenetreReapprovisionnement();
+				FenetreReapprovisionnement fenetreStock = new FenetreReapprovisionnement(null,true);
 				fenetreStock.setVisible(true);
 			}
 		});
@@ -131,7 +135,7 @@ public class MenuGerant extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				// Ouverture de la fenêtre permettant la gestion des promotions 
 				// exceptionnelles du magasin
-				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant();
+				FenetrePromotionsGerant fenetrePromo = new FenetrePromotionsGerant(null,true);
 				fenetrePromo.setVisible(true);
 			}
 		});

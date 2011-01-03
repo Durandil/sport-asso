@@ -24,7 +24,7 @@ import metier.Promotion;
  *
  * @see FenetreFormulairePromotionsGerant
  */
-public class FenetrePromotionsGerant extends JFrame {
+public class FenetrePromotionsGerant extends JDialog {
 	
 
 	private static final long serialVersionUID = 1L;
@@ -37,11 +37,15 @@ public class FenetrePromotionsGerant extends JFrame {
 	 * <b> Constructeur de la classe {@link FenetrePromotionsGerant}. </b>
 	 * <p> La fenetre sera créée selon les instructions de la méthode initComponent(). </p>
 	 * 
+	 * @param parent
+	 * 			JFrame utilisé pour créer la fenêtre			
+	 * @param modal
+	 * 			Booléen indiquant si la fenêtre doit bloquer ou non les interactions avec les autres
+	 * 			fenêtres
 	 * 
 	 */
-	public FenetrePromotionsGerant() {
-		super();
-		this.setTitle("Promotions en cours");
+	public FenetrePromotionsGerant(JFrame parent,boolean modal) {
+		super(parent, "Promotions en cours", modal);
 		this.setSize(500, 600);
 		this.setLocation(50,50);
 		this.setResizable(false);

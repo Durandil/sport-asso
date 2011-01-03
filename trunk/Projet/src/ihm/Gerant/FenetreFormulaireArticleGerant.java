@@ -69,7 +69,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	public FenetreFormulaireArticleGerant(JFrame parent, String title,
 			boolean modal) {
 		super(parent, title, modal);
-		this.setSize(450, 600);
+		this.setSize(450, 500);
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -95,7 +95,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 	public FenetreFormulaireArticleGerant(JFrame parent, String title,
 			boolean modal, String idArticle) {
 		super(parent, title, modal);
-		this.setSize(450, 600);
+		this.setSize(450, 500);
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -288,7 +288,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 
 						// Fermeture de la page
 						dispose();
-						FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+						FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);
 						fen.setVisible(true);
 
 					}
@@ -346,7 +346,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
 				dispose();
-				FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);
 				fen.setVisible(true);
 			}
 		});
@@ -581,7 +581,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 
 						// Puis la page se ferme
 						dispose();
-						FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+						FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);
 						fen.setVisible(true);
 					}
 
@@ -697,7 +697,7 @@ public class FenetreFormulaireArticleGerant extends JDialog{
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page precedente
 				dispose();
-				FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);
 				fen.setVisible(true);
 
 			}

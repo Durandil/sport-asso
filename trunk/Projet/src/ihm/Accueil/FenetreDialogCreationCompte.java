@@ -430,7 +430,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					
 					if( !itemFideliteSelectionne ){
 						throw new ExceptionItemSelectionneJComboBox(
-								"Vous n'avez pas choisi si vous désiriez un compte" +
+								"Vous n'avez pas choisi si vous désiriez un compte " +
 								"fidélité dans le magasin !");
 					}
 					
