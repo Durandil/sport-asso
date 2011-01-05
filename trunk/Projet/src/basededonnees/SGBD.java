@@ -47,14 +47,14 @@ public class SGBD {
 	 * L'identifiant utilisé pour la connexion.
 	 */
 
-	private static final String ID = "id3198";
+	private static final String ID = "id3193";
 
 
 	/**
 	 * Le mot de passe utilisé pour la connnexion.
 	 */
 
-	private static final String MDP = "id3198";
+	private static final String MDP = "id3193";
 
 
 	/**

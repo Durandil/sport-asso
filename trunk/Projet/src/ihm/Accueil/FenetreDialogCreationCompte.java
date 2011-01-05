@@ -52,8 +52,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 	private JTextField nom, prenom, adresse, identifiantVerification,
 			codePostal, telephone, identifiant, denomination;
 	private JComboBox compte, fidelite, ville;
-	// Par défaut, le client désire une carte de fiélité, le booléen associé
-	// vaut ainsi "vrai" à l'origine
+	// Par défaut, le client ne désire pas une carte de fidélité, le booléen associé
+	// vaut ainsi "faux" à l'origine
 	private boolean estFidele = false;
 	private JOptionPane creationCorrecte, creationMotDePasse, erreurCreation;
 	public static String itemSelectionne;
@@ -108,7 +108,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 			ExceptionCodePostalDifferentDeCinqChiffres,
 			ExceptionNumeroDeTelephoneDifferentDeDixChiffres,
 			ExceptionCodePostalIncorrect, ExceptionNumeroDeTelephoneIncorrect {
-		// Icone
+		
+		// Récupération de l'image qui sera affichée sur la fenêtre
 		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
@@ -122,7 +123,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panTypeCompte.setBorder(BorderFactory
 				.createTitledBorder("Type de compte"));
 		typeCompteLabel = new JLabel("Statut Compte : ");
-
+		
+		// Définition d'un menu déroulant permettant à l'utilisateur
+		// de choisir son type de compte
 		compte = new JComboBox();
 		compte.addItem("Compte Particulier");
 		compte.addItem("Compte Collectivites");
@@ -157,8 +160,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		JPanel panDenomination = new JPanel();
 		panDenomination.setBackground(Color.white);
 		panDenomination.setPreferredSize(new Dimension(220, 60));
+		
+		// Mise en place du champ de saisie de la dénomination
 		denomination = new JTextField();
 		denomination.setPreferredSize(new Dimension(90, 25));
+		
 		panDenomination.setBorder(BorderFactory
 				.createTitledBorder("Denomination"));
 		denominationLabel = new JLabel("Denomination");
@@ -169,8 +175,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		JPanel panNom = new JPanel();
 		panNom.setBackground(Color.white);
 		panNom.setPreferredSize(new Dimension(220, 60));
+		
+		// Mise en place du champ de saisie du nom
 		nom = new JTextField();
 		nom.setPreferredSize(new Dimension(90, 25));
+		
 		panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
 		nomLabel = new JLabel("Nom :");
 		panNom.add(nomLabel);
@@ -182,8 +191,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panPrenom.setPreferredSize(new Dimension(220, 60));
 		panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
 		prenomLabel = new JLabel("Prenom : ");
+		
+		// Mise en place du champ de saisie du prénom
 		prenom = new JTextField();
 		prenom.setPreferredSize(new Dimension(90, 25));
+		
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
 
@@ -193,8 +205,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panAdresse.setPreferredSize(new Dimension(220, 60));
 		panAdresse.setBorder(BorderFactory.createTitledBorder("Adresse"));
 		adresseLabel = new JLabel("Adresse : ");
+		
+		// Mise en place du champ de saisie de l'adresse
 		adresse = new JTextField();
 		adresse.setPreferredSize(new Dimension(100, 25));
+		
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
 
@@ -204,8 +219,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panCP.setPreferredSize(new Dimension(220, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Code Postal : ");
+		
+		// Mise en place du champ de saisie du code postal
 		codePostal = new JTextField();
 		codePostal.setPreferredSize(new Dimension(100, 25));
+		
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
 
@@ -241,8 +259,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panTelephone.setPreferredSize(new Dimension(220, 60));
 		panTelephone.setBorder(BorderFactory.createTitledBorder("Telephone"));
 		telLabel = new JLabel("Telephone : ");
+		
+		// Mise en place du champ de saisie du numéro de téléphone
 		telephone = new JTextField();
 		telephone.setPreferredSize(new Dimension(90, 25));
+		
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
 
@@ -254,12 +275,16 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panIdentifiant.setBorder(BorderFactory
 				.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
+		
+		// Mise en place du champ de saisie de l'adresse identifiant
 		identifiant = new JTextField();
 		identifiant.setPreferredSize(new Dimension(90, 20));
-
+		
+		// Mise en place du champ de saisie de confirmation de l'adresse
 		identifiantVerification = new JTextField();
 		identifiantVerification.setPreferredSize(new Dimension(90, 20));
 		identifiantVerifLabel = new JLabel("Reconfirmer");
+		
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
 		panIdentifiant.add(identifiantVerifLabel);
@@ -271,7 +296,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panFidelite.setPreferredSize(new Dimension(220, 80));
 		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
-
+		
+		// Définition d'un menu déroulant permettant à l'utilisateur
+		// de choisir s'il souhaite devenir adhérent ou non
 		fidelite = new JComboBox();
 		fidelite.addItem("Oui");
 		fidelite.addItem("Non");
@@ -487,6 +514,12 @@ public class FenetreDialogCreationCompte extends JDialog {
 							"CLIENT", "MOTDEPASSE", "IDCLIENT",
 							identifiant.getText());
 					creationMotDePasse = new JOptionPane();
+
+					creationMotDePasse.showMessageDialog(null,
+							"Votre mot de passe a été envoyé sur votre messagerie interne. " + motDePasse,
+							"Information", JOptionPane.INFORMATION_MESSAGE,
+							imageInformation);
+
 					creationMotDePasse
 							.showMessageDialog(
 									null,
@@ -494,6 +527,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Information",
 									JOptionPane.INFORMATION_MESSAGE,
 									imageInformation);
+
 
 					dispose();
 					// envoi du message avec
@@ -529,7 +563,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					itemTypeCompteSelectionne = false;
 
 				} catch (ExceptionMailsDifferents e1) {
-					System.out.println(e1.getMessage());
+
 					erreurCreation
 							.showMessageDialog(
 									null,
@@ -537,7 +571,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionMailDejaExistant e2) {
-					System.out.println(e2.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -546,7 +579,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionCaractereInterdit e3) {
-					System.out.println(e3.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -555,7 +587,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionExcesDeCaracteres e4) {
-					System.out.println(e4.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -564,7 +595,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionCodePostalDifferentDeCinqChiffres e5) {
-					System.out.println(e5.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -573,7 +603,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionNumeroDeTelephoneDifferentDeDixChiffres e6) {
-					System.out.println(e6.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -582,7 +611,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionCodePostalIncorrect e7) {
-					System.out.println(e7.getMessage());
 
 					erreurCreation.showMessageDialog(null, e7.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
@@ -596,7 +624,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 					ville.setVisible(true);
 
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
-					System.out.println(e8.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -605,7 +632,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionMailSansArobase e9) {
-					System.out.println(e9.getMessage());
 
 					erreurCreation
 							.showMessageDialog(
@@ -615,10 +641,21 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 
 				} catch (ExceptionItemSelectionneJComboBox e10) {
+
+
+					erreurCreation
+							.showMessageDialog(
+									null,
+									e10.getMessage(),
+									"Attention !", JOptionPane.WARNING_MESSAGE,
+									image);
+					
+
 					System.out.println(e10.getMessage());
 
 					erreurCreation.showMessageDialog(null, e10.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
+
 
 				}
 			}

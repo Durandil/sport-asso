@@ -137,6 +137,7 @@ public class FenetreLectureMessage extends JDialog{
 		contenuMessage.setLineWrap(true);
 		contenuMessage.setWrapStyleWord(true);
 		contenuMessage.setText(contenu);
+		contenuMessage.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 		contenuMessage.setEnabled(false);
 		contenuLabel=new JLabel("Contenu : ");
 		panneauContenuMessage.add(contenuLabel);
