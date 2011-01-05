@@ -50,12 +50,16 @@ public class SGBD {
 	/**
 	 * L'identifiant utilisé pour la connexion.
 	 */
-	private static final String ID = "id3199";
+
+	private static final String ID = "id3198";
+
 
 	/**
 	 * Le mot de passe utilisé pour la connnexion.
 	 */
-	private static final String MDP = "id3199";
+
+	private static final String MDP = "id3198";
+
 
 	/**
 	 * Permet à l'utilisateur de se connecter à sa base de données.
@@ -1462,6 +1466,7 @@ public class SGBD {
 						+ "AND LISTING_PROMOS_ARTICLES.IDARTICLE='"
 						+ idArticle
 						+ "'";
+				System.out.println(requete);
 			}
 			
 			res = st.executeQuery(requete);
