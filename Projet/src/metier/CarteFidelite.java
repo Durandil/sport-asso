@@ -246,18 +246,16 @@ public class CarteFidelite {
 	public static int calculerBonsReductions(int nbrePoints) {
 		int bonAchat = 0;
 
-		if (nbrePoints <= 0) {
+		if (nbrePoints <= 100) {
 			bonAchat = 0;
-		} else if (nbrePoints < 101) {
+		} else if (nbrePoints < 201 ) {
 			bonAchat = 5;
-		} else if (nbrePoints < 201) {
-			bonAchat = 12;
 		} else if (nbrePoints < 501) {
-			bonAchat = 30;
+			bonAchat = 12;
 		} else if (nbrePoints < 1001) {
-			bonAchat = 70;
+			bonAchat = 30;
 		} else if (nbrePoints < 2001) {
-			bonAchat = 150;
+			bonAchat = 70;
 		} else
 			bonAchat = 150;
 

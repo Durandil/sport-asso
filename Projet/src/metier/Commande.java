@@ -638,7 +638,8 @@ public class Commande {
 						ligne.getIdArticle(), estFidele);
 
 		// Comparaison des pourcentages dégressif et promotion exceptionnelle
-
+System.out.println("Promo Degressif : " + pourcentagePromoDegressif);
+System.out.println("Promo Excep : " + pourcentagePromoExc);
 		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
 		if (Double.parseDouble(pourcentagePromoDegressif) < Double
 				.parseDouble(pourcentagePromoExc)) {

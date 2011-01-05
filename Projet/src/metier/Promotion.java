@@ -15,8 +15,7 @@ import basededonnees.SGBD;
  * <li>Un nom (une description)</li>
  * <li>Une date de début</li>
  * <li>Une date de fin</li>
- * <li>Le pourcentage de promotion (Plus exactement le pourcentage appliqué au
- * prix initial : "80" pour une réduction de 20%)</li>
+ * <li>Le pourcentage de la promotion</li>
  * <li>Un booléen indiquant si la promotion ne s'applique qu'aux personnes
  * possédant une carte de fidélité</li>
  * </ul>
@@ -71,8 +70,7 @@ public class Promotion {
 	private Date dateFin;
 
 	/**
-	 * Le pourcentage de la promotion, ou plus exactement le pourcentage
-	 * appliqué au prix initial : "80" pour une réduction de 20%.
+	 * Le pourcentage de la promotion.
 	 * 
 	 * @see Promotion#getPourcentagePromo()
 	 * @see Promotion#setPourcentagePromo(double)
