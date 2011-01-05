@@ -315,9 +315,7 @@ public class FenetreCommandeArticle extends JFrame {
 											.parseInt(fideliteClient.get(1));
 									int pointsDepenses = CarteFidelite
 											.calculerNombreDePoints(bonAchat);
-									System.out.println(pointsDepenses);
-									System.out
-											.println("**************************************");
+									
 									CarteFidelite
 											.modifierBDDcarteFidelite(
 													FenetreDialogIdentification.clientUserIdentifiant,
@@ -359,13 +357,15 @@ public class FenetreCommandeArticle extends JFrame {
 								}
 
 								// Affichage de la facture
+								int pointsDepenses = CarteFidelite
+								.calculerNombreDePoints(bonAchat);
 								FenetreFactureCommande fenetre = new FenetreFactureCommande(
 										null,
 										"Facture",
 										true,
 										FenetreDialogIdentification.clientUserIdentifiant,
 										nouvelleCommande, listeArticlesPanier,
-										bonAchat, utilisationBonReduction);
+										pointsDepenses, utilisationBonReduction);
 								fenetre.setVisible(true);
 								dispose();
 								bonAchat = 0;

@@ -55,7 +55,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 	// Par défaut, le client désire une carte de fiélité, le booléen associé
 	// vaut ainsi "vrai" à l'origine
 	private boolean estFidele = false;
-	private JOptionPane creationCorrecte, affichageMotDePasse, erreurCreation;
+	private JOptionPane creationCorrecte, creationMotDePasse, erreurCreation;
 	public static String itemSelectionne;
 	public static String itemFidelite;
 	public static String codePostalSelectionne;
@@ -481,9 +481,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 					String motDePasse = SGBD.selectStringConditionString(
 							"CLIENT", "MOTDEPASSE", "IDCLIENT",
 							identifiant.getText());
-					affichageMotDePasse = new JOptionPane();
-					affichageMotDePasse.showMessageDialog(null,
-							"Retenez votre mot de passe : " + motDePasse,
+					creationMotDePasse = new JOptionPane();
+					creationMotDePasse.showMessageDialog(null,
+							"Votre mot de passe a été envoyé sur votre messagerie interne." + motDePasse,
 							"Information", JOptionPane.INFORMATION_MESSAGE,
 							imageInformation);
 
