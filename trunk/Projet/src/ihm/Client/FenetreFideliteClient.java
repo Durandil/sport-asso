@@ -35,7 +35,6 @@ import basededonnees.SGBD;
  * </ul>
  * </p>
  * 
- * @author Utilisateur
  * 
  */
 public class FenetreFideliteClient extends JDialog {
@@ -119,7 +118,6 @@ public class FenetreFideliteClient extends JDialog {
 																			// points
 																			// du
 																			// client
-
 
 		}
 
@@ -232,12 +230,12 @@ public class FenetreFideliteClient extends JDialog {
 				dispose();
 			}
 		});
-		
+
 		String nomBouton = "Annuler";
-		if(estFidele.equals("Oui")){
+		if (estFidele.equals("Oui")) {
 			nomBouton = "Retour";
 		}
-		
+
 		JButton annulationBouton = new JButton(nomBouton);
 		annulationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -248,14 +246,14 @@ public class FenetreFideliteClient extends JDialog {
 		// Ajout des boutons au panneau panneauBoutons
 		panneauBoutons.add(validationBouton);
 		panneauBoutons.add(annulationBouton);
-		
+
 		// Si le client est adhérent, on ne lui affiche que le bouton retour
 		// car il ne modifie aucun paramètre sur son compte donc le bouton
 		// confirmer n'a plus aucun intérêt
-		if(estFidele.equals("Oui")){
+		if (estFidele.equals("Oui")) {
 			validationBouton.setVisible(false);
 		}
-		
+
 		this.getContentPane().add(panneauCentral, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 	}

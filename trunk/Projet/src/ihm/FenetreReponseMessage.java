@@ -31,8 +31,7 @@ import metier.Message;
  * un utilisateur de répondre à un message envoyé par un autre utilisateur à
  * travers la messagerie interne de l'application.
  * 
- * {@link FenetreLectureMessage}
- * {@link FenetreMessagerie}
+ * {@link FenetreLectureMessage} {@link FenetreMessagerie}
  * 
  * @author Utilisateur
  * 
@@ -48,7 +47,8 @@ public class FenetreReponseMessage extends JFrame {
 
 	/**
 	 * Constructeur de la classe FenetreReponseMessage qui sera initialisée
-	 * grâce à la méthode {@link FenetreReponseMessage#initComponent(boolean, String)}
+	 * grâce à la méthode
+	 * {@link FenetreReponseMessage#initComponent(boolean, String)}
 	 * 
 	 * @param reponseDuGerant
 	 *            Booléen indiquant quel utilisateur utilise la fenêtre (true)
@@ -180,11 +180,10 @@ public class FenetreReponseMessage extends JFrame {
 								FenetreLectureMessage.idExpediteurMessage,
 								dateJour, false);
 
-						
 						FenetreMessagerie fenetre = new FenetreMessagerie(
 								reponseGerant);
 						fenetre.setVisible(true);
-						
+
 						// fermeture de la fenetre
 						dispose();
 
@@ -196,7 +195,7 @@ public class FenetreReponseMessage extends JFrame {
 							"Votre message n'a pas de " + champ
 									+ ",veuillez le préciser.", "Attention",
 							JOptionPane.ERROR_MESSAGE);
-					
+
 				} catch (ExceptionExcesDeCaracteres e3) {
 					System.out.println(e3.getMessage());
 					JOptionPane

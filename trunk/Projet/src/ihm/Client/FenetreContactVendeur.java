@@ -36,8 +36,6 @@ import metier.Message;
  * La classe FenetreContactVendeur affiche une fenêtre dans laquelle le client
  * peut contacter le vendeur et plus particulièrement le gérant du magasin
  * 
- * @author Utilisateur
- * 
  */
 public class FenetreContactVendeur extends JDialog {
 
@@ -154,21 +152,23 @@ public class FenetreContactVendeur extends JDialog {
 						champ = "sujet";
 						throw new ExceptionExcesDeCaracteres(
 								"Le sujet du message est trop long !");
-					}
-					else{
-						 // si aucun problème n'est détecté, nous allons enregistrer
-						 // le message et fermer la
-						 // fenêtre
-						 java.util.Date date = new java.util.Date();
-						
-						 @SuppressWarnings("deprecation")
-						 java.sql.Date dateJour = new java.sql.Date(date.getYear(),
-						 date.getMonth(), date.getDate());
-						 new Message(sujet.getText(), contenu.getText(),
-						 FenetreDialogIdentification.clientUserIdentifiant,
-						 dateJour, true);
-						
-						 // fermeture de la fenetre
+					} else {
+						// si aucun problème n'est détecté, nous allons
+						// enregistrer
+						// le message et fermer la
+						// fenêtre
+						java.util.Date date = new java.util.Date();
+
+						@SuppressWarnings("deprecation")
+						java.sql.Date dateJour = new java.sql.Date(date
+								.getYear(), date.getMonth(), date.getDate());
+						new Message(
+								sujet.getText(),
+								contenu.getText(),
+								FenetreDialogIdentification.clientUserIdentifiant,
+								dateJour, true);
+
+						// fermeture de la fenetre
 						dispose();
 					}
 

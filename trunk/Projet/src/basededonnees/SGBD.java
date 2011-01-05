@@ -41,11 +41,7 @@ public class SGBD {
 	 */
 	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
 	// URL à utiliser lorsque l'on est pas à l'Ensai :
-	//final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
-
-	/** TODO TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Penser à modifier les id/mdp ! **/
-	/** TODO TODO TODO TODO TODO TODO TODO **/
+	// final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 
 	/**
 	 * L'identifiant utilisé pour la connexion.
@@ -1468,7 +1464,7 @@ public class SGBD {
 						+ "'";
 				System.out.println(requete);
 			}
-			
+
 			res = st.executeQuery(requete);
 
 			while (res.next()) {
@@ -1534,7 +1530,6 @@ public class SGBD {
 					+ "'"
 					+ " and idCommande='" + identifiantCommande + "'";
 
-			
 			res = st.executeQuery(requete);
 
 			while (res.next()) {

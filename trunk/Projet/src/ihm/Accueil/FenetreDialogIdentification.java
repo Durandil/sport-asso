@@ -149,16 +149,17 @@ public class FenetreDialogIdentification extends JDialog {
 								// Si l'identification est correcte, on affiche
 								// un message pour le signifier
 								// puis on ouvre le menu utilisateur
-								
-								//On récupère l'état du compte client (Activé ou Désactivé)
+
+								// On récupère l'état du compte client (Activé
+								// ou Désactivé)
 								etat = SGBD.selectStringConditionString(
 										"CLIENT", "ETATCOMPTE", "IDCLIENT",
 										listeMailsMdps.get(i)[0]);
-								
-								
-								//Si le compte est désactivé, le client est averti
+
+								// Si le compte est désactivé, le client est
+								// averti
 								if (etat.equals("Désactivé")) {
-									
+
 									compteDesactive = new JOptionPane();
 									ImageIcon imageInformation = new ImageIcon(
 											"src/images/information.jpg");
@@ -171,8 +172,9 @@ public class FenetreDialogIdentification extends JDialog {
 													"Information",
 													JOptionPane.INFORMATION_MESSAGE,
 													imageInformation);
-								} 
-								//Si le compte est actif, l'identification est réussie
+								}
+								// Si le compte est actif, l'identification est
+								// réussie
 								else {
 									identificationReussie = new JOptionPane();
 									ImageIcon imageInformation = new ImageIcon(

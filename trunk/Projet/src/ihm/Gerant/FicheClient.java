@@ -39,7 +39,6 @@ import metier.Particulier;
  * ces commandes.
  * </p>
  * 
- * @author Utilisateur
  * 
  * @see FenetreAffichageRecherche
  */
@@ -399,29 +398,31 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-		
-		listeVille= new JComboBox();
-		ArrayList<String> listeVilles = SGBD.selectListeStringOrdonne("VILLE","NOMVILLE",
-						"NOMVILLE");
+
+		listeVille = new JComboBox();
+		ArrayList<String> listeVilles = SGBD.selectListeStringOrdonne("VILLE",
+				"NOMVILLE", "NOMVILLE");
 		for (String nomVille : listeVilles) {
 			listeVille.addItem(nomVille);
 		}
 		listeVille.setSelectedIndex(0);
 		listeVille.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				String nomVille= (String) ((JComboBox) e.getSource())
-								.getSelectedItem();
-				
-				String codePostalSelectionne = SGBD.selectStringConditionString("VILLE", "CODEPOSTAL", "NOMVILLE", nomVille);
+				String nomVille = (String) ((JComboBox) e.getSource())
+						.getSelectedItem();
+
+				String codePostalSelectionne = SGBD
+						.selectStringConditionString("VILLE", "CODEPOSTAL",
+								"NOMVILLE", nomVille);
 				codePostal.setText(codePostalSelectionne);
 			}
 		});
-		
+
 		listeVille.setEnabled(false);
 		listeVille.setVisible(false);
 		panCP.add(listeVille);
-		
+
 		panCP.setBounds(40, 400, 300, 60);
 		this.add(panCP);
 
@@ -566,11 +567,11 @@ public class FicheClient extends JDialog {
 				// client des données
 				ImageIcon image = new ImageIcon("src/images/warning.png");
 				try {
-					
+
 					// Vérification du nombre de caractères
 
 					if (denomination.getText().length() > 40
-					| nom.getText().length() > 40
+							| nom.getText().length() > 40
 							| prenom.getText().length() > 40
 							| identifiant.getText().length() > 40
 							| adresse.getText().length() > 60) {
@@ -666,18 +667,14 @@ public class FicheClient extends JDialog {
 				} catch (ExceptionCodePostalIncorrect e7) {
 					System.out.println(e7.getMessage());
 
-					erreurModification
-							.showMessageDialog(
-									null,
-									e7.getMessage(),
-									"Attention !", JOptionPane.WARNING_MESSAGE,
-									image);
-					
+					erreurModification.showMessageDialog(null, e7.getMessage(),
+							"Attention !", JOptionPane.WARNING_MESSAGE, image);
+
 					codePostal.setVisible(false);
 					listeVille.setEnabled(true);
 					listeVille.setVisible(true);
 					repaint();
-					
+
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 					System.out.println(e8.getMessage());
 
@@ -692,9 +689,9 @@ public class FicheClient extends JDialog {
 			}
 		});
 
-		// Définition du bouton permettant le retour à la page précédante et  //
+		// Définition du bouton permettant le retour à la page précédante et //
 		// l'annulation des modifications en cours tout en fermant la fenêtre //
-		//--------------------------------------------------------------------//
+		// --------------------------------------------------------------------//
 
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener() {
