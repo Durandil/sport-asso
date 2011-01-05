@@ -61,9 +61,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 	public static String codePostalSelectionne;
 	// Booléens permettant de controler que le client a bien cliqué dans les
 	// deux JComboBox de la fenêtre
-	private static boolean itemTypeCompteSelectionne = false ;
-	private static boolean itemFideliteSelectionne = false ;
-	
+	private static boolean itemTypeCompteSelectionne = false;
+	private static boolean itemFideliteSelectionne = false;
+
 	/**
 	 * Constructeur
 	 * 
@@ -131,14 +131,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 		compte.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				//Récupération du type de compte sélectionné
+				// Récupération du type de compte sélectionné
 				itemSelectionne = (String) ((JComboBox) e.getSource())
 						.getSelectedItem();
-				
+
 				// Changement de l'état du booléen pour controler le clic
 				// dans le menu déroulant du client
-				itemTypeCompteSelectionne = true ;
-				
+				itemTypeCompteSelectionne = true;
+
 				if (itemSelectionne == "Compte Particulier") {
 					nom.setEnabled(true);
 					prenom.setEnabled(true);
@@ -208,14 +208,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-		
+
 		// Définition d'un menu déroulant des villes de la base de données
 		// qui sera proposé aux utilisateurs qui ont saisi un code postal
 		// qui n'existe pas encore dans la base de données
 		ville = new JComboBox();
-		ArrayList<String> listeVille = SGBD.selectListeStringOrdonne("VILLE","NOMVILLE",
-				"NOMVILLE");
-				
+		ArrayList<String> listeVille = SGBD.selectListeStringOrdonne("VILLE",
+				"NOMVILLE", "NOMVILLE");
+
 		for (String nomVille : listeVille) {
 			ville.addItem(nomVille);
 		}
@@ -230,7 +230,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 				codePostal.setText(codePostalSelectionne);
 			}
 		});
-		
+
 		ville.setEnabled(false);
 		ville.setVisible(false);
 		panCP.add(ville);
@@ -279,11 +279,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		fidelite.setSelectedItem("Non");
 		fidelite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				// Changement de l'état du booléen pour controler le clic
 				// dans le menu déroulant du client
-				itemFideliteSelectionne = true ;
-				
+				itemFideliteSelectionne = true;
+
 				// Le booléen estFidele passe à faux si l'utilisateur répond
 				// "Non" à la question
 				// Il reste à vrai s'il répond "Oui"
@@ -310,14 +310,18 @@ public class FenetreDialogCreationCompte extends JDialog {
 		content.add(panCP);
 		content.add(panTelephone);
 		content.add(panFidelite);
-		
-		// Définition du panneau qui accueillera les deux boutons de la fenêtre //
-		//----------------------------------------------------------------------//
+
+		// Définition du panneau qui accueillera les deux boutons de la fenêtre
+		// //
+		// ----------------------------------------------------------------------//
 		JPanel control = new JPanel();
-		
-		// Définition de l'action du bouton Valider qui vérifie d'abord que les //
-		// champs ont été correctement saisis puis enregistre les informations  //
-		// --------------- du compte dans la base de données -------------------//
+
+		// Définition de l'action du bouton Valider qui vérifie d'abord que les
+		// //
+		// champs ont été correctement saisis puis enregistre les informations
+		// //
+		// --------------- du compte dans la base de données
+		// -------------------//
 		JButton validationBouton = new JButton("Valider");
 
 		validationBouton.addActionListener(new ActionListener() {
@@ -428,21 +432,22 @@ public class FenetreDialogCreationCompte extends JDialog {
 						throw new ExceptionMailSansArobase(
 								"Votre adresse mail ne comporte pas d'arobase !");
 					}
-					
-					// Vérification de la sélection d'un item dans chacun des deux
+
+					// Vérification de la sélection d'un item dans chacun des
+					// deux
 					// menus déroulants
-					
-					if( !itemTypeCompteSelectionne ){
+
+					if (!itemTypeCompteSelectionne) {
 						throw new ExceptionItemSelectionneJComboBox(
 								"Vous n'avez pas sélectionné votre type de compte !");
 					}
-					
-					if( !itemFideliteSelectionne ){
+
+					if (!itemFideliteSelectionne) {
 						throw new ExceptionItemSelectionneJComboBox(
-								"Vous n'avez pas choisi si vous désiriez un compte " +
-								"fidélité dans le magasin !");
+								"Vous n'avez pas choisi si vous désiriez un compte "
+										+ "fidélité dans le magasin !");
 					}
-					
+
 					// Si aucune erreur relevée,
 					// la
 					// création de compte
@@ -482,10 +487,13 @@ public class FenetreDialogCreationCompte extends JDialog {
 							"CLIENT", "MOTDEPASSE", "IDCLIENT",
 							identifiant.getText());
 					creationMotDePasse = new JOptionPane();
-					creationMotDePasse.showMessageDialog(null,
-							"Votre mot de passe a été envoyé sur votre messagerie interne.",
-							"Information", JOptionPane.INFORMATION_MESSAGE,
-							imageInformation);
+					creationMotDePasse
+							.showMessageDialog(
+									null,
+									"Votre mot de passe a été envoyé sur votre messagerie interne.",
+									"Information",
+									JOptionPane.INFORMATION_MESSAGE,
+									imageInformation);
 
 					dispose();
 					// envoi du message avec
@@ -512,12 +520,13 @@ public class FenetreDialogCreationCompte extends JDialog {
 					// création de compte
 					// correcte
 					MenuUtilisateur men = new MenuUtilisateur();
-					
-					// Changement de la valeur des booléens permettant de gérer les clics
+
+					// Changement de la valeur des booléens permettant de gérer
+					// les clics
 					// sur les menus déroulants afin qu'ils soient bien à false
 					// si l'utilisateur veut créer un nouveau compte
-					itemFideliteSelectionne = false ;
-					itemTypeCompteSelectionne = false ;
+					itemFideliteSelectionne = false;
+					itemTypeCompteSelectionne = false;
 
 				} catch (ExceptionMailsDifferents e1) {
 					System.out.println(e1.getMessage());
@@ -577,9 +586,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 					erreurCreation.showMessageDialog(null, e7.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
-					
-					// Comme l'utilisateur a fait une erreur de saisie de code postal
-					// nous lui affichons le menu déroulant à la place du champ de saisie
+
+					// Comme l'utilisateur a fait une erreur de saisie de code
+					// postal
+					// nous lui affichons le menu déroulant à la place du champ
+					// de saisie
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
 					ville.setVisible(true);
@@ -603,22 +614,17 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 
-				}
-				catch (ExceptionItemSelectionneJComboBox e10){
+				} catch (ExceptionItemSelectionneJComboBox e10) {
 					System.out.println(e10.getMessage());
-					
-					erreurCreation
-							.showMessageDialog(
-									null,
-									e10.getMessage(),
-									"Attention !", JOptionPane.WARNING_MESSAGE,
-									image);
-					
+
+					erreurCreation.showMessageDialog(null, e10.getMessage(),
+							"Attention !", JOptionPane.WARNING_MESSAGE, image);
+
 				}
 			}
 
 		});
-		
+
 		// Définition de l'action du bouton Annuler qui ferme la fenêtre et //
 		// ------ retourne sur la fenêtre d'accueil de l'application -------//
 		JButton annulationBouton = new JButton("Annuler");
@@ -630,14 +636,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 			}
 		});
-		
+
 		// Ajout des deux boutons au JPanel des boutons : control //
-		//--------------------------------------------------------//
+		// --------------------------------------------------------//
 		control.add(validationBouton);
 		control.add(annulationBouton);
-		
+
 		// Ajout des composants au conteneur de la fenêtre //
-		//-------------------------------------------------//
+		// -------------------------------------------------//
 		this.getContentPane().add(panIcon, BorderLayout.WEST);
 		this.getContentPane().add(content, BorderLayout.CENTER);
 		this.getContentPane().add(control, BorderLayout.SOUTH);

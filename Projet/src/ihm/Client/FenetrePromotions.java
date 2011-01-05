@@ -26,7 +26,6 @@ import basededonnees.SGBD;
  * La classe FenetrePromotions permet d'afficher dans un tableau l'ensemble des
  * promotions disponibles pour les clients
  * 
- * @author Utilisateur
  * 
  */
 public class FenetrePromotions extends JFrame {
@@ -113,7 +112,7 @@ public class FenetrePromotions extends JFrame {
 							"DATEDEBUT", "IDPROMO", numPromotion, "dd/mm/yyyy");
 					String dateFin = SGBD.selectDateConditionString("PROMO",
 							"DATEFIN", "IDPROMO", numPromotion, "dd/mm/yyyy");
-					
+
 					JOptionPane.showMessageDialog(null,
 							"Bénéficiez de la promotion : " + description
 									+ "\n" + " sur l'article " + article

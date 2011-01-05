@@ -106,9 +106,9 @@ public class ModelePanier extends AbstractTableModel {
 	 *            Integer indiquant le numéro de la ligne de l'élément choisi
 	 * @param colIndex
 	 *            Integer indiquant le numéro de la colonne de l'élément choisi
-	 *            
-	 * @return L'objet situé dans la ligne numéro rowIndex et la 
-	 *         colonne numéro colIndex du tableau des messages
+	 * 
+	 * @return L'objet situé dans la ligne numéro rowIndex et la colonne numéro
+	 *         colIndex du tableau des messages
 	 */
 	public Object getValueAt(int rowIndex, int colIndex) {
 		return donnees[rowIndex][colIndex];

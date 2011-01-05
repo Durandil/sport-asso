@@ -1,5 +1,4 @@
 package ihm.Accueil;
- 
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,145 +24,154 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+
 /**
- * Initialisation de la fenêtre qui servira de page d'accueil à notre application
+ * Initialisation de la fenêtre qui servira de page d'accueil à notre
+ * application
  * 
  */
 public class FenetreCompte extends JFrame {
-   
+
 	private static final long serialVersionUID = 1L;
 	/**
 	 * Initialisation des composants JButton pour la fenêtre
 	 */
 	private JButton boutonCreation = new JButton(" Créer un compte");
-	private JButton boutonIdentificationClient = new JButton(" Identification Client");
-	private JButton boutonIdentificationGerant = new JButton("Identification Gerant");
+	private JButton boutonIdentificationClient = new JButton(
+			" Identification Client");
+	private JButton boutonIdentificationGerant = new JButton(
+			"Identification Gerant");
 	private JButton boutonDeconnexion = new JButton("Déconnexion");
 	/**
 	 * Initialisation des autres composants
 	 */
 	private JPanel pan = new JPanel();
-	private JLabel icon,iconEast,iconWest, accueilLabel,heureLabel,dateLabel; 
+	private JLabel icon, iconEast, iconWest, accueilLabel, heureLabel,
+			dateLabel;
 	/**
-	 * Initialisation de l'instance Date pour récupérer plus tard la date du système
+	 * Initialisation de l'instance Date pour récupérer plus tard la date du
+	 * système
 	 */
-	private Date heure ;
-	
-	
+	private Date heure;
+
 	/**
-	 * Constructeur de la fenetre d'accueil de l'application dans lequel 
-	 * on retrouve les boutons de création de compte, d'authentification et de déconnexion
+	 * Constructeur de la fenetre d'accueil de l'application dans lequel on
+	 * retrouve les boutons de création de compte, d'authentification et de
+	 * déconnexion
 	 * 
 	 * @throws ExceptionMailsDifferents
 	 */
-	public FenetreCompte(){
+	public FenetreCompte() {
 
 		this.setTitle("Informations client");
 		this.setSize(900, 550);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
-		
-        //Définition de la couleur de fond
-        pan.setBackground(Color.white);        
-        //On prévient notre JFrame que ce sera notre JPanel qui sera son contentPane
-        this.setContentPane(pan);
-        
-        // Nous allons scinder l'écran en plusieurs parties pour pouvoir insérer des images, des boutons 
-        // à différents endroits de la fenetre
-        this.setLayout(new BorderLayout());
-        
-        // Définition du panneau qui se trouvera en haut de la fenêtre
-        JPanel panneauHaut= new JPanel();
-        panneauHaut.setLayout(new BorderLayout());
-        
-        // Création d'un sous panneau accueillant le logo du magasin
-        icon = new JLabel(new ImageIcon("src/images/logo.jpg"));
+
+		// Définition de la couleur de fond
+		pan.setBackground(Color.white);
+		// On prévient notre JFrame que ce sera notre JPanel qui sera son
+		// contentPane
+		this.setContentPane(pan);
+
+		// Nous allons scinder l'écran en plusieurs parties pour pouvoir insérer
+		// des images, des boutons
+		// à différents endroits de la fenetre
+		this.setLayout(new BorderLayout());
+
+		// Définition du panneau qui se trouvera en haut de la fenêtre
+		JPanel panneauHaut = new JPanel();
+		panneauHaut.setLayout(new BorderLayout());
+
+		// Création d'un sous panneau accueillant le logo du magasin
+		icon = new JLabel(new ImageIcon("src/images/logo.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
-		panIcon.add(icon);	
-		
-		//Création du panneau avec l'affichage du texte "Bienvenue"
-		JPanel panAccueil=new JPanel();
+		panIcon.add(icon);
+
+		// Création du panneau avec l'affichage du texte "Bienvenue"
+		JPanel panAccueil = new JPanel();
 		panAccueil.setBackground(Color.white);
-		accueilLabel=new JLabel("Bienvenue");
-		accueilLabel.setFont(new Font("Times",Font.BOLD, 36));
-		panAccueil.add(accueilLabel);	
-		
+		accueilLabel = new JLabel("Bienvenue");
+		accueilLabel.setFont(new Font("Times", Font.BOLD, 36));
+		panAccueil.add(accueilLabel);
+
 		// Création du panneau contenant l'heure et la date
-		JPanel panHeure=new JPanel();
+		JPanel panHeure = new JPanel();
 		panHeure.setBackground(Color.white);
-		panHeure.setLayout(new GridLayout(2,1,5,5));
-		
-		//Pour récupérer la date et l'heure, nous avons besoin d'un objet Date 
+		panHeure.setLayout(new GridLayout(2, 1, 5, 5));
+
+		// Pour récupérer la date et l'heure, nous avons besoin d'un objet Date
 		// où l'on recupera ses informations grâce aux méthodes de cette classe
-		heure=new Date();
-		
+		heure = new Date();
+
 		JPanel panneauDate = new JPanel();
 		panneauDate.setBackground(Color.WHITE);
-		dateLabel=new JLabel("Jour : " + heure.toGMTString().substring(0, 11));
-		dateLabel.setFont(new Font("Times",Font.BOLD, 20));
+		dateLabel = new JLabel("Jour : " + heure.toGMTString().substring(0, 11));
+		dateLabel.setFont(new Font("Times", Font.BOLD, 20));
 		panneauDate.add(dateLabel);
-		
+
 		JPanel panneauHeure = new JPanel();
 		panneauHeure.setBackground(Color.white);
-		
-		String heures=heure.getHours()+"";
-		if(heure.getHours()<10){
-			heures = "0"+heures;
+
+		String heures = heure.getHours() + "";
+		if (heure.getHours() < 10) {
+			heures = "0" + heures;
 		}
-		
-		String minutes=heure.getMinutes()+"";
-		if(heure.getMinutes()<10){
-			minutes = "0"+minutes;
+
+		String minutes = heure.getMinutes() + "";
+		if (heure.getMinutes() < 10) {
+			minutes = "0" + minutes;
 		}
-		
-		heureLabel=new JLabel("Heure : " + heures +"h"+ minutes);
-		heureLabel.setFont(new Font("Times",Font.BOLD, 20));
+
+		heureLabel = new JLabel("Heure : " + heures + "h" + minutes);
+		heureLabel.setFont(new Font("Times", Font.BOLD, 20));
 		panneauHeure.add(heureLabel);
-		
+
 		panHeure.add(panneauDate);
 		panHeure.add(panneauHeure);
-		
-		// Ajout des 3 panneaux qui viennent d'être crées dans le JPanel qui sera en haut de la fenêtre
-		panneauHaut.add("West",panIcon);
-		panneauHaut.add("Center",panAccueil);
-		panneauHaut.add("East",panHeure);
-		
-		
+
+		// Ajout des 3 panneaux qui viennent d'être crées dans le JPanel qui
+		// sera en haut de la fenêtre
+		panneauHaut.add("West", panIcon);
+		panneauHaut.add("Center", panAccueil);
+		panneauHaut.add("East", panHeure);
+
 		// Définition du panneau qui se trouvera au centre avec les boutons
-		JPanel panBoutons= new JPanel();
-		panBoutons.setLayout(new GridLayout(4,1,10,10));
+		JPanel panBoutons = new JPanel();
+		panBoutons.setLayout(new GridLayout(4, 1, 10, 10));
 		panBoutons.add(boutonCreation);
 		panBoutons.add(boutonIdentificationClient);
 		panBoutons.add(boutonIdentificationGerant);
 		panBoutons.add(boutonDeconnexion);
-		
+
 		// Définition du panneau qui se trouvera à droite
-		iconEast=new JLabel(new ImageIcon("src/images/trophee.jpg"));
+		iconEast = new JLabel(new ImageIcon("src/images/trophee.jpg"));
 		JPanel panIconEast = new JPanel();
 		panIconEast.setBackground(Color.white);
 		panIconEast.add(iconEast);
-		
+
 		// Définition du panneau qui se trouvera à gauche
-		iconWest=new JLabel(new ImageIcon("src/images/france.jpg"));
+		iconWest = new JLabel(new ImageIcon("src/images/france.jpg"));
 		JPanel panIconWest = new JPanel();
 		panIconWest.setBackground(Color.white);
 		panIconWest.add(iconWest);
-		
+
 		// Ajout des différents panneaux au panneau principal
-        this.getContentPane().add("North",panneauHaut);
-        this.getContentPane().add("Center",panBoutons);
-        this.getContentPane().add("West",panIconWest);
-        this.getContentPane().add("East",panIconEast);
-		
-        // Définition des actions de chacun des boutons présents sur la fenêtre
-		boutonCreation.addActionListener(new ActionListener(){
+		this.getContentPane().add("North", panneauHaut);
+		this.getContentPane().add("Center", panBoutons);
+		this.getContentPane().add("West", panIconWest);
+		this.getContentPane().add("East", panIconEast);
+
+		// Définition des actions de chacun des boutons présents sur la fenêtre
+		boutonCreation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Affichage de la fenêtre de creation de compte pour le client
 				FenetreDialogCreationCompte compte = null;
 				try {
-					compte = new FenetreDialogCreationCompte(null, "Création Compte Client", true);
+					compte = new FenetreDialogCreationCompte(null,
+							"Création Compte Client", true);
 					compte.setVisible(true);
 					dispose();
 				} catch (ExceptionMailSansArobase e1) {
@@ -185,44 +193,50 @@ public class FenetreCompte extends JFrame {
 				} catch (ExceptionNumeroDeTelephoneIncorrect e9) {
 					System.out.println(e9.getMessage());
 				}
-				
-			}	
+
+			}
 		});
-		
-		boutonIdentificationClient.addActionListener(new ActionListener(){
+
+		boutonIdentificationClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Affichage du contenu de la fenêtre d'identifiaction du client
-				//dispose();
-				FenetreDialogIdentification identificationClient = new FenetreDialogIdentification(null, "Identification client", true);
+				// dispose();
+				FenetreDialogIdentification identificationClient = new FenetreDialogIdentification(
+						null, "Identification client", true);
 				identificationClient.setVisible(true);
 				dispose();
-			}	
-		});	
-		
+			}
+		});
+
 		boutonIdentificationGerant.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				// Affichage du contenu de la fenêtre d'identification du gérant avec 
-				// la même fenêtre que le gérant car on considère qu'un gérant est une extension
+				// Affichage du contenu de la fenêtre d'identification du gérant
+				// avec
+				// la même fenêtre que le gérant car on considère qu'un gérant
+				// est une extension
 				// d'un utilisateur
-				FenetreDialogIdentification identificationGerant = new FenetreDialogIdentification(null,"Identification gérant",true);
+				FenetreDialogIdentification identificationGerant = new FenetreDialogIdentification(
+						null, "Identification gérant", true);
 				identificationGerant.setVisible(true);
 				dispose();
 			}
 		});
-		
-		boutonDeconnexion.addActionListener(new ActionListener(){
+
+		boutonDeconnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Fermeture de l'application
-				int res = JOptionPane.showConfirmDialog(null, "Confirmez-vous la fermeture du logiciel ?","Confirmation",JOptionPane.YES_NO_OPTION);
-				if(res==JOptionPane.OK_OPTION){
+				int res = JOptionPane.showConfirmDialog(null,
+						"Confirmez-vous la fermeture du logiciel ?",
+						"Confirmation", JOptionPane.YES_NO_OPTION);
+				if (res == JOptionPane.OK_OPTION) {
 					System.exit(0);
 				}
-			}	
-		});	
-		
+			}
+		});
+
 		this.setVisible(true);
-			
+
 	}
 
 }
