@@ -167,7 +167,6 @@ public class SGBDTest extends TestCase {
 	
 	
 	public void testRecupererPourcentagePromotionDegressifArticleCommande(){
-		System.out.println(SGBD.recupererPourcentagePromotionDegressifArticleCommande("comm0001", "ART00001"));
 		assertEquals("92.5", SGBD.recupererPourcentagePromotionDegressifArticleCommande("comm0001", "ART00001"));
 	}
 }
