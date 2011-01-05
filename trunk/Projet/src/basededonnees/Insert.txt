@@ -44,11 +44,12 @@ Insert into TYPE_SPORT (idType, NomType) values ('TYP00010','Plein air');
 #Table PROMO
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00001','Raquettes à prix cassé',TO_DATE('2010-12-01', 'YYYY-MM-DD'),TO_DATE('2011-01-01', 'YYYY-MM-DD'),25,0);
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00002','Velo à moitié prix',TO_DATE('2010-12-15', 'YYYY-MM-DD'),TO_DATE('2011-01-01', 'YYYY-MM-DD'),50,1); 
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00003','Maillots bradés',TO_DATE('2011-01-15', 'YYYY-MM-DD'),TO_DATE('2011-03-01', 'YYYY-MM-DD'),40,0);
-Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00004','Chaussettes',TO_DATE('2010-01-15', 'YYYY-MM-DD'),TO_DATE('2011-02-01', 'YYYY-MM-DD'),20,1); 
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00003','Maillots bradés',TO_DATE('2011-01-01', 'YYYY-MM-DD'),TO_DATE('2011-03-01', 'YYYY-MM-DD'),40,0);
+Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00004','Chaussettes',TO_DATE('2010-01-01', 'YYYY-MM-DD'),TO_DATE('2011-02-01', 'YYYY-MM-DD'),20,1); 
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00005','Maillots encore bradés',TO_DATE('2011-01-25', 'YYYY-MM-DD'),TO_DATE('2011-02-01', 'YYYY-MM-DD'),60,0);
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00006','Ballons à prix réduits',TO_DATE('2011-01-31', 'YYYY-MM-DD'),TO_DATE('2011-02-21', 'YYYY-MM-DD'),20,1); 
 Insert into PROMO (idPromo, Nompromo, Datedebut, Datefin, Pourcentagepromo, Promofidelite) values ('PRO00007','Chronoboost',TO_DATE('2010-12-25', 'YYYY-MM-DD'),TO_DATE('2011-02-01', 'YYYY-MM-DD'),10,0); 
+
 #Table VILLE
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville001', '35000', 'Rennes');
 Insert into VILLE (idVille, Codepostal, Nomville) values ('ville002', '35170', 'Pont Rean');

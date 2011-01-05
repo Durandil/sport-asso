@@ -483,7 +483,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 							identifiant.getText());
 					creationMotDePasse = new JOptionPane();
 					creationMotDePasse.showMessageDialog(null,
-							"Votre mot de passe a été envoyé sur votre messagerie interne." + motDePasse,
+							"Votre mot de passe a été envoyé sur votre messagerie interne.",
 							"Information", JOptionPane.INFORMATION_MESSAGE,
 							imageInformation);
 

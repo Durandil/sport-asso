@@ -59,7 +59,7 @@ public class BDD {
 				+ "NOMTYPE VARCHAR(20),"
 				+ "CONSTRAINT PK_TYPE_SPORT PRIMARY KEY (IDTYPE))");
 
-		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 7 nocache");
+		SGBD.executeUpdate("CREATE SEQUENCE S_PROMOTION  Increment by 1 start with 8 nocache");
 		SGBD.executeUpdate("CREATE TABLE PROMO" + "(IDPROMO CHAR(8),"
 				+ "NOMPROMO VARCHAR(40)," 
 				+ "DATEDEBUT DATE," 
