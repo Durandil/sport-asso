@@ -398,10 +398,16 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
+		
+		// Définition d'un menu déroulant des villes de la base de données
+		// qui sera proposé au gérant s'il a saisi un code postal
+		// qui n'existe pas encore dans la base de données
+
 
 		listeVille = new JComboBox();
 		ArrayList<String> listeVilles = SGBD.selectListeStringOrdonne("VILLE",
 				"NOMVILLE", "NOMVILLE");
+
 		for (String nomVille : listeVilles) {
 			listeVille.addItem(nomVille);
 		}
@@ -638,8 +644,9 @@ public class FicheClient extends JDialog {
 					}
 
 					dispose();
+					
 				} catch (ExceptionExcesDeCaracteres e1) {
-					System.out.println(e1.getMessage());
+
 					erreurModification
 							.showMessageDialog(
 									null,
@@ -647,7 +654,6 @@ public class FicheClient extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionCodePostalDifferentDeCinqChiffres e5) {
-					System.out.println(e5.getMessage());
 
 					erreurModification
 							.showMessageDialog(
@@ -656,7 +662,6 @@ public class FicheClient extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionNumeroDeTelephoneDifferentDeDixChiffres e6) {
-					System.out.println(e6.getMessage());
 
 					erreurModification
 							.showMessageDialog(
@@ -665,7 +670,6 @@ public class FicheClient extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 				} catch (ExceptionCodePostalIncorrect e7) {
-					System.out.println(e7.getMessage());
 
 					erreurModification.showMessageDialog(null, e7.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
@@ -676,7 +680,6 @@ public class FicheClient extends JDialog {
 					repaint();
 
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
-					System.out.println(e8.getMessage());
 
 					erreurModification
 							.showMessageDialog(
