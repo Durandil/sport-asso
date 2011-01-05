@@ -113,16 +113,13 @@ public class FenetrePromotions extends JFrame {
 							"DATEDEBUT", "IDPROMO", numPromotion, "dd/mm/yyyy");
 					String dateFin = SGBD.selectDateConditionString("PROMO",
 							"DATEFIN", "IDPROMO", numPromotion, "dd/mm/yyyy");
-					double pourcentageReel = 100 - Double
-							.parseDouble(pourcentagePromo);
-					String pourcentageReelS = "";
-					pourcentageReelS = pourcentageReelS.valueOf(pourcentageReel);
+					
 					JOptionPane.showMessageDialog(null,
 							"Bénéficiez de la promotion : " + description
 									+ "\n" + " sur l'article " + article
 									+ " référencé par "
 									+ identifiantArticleCorrespondant + "\n"
-									+ " avec une remise de " + pourcentageReelS
+									+ " avec une remise de " + pourcentagePromo
 									+ " %" + "\n" + " du " + dateDebut
 									+ " jusqu'au " + dateFin + " inclus");
 				}

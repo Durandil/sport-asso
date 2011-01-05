@@ -17,28 +17,11 @@ public class Principale {
 		//Initialiser la base de données
 		//BDD.init();
 		
-		FenetreCompte fen=new FenetreCompte();
+		//FenetreCompte fen=new FenetreCompte();
 		//MenuUtilisateur men = new MenuUtilisateur();
-		//MenuGerant menu= new MenuGerant();
-		
-//		ArrayList<String> fideliteClient= SGBD.recupererInformationFideliteClient("tnb@ensai.fr");
-//		System.out.println(fideliteClient.get(0));
-		
-		/** test de calcul de statistique **/
-//		String st = SGBD.statistiqueClassiqueClient("qpuc@ensai.fr","avg");
-//		String stat = SGBD.statistiqueClassiqueClient("qpuc@ensai.fr","max");
-//		System.out.println("avg : "+ st+ ", max : "+stat);
-//		ArrayList<String> liste= SGBD.StatistiquePlusGrosseCommande("qpuc@ensai.fr");
-//		System.out.println("Num : " +liste.get(0)+ ", date : " + liste.get(1));
-//		
-		/** test récupération pourcentage promo exceptionnelle d'un article donne **/
-//		int nbrePromo = SGBD.compterNbrePromoExceptionnellesArticle("ART00082", 0);
-//		System.out.println(nbrePromo);
-//		
-//		if(nbrePromo>0){
-//			String pourcent = SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00082", 0);
-//			System.out.println(pourcent);
-//		}
+		MenuGerant menu= new MenuGerant();
+
+	
 
 		
 		/** test récupération pourcentage promo exceptionnelle d'un article donne et d'une commande donnée **/
