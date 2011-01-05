@@ -11,7 +11,6 @@ public class AllTests {
 	public static Test suite(){
 		TestSuite suite = new TestSuite();
 		suite.addTest(new TestSuite(SGBDTest.class));
-		suite.addTest(new TestSuite(PromotionTest.class));
 		suite.addTest(new TestSuite(ParticulierTest.class));
 		suite.addTest(new TestSuite(CommandeTest.class));
 		suite.addTest(new TestSuite(ArticleTest.class));

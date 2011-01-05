@@ -24,9 +24,9 @@ public class SGBDTest extends TestCase {
 
 		public void testSelectListeDatesOrdonne(){
 		ArrayList<String> result = new ArrayList<String>();
-		String dateS = "15/07/10";
-		String dateS2 = "01/09/10";
-		String dateS3 = "20/12/10";
+		String dateS = "01/01/11";
+		String dateS2 = "01/02/11";
+		String dateS3 = "01/03/11";
 		result.add(dateS);
 		result.add(dateS2);
 		result.add(dateS3);
@@ -38,9 +38,9 @@ public class SGBDTest extends TestCase {
 	
 	public void testSelectListeFloat(){
 		ArrayList<Float> result = new ArrayList<Float>();
-		result.add((float) 75);
+		result.add((float) 25);
 		result.add((float) 50);
-		result.add((float) 50);
+		result.add((float) 40);
 		assertEquals(result,SGBD.selectListeFloat("Promo", "PourcentagePromo"));
 	}
 	
@@ -158,9 +158,8 @@ public class SGBDTest extends TestCase {
 	}
 //  test ok	
 	public void testRecupererPourcentagePromotionExceptionnelleArticle(){
-		
-		assertEquals("50", SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00001",1 ));
-		assertEquals("0", SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00003",1 ));
+		assertEquals("40", SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00001",0 ));
+		assertEquals("50", SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00003",1 ));
 	}
 	
 	

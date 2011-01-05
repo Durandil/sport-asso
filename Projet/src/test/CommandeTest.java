@@ -112,9 +112,6 @@ public class CommandeTest extends TestCase {
 		Commande.enleverArticlePanier("ART00003", "12", panier);
 		assertEquals(result.get(0)[1], panier.get(0)[1]);
 		
-//		normalement on ne peut pas enlever plus d'article qu'il n'y a dans le panier
-//		Commande.enleverArticlePanier("ART00003", "15", panier);
-
 	}
 	
 	
