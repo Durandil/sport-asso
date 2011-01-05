@@ -1462,7 +1462,6 @@ public class SGBD {
 						+ "AND LISTING_PROMOS_ARTICLES.IDARTICLE='"
 						+ idArticle
 						+ "'";
-				System.out.println(requete);
 			}
 
 			res = st.executeQuery(requete);
