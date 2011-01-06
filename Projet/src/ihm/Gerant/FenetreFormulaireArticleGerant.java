@@ -115,12 +115,11 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 	private void initComponent() {
 		JPanel panneauCentral = new JPanel();
 
-		// Remplissage des JPanel qui vont accueillir les JTextField de saisie
-		// des //
-		// champs et les JComboBox afin que le gérant puisse choisir la
-		// catégorie et //
-		// ------------- le type de sport auquel appartient l'article
-		// ---------------//
+		// Remplissage des JPanel qui vont accueillir les JTextField de saisie des   //
+		// champs et les JComboBox afin que le gérant puisse choisir la catégorie et //
+		// ------------- le type de sport auquel appartient l'article ---------------//
+		// --------------------------------------------------------------------------//
+		
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panCategoriePrix.setPreferredSize(dimensionStandard);
@@ -152,9 +151,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		prix.setPreferredSize(new Dimension(90, 25));
 		stock.setPreferredSize(new Dimension(90, 25));
 
-		// Définition des deux JComboBox pour le type de sport et la catégorie
-		// de prix //
-		// -----------------------------------------------------------------------------//
+		// Définition des deux JComboBox pour le type de sport et la catégorie de prix //
+		// ----------------------------------------------------------------------------//
 		catPrixBox = new JComboBox();
 		catSportBox = new JComboBox();
 
@@ -204,9 +202,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panStock.add(stockLabel);
 		panPrixInitial.add(prixLabel);
 
-		// Ajout des JTextField et JComboBox correspondants à chacun des champs
-		// à compléter //
-		// ----------------------------------------------------------------------------------//
+		// Ajout des JTextField et JComboBox correspondants à chacun des champs à compléter //
+		// ---------------------------------------------------------------------------------//
 		panDescription.add(description);
 		panPoids.add(poids);
 		panStock.add(stock);
@@ -214,9 +211,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panCategoriePrix.add(catPrixBox);
 		panCategorieSport.add(catSportBox);
 
-		// Ajout des sous JPanel au "grand" JPanel qui regroupe tous les champs
-		// à compléter //
-		// ----------------------------------------------------------------------------------//
+		// Ajout des sous JPanel au "grand" JPanel qui regroupe tous les champs à compléter //
+		// ---------------------------------------------------------------------------------//
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panCategoriePrix);
@@ -224,15 +220,13 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panneauCentral.add(panStock);
 		panneauCentral.add(panPrixInitial);
 
-		// Définition du JPanel qui va accueillir les boutons de confirmation et
-		// d'annulation //
-		// ------------------------------------------------------------------------------------//
+		// Définition du JPanel qui va accueillir les boutons de confirmation et d'annulation // 
+		// -----------------------------------------------------------------------------------//
 		JPanel panneauBoutonsBas = new JPanel();
 
-		// Définition de l'action du bouton confirmer qui va vérifier que les
-		// champs saisis //
-		// --------------------et selectionnés soient corrects
-		// -----------------------------//
+		// Définition de l'action du bouton confirmer qui va vérifier que les champs saisis // 
+		// --------------------et selectionnés soient corrects -----------------------------//
+		// ---------------------------------------------------------------------------------//
 		JButton boutonConfirmation = new JButton("Confirmer");
 
 		boutonConfirmation.addActionListener(new ActionListener() {
@@ -243,7 +237,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					String p = poids.getText();
 					String st = stock.getText();
 					String prx = prix.getText();
-					// On supprime l'espace créé par l'existence des milliers
+					// Nous supprimons l'espace créé par l'existence des milliers
 					// (ex : "15 000")
 					p = p.replaceAll("[\\s\u00a0]+", "");
 					st = st.replaceAll("[\\s\u00a0]+", "");
@@ -305,7 +299,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					}
 
 				} catch (ExceptionChampVide e1) {
-					System.out.println(e1.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -313,7 +307,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionExcesDeCaracteres e2) {
-					System.out.println(e2.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -321,7 +315,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionStockAberrant e3) {
-					System.out.println(e3.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -329,7 +323,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionPoidsAberrant e4) {
-					System.out.println(e4.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -337,7 +331,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionPrixAberrant e5) {
-					System.out.println(e5.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -349,25 +343,22 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			}
 		});
 
-		// Définition de l'action du bouton retour à la page précédente qui
-		// annule //
-		// --------- tout ce qui a pu être fait sur la page et la ferme
-		// -----------//
+		// Définition de l'action du bouton retour à la page précédente qui annule //
+		// --------- tout ce qui a pu être fait sur la page et la ferme -----------//
+		// ------------------------------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		boutonRetour.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// Permet le retour à la page precedente
+				// Permet le retour à la page précédente
 				dispose();
-				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,
-						true);
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);	
 				fen.setVisible(true);
 			}
 		});
 
-		// Ajout des boutons au JPanel panneauBasFenetre destiné à accueillir
-		// les boutons //
-		// --------------------------------------------------------------------------------//
+		// Ajout des boutons au JPanel panneauBasFenetre destiné à accueillir les boutons //
+		// -------------------------------------------------------------------------------//
 		panneauBoutonsBas.add(boutonConfirmation);
 		panneauBoutonsBas.add(boutonRetour);
 
@@ -387,12 +378,10 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 	 */
 	private void initComponent(String idArticle) {
 
-		// Récupération dans la base de données des attributs de l'article afin
-		// de //
-		// pré-remplir les JTextField avec la valeur enregistrée dans la base de
-		// données//
-		// et de compléter la valeur par défaut des JComboBox //
-		// ------------------------------------------------------------------------------//
+		// Récupération dans la base de données des attributs de l'article afin de      //
+		// pré-remplir les JTextField avec la valeur enregistrée dans la base de données//
+		// -------- et de compléter la valeur par défaut des JComboBox ---------------- //
+		// -----------------------------------------------------------------------------//
 		final String numArticle = idArticle;
 		String descriptionA = SGBD.selectStringConditionString("ARTICLE",
 				"DESCRIPTION", "IDARTICLE", idArticle);
@@ -407,10 +396,9 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		itemSportSelectionne = SGBD.selectStringConditionString("ARTICLE",
 				"IDTYPE", "IDARTICLE", idArticle);
 
-		// Récupération du nom de la catégorie de prix et d'article pour le
-		// mettre //
-		// ---------------- comme Item par défaut des JComboBox
-		// -------------------//
+		// Récupération du nom de la catégorie de prix et d'article pour le mettre //
+		// ---------------- comme Item par défaut des JComboBox -------------------//
+		//-------------------------------------------------------------------------//
 		String nomCategorieA = SGBD.selectStringConditionString("CATEGORIE",
 				"NOMCATEGORIE", "IDCATEGORIE", itemPrixSelectionne);
 		String nomtypeSportA = SGBD.selectStringConditionString("TYPE_SPORT",
@@ -418,13 +406,10 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 
 		JPanel panneauCentral = new JPanel();
 
-		// Remplissage des JPanel qui vont accueillir les JTextField de
-		// modification des //
-		// champs et les JComboBox afin que le gérant puisse changer la
-		// catégorie et //
-		// ----------- le type de sport auquel appartient l'article
-		// ----------------------//
-		// -------------------------------------------------------------------------------//
+		// Remplissage des JPanel qui vont accueillir les JTextField de modification des //
+		// champs et les JComboBox afin que le gérant puisse changer la catégorie et     //
+		// ------------- le type de sport auquel appartient l'article -------------------//
+		// ------------------------------------------------------------------------------//
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panStock.setPreferredSize(dimensionStandard);
@@ -446,10 +431,9 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		catPrixLabel = new JLabel("Catégorie de Prix : ");
 		catSportLabel = new JLabel("Catégorie de sport : ");
 
-		// Remplissage des JTexField avec les valeurs initiales de l'article
-		// passé en //
-		// ------------------------en paramètre
-		// --------------------------------------//
+		// Remplissage des JTexField avec les valeurs initiales de l'article passé en // 
+		// ------------------------en paramètre --------------------------------------//
+		//----------------------------------------------------------------------------//
 		description = new JTextField(descriptionA);
 		poids = new JTextField(poidsA);
 		prix = new JTextField(prixA);
@@ -461,9 +445,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		prix.setPreferredSize(new Dimension(100, 20));
 		stock.setPreferredSize(new Dimension(100, 20));
 
-		// Définition des deux JComboBox pour le type de sport et la catégorie
-		// de prix //
-		// -----------------------------------------------------------------------------//
+		// Définition des deux JComboBox pour le type de sport et la catégorie de prix //
+		// ----------------------------------------------------------------------------//
 		catPrixBox = new JComboBox();
 		catSportBox = new JComboBox();
 
@@ -519,9 +502,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			}
 		});
 
-		// Ajout des titres JLabel de chaque champ à leur JPanel correspondant
-		// //
-		// ---------------------------------------------------------------------//
+		// Ajout des titres JLabel de chaque champ à leur JPanel correspondant //
+		// --------------------------------------------------------------------//
 		panDescription.add(descriptionLabel);
 		panPoids.add(poidsLabel);
 		panStock.add(stockLabel);
@@ -530,7 +512,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panCategorieSport.add(catSportLabel);
 
 		// Ajout des JTextField et des JComboBox à leur JPanel correspondant //
-		// -------------------------------------------------------------------//
+		// ------------------------------------------------------------------//
 		panDescription.add(description);
 		panPoids.add(poids);
 		panStock.add(stock);
@@ -539,7 +521,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panCategorieSport.add(catSportBox);
 
 		// Ajout des JPanel de chaque champ au grand JPanel //
-		// --------------------------------------------------//
+		// -------------------------------------------------//
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panStock);
@@ -547,21 +529,16 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panneauCentral.add(panCategoriePrix);
 		panneauCentral.add(panCategorieSport);
 
-		// Définition du JPanel qui va accueillir les 2 boutons de la fenetre :
-		// //
-		// ---- Confirmer les modifications et retour à la page précédente
-		// ------//
+		// Définition du JPanel qui va accueillir les 2 boutons de la fenetre :  //
+		// ---- Confirmer les modifications et retour à la page précédente ------//
 		// ----------------------------------------------------------------------//
 
 		JPanel panneauBoutonsBas = new JPanel();
 
-		// Définition de l'action du bouton de confirmation qui enregistre les
-		// //
-		// modifications sur l'article dans la base de données après avoir
-		// vérifié //
-		// ----------- que les champs remplis soient corrects
-		// ----------------------//
-		// --------------------------------------------------------------------------//
+		// Définition de l'action du bouton de confirmation qui enregistre les     //
+		// modifications sur l'article dans la base de données après avoir vérifié //
+		// ----------- que les champs remplis soient corrects ---------------------//
+		// ------------------------------------------------------------------------//
 		JButton boutonConfirmation = new JButton("Confirmer modification");
 
 		boutonConfirmation.addActionListener(new ActionListener() {
@@ -602,13 +579,13 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					}
 
 					else {
-						// On enregistre la modification de l'article
+						// Enregistrement de la modification de l'article
 						Article.modifierArticleBDD(numArticle,
 								description.getText(), prix.getText(),
 								poids.getText(), stock.getText(),
 								itemSportSelectionne, itemPrixSelectionne);
 
-						// Puis la page se ferme
+						// Puis fermeture de la page
 						dispose();
 						FenetreCatalogueGerant fen = new FenetreCatalogueGerant(
 								null, true);
@@ -616,7 +593,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					}
 
 				} catch (ExceptionChampVide e1) {
-					System.out.println(e1.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -624,7 +601,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionExcesDeCaracteres e2) {
-					System.out.println(e2.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -632,7 +609,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionStockAberrant e3) {
-					System.out.println(e3.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -640,7 +617,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionPoidsAberrant e4) {
-					System.out.println(e4.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -648,7 +625,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionPrixAberrant e5) {
-					System.out.println(e5.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -657,92 +634,31 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 
 				}
 
-				// int verificationChamp = Article.verifierChampsArticles(
-				// description.getText(), prix.getText(), poids.getText(),
-				// stock.getText());
-				//
-				// switch (verificationChamp) {
-				// case 0:
-				// // enregistrer la modification d'article
-				// Article.modifierArticleBDD(numArticle,
-				// description.getText(), prix.getText(),
-				// poids.getText(), stock.getText(),
-				// itemSportSelectionne, itemPrixSelectionne);
-				//
-				// // puis fermer la page
-				// dispose();
-				// FenetreCatalogueGerant fen = new FenetreCatalogueGerant();
-				// fen.setVisible(true);
-				//
-				// break;
-				// case 1:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le champ description est trop long, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 2:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Un des champs que vous avez rempli est vide, remplissez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 3:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le stock indiqué n'est pas valide, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 4:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le poids indiqué n'est pas valide, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 5:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Le prix indiqué n'est pas valide, modifiez ce champ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				//
-				// break;
-				// default:
-				// break;
-				// }
-
 			}
 		});
 
-		// Définition de l'action du bouton retour qui annule les modifications
-		// et //
-		// -------- permet le retour vers la page de gestion du catalogue
-		// ---------//
-		// -------------------------------------------------------------------------//
+		// Définition de l'action du bouton retour qui annule les modifications et //
+		// -------- permet le retour vers la page de gestion du catalogue ---------//
+		// ------------------------------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		boutonRetour.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// Permet le retour à la page precedente
+				// Permet le retour à la page précédente
 				dispose();
-				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,
-						true);
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);
 				fen.setVisible(true);
 
 			}
 		});
 
 		// Ajout des boutons au JPanel panneauBoutonsBas //
-		// -----------------------------------------------//
+		// ----------------------------------------------//
 		panneauBoutonsBas.add(boutonConfirmation);
 		panneauBoutonsBas.add(boutonRetour);
 
 		// Ajout des 2 principaux JPanel au conteneur de la fenêtre //
-		// ----------------------------------------------------------//
+		// ---------------------------------------------------------//
 		this.getContentPane().add(panneauCentral, "Center");
 		this.getContentPane().add(panneauBoutonsBas, "South");
 

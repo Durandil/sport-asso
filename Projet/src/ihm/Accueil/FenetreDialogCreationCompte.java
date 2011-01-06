@@ -615,10 +615,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 					erreurCreation.showMessageDialog(null, e7.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
 
-					// Comme l'utilisateur a fait une erreur de saisie de code
-					// postal
-					// nous lui affichons le menu déroulant à la place du champ
-					// de saisie
+					// Comme l'utilisateur a fait une erreur de saisie de code postal
+					// nous lui affichons le menu déroulant à la place du champ de saisie
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
 					ville.setVisible(true);
@@ -675,12 +673,12 @@ public class FenetreDialogCreationCompte extends JDialog {
 		});
 
 		// Ajout des deux boutons au JPanel des boutons : control //
-		// --------------------------------------------------------//
+		// -------------------------------------------------------//
 		control.add(validationBouton);
 		control.add(annulationBouton);
 
 		// Ajout des composants au conteneur de la fenêtre //
-		// -------------------------------------------------//
+		// ------------------------------------------------//
 		this.getContentPane().add(panIcon, BorderLayout.WEST);
 		this.getContentPane().add(content, BorderLayout.CENTER);
 		this.getContentPane().add(control, BorderLayout.SOUTH);

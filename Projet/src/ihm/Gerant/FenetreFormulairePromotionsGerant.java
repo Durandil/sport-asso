@@ -78,7 +78,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	/**
 	 * <b> Constructeur pour ajouter une promotion dans la base de données. </b>
 	 * <p>
-	 * Elle sera instanciée avec des JTextField vides prêt à être rempli par le
+	 * Elle sera instanciée avec des JTextField vides prêts à être rempli par le
 	 * gérant.
 	 * </p>
 	 * 
@@ -139,23 +139,21 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	 * <li>un JPanel qui accueillir les 6 sous-JPanels contenant les JTextField
 	 * et JComboBox vides permettant la création d'une nouvelle promotion.</li>
 	 * <li>un JPanel qui va accueillir les boutons permettant de valider les
-	 * champs saisis et d'annuler les saisies des champs(fermeture de la
+	 * champs saisis et d'annuler les saisies des champs (fermeture de la
 	 * fenêtre).</li>
 	 * </ul>
 	 * </p>
 	 * 
 	 */
 	private void initComponent() {
-		// Définition du grand JPanel qui va accueillir les sous JPanel
-		// contenant les //
-		// JTextField et les JComboBox pour sélectionner les dates de début et
-		// de fin //
-		// ----------------------------------------------------------------------------//
+		// Définition du grand JPanel qui va accueillir les sous JPanel contenant les //
+		// JTextField et les JComboBox pour sélectionner les dates de début et de fin //
+		// ---------------------------------------------------------------------------//
 		JPanel panneauCentralFenetre = new JPanel();
 		panneauCentralFenetre.setLayout(new GridLayout(6, 1, 5, 5));
 
 		// Définition de chacun des sous JPanel //
-		// --------------------------------------//
+		// -------------------------------------//
 		JPanel panDescriptionPromotion = new JPanel();
 		JPanel panPopulation = new JPanel();
 		JPanel panDateDebut = new JPanel();
@@ -191,10 +189,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		pourcentPromo.setPreferredSize(new Dimension(90, 20));
 		description.setPreferredSize(new Dimension(90, 20));
 
-		// Définition du JComboBox dans lequel le gérant spécifie à quel type de
-		// client //
-		// --------------------- est destiné la promotion
-		// ------------------------------//
+		// Définition du JComboBox dans lequel le gérant spécifie à quel type de client //
+		// --------------------- est destiné la promotion ------------------------------//
+		//------------------------------------------------------------------------------//
 		populationBox = new JComboBox();
 		populationBox.addItem("Promotion pour les adhérents");
 		populationBox.addItem("Promotion pour tous les clients");
@@ -208,10 +205,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition du JComboBox dans lequel le gérant spécifie l'article sur
-		// lequel //
-		// --------------------- est destiné la promotion
-		// ------------------------------//
+		// Définition du JComboBox dans lequel le gérant spécifie l'article sur lequel //
+		// --------------------- est destiné la promotion -----------------------------//
+		//-----------------------------------------------------------------------------//
 		articleBox = new JComboBox();
 		// Récupération de la liste tous les articles
 		ArrayList<String> listeArticles = new ArrayList<String>();
@@ -239,10 +235,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition des JComboBox pour permettre de selectionner le jour, le
-		// mois //
-		// ----------- et l'année de début et de fin d'une promotion
-		// ---------------//
+		// Définition des JComboBox pour permettre de sélectionner le jour,le mois //
+		// ----------- et l'année de début et de fin d'une promotion --------------//
+		//-------------------------------------------------------------------------//
 		cbjourDebut = new JComboBox();
 		cbjourFin = new JComboBox();
 
@@ -346,25 +341,22 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panDateDebut.setLayout(new GridLayout(1, 4, 5, 5));
 		panDateFin.setLayout(new GridLayout(1, 4, 5, 5));
 
-		// Ajout des titres à chacun des JPanel contenant les champs à remplir
-		// //
-		// ---------------------------------------------------------------------//
+		// Ajout des titres à chacun des JPanel contenant les champs à remplir //
+		// --------------------------------------------------------------------//
 		panDescriptionPromotion.add(descriptionLabel);
 		panPopulation.add(populationLabel);
 		panArticle.add(articleLabel);
 		panPourcentPromo.add(pourcentLabel);
 
-		// Ajout des JTextField et JComboBox à chacun des JPanel contenant les
-		// champs à remplir //
-		// --------------------------------------------------------------------------------------//
+		// Ajout des JTextField et JComboBox à chacun des JPanel contenant les champs à remplir //
+		// -------------------------------------------------------------------------------------//
 		panDescriptionPromotion.add(description);
 		panPopulation.add(populationBox);
 		panArticle.add(articleBox);
 		panPourcentPromo.add(pourcentPromo);
 
-		// Ajout des JComboBox à chacun des 2 JPanel contenant les dates à
-		// sélectionner //
-		// -------------------------------------------------------------------------------//
+		// Ajout des JComboBox à chacun des 2 JPanel contenant les dates à sélectionner //
+		// -----------------------------------------------------------------------------//
 		panDateDebut.add(cbjourDebut);
 		panDateDebut.add(cbmoisDebut);
 		panDateDebut.add(cbanneeDebut);
@@ -374,7 +366,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panDateFin.add(cbanneeFin);
 
 		// Ajout des sous JPanel au "grand" JPanel //
-		// -----------------------------------------//
+		// ----------------------------------------//
 		panneauCentralFenetre.add(panDescriptionPromotion);
 		panneauCentralFenetre.add(panPopulation);
 		panneauCentralFenetre.add(panPourcentPromo);
@@ -382,15 +374,13 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panneauCentralFenetre.add(panDateDebut);
 		panneauCentralFenetre.add(panDateFin);
 
-		// Définition du JPanel qui va accueillir les boutons de confirmation et
-		// d'annulation //
-		// ------------------------------------------------------------------------------------//
+		// Définition du JPanel qui va accueillir les boutons de confirmation et d'annulation //
+		// -----------------------------------------------------------------------------------//
 		JPanel panneauBasFenetre = new JPanel();
 
-		// Définition de l'action du bouton confirmer qui va vérifier que les
-		// champs saisis //
-		// --------------------et selectionnés soient corrects
-		// -----------------------------//
+		// Définition de l'action du bouton confirmer qui va vérifier que les champs saisis //
+		// -------------------- et selectionnés soient corrects ----------------------------//
+		//----------------------------------------------------------------------------------//
 		JButton boutonConfirmation = new JButton("Confirmer");
 
 		boutonConfirmation.addActionListener(new ActionListener() {
@@ -416,13 +406,14 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 
 				Date dateJour = new Date(System.currentTimeMillis());
 
-				// int verificationChampPromotion;
+
 				try {
 
 					Date dateDebutPromotion = SGBD.stringToDate(
 							StringDateDebutPromotion, "ddMMyyyy");
 					Date dateFinPromotion = SGBD.stringToDate(
 							StringDateFinPromotion, "ddMMyyyy");
+					
 					// Vérifie si la date de début de la promotion est
 					// postérieure à la date d'aujourd'hui
 					if (dateDebutPromotion.before(dateJour)) {
@@ -539,7 +530,8 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 								"Le pourcentage de la promotion est aberrant");
 					}
 
-					// Si aucune Exception n'est levée, la création s'opère
+					// Si aucune Exception n'est levée, la création de la promotion
+					// exceptionelle s'opère
 					boolean promoAdherent = true;
 
 					if (populationPromo
@@ -558,13 +550,16 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							+ articleSelectionne + "')";
 
 					SGBD.executeUpdate(requete);
+					
+					// Fermeture de la fenêtre et retour vers la fenêtre d'accueil 
+					// de gestion des promotions exceptionnelles
 					dispose();
 					FenetrePromotionsGerant fen = new FenetrePromotionsGerant(
 							null, true);
 					fen.setVisible(true);
 
 				} catch (ExceptionDateAvantAujourdhui e1) {
-					System.out.println(e1.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -574,7 +569,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionMoisDeTrenteJours e2) {
-					System.out.println(e2.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -584,7 +579,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionMoisDeFevrier e3) {
-					System.out.println(e3.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -593,7 +588,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ " de la promotion : vous avez saisi un jour inexistant pour le mois de février (28 jours), modifiez cette date",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionMoisDeFevrierAnneeBissextile e4) {
-					System.out.println(e4.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -602,35 +597,35 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ " de la promotion : vous avez saisi un jour inexistant pour le mois de février (29 jours), modifiez cette date",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionOrdreDeDeuxDates e5) {
-					System.out.println(e5.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"La date de fin de promotion est plus récente que celle de début de la promotion, vérifiez vos dates",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionDatesIdentiques e6) {
-					System.out.println(e6.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"Les dates de début et de fin de promotion sont identiques, vérifiez les",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionChampVide e7) {
-					System.out.println(e7.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"Au moins l'un des champs est vide, veuillez renseigner tous les champs",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionExcesDeCaracteres e8) {
-					System.out.println(e8.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"La description de la promotion est trop longue (40 caractères maximum), veuillez la raccourcir",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionPourcentageAberrant e9) {
-					System.out.println(e9.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -645,16 +640,15 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition de l'action du bouton retour à la page précédente qui
-		// annule //
-		// --------- tout ce qui a pu être fait sur la page et la ferme
-		// -----------//
+		// Définition de l'action du bouton retour à la page précédente qui annule //
+		// --------- tout ce qui a pu être fait sur la page et la ferme -----------//
+		//-------------------------------------------------------------------------//
 
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Permet le retour à la page precedente
+				// Permet le retour à la page précédente
 				dispose();
 				FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null,
 						true);
@@ -662,14 +656,13 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Ajout des boutons au JPanel panneauBasFenetre destiné à accueillir
-		// les boutons //
-		// --------------------------------------------------------------------------------//
+		// Ajout des boutons au JPanel panneauBasFenetre destiné à accueillir les boutons //
+		// -------------------------------------------------------------------------------//
 		panneauBasFenetre.add(boutonConfirmation);
 		panneauBasFenetre.add(boutonRetour);
 
 		// Ajout des 2 JPanels principaux au conteneur de la fenêtre //
-		// -----------------------------------------------------------//
+		// ----------------------------------------------------------//
 		this.getContentPane().add(panneauCentralFenetre, "Center");
 		this.getContentPane().add(panneauBasFenetre, "South");
 	}
@@ -679,10 +672,10 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	 * promotion </b>
 	 * 
 	 * <p>
-	 * Initialisation des composants de la fenêtre d'ajout d'une promotion :
+	 * Initialisation des composants de la fenêtre de modification d'une promotion :
 	 * <ul>
 	 * <li>un JPanel qui accueillir les 6 sous-JPanels contenant les JTextField
-	 * et JComboBox vides permettant la création d'une nouvelle promotion.</li>
+	 * et JComboBox remplis avec les attributs de la promotion sélectionnée.</li>
 	 * <li>un JPanel qui va accueillir les boutons permettant de valider les
 	 * champs saisis et d'annuler les saisies des champs(fermeture de la
 	 * fenêtre).</li>
@@ -690,17 +683,15 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 	 * </p>
 	 * 
 	 * @param idPromo
-	 *            Identifiant unique de la promotion prête à être modifié
+	 *            Identifiant unique de la promotion prête à être modifiée
 	 */
 	private void initComponent(String idPromo) throws Exception {
 		final String identifiantPromotion = idPromo;
 
-		// Récupération dans la base de données des attributs de la promotion
-		// afin de //
-		// pré-remplir les JTextField avec la valeur enregistrée dans la base de
-		// données//
-		// et de compléter la valeur par défaut des JComboBox //
-		// ------------------------------------------------------------------------------//
+		// Récupération dans la base de données des attributs de la promotion afin de   //
+		// pré-remplir les JTextField avec la valeur enregistrée dans la base de données//
+		// ----------- et de compléter la valeur par défaut des JComboBox ------------- //
+		// -----------------------------------------------------------------------------//
 		String nomPromotion = SGBD.selectStringConditionString("PROMO",
 				"NOMPROMO", "IDPROMO", idPromo);
 		String promotionPopulation = SGBD.selectStringConditionString("PROMO",
@@ -720,11 +711,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		String dateFi = SGBD.selectDateConditionString("PROMO", "DATEFIN",
 				"IDPROMO", idPromo, "dd/MM/yyyy");
 
-		// Définition du grand JPanel qui va accueillir les sous JPanel
-		// contenant les //
-		// JTextField et les JComboBox pour sélectionner les dates de début et
-		// de fin //
-		// ----------------------------------------------------------------------------//
+		// Définition du grand JPanel qui va accueillir les sous JPanel contenant les //
+		// JTextField et les JComboBox pour sélectionner les dates de début et de fin //
+		// ---------------------------------------------------------------------------//
 		JPanel panneauCentralFenetre = new JPanel();
 		panneauCentralFenetre.setLayout(new GridLayout(6, 1, 5, 5));
 
@@ -767,10 +756,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		pourcentPromo.setPreferredSize(new Dimension(90, 20));
 		description.setPreferredSize(new Dimension(90, 20));
 
-		// Définition du JComboBox dans lequel le gérant peut modifier à quel
-		// type de client //
-		// --------------------- est destiné la promotion
-		// -----------------------------------//
+		// Définition du JComboBox dans lequel le gérant peut modifier à quel type de client //
+		// --------------------- est destiné la promotion -----------------------------------//
+		//-----------------------------------------------------------------------------------//
 		populationBox = new JComboBox();
 		populationBox.addItem("Promotion pour les adhérents");
 		populationBox.addItem("Promotion pour tous les clients");
@@ -784,12 +772,11 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition du JComboBox dans lequel le gérant peut modifier l'article
-		// sur lequel //
-		// --------------------- est destiné la promotion
-		// ------------------------------//
+		// Définition du JComboBox dans lequel le gérant peut modifier l'article sur lequel //
+		// ------------------------- est destiné la promotion ------------------------------//
+		//----------------------------------------------------------------------------------//
 		articleBox = new JComboBox();
-		// récupération liste tous les articles
+		// Récupération de la liste de tous les articles présents dans le magasin
 		ArrayList<String> listeArticles = new ArrayList<String>();
 		listeArticles = SGBD.selectListeStringOrdonneCondition("ARTICLE",
 				"IDARTICLE", "IDARTICLE", "ETATARTICLE != 'Supprimé'");
@@ -801,12 +788,17 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 
 		articleBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				// Récupération de l'identifiant de l'article sélectionné dans le menu déroulant
 				articleSelectionneModification = (String) ((JComboBox) e
 						.getSource()).getSelectedItem();
+				
+				// Récupération de la description de l'article sélectionné
 				String descriptionArticleSelectionne = SGBD
 						.selectStringConditionString("ARTICLE", "DESCRIPTION",
 								"IDARTICLE", articleSelectionneModification);
+				
+				// Affichage d'une fenêtre pour indiquer au gérant la description de l'article 
+				// qu'il a sélectionné
 				JOptionPane.showMessageDialog(null,
 						"vous avez sélectionné l'article : "
 								+ descriptionArticleSelectionne, "Information",
@@ -814,10 +806,9 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition des JComboBox pour permettre de modifier le jour, le mois
-		// //
-		// ----------- et l'année de début et de fin d'une promotion -----------
-		// //
+		// Définition des JComboBox pour permettre de modifier le jour, le mois //
+		// ----------- et l'année de début et de fin d'une promotion -----------//
+		//----------------------------------------------------------------------//
 		cbjourDebut = new JComboBox();
 		cbjourFin = new JComboBox();
 
@@ -936,26 +927,22 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panDateDebut.setLayout(new GridLayout(1, 4, 5, 5));
 		panDateFin.setLayout(new GridLayout(1, 4, 5, 5));
 
-		// Ajout des titres à chacun des JPanel contenant les champs déjà
-		// remplis //
-		// -----------------------------------------------------------------------
-		// //
+		// Ajout des titres à chacun des JPanel contenant les champs déjà remplis //
+		// -----------------------------------------------------------------------//
 		panDescriptionPromotion.add(descriptionLabel);
 		panPopulation.add(populationLabel);
 		panArticle.add(articleLabel);
 		panPourcentPromo.add(pourcentLabel);
 
-		// Ajout des JTextField et JComboBox à chacun des JPanel contenant les
-		// champs déjà remplis //
-		// -----------------------------------------------------------------------------------------//
+		// Ajout des JTextField et JComboBox à chacun des JPanel contenant les champs déjà remplis //
+		// ----------------------------------------------------------------------------------------//
 		panDescriptionPromotion.add(description);
 		panPopulation.add(populationBox);
 		panArticle.add(articleBox);
 		panPourcentPromo.add(pourcentPromo);
 
-		// Ajout des JComboBox à chacun des 2 JPanel contenant les dates à
-		// sélectionner //
-		// -------------------------------------------------------------------------------//
+		// Ajout des JComboBox à chacun des 2 JPanel contenant les dates à sélectionner //
+		// -----------------------------------------------------------------------------//
 		panDateDebut.add(cbjourDebut);
 		panDateDebut.add(cbmoisDebut);
 		panDateDebut.add(cbanneeDebut);
@@ -965,7 +952,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panDateFin.add(cbanneeFin);
 
 		// Ajout des sous JPanel au "grand" JPanel //
-		// -----------------------------------------//
+		// ----------------------------------------//
 		panneauCentralFenetre.add(panDescriptionPromotion);
 		panneauCentralFenetre.add(panPopulation);
 		panneauCentralFenetre.add(panPourcentPromo);
@@ -974,20 +961,18 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 		panneauCentralFenetre.add(panDateDebut);
 		panneauCentralFenetre.add(panDateFin);
 
-		// Définition du JPanel qui va accueillir les boutons de confirmation et
-		// d'annulation //
-		// ------------------------------------------------------------------------------------//
+		// Définition du JPanel qui va accueillir les boutons de confirmation et d'annulation //
+		// -----------------------------------------------------------------------------------//
 		JPanel panneauBasFenetre = new JPanel();
 
-		// Définition de l'action du bouton confirmer qui va vérifier que les
-		// champs saisis //
-		// --------------------et selectionnés soient corrects
-		// -----------------------------//
+		// Définition de l'action du bouton confirmer qui va vérifier que les champs saisis //
+		// --------------------et selectionnés soient corrects -----------------------------//
+		//----------------------------------------------------------------------------------//
 		JButton boutonConfirmation = new JButton("Confirmer Modification");
 
 		boutonConfirmation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Enregistrement la modification d'une promotion
+				// Phase de vérification des champs remplis et sélectionnés par le gérant
 				String position = null;
 				String StringDateDebutPromotion = jourDebutSelectionneModification
 						+ moisDebutSelectionneModification
@@ -1105,8 +1090,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 						}
 					}
 
-					// Vérifie si la date de début de promotion précède celle de
-					// fin
+					// Vérifie si la date de début de promotion précède celle de fin
 					if (dateDebutPromotion.after(dateFinPromotion)) {
 						throw new ExceptionOrdreDeDeuxDates(
 								"La date de début de promotion est postérieure à celle de fin");
@@ -1137,7 +1121,8 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 								"Le pourcentage de la promotion est aberrant");
 					}
 
-					// Si aucune Exception n'est levée, la modification s'opère
+					// Si aucune Exception n'est levée, la modification de la 
+					// promotion exceptionnelle s'opère
 					boolean promoAdherent = true;
 
 					if (populationPromoModification
@@ -1155,14 +1140,16 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 					System.out.println(requete);
 
 					SGBD.executeUpdate(requete);
-
+					
+					// Puis fermeture de la fenêtre et affichage de la fenêtre d'accueil
+					// de gestion des promotions exceptionnelles
 					dispose();
 					FenetrePromotionsGerant fen = new FenetrePromotionsGerant(
 							null, true);
 					fen.setVisible(true);
 
 				} catch (ExceptionDateAvantAujourdhui e1) {
-					System.out.println(e1.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -1172,7 +1159,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionMoisDeTrenteJours e2) {
-					System.out.println(e2.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -1182,7 +1169,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionMoisDeFevrier e3) {
-					System.out.println(e3.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -1191,7 +1178,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 											+ " de la promotion : vous avez saisi un jour inexistant pour le mois de février (28 jours), modifiez cette date",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionMoisDeFevrierAnneeBissextile e4) {
-					System.out.println(e4.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -1201,35 +1188,35 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionOrdreDeDeuxDates e5) {
-					System.out.println(e5.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"La date de fin de promotion est plus récente que celle de début de la promotion, vérifiez vos dates",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionDatesIdentiques e6) {
-					System.out.println(e6.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"Les dates de début et de fin de promotion sont identiques, vérifiez les",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionChampVide e7) {
-					System.out.println(e7.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"Au moins l'un des champs est vide, veuillez renseigner tous les champs",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionExcesDeCaracteres e8) {
-					System.out.println(e8.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
 									"La description de la promotion est trop longue (40 caractères maximum), veuillez la raccourcir",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} catch (ExceptionPourcentageAberrant e9) {
-					System.out.println(e9.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -1238,20 +1225,20 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 				}
 
 				catch (Exception e10) {
-					// TODO Auto-generated catch block
+
 					e10.printStackTrace();
 				}
 
 			}
 		});
 
-		// Définition de l'action du bouton retour à la page précédente qui
-		// annule //
-		// --------- tout ce qui a pu être fait sur la page et la ferme
-		// -----------//
+		// Définition de l'action du bouton retour à la page précédente qui annule //
+		// --------- tout ce qui a pu être fait sur la page et la ferme -----------//
+		//-------------------------------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Permet le retour à la page précédente
 				dispose();
 				FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null,
 						true);
@@ -1259,14 +1246,13 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition du JPanel qui va accueillir les boutons de confirmation et
-		// d'annulation //
-		// ------------------------------------------------------------------------------------//
+		// Définition du JPanel qui va accueillir les boutons de confirmation et d'annulation //
+		// -----------------------------------------------------------------------------------//
 		panneauBasFenetre.add(boutonConfirmation);
 		panneauBasFenetre.add(boutonRetour);
 
 		// Ajout des 2 JPanels principaux au conteneur de la fenêtre //
-		// -----------------------------------------------------------//
+		// ----------------------------------------------------------//
 		this.getContentPane().add(panneauCentralFenetre, "Center");
 		this.getContentPane().add(panneauBasFenetre, "South");
 

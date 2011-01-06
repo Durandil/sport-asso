@@ -76,7 +76,7 @@ public class FenetreAffichageRecherche extends JDialog {
 	 * <ul>
 	 * <li>un JPanel contenant un tableau avec la liste des clients
 	 * correspondants à la recherche.</li>
-	 * <li>un JPanel contenant deux boutons : l'un permettant d'accéfer à la
+	 * <li>un JPanel contenant deux boutons : l'un permettant d'accéder à la
 	 * fiche d'un client après l'avoir sélectionné et l'autre permettant de
 	 * revenir à la page précédente.</li>
 	 * 
@@ -96,10 +96,9 @@ public class FenetreAffichageRecherche extends JDialog {
 	private void initComponent(String idClient, String nom, String denom,
 			String ville) {
 
-		// Définition d'un panneau JPanel qui va accueillir le tableau des
-		// résultats
-		// de la recherche au moyen du constructeur de la classe
-		// ModeleTableauClient
+		// Définition d'un JPanel qui va accueillir le tableau des résultats de   //
+		// la recherche au moyen du constructeur de la classe ModeleTableauClient //
+		//------------------------------------------------------------------------//
 
 		JPanel panneauCentral = new JPanel();
 		final ModeleTableauClient modele = new ModeleTableauClient(idClient,
@@ -107,11 +106,10 @@ public class FenetreAffichageRecherche extends JDialog {
 		final JTable tableauRechercheClient = new JTable(modele);
 		tableauRechercheClient.setVisible(true);
 
-		// Dans le cas où le tableau ne contient aucune ligne,c'est à dire
-		// qu'aucun client
-		// ne correspond à la recherche effectuée, on lui affiche un message
-		// pour le lui
-		// signifier
+		// Dans le cas où le tableau ne contient aucune ligne, c'est à dire qu'aucun      
+		//  client ne correspond à la recherche effectuée, nous lui affichons
+		//  un message pour le lui signifier 
+
 		if (modele.getRowCount() == 0) {
 			dispose();
 			JOptionPane
@@ -122,12 +120,14 @@ public class FenetreAffichageRecherche extends JDialog {
 		}
 
 		panneauCentral.add(new JScrollPane(tableauRechercheClient));
-
+		
+		// Définition du JPanel qui accueillera les 2 boutons de la fenêtre //
+		//------------------------------------------------------------------//
+		
 		JPanel panneauBouton = new JPanel();
 
-		// Définition du premier bouton de la fenêtre qui permet l'accès à une
-		// fiche client
-		//
+		// Définition du premier bouton de la fenêtre qui permet l'accès à une fiche client //
+		//----------------------------------------------------------------------------------//
 		JButton validationRecherche = new JButton("Accès client");
 		validationRecherche.addActionListener(new ActionListener() {
 
@@ -163,8 +163,8 @@ public class FenetreAffichageRecherche extends JDialog {
 
 					if (res == JOptionPane.OK_OPTION) {
 						dispose();
-						// on affiche la fiche client correspondante à
-						// l'identifiant saisi
+						// Nous affichons la fiche client correspondante à
+						// l'identifiant sélectionné
 						FicheClient ficheDuClient = new FicheClient(null,
 								"Fiche du client : " + identifiant, true,
 								identifiant);
@@ -177,8 +177,7 @@ public class FenetreAffichageRecherche extends JDialog {
 
 		});
 
-		// Définition du bouton de retour et de l'action spécifique de celui-ci
-		// //
+		// Définition du bouton de retour et de l'action spécifique de celui-ci  //
 		// ----------------------------------------------------------------------//
 		JButton retourRecherche = new JButton("Retour");
 		retourRecherche.addActionListener(new ActionListener() {
@@ -187,12 +186,13 @@ public class FenetreAffichageRecherche extends JDialog {
 			}
 		});
 
-		// Ajout des 2 boutons au JPanel destinés à les accueillir //
+		// Ajout des 2 boutons au JPanel destinés à les accueillir  //
 		// ---------------------------------------------------------//
 		panneauBouton.add(validationRecherche);
 		panneauBouton.add(retourRecherche);
 
-		// Ajout des 2 principaux JPanel au conteneur de la fenêtre
+		// Ajout des 2 principaux JPanel au conteneur de la fenêtre //
+		//----------------------------------------------------------//
 		this.getContentPane().add(panneauCentral, "Center");
 		this.getContentPane().add(panneauBouton, "South");
 

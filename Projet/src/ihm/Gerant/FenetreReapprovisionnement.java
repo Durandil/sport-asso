@@ -88,9 +88,8 @@ public class FenetreReapprovisionnement extends JDialog {
 				"Réapprovisionnement des articles en rupture de stock ou en quantité insuffisante");
 		panneauHaut.add(titreLabel);
 
-		// Ajout d'une image entre le tableau et l'introduction dans le haut de
-		// la fenetre //
-		// ---------------------------------------------------------------------------------//
+		// Ajout d'une image entre le tableau et l'introduction dans le haut de la fenetre //
+		// --------------------------------------------------------------------------------//
 		image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
@@ -100,26 +99,23 @@ public class FenetreReapprovisionnement extends JDialog {
 
 		this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
 
-		// Récupération du tableau avec l'ensemble ds articles en quantité
-		// insuffisante //
-		// après interrogation de la base de données dans ModeleTableauCatalogue
-		// //
+		// Récupération du tableau avec l'ensemble ds articles en quantité insuffisante //
+		// après interrogation de la base de données dans ModeleTableauCatalogue        //
 		// -----------------------------------------------------------------------------//
-		final ModeleTableauCatalogue modele = new ModeleTableauCatalogue(true,
-				true);
+		final ModeleTableauCatalogue modele = new ModeleTableauCatalogue(true,true);
 		final JTable tableau = new JTable(modele);
-		this.getContentPane()
-				.add(new JScrollPane(tableau), BorderLayout.CENTER);
+		
 
-		// Ajout d'un bouton permettant d'ouvrir une fenêtre de commande après
-		// avoir cliqué
-		// sur un article dans le tableau
+		// Ajout d'un bouton permettant d'ouvrir une fenêtre de commande après avoir cliqué //
+		// ---------------------- sur un article dans le tableau ---------------------------//
+		//----------------------------------------------------------------------------------//
 		JButton commandeBouton = new JButton("Réapprovisionner");
 		commandeBouton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				ligneTableau = tableau.getSelectedRow();
-
+				
+				// Traitement du cas où le gérant ne sélectionne pas de ligne dans le tableau
 				if (ligneTableau == -1) {
 					JOptionPane
 							.showMessageDialog(
@@ -128,8 +124,11 @@ public class FenetreReapprovisionnement extends JDialog {
 									"Attention", JOptionPane.ERROR_MESSAGE,
 									new ImageIcon("src/images/warning.png"));
 				} else {
-					String numeroArticle = tableau.getValueAt(ligneTableau, 0)
-							.toString();
+					// Récupération de l'identifiant de l'article sélectionné
+					String numeroArticle = tableau.getValueAt(ligneTableau, 0).toString();
+					
+					// Affichage d'une fenêtre pour permettre au gérant de choisir la quantité
+					// qu'il souhaite réapprovisionner de l'article
 					FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(
 							null, "Commande", true, numeroArticle);
 					fen.setVisible(true);
@@ -139,9 +138,9 @@ public class FenetreReapprovisionnement extends JDialog {
 			}
 		});
 
-		// Ajout du bouton permettant de revenir à la page précédante grâce à
-		// l'implémenation
-		// de la méthode ActionPerformed
+		// Ajout du bouton permettant de revenir à la page précédante grâce à l'implémenation //
+		// ------------------------- de la méthode ActionPerformed ---------------------------//
+		//------------------------------------------------------------------------------------//
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,17 +148,18 @@ public class FenetreReapprovisionnement extends JDialog {
 			}
 		});
 
-		// Création d'un JPanel pour accueillir les deux boutons crées au
-		// dessus//
+		// Création d'un JPanel pour accueillir les deux boutons crées au dessus //
 		// ----------------------------------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 
-		// Ajout des boutons au JPanel //
-		// -----------------------------//
+		// Ajout des boutons au JPanel des boutons : panneauBoutons //
+		// ---------------------------------------------------------//
 		panneauBoutons.add(commandeBouton, "West");
 		panneauBoutons.add(retourBouton, "East");
 
-		// Ajout du JPanel des boutons en bas de la fenêtre
+		// Ajout des principaux JPanel dans le conteneur de la fenêtre //
+		//-------------------------------------------------------------//
+		this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 
 		pack();
