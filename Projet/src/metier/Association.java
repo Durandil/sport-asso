@@ -196,7 +196,6 @@ public class Association extends Client {
 				+ adresse.replaceAll("'", "''") + "',IDVILLE='"
 				+ idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone
 				+ "' WHERE IDCLIENT ='" + idClient + "'";
-		System.out.println(requete);
 
 		SGBD.executeUpdate(requete);
 

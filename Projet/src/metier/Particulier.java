@@ -239,8 +239,6 @@ public class Particulier extends Client {
 				+ idVille.replaceAll("'", "''") + "',TELEPHONE='" + telephone
 				+ "' " + "WHERE IDCLIENT ='" + idClient + "'";
 
-		System.out.println(requete);
-
 		SGBD.executeUpdate(requete);
 	}
 

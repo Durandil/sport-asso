@@ -344,8 +344,6 @@ public abstract class Client {
 		String requete = " UPDATE CLIENT SET ETATCOMPTE='" + etatCompte
 				+ "' WHERE IDCLIENT = '" + idClient + "'";
 
-		System.out.println(requete);
-
 		SGBD.executeUpdate(requete);
 	}
 	

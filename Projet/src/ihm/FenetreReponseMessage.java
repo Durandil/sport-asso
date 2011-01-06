@@ -33,8 +33,6 @@ import metier.Message;
  * 
  * {@link FenetreLectureMessage} {@link FenetreMessagerie}
  * 
- * @author Utilisateur
- * 
  */
 public class FenetreReponseMessage extends JFrame {
 
@@ -88,24 +86,32 @@ public class FenetreReponseMessage extends JFrame {
 			gerant = "gérant";
 		}
 
-		// Sujet Message
+		// Création du JPanel du champ de saisie du Sujet du Message //
+		//-----------------------------------------------------------//
 		JPanel panneauSujet = new JPanel();
+		sujetLabel = new JLabel("Objet : ");
+		
+		// Mise en place du champ de saisie du sujet du message
 		sujetMessage = new JTextField("RE (" + gerant + ") : " + sujetDuMessage);
 		sujetMessage.setPreferredSize(new Dimension(200, 25));
-		sujetLabel = new JLabel("Objet : ");
+		
 		panneauSujet.add(sujetLabel);
 		panneauSujet.add(sujetMessage);
 		panneauSujet.setBorder(BorderFactory.createEmptyBorder());
 
-		// Contenu Message
+		// Création du JPanel du champ de saisie du Contenu du Message //
+		//-------------------------------------------------------------//
 		JPanel panneauContenuMessage = new JPanel();
 		panneauContenuMessage.setBorder(BorderFactory
 				.createLineBorder(Color.darkGray));
+		
+		// Mise en place d'une zone de texte pour la saisie du contenu du message
 		contenuMessage = new JTextArea(8, 30);
 		contenuMessage.setBorder(BorderFactory.createLineBorder(Color.black));
 		contenuMessage.setEnabled(true);
 		contenuMessage.setLineWrap(true);
 		contenuMessage.setWrapStyleWord(true);
+		
 		contenuLabel = new JLabel("Contenu : ");
 		panneauContenuMessage.add(contenuLabel);
 		panneauContenuMessage.add(contenuMessage);
@@ -115,9 +121,9 @@ public class FenetreReponseMessage extends JFrame {
 		panneauIdentificationMessage.setBorder(BorderFactory
 				.createLineBorder(Color.GRAY));
 
-		// Définition du panneau dans lequel seront présents les boutons de
-		// retour à la page précédente
-		// et d'envoi de message
+		// Définition du panneau dans lequel seront présents les boutons de //
+		// ----- retour à la page précédente et d'envoi de message ---------//
+		//------------------------------------------------------------------// 
 		JPanel panneauBoutonsBas = new JPanel();
 
 		JButton boutonRetourMessagerie = new JButton(
@@ -139,16 +145,17 @@ public class FenetreReponseMessage extends JFrame {
 			}
 		});
 
-		// Création du bouton permettant d'envoyer un message après avoir
-		// vérifier que les
-		// champs remplis respectent les critères pour être inscrits dans la
-		// base de données //
-		// -----------------------------------------------------------------------------------//
+		// Création du bouton permettant d'envoyer un message après avoir vérifier //
+		// que les champs remplis respectent les critères pour être inscrits dans  // 
+		// -------------------------- la base de données --------------------------//
+		// ------------------------------------------------------------------------//
 		boutonEnvoyer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				String champ = "";
 				try {
+					// Vérification des champs saisis pour voir 
+					// s'ils ne sont pas vides
 					if (contenuMessage.getText().length() == 0) {
 						champ = "corps";
 						throw new ExceptionChampVide(
@@ -159,7 +166,10 @@ public class FenetreReponseMessage extends JFrame {
 						throw new ExceptionChampVide(
 								"Le message n'a pas de sujet !");
 					}
-
+					
+					// Vérification de la longueur des champs complétés
+					// afin de voir s'ils respectent les contraintes de 
+					// la base de données
 					if (contenuMessage.getText().length() > 300) {
 						champ = "corps";
 						throw new ExceptionExcesDeCaracteres(
@@ -170,8 +180,13 @@ public class FenetreReponseMessage extends JFrame {
 						throw new ExceptionExcesDeCaracteres(
 								"Le sujet du message est trop long !");
 					} else {
+						
+						// Si aucune erreur n'est détectée
+						// nous créons un nouveau message à 
+						// partir des champs complétés
+						
 						java.util.Date date = new java.util.Date();
-
+						
 						@SuppressWarnings("deprecation")
 						java.sql.Date dateJour = new java.sql.Date(date
 								.getYear(), date.getMonth(), date.getDate());
@@ -179,100 +194,43 @@ public class FenetreReponseMessage extends JFrame {
 								.getText(),
 								FenetreLectureMessage.idExpediteurMessage,
 								dateJour, false);
-
+						
+						// Une fois le message enregistré dans la base de données
+						// nous allons réouvrir la messagerie de l'utilisateur
 						FenetreMessagerie fenetre = new FenetreMessagerie(
 								reponseGerant);
 						fenetre.setVisible(true);
 
-						// fermeture de la fenetre
+						// puis nous allons fermer la fenêtre
 						dispose();
 
 					}
 
 				} catch (ExceptionChampVide e2) {
-					System.out.println(e2.getMessage());
+
 					JOptionPane.showMessageDialog(null,
 							"Votre message n'a pas de " + champ
 									+ ",veuillez le préciser.", "Attention",
 							JOptionPane.ERROR_MESSAGE);
 
 				} catch (ExceptionExcesDeCaracteres e3) {
-					System.out.println(e3.getMessage());
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"Le "
-											+ champ
-											+ " de votre message est trop long,veuillez le raccourcir",
-									"Attention", JOptionPane.ERROR_MESSAGE);
-				}
-				// Création une nouvelle instance de message
 
-				// int verificationChampMessage = Message.verifierChampMessage(
-				// contenuMessage.getText(), sujetMessage.getText());
-				// System.out.println(verificationChampMessage);
-				//
-				// switch (verificationChampMessage) {
-				// case 0:
-				// java.util.Date date = new java.util.Date();
-				//
-				// @SuppressWarnings("deprecation")
-				// java.sql.Date dateJour = new java.sql.Date(date.getYear(),
-				// date.getMonth(), date.getDate());
-				// new Message(sujetMessage.getText(), contenuMessage
-				// .getText(),
-				// FenetreDialogIdentification.clientUserIdentifiant,
-				// dateJour, true);
-				//
-				// // fermeture de la fenetre
-				// dispose();
-				// FenetreMessagerie fenetre = new FenetreMessagerie(
-				// reponseGerant);
-				// fenetre.setVisible(true);
-				//
-				// break;
-				//
-				// case 1:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Il y a trop de caractères dans la zone du contenu. Reduisez votre message",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 2:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Il y a trop de caractères dans le champ du sujet. Reduisez l'intitulé",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 3:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Votre message contient un caractère interdit : ' ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 4:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// " Le contenu du message est vide, veuillez le remplir",
-				// "Attention ", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// default:
-				// break;
-				// }
+					JOptionPane.showMessageDialog(null,"Le "		
+							+ champ	
+							+ " de votre message est trop long,veuillez le raccourcir",
+							"Attention", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 
-		// Ajout des boutons au panneau principal des boutons panneauBoutons
+		// Ajout des boutons au JPanel principal des boutons panneauBoutons //
+		//------------------------------------------------------------------//
 		panneauBoutonsBas.add(boutonRetourMessagerie);
 		panneauBoutonsBas.add(boutonEnvoyer);
 
-		// Ajout des JPanel crées ci-dessus au conteneur de la fenêtre
-		this.getContentPane().add(panneauIdentificationMessage,
-				BorderLayout.NORTH);
+		// Ajout des JPanel crées ci-dessus au conteneur de la fenêtre //
+		//-------------------------------------------------------------//
+		this.getContentPane().add(panneauIdentificationMessage,BorderLayout.NORTH);
 		this.getContentPane().add(panneauContenuMessage, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutonsBas, BorderLayout.SOUTH);
 

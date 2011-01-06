@@ -28,24 +28,27 @@ public class FenetreInformationsClient extends JFrame {
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		this.setVisible(true);
 
-		// Instanciation d'un objet JPanel pour mettre le panneau contenant le
-		// message de présentation
-		// du magasin
+		// Instanciation du JPanel pour mettre le panneau contenant le //
+		// ---------- message de présentation du magasin --------------//
+		//-------------------------------------------------------------//
+		
 		Panneau panneauInformations = new Panneau();
 		panneauInformations.setBorder(BorderFactory
 				.createTitledBorder("Mot du Gérant : M. Poirier"));
+		
 		// Définition de sa couleur de fond
 		panneauInformations.setBackground(Color.white);
-		this.getContentPane().add(panneauInformations, "Center");
 
-		// Creation du panneau du bas qui accueillera un autre panneau et une
-		// image
+		// Création du JPanel du bas qui accueillera un autre JPanel et une image //
+		//------------------------------------------------------------------------//
 		JPanel panneauBas = new JPanel();
 		panneauBas.setLayout(new GridLayout(1, 2, 5, 5));
 		panneauBas.setBorder(BorderFactory.createTitledBorder("Localisation"));
 
-		// Creation du panneau avec l'adresse et le téléphone du magasin
+		// Création du JPanel avec l'adresse et le téléphone du magasin //
+		//--------------------------------------------------------------//
 		JPanel panneauInformationsSupp = new JPanel();
 		JLabel adresse = new JLabel(
 				"Adresse : Rue Blaise Pascal - BP 37203 - 35172 BRUZ cedex");
@@ -55,17 +58,20 @@ public class FenetreInformationsClient extends JFrame {
 
 		panneauBas.add(panneauInformationsSupp);
 
-		// Creation du panneau qui accueillera l'image (la carte de france)
+		// Création du JPanel qui accueillera l'image (la carte de france) //
+		//-----------------------------------------------------------------//
 		imageFenetre = new JLabel(new ImageIcon("src/images/carte.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBorder(BorderFactory.createEmptyBorder());
 		panImage.add(imageFenetre);
 
 		panneauBas.add(panImage);
-
+		
+		// Ajout des deux composants au conteneur de la fenêtre //
+		//------------------------------------------------------//
+		this.getContentPane().add(panneauInformations, "Center");
 		this.getContentPane().add(panneauBas, "South");
-
-		this.setVisible(true);
+		
 	}
 
 }
