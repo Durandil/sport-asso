@@ -349,18 +349,23 @@ public class Commande {
 	@SuppressWarnings("static-access")
 	public static void ajouterArticlePanier(String idArticle, int quantite,
 			ArrayList<String[]> panier) {
+		
 		String stockArticle = SGBD.selectStringConditionString("ARTICLE",
 				"STOCK", "IDARTICLE", idArticle);
+		
 		int compteurRechercheIdentifiant = rechercheArticleDansPanier(
 				idArticle, panier);
+		
 		JOptionPane pbStock;
 
 		if ((Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1]) + quantite) <= Integer
 				.parseInt(stockArticle)) {
+			
 			panier.get(compteurRechercheIdentifiant)[1] = (Integer
 					.parseInt(panier.get(compteurRechercheIdentifiant)[1]) + quantite)
 					+ "";
 		} else {
+			
 			panier.get(compteurRechercheIdentifiant)[1] = Integer
 					.parseInt(stockArticle) + "";
 			pbStock = new JOptionPane();
@@ -477,8 +482,6 @@ public class Commande {
 		String requete = "INSERT INTO COMMANDE (IDCOMMANDE, DATECOMMANDE, IDCLIENT) VALUES ( "
 				+ "'" + numCommande + "'," + s + " , '" + this.idClient + "')";
 
-		System.out.println(requete);
-
 		SGBD.executeUpdate(requete);
 	}
 
@@ -497,9 +500,6 @@ public class Commande {
 				+ montantCommande + " WHERE IDCOMMANDE='" + this.idCommande
 				+ "'");
 
-		System.out.println(" UPDATE COMMANDE SET MONTANTCOMMANDE="
-				+ montantCommande + " WHERE IDCOMMANDE='" + this.idCommande
-				+ "'");
 	}
 
 	/**
@@ -522,6 +522,7 @@ public class Commande {
 
 			requete = "'" + liste.get(i).getIdArticle() + "',"
 					+ liste.get(i).getQuantite();
+			
 			SGBD.executeUpdate("INSERT INTO LISTING_ARTICLES_COMMANDES "
 					+ " (IDCOMMANDE, IDARTICLE, QUANTITECOMMANDEE)  VALUES"
 					+ "('" + this.idCommande + "'," + requete + ")");
@@ -565,8 +566,6 @@ public class Commande {
 			requete = "UPDATE ARTICLE SET STOCK='" + nouveauStock
 					+ "',ETATARTICLE='" + etatArticle + "'"
 					+ " WHERE IDARTICLE='" + idArticle + "'";
-
-			System.out.println(requete);
 
 			SGBD.executeUpdate(requete);
 

@@ -100,7 +100,8 @@ public class FenetreLectureMessage extends JDialog{
 		final boolean reponseGerant = reponseDuGerant;
 		idExpediteurMessage = expediteur;
 		
-		// L'expéditeur
+		// Création du JPanel sur le champ expéditeur //
+		//--------------------------------------------//
 		JPanel panneauExpediteur= new JPanel();
 		expediteurMessage=new JTextField(expediteur);
 		expediteurMessage.setEnabled(false); // pas modifiable
@@ -110,7 +111,8 @@ public class FenetreLectureMessage extends JDialog{
 		panneauExpediteur.add(expediteurMessage);
 		panneauExpediteur.setBorder(BorderFactory.createEmptyBorder());
 		
-		// Date Reception Message
+		// Création du JPanel sur le champ de la date de Réception Message //
+		//-----------------------------------------------------------------//
 		JPanel panneauDate= new JPanel();
 		dateMessage=new JTextField(date);
 		dateMessage.setEnabled(false);
@@ -120,7 +122,8 @@ public class FenetreLectureMessage extends JDialog{
 		panneauDate.add(dateMessage);
 		panneauDate.setBorder(BorderFactory.createEmptyBorder());
 		
-		// Sujet Message
+		// Création du JPanel sur le champ du Sujet du Message //
+		//-----------------------------------------------------//
 		JPanel panneauSujet= new JPanel();
 		sujetMessage=new JTextField(sujet);
 		sujetMessage.setEnabled(false);
@@ -130,7 +133,8 @@ public class FenetreLectureMessage extends JDialog{
 		panneauSujet.add(sujetMessage);
 		panneauSujet.setBorder(BorderFactory.createEmptyBorder());
 		
-		// Contenu Message
+		// Création du JPanel sur le champ du Contenu du Message //
+		//-------------------------------------------------------//
 		JPanel panneauContenuMessage= new JPanel();
 		panneauContenuMessage.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 		contenuMessage=new JTextArea(8,30);
@@ -143,6 +147,10 @@ public class FenetreLectureMessage extends JDialog{
 		panneauContenuMessage.add(contenuLabel);
 		panneauContenuMessage.add(contenuMessage);
 		
+		// Création d'un JPanel qui accueillera les informations : Date, Expéditeur //
+		//------------------------- et sujet du message -----------------------------//
+		//---------------------------------------------------------------------------//
+		
 		JPanel panneauIdentificationMessage = new JPanel();
 		panneauIdentificationMessage.setLayout(new BorderLayout());
 		panneauIdentificationMessage.add(panneauExpediteur,"West");
@@ -150,15 +158,17 @@ public class FenetreLectureMessage extends JDialog{
 		panneauIdentificationMessage.add(panneauSujet,"East");
 		panneauIdentificationMessage.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		
-		// Définition du panneau dans lequel seront présents les boutons de retour à la page précédente 
-		// et de suppression du message
+		// Définition du panneau dans lequel seront présents les boutons //
+		// de retour à la page précédente et de suppression du message   //
+		//---------------------------------------------------------------//
 		JPanel panneauBoutonsBas=new JPanel();
 		
 		JButton boutonRetourMessagerie= new JButton("Retour à la Boite de Réception");
 		JButton boutonSupprimerMessage= new JButton("Supprimer Message");
 		JButton boutonRepondre = new JButton("Répondre");
 		
-		//Définition des actions relatives à chaque bouton
+		//Définition des actions relatives à chaque bouton //
+		//-------------------------------------------------//
 		
 		boutonRetourMessagerie.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -170,7 +180,8 @@ public class FenetreLectureMessage extends JDialog{
 			}			
 		});
 		
-		// Définition de l'action du bouton supprimer
+		// Définition de l'action du bouton supprimer //
+		//--------------------------------------------//
 		boutonSupprimerMessage.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				// Suppression du message de la base de données
@@ -185,24 +196,27 @@ public class FenetreLectureMessage extends JDialog{
 			}			
 		});
 		
-		// Définition de l'action du bouton répondre qui ferme  la //
+		// Définition de l'action du bouton répondre qui ferme la  //
 		// page en cours et ouvre une fenêtre de réponse au message//
 		//---------------------------------------------------------//
 		boutonRepondre.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//Génération d'une page de réponse à un email
+				// Fermeture de la fenêtre de lecture du message
+				// et Génération d'une page de réponse à un email
 				dispose();
 				FenetreReponseMessage fenReponse = new FenetreReponseMessage(reponseGerant,sujetMessage.getText());
 				fenReponse.setVisible(true);
 			}			
 		});
 		
-		//Ajout des boutons au JPanel principal des boutons : panneauBoutons
+		// Ajout des boutons au JPanel principal des boutons : panneauBoutons //
+		//--------------------------------------------------------------------//
 		panneauBoutonsBas.add(boutonRetourMessagerie);
 		panneauBoutonsBas.add(boutonSupprimerMessage);
 		panneauBoutonsBas.add(boutonRepondre);
 		
-		// Ajout des 3 principaux JPanel au conteneur de la fenêtre
+		// Ajout des 3 principaux JPanel au conteneur de la fenêtre //
+		//----------------------------------------------------------//
 		this.getContentPane().add(panneauIdentificationMessage, BorderLayout.NORTH);
 		this.getContentPane().add(panneauContenuMessage, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutonsBas, BorderLayout.SOUTH);

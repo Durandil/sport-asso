@@ -41,7 +41,7 @@ import basededonnees.SGBD;
 public class FenetreDialogGestionCompteClient extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel denominationLabel, icon, nomLabel, prenomLabel,
+	private JLabel denominationLabel, iconImage, nomLabel, prenomLabel,
 			adresseLabel, villeLabel, cpLabel, telLabel, identifiantLabel;
 	private JTextField nom, prenom, ville, codePostal, telephone, identifiant,
 			denomination;
@@ -94,123 +94,153 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private void initComponent(String idClient) {
 		final String numClient = idClient;
 
-		// Icone
-		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
+		// Création du JPanel qui accueillera l'image de la fenêtre //
+		//----------------------------------------------------------//
+		iconImage = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.setLayout(new BorderLayout());
-		panIcon.add(icon);
+		panIcon.add(iconImage);
 
-		// Panneau qui accueillera tous les champs
+		// Création du JPanel qui accueillera tous les champs //
+		//----------------------------------------------------//
 		JPanel content = new JPanel();
 		content.setBackground(Color.white);
 
-		// Identifiant
+		// Création du JPanel du champ de saisie non modifiable : Identifiant //
+		//--------------------------------------------------------------------//
 		JPanel panIdentifiant = new JPanel();
 		panIdentifiant.setBackground(Color.white);
 		panIdentifiant.setPreferredSize(new Dimension(260, 60));
-		panIdentifiant.setBorder(BorderFactory
-				.createTitledBorder("Identifiant"));
+		panIdentifiant.setBorder(BorderFactory.createTitledBorder("Identifiant"));
 		identifiantLabel = new JLabel("Email : ");
+		
 		identifiant = new JTextField(SGBD.selectStringConditionString("CLIENT",
 				"IDCLIENT", "IDCLIENT", idClient));
 		identifiant.setEnabled(false);
+		
 		identifiant.setPreferredSize(new Dimension(115, 25));
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
 		content.add(panIdentifiant);
 
-		// La denomination
+		
+		
 		// Pour savoir si le client est un particulier ou une association, on
-		// regarde le champ
-		// DENOMINATIONCLIENT dans la table, s'il est vide c'est un particulier
-		// sinon c'est une assoc
+		// regarde le champ DENOMINATIONCLIENT dans la table,
+		// s'il est vide c'est un particulier sinon c'est une association
+		
 		if (!SGBD.selectStringConditionString("CLIENT", "DENOMINATIONCLIENT",
 				"IDCLIENT", idClient).equals(" ")) {
+			
+			// Création du JPanel du champ de saisie : Denomination //
+			//--------------------------------------------//
 			JPanel panDenomination = new JPanel();
 			panDenomination.setBackground(Color.white);
 			panDenomination.setPreferredSize(new Dimension(260, 60));
+			panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination"));
+			denominationLabel = new JLabel("Denomination");
+			
 			denomination = new JTextField(SGBD.selectStringConditionString(
 					"CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient));
 			denomination.setPreferredSize(new Dimension(90, 25));
-			panDenomination.setBorder(BorderFactory
-					.createTitledBorder("Denomination"));
-			denominationLabel = new JLabel("Denomination");
+
 			panDenomination.add(denominationLabel);
 			panDenomination.add(denomination);
 			content.add(panDenomination);
-		} else { // Le nom
+			
+		} else { 
+			// Création du JPanel du champ de saisie : Nom //
+			//-----------------------------------//
 			JPanel panNom = new JPanel();
 			panNom.setBackground(Color.white);
 			panNom.setPreferredSize(new Dimension(260, 60));
+			panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
+			nomLabel = new JLabel("Nom :");
+			
 			nom = new JTextField(SGBD.selectStringConditionString("CLIENT",
 					"NOMCLIENT", "IDCLIENT", idClient));
 			nom.setPreferredSize(new Dimension(90, 25));
-			panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
-			nomLabel = new JLabel("Nom :");
+			
 			panNom.add(nomLabel);
 			panNom.add(nom);
 			content.add(panNom);
 
-			// Le prenom
+			// Création du JPanel du champ de saisie : Prénom //
+			//--------------------------------------//
 			JPanel panPrenom = new JPanel();
 			panPrenom.setBackground(Color.white);
 			panPrenom.setPreferredSize(new Dimension(260, 60));
 			panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
 			prenomLabel = new JLabel("Prenom : ");
+			
 			prenom = new JTextField(SGBD.selectStringConditionString("CLIENT",
 					"PRENOMCLIENT", "IDCLIENT", idClient));
 			prenom.setPreferredSize(new Dimension(90, 25));
+			
 			panPrenom.add(prenomLabel);
 			panPrenom.add(prenom);
 			content.add(panPrenom);
 		}
 
-		// L'adresse
+		// Création du JPanel du champ de saisie : Adresse //
+		//---------------------------------------//
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(Color.white);
 		panAdresse.setPreferredSize(new Dimension(260, 90));
 		panAdresse.setBorder(BorderFactory.createTitledBorder("Adresse"));
 		adresseLabel = new JLabel("Adresse : ");
+		
 		adresse = new TextArea(SGBD.selectStringConditionString("CLIENT",
 				"ADRESSECLIENT", "IDCLIENT", idClient));
 		adresse.setBackground(Color.LIGHT_GRAY);
 		adresse.setPreferredSize(new Dimension(140, 50));
+		
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
 		content.add(panAdresse);
 
-		// Idville
+		// Récupération de l'identifiant Idville du client pour l'afficher //
+		// ---------------- dans le JPanel de la ville --------------------//
 		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE",
 				"IDCLIENT", idClient);
 
-		// ville
+		// Création du JPanel du champ de saisie non modifiable : Ville //
+		//--------------------------------------------------------------//
 		JPanel panVille = new JPanel();
 		panVille.setBackground(Color.white);
 		panVille.setPreferredSize(new Dimension(260, 60));
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville"));
 		villeLabel = new JLabel("Ville: ");
+		
 		ville = new JTextField(SGBD.selectStringConditionString("VILLE",
 				"NOMVILLE", "IDVILLE", idVille));
-		ville.setEnabled(false);
+		ville.setEnabled(false); 
 		ville.setPreferredSize(new Dimension(90, 25));
+		
 		panVille.add(villeLabel);
 		panVille.add(ville);
 		content.add(panVille);
 
-		// Code Postal
+		// Création du JPanel du champ de saisie : Code Postal //
+		//-------------------------------------------//
 		JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(260, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Code Postal : ");
+		
 		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE",
 				"CODEPOSTAL", "IDVILLE", idVille));
 		codePostal.setPreferredSize(new Dimension(100, 25));
+		
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
 		content.add(panCP);
-
+		
+		// Définition d'un menu déroulant des villes de la base de données
+		// qui sera proposé à l'utilisateur qui a saisi un code postal
+		// qui n'existe pas encore dans la base de données
 		listeVille = new JComboBox();
 		ArrayList<String> listeVilles = SGBD.selectListeStringOrdonne("VILLE",
 				"NOMVILLE", "NOMVILLE");
@@ -235,22 +265,30 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		listeVille.setVisible(false);
 		panCP.add(listeVille);
 
-		// Telephone
+		// Création du JPanel du champ de saisie : Telephone //
+		// ----------------------------------------//
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(Color.white);
 		panTelephone.setPreferredSize(new Dimension(260, 60));
 		panTelephone.setBorder(BorderFactory.createTitledBorder("Telephone"));
 		telLabel = new JLabel("Telephone : ");
+		
 		telephone = new JTextField(SGBD.selectStringConditionString("CLIENT",
 				"TELEPHONE", "IDCLIENT", idClient));
 		telephone.setPreferredSize(new Dimension(90, 25));
+		
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
 		content.add(panTelephone);
-
+		
+		// Création du JPanel qui accueillera les deux boutons de la fenêtre : // 
+		// ----------------------- Valider et Annuler -------------------------//
+		//---------------------------------------------------------------------//
 		JPanel control = new JPanel();
 		JButton validationBouton = new JButton("Valider");
-
+		
+		// Définition de l'action du bouton Valider //
+		//------------------------------------------//
 		validationBouton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -329,7 +367,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 					}
 
 					// Si aucune erreur détectée, alors enregistrement des
-					// modifications
+					// modifications dans la base de données 
 
 					if (!SGBD.selectStringConditionString("CLIENT",
 							"DENOMINATIONCLIENT", "IDCLIENT", numClient)
@@ -344,28 +382,35 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 								telephone.getText());
 					}
 
-					// on pourra enregistrer dans base de données la
-					// modification
+					// Fermeture de la fenêtre une fois les modifications enregistrées
 					setVisible(false);
 
 				} catch (ExceptionExcesDeCaracteres e1) {
 					JOptionPane.showMessageDialog(null, e1.getMessage()
 							+ " veuillez modifier le champ concerné",
 							"Attention ", JOptionPane.WARNING_MESSAGE);
+					
 				} catch (ExceptionCodePostalDifferentDeCinqChiffres e2) {
 					JOptionPane.showMessageDialog(null, e2.getMessage()
 							+ " veuillez modifier le champ concerné",
 							"Attention ", JOptionPane.WARNING_MESSAGE);
+					
 				} catch (ExceptionNumeroDeTelephoneDifferentDeDixChiffres e3) {
 					JOptionPane.showMessageDialog(null, e3.getMessage()
 							+ " veuillez modifier le champ concerné",
 							"Attention ", JOptionPane.WARNING_MESSAGE);
+					
 				} catch (ExceptionCodePostalIncorrect e4) {
 					JOptionPane.showMessageDialog(null, e4.getMessage(),
 							"Attention ", JOptionPane.WARNING_MESSAGE);
+					
+					// Comme l'utilisateur a fait une erreur de saisie de code postal 
+					// nous lui affichons le menu déroulant à la place du champ de 
+					// saisie
 					codePostal.setVisible(false);
 					listeVille.setEnabled(true);
 					listeVille.setVisible(true);
+					
 				} catch (ExceptionNumeroDeTelephoneIncorrect e5) {
 					JOptionPane.showMessageDialog(null, e5.getMessage()
 							+ " veuillez modifier le champ concerné",
@@ -375,17 +420,23 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			}
 
 		});
-
+		
+		// Définition de l'action du bouton Annuler qui ferme la fenêtre du compte //
+		//-------------------------------------------------------------------------//
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
 		});
-
+		
+		// Ajout des boutons au JPanel des boutons : control //
+		//---------------------------------------------------//
 		control.add(validationBouton);
 		control.add(annulationBouton);
-
+		
+		// Ajout des composants principaux au conteneur de la fenêtre //
+		//------------------------------------------------------------//
 		this.getContentPane().add(panIcon, BorderLayout.WEST);
 		this.getContentPane().add(content, BorderLayout.CENTER);
 		this.getContentPane().add(control, BorderLayout.SOUTH);

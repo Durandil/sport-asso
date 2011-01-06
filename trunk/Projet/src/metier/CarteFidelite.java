@@ -189,7 +189,7 @@ public class CarteFidelite {
 				+ "','"
 				+ this.nombreDePoints
 				+ "','" + this.idClient + "')";
-		System.out.println(requete2);
+
 		SGBD.executeUpdate(requete2);
 
 	}
@@ -220,7 +220,6 @@ public class CarteFidelite {
 		String requete = "UPDATE CARTE_FIDELITE SET NBPOINTS=" + nbrePoints
 				+ " WHERE IDCLIENT='" + idClient + "'";
 
-		System.out.println(requete);
 		SGBD.executeUpdate(requete);
 
 	}

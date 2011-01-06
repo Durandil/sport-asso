@@ -89,8 +89,8 @@ public class FenetreSuppressionPanier extends JDialog {
 	private void initComponent(int quantiteEntree, String idArticle) {
 		final String identifiantArticle = idArticle;
 
-		// Définition du panneau dans lequel le client verra la description de
-		// l'article
+		// Définition du panneau dans lequel le client verra la description de //
+		// --------------------------- l'article ------------------------------//
 		JPanel panneauDescription = new JPanel();
 		panneauDescription.setBackground(Color.white);
 		panneauDescription.setLayout(new GridLayout(2, 1, 0, 5));
@@ -103,8 +103,8 @@ public class FenetreSuppressionPanier extends JDialog {
 		panneauDescription.add(referenceArticleLabel);
 		panneauDescription.add(descriptionArticleLabel);
 
-		// Définition du panneau dans lequel le client sélectionnera la quantité
-		// d'un article
+		// Définition du panneau dans lequel le client sélectionnera la quantité //
+		// ---------------------------- d'un article ----------------------------//
 		JPanel panneauQuantite = new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));
@@ -113,8 +113,8 @@ public class FenetreSuppressionPanier extends JDialog {
 		quantiteLabel = new JLabel("Quantité : ");
 
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la
-		// quantité
-		// qu'il a déjà commandée de l'article
+		// quantité qu'il a déjà commandée de l'article
+ 
 		quantite = new JComboBox();
 		for (int i = 1; i <= quantiteEntree; i++) {
 			quantite.addItem(i + "");
@@ -123,7 +123,7 @@ public class FenetreSuppressionPanier extends JDialog {
 		quantite.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				String choix = (String) ((JComboBox) e.getSource())
 						.getSelectedItem();
 				quantiteSelectionnee = Integer.parseInt(choix);
@@ -134,9 +134,9 @@ public class FenetreSuppressionPanier extends JDialog {
 		quantite.setVisible(true);
 		panneauQuantite.add(quantite);
 
-		// Définition du panneau dans lequel seront présents les boutons de
-		// confirmation ou d'annulation
-		// du choix d'un article dans le panier
+		// Définition du panneau dans lequel seront présents les boutons de  //
+		// confirmation ou d'annulation du choix d'un article dans le panier //
+		//-------------------------------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 		panneauBoutons.setBackground(Color.white);
 
@@ -145,11 +145,12 @@ public class FenetreSuppressionPanier extends JDialog {
 		JButton boutonAnnulerSuppression = new JButton(
 				"Annuler Modification Panier");
 
-		// Définition des actions relatives à chaque bouton
+		// Définition des actions relatives à chaque bouton //
+		//--------------------------------------------------//
 
 		boutonValiderSuppression.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Modificationdans le panier.
+				// Modification dans le panier.
 				Commande.enleverArticlePanier(identifiantArticle,
 						quantiteSelectionnee + "",
 						FenetreCommandeArticle.panierClient);
@@ -173,11 +174,13 @@ public class FenetreSuppressionPanier extends JDialog {
 			}
 		});
 
-		// Ajout des boutons au panneau principal des boutons panneauBoutons
+		// Ajout des boutons au JPanel principal des boutons panneauBoutons //
+		//------------------------------------------------------------------//
 		panneauBoutons.add(boutonValiderSuppression);
 		panneauBoutons.add(boutonAnnulerSuppression);
 
-		// Ajout des JPanel crées ci-dessus dans le conteneur de la fenêtre
+		// Ajout des JPanel crées ci-dessus dans le conteneur de la fenêtre //
+		//------------------------------------------------------------------//
 		this.getContentPane().add(panneauDescription, BorderLayout.NORTH);
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);

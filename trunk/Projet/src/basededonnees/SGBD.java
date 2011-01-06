@@ -1246,7 +1246,11 @@ public class SGBD {
 			st = c.createStatement();
 			String conditionWhereOr = "WHERE (";
 			boolean ajouterChamp = false;
-
+			
+			// En entrée, nous avons récupéré les champs complétés par le gérant
+			// dans le formulaire. Maintenant, nous allons rechercher les individus 
+			// en rajoutant les critères remplis dans le WHERE ( non vides).
+			
 			if (!idClient.equals("")) {
 				conditionWhereOr = conditionWhereOr + "IDCLIENT Like '%"
 						+ idClient + "%'";
@@ -1284,31 +1288,39 @@ public class SGBD {
 				ajouterChamp = true;
 			}
 
-			// si un utilisateur ne remplit aucun champ et appuie sur le bouton
+			// Si un utilisateur ne remplit aucun champ et appuie sur le bouton
 			// il pourra voir la liste des clients
+			// Sinon, il verra la liste respectant les critères remplis
 			if (conditionWhereOr.equals("WHERE (")) {
+				
 				conditionWhereOr = "WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
-				System.out.println("condition 5");
-			} else {
+
+			} 	
+			else {
+				
 				conditionWhereOr = conditionWhereOr
 						+ " ) AND (VILLE.IDVILLE = CLIENT.IDVILLE) ";
 			}
 
 			res = st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT"
 					+ " FROM CLIENT, VILLE " + conditionWhereOr);
-
-			System.out
-					.println("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT"
-							+ " FROM CLIENT, VILLE " + conditionWhereOr);
-
+			
+			// Tant qu'il y a des observations dans le ResultSet, nous allons récupérer
+			// les 4 informations de l'observation et le stocker dans un ArrayList
 			while (res.next()) {
 
 				String s, s2, s3, s4;
+				
 				s = res.getObject(1).toString();
-
 				listeString1.add(s);
-				if (res.getObject(2) != null) {
-
+				
+				// Traitement du cas où le nom du client n'est pas vide
+				// cas où nous récupérons les informations d'un compte particulier
+				
+				if (res.getObject(2) != null) {	
+					// Récupération  pour le nom et le prénom en 2 et 3ème position et
+					// Renvoi de vide pour la dénomination 
+					
 					s2 = res.getObject(2).toString();
 					s3 = res.getObject(3).toString();
 					listeString2.add(s2);
@@ -1316,11 +1328,18 @@ public class SGBD {
 					s4 = " ";
 					listeString4.add(s4);
 
-				} else {
+				} 
+				
+				// Traitement du cas où la dénomination du client n'est pas vide
+				// cas où nous récupérons les informations d'un compte association			
+				else {
+					// Récupération de la dénomination en 4ème position et
+					// Renvoi de vide pour le nom et le prénom
 					s2 = " ";
 					s3 = " ";
 					listeString2.add(s2);
 					listeString3.add(s3);
+					
 					s4 = res.getObject(4).toString();
 					listeString4.add(s4);
 				}
@@ -1329,6 +1348,7 @@ public class SGBD {
 			informationsClient.add(listeString2);
 			informationsClient.add(listeString3);
 			informationsClient.add(listeString4);
+			
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative d’interrogation : "
 					+ e.getMessage());
@@ -1340,9 +1360,6 @@ public class SGBD {
 		return informationsClient;
 	}
 
-	/** TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Méthode jamais appelée **/
-	/** TODO TODO TODO TODO TODO TODO **/
 	/**
 	 * Retourne le nombre de promotions exceptionnelles valables à l'instant
 	 * présent dans la base de données. Elle est utilisée uniquement pour le
@@ -1401,6 +1418,7 @@ public class SGBD {
 				}
 			}
 			nbrePromo = Integer.parseInt(compteurPromotion);
+			
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} catch (NumberFormatException exc) {

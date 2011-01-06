@@ -466,7 +466,7 @@ public class Article {
 
 		String stockPresentBase = SGBD.selectStringConditionString("ARTICLE",
 				"STOCK", "IDARTICLE", numArticle);
-		System.out.println(stockPresentBase);
+
 		int nouveauStock = stock + Integer.parseInt(stockPresentBase);
 
 		String requete = "UPDATE ARTICLE SET STOCK = '" + nouveauStock

@@ -46,7 +46,7 @@ public class MenuGerant extends JFrame {
 	private JMenuItem itemPromotions = new JMenuItem(
 			"Gestion des promotions exceptionnelles");
 
-	private JLabel icon;
+	private JLabel image;
 
 	/**
 	 * <p>
@@ -64,28 +64,29 @@ public class MenuGerant extends JFrame {
 	 */
 	public MenuGerant() {
 		this.setSize(663, 314);
-		this.setPreferredSize(new Dimension(663, 314));
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
+		this.setResizable(false);
+		this.setLayout(new BorderLayout());
+		
+		// Récupération des dimensions de l'écran et centrage de la fenêtre //
+		//------------------------------------------------------------------//
 		Dimension dimensionEcran = this.getToolkit().getScreenSize();
 		this.setLocation((dimensionEcran.width - this.getSize().width) / 2,
 				(dimensionEcran.height - this.getSize().height) / 2);
 
-		this.setResizable(false);
-		this.setLayout(new BorderLayout());
-
-		// Insertion de l'image au panneau final
-		icon = new JLabel(new ImageIcon("src/images/fenetre.jpg"));
+		// Insertion de l'image au panneau final //
+		//---------------------------------------//
+		image = new JLabel(new ImageIcon("src/images/fenetre.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBackground(Color.white);
 		panImage.setLayout(new BorderLayout());
-		panImage.add(icon);
+		panImage.add(image);
 
 		this.getContentPane().add(panImage, "West");
 
-		// Pour chaque sous-menu (JMenuItem), implémentation de son
-		// actionPerformed correspondant
-		// à la fenetre qu'il faut ouvrir
+		// Pour chaque sous-menu (JMenuItem), implémentation de son     //
+		// actionPerformed correspondant à la fenetre qu'il faut ouvrir //
+		//--------------------------------------------------------------//
 
 		itemGestionCompte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -108,8 +109,7 @@ public class MenuGerant extends JFrame {
 
 		itemFermer.addActionListener(new ActionListener() {
 			// Fermeture du menu Utilisateur et ouverture de la page d'accueil
-			// de
-			// l'application FenetreCompte
+			// de l'application FenetreCompte
 			public void actionPerformed(ActionEvent e) {
 
 				int res = JOptionPane.showConfirmDialog(null,
@@ -140,7 +140,7 @@ public class MenuGerant extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Afficher la fenêtre contenant le tableau des articles en
 				// rupture de stock
-				// et nécessitant un réapprovisionnement du fait de sa qunatité
+				// et nécessitant un réapprovisionnement du fait de sa quantité
 				// en stock
 				FenetreReapprovisionnement fenetreStock = new FenetreReapprovisionnement(
 						null, true);
