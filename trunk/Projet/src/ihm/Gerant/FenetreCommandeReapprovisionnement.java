@@ -79,9 +79,8 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 
 		final String identifiantArticle = idArticle;
 
-		// Définition du panneau dans lequel le gérant sélectionnera la quantité
-		// d'un article //
-		// ------------------------------------------------------------------------------------//
+		// Définition du panneau dans lequel le gérant sélectionnera la quantité d'un article //
+		// -----------------------------------------------------------------------------------//
 		JPanel panneauQuantite = new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));
@@ -100,7 +99,7 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		quantite.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-
+				// Nous récupérons la quantité sélectionnée dans une variable static
 				String choix = (String) ((JComboBox) e.getSource())
 						.getSelectedItem();
 				quantiteSelectionnee = Integer.parseInt(choix);
@@ -111,18 +110,16 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		quantite.setVisible(true);
 		panneauQuantite.add(quantite);
 
-		// Définition du panneau dans lequel seront présents les boutons de
-		// confirmation //
-		// -------ou d'annulation de la commande d'un article en rupture de
-		// stock--------//
+		// Définition du panneau dans lequel seront présents les boutons de confirmation //
+		// ------- ou d'annulation de la commande d'un article en rupture de stock ------//
+		//-------------------------------------------------------------------------------//
+		
 		JPanel panneauBoutons = new JPanel();
 		panneauBoutons.setBackground(Color.white);
 
-		// Définition de l'action relative au bouton valider qui va effectuer la
-		// mise à //
-		// ---- jour du stock dans la base de données et revenir au menu
-		// précédent ------//
-		// -------------------------------------------------------------------------------//
+		// Définition de l'action relative au bouton valider qui va effectuer la mise à  //
+		// ---- jour du stock dans la base de données et revenir au menu précédent ------//
+		// ------------------------------------------------------------------------------//
 
 		JButton boutonValiderSelection = new JButton("Valider Commande Article");
 
@@ -138,10 +135,9 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 			}
 		});
 
-		// Définition de l'action du bouton pour annuler le réapprovisionnement
-		// de //
-		// ---------------l'article passé en paramètre de la
-		// méthode----------------//
+		// Définition de l'action du bouton pour annuler le réapprovisionnement de //
+		// ---------------l'article passé en paramètre de la méthode---------------//
+		// ------------------------------------------------------------------------//
 
 		JButton boutonAnnulerSelection = new JButton("Annuler Commande Article");
 
@@ -156,13 +152,13 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 			}
 		});
 
-		// Ajout des boutons au JPanel principal des boutons panneauBoutons //
-		// -----------------------------------------------------------------//
+		// Ajout des boutons au JPanel principal des boutons : panneauBoutons //
+		// -------------------------------------------------------------------//
 		panneauBoutons.add(boutonValiderSelection);
 		panneauBoutons.add(boutonAnnulerSelection);
 
 		// Ajout des deux JPanel au conteneur de la fenêtre //
-		// --------------------------------------------------//
+		// -------------------------------------------------//
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 

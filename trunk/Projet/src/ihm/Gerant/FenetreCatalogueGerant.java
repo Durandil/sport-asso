@@ -32,7 +32,7 @@ import metier.Article;
 public class FenetreCatalogueGerant extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	private JLabel icon;
+	private JLabel image;
 	public ModeleTableauCatalogue modTabCatalogue = new ModeleTableauCatalogue();
 	public JTable tableau = new JTable();
 	public JPanel panneauTableau = new JPanel();
@@ -40,7 +40,7 @@ public class FenetreCatalogueGerant extends JDialog {
 	/**
 	 * <b> Création du constructeur de la classe FenetreCatalogueGerant. </b>
 	 * <p>
-	 * La fenetre sera créée selon les instructions de la méthode
+	 * La fenêtre sera créée selon les instructions de la méthode
 	 * initComponent().
 	 * </p>
 	 * 
@@ -69,7 +69,7 @@ public class FenetreCatalogueGerant extends JDialog {
 	 * catalogue d'article (Ajouter, modifier et supprimer un article).</li>
 	 * <li>un JPanel accueillant un tableau avec la liste des articles
 	 * disponibles.</li>
-	 * <li>un JPanel accueillant le boutons de retour à la page précédente.</li>
+	 * <li>un JPanel accueillant le bouton de retour à la page précédente.</li>
 	 * </ul>
 	 * </p>
 	 * 
@@ -84,15 +84,14 @@ public class FenetreCatalogueGerant extends JDialog {
 
 		// Récupération et ajout de l'image sur un JPanel //
 		// ------------------------------------------------//
-		icon = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
+		image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
 		final JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
-		panIcon.add(icon);
+		panIcon.add(image);
 
-		// Définition du tableau qui accueillera l'ensemble des articles
-		// disponibles //
-		// ------------ après interrogation de la base de données
-		// -------------------//
+		// Définition du tableau qui accueillera l'ensemble des articles disponibles //
+		// ------------ après interrogation de la base de données -------------------//
+		//---------------------------------------------------------------------------// 
 
 		modTabCatalogue = new ModeleTableauCatalogue(false, true);
 		tableau = new JTable(modTabCatalogue);
@@ -101,20 +100,22 @@ public class FenetreCatalogueGerant extends JDialog {
 		panneauTableau.add(tab);
 
 		// Création du panneau qui accueillera les boutons du haut permettant //
-		// ----------------- la gestion des articles
-		// --------------------------//
+		// ----------------- la gestion des articles -------------------------//
+		//--------------------------------------------------------------------//
+		
 		final JPanel panneauBoutonHaut = new JPanel();
 		panneauBoutonHaut.setLayout(new GridLayout(1, 4, 5, 5));
 
 		// Définition du bouton permettant d'ajouter un article au catalogue //
-		// Dans ce cas, on construit une nouvelle fenetre
-		// FenetreFormulaireArticleGerant //
-		// -------------------------------------------------------------------------------//
+		// ------------------------------------------------------------------//
+		
+		// Dans ce cas, on construit une nouvelle fenetre FenetreFormulaireArticleGerant
+		
 		final JButton boutonAjouter = new JButton("Ajouter");
 		boutonAjouter.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// ouverture du formulaire d'ajout d'un article dans la base de
+				// Ouverture du formulaire d'ajout d'un article dans la base de
 				// donnees
 
 				FenetreFormulaireArticleGerant formulaire = new FenetreFormulaireArticleGerant(
@@ -126,18 +127,17 @@ public class FenetreCatalogueGerant extends JDialog {
 			}
 		});
 
-		// Définition du bouton permettant de supprimer un article du catalogue
-		// //
+		// Définition du bouton permettant de supprimer un article du catalogue //
+        //----------------------------------------------------------------------//
+		
 		// Nous vérifions d'abord qu'une ligne a bien été selectionnée et nous
-		// //
 		// demandons l'accord du gérant avant de supprimer l'article de la base
-		// //
-		// ----------------------------------------------------------------------//
+
 		JButton boutonSupprimer = new JButton("Supprimer");
 		boutonSupprimer.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// suppression de l'article selectionné dans le catalogue
+				// Suppression de l'article selectionné dans le catalogue
 
 				int ligne = tableau.getSelectedRow();
 
@@ -166,8 +166,7 @@ public class FenetreCatalogueGerant extends JDialog {
 			}
 		});
 
-		// Définition du bouton permettant de modifier un article du catalogue
-		// //
+		// Définition du bouton permettant de modifier un article du catalogue  //
 		// ---------------------------------------------------------------------//
 		JButton boutonModifier = new JButton("Modifier");
 		boutonModifier.addActionListener(new ActionListener() {
@@ -188,7 +187,12 @@ public class FenetreCatalogueGerant extends JDialog {
 				} else {
 
 					try {
-
+						
+						/** TODO 
+						 * est ce les lignes 196 à 218 sont utiles ????
+						 * TODO 
+						 **/
+						
 						numeroArticle = Integer.parseInt(tableau.getValueAt(
 								ligne, 0).toString());
 
