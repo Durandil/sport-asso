@@ -68,7 +68,7 @@ public class FenetreFactureCommande extends JDialog {
 			String identifiantClient, Commande commandeP,
 			ArrayList<LigneCommande> panierClient, int bonsAchatUtilises,
 			boolean utilisationBonsAchat) throws SQLException {
-		
+
 		super(parent, title, modal);
 		this.setSize(600, 650);
 		this.setLocation(50, 50);
@@ -110,7 +110,7 @@ public class FenetreFactureCommande extends JDialog {
 			boolean utilisationBonsAchat) throws SQLException {
 
 		// Récupération des différentes informations du client //
-		//-----------------------------------------------------//
+		// -----------------------------------------------------//
 		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT",
 				"IDCLIENT", idClient);
 		String prenom = SGBD.selectStringConditionString("CLIENT",
@@ -128,7 +128,7 @@ public class FenetreFactureCommande extends JDialog {
 
 		// Création du panneau JPanel du haut qui contiendra les //
 		// ---------- caractéristiques du client ----------------//
-		//-------------------------------------------------------//
+		// -------------------------------------------------------//
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new GridLayout(3, 1, 5, 5));
 
@@ -144,7 +144,7 @@ public class FenetreFactureCommande extends JDialog {
 
 		// Création du JPanel qui contiendra les informations relatives à la //
 		// ------ commande : le numéro et la date de la commande ------------//
-		//-------------------------------------------------------------------//
+		// -------------------------------------------------------------------//
 		JPanel panneauDateCommande = new JPanel();
 		dateCommandeLabel = new JLabel("Date commande : " + commande.getDate());
 		numCommandeLabel = new JLabel("Numéro de commande : "
@@ -154,29 +154,29 @@ public class FenetreFactureCommande extends JDialog {
 
 		panneauHaut.add(panneauCaracteristiquesClient);
 		panneauHaut.add(panneauDateCommande);
-		
 
-		// Création du tableau avec le listing de tous les articles achetés dans //
-		// --------------------------- la commande ------------------------------//
-		//-----------------------------------------------------------------------//
+		// Création du tableau avec le listing de tous //
+		// les articles achetés dans la commande ------//
+		// --------------------------------------------//
 		ModeleTableauCommande modele = new ModeleTableauCommande(panier,
 				commande, idClient);
 		JTable tableau = new JTable(modele);
 		JScrollPane tab = new JScrollPane(tableau);
 		tableau.setEnabled(false);
-		
 
-		// Création d'un JPanel qui contiendra le montant total de la commande //
-		// ------------- après utilisation du bon d'achat ---------------------//
-		//---------------------------------------------------------------------//
+		// Création d'un JPanel qui contiendra   //
+		// le montant total de la commande après //
+		// ----- utilisation du bon d'achat -----//
+		// --------------------------------------//
 		JPanel panneauBas = new JPanel();
 		panneauBas.setLayout(new GridLayout(2, 1, 2, 0));
 		panneauBas.setBorder(BorderFactory.createLineBorder(Color.gray));
 		bonsAchatLabel = new JLabel(
 				"Nombre de points de réduction utilisés  sur votre carte de fidélité  :  "
 						+ bonsAchat);
-		// Si le client a utilisé son bon achat, nous affichons le montant du bon de
-		// réduction
+		
+		// Si le client a utilisé son bon achat, nous affichons 
+		// le montant du bon de réduction
 		if (utilisationBonsAchat == true) {
 			panneauBas.add(bonsAchatLabel);
 		}
@@ -185,9 +185,9 @@ public class FenetreFactureCommande extends JDialog {
 						"MONTANTCOMMANDE", "IDCOMMANDE",
 						commande.getIdCommande()) + " €");
 		panneauBas.add(totalLabel);
-		
-		// Ajout des composants JPanel crées ci-dessus dans le conteneur de la fenêtre //
-		//-----------------------------------------------------------------------------//
+
+		// Ajout des composants JPanel crées ci-dessus 
+		// dans le conteneur de la fenêtre 
 		this.getContentPane().add(panneauHaut, "North");
 		this.getContentPane().add(tab, "Center");
 		this.getContentPane().add(panneauBas, "South");

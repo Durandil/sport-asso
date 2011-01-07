@@ -79,8 +79,9 @@ public class FenetreFideliteClient extends JDialog {
 	 * <p>
 	 * Initialisation des composants de la fenêtre :
 	 * <ul>
-	 * <li>le JPanel contenant le JComboBox sur l'état du compte fidélité du client qui
-	 * peut être modifié si le client ne possède pas encore de compte adhérent.</li>
+	 * <li>le JPanel contenant le JComboBox sur l'état du compte fidélité du
+	 * client qui peut être modifié si le client ne possède pas encore de compte
+	 * adhérent.</li>
 	 * <li>le JPanel contenant le JTextField affichant le nombre de points sur
 	 * le compte fidélité.</li>
 	 * <li>le JPanel contenant les boutons de confirmation ou d'annulation de
@@ -90,16 +91,18 @@ public class FenetreFideliteClient extends JDialog {
 	 */
 	private void initComponent() {
 
-		// Création du JPanel de gestion de la demande d'une carte de fidelité //
-		//---------------------------------------------------------------------//
+		// Création du JPanel de gestion de la //
+		// demande d'une carte de fidelité ----//
+		// ------------------------------------//
 		JPanel panFidelite = new JPanel();
 		panFidelite.setBackground(Color.white);
 		panFidelite.setPreferredSize(new Dimension(220, 80));
 		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
 
-		// Récupération dans la base de donnees des informations sur la fidélité //
-		//-----------------------------------------------------------------------//
+		// Récupération dans la base de données // 
+		// des informations sur la fidélité ----//
+		// -------------------------------------//
 		ArrayList<String> fideliteClient = new ArrayList<String>();
 		fideliteClient = SGBD
 				.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
@@ -111,39 +114,41 @@ public class FenetreFideliteClient extends JDialog {
 			nbPoints = 0;
 			FenetreDialogCreationCompte.itemFidelite = "Non";
 		} else {
-			// Si le client est adhérent, récupération du nombre de points du client
+			// Si le client est adhérent, récupération du nombre de points du
+			// client
 			FenetreDialogCreationCompte.itemFidelite = "Oui";
 
 			nbPoints = Integer.parseInt(SGBD.selectStringConditionString(
 					"CARTE_FIDELITE", "NBPOINTS", "IDCLIENT",
-					FenetreDialogIdentification.clientUserIdentifiant)); 
+					FenetreDialogIdentification.clientUserIdentifiant));
 		}
 
 		// Création du menu déroulant sur la demande de la carte de fidélité //
-		//-------------------------------------------------------------------//
+		// -------------------------------------------------------------------//
 		fidelite = new JComboBox();
 		fidelite.addItem("Oui");
 		fidelite.addItem("Non");
 		fidelite.setSelectedItem(FenetreDialogCreationCompte.itemFidelite);
 
 		if (FenetreDialogCreationCompte.itemFidelite == "Oui") {
-			// Si la personne a répondu oui lors de la création de compte,nous ne
-			// lui permettons pas de modifier le contenu du menu déroulant
+			// Si la personne a répondu oui lors de la création de compte,
+			// nous ne lui permettons pas de modifier le contenu du menu
+			// déroulant
 			fidelite.setEnabled(false);
-			
+
 		} else {
-			
+
 			// Dans le cas contraire, il pourra le modifier
 			fidelite.setEnabled(true);
-			
+
 		}
 
 		fidelite.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
-				// Si la valeur du menu déroulant est modifiée, nous changeons pour
-				// l'individu la valeur de l'attribut du compte fidélité
+				// Si la valeur du menu déroulant est modifiée, nous changeons
+				// pour l'individu la valeur de l'attribut du compte fidélité
 				FenetreDialogCreationCompte.itemFidelite = (String) ((JComboBox) e
 						.getSource()).getSelectedItem();
 
@@ -163,7 +168,7 @@ public class FenetreFideliteClient extends JDialog {
 		panFidelite.add(fidelite);
 
 		// Création d'un JPanel permettant l'affichage du nombre de points //
-		//-----------------------------------------------------------------//
+		// -----------------------------------------------------------------//
 		JPanel panPointsFidelite = new JPanel();
 		panPointsFidelite.setBackground(Color.white);
 		panPointsFidelite.setPreferredSize(new Dimension(220, 80));
@@ -178,7 +183,7 @@ public class FenetreFideliteClient extends JDialog {
 		panPointsFidelite.add(pointsFidelite);
 
 		// Définition du bouton d'affichage du bon d'achat disponible //
-		//---------------------------------------------------------------//
+		// -----------------------------------------------------------//
 		JButton boutonAffichageBons = new JButton(
 				"Afficher les bons d'achat disponibles");
 		boutonAffichageBons.addActionListener(new ActionListener() {
@@ -189,7 +194,8 @@ public class FenetreFideliteClient extends JDialog {
 
 				int bonAchat = CarteFidelite.calculerBonsReductions(points);
 
-				ImageIcon imageInformation = new ImageIcon("src/images/information.jpg");
+				ImageIcon imageInformation = new ImageIcon(
+						"src/images/information.jpg");
 				JOptionPane.showMessageDialog(null,
 						"Vous disposez d'un bon d'achat de " + bonAchat + " €",
 						"Information sur les bons d'achat",
@@ -199,49 +205,53 @@ public class FenetreFideliteClient extends JDialog {
 		});
 
 		// Création du JPanel central qui accueillera les JPanel crées //
-		// ci-dessus et qui seront affichés au centre de la fenêtre    //
-		//--------------------------------------------------------------//
+		// ci-dessus et qui seront affichés au centre de la fenêtre ---//
+		// ------------------------------------------------------------//
 		JPanel panneauCentral = new JPanel();
 		panneauCentral.add(panFidelite);
 		panneauCentral.add(panPointsFidelite);
 		panneauCentral.add(boutonAffichageBons);
 
-		// Définition du JPanel panneauBoutons qui va accueillir les boutons de //
-		// ---------------- confirmation et d'annulation -----------------------//
-		//----------------------------------------------------------------------//
+		// Définition du JPanel panneauBoutons qui va //
+		// accueillir les boutons de confirmation et -//
+		// ------------- d'annulation ----------------//
+		// -------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 
 		// Définition du bouton Confirmer qui permet de confirmer la création //
 		// --------------- d'une nouvelle carte de fidélité ------------------//
-		//--------------------------------------------------------------------//
+		// --------------------------------------------------------------------//
 		JButton validationBouton = new JButton("Confirmer");
 		validationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Modification du programme fidelité
-				// (par ex : passage de non à oui, on ne peut pas passer de oui à
-				// non a priori)			
+				// (par ex : passage de non à oui, on ne peut 
+				// pas passer de oui à non a priori) 
 
 				if (estFidele.equals("Non")
-						& FenetreDialogCreationCompte.itemFidelite.equals("Oui")) {
-								
-					new CarteFidelite(FenetreDialogIdentification.clientUserIdentifiant,0);
-							
+						& FenetreDialogCreationCompte.itemFidelite
+								.equals("Oui")) {
+
+					new CarteFidelite(
+							FenetreDialogIdentification.clientUserIdentifiant,
+							0);
+
 				}
-				
+
 				// Et retour au menu utilisateur
 				dispose();
 			}
 		});
-		
+
 		// Définition de l'action du bouton annulation qui permet de fermer //
 		// ----------------------- la fenêtre en cours ---------------------//
-		//------------------------------------------------------------------//
-		
+		// ------------------------------------------------------------------//
+
 		String nomBouton = "Annuler";
 		if (estFidele.equals("Oui")) {
 			nomBouton = "Retour";
 		}
-		
+
 		JButton annulationBouton = new JButton(nomBouton);
 		annulationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -260,9 +270,9 @@ public class FenetreFideliteClient extends JDialog {
 		if (estFidele.equals("Oui")) {
 			validationBouton.setVisible(false);
 		}
-		
+
 		// Ajout des principaux composants JPanel au conteneur de la fenêtre //
-		//-------------------------------------------------------------------//
+		// -------------------------------------------------------------------//
 		this.getContentPane().add(panneauCentral, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 	}

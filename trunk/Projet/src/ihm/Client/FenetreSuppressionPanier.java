@@ -22,7 +22,7 @@ import metier.LigneCommande;
 
 /**
  * Cette classe FenetreSuppression s'affiche une fois que le client a choisi un
- * article dans son panier et qu'il souhaite en enlever une certaine quantité
+ * article dans son panier et qu'il souhaite en enlever une certaine quantité.
  * 
  * @see FenetreCommandeArticle
  */
@@ -36,7 +36,7 @@ public class FenetreSuppressionPanier extends JDialog {
 	/**
 	 * Constructeur de la classe FenetreSuppression dans laquelle le client
 	 * pourra choisir la quantité qu'il désire enlever de l'article sélectionné
-	 * dans le tableau du catalogue
+	 * dans le tableau du catalogue.
 	 * 
 	 * @param parent
 	 *            JFrame utilisé pour créer la fenêtre
@@ -137,7 +137,7 @@ public class FenetreSuppressionPanier extends JDialog {
 
 		// Définition du panneau dans lequel seront présents les boutons de //
 		// confirmation ou d'annulation du choix d'un article dans le panier //
-		// -------------------------------------------------------------------//
+		// ------------------------------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 		panneauBoutons.setBackground(Color.white);
 
@@ -157,11 +157,9 @@ public class FenetreSuppressionPanier extends JDialog {
 						FenetreCommandeArticle.panierClient);
 
 				dispose();
-				// On change la valeur du booleen retraitPanierPossible pour
-				// qu'il ne
-				// puisse pas faire deux retraits consécutifs d'un même article
-				// sans
-				// rafraîchir le panier
+				// Nous changeons la valeur du booleen retraitPanierPossible 
+				// pour qu'il ne puisse pas faire deux retraits consécutifs 
+				// d'un même article sans rafraîchir le panier 
 				FenetreCommandeArticle.retraitPanierPossible = false;
 
 			}
@@ -169,19 +167,19 @@ public class FenetreSuppressionPanier extends JDialog {
 
 		boutonAnnulerSuppression.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// permet d'annuler la sélection en cours et retour vers page
-				// principale
+				// Permet d'annuler la sélection en cours 
+				// et de retourner vers la page principale
 				dispose();
 			}
 		});
 
 		// Ajout des boutons au JPanel principal des boutons panneauBoutons //
-		// ------------------------------------------------------------------//
+		// -----------------------------------------------------------------//
 		panneauBoutons.add(boutonValiderSuppression);
 		panneauBoutons.add(boutonAnnulerSuppression);
 
 		// Ajout des JPanel crées ci-dessus dans le conteneur de la fenêtre //
-		// ------------------------------------------------------------------//
+		// -----------------------------------------------------------------//
 		this.getContentPane().add(panneauDescription, BorderLayout.NORTH);
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);

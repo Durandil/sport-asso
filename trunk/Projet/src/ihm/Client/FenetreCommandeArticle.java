@@ -90,8 +90,8 @@ public class FenetreCommandeArticle extends JDialog {
 	 *            Booléen indiquant si la fenêtre doit bloquer ou non les
 	 *            interactions avec les autres fenêtres
 	 */
-	public FenetreCommandeArticle(JFrame parent,boolean modal) {
-		super(parent,"Catalogue Article",true);
+	public FenetreCommandeArticle(JFrame parent, boolean modal) {
+		super(parent, "Catalogue Article", true);
 		this.setSize(500, 1000);
 		this.setLocation(50, 50);
 		this.setResizable(true);
@@ -119,10 +119,10 @@ public class FenetreCommandeArticle extends JDialog {
 	 */
 	private void initComponent() {
 
-		// Définition du JPanel qui ne contiendra que l'affichage de part et //
-		// d'autre de la fenetre des intitulés des tableaux catalogie et panier
-		// //
-		// ----------------------------------------------------------------------//
+		// Définition du JPanel qui ne contiendra que ----//
+		// l'affichage de part et d'autre de la fenetre --//
+		// des intitulés des tableaux catalogue et panier //
+		// -----------------------------------------------//
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new BorderLayout());
 
@@ -132,9 +132,9 @@ public class FenetreCommandeArticle extends JDialog {
 		panneauHaut.add(panneauCatalogue, "West");
 
 		// Affichage d'un JPanel contenant un bouton à cocher uniquement pour //
-		// les adhérents afin de leur demander s'ils veulent utiliser leur //
+		// les adhérents afin de leur demander s'ils veulent utiliser leur ---//
 		// ------------------- bon de réduction ------------------------------//
-		// --------------------------------------------------------------------//
+		//--------------------------------------------------------------------//
 		JPanel panneauUtilisationBonsReduction = new JPanel();
 
 		// Récupération des informations concernant la fidélité du client //
@@ -164,8 +164,7 @@ public class FenetreCommandeArticle extends JDialog {
 		});
 
 		// Si le client est adhérent, nous lui affichons le bouton à cocher dans
-		// sa
-		// fenêtre
+		// sa fenêtre
 		if (fideliteClient.get(0).equals("Oui") & bonAchat > 0) {
 			panneauUtilisationBonsReduction.add(utiliseBonAchat);
 		}
@@ -182,11 +181,11 @@ public class FenetreCommandeArticle extends JDialog {
 		panneauHaut.add(panneauPanier, "East");
 
 		// Ajout du JPanel au conteneur en haut de la fenetre //
-		// ----------------------------------------------------//
+		//----------------------------------------------------//
 		this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
 
 		// Définition du JPanel qui accueillera le catalogue //
-		// ---------------------------------------------------//
+		// --------------------------------------------------//
 		JPanel panneauTableauCatalogue = new JPanel();
 		panneauTableauCatalogue.setLayout(new GridLayout(1, 2, 5, 5));
 
@@ -207,9 +206,10 @@ public class FenetreCommandeArticle extends JDialog {
 		// ---------------------------------------------------------------//
 		JPanel panneauBouton = new JPanel();
 
-		// Définition de l'action du bouton Choisir un Article qui ouvre une      //
-		// fenêtre de choix de la quantité que l'on souhaite acheter de l'article //
-		// -----------------------------------------------------------------------//
+		// Définition de l'action du bouton Choisir un Article  //
+		// qui ouvre une fenêtre de choix de la quantité que ---//
+		// l'on souhaite acheter de l'article ------------------//
+		// -----------------------------------------------------//
 		JButton commanderArticle = new JButton("Choisir un article");
 		commanderArticle.addActionListener(new ActionListener() {
 
@@ -233,9 +233,8 @@ public class FenetreCommandeArticle extends JDialog {
 						"ARTICLE", "STOCK", "IDARTICLE", numArticle);
 
 				// En paramètre, nous avons veillé à ce que la quantité qui sera
-				// affichée dans le JComboBox soit
-				// celle en stock moins celle actuellement commandée pour éviter
-				// les erreurs
+				// affichée dans le JComboBox soit celle en stock moins celle
+				//  actuellement commandée pour éviter les erreurs
 				FenetreChoixCatalogue fen = new FenetreChoixCatalogue(null,
 						"Achat d'article", true, Integer
 								.parseInt(quantiteStock) - quantitePanier,
@@ -349,15 +348,18 @@ public class FenetreCommandeArticle extends JDialog {
 								}
 
 								// Mise à jour du nombre de points sur la carte
-								// en fonction du
-								// montant de la commande
+								// en fonction du montant de la commande
 								if (fideliteClient.get(0).equals("Oui")) {
 
 									int nbPointsAvant = Integer
 											.parseInt(fideliteClient.get(1));
 									int pointsRecoltes = (int) Math
 											.round(montantCommande);
-
+									
+									// Traitement du cas où l'utilisateur a utilisé
+									// son bon achat. Dans ce cas, nous lui retirons 
+									// de sa carte fidélité le nombre de points 
+									// associé au bon d'achat utilisé.
 									if (utilisationBonReduction == true) {
 										int pointsDepenses = CarteFidelite
 												.calculerNombreDePoints(bonAchat);
@@ -448,7 +450,7 @@ public class FenetreCommandeArticle extends JDialog {
 
 		// Définition de l'action du bouton Retirer un article du panier qui //
 		// ouvre une fenêtre permettant de sélectionner la quantité que l'on //
-		// souhaite retirer d'un article sélectionné dans le tableau Panier  //
+		// souhaite retirer d'un article sélectionné dans le tableau Panier //
 		// ------------------------------------------------------------------//
 		final JButton retirerPanierBouton = new JButton(
 				"Retirer un article du panier");
@@ -465,9 +467,8 @@ public class FenetreCommandeArticle extends JDialog {
 							JOptionPane.WARNING_MESSAGE, image);
 					// Affichage d'un message d'erreur en cas de tentative de
 					// retrait d'un article sans avoir rafraichi le panier après
-					// avoir déjà
-					// effectué un retrait d'une certaine quantité de ce même
-					// article
+					// avoir déjà effectué un retrait d'une certaine quantité 
+					// de ce même article 
 				}
 
 				if (lignePanier == -1) {
@@ -488,19 +489,19 @@ public class FenetreCommandeArticle extends JDialog {
 							" Veuillez rafraichir le panier !!!", "Attention",
 							JOptionPane.WARNING_MESSAGE, image);
 					// Affichage d'un message d'erreur en cas de tentative de
-					// retrait d'article
-					// du panier sans avoir rafraîchi le panier après avoir
-					// effectué un ajout d'article au panier
+					// retrait d'article du panier sans avoir rafraîchi
+					// le panier après avoir effectué un ajout d'article au
+					// panier
 				}
 
-				// ligne Panier <> - 1 gère le pb si un client veut retirer un
-				// article de son panier
-				// sans l'avoir sélectionné dans le tableau
+				// ligne Panier <> - 1 gère le pb si un client veut retirer 
+				// un article de son panier sans l'avoir sélectionné dans le
+				// tableau
 
 				// retraitPanierPossible == true gère le problème si un client a
-				// retiré juste avant une certaine
-				// quantité d'un article et qu'il souhaite en retirer une partie
-				// sans réactualiser le tableau panier
+				// retiré juste avant une certaine quantité d'un article et
+				// qu'il souhaite en retirer une partie sans réactualiser
+				// le tableau panier
 
 				// avoirRafraichiApresAjoutPanier==false gère le problème si un
 				// client oublie de rafraîchir le panier après avoir fait
@@ -515,7 +516,7 @@ public class FenetreCommandeArticle extends JDialog {
 
 					String quantitePanier = panier.getValueAt(lignePanier, 1)
 							.toString();
-					
+
 					// Ouverture de la fenêtre
 					FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(
 							null, "Retrait d'article du panier", true,

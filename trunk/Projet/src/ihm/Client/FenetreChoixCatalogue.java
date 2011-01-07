@@ -33,12 +33,12 @@ public class FenetreChoixCatalogue extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
 	private JComboBox choixQuantite;
-	public static int quantiteSelectionnee=-1;
+	public static int quantiteSelectionnee = -1;
 
 	/**
 	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client
 	 * pourra choisir la quantité qu'il désire ajouter de l'article sélectionné
-	 * dans le tableau du catalogue
+	 * dans le tableau du catalogue.
 	 * 
 	 * @param parent
 	 *            JFrame utilisé pour créer la fenêtre
@@ -85,8 +85,9 @@ public class FenetreChoixCatalogue extends JDialog {
 	private void initComponent(int quantiteStock, String idArticle) {
 		final String numArticle = idArticle;
 
-		// Définition du JPanel dans lequel le client verra la description de l'article //
-		//------------------------------------------------------------------------------//
+		// Définition du JPanel dans lequel le client //
+		// verra la description de l'article ---------//
+		// ------------------------------------------//
 		JPanel panneauDescription = new JPanel();
 		panneauDescription.setBackground(Color.white);
 		panneauDescription.setLayout(new GridLayout(2, 1, 0, 5));
@@ -99,8 +100,9 @@ public class FenetreChoixCatalogue extends JDialog {
 		panneauDescription.add(referenceArticleLabel);
 		panneauDescription.add(descriptionArticleLabel);
 
-		// Définition du JPanel dans lequel le client sélectionnera la quantité d'un article //
-		//-----------------------------------------------------------------------------------//
+		// Définition du JPanel dans lequel le client //
+		// sélectionnera la quantité d'un article ----//
+		// ------------------------------------------//
 		JPanel panneauQuantite = new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));
@@ -108,10 +110,12 @@ public class FenetreChoixCatalogue extends JDialog {
 				.createTitledBorder("Ajout au panier"));
 		quantiteLabel = new JLabel("Quantité : ");
 
-		// Défintion d'un JComboBox dans lequel le client choisira la quantité //
-		// ---- qu'il veut ajouter dans son panier en fonction du bouton  -----//
-		// ----- dans lequel il aura cliqué dans FenetreCommandeArticle -------//
-		// --------------------------------------------------------------------//
+		// Défintion d'un JComboBox dans lequel le //
+		// client choisira la quantité qu'il veut -//
+		// ajouter dans son panier en fonction du -//
+		// bouton dans lequel il aura cliqué dans -//
+		// --------- FenetreCommandeArticle --------//
+		// ---------------------------------------//
 		choixQuantite = new JComboBox();
 
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la
@@ -134,9 +138,9 @@ public class FenetreChoixCatalogue extends JDialog {
 		choixQuantite.setVisible(true);
 		panneauQuantite.add(choixQuantite);
 
-		// Définition du JPanel dans lequel seront présents les boutons de   //
+		// Définition du JPanel dans lequel seront présents les boutons de --//
 		// confirmation ou d'annulation du choix d'un article dans le panier //
-		//-------------------------------------------------------------------//
+		// -----------------------------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 		panneauBoutons.setBackground(Color.white);
 
@@ -146,63 +150,66 @@ public class FenetreChoixCatalogue extends JDialog {
 				"Annuler Sélection Article");
 
 		// Définition des actions relatives à chaque bouton //
-		//--------------------------------------------------//
+		// ------------------------------------------------//
 
 		boutonValiderSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				// Traitement du cas où le client ne sélectionne pas de quantité dans
-				// le menu déroulant
-				if(quantiteSelectionnee == -1){
-					
-					JOptionPane.showMessageDialog(null, 
-							"Vous n'avez pas sélectionné la quantité que " +
-							"vous désiriez de l'article "+  numArticle +" !",
-							"Attention",
+
+				// Traitement du cas où le client ne sélectionne
+				// pas de quantité dans le menu déroulant
+				if (quantiteSelectionnee == -1) {
+
+					JOptionPane.showMessageDialog(null,
+							"Vous n'avez pas sélectionné la quantité que "
+									+ "vous désiriez de l'article "
+									+ numArticle + " !", "Attention",
 							JOptionPane.INFORMATION_MESSAGE);
-				}
-				else{
+				} else {
 					// Fermeture de la fenêtre
 					dispose();
-					
+
 					// Ajout de la quantité selectionnée au panier du client
-					Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee,
+					Commande.ajouterArticlePanier(numArticle,
+							quantiteSelectionnee,
 							FenetreCommandeArticle.panierClient);
-	
-					// Nous changeons la valeur du booléen pour indiquer le client a bien
-					// sélectionné une ligne dans le catalogue
+
+					// Nous changeons la valeur du booléen pour
+					// indiquer que le client a bien sélectionné
+					// une ligne dans le catalogue
 					FenetreCommandeArticle.activationLigneCatalogue = true;
-	
-					// Nous changeons la valeur du booléen avoirRafraichiApresAjoutPanier
-					// pour qu'il ne
-					// puisse pas faire deux ajouts consécutifs d'un même article
+
+					// Nous changeons la valeur du booléen
+					// avoirRafraichiApresAjoutPanier
+					// pour qu'il ne puisse pas faire deux
+					// ajouts consécutifs d'un même article
 					// sans rafraîchir le panier
 					FenetreCommandeArticle.avoirRafraichiApresAjoutPanier = false;
 				}
-				
-				// Nous remettons la valeur -1 au static quantiteSelectionnee pour traiter le cas
-				// où le client ne sélectionne pas de quantité dans le menu déroulant s'il ouvre de
-				// de nouveau cette fenêtre de choix
+
+				// Nous remettons la valeur -1 au static quantiteSelectionnee
+				// pour traiter le cas où le client ne sélectionne pas de
+				// quantité dans le menu déroulant s'il ouvre de nouveau
+				// cette fenêtre de choix
 				quantiteSelectionnee = -1;
 			}
 		});
 
 		boutonAnnulerSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Permet d'annuler la sélection en cours et de retourner vers la 
-				// page principale
+				// Permet d'annuler la sélection en cours
+				// et de retourner vers la page principale
 				setVisible(false);
 			}
 		});
 
 		// Ajout des boutons au JPanel principal des boutons panneauBoutons //
-		//------------------------------------------------------------------//
+		// ----------------------------------------------------------------//
 		panneauBoutons.add(boutonValiderSelection);
 		panneauBoutons.add(boutonAnnulerSelection);
-		
-		// Ajout des 3 principaux composants JPanel au conteneur de la fenêtre //
-		//---------------------------------------------------------------------//
+
+		// Ajout des 3 principaux composants //
+		// JPanel au conteneur de la fenêtre //
+		// ---------------------------------//
 		this.getContentPane().add(panneauDescription, BorderLayout.NORTH);
 		this.getContentPane().add(panneauQuantite, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);

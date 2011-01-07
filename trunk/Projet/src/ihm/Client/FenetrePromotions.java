@@ -65,42 +65,45 @@ public class FenetrePromotions extends JFrame {
 	 */
 	private void initComponent() {
 
-		// Création du JPanel panneauHaut qui se situera en haut de la fenetre créée //
-		//---------------------------------------------------------------------------// 
+		// Création du JPanel panneauHaut qui se //  
+		// situera en haut de la fenetre créée --//
+		// --------------------------------------//
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new BorderLayout());
 
-		// Création d'un JPanel panneauTitle qui accueillera un texte introductif en haut de la fenêtre //
-		// ---------------------------------------------------------------------------------------------//
+		// Création d'un JPanel panneauTitle qui accueillera //
+		// --- un texte introductif en haut de la fenêtre ---//
+		// --------------------------------------------------//
 		JPanel panneauTitle = new JPanel();
 		promotionsLabel = new JLabel(
 				"Decouvrez les promotions en cours dans le tableau ci-dessous");
 		panneauTitle.add(promotionsLabel);
 		panneauHaut.add(panneauTitle, "Center");
 
-		// Définition du tableau qui affichera l'ensemble des promotions en cours  //
-		// pour le client qui utilise l'application après interrogation de la base //          
-		// ---------------- de données dans ModelePromotionClient -----------------//
-		//-------------------------------------------------------------------------//
+		// Définition du tableau qui affichera l'ensemble des //
+		// promotions en cours pour le client qui utilise ----//
+		// l'application après interrogation de la base ------//
+		// ---- de données dans ModelePromotionClient --------//
+		// ---------------------------------------------------//
 		ModelePromotion modele = new ModelePromotion(false);
 		final JTable tableauPromotions = new JTable(modele);
 
 		// Ajout d'un détecteur des actions de la souris pour afficher //
-		// les détails d'une promotion quand le client clique dessus   //
-		//-------------------------------------------------------------//
+		// les détails d'une promotion quand le client clique dessus --//
+		// ------------------------------------------------------------//
 		tableauPromotions.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
 				// Récupération de la ligne sur laquelle le client a pu cliquer
 				int ligne = tableauPromotions.getSelectedRow();
-				
-				// Traitement du cas où il a cliqué dans le tableau 
+
+				// Traitement du cas où il a cliqué dans le tableau
 				if (ligne != -1) {
-					
-					// Récupération de l'identifiant de la promotion 
+
+					// Récupération de l'identifiant de la promotion
 					String numPromotion = tableauPromotions
 							.getValueAt(ligne, 0).toString();
-					
+
 					// Récupération des attributs d'une promotion exceptionnelle
 					String description = SGBD.selectStringConditionString(
 							"PROMO", "NOMPROMO", "IDPROMO", numPromotion);
@@ -118,7 +121,7 @@ public class FenetrePromotions extends JFrame {
 							"DATEDEBUT", "IDPROMO", numPromotion, "dd/mm/yyyy");
 					String dateFin = SGBD.selectDateConditionString("PROMO",
 							"DATEFIN", "IDPROMO", numPromotion, "dd/mm/yyyy");
-					
+
 					// Affichage d'un message d'information sur la promotion
 					JOptionPane.showMessageDialog(null,
 							"Bénéficiez de la promotion : " + description
@@ -143,10 +146,10 @@ public class FenetrePromotions extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		
+
 		// Définition du JPanel panneauBouton qui accueillera le bouton //
 		// ----- permettant de retourner à la page précédente ----------//
-		//--------------------------------------------------------------//
+		// --------------------------------------------------------------//
 		JPanel panneauBouton = new JPanel();
 
 		JButton retourBouton = new JButton("Retour");
@@ -157,13 +160,14 @@ public class FenetrePromotions extends JFrame {
 		});
 
 		// Ajout du bouton au JPanel panneauBouton //
-		//-----------------------------------------//
+		// -----------------------------------------//
 		panneauBouton.add(retourBouton);
 
 		// AJout des JPanel crées au desssus dans le conteneur de la fenêtre //
-		//-------------------------------------------------------------------//
+		// -------------------------------------------------------------------//
 		this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
-		this.getContentPane().add(new JScrollPane(tableauPromotions),BorderLayout.CENTER);
+		this.getContentPane().add(new JScrollPane(tableauPromotions),
+				BorderLayout.CENTER);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 
 		pack();
