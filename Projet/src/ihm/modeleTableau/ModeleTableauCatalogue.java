@@ -17,7 +17,7 @@ import metier.LigneCommande;
  * La classe ModeleTableauCatalogue hérite de la classe AbstractTableModel
  * permettant l'utilisation de tableau de données. Nous allons utiliser cette
  * classe pour afficher différents types de catalogue d'articles en fonction de
- * l'utilisateur
+ * l'utilisateur.
  * 
  * Pour plus d'informations, voir le constructeur de la classe
  * {@link ModeleTableauCatalogue#ModeleTableauCatalogue(boolean, boolean)}
@@ -55,7 +55,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 	 */
 	public ModeleTableauCatalogue() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 		donnees = new Object[1000][5];
 	}
 
@@ -87,12 +87,11 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		if (pourReapprovisionnement == false) {
 
 			if (pourTableauGerant == true) {
-				// tableau qui accueillera le catalogue pour le gérant et qui
-				// doit afficher
-				// tous les articles contrairement au client
+				// Tableau qui accueillera le catalogue pour le gérant et qui
+				// doit afficher tous les articles contrairement au client
 
-				// Quatre listes sont créées pour récupérer les informations de
-				// la table ARTICLE
+				// Quatre listes sont créées pour récupérer les informations de la table ARTICLE
+				
 				ArrayList<String> listeIdentifiants = SGBD
 						.selectListeStringOrdonneCondition("ARTICLE",
 								"IDARTICLE", "IDARTICLE",
@@ -111,7 +110,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 				donnees = new Object[listeIdentifiants.size()][5];
 
-				// On ajoute les informations dans l'objet donnees
+				// Nous ajoutons les informations dans l'objet donnees
 				for (int i = 0; i < listeIdentifiants.size(); i++) {
 					donnees[i][0] = listeIdentifiants.get(i);
 					donnees[i][1] = listeDescriptions.get(i);
@@ -121,9 +120,8 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 				}
 
 			} else {
-				// tableau qui accueillera le catalogue pour les clients et qui
-				// doit afficher
-				// que les articles sont stock > 0
+				// Tableau qui accueillera le catalogue pour les clients et qui
+				// doit afficher que les articles sont stock > 0
 
 				// Quatre listes sont créées pour récupérer les informations de
 				// la table ARTICLE
@@ -146,7 +144,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 				donnees = new Object[listeIdentifiants.size()][5];
 
-				// On ajoute les informations dans l'objet donnees
+				// Nous ajoutons les informations dans l'objet donnees
 				for (int i = 0; i < listeIdentifiants.size(); i++) {
 					donnees[i][0] = listeIdentifiants.get(i);
 					donnees[i][1] = listeDescriptions.get(i);
@@ -157,9 +155,8 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 			}
 
 		} else {
-			// création des listes pour récupérer les informations des articles
-			// qui ont besoin d'être
-			// reapprovisionnés
+			// Création des listes pour récupérer les informations des articles
+			// qui ont besoin d'être reapprovisionnés
 			ArrayList<ArrayList<String>> listeArticles = new ArrayList<ArrayList<String>>();
 			listeArticles = SGBD.selectArticlesReapprovisionnement();
 			ArrayList<String> listeIdentifiants = listeArticles.get(0);
@@ -169,7 +166,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 			donnees = new Object[listeIdentifiants.size()][4];
 
-			// on ajoute les informations dans l'objet
+			// Nous ajoutons les informations dans l'objet
 			for (int i = 0; i < listeIdentifiants.size(); i++) {
 				donnees[i][0] = listeIdentifiants.get(i);
 				donnees[i][1] = listeDescriptions.get(i);

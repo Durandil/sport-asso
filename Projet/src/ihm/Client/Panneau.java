@@ -27,13 +27,13 @@ public class Panneau extends JPanel {
 				"Créer l'envie et rendre accessible au plus grand nombre le plaisir et les bienfaits du sport",
 				20, 40);
 		g.drawString(
-				"Telle est la promesse que SPORT'ASSO propose à ses clients depuis ses débuts.",
+				"Telle est la promesse que SPORT'ASSO propose à ses clients.",
 				20, 60);
 
 		g.setFont(new Font("Times", Font.BOLD, 10));
 		g.setColor(Color.black);
 		g.drawString(
-				"Regroupant tous les sports sous un même toit, SPORT'ASSO n'a cessé depuis son origine de favoriser l accessibilité à la pratique du sport : ",
+				"Regroupant tous les sports sous un même toit, SPORT'ASSO n'a cessé de favoriser l accessibilité à la pratique du sport : ",
 				20, 80);
 
 		g.drawString(

@@ -85,9 +85,13 @@ public class ModeleTableauCommande extends AbstractTableModel {
 	public ModeleTableauCommande(ArrayList<LigneCommande> panier, Commande com,
 			String numClient) throws SQLException {
 		super();
-
+		
+		// Initialisation du tableau des donnees
 		donnees = new Object[panier.size()][4];
-
+		
+		// Récupération des informations sur la fidélité du client pour
+		// faire le calcul du montant de la commande pour chaque article
+		
 		ArrayList<String> fideliteClient = SGBD
 				.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 		int fidelite = 0;
@@ -107,6 +111,7 @@ public class ModeleTableauCommande extends AbstractTableModel {
 					.montantCommandePourUnArticle(numClient, ligneCommande,
 							fidelite)
 					+ " €";
+			
 			compteurArticle++;
 		}
 	}

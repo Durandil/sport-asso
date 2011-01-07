@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 /**
  * La classe ModelePanier hérite de la classe AbstractTableModel. Sa spécificité
  * est de pouvoir afficher uniquement les articles qui sont dans l'état
- * "En stock" en face de la quantité commandée présente dans le panier du client
+ * "En stock" en face de la quantité commandée présente dans le panier du client.
  * 
  * @see FenetreCommandeArticle
  * 
@@ -54,7 +54,9 @@ public class ModelePanier extends AbstractTableModel {
 		}
 
 		donnees = new Object[taille][2];
+		// Compteur permettant de suivre les indices des articles dans le panier
 		int compteur = 0;
+		
 		for (String[] strings : panier) {
 			donnees[compteur][0] = strings[0];
 			donnees[compteur][1] = strings[1];
@@ -65,7 +67,7 @@ public class ModelePanier extends AbstractTableModel {
 
 	/**
 	 * Cette méthode actualise le tableau actuel à l'aide du panier d'articles
-	 * mis en paramètre
+	 * mis en paramètre.
 	 * 
 	 * @param panierCourant
 	 *            Un ArrayList contenant l'ensemble des articles associés leurs

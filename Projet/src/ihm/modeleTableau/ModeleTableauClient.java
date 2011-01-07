@@ -77,7 +77,7 @@ public class ModeleTableauClient extends AbstractTableModel {
 			ArrayList<String> listePrenom = listeClients.get(2);
 			ArrayList<String> listeDenomination = listeClients.get(3);
 
-			// On ajoute les informations dans l'objet donnees
+			// Nous ajoutons les informations dans l'objet donnees
 			for (int i = 0; i < listeIdentifiants.size(); i++) {
 
 				donnees[i][0] = listeIdentifiants.get(i);

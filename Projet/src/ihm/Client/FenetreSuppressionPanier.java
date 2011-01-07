@@ -91,6 +91,7 @@ public class FenetreSuppressionPanier extends JDialog {
 
 		// Définition du panneau dans lequel le client verra la description de //
 		// --------------------------- l'article ------------------------------//
+		//---------------------------------------------------------------------//
 		JPanel panneauDescription = new JPanel();
 		panneauDescription.setBackground(Color.white);
 		panneauDescription.setLayout(new GridLayout(2, 1, 0, 5));
@@ -105,6 +106,7 @@ public class FenetreSuppressionPanier extends JDialog {
 
 		// Définition du panneau dans lequel le client sélectionnera la quantité //
 		// ---------------------------- d'un article ----------------------------//
+		//-----------------------------------------------------------------------//
 		JPanel panneauQuantite = new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));

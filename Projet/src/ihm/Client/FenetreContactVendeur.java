@@ -70,8 +70,8 @@ public class FenetreContactVendeur extends JDialog {
 	 * saisir le sujet et le contenu du message
 	 */
 	private void initComponent() {
-		// Définition d'un JPanel qui accueillera un titre introductif dans la
-		// fenetre
+		// Définition d'un JPanel qui accueillera un titre introductif dans la fenêtre //
+		//-----------------------------------------------------------------------------//
 		JPanel texteHautPan = new JPanel();
 		texteHautPan.setBorder(BorderFactory.createTitledBorder(""));
 		texteHautPan.setBackground(Color.white);
@@ -79,8 +79,8 @@ public class FenetreContactVendeur extends JDialog {
 		introduction.setSize(12, 1);
 		texteHautPan.add(introduction);
 
-		// Création d'un panneau qui accueillera un texte introductif sous le
-		// titre dans la fenetre
+		// Création d'un panneau qui accueillera un texte introductif sous le //
+		// ------------------- titre dans la fenetre -------------------------//
 		JPanel panneauTexte = new JPanel();
 		panneauTexte.setBackground(Color.white);
 		texte = new JLabel(
@@ -88,8 +88,9 @@ public class FenetreContactVendeur extends JDialog {
 		texte.setSize(8, 1);
 		panneauTexte.add(texte);
 
-		// Creation du panneau sujetPan qui sert à l'affichage et l'écriture du
-		// sujet du message
+		// Creation du JPanel sujetPan qui sert à l'affichage et l'écriture du //
+		// ------------------------ sujet du message --------------------------//
+		//---------------------------------------------------------------------//
 		JPanel sujetPan = new JPanel();
 		sujetPan.setBackground(Color.white);
 		sujetPan.setPreferredSize(new Dimension(260, 100));
@@ -100,8 +101,9 @@ public class FenetreContactVendeur extends JDialog {
 		sujetPan.add(sujetLabel);
 		sujetPan.add(sujet);
 
-		// Creation du panneau contenuPan qui sert à l'affichage et l'écriture
-		// du contenu du message
+		// Creation du JPanel contenuPan qui sert à l'affichage et l'écriture //
+		// -------------------- du contenu du message ------------------------//
+		//--------------------------------------------------------------------//
 		JPanel contenuPan = new JPanel();
 		contenuPan.setBackground(Color.white);
 		contenuPan.setPreferredSize(new Dimension(260, 200));
@@ -116,14 +118,16 @@ public class FenetreContactVendeur extends JDialog {
 		contenuPan.add(contenuLabel);
 		contenuPan.add(contenu);
 
-		// Création du panneau qui accueillera tous les panneaux contenant les
-		// champs du message (sujet,contenu)
+		// Création du JPanel qui accueillera tous les JPanel contenant les //
+		//--------------  champs du message (sujet,contenu) ----------------//
+		//------------------------------------------------------------------//
 		JPanel contentPan = new JPanel();
 		contentPan.add(panneauTexte);
 		contentPan.add(sujetPan);
 		contentPan.add(contenuPan);
 
-		// Création du panneau qui va accueillir le bouton d'envoi du message
+		// Création du panneau qui va accueillir le bouton d'envoi du message //
+		//--------------------------------------------------------------------//
 		JPanel panneauBouton = new JPanel();
 		JButton boutonEnvoyer = new JButton("Envoyer");
 
@@ -132,6 +136,8 @@ public class FenetreContactVendeur extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				String champ = "";
 				try {
+					// Vérification de l'existence de caractères dans le message //
+				
 					if (contenu.getText().length() == 0) {
 						champ = "corps";
 						throw new ExceptionChampVide(
@@ -142,7 +148,9 @@ public class FenetreContactVendeur extends JDialog {
 						throw new ExceptionChampVide(
 								"Le message n'a pas de sujet !");
 					}
-
+					
+					// Vérification de la longueur du texte saisi par rapport à la
+					// contrainte imposée par la base de données
 					if (contenu.getText().length() > 300) {
 						champ = "corps";
 						throw new ExceptionExcesDeCaracteres(
@@ -153,10 +161,8 @@ public class FenetreContactVendeur extends JDialog {
 						throw new ExceptionExcesDeCaracteres(
 								"Le sujet du message est trop long !");
 					} else {
-						// si aucun problème n'est détecté, nous allons
-						// enregistrer
-						// le message et fermer la
-						// fenêtre
+						// Si aucun problème n'est détecté, nous allons
+						// enregistrer le message et fermer la fenêtre
 						java.util.Date date = new java.util.Date();
 
 						@SuppressWarnings("deprecation")
@@ -168,7 +174,7 @@ public class FenetreContactVendeur extends JDialog {
 								FenetreDialogIdentification.clientUserIdentifiant,
 								dateJour, true);
 
-						// fermeture de la fenetre
+						// Fermeture de la fenetre
 						dispose();
 					}
 
@@ -188,72 +194,16 @@ public class FenetreContactVendeur extends JDialog {
 											+ " de votre message est trop long,veuillez le raccourcir",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				}
-				// // avant d'enregistrer le message dans la base de données,
-				// nous
-				// // allons vérifier
-				// // qu'il ne contient pas trop de caractères ou pas de
-				// caractères
-				// // interdits
-				// int verificationChampMessage = Message.verifierChampMessage(
-				// contenu.getText(), sujet.getText());
-				// System.out.println(verificationChampMessage);
-				//
-				// switch (verificationChampMessage) {
-				// case 0:
-				// // si aucun problème n'est détecté, nous allons enregistrer
-				// // le message et fermer la
-				// // fenêtre
-				// java.util.Date date = new java.util.Date();
-				//
-				// @SuppressWarnings("deprecation")
-				// java.sql.Date dateJour = new java.sql.Date(date.getYear(),
-				// date.getMonth(), date.getDate());
-				// new Message(sujet.getText(), contenu.getText(),
-				// FenetreDialogIdentification.clientUserIdentifiant,
-				// dateJour, true);
-				//
-				// // fermeture de la fenetre
-				// dispose();
-				//
-				// break;
-				//
-				// case 1:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Il y a trop de caractères dans la zone du contenu. Reduisez votre message",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 2:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Il y a trop de caractères dans le champ du sujet. Reduisez l'intitulé",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 3:
-				// JOptionPane
-				// .showMessageDialog(
-				// null,
-				// "Votre message contient un caractère interdit : ' ",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// case 4:
-				// JOptionPane.showMessageDialog(null,
-				// "Votre message est vide, remplissez le contenu",
-				// "Attention", JOptionPane.ERROR_MESSAGE);
-				// break;
-				// default:
-				// break;
-				// }
-
+				
 			}
 		});
 
-		// Ajout du bouton Envoyer au JPanel des boutons
+		// Ajout du bouton Envoyer au JPanel des boutons //
+		//-----------------------------------------------//
 		panneauBouton.add(boutonEnvoyer);
 
-		// Ajout de tous les JPanel crées dans le conteneur de la fenêtre
+		// Ajout de tous les JPanel crées dans le conteneur de la fenêtre //
+		//----------------------------------------------------------------//
 		this.getContentPane().add(texteHautPan, BorderLayout.NORTH);
 		this.getContentPane().add(contentPan, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);

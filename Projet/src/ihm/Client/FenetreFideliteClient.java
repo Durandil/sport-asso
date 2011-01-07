@@ -79,7 +79,7 @@ public class FenetreFideliteClient extends JDialog {
 	 * <p>
 	 * Initialisation des composants de la fenêtre :
 	 * <ul>
-	 * <li>le JPanel contenant le JComboBox sur l'état du compte du client qui
+	 * <li>le JPanel contenant le JComboBox sur l'état du compte fidélité du client qui
 	 * peut être modifié si le client ne possède pas encore de compte adhérent.</li>
 	 * <li>le JPanel contenant le JTextField affichant le nombre de points sur
 	 * le compte fidélité.</li>
@@ -133,12 +133,12 @@ public class FenetreFideliteClient extends JDialog {
 		fidelite.setSelectedItem(FenetreDialogCreationCompte.itemFidelite);
 
 		if (FenetreDialogCreationCompte.itemFidelite == "Oui") {
-			// si la personne a répondu oui lors de la création de compte, on ne
+			// Si la personne a répondu oui lors de la création de compte, on ne
 			// lui permet pas de modifier
 			// le contenu du menu déroulant
 			fidelite.setEnabled(false);
 		} else {
-			// dans le cas contraire, il pourra le modifier
+			// Dans le cas contraire, il pourra le modifier
 			fidelite.setEnabled(true);
 		}
 
@@ -146,13 +146,13 @@ public class FenetreFideliteClient extends JDialog {
 
 			public void actionPerformed(ActionEvent e) {
 
-				// si la valeur du menu déroulant est modifiée, on change pour
+				// Si la valeur du menu déroulant est modifiée, on change pour
 				// l'individu la valeur de l'attribut du compte fidélité
 				FenetreDialogCreationCompte.itemFidelite = (String) ((JComboBox) e
 						.getSource()).getSelectedItem();
 
 				if (FenetreDialogCreationCompte.itemFidelite == "Oui") {
-					// si la personne a répondu oui lors de la création de
+					// Si la personne a répondu oui lors de la création de
 					// compte, on ne lui permet pas de modifier
 					// le contenu du menu déroulant
 					fidelite.setEnabled(false);
@@ -202,17 +202,17 @@ public class FenetreFideliteClient extends JDialog {
 			}
 		});
 
-		// Création du panneau central qui accueillera les panneaux crées
-		// ci-dessus et qui seront affichés au centre
-		// de la fenêtre
+		// Création du JPanel central qui accueillera les panneaux crées //
+		// ci-dessus et qui seront affichés au centre de la fenêtre      //
+		//---------------------------------------------------------------//
 		JPanel panneauCentral = new JPanel();
 		panneauCentral.add(panFidelite);
 		panneauCentral.add(panPointsFidelite);
 		panneauCentral.add(boutonAffichageBons);
 
-		// Définition du panneau panneauBoutons qui va accueillir les boutons de //
-		// ---------------- confirmation et d'annulation ------------------------//
-		//-----------------------------------------------------------------------//
+		// Définition du JPanel panneauBoutons qui va accueillir les boutons de //
+		// ---------------- confirmation et d'annulation -----------------------//
+		//----------------------------------------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 
 		// Définition du bouton Confirmer qui permet de confirmer la création //

@@ -38,7 +38,7 @@ public class FenetreInformationsClient extends JFrame {
 		panneauInformations.setBorder(BorderFactory
 				.createTitledBorder("Mot du Gérant : M. Poirier"));
 		
-		// Définition de sa couleur de fond
+		// Définition de la couleur de fond
 		panneauInformations.setBackground(Color.white);
 
 		// Création du JPanel du bas qui accueillera un autre JPanel et une image //

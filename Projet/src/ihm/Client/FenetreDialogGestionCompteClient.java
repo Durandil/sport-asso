@@ -49,7 +49,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private JComboBox listeVille;
 
 	/**
-	 * Constructeur qui ouvre une fenetre permettant la gestion d'un compte
+	 * Constructeur qui ouvre une fenêtre permettant la gestion d'un compte
 	 * client avec différents champs de saisie initialisés dans
 	 * {@link FenetreDialogGestionCompteClient#initComponent(String)}
 	 * 
@@ -134,7 +134,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 				"IDCLIENT", idClient).equals(" ")) {
 			
 			// Création du JPanel du champ de saisie : Denomination //
-			//--------------------------------------------//
+			//------------------------------------------------------//
 			JPanel panDenomination = new JPanel();
 			panDenomination.setBackground(Color.white);
 			panDenomination.setPreferredSize(new Dimension(260, 60));
@@ -151,7 +151,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			
 		} else { 
 			// Création du JPanel du champ de saisie : Nom //
-			//-----------------------------------//
+			//---------------------------------------------//
 			JPanel panNom = new JPanel();
 			panNom.setBackground(Color.white);
 			panNom.setPreferredSize(new Dimension(260, 60));
@@ -167,7 +167,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			content.add(panNom);
 
 			// Création du JPanel du champ de saisie : Prénom //
-			//--------------------------------------//
+			//------------------------------------------------//
 			JPanel panPrenom = new JPanel();
 			panPrenom.setBackground(Color.white);
 			panPrenom.setPreferredSize(new Dimension(260, 60));
@@ -184,7 +184,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		}
 
 		// Création du JPanel du champ de saisie : Adresse //
-		//---------------------------------------//
+		//-------------------------------------------------//
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(Color.white);
 		panAdresse.setPreferredSize(new Dimension(260, 90));
@@ -202,6 +202,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 
 		// Récupération de l'identifiant Idville du client pour l'afficher //
 		// ---------------- dans le JPanel de la ville --------------------//
+		//-----------------------------------------------------------------//
 		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE",
 				"IDCLIENT", idClient);
 
@@ -223,7 +224,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		content.add(panVille);
 
 		// Création du JPanel du champ de saisie : Code Postal //
-		//-------------------------------------------//
+		//-----------------------------------------------------//
 		JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(260, 60));
@@ -266,7 +267,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panCP.add(listeVille);
 
 		// Création du JPanel du champ de saisie : Telephone //
-		// ----------------------------------------//
+		// --------------------------------------------------//
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(Color.white);
 		panTelephone.setPreferredSize(new Dimension(260, 60));
