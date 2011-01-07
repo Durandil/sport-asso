@@ -25,9 +25,10 @@ import metier.LigneCommande;
  * <li>sa date de fin</li>
  * </ul>
  * <ul>
- * Elle est utilisée dans {@link FenetrePromotionsGerant} pour afficher au
- * gérant l'ensemble des promotions ainsi que pour en ajouter,modifier ou
- * supprimer une.
+ * Elle est utilisée dans {@link FenetrePromotionsGerant} pour : <ul>
+ * <li> afficher au gérant l'ensemble des promotions </li>
+ * <li> ajouter,modifier ou supprimer une promotion </li>
+ * </ul>
  * </ul>
  * <ul>
  * Elle est utilisée dans {@link FenetrePromotions} pour afficher l'ensemble des
@@ -88,8 +89,8 @@ public class ModelePromotion extends AbstractTableModel {
 		ArrayList<String> listeIdentifiants = new ArrayList<String>();
 
 		if (pourGerant) {
-			// Quatre listes sont créées pour récupérer les informations de la
-			// table PROMO
+			// Quatre listes sont créées pour récupérer les informations de la table PROMO
+
 			listePromos = SGBD.selectListeStringOrdonne("PROMO", "NOMPROMO",
 					"IDPROMO");
 			listeDatesDebut = SGBD.selectListeDatesOrdonne("PROMO",
@@ -100,19 +101,16 @@ public class ModelePromotion extends AbstractTableModel {
 					"IDPROMO", "IDPROMO");
 
 		} else {
-			// Récupération des informations concernant la fidélité de
-			// l'utilisateur
+			// Récupération des informations concernant la fidélité de l'utilisateur
 			ArrayList<String> fideliteUtilisateur = SGBD
 					.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 
-			// Récupération des informations sur les promotions exceptionnelles
-			// selon
+			// Récupération des informations sur les promotions exceptionnelles selon
 			// l'adhésion ou non au programme de fidélité du client
 
 			if (fideliteUtilisateur.get(0).equals("Oui")) {
-				// s'il est adhérent, il peut bénéficier de toutes les
-				// promotions
-				// exceptionnelles ( adhérent + toute la clientèle)
+				// S'il est adhérent, il peut bénéficier de toutes les
+				// promotions exceptionnelles ( adhérent + toute la clientèle)
 				listePromos = SGBD.selectListeStringOrdonneCondition("PROMO",
 						"NOMPROMO", "IDPROMO", "DATEFIN > SYSDATE");
 				listeIdentifiants = SGBD.selectListeStringOrdonneCondition(
@@ -123,9 +121,8 @@ public class ModelePromotion extends AbstractTableModel {
 						"DATEFIN", "IDPROMO", "DATEFIN > SYSDATE");
 
 			} else {
-				// sinon, il n'aura accès qu'aux promotions exceptionnelles
-				// réservées
-				// à l'ensemble de la population
+				// Sinon, il n'aura accès qu'aux promotions exceptionnelles
+				// réservées à l'ensemble de la population
 				listePromos = SGBD.selectListeStringOrdonneCondition("PROMO",
 						"NOMPROMO", "IDPROMO",
 						"DATEFIN > SYSDATE AND PROMOFIDELITE=0");
@@ -142,7 +139,7 @@ public class ModelePromotion extends AbstractTableModel {
 
 		}
 
-		// on ajoute les informations dans le tableau
+		// Nous ajoutons les informations dans le tableau
 		donnees = new Object[listeIdentifiants.size()][5];
 		for (int i = 0; i < listePromos.size(); i++) {
 			donnees[i][0] = listeIdentifiants.get(i);

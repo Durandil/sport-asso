@@ -10,7 +10,7 @@ import basededonnees.SGBD;
 
 /**
  * <p>
- * La classe ModeleTableauStatCommande hérite de la classe AbstractTableModel Sa
+ * La classe ModeleTableauStatCommande hérite de la classe AbstractTableModel. Sa
  * spécificité est de pouvoir afficher uniquement des données relatives à une
  * commande donnée c'est à dire pour chaque article de la commande :
  * <ul>
@@ -78,7 +78,7 @@ public class ModeleTableauStatCommande extends AbstractTableModel {
 
 		donnees = new Object[listeArticles.size()][this.getColumnCount()];
 
-		// On ajoute les informations dans l'objet donnees
+		// Nous ajoutons les informations dans l'objet donnees
 		for (int i = 0; i < listeArticles.size(); i++) {
 			donnees[i][0] = listeArticles.get(i);
 			donnees[i][1] = SGBD.selectStringConditionString("ARTICLE",

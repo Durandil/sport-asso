@@ -12,7 +12,7 @@ import basededonnees.SGBD;
 /**
  * La classe ModeleMessagerie hérite de la classe AbstractTableModel permettant
  * l'utilisation de tableau de données. Nous allons utiliser cette classe pour
- * afficher l'ensemble des messages pour un utilisateur donné
+ * afficher l'ensemble des messages pour un utilisateur donné.
  * 
  * @see FenetreContactVendeur
  * @see ihm.FenetreMessagerie
@@ -38,7 +38,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 	/**
 	 * Constructeur de la classe ModeleMessagerie qui permet de créer une boite
 	 * de réception ou encore une messagerie pour les différents utilisateurs de
-	 * l'application
+	 * l'application.
 	 * 
 	 * @param messagerieGerant
 	 *            <p>
@@ -56,10 +56,11 @@ public class ModeleMessagerie extends AbstractTableModel {
 	public ModeleMessagerie(boolean messagerieGerant) {
 		super();
 
-		// Premier cas : On veut afficher la messagerie du gérant
+		// Premier cas : Nous voulons afficher la messagerie du gérant
 		if (messagerieGerant == true) {
-			// Cinq listes sont créées pour récupérer les informations de la
-			// table MESSAGE
+			
+			// Cinq listes sont créées pour récupérer les informations de la table MESSAGE
+
 			ArrayList<String> listeIdentifiants = SGBD
 					.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE",
 							"IDMESSAGE", "ESTENVOYEAUGERANT=1");
@@ -79,7 +80,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 
 			donnees = new Object[listeIdentifiants.size()][5];
 
-			// On ajoute les informations dans l'objet donnees
+			// Nous ajoutons les informations dans l'objet donnees
 			for (int i = 0; i < listeExpediteur.size(); i++) {
 				donnees[i][0] = listeIdentifiants.get(i);
 
@@ -90,7 +91,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 			}
 
 		}
-		// Second cas : On veut afficher la messagerie d'un client
+		// Second cas : Nous voulons afficher la messagerie d'un client
 		else {
 			// Cinq listes sont créées pour récupérer les informations de la
 			// table MESSAGES
@@ -123,7 +124,7 @@ public class ModeleMessagerie extends AbstractTableModel {
 
 			donnees = new Object[compteurNombreMessages][5];
 
-			// On ajoute les informations des messages du client dans l'objet
+			// Nous ajoutons les informations des messages du client dans l'objet
 			// donnees
 
 			int affichageMessage = 0;
