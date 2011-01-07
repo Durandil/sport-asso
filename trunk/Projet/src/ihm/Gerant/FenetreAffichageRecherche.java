@@ -107,8 +107,8 @@ public class FenetreAffichageRecherche extends JDialog {
 		tableauRechercheClient.setVisible(true);
 
 		// Dans le cas où le tableau ne contient aucune ligne, c'est à dire qu'aucun      
-		//  client ne correspond à la recherche effectuée, nous lui affichons
-		//  un message pour le lui signifier 
+		// client ne correspond à la recherche effectuée, nous lui affichons
+		// un message pour le lui signifier 
 
 		if (modele.getRowCount() == 0) {
 			dispose();
@@ -132,14 +132,12 @@ public class FenetreAffichageRecherche extends JDialog {
 		validationRecherche.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// nous recupérons le numéro de la ligne sélectionnée par le
-				// gérant dans
-				// le tableau
+				// Nous recupérons le numéro de la ligne sélectionnée par le
+				// gérant dans le tableau 
 				int ligne = tableauRechercheClient.getSelectedRow();
 
-				// si aucune ligne est sélectionnée, alors nous affichons un
-				// message pour lui
-				// signifier l'erreur
+				// Si aucune ligne est sélectionnée, alors nous affichons un
+				// message pour lui signifier l'erreur
 				if (ligne == -1) {
 
 					JOptionPane
@@ -155,13 +153,14 @@ public class FenetreAffichageRecherche extends JDialog {
 							ligne, 0).toString();
 
 					// Affichage d'une boite de dialogue pour confirmer le
-					// client selectionné
+					// client sélectionné
 					int res = JOptionPane
 							.showConfirmDialog(null,
 									"confirmez la sélection client de : "
 											+ identifiant);
 
 					if (res == JOptionPane.OK_OPTION) {
+						
 						dispose();
 						// Nous affichons la fiche client correspondante à
 						// l'identifiant sélectionné
@@ -177,10 +176,11 @@ public class FenetreAffichageRecherche extends JDialog {
 
 		});
 
-		// Définition du bouton de retour et de l'action spécifique de celui-ci  //
-		// ----------------------------------------------------------------------//
+		// Définition du bouton de retour et de l'action spécifique de celui-ci //
+		// ---------------------------------------------------------------------//
 		JButton retourRecherche = new JButton("Retour");
 		retourRecherche.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}

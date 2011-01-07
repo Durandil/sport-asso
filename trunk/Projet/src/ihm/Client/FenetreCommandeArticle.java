@@ -191,7 +191,7 @@ public class FenetreCommandeArticle extends JFrame {
 
 		this.getContentPane().add(panneauTableauCatalogue, BorderLayout.WEST);
 
-		// Définition du JPanel qui accueillera les aricles du panier //
+		// Définition du JPanel qui accueillera les articles du panier //
 		// ------------------------------------------------------------//
 		final ModelePanier modPan = new ModelePanier(panierClient);
 		final JTable panier = new JTable(modPan);

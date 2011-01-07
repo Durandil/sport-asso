@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import basededonnees.SGBD;
@@ -32,7 +33,7 @@ public class FenetreChoixCatalogue extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
 	private JComboBox quantite;
-	public static int quantiteSelectionnee;
+	public static int quantiteSelectionnee=-1;
 
 	/**
 	 * Constructeur de la classe FenetreChoixCatalogue dans laquelle le client
@@ -149,20 +150,41 @@ public class FenetreChoixCatalogue extends JDialog {
 
 		boutonValiderSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				// Ajout de la quantité selectionnée au panier du client
-				Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee,
-						FenetreCommandeArticle.panierClient);
-
-				// Nous changeons la valeur du booléen pour indiquer le client a bien
-				// sélectionné une ligne dans le catalogue
-				FenetreCommandeArticle.activationLigneCatalogue = true;
-
-				// Nous changeons la valeur du booleen avoirRafraichiApresAjoutPanier
-				// pour qu'il ne
-				// puisse pas faire deux ajouts consécutifs d'un même article
-				// sans rafraîchir le panier
-				FenetreCommandeArticle.avoirRafraichiApresAjoutPanier = false;
+				
+				
+				// Traitement du cas où le client ne sélectionne pas de quantité dans
+				// le menu déroulant
+				if(quantiteSelectionnee == -1){
+					
+					JOptionPane.showMessageDialog(null, 
+							"Vous n'avez pas sélectionné la quantité que " +
+							"vous désiriez de l'article "+  numArticle +" !",
+							"Attention",
+							JOptionPane.INFORMATION_MESSAGE);
+				}
+				else{
+					// Fermeture de la fenêtre
+					dispose();
+					
+					// Ajout de la quantité selectionnée au panier du client
+					Commande.ajouterArticlePanier(numArticle, quantiteSelectionnee,
+							FenetreCommandeArticle.panierClient);
+	
+					// Nous changeons la valeur du booléen pour indiquer le client a bien
+					// sélectionné une ligne dans le catalogue
+					FenetreCommandeArticle.activationLigneCatalogue = true;
+	
+					// Nous changeons la valeur du booleen avoirRafraichiApresAjoutPanier
+					// pour qu'il ne
+					// puisse pas faire deux ajouts consécutifs d'un même article
+					// sans rafraîchir le panier
+					FenetreCommandeArticle.avoirRafraichiApresAjoutPanier = false;
+				}
+				
+				// Nous remettons la valeur -1 au static quantiteSelectionnee pour traiter le cas
+				// où le client ne sélectionne pas de quantité dans le menu déroulant s'il ouvre de
+				// de nouveau cette fenêtre de choix
+				quantiteSelectionnee = -1;
 			}
 		});
 
