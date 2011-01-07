@@ -15,7 +15,7 @@ import metier.LigneCommande;
 
 /**
  * <p>
- * La classe ModelePromotion hérite de la classe AbstractTableModel Sa
+ * La classe ModelePromotion hérite de la classe AbstractTableModel. Sa
  * spécificité est de pouvoir afficher uniquement les promotions présentes dans
  * la base de données avec les informations suivantes pour chaque promotion :
  * <ul>
@@ -41,7 +41,7 @@ public class ModelePromotion extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * donnees contenues à l'intérieur du tableau
+	 * Données contenues à l'intérieur du tableau
 	 * 
 	 * @see ModelePromotion#getRowCount()
 	 * @see ModelePromotion#ModelePromotion(boolean)
@@ -51,7 +51,7 @@ public class ModelePromotion extends AbstractTableModel {
 	private final Object[][] donnees;
 
 	/**
-	 * liste des noms de colonnes du tableau
+	 * Liste des noms de colonnes du tableau
 	 * 
 	 * @see ModelePromotion#getColumnCount()
 	 * @see ModelePromotion#getColumnName(int)
@@ -166,11 +166,11 @@ public class ModelePromotion extends AbstractTableModel {
 
 	/**
 	 * @param rowIndex
-	 *            integer indiquant le numéro de la ligne de l'élément choisi
+	 *            Integer indiquant le numéro de la ligne de l'élément choisi
 	 * @param colIndex
-	 *            integer indiquant le numéro de la colonne de l'élément choisi
+	 *            Integer indiquant le numéro de la colonne de l'élément choisi
 	 * 
-	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème
+	 * @return l'objet situé dans la rowIndex-ème ligne et la colIndex-ème
 	 *         colonne du tableau correspondant à l'ensemble des promotions
 	 *         présentes dans la base de données
 	 */

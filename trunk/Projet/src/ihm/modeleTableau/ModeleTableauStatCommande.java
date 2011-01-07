@@ -30,7 +30,7 @@ public class ModeleTableauStatCommande extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * donnees contenues à l'intérieur du tableau
+	 * Données contenues à l'intérieur du tableau
 	 * 
 	 * @see ModeleTableauStatCommande#getRowCount()
 	 * @see ModeleTableauStatCommande#ModeleTableauStatCommande(String)
@@ -40,7 +40,7 @@ public class ModeleTableauStatCommande extends AbstractTableModel {
 	private final Object[][] donnees;
 
 	/**
-	 * liste des noms de colonnes du tableau
+	 * Liste des noms de colonnes du tableau
 	 * 
 	 * @see ModeleTableauStatCommande#getColumnCount()
 	 * @see ModeleTableauStatCommande#getColumnName(int)
@@ -105,9 +105,9 @@ public class ModeleTableauStatCommande extends AbstractTableModel {
 
 	/**
 	 * @param rowIndex
-	 *            integer indiquant le numéro de la ligne de l'élément choisi
+	 *            Integer indiquant le numéro de la ligne de l'élément choisi
 	 * @param colIndex
-	 *            integer indiquant le numéro de la colonne de l'élément choisi
+	 *            Integer indiquant le numéro de la colonne de l'élément choisi
 	 * 
 	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème
 	 *         colonne du tableau correspondant à la commande effectuée par le

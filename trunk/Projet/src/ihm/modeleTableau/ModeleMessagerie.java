@@ -58,8 +58,9 @@ public class ModeleMessagerie extends AbstractTableModel {
 
 		// Premier cas : Nous voulons afficher la messagerie du gérant
 		if (messagerieGerant == true) {
-			
-			// Cinq listes sont créées pour récupérer les informations de la table MESSAGE
+
+			// Cinq listes sont créées pour récupérer les informations de la
+			// table MESSAGE
 
 			ArrayList<String> listeIdentifiants = SGBD
 					.selectListeStringOrdonneCondition("MESSAGE", "IDMESSAGE",
@@ -124,7 +125,8 @@ public class ModeleMessagerie extends AbstractTableModel {
 
 			donnees = new Object[compteurNombreMessages][5];
 
-			// Nous ajoutons les informations des messages du client dans l'objet
+			// Nous ajoutons les informations des messages du client dans
+			// l'objet
 			// donnees
 
 			int affichageMessage = 0;
