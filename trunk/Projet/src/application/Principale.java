@@ -19,6 +19,8 @@ public class Principale {
 	public static void main(String[] args) throws Exception {
 
 		// Initialiser la base de données
+		// Il faut ensuite insérer les lignes présentes dans le fichier Insert.txt
+		// dans la base de données
 		// BDD.init();
 
 		// Initialise la fenêtre d'accueil

@@ -42,9 +42,7 @@ import metier.Particulier;
  */
 public class FenetreDialogCreationCompte extends JDialog {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JLabel typeCompteLabel, denominationLabel, identifiantVerifLabel,
 			icon, nomLabel, prenomLabel, adresseLabel, cpLabel, telLabel,

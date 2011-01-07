@@ -1,7 +1,7 @@
 package exception.Article;
 
 /**
- * Cette exception permet de traiter le cas où le poids saisi est aberrant
+ * Cette exception permet de traiter le cas où le prix saisi est aberrant
  */
 public class ExceptionPrixAberrant extends Exception {
 

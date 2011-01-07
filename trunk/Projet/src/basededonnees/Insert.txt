@@ -129,4 +129,4 @@ Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMess
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00004','Prix trop élevés','Les shorts de bain sont trop chers', 'lcg@free.fr',TO_DATE('2010-12-17', 'YYYY-MM-DD'),1);
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00005','Re : Prix trop élevés','En réponse à votre message, je vous annonce la baisse des tarifs sur les shorts de bain', 'lcg@free.fr',TO_DATE('2010-12-18', 'YYYY-MM-DD'),0);
 
-
+COMMIT

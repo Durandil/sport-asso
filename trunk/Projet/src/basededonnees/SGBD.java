@@ -40,7 +40,7 @@ public class SGBD {
 	 * Adresse de la base de données.
 	 */
 	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
-	
+
 	// URL à utiliser lorsque l'on est pas à l'Ensai :
 	// final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 
@@ -50,13 +50,11 @@ public class SGBD {
 
 	private static final String ID = "id3199";
 
-
 	/**
 	 * Le mot de passe utilisé pour la connnexion.
 	 */
 
 	private static final String MDP = "id3199";
-
 
 	/**
 	 * Permet à l'utilisateur de se connecter à sa base de données.
@@ -394,9 +392,6 @@ public class SGBD {
 		return listeString;
 	}
 
-	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Méthode jamais appelée sauf pour les tests **/
-	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
 	/**
 	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
 	 * float issu d'une table tous deux précisés en paramètres.
@@ -439,106 +434,6 @@ public class SGBD {
 		}
 
 		return listeFloat;
-	}
-
-	/** TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Méthode jamais appelée **/
-	/** TODO TODO TODO TODO TODO TODO **/
-	/**
-	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
-	 * Integer issu d'une table tous deux précisés en paramètres.
-	 * 
-	 * @param table
-	 *            Table dans laquelle se trouve le champ dont on veut obtenir la
-	 *            liste
-	 * @param var
-	 *            Champ de la table de nature Integer que l'on souhaite
-	 *            récupérer
-	 * @return L'ensemble des éléments (de nature Integer) d'une variable issue
-	 *         d'une table tous deux précisés en paramètres
-	 */
-	public static ArrayList<Integer> selectListeInt(String table, String var) {
-		connecter();
-		ArrayList<Integer> listeInt = new ArrayList<Integer>();
-		Statement st = null;
-		ResultSet res = null;
-		try {
-
-			st = c.createStatement();
-
-			res = st.executeQuery("SELECT " + var + " FROM " + table);
-
-			while (res.next()) {
-
-				Integer i = res.getInt(1);
-				listeInt.add(i);
-
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-
-		} finally {
-			System.out.println("Tentative de sauvegarde");
-			fermer();
-
-		}
-
-		return listeInt;
-	}
-
-	/** TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Méthode jamais appelée **/
-	/** TODO TODO TODO TODO TODO TODO **/
-	/**
-	 * Méthode permettant d'obtenir l'ensemble des éléments d'un champ de type
-	 * Integer issu d'une table tous deux précisés en paramètres. Ces éléments
-	 * seront triés selon leur valeur d'une deuxième variable de la table.
-	 * 
-	 * @param table
-	 *            Table dans laquelle se trouve le champ dont on veut obtenir la
-	 *            liste
-	 * @param var
-	 *            Champ de la table de nature Integer que l'on souhaite
-	 *            récupérer
-	 * @param champOrdre
-	 *            Variable de la table servant à ordonner les éléments obtenus
-	 * 
-	 * @return l'ensemble des éléments ordonnés (de nature Integer) d'une
-	 *         variable issu d'une table tous deux précisés en paramètres
-	 */
-	public static ArrayList<Integer> selectListeIntOrdonne(String table,
-			String var, String champOrdre) {
-		connecter();
-		ArrayList<Integer> listeInt = new ArrayList<Integer>();
-		Statement st = null;
-		ResultSet res = null;
-		try {
-
-			st = c.createStatement();
-
-			res = st.executeQuery("SELECT " + var + " FROM " + table
-					+ " ORDER BY " + champOrdre + " ASC");
-
-			while (res.next()) {
-
-				Integer i = res.getInt(1);
-				listeInt.add(i);
-
-			}
-
-		} catch (SQLException e) {
-			System.out.println("Echec de la tentative d’interrogation : "
-					+ e.getMessage());
-
-		} finally {
-			System.out.println("Tentative de sauvegarde");
-			fermer();
-
-		}
-
-		return listeInt;
 	}
 
 	/**
@@ -1000,7 +895,8 @@ public class SGBD {
 
 			st = c.createStatement();
 
-			// La requête va sélectionner les articles qui sont en rupture de stock
+			// La requête va sélectionner les articles qui sont en rupture de
+			// stock
 			// et dont la quantité actuelle en stock est inférieure à celle
 			// de la catégorie d'article à laquelle ils appartiennent
 			String requete = "select idarticle,description,stock,prixinitial "
@@ -1037,14 +933,9 @@ public class SGBD {
 		return article;
 	}
 
-	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Méthode jamais appelée sauf pour les tests **/
-	/** TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO **/
-	// TODO cette méthode doit permettre de récupérer l'ensemble des
+	// Cette méthode permet de récupérer l'ensemble des
 	// indormations nécessaires
 	// à la commande n° idCommande passée en paramètre
-	// il faudrait calculer le total par article en tenant compte % promo selon
-	// quantité
 	public static ArrayList<Object[]> informationCommande(String idCommande) {
 		SGBD.connecter();
 		ArrayList<Object[]> commande = new ArrayList<Object[]>();
@@ -1113,7 +1004,8 @@ public class SGBD {
 		try {
 			st = c.createStatement();
 
-			// Nous allons tester pour le client si son identifiant idClient est dans la base
+			// Nous allons tester pour le client si son identifiant idClient est
+			// dans la base
 			// de données de ceux qui ont une carte de fidélité
 
 			res = st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT"
@@ -1201,11 +1093,12 @@ public class SGBD {
 			st = c.createStatement();
 			String conditionWhereOr = "WHERE (";
 			boolean ajouterChamp = false;
-			
+
 			// En entrée, nous avons récupéré les champs complétés par le gérant
-			// dans le formulaire. Maintenant, nous allons rechercher les individus 
+			// dans le formulaire. Maintenant, nous allons rechercher les
+			// individus
 			// en rajoutant les critères remplis dans le WHERE (non vides).
-			
+
 			if (!idClient.equals("")) {
 				conditionWhereOr = conditionWhereOr + "IDCLIENT Like '%"
 						+ idClient + "%'";
@@ -1247,35 +1140,38 @@ public class SGBD {
 			// il pourra voir la liste des clients.
 			// Sinon, il verra la liste respectant les critères remplis.
 			if (conditionWhereOr.equals("WHERE (")) {
-				
+
 				conditionWhereOr = "WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
 
-			} 	
-			else {
-				
+			} else {
+
 				conditionWhereOr = conditionWhereOr
 						+ " ) AND (VILLE.IDVILLE = CLIENT.IDVILLE) ";
 			}
 
 			res = st.executeQuery("SELECT IDCLIENT , NOMCLIENT, PRENOMCLIENT,DENOMINATIONCLIENT"
 					+ " FROM CLIENT, VILLE " + conditionWhereOr);
-			
-			// Tant qu'il y a des observations dans le ResultSet, nous allons récupérer
-			// les 4 informations de l'observation et le stocker dans un ArrayList
+
+			// Tant qu'il y a des observations dans le ResultSet, nous allons
+			// récupérer
+			// les 4 informations de l'observation et le stocker dans un
+			// ArrayList
 			while (res.next()) {
 
 				String s, s2, s3, s4;
-				
+
 				s = res.getObject(1).toString();
 				listeString1.add(s);
-				
+
 				// Traitement du cas où le nom du client n'est pas vide
-				// cas où nous récupérons les informations d'un compte particulier
-				
-				if (res.getObject(2) != null) {	
-					// Récupération  pour le nom et le prénom en 2 et 3ème position et
-					// Renvoi d'un vide pour la dénomination 
-					
+				// cas où nous récupérons les informations d'un compte
+				// particulier
+
+				if (res.getObject(2) != null) {
+					// Récupération pour le nom et le prénom en 2 et 3ème
+					// position et
+					// Renvoi d'un vide pour la dénomination
+
 					s2 = res.getObject(2).toString();
 					s3 = res.getObject(3).toString();
 					listeString2.add(s2);
@@ -1283,10 +1179,11 @@ public class SGBD {
 					s4 = " ";
 					listeString4.add(s4);
 
-				} 
-				
+				}
+
 				// Traitement du cas où la dénomination du client n'est pas vide
-				// cas où nous récupérons les informations d'un compte association			
+				// cas où nous récupérons les informations d'un compte
+				// association
 				else {
 					// Récupération de la dénomination en 4ème position et
 					// Renvoi d'un vide pour le nom et le prénom
@@ -1294,7 +1191,7 @@ public class SGBD {
 					s3 = " ";
 					listeString2.add(s2);
 					listeString3.add(s3);
-					
+
 					s4 = res.getObject(4).toString();
 					listeString4.add(s4);
 				}
@@ -1303,7 +1200,7 @@ public class SGBD {
 			informationsClient.add(listeString2);
 			informationsClient.add(listeString3);
 			informationsClient.add(listeString4);
-			
+
 		} catch (SQLException e) {
 			System.out.println("Echec de la tentative d’interrogation : "
 					+ e.getMessage());
@@ -1372,7 +1269,7 @@ public class SGBD {
 				}
 			}
 			nbrePromo = Integer.parseInt(compteurPromotion);
-			
+
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} catch (NumberFormatException exc) {
@@ -1426,7 +1323,7 @@ public class SGBD {
 						+ "'";
 			} else {
 				// Si le client est adhérent au magasin, il peut bénéficier de
-				// 
+				//
 				// l'ensemble des promotions exceptionelles sur l'article
 				requete = "select max(pourcentagepromo) from promo,LISTING_PROMOS_ARTICLES "
 						+ "where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO and "
@@ -1481,9 +1378,11 @@ public class SGBD {
 		Statement st = null;
 		ResultSet res = null;
 		String requete = "";
-		// Nous mettons le pourcentage de promotion dégressif à zéro si la requête ne
+		// Nous mettons le pourcentage de promotion dégressif à zéro si la
+		// requête ne
 		// retourne pas de resultat
-		// c'est à dire si la quantité commandée de l'article est inférieure au seuil
+		// c'est à dire si la quantité commandée de l'article est inférieure au
+		// seuil
 		// minimal nécessaire
 		// pour bénéficier d'une promotion dégressive sur l'article
 		String pourcentage = "0";
