@@ -9,7 +9,8 @@ import junit.framework.TestCase;
 /**
  * <b> La classe ParticulierTest permet de valider les méthodes présentes dans la classe Particulier.</b>
  * <p> Cette classe possède 10 tests. Elle hérite de la classe TestCase.
- * 
+ * Cette classe est très importante car elle permet d'effectuer de nombreux tests des autres classes
+ * Les méthodes de sélection dans la base de données sont nombreuses et diverses et doivent être testées.
  * </p>
  * 
  * @see basededonnees.SGBD
@@ -17,7 +18,9 @@ import junit.framework.TestCase;
 
 public class SGBDTest extends TestCase {
 	
-// test select liste opérationnel	
+	/**
+	 * Méthode qui teste la sélection d'une liste de String.
+	 */	
 
 		public void testSelectListeString(){
 		ArrayList<String> result= new ArrayList<String>();
@@ -28,8 +31,9 @@ public class SGBDTest extends TestCase {
 		assertEquals(result,SGBD.selectListeString("client","TELEPHONE"));
 	}
 	
-// test select date pour date fin (l'ordre doit être le même dans la base et dans le résultat)	
-// fonctionne
+		/**
+		 * Méthode qui teste la sélection de dates ordonnées.
+		 */
 
 		public void testSelectListeDatesOrdonne(){
 		ArrayList<String> result = new ArrayList<String>();
@@ -42,8 +46,10 @@ public class SGBDTest extends TestCase {
 		assertEquals(result,SGBD.selectListeDatesOrdonne("Promo","datefin" ,"dd/mm/yy","IDPROMO")); 
 	}
 	
-// test select liste float
-// ok
+		/**
+		 * Méthode qui teste la sélection de nombres à virgule comme des pourcentages au sein
+		 * de la base de données.
+		 */
 	
 	public void testSelectListeFloat(){
 		ArrayList<Float> result = new ArrayList<Float>();
@@ -53,8 +59,9 @@ public class SGBDTest extends TestCase {
 		assertEquals(result,SGBD.selectListeFloat("Promo", "PourcentagePromo"));
 	}
 	
-// test sélection String sous condition string
-	// ok
+	/**
+	 * Méthode qui teste la sélection d'un élément de la base de données avec une condition.
+	 */
 	
 	public void testselectStringConditionString(){
 		String result = new String();
@@ -62,8 +69,9 @@ public class SGBDTest extends TestCase {
 		assertEquals(result, SGBD.selectStringConditionString("Promo", "NomPromo", "IDPromo","PRO00001 " ));
 	}	
 	
-// test sélection 2 champs string
-	// ok
+	/**
+	 * Méthode qui teste la sélection de deux listes d'éléments dans la base de données.
+	 */
 	
 	public void testselectDeuxChampsString(){
 		ArrayList<String[]> result = new ArrayList<String[]>();
@@ -81,26 +89,10 @@ public class SGBDTest extends TestCase {
 		assertEquals(result.get(1)[1], SGBD.selectDeuxChampsString("Client", "NomClient", "AdresseClient").get(1)[1]);
 	}
 	
-//  TODO
-	
-//	public void testrecupererAttributClient(){
-//		ArrayList<String> result=new ArrayList<String>();
-//		result.add("bde@ensai.fr");
-//		result.add(" ");
-//		result.add(" ");
-//		result.add("BDE");
-//		result.add("Ensai");
-//		result.add("Bruz");
-//		result.add("35170");
-//		result.add("0256842210");
-//		result.add("Activé");
-//		System.out.println(result);
-//		System.out.println(SGBD.recupererAttributClient("bde@ensai.fr"));
-//		assertEquals(result, SGBD.recupererAttributClient("bde@ensai.fr"));
-//		
-//			}
-
-// test sur les articles en réapprovisionnement bon	
+	/**
+	 * Méthode qui teste que les articles qui apparaissent dans le menu réapprovisionnement
+	 * sont bien en rupture de stock ou en quantité inférieure au seuil fixé pour être réapprovisionné.
+	 */
 	
 	public void testselectArticlesReapprovisionnement(){
 		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
@@ -119,7 +111,10 @@ public class SGBDTest extends TestCase {
 		assertEquals(result, SGBD.selectArticlesReapprovisionnement());
 	}
 	
-//  test qui fonctionne	
+	/**
+	 * Méthode qui teste la sélection du nombre de points fidélité qu'un client
+	 * possède sur sa carte de fidélité.
+	 */
 	
 	public void testrecupererInformationFideliteClient(){
 		ArrayList<String> result= new ArrayList<String>();
@@ -128,28 +123,10 @@ public class SGBDTest extends TestCase {
 		assertEquals(result, SGBD.recupererInformationFideliteClient("arthur.laroch@gmail.com"));
 	}
 	
-// test qui fonctionne 
-	
-//	public void testrecupererInformationRechercheClient(){
-//		ArrayList<ArrayList<String>> result=new ArrayList<ArrayList<String>>();
-//		ArrayList<String> listeString1 = new ArrayList<String>();
-//		ArrayList<String> listeString2 = new ArrayList<String>();
-//		ArrayList<String> listeString3 = new ArrayList<String>();
-//		ArrayList<String> listeString4 = new ArrayList<String>();
-//		listeString1.add("arthur.laroch@gmail.com");
-//		listeString2.add("Laroch");
-//		listeString3.add("Arthur");
-//		listeString4.add("");
-//		result.add(listeString1);
-//		result.add(listeString2);
-//		result.add(listeString3);
-//		result.add(listeString4);
-//		System.out.println(result);
-//		System.out.println(SGBD.recupererInformationRechercheClient("", "laroch"," " , ""));
-//		assertEquals(result,SGBD.recupererInformationRechercheClient("", "laroch"," " , ""));
-//	}
 
-// test opérationnel	
+	/**
+	 * Méthode qui teste la récupération des informations liées à une commande enregistrée dans la base de données.
+	 */	
 	
 	public void testinformationCommande(){
 		ArrayList<Object[]> result=new ArrayList<Object[]>();
@@ -165,14 +142,23 @@ public class SGBDTest extends TestCase {
 		assertEquals(result.get(0)[2], SGBD.informationCommande("comm0001").get(0)[2]);
 		assertEquals(result.get(0)[3], SGBD.informationCommande("comm0001").get(0)[3]);
 	}
-//  test ok	
+
+	
+	/**
+	 * Méthode qui teste la récupération du bon pourcentage de promotion mise en place 
+	 * par le gérant sur un certain article.
+	 */
+	
 	public void testRecupererPourcentagePromotionExceptionnelleArticle(){
 		assertEquals("40", SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00001",0 ));
 		assertEquals("50", SGBD.recupererPourcentagePromotionExceptionnelleArticle("ART00003",1 ));
 	}
 	
 	
-// test ok
+	/**
+	 * Méthode qui teste la récupération du pourcentage de promotion en fonction du nombre d'articles
+	 * commandé.
+	 */
 	
 	
 	public void testRecupererPourcentagePromotionDegressifArticleCommande(){
