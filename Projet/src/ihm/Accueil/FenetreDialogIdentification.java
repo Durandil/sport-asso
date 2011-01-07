@@ -27,7 +27,9 @@ import exception.Client.ExceptionMailsDifferents;
 import exception.Client.ExceptionMotDePasseErrone;
 
 import basededonnees.SGBD;
-
+/**
+ * Classe représentant la fenêtre s'affichant lors de l'identification.
+ */
 public class FenetreDialogIdentification extends JDialog {
 
 	private static final long serialVersionUID = 1L;
@@ -38,12 +40,12 @@ public class FenetreDialogIdentification extends JDialog {
 			compteDesactive;
 
 	/**
-	 * permet d'avoir l'identifiant de l'utilisateur dans toute l'application
+	 * Identifiant de l'utilisateur
 	 */
 	public static String clientUserIdentifiant = "";
 
 	/**
-	 * Identifiant et mot de passe du gérant inscrits en dur dans le programme
+	 * Identifiant et mot de passe du gérant inscrits "en dur" dans le programme
 	 */
 	public static String identifiantGerant = "gerant@sport-asso.fr";
 	public static String motDePasseGerant = "1234";

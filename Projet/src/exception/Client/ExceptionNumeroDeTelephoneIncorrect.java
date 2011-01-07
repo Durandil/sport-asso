@@ -1,7 +1,7 @@
 package exception.Client;
 
 /**
- * Exception traitant le cas où un noméro de téléphone ne respecterait pas la norme
+ * Exception traitant le cas où un numéro de téléphone ne respecterait pas la norme
  */
 public class ExceptionNumeroDeTelephoneIncorrect extends Exception {
 	

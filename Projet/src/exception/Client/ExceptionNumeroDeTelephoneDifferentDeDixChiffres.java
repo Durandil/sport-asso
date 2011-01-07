@@ -1,7 +1,7 @@
 package exception.Client;
 
 /**
- * Exception traitant le cas où un noméro de téléphone ne possèderait pas 10 chiffres.
+ * Exception traitant le cas où un numéro de téléphone ne possèderait pas 10 chiffres.
  */
 public class ExceptionNumeroDeTelephoneDifferentDeDixChiffres extends Exception{
 
