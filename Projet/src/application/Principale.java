@@ -21,9 +21,11 @@ public class Principale {
 		// Initialiser la base de données
 		// BDD.init();
 
-		// FenetreCompte fen=new FenetreCompte();
-		// MenuUtilisateur men = new MenuUtilisateur();
-		MenuGerant menu = new MenuGerant();
+		// Initialise la fenêtre d'accueil
+		 FenetreCompte fen=new FenetreCompte();
+	
+		// Initialise le menu du gérant (sans passer par l'identification)
+		// MenuGerant menu = new MenuGerant();
 
 	}
 }

@@ -22,6 +22,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import exception.ExceptionCompteInexistant;
+import exception.Client.ExceptionCompteDesactive;
 import exception.Client.ExceptionMailsDifferents;
 import exception.Client.ExceptionMotDePasseErrone;
 
@@ -138,14 +139,16 @@ public class FenetreDialogIdentification extends JDialog {
 					// des identifiants client
 					for (int i = 0; i < listeMailsMdps.size(); i++) {
 
-						if (identifiant.getText().equals(listeMailsMdps.get(i)[0])) {
-							
+						if (identifiant.getText().equals(
+								listeMailsMdps.get(i)[0])) {
+
 							present = present + 1;
 							// Nous vérifions en cas d'adresse correcte si le
 							// mot de passe correspondant
 							// est le bon
-							if (password.getText().equals(listeMailsMdps.get(i)[1])) {
-								
+							if (password.getText().equals(
+									listeMailsMdps.get(i)[1])) {
+
 								// Si l'identification est correcte, on affiche
 								// un message pour le signifier
 								// puis on ouvre le menu utilisateur
@@ -159,19 +162,9 @@ public class FenetreDialogIdentification extends JDialog {
 								// Si le compte est désactivé, le client est
 								// averti
 								if (etat.equals("Désactivé")) {
+									throw new ExceptionCompteDesactive(
+											"Ce compte est désactivé.");
 
-									compteDesactive = new JOptionPane();
-									ImageIcon imageInformation = new ImageIcon(
-											"src/images/information.jpg");
-									compteDesactive
-											.showMessageDialog(
-													null,
-													"Ce compte a été désactivé. Veuillez contacter le gérant à l'adresse suivante : "
-															+ identifiantGerant
-															+ " pour plus d'informations.",
-													"Information",
-													JOptionPane.INFORMATION_MESSAGE,
-													imageInformation);
 								}
 								// Si le compte est actif, l'identification est
 								// réussie
@@ -224,14 +217,15 @@ public class FenetreDialogIdentification extends JDialog {
 
 						}
 					}
-					
-					// Fermeture de la fenêtre si l'authentification est correcte
+
+					// Fermeture de la fenêtre si l'authentification est
+					// correcte
 					dispose();
-					
+
 				} catch (ExceptionCompteInexistant e1) {
 
 					System.out.println(e1.getMessage());
-					// Affichage d'un message d'erreur en cas de probleme sur le
+					// Affichage d'un message d'erreur en cas de problème sur le
 					// compte
 					erreurCompte = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
@@ -239,10 +233,9 @@ public class FenetreDialogIdentification extends JDialog {
 							"Ce compte n'existe pas, inscrivez-vous !",
 							"Attention", JOptionPane.WARNING_MESSAGE, image);
 
-
 				} catch (ExceptionMotDePasseErrone e2) {
 
-					// Affichage d'un message d'erreur en cas de probleme sur le
+					// Affichage d'un message d'erreur en cas de problème sur le
 					// mot de passe
 					erreurMotPasse = new JOptionPane();
 					ImageIcon image = new ImageIcon("src/images/warning.png");
@@ -250,13 +243,31 @@ public class FenetreDialogIdentification extends JDialog {
 							"Mot de passe erroné, veuillez réessayer.",
 							"Attention", JOptionPane.WARNING_MESSAGE, image);
 
+				} catch (ExceptionCompteDesactive e3) {
+
+					// Affichage d'un message d'erreur en cas de problème sur le
+					// compte
+					compteDesactive = new JOptionPane();
+					ImageIcon imageInformation = new ImageIcon(
+							"src/images/information.jpg");
+					compteDesactive
+							.showMessageDialog(
+									null,
+									"Ce compte a été désactivé. Veuillez contacter le gérant à l'adresse suivante : "
+											+ identifiantGerant
+											+ " pour plus d'informations.",
+									"Information",
+									JOptionPane.INFORMATION_MESSAGE,
+									imageInformation);
+
 				}
 
 			}
 
 		});
 
-		// Création et définition de l'action du bouton Annuler dans ActionPerformed
+		// Création et définition de l'action du bouton Annuler dans
+		// ActionPerformed
 		// Nous fermons la fenêtre et nous affichons une nouvelle page d'accueil
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener() {
