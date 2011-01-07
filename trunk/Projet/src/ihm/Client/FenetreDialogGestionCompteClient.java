@@ -34,7 +34,7 @@ import basededonnees.SGBD;
  * La classe FenetreDialogGestionCompteClient permet à un utilisateur client de
  * pouvoir consulter ses informations personnelles et aussi de pouvoir en
  * modifier certaines sous réserve que les modifications effectuées soient
- * correctes
+ * correctes.
  * 
  * 
  */

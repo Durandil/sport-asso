@@ -36,7 +36,7 @@ public class FenetrePromotionsGerant extends JDialog {
 	/**
 	 * <b> Constructeur de la classe {@link FenetrePromotionsGerant}. </b>
 	 * <p>
-	 * La fenetre sera créée selon les instructions de la méthode
+	 * La fenêtre sera créée selon les instructions de la méthode
 	 * initComponent().
 	 * </p>
 	 * 
@@ -75,18 +75,17 @@ public class FenetrePromotionsGerant extends JDialog {
 	 */
 	private void initComponent() {
 
-		// Définition du tableau qui affichera l'ensemble des promotions en cours pour //
-		// les différents clients (adhérents ou non adhérents) après interrogation de  //
-		// -------------- la base de données dans ModelePromotionClient ---------------//
-		// ----------------------------------------------------------------------------//
+		// Définition du tableau qui affichera l'ensemble des promotions en
+		// cours pour les différents clients (adhérents ou non adhérents) après
+		// interrogation de la base de données dans ModelePromotionClient
 
 		final ModelePromotion modele = new ModelePromotion(true);
 		final JTable tableauPromotions = new JTable(modele);
 
-		// Création d'un JPanel accueillant tous les boutons relatifs aux actions //
-		// que le gérant peut faire sur les promotions en cours : soit en ajouter //
-		// --------------- soit en modifier soit en supprimer ------------------- //
-		//------------------------------------------------------------------------//
+		// Création d'un JPanel accueillant tous les boutons relatifs aux
+		// actions que le gérant peut faire sur les promotions en cours : soit
+		// en ajouter soit en modifier soit en supprimer
+
 		JPanel panneauTitle = new JPanel();
 
 		JButton boutonAjouter = new JButton("Ajouter");
@@ -98,9 +97,8 @@ public class FenetrePromotionsGerant extends JDialog {
 			boutonModifier.setEnabled(false);
 		}
 
-		// Définition de l'action spécifique du bouton ajouter pour lequel nous ouvrons //
-		// --------------- juste un formulaire de création de promotion ----------------//
-		//------------------------------------------------------------------------------//
+		// Définition de l'action spécifique du bouton ajouter pour lequel nous
+		// ouvrons juste un formulaire de création de promotion
 
 		boutonAjouter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,16 +110,18 @@ public class FenetrePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Définition du bouton permettant de supprimer une promotion de la base //
-		// Nous vérifions d'abord qu'une ligne a bien été selectionnée et nous   //
-		// demandons l'accord du gérant avant de supprimer la promotion          //
-		// ----------------------------------------------------------------------//
+		// Définition du bouton permettant de supprimer une promotion de la base
+
+		// Nous vérifions d'abord qu'une ligne a bien été selectionnée et nous
+		// demandons l'accord du gérant avant de supprimer la promotion
+
 		boutonSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				ligneTableau = tableauPromotions.getSelectedRow();
-				
-				// Traitement du cas où le gérant ne sélectionne pas de ligne dans le tableau
+
+				// Traitement du cas où le gérant ne sélectionne pas de ligne
+				// dans le tableau
 				if (ligneTableau == -1) {
 
 					JOptionPane
@@ -130,12 +130,13 @@ public class FenetrePromotionsGerant extends JDialog {
 									"Aucune ligne sélectionnée. Veuillez en sélectionner une",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} else {
-					// Récupération de l'identifiant de la promotion sélectionnée
+					// Récupération de l'identifiant de la promotion
+					// sélectionnée
 					String idPromo = tableauPromotions.getValueAt(ligneTableau,
 							0).toString();
 					String descriptionPromo = tableauPromotions.getValueAt(
 							ligneTableau, 1).toString();
-					
+
 					// Affichage d'une fenêtre pour demander au gérant s'il
 					// souhaite réellement supprimer la promotion
 					int res = JOptionPane.showConfirmDialog(null,
@@ -144,9 +145,10 @@ public class FenetrePromotionsGerant extends JDialog {
 							"Confirmation", JOptionPane.YES_NO_OPTION);
 
 					if (res == JOptionPane.YES_OPTION) {
-						
+
 						// Si le gérant confirme son choix dans la fenêtre
-						// Supprimer la promotion selectionnée dans la base de données
+						// Supprimer la promotion selectionnée dans la base de
+						// données
 						Promotion.supprimerListing_PromoBDD(idPromo);
 						Promotion.supprimerPromoBDD(idPromo);
 					}
@@ -159,10 +161,11 @@ public class FenetrePromotionsGerant extends JDialog {
 		boutonModifier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Modifier la promotion sélectionée grâce à un formulaire
-				
+
 				ligneTableau = tableauPromotions.getSelectedRow();
-				
-				// Traitement du cas où le gérant ne sélectionne pas de ligne dans le tableau
+
+				// Traitement du cas où le gérant ne sélectionne pas de ligne
+				// dans le tableau
 				if (ligneTableau == -1) {
 
 					JOptionPane
@@ -171,21 +174,24 @@ public class FenetrePromotionsGerant extends JDialog {
 									"Aucune ligne sélectionnée. Veuillez en sélectionner une",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 				} else {
-					// Récupération de l'identifiant de la promotion dans le tableau
-					String idPromo = tableauPromotions.getValueAt(ligneTableau,0).toString();
+					// Récupération de l'identifiant de la promotion dans le
+					// tableau
+					String idPromo = tableauPromotions.getValueAt(ligneTableau,
+							0).toString();
 
 					FenetreFormulairePromotionsGerant modifierPromo;
-					
+
 					try {
-						// Affichage de la fenêtre affichant un formulaire pour modifier
+						// Affichage de la fenêtre affichant un formulaire pour
+						// modifier
 						// la promotion exceptionnelle sélectionnée
 						modifierPromo = new FenetreFormulairePromotionsGerant(
 								null, "Modification d'une nouvelle promotion",
 								true, idPromo);
 						modifierPromo.setVisible(true);
-						
+
 						dispose();
-						
+
 					} catch (Exception e1) {
 						System.out.println(e1.getMessage());
 					}
@@ -194,15 +200,16 @@ public class FenetrePromotionsGerant extends JDialog {
 			}
 		});
 
-		// Ajout de ses boutons de gestion des promotions au JPanel panneauTitle  //
-		// -----------------------------------------------------------------------//
+		// Ajout de ses boutons de gestion des promotions au JPanel panneauTitle
+
 		panneauTitle.add(boutonAjouter);
 		panneauTitle.add(boutonSupprimer);
 		panneauTitle.add(boutonModifier);
 
-		// Définition du panneau panneauBouton qui accueillera le bouton permettant de //
-		// ------ retourner à la page précédente en fermant celle en cours ------------//
-		// ----------------------------------------------------------------------------//
+		// Définition du JPanel panneauBouton qui accueillera le bouton
+		// permettant de retourner à la page précédente en fermant celle en
+		// cours
+
 		JPanel panneauBouton = new JPanel();
 
 		JButton retourBouton = new JButton("Retour");
@@ -217,7 +224,8 @@ public class FenetrePromotionsGerant extends JDialog {
 		// Ajout des composants au conteneur de la fenêtre //
 		// ------------------------------------------------//
 		this.getContentPane().add(panneauTitle, BorderLayout.NORTH);
-		this.getContentPane().add(new JScrollPane(tableauPromotions),BorderLayout.CENTER);
+		this.getContentPane().add(new JScrollPane(tableauPromotions),
+				BorderLayout.CENTER);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 
 		pack();

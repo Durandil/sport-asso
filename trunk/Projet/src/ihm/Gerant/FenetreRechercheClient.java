@@ -29,7 +29,7 @@ public class FenetreRechercheClient extends JDialog {
 
 	/**
 	 * @param parent
-	 * 
+	 *            JFrame utilisé pour créer la fenêtre
 	 * @param title
 	 *            String contenant le titre de la fenêtre
 	 * @param modal
@@ -49,92 +49,98 @@ public class FenetreRechercheClient extends JDialog {
 
 		// Définition du JPanel qui acceuillera tous les panneaux avec les //
 		// ------ principaux critères de recherche de clients -------------//
-		//-----------------------------------------------------------------//
+		// -----------------------------------------------------------------//
 		JPanel panneauChampsRecherche = new JPanel();
 		panneauChampsRecherche.setBorder(BorderFactory
 				.createTitledBorder("Recherche de clients selon :"));
 		panneauChampsRecherche.setLayout(new GridLayout(4, 1, 5, 5));
 
 		// Définition d'un JPanel avec le premier critère de recherche : //
-		//----------------------le mail du client------------------------//
-		//---------------------------------------------------------------//
+		// ----------------------le mail du client------------------------//
+		// ---------------------------------------------------------------//
 		JPanel panneauMail = new JPanel();
 		panneauMail.setBackground(Color.white);
 		panneauMail.setPreferredSize(new Dimension(110, 60));
-		panneauMail.setBorder(BorderFactory.createTitledBorder("Identifiant du client"));
+		panneauMail.setBorder(BorderFactory
+				.createTitledBorder("Identifiant du client"));
 		mailLabel = new JLabel("Mail : ");
-		
+
 		mail = new JTextField();
 		mail.setPreferredSize(new Dimension(90, 25));
-		
+
 		panneauMail.add(mailLabel);
 		panneauMail.add(mail);
 
 		// Définition d'un JPanel avec un autre critère de recherche : //
 		// ---------le nom du client pour les particulier--------------//
-		//-------------------------------------------------------------//
+		// -------------------------------------------------------------//
 		JPanel panneauNom = new JPanel();
 		panneauNom.setBackground(Color.white);
 		panneauNom.setPreferredSize(new Dimension(110, 60));
-		panneauNom.setBorder(BorderFactory.createTitledBorder("Nom du client pour les particuliers"));
+		panneauNom.setBorder(BorderFactory
+				.createTitledBorder("Nom du client pour les particuliers"));
 		nomLabel = new JLabel("Nom : ");
-		
+
 		nom = new JTextField();
 		nom.setPreferredSize(new Dimension(90, 25));
-		
+
 		panneauNom.add(nomLabel);
 		panneauNom.add(nom);
 
-		// Définition d'un JPanel avec un autre critère de recherche :      //
+		// Définition d'un JPanel avec un autre critère de recherche : //
 		// la dénomination du client pour les collectivités ou associations //
 		// -----------------------------------------------------------------//
 		JPanel panDenomination = new JPanel();
 		panDenomination.setBackground(Color.white);
 		panDenomination.setPreferredSize(new Dimension(110, 60));
-		panDenomination.setBorder(BorderFactory.createTitledBorder("Denomination de l'association ou de la collectivité"));
+		panDenomination
+				.setBorder(BorderFactory
+						.createTitledBorder("Denomination de l'association ou de la collectivité"));
 		denominationLabel = new JLabel("Denomination : ");
-		
+
 		denomination = new JTextField();
 		denomination.setPreferredSize(new Dimension(90, 25));
-		
+
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
 
 		// Définition d'un JPanel avec le dernier critère de recherche : //
 		// ------------------ la ville du client ------------------------//
-		//---------------------------------------------------------------//
+		// ---------------------------------------------------------------//
 		JPanel panVille = new JPanel();
 		panVille.setBackground(Color.white);
 		panVille.setPreferredSize(new Dimension(110, 60));
 		panVille.setBorder(BorderFactory.createTitledBorder("Ville du client"));
 		villeLabel = new JLabel("Ville : ");
-		
+
 		ville = new JTextField();
 		ville.setPreferredSize(new Dimension(90, 25));
-		
+
 		panVille.add(villeLabel);
 		panVille.add(ville);
 
-		// Pour finir, nous ajoutons ces JPanel au grand JPanel de recherche d'un client //
-		//-------------------------------------------------------------------------------//
+		// Pour finir, nous ajoutons ces JPanel au grand JPanel de recherche
+		// d'un client
+
 		panneauChampsRecherche.add(panneauMail);
 		panneauChampsRecherche.add(panDenomination);
 		panneauChampsRecherche.add(panneauNom);
 		panneauChampsRecherche.add(panVille);
 
 		// Définition du JPanel qui accueillir les boutons du bas //
-		//--------------------------------------------------------//
+		// --------------------------------------------------------//
 		JPanel panneauBasBoutons = new JPanel();
 		panneauBasBoutons.setLayout(new GridLayout(1, 2, 5, 5));
 
 		// Création du bouton de validation de la recherche //
-		//--------------------------------------------------//
+		// --------------------------------------------------//
 		JButton boutonValidationRecherche = new JButton("Rechercher");
 
 		boutonValidationRecherche.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				// Ouverture de la fenêtre d'affichage des résultats de la recherche
+				// Ouverture de la fenêtre d'affichage des résultats de la
+				// recherche
 				FenetreAffichageRecherche fen = new FenetreAffichageRecherche(
 						null, "Recherche", true, mail.getText(), nom.getText(),
 						denomination.getText(), ville.getText());
@@ -143,7 +149,7 @@ public class FenetreRechercheClient extends JDialog {
 		});
 
 		// Création du bouton de retour à la page précédente //
-		//---------------------------------------------------//
+		// ---------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 
 		boutonRetour.addActionListener(new ActionListener() {
@@ -153,13 +159,13 @@ public class FenetreRechercheClient extends JDialog {
 		});
 
 		// Ajout des boutons crées au JPanel des boutons du bas //
-		//------------------------------------------------------//
+		// ------------------------------------------------------//
 		panneauBasBoutons.add(boutonValidationRecherche);
 		panneauBasBoutons.add(boutonRetour);
 
-		// Ajout du JPanel contenant les champs de la recherche et celui des boutons //
-		// ----------- au grand conteneur des composants de la fenêtre --------------//
-		//---------------------------------------------------------------------------//
+		// Ajout du JPanel contenant les champs de la recherche et celui des
+		// boutons au grand conteneur des composants de la fenêtre
+
 		getContentPane().add(panneauChampsRecherche, "Center");
 		getContentPane().add(panneauBasBoutons, "South");
 	}

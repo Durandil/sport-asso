@@ -76,8 +76,8 @@ public class FenetreStatistiqueCommande extends JDialog {
 	 */
 	private void initComponent(String idCommande) {
 
-		// Définition du JPanel qui détaille les informations concernant la commande //
-		// --------------------------------------------------------------------------//
+		// Définition du JPanel qui détaille les informations concernant la
+		// commande
 		JPanel panneauHautInformations = new JPanel();
 		panneauHautInformations.setLayout(new GridLayout(3, 1, 0, 5));
 
@@ -93,9 +93,9 @@ public class FenetreStatistiqueCommande extends JDialog {
 		panneauHautInformations.add(referenceCommandeLabel);
 		panneauHautInformations.add(montantCommandeLabel);
 
-		// Récupération du tableau avec le détail des articles et des quantités commandées //
-		// ------- de chacun des articles avec ModeleTableauStatCommande ------------------//
-		//---------------------------------------------------------------------------------//
+		// Récupération du tableau avec le détail des articles et des quantités
+		// commandées de chacun des articles avec ModeleTableauStatCommande
+
 		ModeleTableauStatCommande modele = new ModeleTableauStatCommande(
 				idCommande);
 		JTable tableau = new JTable(modele);
@@ -105,7 +105,7 @@ public class FenetreStatistiqueCommande extends JDialog {
 
 		// Définition du bouton permettant le retour à la page précédente //
 		// -------------- en fermant la page en cours ------------------- //
-		//----------------------------------------------------------------//
+		// ----------------------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la fiche client");
 		boutonRetour.addActionListener(new ActionListener() {
 
