@@ -6,6 +6,15 @@ import basededonnees.SGBD;
 
 import junit.framework.TestCase;
 
+/**
+ * <b> La classe ParticulierTest permet de valider les méthodes présentes dans la classe Particulier.</b>
+ * <p> Cette classe possède 10 tests. Elle hérite de la classe TestCase.
+ * 
+ * </p>
+ * 
+ * @see basededonnees.SGBD
+ */
+
 public class SGBDTest extends TestCase {
 	
 // test select liste opérationnel	

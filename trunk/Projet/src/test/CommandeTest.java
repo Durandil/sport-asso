@@ -5,9 +5,22 @@ import java.util.ArrayList;
 import metier.Commande;
 import junit.framework.TestCase;
 
+/**
+ * <b> La classe CommandeTest permet de valider les méthodes présentes dans la classe Commande.</b>
+ * <p> Cette classe possède 5 tests de méthodes.
+ * Elle hérite de la classe TestCase.
+ * </p>
+ * 
+ * @see metier.Commande
+ */
+
 public class CommandeTest extends TestCase {
 
-// test ok
+	/**
+	 * Méthode qui teste la préparation du panier, 
+	 * c'est-à-dire les ajouts des articles
+	 * ainsi que l'initialisation des quantités de chaque article dans le panier.
+	 */
 	
 	public void testPreparerPanier(){
 		ArrayList<String[]> result = new ArrayList<String[]>();
@@ -25,7 +38,10 @@ public class CommandeTest extends TestCase {
 		assertEquals(result.get(1)[1], Commande.preparerPanier().get(1)[1]);
 	}
 	
-// test ok	
+	/**
+	 * Méthode qui teste la méthode viderPanier
+	 * qui réinitialise les quantité des articles du panier.
+	 */
 	
 	public void testViderPanier(){
 		ArrayList<String[]> panier = new ArrayList<String[]>();
@@ -51,7 +67,10 @@ public class CommandeTest extends TestCase {
 		assertEquals(result.get(1)[1], panier.get(1)[1]);
 	}
 
-	// test ok
+	/**
+	 * Méthode qui teste la recherche des quantités des articles dans le panier.
+	 */
+
 	public void testRechercheArticleDansPanier(){
 		ArrayList<String[]> panier = new ArrayList<String[]>();
 		String[] listeString = new String[2];
@@ -67,7 +86,10 @@ public class CommandeTest extends TestCase {
 
 	}
 	
-	// Test ok
+	/**
+	 * Méthode qui teste l'ajout d'articles dans le panier.
+	 */
+	
 	public void testAjouterArticlePanier(){
 		ArrayList<String[]> panier = new ArrayList<String[]>();
 		String[] listeString = new String[2];
@@ -86,7 +108,9 @@ public class CommandeTest extends TestCase {
 		assertEquals("24",panier.get(1)[1]);
 	}
 	
-	//Test ok
+	/**
+	 * Méthode qui teste la suppression d'articles du panier.
+	 */
 	public void testEnleverArticlePanier(){
 		ArrayList<String[]> panier = new ArrayList<String[]>();
 		String[] listeString = new String[2];
