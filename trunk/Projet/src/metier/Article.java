@@ -63,7 +63,8 @@ public class Article {
 
 	/**
 	 * La quantité en stock de l'article, variant au fil des commandes des
-	 * clients. Le gérant peut également modifier le stock de l'article à travers des réapprovisionnements.
+	 * clients. Le gérant peut également modifier le stock de l'article à
+	 * travers des réapprovisionnements.
 	 * 
 	 * @see Article#ajouterBDD()
 	 * @see Article#modifierArticleBDD(String, String, String, String, String,
