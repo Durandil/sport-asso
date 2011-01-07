@@ -114,16 +114,15 @@ public class FicheClient extends JDialog {
 		panneauGauche.setBackground(Color.white);
 		panneauGauche.add(image);
 
-		// Déclaration du JPanel qui contiendra les statistiques sur le client //
-		// --------------------------------------------------------------------//
+		// Déclaration du JPanel qui contiendra les statistiques sur le client
+
 		JPanel panneauDroite = new JPanel();
 		panneauDroite.setLayout(new GridLayout(6, 1, 0, 5));
 		panneauDroite.setBorder(BorderFactory
 				.createTitledBorder("Statistiques"));
 		panneauDroite.setBackground(Color.YELLOW);
 
-		// Interrogation des tables pour obtenir les statistiques sur un client //
-		// ---------------------------------------------------------------------//
+		// Interrogation des tables pour obtenir les statistiques sur un client
 
 		ArrayList<String> listeInformationsPlusGrosseCommande = SGBD
 				.statistiquePlusGrosseCommande(idClient);
@@ -147,8 +146,9 @@ public class FicheClient extends JDialog {
 		JLabel stat5 = new JLabel("Date de la plus grosse commande : "
 				+ datePlusGrosseCommande);
 
-		// Création des 5 JPanel qui vont accueillir les résultats des requêtes statistiques //
-		// ----------------------------------------------------------------------------------//
+		// Création des 5 JPanel qui vont accueillir les résultats des requêtes
+		// statistiques
+
 		JPanel panStat1 = new JPanel();
 		JPanel panStat2 = new JPanel();
 		JPanel panStat3 = new JPanel();
@@ -175,9 +175,8 @@ public class FicheClient extends JDialog {
 		panStat4.add(stat4);
 		panStat5.add(stat5);
 
-		// Création d'un JComboBox et d'un bouton pour pouvoir consulter les anciennes //
-		// ------------------------ factures d'un client ------------------------------//
-		// ----------------------------------------------------------------------------//
+		// Création d'un JComboBox et d'un bouton pour pouvoir consulter les
+		// anciennes factures d'un client
 
 		JComboBox comboAfficherCommande = new JComboBox();
 
@@ -193,9 +192,9 @@ public class FicheClient extends JDialog {
 			comboAfficherCommande.setSelectedIndex(0);
 		}
 
-		// Définition de l'action du JComboBox qui permet de récupérer le numéro de //
-		// ---------- la commande dont on souhaite afficher la facture -------------//
-		//--------------------------------------------------------------------------//
+		// Définition de l'action du JComboBox qui permet de récupérer le numéro
+		// de la commande dont on souhaite afficher la facture
+
 		comboAfficherCommande.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -204,9 +203,9 @@ public class FicheClient extends JDialog {
 			}
 		});
 
-		// Définition de l'action du bouton qui ouvrira la fenetre des statistiques //
-		// --------------------------- d'une commande (facture) --------------------//
-		// -------------------------------------------------------------------------//
+		// Définition de l'action du bouton qui ouvrira la fenêtre des
+		// statistiques d'une commande (facture)
+
 		JButton boutonValidation = new JButton("OK");
 
 		boutonValidation.addActionListener(new ActionListener() {
@@ -227,8 +226,8 @@ public class FicheClient extends JDialog {
 		panStatCommande.add(comboAfficherCommande);
 		panStatCommande.add(boutonValidation);
 
-		// Ajout des JPanel de chaque statistique au grand JPanel des statistiques //
-		// ------------------------------------------------------------------------//
+		// Ajout des JPanel de chaque statistique au grand JPanel des
+		// statistiques
 		panneauDroite.add(panStat1);
 		panneauDroite.add(panStat2);
 		panneauDroite.add(panStat3);
@@ -261,7 +260,7 @@ public class FicheClient extends JDialog {
 		panIdentifiant.setBounds(40, 75, 300, 60);
 		this.add(panIdentifiant);
 
-		// Création d'un JPanel pour la denomination //
+		// Création d'un JPanel pour la dénomination //
 		// ------------------------------------------//
 		JPanel panDenomination = new JPanel();
 		panDenomination.setBackground(new Color(0, 0, 0, 0));
@@ -295,7 +294,7 @@ public class FicheClient extends JDialog {
 		panNom.setBounds(40, 205, 300, 60);
 		this.add(panNom);
 
-		// Création d'un JPanel pour le prenom //
+		// Création d'un JPanel pour le prénom //
 		// ------------------------------------//
 		JPanel panPrenom = new JPanel();
 		panPrenom.setBackground(new Color(0, 0, 0, 0));
@@ -356,7 +355,8 @@ public class FicheClient extends JDialog {
 		panAdresse.setBounds(40, 335, 300, 60);
 		this.add(panAdresse);
 
-		//Récupération de l'identifiant de la ville du client pour l'insérer dans le JPanel de la ville
+		// Récupération de l'identifiant de la ville du client pour l'insérer
+		// dans le JPanel de la ville
 		String idVille = SGBD.selectStringConditionString("CLIENT", "IDVILLE",
 				"IDCLIENT", idClient);
 
@@ -388,7 +388,7 @@ public class FicheClient extends JDialog {
 		codePostal.setPreferredSize(new Dimension(100, 25));
 		panCP.add(cpLabel);
 		panCP.add(codePostal);
-		
+
 		// Définition d'un menu déroulant des villes de la base de données
 		// qui sera proposé au gérant s'il a saisi un code postal
 		// qui n'existe pas encore dans la base de données
@@ -478,8 +478,8 @@ public class FicheClient extends JDialog {
 		panActivationCompte.setBounds(40, 595, 200, 60);
 		this.add(panActivationCompte);
 
-		// Declaration d'un panneau qui contiendra les infos concernant la fidélité //
-		// -------------------------------------------------------------------------//
+		// Declaration d'un JPanel qui contiendra les infos concernant la
+		// fidélité
 		JPanel panneauFidelite = new JPanel();
 		panneauFidelite.setLayout(new GridLayout(2, 1, 0, 5));
 		panneauFidelite.setBackground(new Color(0, 0, 0, 0));
@@ -514,8 +514,8 @@ public class FicheClient extends JDialog {
 		panCompteFidelite.add(compteFidelite);
 		panneauFidelite.add(panCompteFidelite);
 
-		// Création d'un JPanel pour le Nombre de Points sur le Compte Fidélité //
-		// ---------------------------------------------------------------------//
+		// Création d'un JPanel pour le Nombre de Points sur le Compte Fidélité
+
 		JPanel panPointsFidelite = new JPanel();
 		panPointsFidelite.setBackground(new Color(0, 0, 0, 0));
 		panPointsFidelite.setPreferredSize(new Dimension(290, 60));
@@ -542,13 +542,12 @@ public class FicheClient extends JDialog {
 
 		this.getContentPane().add(panneauGauche);
 
-		// Définition du panneau accueillant les boutons situés en bas de fenêtre //
-		// -----------------------------------------------------------------------//
+		// Définition du JPanel accueillant les boutons situés en bas de
+		// fenêtre
 		JPanel panneauBouton = new JPanel();
 
-		// Définition d'un bouton qui permet de confirmer les modifications faites dans //
-		// ------ la fiche client dans les JTextField et dans les JComboBox ------------//
-		//------------------------------------------------------------------------------//
+		// Définition d'un bouton qui permet de confirmer les modifications
+		// faites dans la fiche client dans les JTextField et dans les JComboBox
 		JButton boutonValider = new JButton("Confirmer");
 
 		boutonValider.addActionListener(new ActionListener() {
@@ -568,7 +567,7 @@ public class FicheClient extends JDialog {
 						throw new ExceptionExcesDeCaracteres(
 								"Un des champs saisis comporte trop de caractères !");
 					}
-					
+
 					// Vérification de la longueur du code postal
 
 					if (codePostal.getText().length() != 5) {
@@ -584,7 +583,7 @@ public class FicheClient extends JDialog {
 						throw new ExceptionNumeroDeTelephoneDifferentDeDixChiffres(
 								"Un numéro de téléphone doit être composé de 10 chiffres !");
 					}
-					
+
 					// Vérification de la valeur du code postal
 
 					int cp = Integer.parseInt(codePostal.getText());
@@ -594,7 +593,7 @@ public class FicheClient extends JDialog {
 					}
 
 					// Verification code postal base de donnees
-					
+
 					if (!SGBD.verifierCodePostalExisteDansBase(codePostal
 							.getText())) {
 						throw new ExceptionCodePostalIncorrect(
@@ -609,10 +608,11 @@ public class FicheClient extends JDialog {
 						throw new ExceptionNumeroDeTelephoneIncorrect(
 								"Le numéro de téléphone saisi est incorrect !");
 					}
-					
-					// Si aucune erreur n'est détectée, nous allons modifier les informations
-					// du client dans la base de données selon son type de compte
-					
+
+					// Si aucune erreur n'est détectée, nous allons modifier les
+					// informations du client dans la base de données selon son
+					// type de compte
+
 					if (denominationClient.equals(" ")) {
 						Particulier.modifierBDDclient(identifiantClient,
 								etatCompte);
@@ -628,10 +628,10 @@ public class FicheClient extends JDialog {
 								denomination.getText(), adresse.getText(),
 								codePostal.getText(), telephone.getText());
 					}
-					
+
 					// Une fois la modification faite, nous fermons la fenêtre
 					dispose();
-					
+
 				} catch (ExceptionExcesDeCaracteres e1) {
 
 					erreurModification
@@ -660,9 +660,10 @@ public class FicheClient extends JDialog {
 
 					erreurModification.showMessageDialog(null, e7.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
-					
-					// Comme le gérant a fait une erreur de saisie de code postal
-					// nous lui affichons le menu déroulant à la place du champ de saisie
+
+					// Comme le gérant a fait une erreur de saisie de code
+					// postal nous lui affichons le menu déroulant à la place du
+					// champ de saisie
 					codePostal.setVisible(false);
 					listeVille.setEnabled(true);
 					listeVille.setVisible(true);

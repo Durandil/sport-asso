@@ -44,7 +44,7 @@ public class FenetreReapprovisionnement extends JDialog {
 	public static int ligneTableau = 0;
 
 	/**
-	 * Constructeur de la fenetre permettant de réapprovisionner les articles en
+	 * Constructeur de la fenêtre permettant de réapprovisionner les articles en
 	 * faible quantité. Les composants de la fenêtre sont initialisés dans
 	 * {@link FenetreReapprovisionnement#initComponent()}.
 	 * 
@@ -88,8 +88,8 @@ public class FenetreReapprovisionnement extends JDialog {
 				"Réapprovisionnement des articles en rupture de stock ou en quantité insuffisante");
 		panneauHaut.add(titreLabel);
 
-		// Ajout d'une image entre le tableau et l'introduction dans le haut de la fenetre //
-		// --------------------------------------------------------------------------------//
+		// Ajout d'une image entre le tableau et l'introduction dans le haut de
+		// la fenetre
 		image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
@@ -99,23 +99,25 @@ public class FenetreReapprovisionnement extends JDialog {
 
 		this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
 
-		// Récupération du tableau avec l'ensemble ds articles en quantité insuffisante //
-		// après interrogation de la base de données dans ModeleTableauCatalogue        //
-		// -----------------------------------------------------------------------------//
-		final ModeleTableauCatalogue modele = new ModeleTableauCatalogue(true,true);
-		final JTable tableau = new JTable(modele);
-		
+		// Récupération du tableau avec l'ensemble ds articles en quantité
+		// insuffisante après interrogation de la base de données dans
+		// ModeleTableauCatalogue
 
-		// Ajout d'un bouton permettant d'ouvrir une fenêtre de commande après avoir cliqué //
-		// ---------------------- sur un article dans le tableau ---------------------------//
-		//----------------------------------------------------------------------------------//
+		final ModeleTableauCatalogue modele = new ModeleTableauCatalogue(true,
+				true);
+		final JTable tableau = new JTable(modele);
+
+		// Ajout d'un bouton permettant d'ouvrir une fenêtre de commande après
+		// avoir cliqué sur un article dans le tableau
+
 		JButton commandeBouton = new JButton("Réapprovisionner");
 		commandeBouton.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				ligneTableau = tableau.getSelectedRow();
-				
-				// Traitement du cas où le gérant ne sélectionne pas de ligne dans le tableau
+
+				// Traitement du cas où le gérant ne sélectionne pas de ligne
+				// dans le tableau
 				if (ligneTableau == -1) {
 					JOptionPane
 							.showMessageDialog(
@@ -125,9 +127,11 @@ public class FenetreReapprovisionnement extends JDialog {
 									new ImageIcon("src/images/warning.png"));
 				} else {
 					// Récupération de l'identifiant de l'article sélectionné
-					String numeroArticle = tableau.getValueAt(ligneTableau, 0).toString();
-					
-					// Affichage d'une fenêtre pour permettre au gérant de choisir la quantité
+					String numeroArticle = tableau.getValueAt(ligneTableau, 0)
+							.toString();
+
+					// Affichage d'une fenêtre pour permettre au gérant de
+					// choisir la quantité
 					// qu'il souhaite réapprovisionner de l'article
 					FenetreCommandeReapprovisionnement fen = new FenetreCommandeReapprovisionnement(
 							null, "Commande", true, numeroArticle);
@@ -138,9 +142,9 @@ public class FenetreReapprovisionnement extends JDialog {
 			}
 		});
 
-		// Ajout du bouton permettant de revenir à la page précédante grâce à l'implémenation //
-		// ------------------------- de la méthode ActionPerformed ---------------------------//
-		//------------------------------------------------------------------------------------//
+		// Ajout du bouton permettant de revenir à la page précédante grâce à
+		// l'implémenation de la méthode ActionPerformed
+
 		JButton retourBouton = new JButton("Retour");
 		retourBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,8 +152,8 @@ public class FenetreReapprovisionnement extends JDialog {
 			}
 		});
 
-		// Création d'un JPanel pour accueillir les deux boutons crées au dessus //
-		// ----------------------------------------------------------------------//
+		// Création d'un JPanel pour accueillir les deux boutons crées au dessus
+
 		JPanel panneauBoutons = new JPanel();
 
 		// Ajout des boutons au JPanel des boutons : panneauBoutons //
@@ -158,8 +162,9 @@ public class FenetreReapprovisionnement extends JDialog {
 		panneauBoutons.add(retourBouton, "East");
 
 		// Ajout des principaux JPanel dans le conteneur de la fenêtre //
-		//-------------------------------------------------------------//
-		this.getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+		// -------------------------------------------------------------//
+		this.getContentPane()
+				.add(new JScrollPane(tableau), BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 
 		pack();
