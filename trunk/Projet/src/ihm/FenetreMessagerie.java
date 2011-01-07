@@ -55,16 +55,15 @@ public class FenetreMessagerie extends JFrame {
 	private void initComponent(boolean messagerieGerant) {
 		final boolean messagerieDuGerant = messagerieGerant;
 
-		// Création d'une table contenant tous les messages envoyés par les  //
-		//     clients au gérant après interrogation de la base de données   //
-		//-------------------------------------------------------------------//
+		// Création d'une table contenant tous les messages envoyés par les //
+		// clients au gérant après interrogation de la base de données //
+		// -------------------------------------------------------------------//
 		final ModeleMessagerie modele = new ModeleMessagerie(messagerieGerant);
 		final JTable tableauMessage = new JTable(modele);
 		final JScrollPane tab = new JScrollPane(tableauMessage);
 
-
 		// Création du panneau qui se situera en haut de la fenêtre créée //
-		//----------------------------------------------------------------//
+		// ----------------------------------------------------------------//
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new BorderLayout());
 
@@ -77,15 +76,16 @@ public class FenetreMessagerie extends JFrame {
 		JButton boutonLire = new JButton("Lire");
 		JButton boutonSupprimerTout = new JButton("Supprimer tout");
 
-		// Si le tableau est vide, nous désactivons les boutons afin d'éviter aux //
-		// --- utilisateurs de vouloir faire des actions dans un tableau vide ----//
-		//------------------------------------------------------------------------//
+		// Si le tableau est vide, nous désactivons          //
+		// les boutons afin d'éviter aux utilisateurs        //
+		// de vouloir faire des actions dans un tableau vide //
+		// --------------------------------------------------//
 		if (modele.getRowCount() == 0) {
 			boutonLire.setEnabled(false);
 			boutonSupprimerTout.setEnabled(false);
 		}
 
-		// Définition de l'action du bouton permettant de lire un message  //
+		// Définition de l'action du bouton permettant de lire un message //
 		// ----------------------------------------------------------------//
 		boutonLire.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -112,9 +112,10 @@ public class FenetreMessagerie extends JFrame {
 				dispose();
 			}
 		});
-		
-		// Définition de l'action du bouton permettant de supprimer tous les messages //
-		// ---------------------------------------------------------------------------//
+
+		// Définition de l'action du bouton permettant //
+		// ------ de supprimer tous les messages ------//
+		// --------------------------------------------//
 		boutonSupprimerTout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Suppression de tous les messages de la Base de Données
@@ -126,12 +127,10 @@ public class FenetreMessagerie extends JFrame {
 		});
 
 		// Ajout de ses boutons au sous JPanel << panneauTitle>> //
-		//-------------------------------------------------------//
+		// -------------------------------------------------------//
 		panneauTitle.add(boutonLire);
 		panneauTitle.add(boutonSupprimerTout);
 		panneauHaut.add(panneauTitle, "Center");
-
-		
 
 		// Définition du panneau panneauBouton qui accueillera le bouton //
 		// ---- permettant de retourner à la page précédente ------------//
@@ -147,9 +146,9 @@ public class FenetreMessagerie extends JFrame {
 		});
 
 		panneauBouton.add(retourBouton);
-		
+
 		// Ajout des principaux composants JPanel au conteneur de la fenêtre //
-		//-------------------------------------------------------------------//
+		// -------------------------------------------------------------------//
 		this.getContentPane().add(tab, BorderLayout.CENTER);
 		this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);

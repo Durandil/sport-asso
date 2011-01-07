@@ -42,17 +42,15 @@ import metier.Particulier;
  */
 public class FenetreDialogCreationCompte extends JDialog {
 
-
 	private static final long serialVersionUID = 1L;
 	private JLabel typeCompteLabel, denominationLabel, identifiantVerifLabel,
-			icon, nomLabel, prenomLabel, adresseLabel, cpLabel, telLabel,
+			image, nomLabel, prenomLabel, adresseLabel, cpLabel, telLabel,
 			fideliteLabel, identifiantLabel;
 	private JTextField nom, prenom, adresse, identifiantVerification,
 			codePostal, telephone, identifiant, denomination;
 	private JComboBox compte, fidelite, ville;
-	// Par défaut, le client ne désire pas une carte de fidélité, le booléen
-	// associé
-	// vaut ainsi "faux" à l'origine
+	// Par défaut, le client ne désire pas une carte de fidélité, 
+	// le booléen associé vaut ainsi "faux" à l'origine
 	private boolean estFidele = false;
 	private JOptionPane creationCorrecte, creationMotDePasse, erreurCreation;
 	public static String itemSelectionne;
@@ -109,13 +107,14 @@ public class FenetreDialogCreationCompte extends JDialog {
 			ExceptionCodePostalIncorrect, ExceptionNumeroDeTelephoneIncorrect {
 
 		// Récupération de l'image qui sera affichée sur la fenêtre
-		icon = new JLabel(new ImageIcon("src/images/logos.jpg"));
+		image = new JLabel(new ImageIcon("src/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.setLayout(new BorderLayout());
-		panIcon.add(icon);
+		panIcon.add(image);
 
-		// Le type de compte
+		// Création d'un JPanel pour le type de compte //
+		//---------------------------------------------//
 		JPanel panTypeCompte = new JPanel();
 		panTypeCompte.setBackground(Color.white);
 		panTypeCompte.setPreferredSize(new Dimension(220, 60));
@@ -123,8 +122,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 				.createTitledBorder("Type de compte"));
 		typeCompteLabel = new JLabel("Statut Compte : ");
 
-		// Définition d'un menu déroulant permettant à l'utilisateur
-		// de choisir son type de compte
+		// Définition d'un menu déroulant permettant 
+		// à l'utilisateur de choisir son type de compte
 		compte = new JComboBox();
 		compte.addItem("Compte Particulier");
 		compte.addItem("Compte Collectivites");
@@ -155,7 +154,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 		panTypeCompte.add(compte);
 
-		// La denomination
+		// Création d'un JPanel pour la saisie de la dénomination //
+		// --------------------------------------------------------//
 		JPanel panDenomination = new JPanel();
 		panDenomination.setBackground(Color.white);
 		panDenomination.setPreferredSize(new Dimension(220, 60));
@@ -170,7 +170,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
 
-		// Le nom
+		// Création d'un JPanel pour la saisie du nom //
+		//--------------------------------------------//
 		JPanel panNom = new JPanel();
 		panNom.setBackground(Color.white);
 		panNom.setPreferredSize(new Dimension(220, 60));
@@ -184,7 +185,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panNom.add(nomLabel);
 		panNom.add(nom);
 
-		// Le prenom
+		// Création d'un JPanel pour la saisie du prénom //
+		//-----------------------------------------------//
 		JPanel panPrenom = new JPanel();
 		panPrenom.setBackground(Color.white);
 		panPrenom.setPreferredSize(new Dimension(220, 60));
@@ -198,7 +200,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
 
-		// L'adresse
+		// Création d'un JPanel pour la saisie de l'adresse //
+		//--------------------------------------------------//
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(Color.white);
 		panAdresse.setPreferredSize(new Dimension(220, 60));
@@ -212,7 +215,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panAdresse.add(adresseLabel);
 		panAdresse.add(adresse);
 
-		// Code Postal
+		// Création d'un JPanel pour la saisie du Code Postal //
+		//----------------------------------------------------//
 		final JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(220, 60));
@@ -252,7 +256,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		ville.setVisible(false);
 		panCP.add(ville);
 
-		// Telephone
+		// Création d'un JPanel pour la saisie du téléphone //
+		// -------------------------------------------------//
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(Color.white);
 		panTelephone.setPreferredSize(new Dimension(220, 60));
@@ -266,7 +271,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panTelephone.add(telLabel);
 		panTelephone.add(telephone);
 
-		// Identifiant
+		// Création d'un JPanel pour la saisie de l'identifiant //
+		// -----------------------------------------------------//
 		JPanel panIdentifiant = new JPanel();
 		panIdentifiant.setLayout(new GridLayout(2, 2, 2, 2));
 		panIdentifiant.setBackground(Color.white);
@@ -289,7 +295,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panIdentifiant.add(identifiantVerifLabel);
 		panIdentifiant.add(identifiantVerification);
 
-		// La demande de carte de fidelité
+		// Création d'un JPanel pour la demande de carte de fidelité
 		JPanel panFidelite = new JPanel();
 		panFidelite.setBackground(Color.white);
 		panFidelite.setPreferredSize(new Dimension(220, 80));
@@ -337,17 +343,16 @@ public class FenetreDialogCreationCompte extends JDialog {
 		content.add(panTelephone);
 		content.add(panFidelite);
 
-		// Définition du panneau qui accueillera les deux boutons de la fenêtre
-		// //
-		// ----------------------------------------------------------------------//
+		// Définition du JPanel qui accueillera //
+		// les deux boutons de la fenêtre ------//
+		// -------------------------------------//
 		JPanel control = new JPanel();
 
-		// Définition de l'action du bouton Valider qui vérifie d'abord que les
-		// //
-		// champs ont été correctement saisis puis enregistre les informations
-		// //
-		// --------------- du compte dans la base de données
-		// -------------------//
+		// Définition de l'action du bouton Valider //
+		// quivérifie d'abord que les champs ont été //
+		// correctement saisis puis enregistre les //
+		// informations du compte dans la base de données //
+		// ----------------------------------------------//
 		JButton validationBouton = new JButton("Valider");
 
 		validationBouton.addActionListener(new ActionListener() {
@@ -374,8 +379,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 					ArrayList<String> listeMails = new ArrayList<String>();
 					listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
 
-					// Vérification de la présence de l'adresse mail dans la
-					// base
+					// Vérification de la présence de  
+					// l'adresse mail dans la base
 					int test = 0;
 					for (int i = 0; i < listeMails.size(); i++) {
 						if (identifiant.getText().equals(listeMails.get(i))) {
@@ -389,8 +394,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					}
 
 					// Vérification de l'absence du caractère ' dans
-					// l'adresse
-					// mail
+					// l'adresse mail 
 
 					if (identifiant.getText().contains("'")) {
 						throw new ExceptionCaractereInterdit(
@@ -442,8 +446,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					}
 
 					// Vérification de la cohérence du
-					// numéro de
-					// téléphone
+					// numéro de téléphone 
 
 					long tel = Long.parseLong(telephone.getText());
 					if (tel < 100000000 | tel >= 800000000) {
@@ -451,8 +454,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 								"Le numéro de téléphone saisi est incorrect !");
 					}
 					// Vérification de la présence
-					// d'un @
-					// dans l'adresse mail
+					// d'un @ dans l'adresse mail
 
 					if (!identifiant.getText().contains("@")) {
 						throw new ExceptionMailSansArobase(
@@ -460,8 +462,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					}
 
 					// Vérification de la sélection d'un item dans chacun des
-					// deux
-					// menus déroulants
+					// deux menus déroulants
 
 					if (!itemTypeCompteSelectionne) {
 						throw new ExceptionAucunItemSelectionneDansJComboBox(
@@ -475,9 +476,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					}
 
 					// Si aucune erreur relevée,
-					// la
-					// création de compte
-					// s'effectue
+					// la création de compte s'effectue
 
 					String idVille = SGBD.selectStringConditionString("VILLE",
 							"IDVILLE", "CODEPOSTAL", codePostal.getText());
@@ -505,10 +504,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 					FenetreDialogIdentification.clientUserIdentifiant = identifiant
 							.getText();
 
-					// On recherche le mot
-					// de passe
-					// dans la base avant de
-					// l'afficher
+					// Nous recherchons le mot de passe
+					// dans la base avant de l'afficher
 					String motDePasse = SGBD.selectStringConditionString(
 							"CLIENT", "MOTDEPASSE", "IDCLIENT",
 							identifiant.getText());
@@ -523,9 +520,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 									imageInformation);
 
 					dispose();
+					
 					// envoi du message avec
-					// le mot
-					// de passe
+					// le mot de passe 
 					java.util.Date date = new java.util.Date();
 
 					@SuppressWarnings("deprecation")
@@ -542,16 +539,13 @@ public class FenetreDialogCreationCompte extends JDialog {
 							dateJour, false);
 
 					// Essai d'ouverture du
-					// menu
-					// Utilisateur après une
-					// création de compte
-					// correcte
+					// menu Utilisateur après une
+					// création de compte correcte
 					MenuUtilisateur men = new MenuUtilisateur();
 
 					// Changement de la valeur des booléens permettant de gérer
-					// les clics
-					// sur les menus déroulants afin qu'ils soient bien à false
-					// si l'utilisateur veut créer un nouveau compte
+					// les clics sur les menus déroulants afin qu'ils soient bien
+					// à false si l'utilisateur veut créer un nouveau compte
 					itemFideliteSelectionne = false;
 					itemTypeCompteSelectionne = false;
 
@@ -609,9 +603,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
 
 					// Comme l'utilisateur a fait une erreur de saisie de code
-					// postal
-					// nous lui affichons le menu déroulant à la place du champ
-					// de saisie
+					// postal, nous lui affichons le menu déroulant à la place 
+					// du champ de saisie
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
 					ville.setVisible(true);
@@ -634,11 +627,6 @@ public class FenetreDialogCreationCompte extends JDialog {
 									image);
 
 				} catch (ExceptionAucunItemSelectionneDansJComboBox e10) {
-
-					erreurCreation.showMessageDialog(null, e10.getMessage(),
-							"Attention !", JOptionPane.WARNING_MESSAGE, image);
-
-					System.out.println(e10.getMessage());
 
 					erreurCreation.showMessageDialog(null, e10.getMessage(),
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);

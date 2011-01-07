@@ -82,16 +82,16 @@ public class MenuUtilisateur extends JFrame {
 	public MenuUtilisateur() {
 		this.setSize(500, 300);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		
+
 		// Récupération des dimensions de l'écran et centrage de la fenêtre //
-		//------------------------------------------------------------------//
+		// ------------------------------------------------------------------//
 		Dimension dimensionEcran = this.getToolkit().getScreenSize();
 		this.setLocation((dimensionEcran.width - this.getSize().width) / 2,
 				(dimensionEcran.height - this.getSize().height) / 2);
 
 		// Récupération du nom et prénom pour les particuliers et //
 		// la dénomination pour les collectivités et associations //
-		//--------------------------------------------------------//
+		// --------------------------------------------------------//
 		String nom = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT",
 				"IDCLIENT", FenetreDialogIdentification.clientUserIdentifiant);
 		String prenom = SGBD.selectStringConditionString("CLIENT",
@@ -118,12 +118,13 @@ public class MenuUtilisateur extends JFrame {
 		this.repaint();
 		this.pack();
 
-		// On initialise nos sous-menus (JMenuItem) avec leurs actions correspondantes// 
-		// ---------------------------------------------------------------------------//
+		// On initialise nos sous-menus JMenuItem) //
+		// avec leurs actions correspondantes -----//
+		// ----------------------------------------//
 
 		itemMesInformations.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// ouvrir la fenetre permettant accès au compte
+				// Ouvrir la fenetre permettant accès au compte
 				FenetreDialogGestionCompteClient fenetreGestionCompte = new FenetreDialogGestionCompteClient(
 						null, "Informations client", true,
 						FenetreDialogIdentification.clientUserIdentifiant);
@@ -133,9 +134,8 @@ public class MenuUtilisateur extends JFrame {
 
 		itemProgFidelite.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Ouverture de la fenetre permettant l'accès aux informations
-				// sur le
-				// programme de fidelite
+				// Ouverture de la fenetre permettant l'accès 
+				// aux informations sur le programme de fidélité
 				FenetreFideliteClient fenetreProgrammeFidelite = new FenetreFideliteClient(
 						null, "programme fidelité", true);
 				fenetreProgrammeFidelite.setVisible(true);
@@ -144,8 +144,8 @@ public class MenuUtilisateur extends JFrame {
 
 		itemMessagerieClient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Ouverture de la fenetre permettant l'accès à la messagerie du
-				// client
+				// Ouverture de la fenetre permettant  
+				// l'accès à la messagerie du client
 				FenetreMessagerie fenetre = new FenetreMessagerie(false);
 				fenetre.setVisible(true);
 			}
@@ -158,11 +158,11 @@ public class MenuUtilisateur extends JFrame {
 				int res = JOptionPane.showConfirmDialog(null,
 						"Confirmez-vous la déconnexion de votre compte ?",
 						"Confirmation", JOptionPane.YES_NO_OPTION);
-				
+
 				// S'il répond OK, nous allons fermer la fenêtre puis afficher
 				// de nouveau la fenêtre d'accueil
 				if (res == JOptionPane.OK_OPTION) {
-					
+
 					dispose();
 					FenetreCompte fenAccueil = new FenetreCompte();
 					fenAccueil.setVisible(true);
@@ -174,7 +174,8 @@ public class MenuUtilisateur extends JFrame {
 		itemArticles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Ouverture de la fenêtre permettant l'achat d'articles
-				FenetreCommandeArticle catalogue = new FenetreCommandeArticle(null,true);
+				FenetreCommandeArticle catalogue = new FenetreCommandeArticle(
+						null, true);
 				catalogue.setVisible(true);
 			}
 		});
@@ -195,7 +196,7 @@ public class MenuUtilisateur extends JFrame {
 				FenetreInformationsClient fenInformations = new FenetreInformationsClient();
 			}
 		});
-		
+
 		itemContact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Ouverture de la fenêtre permettant d'envoyer un message au
@@ -205,7 +206,7 @@ public class MenuUtilisateur extends JFrame {
 				contactVendeur.setVisible(true);
 			}
 		});
-		
+
 		// Ajout des sous-menus à leur menu respectif dans l'ordre descendant //
 		// ----------------------- choisi à l'affichage ----------------------//
 		// -------------------------------------------------------------------//
@@ -221,10 +222,11 @@ public class MenuUtilisateur extends JFrame {
 		this.menuContact.add(itemInformations);
 		this.menuContact.add(itemContact);
 
-		// L'ordre d'ajout va déterminer l'ordre d'apparition dans le menu de   //
-		// gauche à droite. Le premier ajouté sera tout à gauche de la barre de //
-		// -------------- menu et inversement pour le dernier ------------------//
-		// ---------------------------------------------------------------------//
+		// L'ordre d'ajout va déterminer l'ordre d'apparition //
+		// dans le menu de gauche à droite. Le premier ajouté //
+		// sera tout à gauche de la barre de menu et ---------//
+		// ---------- inversement pour le dernier ------------//
+		// ---------------------------------------------------//
 		this.menuBar.add(menuCompte);
 		this.menuBar.add(menuCatalogue);
 		this.menuBar.add(menuPromotions);
