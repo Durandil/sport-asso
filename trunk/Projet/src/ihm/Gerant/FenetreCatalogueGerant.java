@@ -188,10 +188,7 @@ public class FenetreCatalogueGerant extends JDialog {
 
 					try {
 						
-						/** TODO 
-						 * est ce les lignes 196 à 218 sont utiles ????
-						 * TODO 
-						 **/
+
 						
 						numeroArticle = Integer.parseInt(tableau.getValueAt(
 								ligne, 0).toString());

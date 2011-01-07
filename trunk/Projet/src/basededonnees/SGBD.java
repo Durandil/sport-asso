@@ -40,6 +40,7 @@ public class SGBD {
 	 * Adresse de la base de données.
 	 */
 	final static String URL = "jdbc:oracle:thin:@oraens10g:1521:ORAENS";
+	
 	// URL à utiliser lorsque l'on est pas à l'Ensai :
 	// final static String URL = "jdbc:oracle:thin:@//127.0.0.1:1521/xe";
 
@@ -47,14 +48,14 @@ public class SGBD {
 	 * L'identifiant utilisé pour la connexion.
 	 */
 
-	private static final String ID = "id3193";
+	private static final String ID = "id3199";
 
 
 	/**
 	 * Le mot de passe utilisé pour la connnexion.
 	 */
 
-	private static final String MDP = "id3193";
+	private static final String MDP = "id3199";
 
 
 	/**
