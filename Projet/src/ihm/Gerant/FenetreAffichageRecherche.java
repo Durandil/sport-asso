@@ -98,7 +98,7 @@ public class FenetreAffichageRecherche extends JDialog {
 
 		// Définition d'un JPanel qui va accueillir le tableau des résultats de   //
 		// la recherche au moyen du constructeur de la classe ModeleTableauClient //
-		//------------------------------------------------------------------------//
+		// -----------------------------------------------------------------------//
 
 		JPanel panneauCentral = new JPanel();
 		final ModeleTableauClient modele = new ModeleTableauClient(idClient,
@@ -106,9 +106,10 @@ public class FenetreAffichageRecherche extends JDialog {
 		final JTable tableauRechercheClient = new JTable(modele);
 		tableauRechercheClient.setVisible(true);
 
-		// Dans le cas où le tableau ne contient aucune ligne, c'est à dire qu'aucun      
+		// Dans le cas où le tableau ne contient aucune ligne, c'est à dire
+		// qu'aucun
 		// client ne correspond à la recherche effectuée, nous lui affichons
-		// un message pour le lui signifier 
+		// un message pour le lui signifier
 
 		if (modele.getRowCount() == 0) {
 			dispose();
@@ -120,20 +121,20 @@ public class FenetreAffichageRecherche extends JDialog {
 		}
 
 		panneauCentral.add(new JScrollPane(tableauRechercheClient));
-		
+
 		// Définition du JPanel qui accueillera les 2 boutons de la fenêtre //
-		//------------------------------------------------------------------//
-		
+		// -----------------------------------------------------------------//
+
 		JPanel panneauBouton = new JPanel();
 
 		// Définition du premier bouton de la fenêtre qui permet l'accès à une fiche client //
-		//----------------------------------------------------------------------------------//
+		// ---------------------------------------------------------------------------------//
 		JButton validationRecherche = new JButton("Accès client");
 		validationRecherche.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				// Nous recupérons le numéro de la ligne sélectionnée par le
-				// gérant dans le tableau 
+				// gérant dans le tableau
 				int ligne = tableauRechercheClient.getSelectedRow();
 
 				// Si aucune ligne est sélectionnée, alors nous affichons un
@@ -160,7 +161,7 @@ public class FenetreAffichageRecherche extends JDialog {
 											+ identifiant);
 
 					if (res == JOptionPane.OK_OPTION) {
-						
+
 						dispose();
 						// Nous affichons la fiche client correspondante à
 						// l'identifiant sélectionné
@@ -180,19 +181,19 @@ public class FenetreAffichageRecherche extends JDialog {
 		// ---------------------------------------------------------------------//
 		JButton retourRecherche = new JButton("Retour");
 		retourRecherche.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
 
-		// Ajout des 2 boutons au JPanel destinés à les accueillir  //
-		// ---------------------------------------------------------//
+		// Ajout des 2 boutons au JPanel destinés à les accueillir //
+		// --------------------------------------------------------//
 		panneauBouton.add(validationRecherche);
 		panneauBouton.add(retourRecherche);
 
 		// Ajout des 2 principaux JPanel au conteneur de la fenêtre //
-		//----------------------------------------------------------//
+		// ---------------------------------------------------------//
 		this.getContentPane().add(panneauCentral, "Center");
 		this.getContentPane().add(panneauBouton, "South");
 

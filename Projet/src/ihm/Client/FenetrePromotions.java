@@ -91,10 +91,17 @@ public class FenetrePromotions extends JFrame {
 		tableauPromotions.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
+				// Récupération de la ligne sur laquelle le client a pu cliquer
 				int ligne = tableauPromotions.getSelectedRow();
+				
+				// Traitement du cas où il a cliqué dans le tableau 
 				if (ligne != -1) {
+					
+					// Récupération de l'identifiant de la promotion 
 					String numPromotion = tableauPromotions
 							.getValueAt(ligne, 0).toString();
+					
+					// Récupération des attributs d'une promotion exceptionnelle
 					String description = SGBD.selectStringConditionString(
 							"PROMO", "NOMPROMO", "IDPROMO", numPromotion);
 					String pourcentagePromo = SGBD.selectStringConditionString(
@@ -111,7 +118,8 @@ public class FenetrePromotions extends JFrame {
 							"DATEDEBUT", "IDPROMO", numPromotion, "dd/mm/yyyy");
 					String dateFin = SGBD.selectDateConditionString("PROMO",
 							"DATEFIN", "IDPROMO", numPromotion, "dd/mm/yyyy");
-
+					
+					// Affichage d'un message d'information sur la promotion
 					JOptionPane.showMessageDialog(null,
 							"Bénéficiez de la promotion : " + description
 									+ "\n" + " sur l'article " + article
@@ -135,9 +143,7 @@ public class FenetrePromotions extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		this.getContentPane().add(new JScrollPane(tableauPromotions),
-				BorderLayout.CENTER);
-
+		
 		// Définition du JPanel panneauBouton qui accueillera le bouton //
 		// ----- permettant de retourner à la page précédente ----------//
 		//--------------------------------------------------------------//
@@ -157,6 +163,7 @@ public class FenetrePromotions extends JFrame {
 		// AJout des JPanel crées au desssus dans le conteneur de la fenêtre //
 		//-------------------------------------------------------------------//
 		this.getContentPane().add(panneauHaut, BorderLayout.NORTH);
+		this.getContentPane().add(new JScrollPane(tableauPromotions),BorderLayout.CENTER);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 
 		pack();

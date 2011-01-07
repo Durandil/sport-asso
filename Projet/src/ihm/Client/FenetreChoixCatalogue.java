@@ -24,7 +24,7 @@ import metier.Commande;
  * La classe FenetreChoixCatalogue permet de créer une fenêtre dans laquelle le
  * client pourra choisir la quantité qu'il désire ajouter de l'article
  * sélectionné dans le tableau du catalogue tout en voyant une description de
- * l'article sélectionné.
+ * cet article.
  * 
  * 
  */
@@ -32,7 +32,7 @@ public class FenetreChoixCatalogue extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
-	private JComboBox quantite;
+	private JComboBox choixQuantite;
 	public static int quantiteSelectionnee=-1;
 
 	/**
@@ -109,18 +109,18 @@ public class FenetreChoixCatalogue extends JDialog {
 		quantiteLabel = new JLabel("Quantité : ");
 
 		// Défintion d'un JComboBox dans lequel le client choisira la quantité //
-		// qu'il veut ajoute ou retirer de son panier en fonction du bouton    //
+		// ---- qu'il veut ajouter dans son panier en fonction du bouton  -----//
 		// ----- dans lequel il aura cliqué dans FenetreCommandeArticle -------//
 		// --------------------------------------------------------------------//
-		quantite = new JComboBox();
+		choixQuantite = new JComboBox();
 
 		// Pour gérer la quantité selectionnée, il ne pourra dépasser la
 		// quantité en stock
 		for (int j = 1; j <= quantiteStock; j++) {
-			quantite.addItem(j + "");
+			choixQuantite.addItem(j + "");
 		}
 
-		quantite.addActionListener(new ActionListener() {
+		choixQuantite.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
@@ -131,8 +131,8 @@ public class FenetreChoixCatalogue extends JDialog {
 		});
 
 		panneauQuantite.add(quantiteLabel);
-		quantite.setVisible(true);
-		panneauQuantite.add(quantite);
+		choixQuantite.setVisible(true);
+		panneauQuantite.add(choixQuantite);
 
 		// Définition du JPanel dans lequel seront présents les boutons de   //
 		// confirmation ou d'annulation du choix d'un article dans le panier //
@@ -174,7 +174,7 @@ public class FenetreChoixCatalogue extends JDialog {
 					// sélectionné une ligne dans le catalogue
 					FenetreCommandeArticle.activationLigneCatalogue = true;
 	
-					// Nous changeons la valeur du booleen avoirRafraichiApresAjoutPanier
+					// Nous changeons la valeur du booléen avoirRafraichiApresAjoutPanier
 					// pour qu'il ne
 					// puisse pas faire deux ajouts consécutifs d'un même article
 					// sans rafraîchir le panier
@@ -190,8 +190,8 @@ public class FenetreChoixCatalogue extends JDialog {
 
 		boutonAnnulerSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Permet d'annuler la sélection en cours et retourner vers page
-				// principale
+				// Permet d'annuler la sélection en cours et de retourner vers la 
+				// page principale
 				setVisible(false);
 			}
 		});

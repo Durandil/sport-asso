@@ -19,7 +19,7 @@ import basededonnees.SGBD;
  * du panier du client
  * 
  */
-public class FenetreCommandeArticle extends JFrame {
+public class FenetreCommandeArticle extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel catalogueLabel;
@@ -39,7 +39,7 @@ public class FenetreCommandeArticle extends JFrame {
 	 * <li>conserver la dernière ligne modifiée du panier en cas de retrait
 	 * d'article du panier
 	 * <li>gérer le problème si un client veut retirer un article de son panier
-	 * sans l'avoir selectionné sa ligne correspondante dans le tableau</li>
+	 * sans avoir sélectionné sa ligne correspondante dans le tableau</li>
 	 * </ul>
 	 * </p>
 	 */
@@ -48,13 +48,13 @@ public class FenetreCommandeArticle extends JFrame {
 	/**
 	 * Booléen static permettant de gérer le problème si un client a retiré
 	 * juste avant une certaine quantité d'un article et qu'il souhaite en
-	 * retirer une partie sans reactualiser le tableau panier
+	 * retirer une partie sans réactualiser le tableau panier
 	 */
 	public static boolean retraitPanierPossible = false;
 
 	/**
 	 * Booléen static permettant de gérer le fait que quand un client ouvre
-	 * cette fenetre, il n'a pas encore choisi d'article donc on met ce booleen
+	 * cette fenêtre, il n'a pas encore choisi d'article donc on met ce booléen
 	 * à false et on le passera à true s'il sélectionne correctement une ligne
 	 * du catalogue
 	 */
@@ -67,7 +67,7 @@ public class FenetreCommandeArticle extends JFrame {
 	public static boolean avoirRafraichiApresAjoutPanier = false;
 
 	/**
-	 * Booléen static permettant de savoir si le client va utiliser ces bons
+	 * Booléen static permettant de savoir si le client va utiliser son bon
 	 * d'achat pour cette commande
 	 */
 	private static boolean utilisationBonReduction = false;
@@ -79,14 +79,19 @@ public class FenetreCommandeArticle extends JFrame {
 	static int bonAchat = 0;
 
 	/**
-	 * Définition du constructeur de la classe qui va initialiser la fenetre
+	 * Définition du constructeur de la classe qui va initialiser la fenêtre
 	 * selon les instructions de la méthode
 	 * {@link FenetreCommandeArticle#initComponent()}. Cette classe permet
 	 * l'affichage simultané du catalogue et du panier du client.
+	 * 
+	 * @param parent
+	 *            JFrame utilisé pour créer la fenêtre
+	 * @param modal
+	 *            Booléen indiquant si la fenêtre doit bloquer ou non les
+	 *            interactions avec les autres fenêtres
 	 */
-	public FenetreCommandeArticle() {
-		super();
-		this.setTitle("Catalogue Article");
+	public FenetreCommandeArticle(JFrame parent,boolean modal) {
+		super(parent,"Catalogue Article",true);
 		this.setSize(500, 1000);
 		this.setLocation(50, 50);
 		this.setResizable(true);
@@ -199,13 +204,12 @@ public class FenetreCommandeArticle extends JFrame {
 
 		// Définition du JPanel des boutons permettant la confirmation ou //
 		// ---------- l'annulation de la commande en cours ---------------//
-		// ----------------------------------------------------------------//
+		// ---------------------------------------------------------------//
 		JPanel panneauBouton = new JPanel();
 
-		// Définition de l'action du bouton Choisir un Article qui ouvre une //
-		// fenêtre de choix de la quantité que l'on souhaite acheter de
-		// l'article //
-		// ------------------------------------------------------------------------//
+		// Définition de l'action du bouton Choisir un Article qui ouvre une      //
+		// fenêtre de choix de la quantité que l'on souhaite acheter de l'article //
+		// -----------------------------------------------------------------------//
 		JButton commanderArticle = new JButton("Choisir un article");
 		commanderArticle.addActionListener(new ActionListener() {
 
@@ -245,7 +249,7 @@ public class FenetreCommandeArticle extends JFrame {
 		 * Dans le bouton Valider, nous allons effectuer successivement les
 		 * actions suivantes :
 		 * <ul>
-		 * <li>Creation du panier final qui ne contient que les articles
+		 * <li>Création du panier final qui ne contient que les articles
 		 * commandés en quantité non nulles</li>
 		 * <li>Enregistrement de la commande dans la table COMMANDE</li>
 		 * <li>Calcul du montant de la facture en tenant compte du fait qu'un
@@ -273,9 +277,7 @@ public class FenetreCommandeArticle extends JFrame {
 							"Confirmation", JOptionPane.YES_NO_OPTION);
 					if (res == JOptionPane.OK_OPTION) {
 						// Nous mettons dans la liste des articles que ceux dont
-						// la
-						// quantité commandée
-						// est supérieure à 0
+						// la quantité commandée est supérieure à 0
 						for (String[] article : panierClient) {
 							if (Integer.parseInt(article[1]) > 0) {
 								listeArticlesPanier.add(new LigneCommande(
@@ -286,7 +288,7 @@ public class FenetreCommandeArticle extends JFrame {
 
 						if (listeArticlesPanier.size() > 0) {
 							// Enregistrement de la commande si la liste des
-							// articles commandé n'est pas vide
+							// articles commandés n'est pas vide
 							java.util.Date date = new java.util.Date();
 							@SuppressWarnings("deprecation")
 							java.sql.Date dateJour = new java.sql.Date(date
@@ -446,8 +448,8 @@ public class FenetreCommandeArticle extends JFrame {
 
 		// Définition de l'action du bouton Retirer un article du panier qui //
 		// ouvre une fenêtre permettant de sélectionner la quantité que l'on //
-		// souhaite retirer d'un article sélectionné dans le tableau Panier //
-		// -------------------------------------------------------------------//
+		// souhaite retirer d'un article sélectionné dans le tableau Panier  //
+		// ------------------------------------------------------------------//
 		final JButton retirerPanierBouton = new JButton(
 				"Retirer un article du panier");
 
@@ -493,7 +495,7 @@ public class FenetreCommandeArticle extends JFrame {
 
 				// ligne Panier <> - 1 gère le pb si un client veut retirer un
 				// article de son panier
-				// sans l'avoir selectionné dans le tableau
+				// sans l'avoir sélectionné dans le tableau
 
 				// retraitPanierPossible == true gère le problème si un client a
 				// retiré juste avant une certaine
@@ -501,9 +503,8 @@ public class FenetreCommandeArticle extends JFrame {
 				// sans réactualiser le tableau panier
 
 				// avoirRafraichiApresAjoutPanier==false gère le problème si un
-				// client
-				// oublie de rafraîchir
-				// le panier après avoir fait la sélection d'un article
+				// client oublie de rafraîchir le panier après avoir fait
+				// la sélection d'un article
 
 				if (lignePanier != -1 && retraitPanierPossible == true
 						&& avoirRafraichiApresAjoutPanier == true) {
@@ -514,6 +515,7 @@ public class FenetreCommandeArticle extends JFrame {
 
 					String quantitePanier = panier.getValueAt(lignePanier, 1)
 							.toString();
+					
 					// Ouverture de la fenêtre
 					FenetreSuppressionPanier fenetreRetrait = new FenetreSuppressionPanier(
 							null, "Retrait d'article du panier", true,
@@ -529,7 +531,7 @@ public class FenetreCommandeArticle extends JFrame {
 		retirerPanierBouton.setEnabled(false);
 
 		// Définition de l'action du bouton Rafraîchir le panier //
-		// -------------------------------------------------------//
+		// ------------------------------------------------------//
 		JButton rafraichirPanierBouton = new JButton("Rafraichir le panier");
 		rafraichirPanierBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -538,7 +540,7 @@ public class FenetreCommandeArticle extends JFrame {
 				modPan.fireTableDataChanged();
 
 				// Condition nécessaire pour gérer le fait qu'un client ne
-				// puisse selectionner
+				// puisse sélectionner
 				// aucune ligne dans le catalogue avant d'appuyer sur rafraîchir
 				if (activationLigneCatalogue == true) {
 
@@ -561,7 +563,7 @@ public class FenetreCommandeArticle extends JFrame {
 		});
 
 		// Ajout des boutons au JPanel des boutons panneauBouton //
-		// -------------------------------------------------------//
+		// ------------------------------------------------------//
 		panneauBouton.add(commanderArticle);
 		panneauBouton.add(boutonValider);
 		panneauBouton.add(retourBouton);
@@ -569,7 +571,7 @@ public class FenetreCommandeArticle extends JFrame {
 		panneauBouton.add(retirerPanierBouton);
 
 		// Ajout du JPanel des boutons au conteneur de la fenêtre //
-		// --------------------------------------------------------//
+		// -------------------------------------------------------//
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 
 		pack();

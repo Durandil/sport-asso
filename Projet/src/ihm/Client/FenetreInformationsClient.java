@@ -7,7 +7,7 @@ import javax.swing.*;
  * La classe FenetreInformationsClient permet d'afficher la fenêtre regroupant
  * le descriptif du magasin aux clients accédant au sous-menu "Informations"
  * dans le menu "Contact". Nous retrouvons le message de présentation de
- * l'entreprise, un panneau avec l'adresse et le numéro de téléphone ainsi
+ * l'entreprise, un JPanel avec l'adresse et le numéro de téléphone ainsi
  * qu'une carte pour localiser le magasin
  * 
  * @see ihm.MenuUtilisateur

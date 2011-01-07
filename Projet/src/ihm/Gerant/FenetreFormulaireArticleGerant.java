@@ -52,7 +52,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 
 	/**
 	 * Constructeur de la fenêtre du formulaire d'ajout d'un article dans la
-	 * base de données Il est construit à partir de
+	 * base de données. Il est construit à partir de
 	 * {@link FenetreFormulaireArticleGerant#initComponent()}.
 	 * 
 	 * @param parent
@@ -107,7 +107,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 	 * <li>un JPanel qui accueillir les sous-JPanels contenant les JTextField et
 	 * JComboBox vides permettant l'ajout d'un nouvel article.</li>
 	 * <li>un JPanel qui va accueillir les boutons permettant de valider les
-	 * champs saisis et d'annuler les saisies des champs(fermeture de la
+	 * champs saisis et d'annuler les saisies des champs (fermeture de la
 	 * fenêtre).</li>
 	 * </ul>
 	 * </p>
@@ -115,11 +115,14 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 	private void initComponent() {
 		JPanel panneauCentral = new JPanel();
 
-		// Remplissage des JPanel qui vont accueillir les JTextField de saisie des   //
-		// champs et les JComboBox afin que le gérant puisse choisir la catégorie et //
-		// ------------- le type de sport auquel appartient l'article ---------------//
+		// Remplissage des JPanel qui vont accueillir 
+		// les JTextField de saisie des //
+		// champs et les JComboBox afin que le gérant puisse choisir la
+		// catégorie et //
+		// ------------- le type de sport auquel appartient l'article
+		// ---------------//
 		// --------------------------------------------------------------------------//
-		
+
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
 		panCategoriePrix.setPreferredSize(dimensionStandard);
@@ -135,7 +138,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panPrixInitial.setBorder(BorderFactory.createEmptyBorder());
 
 		descriptionLabel = new JLabel("Description : ");
-		poidsLabel = new JLabel("Poids : ");
+		poidsLabel = new JLabel("Poids en g : ");
 		catPrixLabel = new JLabel("Catégorie de Prix : ");
 		catSportLabel = new JLabel("Catégorie de sport : ");
 		prixLabel = new JLabel("Prix Initial : ");
@@ -151,12 +154,14 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		prix.setPreferredSize(new Dimension(90, 25));
 		stock.setPreferredSize(new Dimension(90, 25));
 
-		// Définition des deux JComboBox pour le type de sport et la catégorie de prix //
-		// ----------------------------------------------------------------------------//
+		// Définition des deux JComboBox pour le //
+		// type de sport et la catégorie de prix //
+		// --------------------------------------//
 		catPrixBox = new JComboBox();
 		catSportBox = new JComboBox();
 
 		// Récupération de la liste de tous les types de sport existants
+		// pour remplir le menu déroulant JComboBox
 		ArrayList<String> listeTypeSport = new ArrayList<String>();
 		listeTypeSport = SGBD.selectListeString("TYPE_SPORT", "NOMTYPE");
 		if (listeTypeSport.size() > 0) {
@@ -176,6 +181,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 
 		ArrayList<String> listeCategoriePrix = new ArrayList<String>();
 		// Récupération de la liste de toutes les catégories de prix existantes
+		// pour remplir le menu déroulant JComboBox
 		listeCategoriePrix = SGBD
 				.selectListeString("CATEGORIE", "NOMCATEGORIE");
 		if (listeCategoriePrix.size() > 0) {
@@ -202,7 +208,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panStock.add(stockLabel);
 		panPrixInitial.add(prixLabel);
 
-		// Ajout des JTextField et JComboBox correspondants à chacun des champs à compléter //
+		// Ajout des JTextField et JComboBox correspondants à chacun des champs
+		// à compléter //
 		// ---------------------------------------------------------------------------------//
 		panDescription.add(description);
 		panPoids.add(poids);
@@ -211,8 +218,9 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panCategoriePrix.add(catPrixBox);
 		panCategorieSport.add(catSportBox);
 
-		// Ajout des sous JPanel au "grand" JPanel qui regroupe tous les champs à compléter //
-		// ---------------------------------------------------------------------------------//
+		// Ajout des sous JPanel au "grand" JPanel  // 
+		// qui regroupe tous les champs à compléter //
+		// -----------------------------------------//
 		panneauCentral.add(panDescription);
 		panneauCentral.add(panPoids);
 		panneauCentral.add(panCategoriePrix);
@@ -220,13 +228,15 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panneauCentral.add(panStock);
 		panneauCentral.add(panPrixInitial);
 
-		// Définition du JPanel qui va accueillir les boutons de confirmation et d'annulation // 
-		// -----------------------------------------------------------------------------------//
+		// Définition du JPanel qui va accueillir les  //
+		// boutons de confirmation et d'annulation     //
+		// --------------------------------------------//
 		JPanel panneauBoutonsBas = new JPanel();
 
-		// Définition de l'action du bouton confirmer qui va vérifier que les champs saisis // 
-		// --------------------et selectionnés soient corrects -----------------------------//
-		// ---------------------------------------------------------------------------------//
+		// Définition de l'action du bouton confirmer qui //
+		// va vérifier que les champs saisis et           //
+		// selectionnés soient corrects                   //
+		// -----------------------------------------------//
 		JButton boutonConfirmation = new JButton("Confirmer");
 
 		boutonConfirmation.addActionListener(new ActionListener() {
@@ -237,12 +247,14 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					String p = poids.getText();
 					String st = stock.getText();
 					String prx = prix.getText();
-					// Nous supprimons l'espace créé par l'existence des milliers
+					// Nous supprimons l'espace créé par l'existence des
+					// milliers
 					// (ex : "15 000")
 					p = p.replaceAll("[\\s\u00a0]+", "");
 					st = st.replaceAll("[\\s\u00a0]+", "");
 					prx = prx.replaceAll("[\\s\u00a0]+", "");
 
+					// Vérification de l'existence d'une saisie dans le champ
 					if (description.getText().length() == 0
 							| prix.getText().length() == 0
 							| poids.getText().length() == 0
@@ -251,6 +263,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 								"Au moins l'un des champs est vide");
 					}
 
+					// Vérification de la longueur de la description saisie
 					if (description.getText().length() > 40) {
 						throw new ExceptionExcesDeCaracteres(
 								"La description de l'article est trop longue");
@@ -260,11 +273,13 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					long poidsArticle = Long.parseLong(poids.getText());
 					double prixInitial = Double.parseDouble(prix.getText());
 
+					// Vérification de la valeur du stock saisi
 					if (stockArticle < 0 | stockArticle >= 1000000) {
 						throw new ExceptionStockAberrant(
 								"Le stock saisi est aberrant.");
 					}
 
+					// Vérification de la valeur du poids saisi
 					if (poidsArticle < 0 | poidsArticle >= 1000000) {
 						throw new ExceptionPoidsAberrant(
 								"Le poids saisi est aberrant.");
@@ -285,12 +300,12 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 								"CATEGORIE", "IDCATEGORIE", "NOMCATEGORIE",
 								itemPrixSelectionne);
 
-						System.out.println(typ + " " + cat);
 						Article art = new Article(description.getText(), Double
 								.parseDouble(prx), Integer.parseInt(st), Float
 								.parseFloat(p), typ, cat, "En stock");
 
-						// Fermeture de la page
+						// Fermeture de la page et réouverture de la fenêtre
+						// du catalogue du gérant
 						dispose();
 						FenetreCatalogueGerant fen = new FenetreCatalogueGerant(
 								null, true);
@@ -335,7 +350,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 					JOptionPane
 							.showMessageDialog(
 									null,
-									"Le prix saisi doit être compris entre 0 et 999 999€ ! ",
+									"Le prix saisi doit être compris entre 0 et 999 999 € ! ",
 									"Attention", JOptionPane.ERROR_MESSAGE);
 
 				}
@@ -343,8 +358,10 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			}
 		});
 
-		// Définition de l'action du bouton retour à la page précédente qui annule //
-		// --------- tout ce qui a pu être fait sur la page et la ferme -----------//
+		// Définition de l'action du bouton retour à la page précédente qui
+		// annule //
+		// --------- tout ce qui a pu être fait sur la page et la ferme
+		// -----------//
 		// ------------------------------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		boutonRetour.addActionListener(new ActionListener() {
@@ -352,12 +369,14 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page précédente
 				dispose();
-				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);	
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,
+						true);
 				fen.setVisible(true);
 			}
 		});
 
-		// Ajout des boutons au JPanel panneauBasFenetre destiné à accueillir les boutons //
+		// Ajout des boutons au JPanel panneauBasFenetre destiné à accueillir
+		// les boutons //
 		// -------------------------------------------------------------------------------//
 		panneauBoutonsBas.add(boutonConfirmation);
 		panneauBoutonsBas.add(boutonRetour);
@@ -378,9 +397,12 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 	 */
 	private void initComponent(String idArticle) {
 
-		// Récupération dans la base de données des attributs de l'article afin de      //
-		// pré-remplir les JTextField avec la valeur enregistrée dans la base de données//
-		// -------- et de compléter la valeur par défaut des JComboBox ---------------- //
+		// Récupération dans la base de données des attributs de l'article afin
+		// de //
+		// pré-remplir les JTextField avec la valeur enregistrée dans la base de
+		// données//
+		// -------- et de compléter la valeur par défaut des JComboBox
+		// ---------------- //
 		// -----------------------------------------------------------------------------//
 		final String numArticle = idArticle;
 		String descriptionA = SGBD.selectStringConditionString("ARTICLE",
@@ -396,9 +418,11 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		itemSportSelectionne = SGBD.selectStringConditionString("ARTICLE",
 				"IDTYPE", "IDARTICLE", idArticle);
 
-		// Récupération du nom de la catégorie de prix et d'article pour le mettre //
-		// ---------------- comme Item par défaut des JComboBox -------------------//
-		//-------------------------------------------------------------------------//
+		// Récupération du nom de la catégorie de prix et d'article pour le
+		// mettre //
+		// ---------------- comme Item par défaut des JComboBox
+		// -------------------//
+		// -------------------------------------------------------------------------//
 		String nomCategorieA = SGBD.selectStringConditionString("CATEGORIE",
 				"NOMCATEGORIE", "IDCATEGORIE", itemPrixSelectionne);
 		String nomtypeSportA = SGBD.selectStringConditionString("TYPE_SPORT",
@@ -406,9 +430,12 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 
 		JPanel panneauCentral = new JPanel();
 
-		// Remplissage des JPanel qui vont accueillir les JTextField de modification des //
-		// champs et les JComboBox afin que le gérant puisse changer la catégorie et     //
-		// ------------- le type de sport auquel appartient l'article -------------------//
+		// Remplissage des JPanel qui vont accueillir les JTextField de
+		// modification des //
+		// champs et les JComboBox afin que le gérant puisse changer la
+		// catégorie et //
+		// ------------- le type de sport auquel appartient l'article
+		// -------------------//
 		// ------------------------------------------------------------------------------//
 		panDescription.setPreferredSize(dimensionStandard);
 		panPoids.setPreferredSize(dimensionStandard);
@@ -425,15 +452,17 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panCategorieSport.setBorder(BorderFactory.createEmptyBorder());
 
 		descriptionLabel = new JLabel("Description : ");
-		poidsLabel = new JLabel("Poids : ");
+		poidsLabel = new JLabel("Poids en g : ");
 		prixLabel = new JLabel("Prix Initial : ");
 		stockLabel = new JLabel("Stock : ");
 		catPrixLabel = new JLabel("Catégorie de Prix : ");
 		catSportLabel = new JLabel("Catégorie de sport : ");
 
-		// Remplissage des JTexField avec les valeurs initiales de l'article passé en // 
-		// ------------------------en paramètre --------------------------------------//
-		//----------------------------------------------------------------------------//
+		// Remplissage des JTexField avec les valeurs initiales de l'article
+		// passé en //
+		// ------------------------en paramètre
+		// --------------------------------------//
+		// ----------------------------------------------------------------------------//
 		description = new JTextField(descriptionA);
 		poids = new JTextField(poidsA);
 		prix = new JTextField(prixA);
@@ -445,12 +474,14 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		prix.setPreferredSize(new Dimension(100, 20));
 		stock.setPreferredSize(new Dimension(100, 20));
 
-		// Définition des deux JComboBox pour le type de sport et la catégorie de prix //
+		// Définition des deux JComboBox pour le type de sport et la catégorie
+		// de prix //
 		// ----------------------------------------------------------------------------//
 		catPrixBox = new JComboBox();
 		catSportBox = new JComboBox();
 
 		// Récupération de la liste de tous les types de sport existants
+		// pour remplir le menu déroulant JComboBox
 		ArrayList<String> listeTypeSport = new ArrayList<String>();
 		listeTypeSport = SGBD.selectListeString("TYPE_SPORT", "NOMTYPE");
 
@@ -459,8 +490,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			for (int i = 0; i < listeTypeSport.size(); i++) {
 				catSportBox.addItem(listeTypeSport.get(i));
 			}
-			// On met par défaut la catégorie de sport de l'article lorsqu'il a
-			// été enregistré
+			// Nous mettons par défaut la catégorie de sport
+			// de l'article lorsqu'il a été enregistré
 			// la dernière fois dans la base de données
 			catSportBox.setSelectedItem(nomtypeSportA);
 		}
@@ -476,6 +507,7 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		});
 
 		// Récupération de la liste de toutes les catégories de prix existantes
+		// pour remplir le menu déroulant JComboBox
 		ArrayList<String> listeCategoriePrix = new ArrayList<String>();
 		listeCategoriePrix = SGBD
 				.selectListeString("CATEGORIE", "NOMCATEGORIE");
@@ -485,9 +517,9 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			for (int i = 0; i < listeCategoriePrix.size(); i++) {
 				catPrixBox.addItem(listeCategoriePrix.get(i));
 			}
-			// On met par défaut la catégorie de prix de l'article lorsqu'il a
-			// été enregistré
-			// la dernière fois dans la base de données
+			// Nous mettons par défaut la catégorie de prix de l'article
+			// lorsqu'il a été enregistréla dernière fois
+			// dans la base de données
 			catPrixBox.setSelectedItem(nomCategorieA);
 
 		}
@@ -502,7 +534,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			}
 		});
 
-		// Ajout des titres JLabel de chaque champ à leur JPanel correspondant //
+		// Ajout des titres JLabel de chaque champ à leur JPanel correspondant
+		// //
 		// --------------------------------------------------------------------//
 		panDescription.add(descriptionLabel);
 		panPoids.add(poidsLabel);
@@ -529,15 +562,20 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 		panneauCentral.add(panCategoriePrix);
 		panneauCentral.add(panCategorieSport);
 
-		// Définition du JPanel qui va accueillir les 2 boutons de la fenetre :  //
-		// ---- Confirmer les modifications et retour à la page précédente ------//
+		// Définition du JPanel qui va accueillir les 2 boutons de la fenetre :
+		// //
+		// ---- Confirmer les modifications et retour à la page précédente
+		// ------//
 		// ----------------------------------------------------------------------//
 
 		JPanel panneauBoutonsBas = new JPanel();
 
-		// Définition de l'action du bouton de confirmation qui enregistre les     //
-		// modifications sur l'article dans la base de données après avoir vérifié //
-		// ----------- que les champs remplis soient corrects ---------------------//
+		// Définition de l'action du bouton de confirmation qui enregistre les
+		// //
+		// modifications sur l'article dans la base de données après avoir
+		// vérifié //
+		// ----------- que les champs remplis soient corrects
+		// ---------------------//
 		// ------------------------------------------------------------------------//
 		JButton boutonConfirmation = new JButton("Confirmer modification");
 
@@ -637,8 +675,10 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			}
 		});
 
-		// Définition de l'action du bouton retour qui annule les modifications et //
-		// -------- permet le retour vers la page de gestion du catalogue ---------//
+		// Définition de l'action du bouton retour qui annule les modifications
+		// et //
+		// -------- permet le retour vers la page de gestion du catalogue
+		// ---------//
 		// ------------------------------------------------------------------------//
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		boutonRetour.addActionListener(new ActionListener() {
@@ -646,7 +686,8 @@ public class FenetreFormulaireArticleGerant extends JDialog {
 			public void actionPerformed(ActionEvent e) {
 				// Permet le retour à la page précédente
 				dispose();
-				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,true);
+				FenetreCatalogueGerant fen = new FenetreCatalogueGerant(null,
+						true);
 				fen.setVisible(true);
 
 			}

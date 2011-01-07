@@ -66,8 +66,8 @@ public class FenetreContactVendeur extends JDialog {
 	}
 
 	/**
-	 * Pour créer la fenêtre, nous allons insérer deux panneux pour pouvoir
-	 * saisir le sujet et le contenu du message
+	 * Pour créer la fenêtre, nous allons insérer deux JPanel pour pouvoir
+	 * saisir le sujet et le contenu du message.
 	 */
 	private void initComponent() {
 		// Définition d'un JPanel qui accueillera un titre introductif dans la fenêtre //
@@ -81,6 +81,7 @@ public class FenetreContactVendeur extends JDialog {
 
 		// Création d'un panneau qui accueillera un texte introductif sous le //
 		// ------------------- titre dans la fenetre -------------------------//
+		//--------------------------------------------------------------------//
 		JPanel panneauTexte = new JPanel();
 		panneauTexte.setBackground(Color.white);
 		texte = new JLabel(
@@ -126,8 +127,8 @@ public class FenetreContactVendeur extends JDialog {
 		contentPan.add(sujetPan);
 		contentPan.add(contenuPan);
 
-		// Création du panneau qui va accueillir le bouton d'envoi du message //
-		//--------------------------------------------------------------------//
+		// Création du JPanel qui va accueillir le bouton d'envoi du message //
+		//-------------------------------------------------------------------//
 		JPanel panneauBouton = new JPanel();
 		JButton boutonEnvoyer = new JButton("Envoyer");
 
@@ -179,13 +180,14 @@ public class FenetreContactVendeur extends JDialog {
 					}
 
 				} catch (ExceptionChampVide e2) {
-					System.out.println(e2.getMessage());
+
 					JOptionPane.showMessageDialog(null,
 							"Votre message n'a pas de " + champ
 									+ ",veuillez le préciser.", "Attention",
 							JOptionPane.ERROR_MESSAGE);
+					
 				} catch (ExceptionExcesDeCaracteres e3) {
-					System.out.println(e3.getMessage());
+
 					JOptionPane
 							.showMessageDialog(
 									null,

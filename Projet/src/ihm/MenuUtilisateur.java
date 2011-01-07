@@ -174,7 +174,7 @@ public class MenuUtilisateur extends JFrame {
 		itemArticles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Ouverture de la fenêtre permettant l'achat d'articles
-				FenetreCommandeArticle catalogue = new FenetreCommandeArticle();
+				FenetreCommandeArticle catalogue = new FenetreCommandeArticle(null,true);
 				catalogue.setVisible(true);
 			}
 		});
