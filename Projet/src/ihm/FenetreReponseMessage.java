@@ -87,31 +87,32 @@ public class FenetreReponseMessage extends JFrame {
 		}
 
 		// Création du JPanel du champ de saisie du Sujet du Message //
-		//-----------------------------------------------------------//
+		// -----------------------------------------------------------//
 		JPanel panneauSujet = new JPanel();
 		sujetLabel = new JLabel("Objet : ");
-		
+
 		// Mise en place du champ de saisie du sujet du message
 		sujetMessage = new JTextField("RE (" + gerant + ") : " + sujetDuMessage);
 		sujetMessage.setPreferredSize(new Dimension(200, 25));
-		
+
 		panneauSujet.add(sujetLabel);
 		panneauSujet.add(sujetMessage);
 		panneauSujet.setBorder(BorderFactory.createEmptyBorder());
 
 		// Création du JPanel du champ de saisie du Contenu du Message //
-		//-------------------------------------------------------------//
+		// -------------------------------------------------------------//
 		JPanel panneauContenuMessage = new JPanel();
 		panneauContenuMessage.setBorder(BorderFactory
 				.createLineBorder(Color.darkGray));
-		
-		// Mise en place d'une zone de texte pour la saisie du contenu du message
+
+		// Mise en place d'une zone de texte pour la saisie du contenu du
+		// message
 		contenuMessage = new JTextArea(8, 30);
 		contenuMessage.setBorder(BorderFactory.createLineBorder(Color.black));
 		contenuMessage.setEnabled(true);
 		contenuMessage.setLineWrap(true);
 		contenuMessage.setWrapStyleWord(true);
-		
+
 		contenuLabel = new JLabel("Contenu : ");
 		panneauContenuMessage.add(contenuLabel);
 		panneauContenuMessage.add(contenuMessage);
@@ -123,7 +124,7 @@ public class FenetreReponseMessage extends JFrame {
 
 		// Définition du panneau dans lequel seront présents les boutons de //
 		// ----- retour à la page précédente et d'envoi de message ---------//
-		//------------------------------------------------------------------// 
+		// ------------------------------------------------------------------//
 		JPanel panneauBoutonsBas = new JPanel();
 
 		JButton boutonRetourMessagerie = new JButton(
@@ -140,21 +141,22 @@ public class FenetreReponseMessage extends JFrame {
 				dispose();
 				FenetreMessagerie fenetre = new FenetreMessagerie(reponseGerant);
 				fenetre.setVisible(true);
-				// permet le retour vers la page contenant la boite de reception
+				// Permet le retour vers la page contenant la boite de reception
 				// du gérant
 			}
 		});
 
-		// Création du bouton permettant d'envoyer un message après avoir vérifier //
-		// que les champs remplis respectent les critères pour être inscrits dans  // 
-		// -------------------------- la base de données --------------------------//
-		// ------------------------------------------------------------------------//
+		// Création du bouton permettant d'envoyer un -//
+		// message après avoir vérifier que les champs //
+		// remplis respectent les critères pour être --// 
+		// ---- inscrits dans la base de données ------//
+		// --------------------------------------------//
 		boutonEnvoyer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				String champ = "";
 				try {
-					// Vérification des champs saisis pour voir 
+					// Vérification des champs saisis pour voir
 					// s'ils ne sont pas vides
 					if (contenuMessage.getText().length() == 0) {
 						champ = "corps";
@@ -166,9 +168,9 @@ public class FenetreReponseMessage extends JFrame {
 						throw new ExceptionChampVide(
 								"Le message n'a pas de sujet !");
 					}
-					
+
 					// Vérification de la longueur des champs complétés
-					// afin de voir s'ils respectent les contraintes de 
+					// afin de voir s'ils respectent les contraintes de
 					// la base de données
 					if (contenuMessage.getText().length() > 300) {
 						champ = "corps";
@@ -180,13 +182,13 @@ public class FenetreReponseMessage extends JFrame {
 						throw new ExceptionExcesDeCaracteres(
 								"Le sujet du message est trop long !");
 					} else {
-						
+
 						// Si aucune erreur n'est détectée
-						// nous créons un nouveau message à 
+						// nous créons un nouveau message à
 						// partir des champs complétés
-						
+
 						java.util.Date date = new java.util.Date();
-						
+
 						@SuppressWarnings("deprecation")
 						java.sql.Date dateJour = new java.sql.Date(date
 								.getYear(), date.getMonth(), date.getDate());
@@ -194,14 +196,15 @@ public class FenetreReponseMessage extends JFrame {
 								.getText(),
 								FenetreLectureMessage.idExpediteurMessage,
 								dateJour, false);
-						
-						// Une fois le message enregistré dans la base de données
+
+						// Une fois le message enregistré dans 
+						// la base de données
 						// nous allons réouvrir la messagerie de l'utilisateur
 						FenetreMessagerie fenetre = new FenetreMessagerie(
 								reponseGerant);
 						fenetre.setVisible(true);
 
-						// puis nous allons fermer la fenêtre
+						// Puis nous allons fermer la fenêtre
 						dispose();
 
 					}
@@ -215,22 +218,26 @@ public class FenetreReponseMessage extends JFrame {
 
 				} catch (ExceptionExcesDeCaracteres e3) {
 
-					JOptionPane.showMessageDialog(null,"Le "		
-							+ champ	
-							+ " de votre message est trop long,veuillez le raccourcir",
-							"Attention", JOptionPane.ERROR_MESSAGE);
+					JOptionPane
+							.showMessageDialog(
+									null,
+									"Le "
+											+ champ
+											+ " de votre message est trop long,veuillez le raccourcir",
+									"Attention", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
 
 		// Ajout des boutons au JPanel principal des boutons panneauBoutons //
-		//------------------------------------------------------------------//
+		// ------------------------------------------------------------------//
 		panneauBoutonsBas.add(boutonRetourMessagerie);
 		panneauBoutonsBas.add(boutonEnvoyer);
 
 		// Ajout des JPanel crées ci-dessus au conteneur de la fenêtre //
-		//-------------------------------------------------------------//
-		this.getContentPane().add(panneauIdentificationMessage,BorderLayout.NORTH);
+		// -------------------------------------------------------------//
+		this.getContentPane().add(panneauIdentificationMessage,
+				BorderLayout.NORTH);
 		this.getContentPane().add(panneauContenuMessage, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutonsBas, BorderLayout.SOUTH);
 

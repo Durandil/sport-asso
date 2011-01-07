@@ -67,15 +67,15 @@ public class MenuGerant extends JFrame {
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setResizable(false);
 		this.setLayout(new BorderLayout());
-		
+
 		// Récupération des dimensions de l'écran et centrage de la fenêtre //
-		//------------------------------------------------------------------//
+		// ------------------------------------------------------------------//
 		Dimension dimensionEcran = this.getToolkit().getScreenSize();
 		this.setLocation((dimensionEcran.width - this.getSize().width) / 2,
 				(dimensionEcran.height - this.getSize().height) / 2);
 
 		// Insertion de l'image au panneau final //
-		//---------------------------------------//
+		// ---------------------------------------//
 		image = new JLabel(new ImageIcon("src/images/fenetre.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBackground(Color.white);
@@ -84,9 +84,9 @@ public class MenuGerant extends JFrame {
 
 		this.getContentPane().add(panImage, "West");
 
-		// Pour chaque sous-menu (JMenuItem), implémentation de son     //
+		// Pour chaque sous-menu (JMenuItem), implémentation de son ----//
 		// actionPerformed correspondant à la fenetre qu'il faut ouvrir //
-		//--------------------------------------------------------------//
+		// -------------------------------------------------------------//
 
 		itemGestionCompte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -139,9 +139,8 @@ public class MenuGerant extends JFrame {
 		itemCommandes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Afficher la fenêtre contenant le tableau des articles en
-				// rupture de stock
-				// et nécessitant un réapprovisionnement du fait de sa quantité
-				// en stock
+				// rupture de stock et nécessitant un réapprovisionnement du
+				// fait de sa quantité en stock
 				FenetreReapprovisionnement fenetreStock = new FenetreReapprovisionnement(
 						null, true);
 				fenetreStock.setVisible(true);
@@ -158,9 +157,10 @@ public class MenuGerant extends JFrame {
 			}
 		});
 
-		// Ajout des différents sous-menus à leur menu correspondant comme cela
-		// a été défini
-		// dans la maquette graphique des interfaces
+		// Ajout des différents sous-menus à leur menu //
+		// correspondant comme cela a été défini ------//
+		// dans la maquette graphique des interfaces --//
+		// ---------------------------------------------//
 		this.menuClientele.add(itemGestionCompte);
 		this.menuClientele.add(itemMessagerie);
 		this.menuClientele.add(itemFermer);
@@ -168,13 +168,18 @@ public class MenuGerant extends JFrame {
 		this.menuStock.add(itemCommandes);
 		this.menuStock.add(itemPromotions);
 
-		// Ajout des menus à l'objet barre de menus qui contient tous les menus
+		// Ajout des menus à l'objet barre de// 
+		// menus qui contient tous les menus //
+		// ----------------------------------//
 		this.menuBar.add(menuClientele);
 		this.menuBar.add(menuStock);
 
-		// Ajout de la barre de menus à notre objet MenuGerant
+		// Ajout de la barre de menus à notre objet MenuGerant //
+		// -----------------------------------------------------//
 		this.setJMenuBar(menuBar);
-		// Enfin on rend visible l'objet
+
+		// Enfin nous rendons visible l'objet //
+		// ------------------------------------//
 		this.setVisible(true);
 
 		pack();

@@ -27,6 +27,7 @@ import exception.Client.ExceptionMailsDifferents;
 import exception.Client.ExceptionMotDePasseErrone;
 
 import basededonnees.SGBD;
+
 /**
  * Classe représentant la fenêtre s'affichant lors de l'identification.
  */
@@ -87,7 +88,8 @@ public class FenetreDialogIdentification extends JDialog {
 	 *      String, boolean)
 	 */
 	private void initComponent() {
-		// Création du panneau pour la saisie de l'identifiant
+		// Création du JPanel pour la saisie de l'identifiant //
+		//----------------------------------------------------//
 		JPanel panIdentifiant = new JPanel();
 		panIdentifiant.setBackground(new Color(0, 0, 0, 0));
 		panIdentifiant.setPreferredSize(new Dimension(220, 60));
@@ -99,7 +101,8 @@ public class FenetreDialogIdentification extends JDialog {
 		panIdentifiant.add(identifiantLabel);
 		panIdentifiant.add(identifiant);
 
-		// Création du panneau pour la saisie du mot de passe
+		// Création du JPanel pour la saisie du mot de passe //
+		//---------------------------------------------------//
 		JPanel panPassword = new JPanel();
 		panPassword.setBackground(new Color(0, 0, 0, 0));
 		panPassword.setPreferredSize(new Dimension(220, 60));
@@ -111,19 +114,22 @@ public class FenetreDialogIdentification extends JDialog {
 		panPassword.add(passwordLabel);
 		panPassword.add(password);
 
-		// Définition du panneau qui accueillera les deux panneaux de saisie des
-		// champs
+		// Définition du panneau qui accueillera les // 
+		// deux panneaux de saisie des champs -------//
+		//-------------------------------------------//
 		JPanel content = new JPanel();
 		content.setBackground(Color.white);
 		content.add(panIdentifiant);
 		content.add(panPassword);
 
-		// Définition du panneau qui accueillera les 2 boutons : Valider et
-		// Annuler
+		// Définition du panneau qui accueillera // 
+		// les 2 boutons : Valider et Annuler ---//
+		//---------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 
-		// Création et définition de l'action du bouton Valider dans
-		// ActionPerformed
+		// Création et définition de l'action du // 
+		// bouton Valider dans ActionPerformed --//
+		//---------------------------------------//
 		JButton validationBouton = new JButton("Valider");
 
 		validationBouton.addActionListener(new ActionListener() {
@@ -137,8 +143,7 @@ public class FenetreDialogIdentification extends JDialog {
 							"IDCLIENT", "MOTDEPASSE");
 
 					// Nous allons vérifier que le mail saisi est bien dans la
-					// base de données des
-					// des identifiants client
+					// base de données des identifiants client
 					for (int i = 0; i < listeMailsMdps.size(); i++) {
 
 						if (identifiant.getText().equals(
@@ -146,17 +151,16 @@ public class FenetreDialogIdentification extends JDialog {
 
 							present = present + 1;
 							// Nous vérifions en cas d'adresse correcte si le
-							// mot de passe correspondant
-							// est le bon
+							// mot de passe correspondant est le bon
 							if (password.getText().equals(
 									listeMailsMdps.get(i)[1])) {
 
-								// Si l'identification est correcte, on affiche
-								// un message pour le signifier
-								// puis on ouvre le menu utilisateur
+								// Si l'identification est correcte, nous 
+								// affichons un message pour le signifier
+								// puis nous ouvrons le menu utilisateur
 
-								// On récupère l'état du compte client (Activé
-								// ou Désactivé)
+								// Nous récupèrons l'état du compte client 
+								// (Activé ou Désactivé)
 								etat = SGBD.selectStringConditionString(
 										"CLIENT", "ETATCOMPTE", "IDCLIENT",
 										listeMailsMdps.get(i)[0]);
@@ -185,7 +189,7 @@ public class FenetreDialogIdentification extends JDialog {
 									MenuUtilisateur men = new MenuUtilisateur();
 								}
 							} else {
-								// Au contraire, on indique à l'utilisateur
+								// Au contraire, nous indiquons à l'utilisateur
 								// qu'il a saisi un mauvais mot de passe
 								// et on lui affiche de nouveau la fenetre
 								// d'accueil
@@ -200,13 +204,12 @@ public class FenetreDialogIdentification extends JDialog {
 					if (present == 0) {
 
 						// Dans le cas où le gérant s'identifie,aucun mot de
-						// passe et identifiant
-						// n'a une correspondance dans la base de données, d'où
-						// le test ci dessous
+						// passe et identifiant n'a une correspondance dans 
+						// la base de données, d'où le test ci dessous 
 						// pour voir si le gérant s'authentifie correctement
 						if (identifiant.getText().equals(identifiantGerant)
 								& password.getText().equals(motDePasseGerant)) {
-							// si le gérant s'authentifie correctement, on ouvre
+							// Si le gérant s'authentifie correctement, nous ouvrons
 							// le menu du Gérant
 							FenetreDialogIdentification.clientUserIdentifiant = identifiantGerant;
 							MenuGerant menuGerant = new MenuGerant();
@@ -282,11 +285,13 @@ public class FenetreDialogIdentification extends JDialog {
 			}
 		});
 
-		// Ajout de chacun des boutons au panneau des boutons
+		// Ajout de chacun des boutons au panneau des boutons //
+		//----------------------------------------------------//
 		panneauBoutons.add(validationBouton);
 		panneauBoutons.add(annulationBouton);
 
-		// Ajout de tous les panneaux crées dans le conteneur de la fenêtre
+		// Ajout de tous les panneaux crées dans le conteneur de la fenêtre //
+		//------------------------------------------------------------------//
 		this.getContentPane().add(content, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBoutons, BorderLayout.SOUTH);
 
