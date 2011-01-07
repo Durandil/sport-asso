@@ -1,13 +1,22 @@
 package test;
 
+import metier.LigneCommande;
+import metier.Promotion;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+/**
+ * <b>La classe AllTests comporte l'ensemble des tests effectués.</b>
+ * <p> La classe AllTests est une Test Suite qui définit une méthode publique
+ * qui renvoie un objet de type Test.
+ * Elle permet d'effectuer tous les tests mis en place dans le package test
+ * </p>
+ * 
+ */
+
 public class AllTests {
 
-// Attention à n'exécuter qu'une seule fois (ne marchera pas de fois de suite)
-// pour le refaire, refaire un BDD.init() et et re rentrer les insert into
-	
+
 	public static Test suite(){
 		TestSuite suite = new TestSuite();
 		suite.addTest(new TestSuite(SGBDTest.class));
