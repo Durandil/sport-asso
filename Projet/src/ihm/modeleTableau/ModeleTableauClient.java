@@ -27,7 +27,7 @@ public class ModeleTableauClient extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * donnees contenues à l'intérieur du tableau
+	 * Données contenues à l'intérieur du tableau
 	 * 
 	 * @see ModeleTableauClient#getRowCount()
 	 * @see ModeleTableauClient#ModeleTableauClient(String,String,String,String)
@@ -37,7 +37,7 @@ public class ModeleTableauClient extends AbstractTableModel {
 	private final Object[][] donnees;
 
 	/**
-	 * liste des noms de colonnes du tableau
+	 * Liste des noms de colonnes du tableau
 	 * 
 	 * @see ModeleTableauClient#getColumnCount()
 	 * @see ModeleTableauClient#getColumnName(int)
@@ -105,9 +105,9 @@ public class ModeleTableauClient extends AbstractTableModel {
 
 	/**
 	 * @param rowIndex
-	 *            integer indiquant le numéro de la ligne de l'élément choisi
+	 *            Integer indiquant le numéro de la ligne de l'élément choisi
 	 * @param colIndex
-	 *            integer indiquant le numéro de la colonne de l'élément choisi
+	 *            Integer indiquant le numéro de la colonne de l'élément choisi
 	 * 
 	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème
 	 *         colonne du tableau correspondant à la liste des clients
@@ -121,7 +121,7 @@ public class ModeleTableauClient extends AbstractTableModel {
 	 * @return le nom de la colonne à l'index columnIndex
 	 * 
 	 * @param columnIndex
-	 *            l'index de la colonne dans le tableau
+	 *            L'index de la colonne dans le tableau
 	 */
 	public String getColumnName(int columnIndex) {
 		return entetes[columnIndex];

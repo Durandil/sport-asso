@@ -31,7 +31,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * donnees contenues à l'intérieur du tableau
+	 * Données contenues à l'intérieur du tableau
 	 * 
 	 * @see ModeleTableauCatalogue#getRowCount()
 	 * @see ModeleTableauStatCommande
@@ -41,7 +41,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 	private final Object[][] donnees;
 
 	/**
-	 * liste des noms de colonnes du tableau
+	 * Liste des noms de colonnes du tableau
 	 * 
 	 * @see ModeleTableauCatalogue#getColumnCount()
 	 * @see ModeleTableauCatalogue#getColumnName(int)
@@ -55,7 +55,7 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 	 */
 	public ModeleTableauCatalogue() {
 		super();
-		
+
 		donnees = new Object[1000][5];
 	}
 
@@ -87,11 +87,10 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 		if (pourReapprovisionnement == false) {
 
 			if (pourTableauGerant == true) {
-				// Tableau qui accueillera le catalogue pour le gérant et qui
-				// doit afficher tous les articles contrairement au client
 
-				// Quatre listes sont créées pour récupérer les informations de la table ARTICLE
-				
+				// Quatre listes sont créées pour récupérer les informations de
+				// la table ARTICLE
+
 				ArrayList<String> listeIdentifiants = SGBD
 						.selectListeStringOrdonneCondition("ARTICLE",
 								"IDARTICLE", "IDARTICLE",
@@ -108,6 +107,8 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 								"PRIXINITIAL", "IDARTICLE",
 								"ETATARTICLE !='Supprimé'");
 
+				// Tableau qui accueillera le catalogue pour le gérant et qui
+				// doit afficher tous les articles contrairement au client
 				donnees = new Object[listeIdentifiants.size()][5];
 
 				// Nous ajoutons les informations dans l'objet donnees
@@ -120,8 +121,6 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 				}
 
 			} else {
-				// Tableau qui accueillera le catalogue pour les clients et qui
-				// doit afficher que les articles sont stock > 0
 
 				// Quatre listes sont créées pour récupérer les informations de
 				// la table ARTICLE
@@ -142,6 +141,8 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 								"PRIXINITIAL", "IDARTICLE",
 								"STOCK>0 AND ETATARTICLE !='Supprimé'");
 
+				// Tableau qui accueillera le catalogue pour les clients et qui
+				// doit afficher que les articles sont stock > 0
 				donnees = new Object[listeIdentifiants.size()][5];
 
 				// Nous ajoutons les informations dans l'objet donnees
@@ -193,11 +194,11 @@ public class ModeleTableauCatalogue extends AbstractTableModel {
 
 	/**
 	 * @param rowIndex
-	 *            integer indiquant le numéro de la ligne de l'élément choisi
+	 *            Integer indiquant le numéro de la ligne de l'élément choisi
 	 * @param colIndex
-	 *            integer indiquant le numéro de la colonne de l'élément choisi
+	 *            Integer indiquant le numéro de la colonne de l'élément choisi
 	 * 
-	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème
+	 * @return l'objet situé dans la rowIndex-ème ligne et la colIndex-ème
 	 *         colonne du tableau correspondant à la liste des articles en stock
 	 *         dans le catalogue
 	 */

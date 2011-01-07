@@ -37,7 +37,7 @@ public class ModeleTableauCommande extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 	/**
-	 * donnees contenues à l'intérieur du tableau
+	 * Données contenues à l'intérieur du tableau
 	 * 
 	 * @see ModeleTableauCommande#getRowCount()
 	 * @see ModeleTableauCommande#ModeleTableauCommande(ArrayList, Commande,
@@ -48,7 +48,7 @@ public class ModeleTableauCommande extends AbstractTableModel {
 	private final Object[][] donnees;
 
 	/**
-	 * liste des noms de colonnes du tableau
+	 * Liste des noms de colonnes du tableau
 	 * 
 	 * @see ModeleTableauCommande#getColumnCount()
 	 * @see ModeleTableauCommande#getColumnName(int)
@@ -85,13 +85,13 @@ public class ModeleTableauCommande extends AbstractTableModel {
 	public ModeleTableauCommande(ArrayList<LigneCommande> panier, Commande com,
 			String numClient) throws SQLException {
 		super();
-		
+
 		// Initialisation du tableau des donnees
 		donnees = new Object[panier.size()][4];
-		
+
 		// Récupération des informations sur la fidélité du client pour
 		// faire le calcul du montant de la commande pour chaque article
-		
+
 		ArrayList<String> fideliteClient = SGBD
 				.recupererInformationFideliteClient(FenetreDialogIdentification.clientUserIdentifiant);
 		int fidelite = 0;
@@ -111,7 +111,7 @@ public class ModeleTableauCommande extends AbstractTableModel {
 					.montantCommandePourUnArticle(numClient, ligneCommande,
 							fidelite)
 					+ " €";
-			
+
 			compteurArticle++;
 		}
 	}
@@ -132,9 +132,9 @@ public class ModeleTableauCommande extends AbstractTableModel {
 
 	/**
 	 * @param rowIndex
-	 *            integer indiquant le numéro de la ligne de l'élément choisi
+	 *            Integer indiquant le numéro de la ligne de l'élément choisi
 	 * @param colIndex
-	 *            integer indiquant le numéro de la colonne de l'élément choisi
+	 *            Integer indiquant le numéro de la colonne de l'élément choisi
 	 * 
 	 * @return l'objet situé dans la rowIndex ème ligne et la colIndex ème
 	 *         colonne du tableau correspondant à la commande effectuée par le
