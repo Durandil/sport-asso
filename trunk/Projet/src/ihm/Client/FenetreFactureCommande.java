@@ -68,6 +68,7 @@ public class FenetreFactureCommande extends JDialog {
 			String identifiantClient, Commande commandeP,
 			ArrayList<LigneCommande> panierClient, int bonsAchatUtilises,
 			boolean utilisationBonsAchat) throws SQLException {
+		
 		super(parent, title, modal);
 		this.setSize(600, 650);
 		this.setLocation(50, 50);
@@ -126,7 +127,7 @@ public class FenetreFactureCommande extends JDialog {
 				"IDVILLE", idVille);
 
 		// Création du panneau JPanel du haut qui contiendra les //
-		// ------- caractéristiques du client -------------------//
+		// ---------- caractéristiques du client ----------------//
 		//-------------------------------------------------------//
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new GridLayout(3, 1, 5, 5));
@@ -174,7 +175,7 @@ public class FenetreFactureCommande extends JDialog {
 		bonsAchatLabel = new JLabel(
 				"Nombre de points de réduction utilisés  sur votre carte de fidélité  :  "
 						+ bonsAchat);
-		// Si le client a utilisé son bon achat, on affiche le montant du bon de
+		// Si le client a utilisé son bon achat, nous affichons le montant du bon de
 		// réduction
 		if (utilisationBonsAchat == true) {
 			panneauBas.add(bonsAchatLabel);

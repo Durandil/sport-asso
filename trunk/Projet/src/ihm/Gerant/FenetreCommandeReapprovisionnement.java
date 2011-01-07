@@ -33,13 +33,13 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private JLabel quantiteLabel;
-	private JComboBox quantite;
+	private JComboBox choixQuantite;
 	public static int quantiteSelectionnee;
 
 	/**
 	 * Constructeur de la classe dans laquelle le gérant pourra choisir la
-	 * quantitée qu'il désire commander de l'article sélectionné dans le tableau
-	 * des articles en rupture de stock ou en quantité insuffisante
+	 * quantité qu'il désire commander de l'article sélectionné dans le tableau
+	 * des articles en rupture de stock ou en quantité insuffisante.
 	 * 
 	 * @param parent
 	 *            JFrame utilisé pour créer la fenêtre
@@ -79,8 +79,8 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 
 		final String identifiantArticle = idArticle;
 
-		// Définition du panneau dans lequel le gérant sélectionnera la quantité d'un article //
-		// -----------------------------------------------------------------------------------//
+		// Définition du JPanel dans lequel le gérant sélectionnera la quantité d'un article //
+		// ----------------------------------------------------------------------------------//
 		JPanel panneauQuantite = new JPanel();
 		panneauQuantite.setBackground(Color.white);
 		panneauQuantite.setPreferredSize(new Dimension(220, 60));
@@ -88,18 +88,19 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 				.createTitledBorder("Ajout au panier"));
 		quantiteLabel = new JLabel("Quantité : ");
 
-		// Pour gérer la quantité selectionnée, il ne pourra dépasser la
-		// quantité en stock
-		quantite = new JComboBox();
+		// Pour gérer la quantité selectionnée, il ne pourra dépasser 500 (choix par défaut)
+		choixQuantite = new JComboBox();
 
 		for (int j = 1; j < 501; j++) {
-			quantite.addItem(j + "");
+			choixQuantite.addItem(j + "");
 		}
 
-		quantite.addActionListener(new ActionListener() {
+		choixQuantite.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				// Nous récupérons la quantité sélectionnée dans une variable static
+				// qui sera utile au moment de modifier les données dans 
+				// la base de données
 				String choix = (String) ((JComboBox) e.getSource())
 						.getSelectedItem();
 				quantiteSelectionnee = Integer.parseInt(choix);
@@ -107,12 +108,12 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		});
 
 		panneauQuantite.add(quantiteLabel);
-		quantite.setVisible(true);
-		panneauQuantite.add(quantite);
+		choixQuantite.setVisible(true);
+		panneauQuantite.add(choixQuantite);
 
-		// Définition du panneau dans lequel seront présents les boutons de confirmation //
-		// ------- ou d'annulation de la commande d'un article en rupture de stock ------//
-		//-------------------------------------------------------------------------------//
+		// Définition du JPanel dans lequel seront présents les boutons de confirmation //
+		// ------- ou d'annulation de la commande d'un article en rupture de stock -----//
+		//------------------------------------------------------------------------------//
 		
 		JPanel panneauBoutons = new JPanel();
 		panneauBoutons.setBackground(Color.white);
@@ -125,10 +126,14 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 
 		boutonValiderSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				// Modification du stock de l'article
 				Article.modifierStockArticleBDD(identifiantArticle,
 						quantiteSelectionnee);
+				
+				// Fermeture de la fenêtre
 				dispose();
+				
+				// Ouverture de la fenêtre de gestion des articles en faible quantité
 				FenetreReapprovisionnement fen = new FenetreReapprovisionnement(
 						null, true);
 				fen.setVisible(true);
@@ -136,15 +141,15 @@ public class FenetreCommandeReapprovisionnement extends JDialog {
 		});
 
 		// Définition de l'action du bouton pour annuler le réapprovisionnement de //
-		// ---------------l'article passé en paramètre de la méthode---------------//
+		// ---------------l'article passé en paramètre de la méthode --------------//
 		// ------------------------------------------------------------------------//
 
 		JButton boutonAnnulerSelection = new JButton("Annuler Commande Article");
 
 		boutonAnnulerSelection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// permet d'annuler la commande en cours et retour vers page
-				// principale
+				// Permet d'annuler la commande en cours et de retourner vers 
+				// la page principale
 				dispose();
 				FenetreReapprovisionnement fen = new FenetreReapprovisionnement(
 						null, true);
