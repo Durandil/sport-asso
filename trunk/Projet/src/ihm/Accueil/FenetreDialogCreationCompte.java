@@ -25,7 +25,7 @@ import exception.ExceptionExcesDeCaracteres;
 import exception.Client.ExceptionCaractereInterdit;
 import exception.Client.ExceptionCodePostalDifferentDeCinqChiffres;
 import exception.Client.ExceptionCodePostalIncorrect;
-import exception.Client.ExceptionItemSelectionneJComboBox;
+import exception.Client.ExceptionAucunItemSelectionneDansJComboBox;
 import exception.Client.ExceptionMailDejaExistant;
 import exception.Client.ExceptionMailSansArobase;
 import exception.Client.ExceptionMailsDifferents;
@@ -465,12 +465,12 @@ public class FenetreDialogCreationCompte extends JDialog {
 					// menus déroulants
 
 					if (!itemTypeCompteSelectionne) {
-						throw new ExceptionItemSelectionneJComboBox(
+						throw new ExceptionAucunItemSelectionneDansJComboBox(
 								"Vous n'avez pas sélectionné votre type de compte !");
 					}
 
 					if (!itemFideliteSelectionne) {
-						throw new ExceptionItemSelectionneJComboBox(
+						throw new ExceptionAucunItemSelectionneDansJComboBox(
 								"Vous n'avez pas choisi si vous désiriez un compte "
 										+ "fidélité dans le magasin !");
 					}
@@ -638,7 +638,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 									"Attention !", JOptionPane.WARNING_MESSAGE,
 									image);
 
-				} catch (ExceptionItemSelectionneJComboBox e10) {
+				} catch (ExceptionAucunItemSelectionneDansJComboBox e10) {
 
 
 					erreurCreation

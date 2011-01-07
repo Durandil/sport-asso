@@ -4,7 +4,7 @@ package exception.Client;
  * Cette exception permet de traiter le cas où un client ne sélectionne pas
  *  d'item dans un menu déroulant JComboBox
  */
-public class ExceptionItemSelectionneJComboBox extends Exception {
+public class ExceptionAucunItemSelectionneDansJComboBox extends Exception {
 
 	/**
 	 * Constructeur de la classe ExceptionItemSelectionneJComboBox
@@ -12,7 +12,7 @@ public class ExceptionItemSelectionneJComboBox extends Exception {
 	 * @param msg
 	 *            Message lié à l'exception
 	 */
-	public ExceptionItemSelectionneJComboBox(String msg) {
+	public ExceptionAucunItemSelectionneDansJComboBox(String msg) {
 		super(msg);
 	}
 
