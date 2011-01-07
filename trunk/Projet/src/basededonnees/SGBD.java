@@ -968,49 +968,6 @@ public class SGBD {
 		return listeStat;
 	}
 
-	/** TODO TODO TODO TODO TODO TODO TODO **/
-	/** TODO : Méthode à utiliser ou pas ? **/
-	/** TODO TODO TODO TODO TODO TODO TODO **/
-	// // Méthode qui récuperera les attributs d'un client à partir de son
-	// identifiant
-	// public static ArrayList<String> recupererAttributClient(String
-	// mailIdentifiant){
-	// connecter();
-	// ArrayList<String> client = new ArrayList<String>();
-	//
-	// Statement st = null ;
-	// ResultSet res= null;
-	// try{
-	// st=c.createStatement();
-	// res=
-	// st.executeQuery("SELECT IDCLIENT,NOMCLIENT,PRENOMCLIENT,DENOMINATIONCLIENT,"
-	// +
-	// "ADRESSECLIENT,CODEPOSTAL,NOMVILLE,TELEPHONE," +
-	// "ETATCOMPTE FROM CLIENT VILLE" +
-	// "WHERE IDCLIENT='"+ mailIdentifiant+"'" +
-	// "AND CLIENT.IDVILLE = VILLE.IDVILLE;");
-	//
-	// ResultSetMetaData rsmd = res.getMetaData();
-	//
-	// for(int i=1;i==rsmd.getColumnCount();i++){
-	// client.add(res.getString(i));
-	// }
-	//
-	// }
-	// catch(SQLException e){
-	// System.out.println("Echec de la tentative d’interrogation : "
-	// + e.getMessage());
-	// }
-	// finally{
-	// System.out.println("Tentative de sauvegarde");
-	// SGBD.executeUpdate("COMMIT");
-	// fermer();
-	// }
-	//
-	// return client;
-	// }
-	//
-
 	/**
 	 * Retourne la liste des articles dont le stock est inférieur à la quantité
 	 * seuil ou en rupture de stock.
@@ -1043,11 +1000,9 @@ public class SGBD {
 
 			st = c.createStatement();
 
-			// La requete va selectionner les articles qui sont rupture de stock
-			// et dont la
-			// quantité actuelle en stock est inférieure à celle de la catégorie
-			// d'article
-			// à laquelle ils appartiennent
+			// La requête va sélectionner les articles qui sont en rupture de stock
+			// et dont la quantité actuelle en stock est inférieure à celle
+			// de la catégorie d'article à laquelle ils appartiennent
 			String requete = "select idarticle,description,stock,prixinitial "
 					+ " from ARTICLE where (etatarticle !='Supprimé' and (stock=0 or idarticle in ( select idarticle from article, "
 					+ " categorie where article.idcategorie = categorie.idcategorie and "
@@ -1158,9 +1113,8 @@ public class SGBD {
 		try {
 			st = c.createStatement();
 
-			// ON VA TESTER POUR LE CLIENT SI SON IDCLIENT EST DANS LA TABLE DE
-			// CEUX
-			// QUI ONT UNE CARTE DE FIDELITE
+			// Nous allons tester pour le client si son identifiant idClient est dans la base
+			// de données de ceux qui ont une carte de fidélité
 
 			res = st.executeQuery("SELECT NBPOINTS FROM CARTE_FIDELITE,CLIENT"
 					+ " WHERE CARTE_FIDELITE.IDCLIENT=CLIENT.IDCLIENT AND CARTE_FIDELITE.IDCLIENT='"
@@ -1175,7 +1129,7 @@ public class SGBD {
 					nbpoints = res.getObject(1).toString();
 
 				}
-				// Sinon, on affecte un espace au String renvoyé (cf. Classe
+				// Sinon, nous affectons un espace au String renvoyé (cf. Classe
 				// FenetreDialogGestionCompteClient)
 				// (lorsque l'on y chercher à vérifier si un client possède une
 				// dénomination pour savoir si c'est un particulier)
@@ -1250,7 +1204,7 @@ public class SGBD {
 			
 			// En entrée, nous avons récupéré les champs complétés par le gérant
 			// dans le formulaire. Maintenant, nous allons rechercher les individus 
-			// en rajoutant les critères remplis dans le WHERE ( non vides).
+			// en rajoutant les critères remplis dans le WHERE (non vides).
 			
 			if (!idClient.equals("")) {
 				conditionWhereOr = conditionWhereOr + "IDCLIENT Like '%"
@@ -1290,8 +1244,8 @@ public class SGBD {
 			}
 
 			// Si un utilisateur ne remplit aucun champ et appuie sur le bouton
-			// il pourra voir la liste des clients
-			// Sinon, il verra la liste respectant les critères remplis
+			// il pourra voir la liste des clients.
+			// Sinon, il verra la liste respectant les critères remplis.
 			if (conditionWhereOr.equals("WHERE (")) {
 				
 				conditionWhereOr = "WHERE VILLE.IDVILLE = CLIENT.IDVILLE";
@@ -1320,7 +1274,7 @@ public class SGBD {
 				
 				if (res.getObject(2) != null) {	
 					// Récupération  pour le nom et le prénom en 2 et 3ème position et
-					// Renvoi de vide pour la dénomination 
+					// Renvoi d'un vide pour la dénomination 
 					
 					s2 = res.getObject(2).toString();
 					s3 = res.getObject(3).toString();
@@ -1335,7 +1289,7 @@ public class SGBD {
 				// cas où nous récupérons les informations d'un compte association			
 				else {
 					// Récupération de la dénomination en 4ème position et
-					// Renvoi de vide pour le nom et le prénom
+					// Renvoi d'un vide pour le nom et le prénom
 					s2 = " ";
 					s3 = " ";
 					listeString2.add(s2);
@@ -1390,18 +1344,17 @@ public class SGBD {
 			st = c.createStatement();
 
 			if (estFidele == 0) {
-				// si le client n'est pas adhérent au magasin, il ne peut
+				// Si le client n'est pas adhérent au magasin, il ne peut
 				// bénéficier que des promotions
-				// sur les promotions concernant l'ensemble des clients
+				// sur les promotions concernant l'ensemble des clients.
 				requete = "select count(*) from promo,LISTING_PROMOS_ARTICLES "
 						+ "where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO AND PROMOFIDELITE=0 "
 						+ "and DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE "
 						+ "AND LISTING_PROMOS_ARTICLES.IDARTICLE='" + idArticle
 						+ "'";
 			} else {
-				// si le client est adhérent au magasin, il peut bénéficier de
-				// l'ensemble
-				// des promotions exceptionelles sur l'article
+				// Si le client est adhérent au magasin, il peut bénéficier de
+				// l'ensemble des promotions exceptionelles sur l'article.
 				requete = "select count(*) from promo,LISTING_PROMOS_ARTICLES "
 						+ "where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO and "
 						+ "DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE "
@@ -1462,7 +1415,7 @@ public class SGBD {
 			st = c.createStatement();
 
 			if (estFidele == 0) {
-				// si le client n'est pas adhérent au magasin, il ne peut
+				// Si le client n'est pas adhérent au magasin, il ne peut
 				// bénéficier que des promotions
 				// sur les promotions concernant l'ensemble des clients
 				requete = "select max(pourcentagepromo) from promo,LISTING_PROMOS_ARTICLES "
@@ -1472,9 +1425,9 @@ public class SGBD {
 						+ idArticle
 						+ "'";
 			} else {
-				// si le client est adhérent au magasin, il peut bénéficier de
-				// l'ensemble
-				// des promotions exceptionelles sur l'article
+				// Si le client est adhérent au magasin, il peut bénéficier de
+				// 
+				// l'ensemble des promotions exceptionelles sur l'article
 				requete = "select max(pourcentagepromo) from promo,LISTING_PROMOS_ARTICLES "
 						+ "where PROMO.IDPROMO= LISTING_PROMOS_ARTICLES.IDPROMO and "
 						+ "DATEDEBUT<SYSDATE AND DATEFIN>SYSDATE "
@@ -1528,11 +1481,11 @@ public class SGBD {
 		Statement st = null;
 		ResultSet res = null;
 		String requete = "";
-		// on met le pourcentage de promo degressif à zéro si la requete ne
+		// Nous mettons le pourcentage de promotion dégressif à zéro si la requête ne
 		// retourne pas de resultat
-		// cad si la quantite commandee de l'article est inférieure au seuil
+		// c'est à dire si la quantité commandée de l'article est inférieure au seuil
 		// minimal nécessaire
-		// pour bénéficier d'une promotion degressive sur l'article
+		// pour bénéficier d'une promotion dégressive sur l'article
 		String pourcentage = "0";
 
 		try {
