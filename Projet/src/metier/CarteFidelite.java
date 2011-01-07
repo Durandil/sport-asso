@@ -214,7 +214,7 @@ public class CarteFidelite {
 
 	public static void modifierBDDcarteFidelite(String idClient, int nbrePoints) {
 
-		if(nbrePoints<0){
+		if (nbrePoints < 0) {
 			nbrePoints = 0;
 		}
 		String requete = "UPDATE CARTE_FIDELITE SET NBPOINTS=" + nbrePoints
@@ -247,7 +247,7 @@ public class CarteFidelite {
 
 		if (nbrePoints <= 100) {
 			bonAchat = 0;
-		} else if (nbrePoints < 201 ) {
+		} else if (nbrePoints < 201) {
 			bonAchat = 5;
 		} else if (nbrePoints < 501) {
 			bonAchat = 12;

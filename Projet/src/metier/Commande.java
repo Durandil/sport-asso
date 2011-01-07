@@ -349,23 +349,23 @@ public class Commande {
 	@SuppressWarnings("static-access")
 	public static void ajouterArticlePanier(String idArticle, int quantite,
 			ArrayList<String[]> panier) {
-		
+
 		String stockArticle = SGBD.selectStringConditionString("ARTICLE",
 				"STOCK", "IDARTICLE", idArticle);
-		
+
 		int compteurRechercheIdentifiant = rechercheArticleDansPanier(
 				idArticle, panier);
-		
+
 		JOptionPane pbStock;
 
 		if ((Integer.parseInt(panier.get(compteurRechercheIdentifiant)[1]) + quantite) <= Integer
 				.parseInt(stockArticle)) {
-			
+
 			panier.get(compteurRechercheIdentifiant)[1] = (Integer
 					.parseInt(panier.get(compteurRechercheIdentifiant)[1]) + quantite)
 					+ "";
 		} else {
-			
+
 			panier.get(compteurRechercheIdentifiant)[1] = Integer
 					.parseInt(stockArticle) + "";
 			pbStock = new JOptionPane();
@@ -522,7 +522,7 @@ public class Commande {
 
 			requete = "'" + liste.get(i).getIdArticle() + "',"
 					+ liste.get(i).getQuantite();
-			
+
 			SGBD.executeUpdate("INSERT INTO LISTING_ARTICLES_COMMANDES "
 					+ " (IDCOMMANDE, IDARTICLE, QUANTITECOMMANDEE)  VALUES"
 					+ "('" + this.idCommande + "'," + requete + ")");
@@ -637,8 +637,8 @@ public class Commande {
 						ligne.getIdArticle(), estFidele);
 
 		// Comparaison des pourcentages dégressif et promotion exceptionnelle
-System.out.println("Promo Degressif : " + pourcentagePromoDegressif);
-System.out.println("Promo Excep : " + pourcentagePromoExc);
+		System.out.println("Promo Degressif : " + pourcentagePromoDegressif);
+		System.out.println("Promo Excep : " + pourcentagePromoExc);
 		double promoAppliquee = Double.parseDouble(pourcentagePromoDegressif);
 		if (Double.parseDouble(pourcentagePromoDegressif) < Double
 				.parseDouble(pourcentagePromoExc)) {
