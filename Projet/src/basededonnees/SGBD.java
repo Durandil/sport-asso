@@ -620,7 +620,7 @@ public class SGBD {
 	/**
 	 * Méthode permettant d'obtenir un élément d'un champ de type Date issu
 	 * d'une table tous deux précisés en paramètres. S'ajoute à cela une
-	 * condition qui s'applique sur un autre champ, qui lui est de type String0
+	 * condition qui s'applique sur un autre champ, qui lui est de type String
 	 * 
 	 * @param table
 	 *            Nom de la table dans laquelle se situe l'élément à récupérer
