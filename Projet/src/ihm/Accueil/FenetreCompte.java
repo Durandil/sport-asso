@@ -69,7 +69,8 @@ public class FenetreCompte extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 
-		// Définition de la couleur de fond
+		// Définition de la couleur de fond //
+		// ----------------------------------//
 		pan.setBackground(Color.white);
 		// On prévient notre JFrame que ce sera notre JPanel qui sera son
 		// contentPane
@@ -80,30 +81,36 @@ public class FenetreCompte extends JFrame {
 		// à différents endroits de la fenetre
 		this.setLayout(new BorderLayout());
 
-		// Définition du panneau qui se trouvera en haut de la fenêtre
+		// Définition du JPanel qui se trouvera en haut de la fenêtre //
+		// ------------------------------------------------------------//
 		JPanel panneauHaut = new JPanel();
 		panneauHaut.setLayout(new BorderLayout());
 
-		// Création d'un sous panneau accueillant le logo du magasin
+		// Création d'un sous JPanel accueillant le logo du magasin //
+		// ----------------------------------------------------------//
 		icon = new JLabel(new ImageIcon("src/images/logo.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.add(icon);
 
-		// Création du panneau avec l'affichage du texte "Bienvenue"
+		// Création du JPanel avec l'affichage du texte "Bienvenue" //
+		// ----------------------------------------------------------//
 		JPanel panAccueil = new JPanel();
 		panAccueil.setBackground(Color.white);
 		accueilLabel = new JLabel("Bienvenue");
 		accueilLabel.setFont(new Font("Times", Font.BOLD, 36));
 		panAccueil.add(accueilLabel);
 
-		// Création du panneau contenant l'heure et la date
+		// Création du JPanel contenant l'heure et la date //
+		// -------------------------------------------------//
 		JPanel panHeure = new JPanel();
 		panHeure.setBackground(Color.white);
 		panHeure.setLayout(new GridLayout(2, 1, 5, 5));
 
-		// Pour récupérer la date et l'heure, nous avons besoin d'un objet Date
-		// où l'on recupera ses informations grâce aux méthodes de cette classe
+		// Pour récupérer la date et l'heure, nous avons //
+		// besoin d'un objet Date où l'on récupérera ses //
+		// informations grâce aux méthodes de cette classe //
+		// ------------------------------------------------//
 		heure = new Date();
 
 		JPanel panneauDate = new JPanel();
@@ -132,13 +139,15 @@ public class FenetreCompte extends JFrame {
 		panHeure.add(panneauDate);
 		panHeure.add(panneauHeure);
 
-		// Ajout des 3 panneaux qui viennent d'être crées dans le JPanel qui
-		// sera en haut de la fenêtre
+		// Ajout des 3 JPanel qui viennent d'être crées //
+		// dans le JPanel qui sera en haut de la fenêtre//
+		// ----------------------------------------------//
 		panneauHaut.add("West", panIcon);
 		panneauHaut.add("Center", panAccueil);
 		panneauHaut.add("East", panHeure);
 
-		// Définition du panneau qui se trouvera au centre avec les boutons
+		// Définition du JPanel qui se trouvera au centre avec les boutons //
+		// -----------------------------------------------------------------//
 		JPanel panBoutons = new JPanel();
 		panBoutons.setLayout(new GridLayout(4, 1, 10, 10));
 		panBoutons.add(boutonCreation);
@@ -146,19 +155,22 @@ public class FenetreCompte extends JFrame {
 		panBoutons.add(boutonIdentificationGerant);
 		panBoutons.add(boutonDeconnexion);
 
-		// Définition du panneau qui se trouvera à droite
+		// Définition du JPanel qui se trouvera à droite //
+		// -----------------------------------------------//
 		iconEast = new JLabel(new ImageIcon("src/images/trophee.jpg"));
 		JPanel panIconEast = new JPanel();
 		panIconEast.setBackground(Color.white);
 		panIconEast.add(iconEast);
 
-		// Définition du panneau qui se trouvera à gauche
+		// Définition du JPanel qui se trouvera à gauche //
+		// -----------------------------------------------//
 		iconWest = new JLabel(new ImageIcon("src/images/france.jpg"));
 		JPanel panIconWest = new JPanel();
 		panIconWest.setBackground(Color.white);
 		panIconWest.add(iconWest);
 
-		// Ajout des différents panneaux au panneau principal
+		// Ajout des différents JPanel au conteneur de la fenêtre //
+		// --------------------------------------------------------//
 		this.getContentPane().add("North", panneauHaut);
 		this.getContentPane().add("Center", panBoutons);
 		this.getContentPane().add("West", panIconWest);
@@ -174,6 +186,7 @@ public class FenetreCompte extends JFrame {
 							"Création Compte Client", true);
 					compte.setVisible(true);
 					dispose();
+
 				} catch (ExceptionMailSansArobase e1) {
 					System.out.println(e1.getMessage());
 				} catch (ExceptionMailsDifferents e2) {
@@ -212,10 +225,8 @@ public class FenetreCompte extends JFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				// Affichage du contenu de la fenêtre d'identification du gérant
-				// avec
-				// la même fenêtre que le gérant car on considère qu'un gérant
-				// est une extension
-				// d'un utilisateur
+				// avec la même fenêtre que le gérant car on considère qu'un
+				// gérant est une extension d'un utilisateur
 				FenetreDialogIdentification identificationGerant = new FenetreDialogIdentification(
 						null, "Identification gérant", true);
 				identificationGerant.setVisible(true);
@@ -225,10 +236,14 @@ public class FenetreCompte extends JFrame {
 
 		boutonDeconnexion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Fermeture de l'application
+				// Demande à l'utilisateur de confirmer son choix
 				int res = JOptionPane.showConfirmDialog(null,
 						"Confirmez-vous la fermeture du logiciel ?",
 						"Confirmation", JOptionPane.YES_NO_OPTION);
+
+				// S'il clique sur l'option OK, nous fermons toutes les fenêtres
+				// Dans le cas contraire, nous laissons l'utilisateur sur
+				// cette fenêtre
 				if (res == JOptionPane.OK_OPTION) {
 					System.exit(0);
 				}

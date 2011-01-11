@@ -114,17 +114,17 @@ public class FenetreDialogIdentification extends JDialog {
 		panPassword.add(passwordLabel);
 		panPassword.add(password);
 
-		// Définition du panneau qui accueillera les // 
-		// deux panneaux de saisie des champs -------//
-		//-------------------------------------------//
+		// Définition du JPanel qui accueillera les // 
+		// deux panneaux de saisie des champs ------//
+		//------------------------------------------//
 		JPanel content = new JPanel();
 		content.setBackground(Color.white);
 		content.add(panIdentifiant);
 		content.add(panPassword);
 
-		// Définition du panneau qui accueillera // 
-		// les 2 boutons : Valider et Annuler ---//
-		//---------------------------------------//
+		// Définition du JPanel qui accueillera // 
+		// les 2 boutons : Valider et Annuler --//
+		//--------------------------------------//
 		JPanel panneauBoutons = new JPanel();
 
 		// Création et définition de l'action du // 
@@ -155,11 +155,11 @@ public class FenetreDialogIdentification extends JDialog {
 							if (password.getText().equals(
 									listeMailsMdps.get(i)[1])) {
 
-								// Si l'identification est correcte, nous 
+								// Si l'identification est correcte, nous
 								// affichons un message pour le signifier
 								// puis nous ouvrons le menu utilisateur
 
-								// Nous récupèrons l'état du compte client 
+								// Nous récupérons l'état du compte client
 								// (Activé ou Désactivé)
 								etat = SGBD.selectStringConditionString(
 										"CLIENT", "ETATCOMPTE", "IDCLIENT",
@@ -176,13 +176,16 @@ public class FenetreDialogIdentification extends JDialog {
 								// réussie
 								else {
 									identificationReussie = new JOptionPane();
+
 									ImageIcon imageInformation = new ImageIcon(
 											"src/images/information.jpg");
+
 									identificationReussie.showMessageDialog(
 											null, "Identification réussie !",
 											"Information",
 											JOptionPane.INFORMATION_MESSAGE,
 											imageInformation);
+
 									clientUserIdentifiant = identifiant
 											.getText();
 
@@ -204,12 +207,13 @@ public class FenetreDialogIdentification extends JDialog {
 					if (present == 0) {
 
 						// Dans le cas où le gérant s'identifie,aucun mot de
-						// passe et identifiant n'a une correspondance dans 
-						// la base de données, d'où le test ci dessous 
+						// passe et identifiant n'a une correspondance dans
+						// la base de données, d'où le test ci dessous
 						// pour voir si le gérant s'authentifie correctement
 						if (identifiant.getText().equals(identifiantGerant)
 								& password.getText().equals(motDePasseGerant)) {
-							// Si le gérant s'authentifie correctement, nous ouvrons
+							// Si le gérant s'authentifie correctement, nous
+							// ouvrons
 							// le menu du Gérant
 							FenetreDialogIdentification.clientUserIdentifiant = identifiantGerant;
 							MenuGerant menuGerant = new MenuGerant();
@@ -229,11 +233,12 @@ public class FenetreDialogIdentification extends JDialog {
 
 				} catch (ExceptionCompteInexistant e1) {
 
-					System.out.println(e1.getMessage());
 					// Affichage d'un message d'erreur en cas de problème sur le
 					// compte
 					erreurCompte = new JOptionPane();
+					
 					ImageIcon image = new ImageIcon("src/images/warning.png");
+					
 					erreurCompte.showMessageDialog(null,
 							"Ce compte n'existe pas, inscrivez-vous !",
 							"Attention", JOptionPane.WARNING_MESSAGE, image);
@@ -243,7 +248,9 @@ public class FenetreDialogIdentification extends JDialog {
 					// Affichage d'un message d'erreur en cas de problème sur le
 					// mot de passe
 					erreurMotPasse = new JOptionPane();
+
 					ImageIcon image = new ImageIcon("src/images/warning.png");
+
 					erreurMotPasse.showMessageDialog(null,
 							"Mot de passe erroné, veuillez réessayer.",
 							"Attention", JOptionPane.WARNING_MESSAGE, image);
@@ -253,8 +260,10 @@ public class FenetreDialogIdentification extends JDialog {
 					// Affichage d'un message d'erreur en cas de problème sur le
 					// compte
 					compteDesactive = new JOptionPane();
+
 					ImageIcon imageInformation = new ImageIcon(
 							"src/images/information.jpg");
+
 					compteDesactive
 							.showMessageDialog(
 									null,
@@ -271,9 +280,10 @@ public class FenetreDialogIdentification extends JDialog {
 
 		});
 
-		// Création et définition de l'action du bouton Annuler dans
-		// ActionPerformed
-		// Nous fermons la fenêtre et nous affichons une nouvelle page d'accueil
+		// Création et définition de l'action
+		// du bouton Annuler dans ActionPerformed
+		// Nous fermons la fenêtre et nous affichons
+		// une nouvelle page d'accueil
 		JButton annulationBouton = new JButton("Annuler");
 		annulationBouton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -165,8 +165,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		denomination.setPreferredSize(new Dimension(90, 25));
 
 		panDenomination.setBorder(BorderFactory
-				.createTitledBorder("Denomination"));
-		denominationLabel = new JLabel("Denomination");
+				.createTitledBorder("Dénomination"));
+		denominationLabel = new JLabel("Dénomination");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
 
@@ -190,8 +190,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		JPanel panPrenom = new JPanel();
 		panPrenom.setBackground(Color.white);
 		panPrenom.setPreferredSize(new Dimension(220, 60));
-		panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
-		prenomLabel = new JLabel("Prenom : ");
+		panPrenom.setBorder(BorderFactory.createTitledBorder("Prénom"));
+		prenomLabel = new JLabel("Prénom : ");
 
 		// Mise en place du champ de saisie du prénom
 		prenom = new JTextField();
@@ -261,8 +261,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 		JPanel panTelephone = new JPanel();
 		panTelephone.setBackground(Color.white);
 		panTelephone.setPreferredSize(new Dimension(220, 60));
-		panTelephone.setBorder(BorderFactory.createTitledBorder("Telephone"));
-		telLabel = new JLabel("Telephone : ");
+		panTelephone.setBorder(BorderFactory.createTitledBorder("Téléphone"));
+		telLabel = new JLabel("Téléphone : ");
 
 		// Mise en place du champ de saisie du numéro de téléphone
 		telephone = new JTextField();
@@ -299,7 +299,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		JPanel panFidelite = new JPanel();
 		panFidelite.setBackground(Color.white);
 		panFidelite.setPreferredSize(new Dimension(220, 80));
-		fideliteLabel = new JLabel("Desirez-vous une carte de fidelité ? : ");
+		fideliteLabel = new JLabel("Désirez-vous une carte de fidelité ? : ");
 		panFidelite.add(fideliteLabel);
 
 		// Définition d'un menu déroulant permettant à l'utilisateur
@@ -349,7 +349,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		JPanel control = new JPanel();
 
 		// Définition de l'action du bouton Valider //
-		// quivérifie d'abord que les champs ont été //
+		// qui vérifie d'abord que les champs ont été //
 		// correctement saisis puis enregistre les //
 		// informations du compte dans la base de données //
 		// ----------------------------------------------//
@@ -360,7 +360,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				/**
-				 * ATTENTION ! Au début, le type de compte est sur
+				 * Au début, le type de compte est sur
 				 * "Compte Particulier" par défaut Mais le champ Dénomination
 				 * n'est pas grisé il faut resélectionner Compte Particulier
 				 * pour que Dénomination se grise.
