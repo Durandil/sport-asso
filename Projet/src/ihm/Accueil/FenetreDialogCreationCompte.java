@@ -107,7 +107,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 			ExceptionCodePostalIncorrect, ExceptionNumeroDeTelephoneIncorrect {
 
 		// Récupération de l'image qui sera affichée sur la fenêtre
-		image = new JLabel(new ImageIcon("src/images/logos.jpg"));
+		image = new JLabel(new ImageIcon("Ressources/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.setLayout(new BorderLayout());
@@ -373,7 +373,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 				 */
 
 				erreurCreation = new JOptionPane();
-				ImageIcon image = new ImageIcon("src/images/warning.png");
+				ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 
 				try {
 					// Vérification des champs
@@ -501,7 +501,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 					creationCorrecte = new JOptionPane();
 					ImageIcon imageInformation = new ImageIcon(
-							"src/images/information.jpg");
+							"Ressources/images/information.jpg");
 					creationCorrecte.showMessageDialog(null,
 							"Un nouveau compte a été crée, votre identifiant est : "
 									+ identifiant.getText(), "Information",

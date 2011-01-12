@@ -72,7 +72,8 @@ public class FenetreInformationsClient extends JFrame {
 		// ------------------------------------------------------//
 		this.getContentPane().add(panneauInformations, "Center");
 		this.getContentPane().add(panneauBas, "South");
-
+		
+		this.setVisible(true);
 	}
 
 }

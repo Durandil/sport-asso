@@ -84,7 +84,7 @@ public class FenetreCatalogueGerant extends JDialog {
 
 		// Récupération et ajout de l'image sur un JPanel //
 		// -----------------------------------------------//
-		image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
+		image = new JLabel(new ImageIcon("Ressources/images/catalogue.jpg"));
 		final JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.add(image);

@@ -63,6 +63,7 @@ public class MenuGerant extends JFrame {
 	 * 
 	 */
 	public MenuGerant() {
+		this.setTitle("Gestion boutique Sport'Asso");
 		this.setSize(663, 314);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setResizable(false);
@@ -76,7 +77,7 @@ public class MenuGerant extends JFrame {
 
 		// Insertion de l'image au panneau final //
 		// ---------------------------------------//
-		image = new JLabel(new ImageIcon("src/images/fenetre.jpg"));
+		image = new JLabel(new ImageIcon("Ressources/images/fenetre.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBackground(Color.white);
 		panImage.setLayout(new BorderLayout());

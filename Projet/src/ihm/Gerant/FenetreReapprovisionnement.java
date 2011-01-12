@@ -90,7 +90,7 @@ public class FenetreReapprovisionnement extends JDialog {
 
 		// Ajout d'une image entre le tableau et l'introduction dans le haut de
 		// la fenetre
-		image = new JLabel(new ImageIcon("src/images/catalogue.jpg"));
+		image = new JLabel(new ImageIcon("Ressources/images/catalogue.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.add(image);
@@ -124,7 +124,7 @@ public class FenetreReapprovisionnement extends JDialog {
 									null,
 									"Aucune ligne sélectionnée, veuillez en sélectionner une",
 									"Attention", JOptionPane.ERROR_MESSAGE,
-									new ImageIcon("src/images/warning.png"));
+									new ImageIcon("Ressources/images/warning.png"));
 				} else {
 					// Récupération de l'identifiant de l'article sélectionné
 					String numeroArticle = tableau.getValueAt(ligneTableau, 0)

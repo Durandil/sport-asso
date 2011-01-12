@@ -110,7 +110,7 @@ public class FicheClient extends JDialog {
 		// Déclaration du JPanel du fond de l'écran //
 		// -----------------------------------------//
 		JPanel panneauGauche = new JPanel();
-		image = new JLabel(new ImageIcon("src/images/fond_fiche2.jpg"));
+		image = new JLabel(new ImageIcon("Ressources/images/fond_fiche2.jpg"));
 		panneauGauche.setBackground(Color.white);
 		panneauGauche.add(image);
 
@@ -563,7 +563,7 @@ public class FicheClient extends JDialog {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 
-				ImageIcon image = new ImageIcon("src/images/warning.png");
+				ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 				try {
 
 					// Vérification du nombre de caractères

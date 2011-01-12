@@ -86,7 +86,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 
 		// Création du JPanel qui accueillera l'image de la fenêtre //
 		// ----------------------------------------------------------//
-		iconImage = new JLabel(new ImageIcon("src/images/logos.jpg"));
+		iconImage = new JLabel(new ImageIcon("Ressources/images/logos.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.setLayout(new BorderLayout());
