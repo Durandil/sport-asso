@@ -310,8 +310,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		fidelite.setVisible(true);
 		fidelite.setSelectedItem("Non");
 		fidelite.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
-
+				
+				itemFidelite = (String) ((JComboBox) e.getSource())
+				.getSelectedItem();
 				// Changement de l'état du booléen pour controler le clic
 				// dans le menu déroulant du client
 				itemFideliteSelectionne = true;
@@ -319,8 +322,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 				// Le booléen estFidele passe à faux si l'utilisateur répond
 				// "Non" à la question
 				// Il reste à vrai s'il répond "Oui"
-				itemFidelite = (String) ((JComboBox) e.getSource())
-						.getSelectedItem();
+
 				if (itemFidelite == "Non") {
 					estFidele = false;
 				} else {

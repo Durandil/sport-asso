@@ -102,10 +102,8 @@ public class SGBD {
 		boolean result = true;
 		Statement st;
 		try {
-
-			st = c.createStatement();
-			st.executeUpdate("COMMIT");
-
+			
+			c.commit();
 			c.close();
 			System.out.println("Déconnexion à la base");
 		} catch (SQLException e) {
