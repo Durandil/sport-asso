@@ -63,7 +63,7 @@ public class FenetreCompte extends JFrame {
 	 */
 	public FenetreCompte() {
 
-		this.setTitle("Informations client");
+		this.setTitle("Boutique Sport'Asso");
 		this.setSize(900, 550);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -88,7 +88,7 @@ public class FenetreCompte extends JFrame {
 
 		// Création d'un sous JPanel accueillant le logo du magasin //
 		// ----------------------------------------------------------//
-		icon = new JLabel(new ImageIcon("src/images/logo.jpg"));
+		icon = new JLabel(new ImageIcon("Ressources/images/logo.jpg"));
 		JPanel panIcon = new JPanel();
 		panIcon.setBackground(Color.white);
 		panIcon.add(icon);
@@ -157,14 +157,14 @@ public class FenetreCompte extends JFrame {
 
 		// Définition du JPanel qui se trouvera à droite //
 		// -----------------------------------------------//
-		iconEast = new JLabel(new ImageIcon("src/images/trophee.jpg"));
+		iconEast = new JLabel(new ImageIcon("Ressources/images/trophee.jpg"));
 		JPanel panIconEast = new JPanel();
 		panIconEast.setBackground(Color.white);
 		panIconEast.add(iconEast);
 
 		// Définition du JPanel qui se trouvera à gauche //
 		// -----------------------------------------------//
-		iconWest = new JLabel(new ImageIcon("src/images/france.jpg"));
+		iconWest = new JLabel(new ImageIcon("Ressources/images/france.jpg"));
 		JPanel panIconWest = new JPanel();
 		panIconWest.setBackground(Color.white);
 		panIconWest.add(iconWest);

@@ -106,7 +106,7 @@ public class MenuUtilisateur extends JFrame {
 
 		// Ajout d'une image de fond pour la fenêtre //
 		// ------------------------------------------//
-		icon = new JLabel(new ImageIcon("src/images/nba.jpg"));
+		icon = new JLabel(new ImageIcon("Ressources/images/nba.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBackground(Color.white);
 		panImage.setLayout(new BorderLayout());
