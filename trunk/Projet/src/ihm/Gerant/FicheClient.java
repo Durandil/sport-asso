@@ -268,11 +268,14 @@ public class FicheClient extends JDialog {
 				.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		final String denominationClient = SGBD.selectStringConditionString(
 				"CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
-		denomination = new JTextField(denominationClient);
+		
+		denomination = new JTextField(denominationClient.replaceFirst(
+				denominationClient.charAt(0) + "",
+				(denominationClient.charAt(0) + "").toUpperCase()));
 		denomination.setPreferredSize(new Dimension(110, 25));
 		panDenomination.setBorder(BorderFactory
 				.createTitledBorder("Denomination"));
-		denominationLabel = new JLabel("Denomination");
+		denominationLabel = new JLabel("Dénomination");
 		panDenomination.add(denominationLabel);
 		panDenomination.add(denomination);
 		panDenomination.setBounds(40, 140, 300, 60);
@@ -285,7 +288,10 @@ public class FicheClient extends JDialog {
 		panNom.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		String name = SGBD.selectStringConditionString("CLIENT", "NOMCLIENT",
 				"IDCLIENT", idClient);
-		nom = new JTextField(name);
+		
+		nom = new JTextField(name.replaceFirst(
+				name.charAt(0) + "",
+				(name.charAt(0) + "").toUpperCase()));
 		nom.setPreferredSize(new Dimension(90, 25));
 		panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
 		nomLabel = new JLabel("Nom :");
@@ -299,11 +305,14 @@ public class FicheClient extends JDialog {
 		JPanel panPrenom = new JPanel();
 		panPrenom.setBackground(new Color(0, 0, 0, 0));
 		panPrenom.setPreferredSize(dimensionpanneauInformationsPersonnelles);
-		panPrenom.setBorder(BorderFactory.createTitledBorder("Prenom"));
-		prenomLabel = new JLabel("Prenom : ");
+		panPrenom.setBorder(BorderFactory.createTitledBorder("Prénom"));
+		prenomLabel = new JLabel("Prénom : ");
 		String prenomClient = SGBD.selectStringConditionString("CLIENT",
 				"PRENOMCLIENT", "IDCLIENT", idClient);
-		prenom = new JTextField(prenomClient);
+		
+		prenom = new JTextField(prenomClient.replaceFirst(
+				prenomClient.charAt(0) + "",
+				(prenomClient.charAt(0) + "").toUpperCase()));
 		prenom.setPreferredSize(new Dimension(90, 25));
 		panPrenom.add(prenomLabel);
 		panPrenom.add(prenom);
@@ -311,13 +320,13 @@ public class FicheClient extends JDialog {
 		this.add(panPrenom);
 
 		if (denominationClient.equals(" ")) {
-			denomination.setEnabled(false);
-			nom.setEnabled(true);
-			prenom.setEnabled(true);
+			panDenomination.setVisible(false);
+			panNom.setVisible(true);
+			panPrenom.setVisible(true);
 		} else {
-			denomination.setEnabled(true);
-			nom.setEnabled(false);
-			prenom.setEnabled(false);
+			panDenomination.setVisible(true);
+			panNom.setVisible(false);
+			panPrenom.setVisible(false);
 		}
 
 		// Création d'un JPanel pour le type de Compte //
@@ -382,7 +391,7 @@ public class FicheClient extends JDialog {
 		panCP.setBackground(new Color(0, 0, 0, 0));
 		panCP.setPreferredSize(dimensionpanneauInformationsPersonnelles);
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
-		cpLabel = new JLabel("Code Postal : ");
+		cpLabel = new JLabel("Numéro : ");
 		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE",
 				"CODEPOSTAL", "IDVILLE", idVille));
 		codePostal.setPreferredSize(new Dimension(100, 25));
@@ -658,7 +667,11 @@ public class FicheClient extends JDialog {
 									image);
 				} catch (ExceptionCodePostalIncorrect e7) {
 
-					erreurModification.showMessageDialog(null, e7.getMessage(),
+					erreurModification.showMessageDialog(
+							null,
+							e7.getMessage()+ "/n"
+							+ "Veuillez sélectionner votre ville " +
+							"dans le menu déroulant",
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
 
 					// Comme le gérant a fait une erreur de saisie de code
@@ -667,6 +680,7 @@ public class FicheClient extends JDialog {
 					codePostal.setVisible(false);
 					listeVille.setEnabled(true);
 					listeVille.setVisible(true);
+					cpLabel.setText("Choix de la ville ");
 					repaint();
 
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {

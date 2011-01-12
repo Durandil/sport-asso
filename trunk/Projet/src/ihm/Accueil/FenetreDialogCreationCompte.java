@@ -144,9 +144,13 @@ public class FenetreDialogCreationCompte extends JDialog {
 					nom.setEnabled(true);
 					prenom.setEnabled(true);
 					denomination.setEnabled(false);
+					denomination.setText("");
+					
 				} else {
 					nom.setEnabled(false);
 					prenom.setEnabled(false);
+					nom.setText("");
+					prenom.setText("");
 					denomination.setEnabled(true);
 				}
 			}
@@ -221,7 +225,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(220, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
-		cpLabel = new JLabel("Code Postal : ");
+		cpLabel = new JLabel("Numéro : ");
 
 		// Mise en place du champ de saisie du code postal
 		codePostal = new JTextField();
@@ -262,7 +266,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panTelephone.setBackground(Color.white);
 		panTelephone.setPreferredSize(new Dimension(220, 60));
 		panTelephone.setBorder(BorderFactory.createTitledBorder("Téléphone"));
-		telLabel = new JLabel("Téléphone : ");
+		telLabel = new JLabel("Numéro : ");
 
 		// Mise en place du champ de saisie du numéro de téléphone
 		telephone = new JTextField();
@@ -610,6 +614,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
 					ville.setVisible(true);
+					cpLabel.setText("Choix de votre ville ");
 
 				} catch (ExceptionNumeroDeTelephoneIncorrect e8) {
 
@@ -630,8 +635,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 				} catch (ExceptionAucunItemSelectionneDansJComboBox e10) {
 
-					erreurCreation.showMessageDialog(null, e10.getMessage(),
-							"Attention !", JOptionPane.WARNING_MESSAGE, image);
+					erreurCreation.showMessageDialog(null, e10.getMessage()
+							+ "/n" + "Veuillez sélectionner votre ville "
+							+ "dans le menu déroulant",
+							"Attention !",
+							JOptionPane.WARNING_MESSAGE, image);
 
 				}
 			}

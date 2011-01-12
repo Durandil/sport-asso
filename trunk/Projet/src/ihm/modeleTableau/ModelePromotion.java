@@ -56,7 +56,7 @@ public class ModelePromotion extends AbstractTableModel {
 	 * @see ModelePromotion#getColumnCount()
 	 * @see ModelePromotion#getColumnName(int)
 	 */
-	private final String[] entetes = { "Numéro", " Promotions en cours",
+	private final String[] entetes = { "Référence", " Promotions en cours",
 			"Date de début", "Date de fin" };
 
 	/**
