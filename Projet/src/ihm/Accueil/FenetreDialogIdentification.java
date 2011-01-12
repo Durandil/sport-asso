@@ -110,6 +110,7 @@ public class FenetreDialogIdentification extends JDialog {
 				.createTitledBorder("Mot de passe :"));
 		passwordLabel = new JLabel("Mot de passe : ");
 		password = new JPasswordField();
+		password.setEchoChar('*');
 		password.setPreferredSize(new Dimension(90, 25));
 		panPassword.add(passwordLabel);
 		panPassword.add(password);

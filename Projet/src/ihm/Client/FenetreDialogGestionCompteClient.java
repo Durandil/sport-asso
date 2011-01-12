@@ -8,16 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import exception.ExceptionExcesDeCaracteres;
 import exception.Client.ExceptionCodePostalDifferentDeCinqChiffres;
@@ -43,9 +34,8 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JLabel denominationLabel, iconImage, nomLabel, prenomLabel,
 			adresseLabel, villeLabel, cpLabel, telLabel, identifiantLabel;
-	private JTextField nom, prenom, ville, codePostal, telephone, identifiant,
-			denomination;
-	private TextArea adresse;
+	private JTextField ville, codePostal, telephone, identifiant;
+	private JTextArea adresse, denomination, nom, prenom;
 	private JComboBox listeVille;
 
 	/**
@@ -136,14 +126,21 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			// ------------------------------------------------------//
 			JPanel panDenomination = new JPanel();
 			panDenomination.setBackground(Color.white);
-			panDenomination.setPreferredSize(new Dimension(260, 60));
+			panDenomination.setPreferredSize(new Dimension(260, 110));
 			panDenomination.setBorder(BorderFactory
 					.createTitledBorder("Dénomination"));
 			denominationLabel = new JLabel("Dénomination");
-
-			denomination = new JTextField(SGBD.selectStringConditionString(
-					"CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient));
-			denomination.setPreferredSize(new Dimension(90, 25));
+			
+			String denominationClient = SGBD.selectStringConditionString(
+					"CLIENT", "DENOMINATIONCLIENT", "IDCLIENT", idClient);
+			denomination = new JTextArea(denominationClient.replaceFirst(
+					denominationClient.charAt(0) + "",
+					(denominationClient.charAt(0) + "").toUpperCase()));
+			denomination.setPreferredSize(new Dimension(140, 50));
+			denomination.setWrapStyleWord(true);
+			denomination.setLineWrap(true);
+			denomination.setBorder(BorderFactory
+					.createLineBorder(Color.LIGHT_GRAY));
 
 			panDenomination.add(denominationLabel);
 			panDenomination.add(denomination);
@@ -154,13 +151,19 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			// ---------------------------------------------//
 			JPanel panNom = new JPanel();
 			panNom.setBackground(Color.white);
-			panNom.setPreferredSize(new Dimension(260, 60));
+			panNom.setPreferredSize(new Dimension(260, 110));
 			panNom.setBorder(BorderFactory.createTitledBorder("Nom"));
 			nomLabel = new JLabel("Nom :");
-
-			nom = new JTextField(SGBD.selectStringConditionString("CLIENT",
-					"NOMCLIENT", "IDCLIENT", idClient));
-			nom.setPreferredSize(new Dimension(90, 25));
+			
+			String nomClient = SGBD.selectStringConditionString("CLIENT",
+					"NOMCLIENT", "IDCLIENT", idClient);
+			nom = new JTextArea(nomClient.replaceFirst(
+					nomClient.charAt(0) + "",
+					(nomClient.charAt(0) + "").toUpperCase()));
+			nom.setPreferredSize(new Dimension(140, 50));
+			nom.setWrapStyleWord(true);
+			nom.setLineWrap(true);
+			nom.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
 			panNom.add(nomLabel);
 			panNom.add(nom);
@@ -170,13 +173,19 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			// ------------------------------------------------//
 			JPanel panPrenom = new JPanel();
 			panPrenom.setBackground(Color.white);
-			panPrenom.setPreferredSize(new Dimension(260, 60));
+			panPrenom.setPreferredSize(new Dimension(260, 110));
 			panPrenom.setBorder(BorderFactory.createTitledBorder("Prénom"));
 			prenomLabel = new JLabel("Prénom : ");
-
-			prenom = new JTextField(SGBD.selectStringConditionString("CLIENT",
-					"PRENOMCLIENT", "IDCLIENT", idClient));
-			prenom.setPreferredSize(new Dimension(90, 25));
+			
+			String prenomClient = SGBD.selectStringConditionString("CLIENT",
+					"PRENOMCLIENT", "IDCLIENT", idClient);
+			prenom = new JTextArea(prenomClient.replaceFirst(
+					prenomClient.charAt(0) + "",
+					(prenomClient.charAt(0) + "").toUpperCase()));
+			prenom.setPreferredSize(new Dimension(140, 50));
+			prenom.setWrapStyleWord(true);
+			prenom.setLineWrap(true);
+			prenom.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
 			panPrenom.add(prenomLabel);
 			panPrenom.add(prenom);
@@ -187,13 +196,16 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		// -------------------------------------------------//
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(Color.white);
-		panAdresse.setPreferredSize(new Dimension(260, 90));
+		panAdresse.setPreferredSize(new Dimension(260, 110));
 		panAdresse.setBorder(BorderFactory.createTitledBorder("Adresse"));
 		adresseLabel = new JLabel("Adresse : ");
 
-		adresse = new TextArea(SGBD.selectStringConditionString("CLIENT",
+		adresse = new JTextArea(SGBD.selectStringConditionString("CLIENT",
 				"ADRESSECLIENT", "IDCLIENT", idClient));
-		adresse.setBackground(Color.LIGHT_GRAY);
+		adresse.setBackground(Color.white);
+		adresse.setLineWrap(true);
+		adresse.setWrapStyleWord(true);
+		adresse.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 		adresse.setPreferredSize(new Dimension(140, 50));
 
 		panAdresse.add(adresseLabel);
@@ -229,7 +241,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(260, 60));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
-		cpLabel = new JLabel("Code Postal : ");
+		cpLabel = new JLabel("Numéro : ");
 
 		codePostal = new JTextField(SGBD.selectStringConditionString("VILLE",
 				"CODEPOSTAL", "IDVILLE", idVille));
@@ -272,7 +284,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 		panTelephone.setBackground(Color.white);
 		panTelephone.setPreferredSize(new Dimension(260, 60));
 		panTelephone.setBorder(BorderFactory.createTitledBorder("Téléphone"));
-		telLabel = new JLabel("Téléphone : ");
+		telLabel = new JLabel("Numéro : ");
 
 		telephone = new JTextField(SGBD.selectStringConditionString("CLIENT",
 				"TELEPHONE", "IDCLIENT", idClient));
@@ -402,8 +414,10 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 							"Attention ", JOptionPane.WARNING_MESSAGE);
 
 				} catch (ExceptionCodePostalIncorrect e4) {
-					JOptionPane.showMessageDialog(null, e4.getMessage(),
-							"Attention ", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, e4.getMessage() + "/n"
+							+ "Veuillez sélectionner votre ville "
+							+ "dans le menu déroulant", "Attention ",
+							JOptionPane.WARNING_MESSAGE);
 
 					// Comme l'utilisateur a fait une erreur de saisie de code
 					// postal, nous lui affichons le menu déroulant à la
@@ -411,6 +425,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 					codePostal.setVisible(false);
 					listeVille.setEnabled(true);
 					listeVille.setVisible(true);
+					cpLabel.setText("Choix de votre ville ");
 
 				} catch (ExceptionNumeroDeTelephoneIncorrect e5) {
 					JOptionPane.showMessageDialog(null, e5.getMessage()
