@@ -61,7 +61,7 @@ public class FenetreInformationsClient extends JFrame {
 
 		// Création du JPanel qui accueillera l'image (la carte de france) //
 		// -----------------------------------------------------------------//
-		imageFenetre = new JLabel(new ImageIcon("src/images/carte.jpg"));
+		imageFenetre = new JLabel(new ImageIcon("Ressources/images/carte.jpg"));
 		JPanel panImage = new JPanel();
 		panImage.setBorder(BorderFactory.createEmptyBorder());
 		panImage.add(imageFenetre);

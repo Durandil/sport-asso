@@ -404,7 +404,7 @@ public class FenetreCommandeArticle extends JDialog {
 						} else {
 
 							ImageIcon image = new ImageIcon(
-									"src/images/warning.png");
+									"Ressources/images/warning.png");
 							JOptionPane
 									.showMessageDialog(
 											null,
@@ -421,7 +421,7 @@ public class FenetreCommandeArticle extends JDialog {
 					}
 
 				} else {
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -461,7 +461,7 @@ public class FenetreCommandeArticle extends JDialog {
 				lignePanier = panier.getSelectedRow();
 
 				if (retraitPanierPossible == false) {
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 					JOptionPane.showMessageDialog(null,
 							" Veuillez rafraichir le panier !!!", "Attention",
 							JOptionPane.WARNING_MESSAGE, image);
@@ -472,7 +472,7 @@ public class FenetreCommandeArticle extends JDialog {
 				}
 
 				if (lignePanier == -1) {
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 					JOptionPane
 							.showMessageDialog(
 									null,
@@ -484,7 +484,7 @@ public class FenetreCommandeArticle extends JDialog {
 				}
 
 				if (avoirRafraichiApresAjoutPanier == false) {
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 					JOptionPane.showMessageDialog(null,
 							" Veuillez rafraichir le panier !!!", "Attention",
 							JOptionPane.WARNING_MESSAGE, image);
@@ -551,7 +551,7 @@ public class FenetreCommandeArticle extends JDialog {
 
 				} else {
 
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 					JOptionPane
 							.showMessageDialog(
 									null,

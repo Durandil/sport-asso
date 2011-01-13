@@ -195,7 +195,7 @@ public class FenetreFideliteClient extends JDialog {
 				int bonAchat = CarteFidelite.calculerBonsReductions(points);
 
 				ImageIcon imageInformation = new ImageIcon(
-						"src/images/information.jpg");
+						"Ressources/images/information.jpg");
 				JOptionPane.showMessageDialog(null,
 						"Vous disposez d'un bon d'achat de " + bonAchat + " €",
 						"Information sur les bons d'achat",
