@@ -1017,13 +1017,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							StringDateDebutPromotion, "ddMMyyyy");
 					Date dateFinPromotion = SGBD.stringToDate(
 							StringDateFinPromotion, "ddMMyyyy");
-					// Vérifie si la date de début de la promotion est
-					// postérieure à la date d'aujourd'hui
-					if (dateDebutPromotion.before(dateJour)) {
-						position = "début";
-						throw new ExceptionDateAvantAujourdhui(
-								"La date de début de la promotion est déjà passée.");
-					}
 
 					// Vérifie si la date de fin de la promotion est postérieure
 					// à la date d'aujourd'hui
@@ -1031,17 +1024,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 						position = "fin";
 						throw new ExceptionDateAvantAujourdhui(
 								"La date de fin de la promotion est déjà passée.");
-					}
-
-					// Vérifie si la date de début de la promotion est cohérente
-					// (mois de 30 jours)
-					if ((moisDateDebutPromotion == 4
-							| moisDateDebutPromotion == 6
-							| moisDateDebutPromotion == 9 | moisDateDebutPromotion == 11)
-							& jourDateDebutPromotion == 31) {
-						position = "début";
-						throw new ExceptionMoisDeTrenteJours(
-								"Le 31ème jour de ce mois a été saisi alors que ce dernier n'en possède que 30");
 					}
 
 					// Vérifie si la date de fin de la promotion est cohérente
@@ -1052,30 +1034,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 						position = "fin";
 						throw new ExceptionMoisDeTrenteJours(
 								"Le 31ème jour de ce mois a été saisi alors que ce dernier n'en possède que 30");
-					}
-
-					// Vérifie si la date de début de la promotion est cohérente
-					// (mois de février)
-					if (moisDateDebutPromotion == 2
-							& jourDateDebutPromotion > 28) {
-						position = "début";
-						if (anneeDateDebutPromotion % 4 == 0
-								&& jourDateDebutPromotion > 29) {
-							throw new ExceptionMoisDeFevrierAnneeBissextile(
-									"Le "
-											+ jourDateDebutPromotion
-											+ "ème jour du mois de Février a été"
-											+ " saisi alors que ce dernier n'en possède que 29");
-						} else {
-							if (anneeDateDebutPromotion % 4 != 0) {
-								throw new ExceptionMoisDeFevrier(
-										"Le "
-												+ jourDateDebutPromotion
-												+ "ème jour du mois de Février a été"
-												+ " saisi alors que ce dernier n'en possède que 28");
-							}
-
-						}
 					}
 
 					// Vérifie si la date de fin de la promotion est cohérente
@@ -1099,19 +1057,6 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 							}
 
 						}
-					}
-
-					// Vérifie si la date de début de promotion précède celle de
-					// fin
-					if (dateDebutPromotion.after(dateFinPromotion)) {
-						throw new ExceptionOrdreDeDeuxDates(
-								"La date de début de promotion est postérieure à celle de fin");
-					}
-
-					// Vérifie que les dates de début et de fin sont différentes
-					if (dateDebutPromotion.equals(dateFinPromotion)) {
-						throw new ExceptionDatesIdentiques(
-								"La date de début de promotion est identique à celle de fin");
 					}
 
 					// Vérifie que tous les champs sont remplis
@@ -1247,7 +1192,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 
 		// Définition de l'action du bouton retour à la page précédente qui
 		// annule tout ce qui a pu être fait sur la page et la ferme
-		
+
 		JButton boutonRetour = new JButton("Retour à la page précédente");
 		boutonRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1267,7 +1212,7 @@ public class FenetreFormulairePromotionsGerant extends JDialog {
 
 		// Ajout des 2 JPanels principaux au conteneur de la fenêtre //
 		// ----------------------------------------------------------//
-		
+
 		this.getContentPane().add(panneauCentralFenetre, "Center");
 		this.getContentPane().add(panneauBasFenetre, "South");
 
