@@ -2,19 +2,33 @@ package ihm.Client;
 
 import ihm.modeleTableau.ModeleTableauCommande;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileSystemView;
 
 import metier.Commande;
 import metier.LigneCommande;
@@ -70,7 +84,7 @@ public class FenetreFactureCommande extends JDialog {
 			boolean utilisationBonsAchat) throws SQLException {
 
 		super(parent, title, modal);
-		this.setSize(600, 650);
+		this.setSize(600, 800);
 		this.setLocation(50, 50);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
@@ -168,14 +182,16 @@ public class FenetreFactureCommande extends JDialog {
 		// le montant total de la commande après //
 		// ----- utilisation du bon d'achat -----//
 		// --------------------------------------//
+		
 		JPanel panneauBas = new JPanel();
-		panneauBas.setLayout(new GridLayout(2, 1, 2, 0));
+
+		panneauBas.setLayout(new GridLayout(3, 1, 2, 0));
 		panneauBas.setBorder(BorderFactory.createLineBorder(Color.gray));
 		bonsAchatLabel = new JLabel(
 				"Nombre de points de réduction utilisés  sur votre carte de fidélité  :  "
 						+ bonsAchat);
-		
-		// Si le client a utilisé son bon achat, nous affichons 
+
+		// Si le client a utilisé son bon achat, nous affichons
 		// le montant du bon de réduction
 		if (utilisationBonsAchat == true) {
 			panneauBas.add(bonsAchatLabel);
@@ -186,6 +202,110 @@ public class FenetreFactureCommande extends JDialog {
 						commande.getIdCommande()) + " €");
 		panneauBas.add(totalLabel);
 
+		// Création d'un bouton pour enregistrer la facture
+		JButton boutonEnregistrer = new JButton("Enregistrer la facture "
+				+ commande.getIdCommande());
+
+		// Récupération des dimensions principales de la fenêtre
+		// pour la capture d'écran
+		final int x = this.getLocation().x;
+		final int y = this.getLocation().y;
+		final int wi = this.getWidth();
+		final int hei = this.getHeight();
+
+		boutonEnregistrer.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				try {
+
+					Robot robot = new Robot();
+					// Capture de l'écran défini dans le rectangle respectant
+					// les dimensions
+					// de la fenêtre
+					BufferedImage bi = robot.createScreenCapture(new Rectangle(
+							x, y, wi, hei));
+
+					// Définition de l'objet JFileChooser qui permettra
+					// d'enregistrer
+					// la facture
+					FileSystemView vueSysteme = FileSystemView
+							.getFileSystemView();
+					JFileChooser filechooser = new JFileChooser(vueSysteme
+							.getDefaultDirectory());
+
+					filechooser.setDialogTitle("Enregistrer la facture");
+					filechooser.setSelectedFile(new File(filechooser
+							.getCurrentDirectory(), "Facture.jpg"));
+
+					// Implémentation du filtre pour choisir le format du
+					// fichier de la facture
+					filechooser.setFileFilter(new FileFilter() {
+
+						public boolean accept(File f) {
+							// Vérification de l'extension du fichier f
+							String extension = f
+									.getName()
+									.substring(f.getName().lastIndexOf('.') + 1)
+									.toLowerCase();
+
+							if (f.isDirectory()) {
+								return true;
+							}
+							if (extension.equals("jpg")) {
+								return true;
+							}
+							return false;
+						}
+
+						public String getDescription() {
+							return "Fichier accepté : jpg";
+						}
+					});
+
+					// Ouverture d'une boîte de dialogue pour enregistrer la
+					// facture
+					int sauvegardeFacture = filechooser.showSaveDialog(null);
+
+					if (sauvegardeFacture == JFileChooser.APPROVE_OPTION) {
+
+						// Récupération du fichier sélectionné
+						File file = filechooser.getSelectedFile();
+
+						try {
+							// Récupération de l'extension du fichier
+							// sélectionné
+							String extension = file.getName().substring(
+									file.getName().lastIndexOf(".") + 1);
+
+							// si l'extension n'est pas un jpg, alors on affiche
+							// un message d'erreur
+							// sinon on enregistre la facture
+							if (extension.equals("jpg")) {
+								javax.imageio.ImageIO
+										.write(bi, extension, file);
+							} else {
+								JOptionPane
+										.showMessageDialog(null,
+												"Vous n'avez pas sélectionné un bon format pour votre facture");
+							}
+
+						} catch (IOException err) {
+							JOptionPane.showMessageDialog(
+									null,
+									"Echec de la sauvegarde: "
+											+ err.getMessage());
+						}
+					}
+
+				} catch (AWTException e2) {
+					System.out.println(e2.getMessage());
+				}
+
+			}
+		});
+
+		panneauBas.add(boutonEnregistrer);
+		
 		// Ajout des composants JPanel crées ci-dessus 
 		// dans le conteneur de la fenêtre 
 		this.getContentPane().add(panneauHaut, "North");
@@ -193,5 +313,6 @@ public class FenetreFactureCommande extends JDialog {
 		this.getContentPane().add(panneauBas, "South");
 
 	}
+
 
 }

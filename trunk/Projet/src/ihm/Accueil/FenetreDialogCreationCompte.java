@@ -223,7 +223,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		// ----------------------------------------------------//
 		final JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
-		panCP.setPreferredSize(new Dimension(220, 60));
+		panCP.setPreferredSize(new Dimension(220, 90));
 		panCP.setBorder(BorderFactory.createTitledBorder("Code Postal"));
 		cpLabel = new JLabel("Numéro : ");
 

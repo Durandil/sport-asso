@@ -1,5 +1,6 @@
 package application;
 
+
 import basededonnees.BDD;
 import ihm.MenuGerant;
 import ihm.MenuUtilisateur;
@@ -24,10 +25,11 @@ public class Principale {
 		// BDD.init();
 
 		// Initialise la fenêtre d'accueil
-		 FenetreCompte fen=new FenetreCompte();
+		FenetreCompte fen=new FenetreCompte();
 	
 		// Initialise le menu du gérant (sans passer par l'identification)
 		// MenuGerant menu = new MenuGerant();
-
+		 	 
+		 
 	}
 }
