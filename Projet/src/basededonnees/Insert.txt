@@ -97,11 +97,13 @@ Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCateg
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00006', 'Chaussettes de sport', 0, 100, 10, 'CAT00004', 'TYP00010', 'Rupture de stock');
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00007', 'Short de bain', 0, 300, 20, 'CAT00004', 'TYP00004', 'Déstocké');
 Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00008', 'Chronomètre', 500, 125, 30, 'CAT00002', 'TYP00010', 'En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00009', 'Club de golf', 250, 2500, 80, 'CAT00001', 'TYP00010', 'En stock');
+Insert into ARTICLE (idArticle, Description, Stock, Poids, PrixInitial , idCategorie, idType, etatArticle) values ('ART00010', 'Tente', 150, 25000, 200, 'CAT00001', 'TYP00002', 'En stock');
 
 #Table CARTE_FIDELITE
 Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00001', '500', 'arthur.laroch@gmail.com');
 Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00002', '100', 'cebdf@belfort.fr');
-Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00003', '200', 'picjean@free.fr@free.fr');
+Insert into CARTE_FIDELITE (idCartefidelite, Nbpoints, idclient) values ('FID00003', '200', 'picjean@free.fr');
 
 #Table LISTING_ARTICLES_COMMANDES
 Insert into LISTING_ARTICLES_COMMANDES (idCommande, idArticle, quantitecommandee) values ('COM00001', 'ART00001',5);
@@ -123,7 +125,7 @@ Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00002','PRO
 Insert into LISTING_PROMOS_ARTICLES (idArticle, idPromo) values ('ART00008','PRO00007');
 
 #Table MESSAGE
-Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Envoi des identifiants','Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est lcr@free.fr et votre mot de passe est Canar35. Cordialement, M. Poirier', 'lcg@free.fr',TO_DATE('2010-12-12', 'YYYY-MM-DD'),0);
+Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00001','Envoi des identifiants','Votre compte sport-asso a été activé avec succès. Pour rappel, votre identifiant est lcr@free.fr et votre mot de passe est Canar35. Cordialement, M. Poirier', 'lcr@free.fr',TO_DATE('2010-12-12', 'YYYY-MM-DD'),0);
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00002','Merci','Je vous remercie pour la rapidité de la livraison', 'arthur.laroch@gmail.com',TO_DATE('2010-12-15', 'YYYY-MM-DD'),1);
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00003','Re : Merci','Merci à vous pour votre fidélité', 'arthur.laroch@gmail.com',TO_DATE('2010-12-16', 'YYYY-MM-DD'),0);
 Insert into MESSAGE (idMessage, sujetMessage, contenuMessage, idClient, dateMessage,estenvoyeaugerant) values ('MES00004','Prix trop élevés','Les shorts de bain sont trop chers', 'lcr@free.fr',TO_DATE('2010-12-17', 'YYYY-MM-DD'),1);

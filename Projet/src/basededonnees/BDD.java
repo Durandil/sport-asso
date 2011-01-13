@@ -94,7 +94,7 @@ public class BDD {
 				+ "CONSTRAINT PK_COMMANDE PRIMARY KEY (IDCOMMANDE),"
 				+ "CONSTRAINT FK_COMMANDE_CLIENT FOREIGN KEY (IDCLIENT) REFERENCES CLIENT)");
 
-		SGBD.executeUpdate("CREATE SEQUENCE S_ARTICLE Increment by 1 start with 9 nocache");
+		SGBD.executeUpdate("CREATE SEQUENCE S_ARTICLE Increment by 1 start with 11 nocache");
 		SGBD.executeUpdate("CREATE TABLE ARTICLE"
 				+ "(IDARTICLE CHAR(8),"
 				+ "DESCRIPTION VARCHAR(40),"
