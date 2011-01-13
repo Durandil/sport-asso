@@ -179,7 +179,7 @@ public class FenetreDialogIdentification extends JDialog {
 									identificationReussie = new JOptionPane();
 
 									ImageIcon imageInformation = new ImageIcon(
-											"src/images/information.jpg");
+											"Ressources/images/information.jpg");
 
 									identificationReussie.showMessageDialog(
 											null, "Identification réussie !",
@@ -238,7 +238,7 @@ public class FenetreDialogIdentification extends JDialog {
 					// compte
 					erreurCompte = new JOptionPane();
 					
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 					
 					erreurCompte.showMessageDialog(null,
 							"Ce compte n'existe pas, inscrivez-vous !",
@@ -250,7 +250,7 @@ public class FenetreDialogIdentification extends JDialog {
 					// mot de passe
 					erreurMotPasse = new JOptionPane();
 
-					ImageIcon image = new ImageIcon("src/images/warning.png");
+					ImageIcon image = new ImageIcon("Ressources/images/warning.png");
 
 					erreurMotPasse.showMessageDialog(null,
 							"Mot de passe erroné, veuillez réessayer.",
@@ -263,7 +263,7 @@ public class FenetreDialogIdentification extends JDialog {
 					compteDesactive = new JOptionPane();
 
 					ImageIcon imageInformation = new ImageIcon(
-							"src/images/information.jpg");
+							"Ressources/images/information.jpg");
 
 					compteDesactive
 							.showMessageDialog(

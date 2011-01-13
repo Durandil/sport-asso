@@ -49,7 +49,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 	private JTextField nom, prenom, adresse, identifiantVerification,
 			codePostal, telephone, identifiant, denomination;
 	private JComboBox compte, fidelite, ville;
-	// Par défaut, le client ne désire pas une carte de fidélité, 
+	// Par défaut, le client ne désire pas une carte de fidélité,
 	// le booléen associé vaut ainsi "faux" à l'origine
 	private boolean estFidele = false;
 	private JOptionPane creationCorrecte, creationMotDePasse, erreurCreation;
@@ -114,7 +114,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panIcon.add(image);
 
 		// Création d'un JPanel pour le type de compte //
-		//---------------------------------------------//
+		// ---------------------------------------------//
 		JPanel panTypeCompte = new JPanel();
 		panTypeCompte.setBackground(Color.white);
 		panTypeCompte.setPreferredSize(new Dimension(220, 60));
@@ -122,7 +122,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 				.createTitledBorder("Type de compte"));
 		typeCompteLabel = new JLabel("Statut Compte : ");
 
-		// Définition d'un menu déroulant permettant 
+		// Définition d'un menu déroulant permettant
 		// à l'utilisateur de choisir son type de compte
 		compte = new JComboBox();
 		compte.addItem("Compte Particulier");
@@ -145,7 +145,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					prenom.setEnabled(true);
 					denomination.setEnabled(false);
 					denomination.setText("");
-					
+
 				} else {
 					nom.setEnabled(false);
 					prenom.setEnabled(false);
@@ -175,7 +175,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panDenomination.add(denomination);
 
 		// Création d'un JPanel pour la saisie du nom //
-		//--------------------------------------------//
+		// --------------------------------------------//
 		JPanel panNom = new JPanel();
 		panNom.setBackground(Color.white);
 		panNom.setPreferredSize(new Dimension(220, 60));
@@ -190,7 +190,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panNom.add(nom);
 
 		// Création d'un JPanel pour la saisie du prénom //
-		//-----------------------------------------------//
+		// -----------------------------------------------//
 		JPanel panPrenom = new JPanel();
 		panPrenom.setBackground(Color.white);
 		panPrenom.setPreferredSize(new Dimension(220, 60));
@@ -205,7 +205,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panPrenom.add(prenom);
 
 		// Création d'un JPanel pour la saisie de l'adresse //
-		//--------------------------------------------------//
+		// --------------------------------------------------//
 		JPanel panAdresse = new JPanel();
 		panAdresse.setBackground(Color.white);
 		panAdresse.setPreferredSize(new Dimension(220, 60));
@@ -220,7 +220,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 		panAdresse.add(adresse);
 
 		// Création d'un JPanel pour la saisie du Code Postal //
-		//----------------------------------------------------//
+		// ----------------------------------------------------//
 		final JPanel panCP = new JPanel();
 		panCP.setBackground(Color.white);
 		panCP.setPreferredSize(new Dimension(220, 60));
@@ -314,11 +314,11 @@ public class FenetreDialogCreationCompte extends JDialog {
 		fidelite.setVisible(true);
 		fidelite.setSelectedItem("Non");
 		fidelite.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				
+
 				itemFidelite = (String) ((JComboBox) e.getSource())
-				.getSelectedItem();
+						.getSelectedItem();
 				// Changement de l'état du booléen pour controler le clic
 				// dans le menu déroulant du client
 				itemFideliteSelectionne = true;
@@ -366,10 +366,10 @@ public class FenetreDialogCreationCompte extends JDialog {
 			@SuppressWarnings("static-access")
 			public void actionPerformed(ActionEvent e) {
 				/**
-				 * Au début, le type de compte est sur
-				 * "Compte Particulier" par défaut Mais le champ Dénomination
-				 * n'est pas grisé il faut resélectionner Compte Particulier
-				 * pour que Dénomination se grise.
+				 * Au début, le type de compte est sur "Compte Particulier" par
+				 * défaut Mais le champ Dénomination n'est pas grisé il faut
+				 * resélectionner Compte Particulier pour que Dénomination se
+				 * grise.
 				 */
 
 				erreurCreation = new JOptionPane();
@@ -385,7 +385,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					ArrayList<String> listeMails = new ArrayList<String>();
 					listeMails = SGBD.selectListeString("CLIENT", "IDCLIENT");
 
-					// Vérification de la présence de  
+					// Vérification de la présence de
 					// l'adresse mail dans la base
 					int test = 0;
 					for (int i = 0; i < listeMails.size(); i++) {
@@ -400,7 +400,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					}
 
 					// Vérification de l'absence du caractère ' dans
-					// l'adresse mail 
+					// l'adresse mail
 
 					if (identifiant.getText().contains("'")) {
 						throw new ExceptionCaractereInterdit(
@@ -452,7 +452,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 					}
 
 					// Vérification de la cohérence du
-					// numéro de téléphone 
+					// numéro de téléphone
 
 					long tel = Long.parseLong(telephone.getText());
 					if (tel < 100000000 | tel >= 800000000) {
@@ -526,9 +526,9 @@ public class FenetreDialogCreationCompte extends JDialog {
 									imageInformation);
 
 					dispose();
-					
+
 					// envoi du message avec
-					// le mot de passe 
+					// le mot de passe
 					java.util.Date date = new java.util.Date();
 
 					@SuppressWarnings("deprecation")
@@ -550,7 +550,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 					MenuUtilisateur men = new MenuUtilisateur();
 
 					// Changement de la valeur des booléens permettant de gérer
-					// les clics sur les menus déroulants afin qu'ils soient bien
+					// les clics sur les menus déroulants afin qu'ils soient
+					// bien
 					// à false si l'utilisateur veut créer un nouveau compte
 					itemFideliteSelectionne = false;
 					itemTypeCompteSelectionne = false;
@@ -609,7 +610,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 							"Attention !", JOptionPane.WARNING_MESSAGE, image);
 
 					// Comme l'utilisateur a fait une erreur de saisie de code
-					// postal, nous lui affichons le menu déroulant à la place 
+					// postal, nous lui affichons le menu déroulant à la place
 					// du champ de saisie
 					codePostal.setVisible(false);
 					ville.setEnabled(true);
@@ -635,11 +636,8 @@ public class FenetreDialogCreationCompte extends JDialog {
 
 				} catch (ExceptionAucunItemSelectionneDansJComboBox e10) {
 
-					erreurCreation.showMessageDialog(null, e10.getMessage()
-							+ "/n" + "Veuillez sélectionner votre ville "
-							+ "dans le menu déroulant",
-							"Attention !",
-							JOptionPane.WARNING_MESSAGE, image);
+					erreurCreation.showMessageDialog(null, e10.getMessage(),
+							"Attention !", JOptionPane.WARNING_MESSAGE, image);
 
 				}
 			}
