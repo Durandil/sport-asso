@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,7 +28,7 @@ import metier.Message;
  * @author Utilisateur
  * 
  */
-public class FenetreMessagerie extends JFrame {
+public class FenetreMessagerie extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,10 +41,16 @@ public class FenetreMessagerie extends JFrame {
 	 * @param boiteMessagerieGerant
 	 *            Booléen indiquant quel utilisateur utilise la fenêtre (true)
 	 *            pour le gérant et (false) pour les clients
-	 * 
+	 *
+	 * @param parent
+	 *            JFrame utilisé pour créer la fenêtre
+
+	 * @param modal
+	 *            Booléen indiquant si la fenêtre doit bloquer ou non les
+	 *            interactions avec les autres fenêtres
 	 */
-	public FenetreMessagerie(boolean boiteMessagerieGerant) {
-		super();
+	public FenetreMessagerie(boolean boiteMessagerieGerant, JFrame parent, boolean modal) {
+		super(parent,"Boite de Réception ",modal);
 		this.setTitle("Boite de Réception ");
 		this.setSize(500, 900);
 		this.setLocation(50, 50);
@@ -92,24 +99,36 @@ public class FenetreMessagerie extends JFrame {
 				// Récupération de la ligne selctionnée et des attributs du
 				// message
 				int ligne = tableauMessage.getSelectedRow();
-				String identifiantMail = tableauMessage.getValueAt(ligne, 0)
-						.toString();
-				String expediteur = tableauMessage.getValueAt(ligne, 1)
-						.toString();
-				String sujet = tableauMessage.getValueAt(ligne, 2).toString();
-				String contenu = tableauMessage.getValueAt(ligne, 3).toString();
-				String date = tableauMessage.getValueAt(ligne, 4).toString();
 
-				// Ouverture de la fenetre de lecture de message en passant en
-				// paramètre
-				// du constructeur les attributs du message selectionné
-				FenetreLectureMessage fenMessage = new FenetreLectureMessage(
-						null, "Message : " + sujet, true, expediteur, sujet,
-						contenu, date, identifiantMail, messagerieDuGerant);
-				fenMessage.setVisible(true);
+				if (ligne != -1) {
+					String identifiantMail = tableauMessage
+							.getValueAt(ligne, 0).toString();
+					String expediteur = tableauMessage.getValueAt(ligne, 1)
+							.toString();
+					String sujet = tableauMessage.getValueAt(ligne, 2)
+							.toString();
+					String contenu = tableauMessage.getValueAt(ligne, 3)
+							.toString();
+					String date = tableauMessage.getValueAt(ligne, 4)
+							.toString();
 
-				// Fermeture de la fenêtre
-				dispose();
+					// Ouverture de la fenetre de lecture de message en passant
+					// en
+					// paramètre
+					// du constructeur les attributs du message selectionné
+					FenetreLectureMessage fenMessage = new FenetreLectureMessage(
+							null, "Message : " + sujet, true, expediteur,
+							sujet, contenu, date, identifiantMail,
+							messagerieDuGerant);
+					fenMessage.setVisible(true);
+
+					// Fermeture de la fenêtre
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Vous n'avez sélectionné aucun message",
+							"Attention", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 
@@ -122,6 +141,7 @@ public class FenetreMessagerie extends JFrame {
 				// correspondants à l'utilisateur
 				// courant de l'application
 				Message.supprimerAllBDD();
+				//repaint();
 
 			}
 		});

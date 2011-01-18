@@ -139,7 +139,7 @@ public class FenetreReponseMessage extends JFrame {
 		boutonRetourMessagerie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				FenetreMessagerie fenetre = new FenetreMessagerie(reponseGerant);
+				FenetreMessagerie fenetre = new FenetreMessagerie(reponseGerant,null,true);
 				fenetre.setVisible(true);
 				// Permet le retour vers la page contenant la boite de reception
 				// du gérant
@@ -201,7 +201,7 @@ public class FenetreReponseMessage extends JFrame {
 						// la base de données
 						// nous allons réouvrir la messagerie de l'utilisateur
 						FenetreMessagerie fenetre = new FenetreMessagerie(
-								reponseGerant);
+								reponseGerant,null,true);
 						fenetre.setVisible(true);
 
 						// Puis nous allons fermer la fenêtre

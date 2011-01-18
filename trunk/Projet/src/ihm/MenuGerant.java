@@ -103,7 +103,7 @@ public class MenuGerant extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Affichage de la fenêtre contenant la boite de reception
 				// interne du gérant
-				FenetreMessagerie message = new FenetreMessagerie(true);
+				FenetreMessagerie message = new FenetreMessagerie(true,null,true);
 				message.setVisible(true);
 			}
 		});
