@@ -146,7 +146,7 @@ public class MenuUtilisateur extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Ouverture de la fenetre permettant  
 				// l'accès à la messagerie du client
-				FenetreMessagerie fenetre = new FenetreMessagerie(false);
+				FenetreMessagerie fenetre = new FenetreMessagerie(false,null,true);
 				fenetre.setVisible(true);
 			}
 		});

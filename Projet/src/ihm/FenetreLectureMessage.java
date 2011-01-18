@@ -184,7 +184,7 @@ public class FenetreLectureMessage extends JDialog {
 				// permet le retour vers la page contenant la boite de reception
 				// du gérant
 				FenetreMessagerie messagerie = new FenetreMessagerie(
-						reponseGerant);
+						reponseGerant,null,true);
 				messagerie.setVisible(true);
 
 				dispose();
@@ -201,7 +201,7 @@ public class FenetreLectureMessage extends JDialog {
 				// Fermeture de la fenêtre et ouverture d'une nouvelle
 				// fenêtre boite de réception
 				FenetreMessagerie messagerie = new FenetreMessagerie(
-						reponseGerant);
+						reponseGerant,null,true);
 				messagerie.setVisible(true);
 
 				dispose();
