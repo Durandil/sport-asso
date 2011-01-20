@@ -111,7 +111,10 @@ public class FenetreMessagerie extends JDialog {
 							.toString();
 					String date = tableauMessage.getValueAt(ligne, 4)
 							.toString();
-
+					
+					// Fermeture de la fenêtre
+					dispose();
+					
 					// Ouverture de la fenetre de lecture de message en passant
 					// en
 					// paramètre
@@ -122,8 +125,7 @@ public class FenetreMessagerie extends JDialog {
 							messagerieDuGerant);
 					fenMessage.setVisible(true);
 
-					// Fermeture de la fenêtre
-					dispose();
+					
 				} else {
 					JOptionPane.showMessageDialog(null,
 							"Vous n'avez sélectionné aucun message",
@@ -141,8 +143,11 @@ public class FenetreMessagerie extends JDialog {
 				// correspondants à l'utilisateur
 				// courant de l'application
 				Message.supprimerAllBDD();
-				//repaint();
 
+				FenetreMessagerie message = new FenetreMessagerie(true,null,true);
+				message.setVisible(true);
+				
+				dispose();
 			}
 		});
 

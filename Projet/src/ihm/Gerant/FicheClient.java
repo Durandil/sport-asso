@@ -78,7 +78,7 @@ public class FicheClient extends JDialog {
 	public FicheClient(JFrame parent, String title, boolean modal,
 			String identifiantClient) {
 		super(parent, title, modal);
-		this.setSize(1024, 900);
+		this.setSize(950, 730);
 		this.setLocation(0, 0);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
@@ -110,7 +110,7 @@ public class FicheClient extends JDialog {
 		// Déclaration du JPanel du fond de l'écran //
 		// -----------------------------------------//
 		JPanel panneauGauche = new JPanel();
-		image = new JLabel(new ImageIcon("Ressources/images/fond_fiche2.jpg"));
+		image = new JLabel(new ImageIcon("Ressources/images/fond_fiche4.jpg"));
 		panneauGauche.setBackground(Color.white);
 		panneauGauche.add(image);
 
@@ -716,7 +716,7 @@ public class FicheClient extends JDialog {
 		// -------------------------------------//
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 
-		pack();
+		//pack();
 		repaint();
 	}
 }

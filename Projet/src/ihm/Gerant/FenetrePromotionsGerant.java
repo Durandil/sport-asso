@@ -151,6 +151,11 @@ public class FenetrePromotionsGerant extends JDialog {
 						// données
 						Promotion.supprimerListing_PromoBDD(idPromo);
 						Promotion.supprimerPromoBDD(idPromo);
+						
+						
+						FenetrePromotionsGerant fen = new FenetrePromotionsGerant(null, true);
+						fen.setVisible(true);
+						dispose();
 					}
 				}
 			}

@@ -53,8 +53,8 @@ public class FenetreCatalogueGerant extends JDialog {
 	 */
 	public FenetreCatalogueGerant(JFrame parent, boolean modal) {
 		super(parent, "Gestion du Catalogue Article", modal);
-		this.setSize(500, 700);
-		this.setLocation(50, 50);
+		this.setSize(500, 690);
+		this.setLocation(40, 40);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent();
@@ -249,7 +249,7 @@ public class FenetreCatalogueGerant extends JDialog {
 		this.getContentPane().add(panneauTableau, BorderLayout.CENTER);
 		this.getContentPane().add(panneauBouton, BorderLayout.SOUTH);
 
-		pack();
+		//pack();
 
 	}
 
