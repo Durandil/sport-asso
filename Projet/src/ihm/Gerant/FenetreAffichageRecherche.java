@@ -157,7 +157,7 @@ public class FenetreAffichageRecherche extends JDialog {
 					// client sélectionné
 					int res = JOptionPane
 							.showConfirmDialog(null,
-									"confirmez la sélection client de : "
+									"Confirmez la sélection client de : "
 											+ identifiant);
 
 					if (res == JOptionPane.OK_OPTION) {
