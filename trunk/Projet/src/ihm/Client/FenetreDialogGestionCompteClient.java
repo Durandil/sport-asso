@@ -59,7 +59,7 @@ public class FenetreDialogGestionCompteClient extends JDialog {
 			boolean modal, String idclient) {
 		super(parent, title, modal);
 		this.setSize(550, 700);
-		this.setLocation(50, 50);
+		this.setLocation(30, 30);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		this.initComponent(idclient);

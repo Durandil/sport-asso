@@ -89,7 +89,7 @@ public class FenetreDialogCreationCompte extends JDialog {
 			ExceptionNumeroDeTelephoneDifferentDeDixChiffres,
 			ExceptionCodePostalIncorrect, ExceptionNumeroDeTelephoneIncorrect {
 		super(parent, title, modal);
-		this.setSize(400, 750);
+		this.setSize(400, 720);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);

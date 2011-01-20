@@ -4,6 +4,7 @@ import ihm.modeleTableau.ModeleTableauCommande;
 
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -84,7 +85,7 @@ public class FenetreFactureCommande extends JDialog {
 			boolean utilisationBonsAchat) throws SQLException {
 
 		super(parent, title, modal);
-		this.setSize(600, 800);
+		this.setSize(600, 600);
 		this.setLocation(50, 50);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
@@ -305,6 +306,8 @@ public class FenetreFactureCommande extends JDialog {
 		});
 
 		panneauBas.add(boutonEnregistrer);
+		
+		
 		
 		// Ajout des composants JPanel crées ci-dessus 
 		// dans le conteneur de la fenêtre 
