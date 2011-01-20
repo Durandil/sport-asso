@@ -22,10 +22,10 @@ public class Principale {
 		// Initialiser la base de données
 		// Il faut ensuite insérer les lignes présentes dans le fichier Insert.txt
 		// dans la base de données
-		// BDD.init();
+		 BDD.init();
 
 		// Initialise la fenêtre d'accueil
-		FenetreCompte fen=new FenetreCompte();
+		// FenetreCompte fen=new FenetreCompte();
 	
 		// Initialise le menu du gérant (sans passer par l'identification)
 		// MenuGerant menu = new MenuGerant();

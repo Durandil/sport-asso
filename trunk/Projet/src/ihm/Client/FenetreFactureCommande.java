@@ -86,7 +86,7 @@ public class FenetreFactureCommande extends JDialog {
 		super(parent, title, modal);
 		this.setSize(600, 800);
 		this.setLocation(50, 50);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		this.initComponent(identifiantClient, commandeP, panierClient,
 				bonsAchatUtilises, utilisationBonsAchat);
@@ -313,6 +313,5 @@ public class FenetreFactureCommande extends JDialog {
 		this.getContentPane().add(panneauBas, "South");
 
 	}
-
 
 }
